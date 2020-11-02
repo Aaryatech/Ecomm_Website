@@ -8,7 +8,7 @@ public class Franchise {
 	private String frCode;
 	private String frName;
 	private String frAddress;
-	private Date openingDate;
+	private String openingDate;
 	private String frImage;
 	private float frRating;
 	private int frCity;
@@ -19,8 +19,8 @@ public class Franchise {
 	private String gstType;
 	private String gstNumber;
 	private String pincode;
-	private Date ownersBirthDay;
-	private Date fdaLicenseDateExp;
+	private String ownersBirthDay;
+	private String fdaLicenseDateExp;
 	private String shopsLatitude;
 	private String shopsLogitude;
 	private int isActive;
@@ -52,8 +52,8 @@ public class Franchise {
 	private String exVar5;
 	private String exVar6;
 	private String exVar7;
-	private Date exDate1;
-	private Date exDate2;
+	private String exDate1;
+	private String exDate2;
 	private int exInt1;
 	private int exInt2;
 	private int exInt3;
@@ -90,11 +90,11 @@ public class Franchise {
 		this.frAddress = frAddress;
 	}
 
-	public Date getOpeningDate() {
+	public String getOpeningDate() {
 		return openingDate;
 	}
 
-	public void setOpeningDate(Date openingDate) {
+	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
 	}
 
@@ -178,19 +178,19 @@ public class Franchise {
 		this.pincode = pincode;
 	}
 
-	public Date getOwnersBirthDay() {
+	public String getOwnersBirthDay() {
 		return ownersBirthDay;
 	}
 
-	public void setOwnersBirthDay(Date ownersBirthDay) {
+	public void setOwnersBirthDay(String ownersBirthDay) {
 		this.ownersBirthDay = ownersBirthDay;
 	}
 
-	public Date getFdaLicenseDateExp() {
+	public String getFdaLicenseDateExp() {
 		return fdaLicenseDateExp;
 	}
 
-	public void setFdaLicenseDateExp(Date fdaLicenseDateExp) {
+	public void setFdaLicenseDateExp(String fdaLicenseDateExp) {
 		this.fdaLicenseDateExp = fdaLicenseDateExp;
 	}
 
@@ -442,19 +442,19 @@ public class Franchise {
 		this.exVar7 = exVar7;
 	}
 
-	public Date getExDate1() {
+	public String getExDate1() {
 		return exDate1;
 	}
 
-	public void setExDate1(Date exDate1) {
+	public void setExDate1(String exDate1) {
 		this.exDate1 = exDate1;
 	}
 
-	public Date getExDate2() {
+	public String getExDate2() {
 		return exDate2;
 	}
 
-	public void setExDate2(Date exDate2) {
+	public void setExDate2(String exDate2) {
 		this.exDate2 = exDate2;
 	}
 
