@@ -384,6 +384,178 @@
 						</table>
 					</div>
 				</div>
+				
+				
+				
+				<!--mobile-table-->
+        <div class="mobile_table">
+            <!--1-->
+            <div class="row_1">
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Order Number</div>
+                    <div class="mob_quan_r font">#123456</div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Order Date</div>
+                    <div class="mob_quan_r font">01 Oct 2020</div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Total Rupees</div>
+                    <div class="mob_quan_r font"><div class="prc_amt">Rs. 450.00</div></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Payment Mode</div>
+                    <div class="mob_quan_r font"><div class="paid mobile">COD (Cash on Delivery)</div></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Status</div>
+                    <div class="mob_quan_r font"><span class="deliverd">Delivered</span></div>
+                    <div class="clr"></div>
+                </div>
+                
+                <div class="click_open">
+                    <div class="mob_quan">
+                        <div class="click_opn_l"> Product Pic </div>
+                        <div class="click_opn_r"> <img src="${pageContext.request.contextPath}/resources/images/cake_open.jpg" alt="cake_open"></div>
+                        <div class="clr"></div>
+                    </div>
+                    
+                    <div class="mob_quan">
+                        <div class="click_opn_l"> Product name </div>
+                        <div class="click_opn_r"> Cars Lightning McQueen Cake</div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">  Product Amount  </div>
+                        <div class="click_opn_r"><div class="prc_amt"> Rs. 450.00</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">    Product Quantity   </div>
+                        <div class="click_opn_r"><div class="prc_kg"> 4 K.G</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">Total</div>
+                        <div class="click_opn_r"><div class="paid mobile">  Rs.1800.00</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    
+                </div>
+                
+                <div class="mob_order_log">
+                   <h3 class="mobile_order"> Order Log</h3>
+                    <div class="order_row_1">
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Status</h4>
+                            <p>Accept Order For Process By Shop </p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Action By</h4>
+                            <p>Ats User (Test Franchisee) </p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Date Time</h4>
+                            <p>17-09-2020 12:30:04 PM</p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Remark</h4>
+                            <p>product Quality Owesome</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <!--2-->
+            <div class="row_1">
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Order Number</div>
+                    <div class="mob_quan_r font">#123456</div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Order Date</div>
+                    <div class="mob_quan_r font">01 Oct 2020</div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Total Rupees</div>
+                    <div class="mob_quan_r font"><div class="prc_amt">Rs. 450.00</div></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Payment Mode</div>
+                    <div class="mob_quan_r font"><div class="paid mobile">Online Payment</div></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="mob_quan">
+                    <div class="mob_quan_l history">Status</div>
+                    <div class="mob_quan_r font"><span class="pending_ord">Pending</span></div>
+                    <div class="clr"></div>
+                </div>
+                
+                <div class="click_open">
+                    <div class="mob_quan">
+                        <div class="click_opn_l"> Product Pic </div>
+                        <div class="click_opn_r"> <img src="${pageContext.request.contextPath}/resources/images/cake_open.jpg" alt="cake_open"></div>
+                        <div class="clr"></div>
+                    </div>
+                    
+                    <div class="mob_quan">
+                        <div class="click_opn_l"> Product name </div>
+                        <div class="click_opn_r"> Cars Lightning McQueen Cake</div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">  Product Amount  </div>
+                        <div class="click_opn_r"><div class="prc_amt"> Rs. 450.00</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">    Product Quantity   </div>
+                        <div class="click_opn_r"><div class="prc_kg"> 4 K.G</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="click_opn_l">Total</div>
+                        <div class="click_opn_r"><div class="paid mobile">  Rs.1800.00</div></div>
+                        <div class="clr"></div>
+                    </div>
+                    
+                </div>
+                
+                <div class="mob_order_log">
+                   <h3 class="mobile_order"> Order Log</h3>
+                    <div class="order_row_1">
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Status</h4>
+                            <p>Accept Order For Process By Shop </p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Action By</h4>
+                            <p>Ats User (Test Franchisee) </p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Date Time</h4>
+                            <p>17-09-2020 12:30:04 PM</p>
+                        </div>
+                        <div class="mob_log_one">
+                            <h4 class="mob_status">Remark</h4>
+                            <p>product Quality Owesome</p>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+				
 
 			</div>
 		</div>

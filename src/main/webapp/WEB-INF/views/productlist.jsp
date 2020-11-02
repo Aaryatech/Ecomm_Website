@@ -1,3 +1,4 @@
+<!-- this is mohsins product filter page -->
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -108,331 +109,341 @@
 	<!-- Header End -->
 
 
-	<div class="head_marg">
+	
+<!-- mega menu -->
+<div class="mega_menu_row">
+    
+    <div class="wrapper">
+        
+        <div id="menuzord" class="menuzord red menuzord-responsive">
+      			<div class="showhide32"></div>
+      			<ul class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
+                    
+                     
+      				<li><a href="#" class="same_day">Same Day Delivery </a></li>
+                    
+                    <!--four colum dropdown-->
+      				<li><a href="#">Cakes <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        <!--cake dropdown-->
+                        <ul class="megamenu four-row">
+                          <div class="four_row_dropdown">
+                            <!--row-1-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>By Price </li>
+                                    <li><a href="#"> Under 499 </a></li>
+                                    <li><a href="#"> 500 to 599 </a></li>
+                                    <li><a href="#"> 600 to 999 </a></li>
+                                    <li><a href="#"> 1000 to 1999 </a></li>
+                                    <li><a href="#"> Above 2000 </a></li>
+                                </ul>  
+                            </div>
+                              
 
-		<div class="mega_menu_row">
-			<div class="wrapper">
+     
+                              <!--row-2-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Flavour </li>
+                                    <li><a href="#"> Chocolate Cakes </a></li>
+                                    <li><a href="#"> Red Velvet Cakes </a></li>
+                                    <li><a href="#"> Black Forest Cakes </a></li>
+                                    <li><a href="#"> Butter Scotch Cakes </a></li>
+                                    <li><a href="#"> Strawberry Cakes </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-3-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Shape </li>
+                                    <li><a href="#"> Tier Cakes </a></li>
+                                    <li><a href="#"> Barbie Doll Cakes </a></li>
+                                    <li><a href="#"> Minion Cakes </a></li>
+                                    <li><a href="#"> Spiderman Cakes </a></li>
+                                    <li><a href="#"> Mickey Mouse Cakes </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-4-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Type </li>
+                                    <li><a href="#"> Eggless Cakes </a></li>
+                                    <li><a href="#"> Midnight Cakes </a></li>
+                                    <li><a href="#"> Kids Cakes </a></li>
+                                    <li><a href="#"> Photo Cakes </a></li>
+                                    <li><a href="#"> Premium Cakes </a></li>
+                                </ul>  
+                            </div>
+                          </div>
+                        </ul>
+                        
+                    </li>
+                    
+                    <!--three-colum dropdown-->
+                    <li><a href="#">Pastries <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        <ul class="megamenu three-row">
+                            <div class="four_row_dropdown">
+                                <!--1-->
+                                <div class="three_one">
+                                    <ul class="drop_mainmenu">
+                                        <li>By Price</li>
+                                        <li><a href="#"> Under 499 </a></li>
+                                        <li><a href="#"> 500 to 699 </a></li>
+                                        <li><a href="#"> 700 to 999 </a></li>
+                                        <li><a href="#"> 1000 to 1999 </a></li>
+                                        <li><a href="#"> Above 2000 </a></li>
+                                    </ul>
+                                </div>
+                                
+                                <!--2-->
+                                <div class="three_one">
+                                    <ul class="drop_mainmenu">
+                                        <li>By Type</li>
+                                        <li><a href="#"> All Flowers  </a></li>
+                                        <li><a href="#"> Roses  </a></li>
+                                        <li><a href="#"> Gerberas  </a></li>
+                                        <li><a href="#"> Lilies  </a></li>
+                                        <li><a href="#"> Orchids  </a></li>
+                                    </ul>
+                                </div>
+                                
+                                <!--1-->
+                                <div class="three_one">
+                                    <ul class="drop_mainmenu">
+                                        <li>By Color</li>
+                                        <li><a href="#"> Red Flowers </a></li>
+                                        <li><a href="#"> Yellow Flowers </a></li>
+                                        <li><a href="#"> Purple Flowers </a></li>
+                                        <li><a href="#"> Pink Flowers </a></li>
+                                        <li><a href="#"> White Flowers </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </ul>    
+                    </li>
+                    
+                    <li><a href="#">Savories <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                    
+                        <!--combos dropdown-->
+                        <ul class="megamenu four-row">
+                          <div class="four_row_dropdown">
+                            <!--row-1-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>By Price </li>
+                                    <li><a href="#"> Under 499 </a></li>
+                                    <li><a href="#"> 500 to 599 </a></li>
+                                    <li><a href="#"> 600 to 999 </a></li>
+                                    <li><a href="#"> 1000 to 1999 </a></li>
+                                    <li><a href="#"> Above 2000 </a></li>
+                                </ul>  
+                            </div>
+                              
 
-				<div id="menuzord" class="menuzord red menuzord-responsive">
-					<div class="showhide32"></div>
-					<ul
-						class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
+     
+                              <!--row-2-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Flavour </li>
+                                    <li><a href="#"> Chocolate Cakes </a></li>
+                                    <li><a href="#"> Red Velvet Cakes </a></li>
+                                    <li><a href="#"> Black Forest Cakes </a></li>
+                                    <li><a href="#"> Butter Scotch Cakes </a></li>
+                                    <li><a href="#"> Strawberry Cakes </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-3-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Shape </li>
+                                    <li><a href="#"> Tier Cakes </a></li>
+                                    <li><a href="#"> Barbie Doll Cakes </a></li>
+                                    <li><a href="#"> Minion Cakes </a></li>
+                                    <li><a href="#"> Spiderman Cakes </a></li>
+                                    <li><a href="#"> Mickey Mouse Cakes </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-4-->
+                              <div class="row_one">
+                                <ul class="drop_mainmenu">
+                                    <li>Cakes By Type </li>
+                                    <li><a href="#"> Eggless Cakes </a></li>
+                                    <li><a href="#"> Midnight Cakes </a></li>
+                                    <li><a href="#"> Kids Cakes </a></li>
+                                    <li><a href="#"> Photo Cakes </a></li>
+                                    <li><a href="#"> Premium Cakes </a></li>
+                                </ul>  
+                            </div>
+                          </div>
+                        </ul>
+                    </li>
+                    <li><a href="#">Packaged Cakes <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        <!--chocolates dropdown-->
+                        <ul class="megamenu two-row">
+                          <div class="four_row_dropdown">
+                            <!--row-1-->
+                              <div class="two_one">
+                                <ul class="drop_mainmenu">
+                                    <li>By Price </li>
+                                    <li><a href="#"> Under 399 </a></li>
+                                    <li><a href="#"> 400 to 599 </a></li>
+                                    <li><a href="#"> 600 to 999 </a></li>
+                                    <li><a href="#"> 1000 to 1999 </a></li>
+                                    <li><a href="#"> Above 2000 </a></li>
+                                </ul>  
+                            </div>
+                              
 
-
-						<li><a href="#" class="same_day">Same Day Delivery </a></li>
-
-						<!--four colum dropdown-->
-						<li><a href="#">Cakes <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--cake dropdown-->
-							<ul class="megamenu four-row">
-								<div class="four_row_dropdown">
-									<!--row-1-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>By Price</li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 599 </a></li>
-											<li><a href="#"> 600 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Above 2000 </a></li>
-										</ul>
-									</div>
-
-
-
-									<!--row-2-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Flavour</li>
-											<li><a href="#"> Chocolate Cakes </a></li>
-											<li><a href="#"> Red Velvet Cakes </a></li>
-											<li><a href="#"> Black Forest Cakes </a></li>
-											<li><a href="#"> Butter Scotch Cakes </a></li>
-											<li><a href="#"> Strawberry Cakes </a></li>
-										</ul>
-									</div>
-
-									<!--row-3-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Shape</li>
-											<li><a href="#"> Tier Cakes </a></li>
-											<li><a href="#"> Barbie Doll Cakes </a></li>
-											<li><a href="#"> Minion Cakes </a></li>
-											<li><a href="#"> Spiderman Cakes </a></li>
-											<li><a href="#"> Mickey Mouse Cakes </a></li>
-										</ul>
-									</div>
-
-									<!--row-4-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Type</li>
-											<li><a href="#"> Eggless Cakes </a></li>
-											<li><a href="#"> Midnight Cakes </a></li>
-											<li><a href="#"> Kids Cakes </a></li>
-											<li><a href="#"> Photo Cakes </a></li>
-											<li><a href="#"> Premium Cakes </a></li>
-										</ul>
-									</div>
-								</div>
-							</ul></li>
-
-						<!--three-colum dropdown-->
-						<li><a href="#">Pastries <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a>
-							<ul class="megamenu three-row">
-								<div class="four_row_dropdown">
-									<!--1-->
-									<div class="three_one">
-										<ul class="drop_mainmenu">
-											<li>By Price</li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 699 </a></li>
-											<li><a href="#"> 700 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Above 2000 </a></li>
-										</ul>
-									</div>
-
-									<!--2-->
-									<div class="three_one">
-										<ul class="drop_mainmenu">
-											<li>By Type</li>
-											<li><a href="#"> All Flowers </a></li>
-											<li><a href="#"> Roses </a></li>
-											<li><a href="#"> Gerberas </a></li>
-											<li><a href="#"> Lilies </a></li>
-											<li><a href="#"> Orchids </a></li>
-										</ul>
-									</div>
-
-									<!--1-->
-									<div class="three_one">
-										<ul class="drop_mainmenu">
-											<li>By Color</li>
-											<li><a href="#"> Red Flowers </a></li>
-											<li><a href="#"> Yellow Flowers </a></li>
-											<li><a href="#"> Purple Flowers </a></li>
-											<li><a href="#"> Pink Flowers </a></li>
-											<li><a href="#"> White Flowers </a></li>
-										</ul>
-									</div>
-								</div>
-							</ul></li>
-
-						<li><a href="#">Savories <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--combos dropdown-->
-							<ul class="megamenu four-row">
-								<div class="four_row_dropdown">
-									<!--row-1-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>By Price</li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 599 </a></li>
-											<li><a href="#"> 600 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Above 2000 </a></li>
-										</ul>
-									</div>
-
-
-
-									<!--row-2-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Flavour</li>
-											<li><a href="#"> Chocolate Cakes </a></li>
-											<li><a href="#"> Red Velvet Cakes </a></li>
-											<li><a href="#"> Black Forest Cakes </a></li>
-											<li><a href="#"> Butter Scotch Cakes </a></li>
-											<li><a href="#"> Strawberry Cakes </a></li>
-										</ul>
-									</div>
-
-									<!--row-3-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Shape</li>
-											<li><a href="#"> Tier Cakes </a></li>
-											<li><a href="#"> Barbie Doll Cakes </a></li>
-											<li><a href="#"> Minion Cakes </a></li>
-											<li><a href="#"> Spiderman Cakes </a></li>
-											<li><a href="#"> Mickey Mouse Cakes </a></li>
-										</ul>
-									</div>
-
-									<!--row-4-->
-									<div class="row_one">
-										<ul class="drop_mainmenu">
-											<li>Cakes By Type</li>
-											<li><a href="#"> Eggless Cakes </a></li>
-											<li><a href="#"> Midnight Cakes </a></li>
-											<li><a href="#"> Kids Cakes </a></li>
-											<li><a href="#"> Photo Cakes </a></li>
-											<li><a href="#"> Premium Cakes </a></li>
-										</ul>
-									</div>
-								</div>
-							</ul></li>
-						<li><a href="#">Packaged Cakes <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--chocolates dropdown-->
-							<ul class="megamenu two-row">
-								<div class="four_row_dropdown">
-									<!--row-1-->
-									<div class="two_one">
-										<ul class="drop_mainmenu">
-											<li>By Price</li>
-											<li><a href="#"> Under 399 </a></li>
-											<li><a href="#"> 400 to 599 </a></li>
-											<li><a href="#"> 600 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Above 2000 </a></li>
-										</ul>
-									</div>
-
-
-
-									<!--row-2-->
-									<div class="two_one">
-										<ul class="drop_mainmenu">
-											<li>By Type</li>
-											<li><a href="#"> All Chocolates </a></li>
-											<li><a href="#"> Chocolates Combos </a></li>
-											<li><a href="#"> Chocolate Bouquet </a></li>
-											<li><a href="#"> Cadbury Chocolates </a></li>
-											<li><a href="#"> Sugar Free Chocolates </a></li>
-										</ul>
-									</div>
-
-
-								</div>
-							</ul></li>
-						<!--full-row dropdown-->
-						<li><a href="#">Chocolates <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--chocolates dropdown-->
-							<ul class="megamenu full-row">
-								<div class="four_row_dropdown">
-									<!--row-1-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>By Price</li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 699 </a></li>
-											<li><a href="#"> 700 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 699 </a></li>
-											<li><a href="#"> 700 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-										</ul>
-									</div>
-
-									<!--row-2-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>By Recipient</li>
-											<li><a href="#"> Gifts for girls </a></li>
-											<li><a href="#"> Gifts for girlfriend </a></li>
-											<li><a href="#"> Gifts for her </a></li>
-											<li><a href="#"> Gifts for wife </a></li>
-											<li><a href="#"> Gifts for sister </a></li>
-											<li><a href="#"> Gifts for mother </a></li>
-											<li><a href="#"> Gifts for daughter </a></li>
-											<li><a href="#"> Gifts for fiancee </a></li>
-										</ul>
-									</div>
-
-									<!--row-3-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>By Recipient</li>
-											<li><a href="#"> Gifts for boys </a></li>
-											<li><a href="#"> Gifts for boyfriend </a></li>
-											<li><a href="#"> Gifts for him </a></li>
-											<li><a href="#"> Gifts for husband </a></li>
-											<li><a href="#"> Gifts for brother </a></li>
-											<li><a href="#"> Gifts for father </a></li>
-											<li><a href="#"> Gifts for son </a></li>
-											<li><a href="#"> Gifts for fiance </a></li>
-										</ul>
-									</div>
-
-									<!--row-4-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>By Type</li>
-											<li><a href="#"> All gifts </a></li>
-											<li><a href="#"> Handbags </a></li>
-											<li><a href="#"> Clutches </a></li>
-											<li><a href="#"> Scented Candles </a></li>
-											<li><a href="#"> Metallic Utensils </a></li>
-											<li><a href="#"> Jewellery </a></li>
-											<li><a href="#"> Gold Plated Gifts </a></li>
-											<li><a href="#"> Home Decor Gifts </a></li>
-										</ul>
-									</div>
-
-									<!--row-5-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>By Type</li>
-											<li><a href="#"> Gift Baskets </a></li>
-											<li><a href="#"> Scarfs </a></li>
-											<li><a href="#"> Men Accessories </a></li>
-											<li><a href="#"> Artificial Plants </a></li>
-											<li><a href="#"> Electric Diffusers </a></li>
-											<li><a href="#"> Soft toys </a></li>
-											<li><a href="#"> Crystal Gifts </a></li>
-											<li><a href="#"> Greeting Cards </a></li>
-										</ul>
-									</div>
-
-									<!--row-6-->
-									<div class="full_divid">
-										<ul class="drop_mainmenu">
-											<li>Personalised Gifts</li>
-											<li><a href="#"> All Personalised Gifts </a></li>
-											<li><a href="#"> Personalised Mugs </a></li>
-											<li><a href="#"> Personalised Cushions </a></li>
-											<li><a href="#"> Personlised Tshirts </a></li>
-											<li><a href="#"> Personalised Keychains </a></li>
-											<li><a href="#"> Personalised Beer Mugs </a></li>
-											<li><a href="#"> Personalised Jewellery </a></li>
-											<li><a href="#"> Personalised Chocolates </a></li>
-										</ul>
-									</div>
-
-
-								</div>
-							</ul></li>
-
-						<li><a href="#">Bakersware <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--anniversary-dropdown-->
-							<ul class="dropdown">
-								<li><a href="#"> Anniversary Gifts </a></li>
-								<li><a href="#"> Anniversary Cakes </a></li>
-								<li><a href="#"> Anniversary Flowers </a></li>
-								<li><a href="#"> First Anniversary Cakes </a></li>
-								<li><a href="#"> 25<sup>th</sup> Anniversary Cakes
-								</a></li>
-							</ul></li>
-						<li><a href="#">Combo <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a></li>
-						<li><a href="#">Gifts <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a></li>
-						<li><a href="#">Anniversary <span><i
-									class="fa fa-angle-down" aria-hidden="true"></i></span></a></li>
-					</ul>
-				</div>
-
-			</div>
-		</div>
-
-
+     
+                              <!--row-2-->
+                              <div class="two_one">
+                                <ul class="drop_mainmenu">
+                                    <li>By Type </li>
+                                    <li><a href="#">  All Chocolates </a></li>
+                                    <li><a href="#">  Chocolates Combos </a></li>
+                                    <li><a href="#">  Chocolate Bouquet </a></li>
+                                    <li><a href="#">  Cadbury Chocolates </a></li>
+                                    <li><a href="#">  Sugar Free Chocolates </a></li>
+                                </ul>  
+                            </div>
+                              
+                              
+                          </div>
+                        </ul>
+                    </li>
+                    <!--full-row dropdown-->
+                    <li><a href="#">Chocolates <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        <!--chocolates dropdown-->
+                        <ul class="megamenu full-row">
+                          <div class="four_row_dropdown">
+                            <!--row-1-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>By Price </li>
+                                    <li><a href="#"> Under 499 </a></li>
+                                    <li><a href="#"> 500 to 699 </a></li>
+                                    <li><a href="#"> 700 to 999 </a></li>
+                                    <li><a href="#"> 1000 to 1999 </a></li>
+                                    <li><a href="#"> Under 499 </a></li>
+                                    <li><a href="#"> 500 to 699 </a></li>
+                                    <li><a href="#"> 700 to 999 </a></li>
+                                    <li><a href="#"> 1000 to 1999 </a></li>
+                                </ul>  
+                            </div>
+     
+                              <!--row-2-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>By Recipient</li>
+                                    <li><a href="#"> Gifts for girls </a></li>
+                                    <li><a href="#"> Gifts for girlfriend </a></li>
+                                    <li><a href="#"> Gifts for her </a></li>
+                                    <li><a href="#"> Gifts for wife </a></li>
+                                    <li><a href="#"> Gifts for sister </a></li>
+                                    <li><a href="#"> Gifts for mother </a></li>
+                                    <li><a href="#"> Gifts for daughter </a></li>
+                                    <li><a href="#"> Gifts for fiancee </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-3-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>By Recipient</li>
+                                    <li><a href="#"> Gifts for boys </a></li>
+                                    <li><a href="#"> Gifts for boyfriend </a></li>
+                                    <li><a href="#"> Gifts for him </a></li>
+                                    <li><a href="#"> Gifts for husband </a></li>
+                                    <li><a href="#"> Gifts for brother </a></li>
+                                    <li><a href="#"> Gifts for father </a></li>
+                                    <li><a href="#"> Gifts for son </a></li>
+                                    <li><a href="#"> Gifts for fiance </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-4-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>By Type</li>
+                                    <li><a href="#"> All gifts </a></li>
+                                    <li><a href="#"> Handbags </a></li>
+                                    <li><a href="#"> Clutches </a></li>
+                                    <li><a href="#"> Scented Candles </a></li>
+                                    <li><a href="#"> Metallic Utensils </a></li>
+                                    <li><a href="#"> Jewellery </a></li>
+                                    <li><a href="#"> Gold Plated Gifts </a></li>
+                                    <li><a href="#"> Home Decor Gifts </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-5-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>By Type</li>
+                                    <li><a href="#"> Gift Baskets </a></li>
+                                    <li><a href="#"> Scarfs </a></li>
+                                    <li><a href="#"> Men Accessories </a></li>
+                                    <li><a href="#"> Artificial Plants </a></li>
+                                    <li><a href="#"> Electric Diffusers </a></li>
+                                    <li><a href="#"> Soft toys </a></li>
+                                    <li><a href="#"> Crystal Gifts </a></li>
+                                    <li><a href="#"> Greeting Cards </a></li>
+                                </ul>  
+                            </div>
+                              
+                              <!--row-6-->
+                              <div class="full_divid">
+                                <ul class="drop_mainmenu">
+                                    <li>Personalised Gifts</li>
+                                    <li><a href="#"> All Personalised Gifts </a></li>
+                                    <li><a href="#"> Personalised Mugs </a></li>
+                                    <li><a href="#"> Personalised Cushions </a></li>
+                                    <li><a href="#"> Personlised Tshirts </a></li>
+                                    <li><a href="#"> Personalised Keychains </a></li>
+                                    <li><a href="#"> Personalised Beer Mugs </a></li>
+                                    <li><a href="#"> Personalised Jewellery </a></li>
+                                    <li><a href="#"> Personalised Chocolates </a></li>
+                                </ul>  
+                            </div>
+                              
+                              
+                          </div>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#">Bakersware <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a>
+                        <!--anniversary-dropdown-->
+                        <ul class="dropdown">
+                          <li><a href="#"> Anniversary Gifts </a></li>
+                          <li><a href="#"> Anniversary Cakes </a></li>
+                          <li><a href="#"> Anniversary Flowers </a></li>
+                          <li><a href="#"> First Anniversary Cakes </a></li>
+                          <li><a href="#"> 25<sup>th</sup> Anniversary Cakes </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Combo <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></li>
+                    <li><a href="#">Gifts <span><i class="fa fa-angle-down" aria-hidden="true"></i></span></a></li>
+      			</ul>
+      		</div>
+        
+    </div>
+ 
+    
+    <div class="arrow_right"><ul>
+        <li><a href="#"><i class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+        <li><a href="#"><i class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
+        </ul></div>
+    </div> 
+	
+<div class="head_marg with_menu">
 		<section class="product_category">
 			<div class="wrapper">
+				<div class="mobile_scroll">
+			
 				<div class="prod_filt">
 					<ul>
 						<li>
@@ -471,9 +482,12 @@
 									Express Cakes</a>
 							</div>
 						</li>
+						
+						
 					</ul>
 				</div>
-
+		
+		</div>
 
 
 			</div>

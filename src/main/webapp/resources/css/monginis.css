@@ -626,7 +626,7 @@ box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.50); -webkit-transition: all ease 0
 
 .detail_row{display: inline-block; width: 100%; margin: 0 0 30px 0;}
 .detail_l{float: left; width: 40%;}
-.detail_slide{background: #FFF; padding: 10px; display: block; min-height: 496px;}
+.detail_slide{background: #FFF; padding: 10px; display: block; /* min-height: 496px; */}
 
 .detail_r{float: right; width: 59%;}
 .detail_content{background: #FFF; padding: 10px;}
@@ -929,7 +929,8 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
 .pop_one{margin: 0 0 10px 0;}
 .mobile_button{display: none;}
 .mobile_table{display: none;}
-    
+
+.mobile_scroll{position: relative; width:100%; overflow-x:auto; }    
 
 @media screen and (max-width:1280px){
     /*home page css*/
@@ -1038,10 +1039,17 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .table_title_one{font-size: 20px;}
     
     .head_marg {margin: 105px 0 0 0;}
-    .prod_filt ul li{width: 20%;}
+    /* .prod_filt ul li{width: 20%;} */
     .promo_row_l{font-size: 14px;}
+    
+    .cart_cont{width: 100px;}
+    .prod_filt{width: 120%;}
+    .tweets_r{font-size:22px;}
+    .landing_button{width: 50%;}
 }
 @media screen and (max-width:900px){
+	.prod_filt {width: 150%;}
+
     /*home page css*/
     .top_menu{display: none;}
     .logo_form{width: 40%; margin: 0;}
@@ -1109,7 +1117,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .table_detail_l {width: 11%;}
     .table_detail_r {width: 89%; padding: 0 0 0 10px;}
     
-    .prod_filt ul li{width: 25%;}
+    /* .prod_filt ul li{width: 25%;} */
     .footer_social ul li{padding: 0 22px 0 0;}
     
     .full_divid{width: 25%; margin: 0 0 30px 0;}
@@ -1117,6 +1125,12 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .menuzord-menu>li>.megamenu.two-row,.menuzord-menu>li>.megamenu.three-row{width: 100%; max-width: 100%;}
     .mega_menu_row{background: #FFF; top: 105px; position: fixed; z-index: 9 /*999999*/;}
     .arrow_right {position: absolute; top: 15px; right: 12px; z-index: 2;}
+    
+    .cart_cont{width:150px /* 170px */; margin: 6px 0 0 0;}
+    
+    .tweets_r{padding: 0 20px;}
+    .tweets_r {font-size: 20px;}
+    .landing_button {width: 60%; font-size: 20px;}
     
 }
 
@@ -1140,7 +1154,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
         .cart_delete {
     text-align: left;
 }
-        .cart_remove{text-align: left;}
+        .cart_remove{text-align:center /* left */;}
         .qtyminus.cart, .qtyplus.cart{margin: 0;}
         
 
@@ -1148,7 +1162,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
 		table.cart1, table.cart1 thead, table.cart1 tbody, table.cart1 th, table.cart1 td, table.cart1 tr {
 			display: block;
 		}
-        .cart_cont{width: 170px; margin: 6px 0 0 0;}
+        /* .cart_cont{width:150px 170px; margin: 6px 0 0 0;} */
 
 		/* Hide table headers (but not display: none;, for accessibility) */
 		table.cart1 thead tr {
@@ -1203,7 +1217,14 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
 
 
 @media screen and (max-width:700px){
-    .arrow_right {top: 9px; right: 7px;}
+	.prod_filt {width: 250%;}
+
+	.mobile_Scrl{position: relative;  width: 100%; overflow-x: auto; }
+	.xzoom-thumbs{width: 135%;}
+	.overlay a{font-size: 26px;}
+	
+	
+	.arrow_right {top: 9px; right: 7px;}
     .mega_menu_row{top: 89px;}
     .head_marg.with_menu {margin: 136px 0 0 0;}
     /*home page css*/
@@ -1218,7 +1239,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     
     /*product detail page css*/
     .detail_l{width:100%;}
-    .detail_slide{min-height: 550px;}
+    /* .detail_slide{min-height: 550px;} */
     
     .address_row ul li{width: 50%;}
     
@@ -1233,7 +1254,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     table.cart.two td{font-size: 14px;}
     .detail_one span{font-size: 14px;}
     .cart_able_bx.drop_tab{padding: 0;}
-    .prod_filt ul li {width: 33.333%;}
+    /* .prod_filt ul li {width: 33.333%;} */
     .product_filter_one img{margin: 0 auto 5px auto}
     
     
@@ -1276,6 +1297,12 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .mob_status{display: block; margin: 0; color: #333; font-size: 14px; font-family: 'Hind-Medium';}
     .order_row_1{border-bottom: 4px solid #f9f9f9;}
     
+    .tweets_row{display: block; height: auto;}
+    .tweets_l{display: block; width: 100%; margin: 0 0 30px 0;}
+    .tweets_r{display: block; width: 100%;}
+    .landing_button {width: 90%; font-size: 17px; line-height: 24px;}
+    .landing_button a{font-size: 16px;}
+    .well_landing{width: 96%;}
 }
 @media screen and (max-width:640px){
     /*location page css*/
@@ -1317,7 +1344,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .act_prc{margin: 0 5px;}
     
     .head_marg {margin: 95px 0 0 0;}
-    .prod_filt ul li {width: 33.333%;}
+    /* .prod_filt ul li {width: 33.333%;} */
     
 }
 @media screen and (max-width:640px){
@@ -1411,7 +1438,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     .total_row_l{float: right; width: 100%;}
     .related_one{padding: 0 0 0 131px; width: 100%;}
     
-    .detail_slide {min-height: 572px;}
+    /* .detail_slide {min-height: 572px;} */
     
     .stock_prc{line-height: 20px;}
     .delivery_frm_l{float: none; width: 100%; text-align: center;}
@@ -1433,7 +1460,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     
     .profile_l{padding: 20px;}
     
-    .prod_filt ul li {width: 50%;}
+    /* .prod_filt ul li {width: 50%;} */
     .product_filter_one img{height: 180px;}
     
 }
@@ -1451,6 +1478,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
     
     .cart_button, .buy_button{min-width: 155px;}
     .cart_cont {width: 160px;}
+    .cart_cont.width_inc {width: 65%;}
     
 }
 @media screen and (max-width:320px){

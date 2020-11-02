@@ -189,16 +189,16 @@
 							<ul class="login_menu">
 								<li><a href="#"><img src="#" class="lazy"
 										data-src="${pageContext.request.contextPath}/resources/images/user_pic.jpg"
-										alt=""> Hi Kate <i class="fa fa-angle-down"
-										aria-hidden="true"></i></a>
+										alt=""> Hi Kate <!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a>
 									<ul>
 										<li class="lgn_nm">Hello <span>kate@gmail.com</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
-										<li><a href="order-history.html"> My Order </a></li>
-										<li><a href="multi-address.html"> My Address Book </a></li>
-										<li><a href="profile.html"> Profile </a></li>
-										<li><a href="#">Help</a></li>
-										<li class="lgn_out"><a href="location.html">Logout</a></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li class="lgn_out"></li>
 									</ul></li>
 							</ul>
 						</div>
@@ -213,8 +213,13 @@
 	<div id="myNav" class="overlay">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 		<div class="overlay-content">
-			<a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a>
-			<a href="#">Contact</a>
+			<a href="order-history.html"> My Order </a>
+			<a href="multi-address.html"> My Address Book </a>
+			<a href="profile.html"> Profile </a>
+			<a href="#">Help</a>
+			<a href="location.html">Logout</a>
+			
+			<!-- <a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> -->
 		</div>
 	</div>
 

@@ -343,7 +343,7 @@
         <div class="landingpop_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></h2>
         
         <div class="location_padd">
-                <div class="current_location"><a href="#"><img src="images/location_icn.png" alt=""> use Current Location </a></div>
+                <div class="current_location"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/location_icn.png" alt=""> use Current Location </a></div>
                 <div class="location_or">Or</div>
                 
                 <div class="location_city">
@@ -403,7 +403,7 @@
                 
                 
                 <div class="select_location">
-                    <span><img src="images/current_icn.png" alt=""> Currently our services are unavailable at selected location.</span>
+                    <span><img src="${pageContext.request.contextPath}/resources/images/current_icn.png" alt=""> Currently our services are unavailable at selected location.</span>
                 </div>
                 
                 <div class="proceed_btn_1"><a href="home.html"><input name="" type="button" value="Proceed" class="proceed" /></a></div>

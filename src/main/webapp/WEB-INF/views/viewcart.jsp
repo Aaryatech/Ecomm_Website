@@ -122,139 +122,229 @@ z-index: 999999 !important;
 
 				<div class="cart_row">
 					<div class="cart_l">
-						<!--cart table-start-here-->
-						<div class="cart_able_bx">
-							<div class="table_bx">
-								<table class="cart">
-									<tr>
-										<th>Product Name</th>
-										<th>Quantity</th>
-										<th>Delivery Option</th>
-										<th>Sub Total</th>
-										<th>Action</th>
-									</tr>
-									<!--cart-row-1-->
-									<tr>
-										<td>
-											<div class="cart_pic_row">
-												<div class="cart_pic">
-													<img
-														src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg"
-														alt=""> <img
-														src="${pageContext.request.contextPath}/resources/images/icon_veg.png"
-														alt="" class="veg_icn">
-												</div>
-												<div class="cart_cont">
-													<h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
-													<h3 class="cart_prc">495.00</h3>
-													<div class="cart_show" style="display: none;">
-														<a href="#"><i class="fa fa-eye" aria-hidden="true"></i>
-															Show Details</a>
-													</div>
-													<div class="cart_det">
-														Weight - 500 gm <br> Eggless - False <br> Heart
-														Shape - False <br>
-													</div>
-
-												</div>
-											</div>
-										</td>
-										<td>
-
-											<form id="myform" method="POST" action="#">
-												<button type="button" value="" field="quantity"
-													class="qtyminus cart">
-													<i class="fa fa-minus" aria-hidden="true"></i>
-												</button>
-												<!--<input type="button" value="-" class="qtyminus" field="quantity">-->
-												<input type="text" name="quantity" value="0"
-													class="qty cart">
-												<!--<input type="button" value="+" class="qtyplus" field="quantity">-->
-												<button type="button" value="" field="quantity"
-													class="qtyplus cart">
-													<i class="fa fa-plus" aria-hidden="true"></i>
-												</button>
-											</form> <span class="cart_remove"><a href="#">Remove</a></span>
-
-										</td>
-										<td>
-											<div class="cart_option">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/user_pic.jpg"
-													alt=""> <span>Message in the cake</span>
-											</div>
-										</td>
-										<td><div class="cart_prc_1">990.00</div></td>
-										<td><div class="cart_delete">
-												<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-											</div></td>
-									</tr>
-									<!--cart-row-2-->
-									<tr>
-										<td>
-											<div class="cart_pic_row">
-												<div class="cart_pic">
-													<img
-														src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg"
-														alt=""> <img
-														src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png"
-														alt="" class="veg_icn">
-												</div>
-												<div class="cart_cont">
-													<h3 class="cart_cake">Classic Red Velvet Cake</h3>
-													<h3 class="cart_prc">495.00</h3>
-													<div class="cart_show">
-														<a href="#"><i class="fa fa-eye" aria-hidden="true"></i>
-															Show Details</a>
-													</div>
-													<div class="cart_det" style="display: none;">
-														Weight - 500 gm <br> Eggless - False <br> Heart
-														Shape - False <br>
-													</div>
-
-												</div>
-											</div>
-										</td>
-										<td>
-
-											<form id="myform" method="POST" action="#">
-												<button type="button" value="" field="quantity"
-													class="qtyminus cart">
-													<i class="fa fa-minus" aria-hidden="true"></i>
-												</button>
-												<!--<input type="button" value="-" class="qtyminus" field="quantity">-->
-												<input type="text" name="quantity" value="0"
-													class="qty cart">
-												<!--<input type="button" value="+" class="qtyplus" field="quantity">-->
-												<button type="button" value="" field="quantity"
-													class="qtyplus cart">
-													<i class="fa fa-plus" aria-hidden="true"></i>
-												</button>
-											</form> <span class="cart_remove"><a href="#">Remove</a></span>
-
-										</td>
-										<td>
-											<div class="cart_option">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/user_pic.jpg"
-													alt=""> <span>Message in the cake</span>
-											</div> <!--<div class="cart_option">
-            <span>Standard Delivery (Free)</span>
-            on 09-Sep-2020 <br>
-            Between 9:00 hrs - 13:00 hrs  
-        </div>-->
-										</td>
-										<td><div class="cart_prc_1">990.00</div></td>
-										<td><div class="cart_delete">
-												<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-											</div></td>
-									</tr>
-
-								</table>
-							</div>
-						</div>
-						<!--cart table-close-here-->
-
+					
+					<!-- desktop table-->
+					<div class="cart_able_bx">
+                <div class="table_bx">
+                    <table class="cart">
+    <tr>
+      <th>Product Name</th>
+      <th>Quantity</th>
+      <th>Delivery Option</th>
+      <th>Sub Total</th>
+      <th>Action</th>
+    </tr>                   
+    <tr>
+      <td>
+        <div class="cart_pic_row">
+            <div class="cart_pic">
+                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">
+            </div>
+            <div class="cart_cont">
+                <h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
+                <h3 class="cart_prc">495.00</h3>
+                <div class="cart_show" style="display: none;"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
+                <div class="cart_det">
+                    Weight - 500 gm <br>
+                    Eggless - False <br>
+                    Heart Shape - False <br>
+                </div>
+            
+            </div>
+        </div>  
+      </td>
+      <td>
+        
+          <form id="myform" method="POST" action="#">
+            <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <input type="text" name="quantity" value="0" class="qty cart">
+            <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </form>
+        <span class="cart_remove"><a href="#">Remove</a></span>
+        
+      </td>
+      <td>
+        <div class="cart_option">
+            <img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt="">
+            <span>Message in the cake</span>
+        </div>  
+      </td>
+      <td><div class="cart_prc_1">  990.00</div></td>
+      <td><div class="cart_delete"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>
+    </tr>
+                        
+    <tr>
+      <td>
+        <div class="cart_pic_row">
+            <div class="cart_pic">
+                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png" alt="" class="veg_icn">
+            </div>
+            <div class="cart_cont">
+                <h3 class="cart_cake">Classic Red Velvet Cake</h3>
+                <h3 class="cart_prc"> 495.00</h3>
+                <div class="cart_show"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
+                <div class="cart_det" style="display: none;">
+                    Weight - 500 gm <br>
+                    Eggless - False <br>
+                    Heart Shape - False <br>
+                </div>
+            
+            </div>
+        </div>    
+      </td>
+      <td>
+        
+          <form id="myform" method="POST" action="#">
+            <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
+            <input type="text" name="quantity" value="0" class="qty cart">
+            <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </form>
+        <span class="cart_remove"><a href="#">Remove</a></span>
+        
+      </td>
+      <td>
+           <div class="cart_option">
+            <img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt="">
+            <span>Message in the cake</span>
+        </div>
+      </td>
+      <td><div class="cart_prc_1">  990.00</div></td>
+      <td><div class="cart_delete"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>
+    </tr>
+    
+  </table>
+                </div>
+            </div>
+						
+						
+						
+						<!-- mobile-table-->
+            <div class="mobile_table">
+                <!--mobile-row-1-->
+                <div class="row_1">
+                    <div class="mob_prod">
+                        <div class="mob_prod_title">Product Name</div>
+                        <div class="cart_pic_row mobile_width">
+            <div class="cart_pic">
+                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">
+            </div>
+            <div class="cart_cont width_inc">
+                <h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
+                <h3 class="cart_prc">495.00</h3>
+                <div class="cart_show" style="display: none;"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
+                <div class="cart_det">
+                    Weight - 500 gm <br>
+                    Eggless - False <br>
+                    Heart Shape - False <br>
+                </div>
+            
+            </div>
+        </div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Quantity</div>
+                        <div class="mob_quan_r">
+                            <form id="myform" method="POST" action="#">
+                                <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                <input type="text" name="quantity" value="0" class="qty cart">
+                                <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Delivery Option</div>
+                        <div class="mob_quan_r">
+                            <div class="cart_option">
+                                <img src="images/user_pic.jpg" alt="">
+                                <span>Message in the cake</span>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Sub Total</div>
+                        <div class="mob_quan_r">
+                             990.00
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Action</div>
+                        <div class="mob_quan_r">
+                            <div class="cart_delete">
+                             <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+                
+                <!--mobile-row-2-->
+                <div class="row_1">
+                    <div class="mob_prod">
+                        <div class="mob_prod_title">Product Name</div>
+                        <div class="cart_pic_row mobile_width">
+            <div class="cart_pic">
+                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg" alt="">
+            <img src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png" alt="" class="veg_icn">
+            </div>
+            <div class="cart_cont width_inc">
+                <h3 class="cart_cake">Classic Red Velvet Cake</h3>
+                <h3 class="cart_prc">495.00</h3>
+                <div class="cart_show"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
+                <div class="cart_det" style="display: none;">
+                    Weight - 500 gm <br>
+                    Eggless - False <br>
+                    Heart Shape - False <br>
+                </div>
+            
+            </div>
+        </div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Quantity</div>
+                        <div class="mob_quan_r">
+                            <form id="myform" method="POST" action="#">
+                                <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                                <input type="text" name="quantity" value="0" class="qty cart">
+                                <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Delivery Option</div>
+                        <div class="mob_quan_r">
+                            <div class="cart_option">
+                                <img src="images/user_pic.jpg" alt="">
+                                <span>Message in the cake</span>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Sub Total</div>
+                        <div class="mob_quan_r">
+                            <div class="cart_prc_1"> 990.00</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="mob_quan">
+                        <div class="mob_quan_l">Action</div>
+                        <div class="mob_quan_r">
+                            <div class="cart_delete">
+                             <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                </div>
+            </div> 
+						
+						
+						<!-- desktop table-->
 						<div class="total_row">
 							<!--cart-right-->
 							<div class="total_row_r">
@@ -345,6 +435,10 @@ z-index: 999999 !important;
 								</form>
 							</div>
 						</div>
+
+
+						
+						
 
 					</div>
 

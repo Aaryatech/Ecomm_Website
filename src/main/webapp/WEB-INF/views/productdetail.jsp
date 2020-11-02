@@ -124,7 +124,24 @@
 				<div class="detail_row">
 					<div class="detail_l">
 						<div class="detail_slide">
-							<div id="el"></div>
+							<!-- <div id="el"></div> -->
+							
+							<div class="xzoom-container">
+          <img class="xzoom" id="xzoom-default" src="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" xoriginal="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" />
+          
+          <div class="mobile_Scrl">
+          <div class="xzoom-thumbs">
+            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg"  xpreview="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" title="The description goes here"></a>
+            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_2.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_2.jpg" title="The description goes here"></a>
+            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg" title="The description goes here"></a>
+            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg" title="The description goes here"></a>
+            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_5.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_5.jpg" title="The description goes here"></a>
+              </div>
+              
+          </div>
+        </div>
+							
+							
 						</div>
 					</div>
 					<div class="detail_r">
@@ -282,6 +299,12 @@
 									href="my-cart.html" class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
+							
+							<!--mobile-buttons-->
+                    <div class="mobile_button">
+                        <a href="#" class="mobile_cart">Add To Cart</a>
+                        <a href="my-cart.html" class="mobile_buy">Buy Now</a>
+                    </div>
 
 						</div>
 					</div>
@@ -588,28 +611,24 @@
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
 
-	<!--zoom slider-->
 
-	<script src="${pageContext.request.contextPath}/resources/js/zoomy.js"></script>
+
+	<!--zoom slider-->
+	
+
+	<%-- <script src="${pageContext.request.contextPath}/resources/js/zoomy.js"></script>
 	<link type="text/css" rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/css/zoomy.css">
 	<script>
 		var urls = [ '${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg', '${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg',
 				'${pageContext.request.contextPath}/resources/images/zoom_slide_5.jpg', '${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg',
 				'${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg'
-		/*'https://source.unsplash.com/h0s58n-8R6w/600x350',
-		'https://source.unsplash.com/jQ2_DWnIX7Y/600x350',
-		'https://source.unsplash.com/u4gwRbr2_j0/600x350'*/
+		
 		];
 		var options = {
-		//thumbLeft:true,
-		//thumbRight:true,
-		//thumbHide:true,
-		//width:300,
-		//height:500,
 		};
 		$('#el').zoomy(urls, options);
-	</script>
+	</script> --%>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push([ '_setAccount', 'UA-36251023-1' ]);
@@ -854,6 +873,9 @@
 				});
 	</script>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/xzoom.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/xzoom.css" media="all" />    
+<script src="${pageContext.request.contextPath}/resources/js/setup.js"></script>  
 
 	<script type="text/javascript">
 		document

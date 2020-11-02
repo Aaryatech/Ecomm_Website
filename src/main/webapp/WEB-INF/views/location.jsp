@@ -49,7 +49,7 @@
 					<div class="current_location">
 						<a href="${pageContext.request.contextPath}/viewmap"><img
 							src="${pageContext.request.contextPath}/resources/images/location_icn.png"
-							alt=""> use Current Location </a>
+							alt=""> use Current Location  </a>
 					</div>
 					<div class="location_or">Or</div>
 

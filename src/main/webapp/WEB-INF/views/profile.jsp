@@ -198,8 +198,9 @@
 											class="form-label-hint-error" id="errorEmailInvalid"
 											style="display: none;">invalid email id</label>
 									</div>
-									<div class="place_row_r_new">
-										<div class="gender_l">Gender</div>
+									<div class="place_row_r">
+									<label class="form-label-hint" style="display: block;">Gender</label>
+										<!-- <div class="gender_l">Gender</div> -->
 										<div class="gender_r">
 											<div class="radio_1 gender">
 												<ul>
