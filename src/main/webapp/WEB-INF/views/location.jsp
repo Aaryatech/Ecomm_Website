@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%><%@ taglib
+	uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 <meta charset="utf-8" />
 <title>Monginis</title>
@@ -49,7 +50,7 @@
 					<div class="current_location">
 						<a href="${pageContext.request.contextPath}/viewmap"><img
 							src="${pageContext.request.contextPath}/resources/images/location_icn.png"
-							alt=""> use Current Location  </a>
+							alt=""> use Current Location </a>
 					</div>
 					<div class="location_or">Or</div>
 
@@ -86,36 +87,52 @@
 					<div class="place_search_row">
 						<form action="" method="get">
 							<div class="search_one">
-								<div class="dropdown">
+								<%-- <div class="dropdown">
 									<div class="select">
 										<span>Other City</span>
 									</div>
 									<ul class="dropdown-menu" id="citySel">
-										<li id="Agra">Agra</li>
-										<li id="Pune">Pune</li>
-										<li id="Mumbai">Mumbai</li>
+										<c:forEach items="${cityList}" var="cityList">
+											<li id="city${cityList.cityId}" value="${cityList.cityId}"
+												data-cityname="${cityList.cityName}" class="cityclass">${cityList.cityName}</li>
+										</c:forEach>
 									</ul>
+								</div> --%>
+
+								<div
+									style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									<select id="citySel" name="citySel"
+										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;"
+										onchange="getCityName(this.value)">
+										<option value="0" id="city0" data-cityname="">select</option>
+										<c:forEach items="${cityList}" var="cityList">
+											<option value="${cityList.cityId}"
+												id="city${cityList.cityId}"
+												data-cityname="${cityList.cityName}">${cityList.cityName}</option>
+										</c:forEach>
+
+									</select>
 								</div>
-
-
 
 							</div>
 
-							<div class="search_one">
-								<div style="background-color: #FFF;border-radius: 3px; width:100%;">
-									<select id="address" name="address" style="padding: 10px;font-size: 16px;color: #a6a6a6; width:100%;">
+							<div class="search_one" style="display: none;">
+								<div
+									style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									<select id="address" name="address"
+										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
 										<option value="1">choose your default address 1</option>
-										<option  value="2">choose your default address 2</option>
-										<option  value="3">choose your default address 3</option>
+										<option value="2">choose your default address 2</option>
+										<option value="3">choose your default address 3</option>
 									</select>
 								</div>
 							</div>
 
 							<div class="search_one">
 								<div class="search_one_l">
-									<input name="" type="text" class="input_search"
-										placeholder="Search your Area" /> <i class="fa fa-search"
-										aria-hidden="true"></i>
+									<input name="txtPlaces" type="text" class="input_search"
+										placeholder="Search your Area" id="txtPlaces" /> <i
+										class="fa fa-search" aria-hidden="true"></i>
 								</div>
 								<div class="search_one_r">
 									<a href="${pageContext.request.contextPath}/viewmap">Get
@@ -123,17 +140,15 @@
 								</div>
 								<div class="clr"></div>
 							</div>
-							<div class="search_one" style="display: none;">
-								<div class="dropdown">
-									<div class="select">
-										<span>Select your nearest franchisee</span>
-									</div>
-									<input type="hidden" name="gender">
-									<ul class="dropdown-menu">
-										<li id="male">Pune</li>
-										<li id="female">Mumbai</li>
-										<li id="female">Nashik</li>
-									</ul>
+							<div class="search_one">
+								<div
+									style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									<select id="selectShop" name="selectShop"
+										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
+										<option value="1">choose your default address 1</option>
+										<option value="2">choose your default address 2</option>
+										<option value="3">choose your default address 3</option>
+									</select>
 								</div>
 							</div>
 						</form>
@@ -210,7 +225,8 @@
 		</div>
 	</section>
 
-
+	<script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBahlnISPYhetj3q50ADqVE6SECypRGe4A&libraries=places"></script>
 	<!--menuzord -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/menuzord.js"></script>
@@ -393,11 +409,162 @@
 
 
 	<script type="text/javascript">
-		function setCityData(val) {
+		$(document).ready(function($) {
 
-			alert(val)
-			//alert($('#citySel').val())
+			var frData = '${frData}';
+			sessionStorage.setItem("frList", frData);
+			//console.log(frData)
+		});
+		$('.cityclass').click(function() {
+			//var id = this.value();
+			//var id = $(this).val();
+			var cityname = $(this).data("cityname");
+			$('#txtPlaces').val(cityname + " ");
+			document.getElementById("txtPlaces").focus();
+		});
 
+		function getCityName(val) {
+			var cityname = $("#city" + val).data("cityname");
+			$('#txtPlaces').val(cityname + " ");
+			document.getElementById("txtPlaces").focus();
+		}
+		function calculateDistance(latitude, longitude, type) {
+
+			/* alert(latitude)
+			alert(longitude) */
+			var bounds = new google.maps.LatLngBounds;
+
+			var origin1 = {
+				lat : latitude,
+				lng : longitude
+			};
+
+			var waypts = [];
+
+			var frList = sessionStorage.getItem("frList");
+			var list = $.parseJSON(frList);
+
+			for (var i = 0; i < list.length; i++) {
+
+				if (!isNaN(parseFloat(list[i].shopsLatitude))) {
+					var data_add = {
+						lat : parseFloat(list[i].shopsLatitude),
+						lng : parseFloat(list[i].shopsLogitude)
+					}
+					waypts.push(data_add);
+				}
+
+			}
+
+			//console.log(waypts);
+
+			var geocoder = new google.maps.Geocoder;
+			var service = new google.maps.DistanceMatrixService;
+			service
+					.getDistanceMatrix(
+							{
+								origins : [ origin1 ],
+								destinations : waypts,
+								travelMode : 'DRIVING',
+								unitSystem : google.maps.UnitSystem.METRIC,
+								avoidHighways : false,
+								avoidTolls : false
+							},
+							function(response, status) {
+
+								//alert(JSON.stringify(response))
+
+								if (status !== 'OK') {
+									alert('Error was: ' + status);
+								} else {
+									$('#selectShop').html('');
+									var html = '<option value="0" selected>Select Shop</option>';
+
+									var originList = response.originAddresses;
+									var destinationList = response.destinationAddresses;
+
+									var results = response.rows[0].elements;
+									var newFrList = [];
+
+									for (var j = 0; j < results.length; j++) {
+
+										try {
+											var km = (parseFloat((results[j].distance.value) / 1000))
+													.toFixed(2);
+											list[j].exInt1 = km;
+											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
+												newFrList.push(list[j]);
+											}
+
+										} catch (err) {
+
+										}
+
+									}
+									sortArray(newFrList, "exInt1");
+									for (var j = 0; j < newFrList.length; j++) {
+
+										//alert(newFrList[j].exInt1)
+										html += '<option value="' + newFrList[j].frId + '">'
+												+ newFrList[j].frName
+												+ ' ('
+												+ newFrList[j].frCode
+												+ ') - '
+												+ newFrList[j].frAddress
+												+ ' - '
+												+ newFrList[j].exInt1
+												+ ' KM</option>';
+
+									}
+
+									sessionStorage.setItem("frList", JSON
+											.stringify(newFrList));
+									$('#selectShop').html(html);
+
+								}
+							});
+
+		}
+		google.maps.event.addDomListener(window, 'load', function() {
+			var places = new google.maps.places.Autocomplete(document
+					.getElementById('txtPlaces'), {
+				fields : [ "name", "geometry.location", "place_id",
+						"formatted_address" ]
+			});
+			places.setFields([ "name", "geometry.location", "place_id",
+					"formatted_address" ]);
+			google.maps.event.addListener(places, 'place_changed', function() {
+
+				var place = places.getPlace();
+
+				//console.log(place);
+				try {
+					var address = place.formatted_address;
+					var latitude = place.geometry.location.lat();
+					var longitude = place.geometry.location.lng();
+					/* alert(latitude)
+					alert(longitude) */
+					calculateDistance(latitude, longitude, 1);
+
+				} catch (err) {
+
+				}
+
+			});
+
+		});
+		function sortArray(array, property, direction) {
+			direction = direction || 1;
+			array.sort(function compare(a, b) {
+				let comparison = 0;
+				if (a[property] > b[property]) {
+					comparison = 1 * direction;
+				} else if (a[property] < b[property]) {
+					comparison = -1 * direction;
+				}
+				return comparison;
+			});
+			return array; // Chainable
 		}
 	</script>
 
