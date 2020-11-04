@@ -223,7 +223,7 @@
 									varStatus="prodCount">
 									<c:choose>
 										<c:when
-											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==0}">
+											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}">
 											<div class="cake_one">
 												<div class="cake_pic">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
@@ -238,12 +238,10 @@
 															alt="">
 													</div>
 													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>499 <span
+														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice} <span
 															class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>649</span> <span class="prc_off">(23%
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span class="prc_off">(23%
 															Off)</span>
-															
-															
 													</div>
 												</div>
 												<div class="cake_container">
@@ -253,37 +251,35 @@
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
-														<!-- <div class="custom-select-new">
-															<select id="aaa">
-															<option value="A">A</option>
-															<option value="B">B</option>
-															</select>
-															</div> -->
 															<div class="custom-select-new">
 																     <select id="flav${product.productId}">
-																     
-																    
-<!-- 																<input type="hidden" name="gender">
- -->																	<c:forEach items="${product.prodDetailList}"
+																	<c:forEach items="${product.prodDetailList}"
 																		var="prodDetail">
+																		<option value="HHH">LLLL11 ${product.productId}</option>
 																		<c:forEach items="${flavTagStatusList}"
 																			var="flavorFilter" varStatus="flavorFilterCount">
-																			<c:choose>
-																				<c:when test="${flavorFilter.filterTypeId==1}">
+																			
+																				<c:if test="${flavorFilter.filterTypeId==4}">
+																				
+																				<c:choose>
 																					<c:when
-																						test="${prodDetail.flavorId==flavorFilter.filterId}"></c:when>
+																						test="${prodDetail.flavorId==flavorFilter.filterId}">
 																					<c:choose>
 																						<c:when
 																							test="${prodDetail.flavorId==product.defaultFlavorId}">
 																					<option value="${prodDetail.flavorId}" selected>${flavorFilter.adminName}</option>
 																						</c:when>
 																						<c:otherwise>
-																						<option value="1"> KKK</option>
-																					<option value="${prodDetail.flavorId}">${flavorFilter.adminName}</option>
+																						<option value="${prodDetail.flavorId}">${flavorFilter.adminName}</option>
 																						</c:otherwise>
 																					</c:choose>
-																				</c:when>
-																			</c:choose>
+																					</c:when>
+																					<c:otherwise>
+																					
+																					</c:otherwise>
+																					</c:choose>
+																				</c:if>
+																			
 																		</c:forEach>
 																	</c:forEach>
 																	</select>
@@ -293,15 +289,15 @@
 															<div class="custom-select-new">
 														<select id="wt${product.productId}">
 															<c:forEach items="${product.prodDetailList}"
-																		var="prodDetail1">
-														<option value="${prodDetail1.qty}">${prodDetail1.qty}</option>
+																		var="prodDetailwt">
+														<option value="${prodDetailwt.qty}">${prodDetailwt.qty}</option>
 														</c:forEach>
 														</select>
 															</div>
 														</div>
 														<div class="clr"></div>
 													</div>
-													<div class="cake_radio_row">
+													<!-- <div class="cake_radio_row">
 														<div class="radio_l">
 
 															<div class="radio_1">
@@ -325,7 +321,84 @@
 															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
 														</div>
 														<div class="clr"></div>
+													</div> -->
+													
+													
+													<div class="cake_radio_row">
+														<div class="radio_l">
+
+															<div class="radio_1">
+																<c:set var="isVegFound" value="0"></c:set>
+																<c:set var="isNonVegFound" value="0"></c:set>
+																<c:forEach items="${product.prodDetailList}"
+																		var="prodDetailVegNon">
+																
+																
+																	<c:forEach items="${flavTagStatusList}"
+																			var="vegNonFilter" varStatus="flavorFilterCount">
+																<c:if test="${vegNonFilter.filterTypeId==12}">
+																<c:if test="${vegNonFilter.filterId==prodDetailVegNon.isVeg}">
+																<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																<c:set var="isVegFound" value="1"></c:set>
+																</c:if>
+																
+																<c:if test="${vegNonFilter.adminName eq 'Non Veg'}">
+																<c:set var="isNonVegFound" value="1"></c:set>
+																</c:if>
+																</c:if>
+																</c:if>
+																</c:forEach>
+																
+																</c:forEach>
+																
+																
+																<c:choose>
+																<c:when test="${isVegFound==1}">
+																<input type="radio" id="prod_veg${product.productId}"
+																		name="prod_vnv${product.productId}"> <label for="b-option">
+																			Veg VG</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div>
+																		
+																		
+																</c:when>
+																
+																<c:when test="${isNonVegFound==1}">
+																<input type="radio" id="prod_NonVeg${product.productId}"
+																		name="prod_vnv${product.productId}"> <label for="b-option">Non
+																			Veg NV</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div>
+																</c:when>
+																<c:otherwise>
+																
+																</c:otherwise>
+																</c:choose>
+														
+																<!-- <ul>
+																	<li><input type="radio" id="a-option"
+																		name="selector"> <label for="a-option">Veg</label>
+																		<div class="check"></div></li>
+
+																	<li><input type="radio" id="b-option"
+																		name="selector"> <label for="b-option">Non
+																			Veg</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div></li>
+
+																</ul> -->
+															</div>
+
+														</div>
+														<div class="radio_r">
+															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
+														</div>
+														<div class="clr"></div>
 													</div>
+													
 												</div>
 
 											</div>
@@ -352,10 +425,83 @@
 
 			</c:otherwise>
 		</c:choose>
+		
 	</c:forEach>
 
 	<!--premium cake box-->
+<%-- <div class="cake_one_demo">
+												<div class="cake_pic">
+													<img src="${prodImgUrl}dsd"
+														data-src="${prodImgUrl}dsds" alt=""
+														class="mobile_fit transition lazy">
 
+													<div class="circle_tag active">
+														<img src="#" class="lazy"
+															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+															alt=""> <img src="#" class="lazy"
+															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+															alt="">
+													</div>
+													<div class="cake_prc">
+														<i class="fa fa-inr" aria-hidden="true"></i>499 <span
+															class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>649</span> <span class="prc_off">(23%
+															Off)</span>
+															
+															
+													</div>
+												</div>
+												<div class="cake_container">
+													<h4 class="cake_nm">
+														<a
+															href="${pageContext.request.contextPath}/showProdDetail/14">KKKKK</a>
+													</h4>
+													<div class="cake_dropdown">
+														<div class="cake_dropdown_l">
+															<div class="custom-select-new">
+																     <select id="flav7LLL">
+																	</select>
+															</div>
+														</div>
+														<div class="cake_dropdown_r">
+															<div class="custom-select-new">
+														<select id="wt">
+															
+														<option value="d2">ffffff</option>
+													
+														</select>
+															</div>
+														</div>
+														<div class="clr"></div>
+													</div>
+													<div class="cake_radio_row">
+														<div class="radio_l">
+
+															<div class="radio_1">
+																<ul>
+																	<li><input type="radio" id="a-option"
+																		name="selector"> <label for="a-option">Veg</label>
+																		<div class="check"></div></li>
+
+																	<li><input type="radio" id="b-option"
+																		name="selector"> <label for="b-option">Non
+																			Veg</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div></li>
+
+																</ul>
+															</div>
+
+														</div>
+														<div class="radio_r">
+															<a href="my-cart.html" class="cart_btn">Add to Cart222</a>
+														</div>
+														<div class="clr"></div>
+													</div>
+												</div>
+
+											</div> --%>
 
 	<!--new cake box-->
 

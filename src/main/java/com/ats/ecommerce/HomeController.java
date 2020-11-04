@@ -44,7 +44,7 @@ public class HomeController {
 						
 						 ObjectMapper mapper = new ObjectMapper();
 						  data = mapper.readValue(new
-						 File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/4_.json"),
+						 File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json"),
 						 FEDataTraveller.class);
 						 System.err.println("data " +data.toString());
 						break;

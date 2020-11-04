@@ -133,6 +133,20 @@ public class FEProductHeader {
 	
 	
 	
+private float defaultPrice;//Sachin 04-11-2020 new Add
+	
+	
+	
+	public float getDefaultPrice() {
+		return defaultPrice;
+	}
+
+	public void setDefaultPrice(float defaultPrice) {
+		this.defaultPrice = defaultPrice;
+	}
+
+	
+	
 	List<FEProdDetail> prodDetailList;
 	
 	
@@ -796,7 +810,7 @@ public class FEProductHeader {
 				+ ", layeringCreamNames=" + layeringCreamNames + ", creamTypeName=" + creamTypeName + ", breadTypeName="
 				+ breadTypeName + ", vegNonvegName=" + vegNonvegName + ", defaultFlavorId=" + defaultFlavorId
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
-				+ ", prodDetailList=" + prodDetailList + "]";
+				+ ", defaultPrice=" + defaultPrice + ", prodDetailList=" + prodDetailList + "]";
 	}
 
 	
