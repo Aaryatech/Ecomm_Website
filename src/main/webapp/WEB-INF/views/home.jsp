@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -128,153 +135,65 @@
 	<div class="find_store">
 		<div class="wrapper">
 			<div class="prod_cat_bx">
-				<div class="prod_cat_1">
-					<div class="cakes_cat_1">
-						<a href="product-filter.html">
-							<div class="img_cap">
-								<img
-									src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-									class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
-									alt="">
-								<div class="prod_cat_cap">
-									<span>Cakes</span>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="prod_cat_2">
-					<div class="divid_two">
-						<div class="divide_one_pic left">
-							<div class="single_pic">
-								<a href="product-filter.html"> <img
-									src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-									class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
-									alt="">
-									<div class="prod_cat_cap1">
-										<span>Pastries</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="divide_one_pic right">
-							<div class="single_pic">
-								<a href="product-filter.html"> <img
-									src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-									class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
-									alt="">
-									<div class="prod_cat_cap1">
-										<span>Savories</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="clr"></div>
-					</div>
-					<div class="divid_two">
-						<div class="divide_one_pic left">
-							<div class="single_pic">
-								<a href="product-filter.html"> <img
-									src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-									class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
-									alt="">
-									<div class="prod_cat_cap1">
-										<span>Packaged Cakes</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="divide_one_pic right">
-							<div class="single_pic">
-								<a href="product-filter.html"> <img
-									src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-									class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
-									alt="">
-									<div class="prod_cat_cap1">
-										<span>Chocolates</span>
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="clr"></div>
-					</div>
-					<div class="single_prod">
-						<div class="single_pic">
-							<a href="product-filter.html"> <img
-								src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
-								class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
-								alt="">
-								<div class="prod_cat_cap1">
-									<span>Bakersware</span>
-								</div>
-							</a>
 
-						</div>
-					</div>
-				</div>
-				<div class="prod_cat_3">
-					<div class="lst_tow marg_btm divice">
-						<div class="single_pic">
-							<a href="product-filter.html"> <img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
-								alt="">
-								<div class="prod_cat_cap1">
-									<span>Combo</span>
+				<c:forEach items="${frCatList}" var="frCat" varStatus="count">
+					<div class="prod_cat_1">
+						<div class="cakes_cat_1">
+							<a
+								href="${pageContext.request.contextPath}/filterCategoryProduct/${frCat.catId}">
+								<div class="img_cap">
+									<img
+										src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
+										class="lazy" data-src="${catImgUrl}${frCat.imageName}" alt="">
+									<div class="prod_cat_cap">
+										<span>Cakes</span>
+									</div>
 								</div>
 							</a>
 						</div>
 					</div>
-					<div class="lst_tow divice1">
-						<div class="single_pic ">
-							<a href="product-filter.html"> <img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
-								alt="">
-								<div class="prod_cat_cap1">
-									<span>Combo</span>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
+
 				<div class="clr"></div>
 			</div>
 		</div>
 	</div>
-
 	<!--festival offoer box-->
 	<div class="testimonial_bx">
 		<div class="wrapper">
 			<section class="regular-cake slider">
 				<div>
 					<div class="festival_offer">
-						<a href="product-filter.html"><img src="#" class="lazy"
+						<a href="product-filter.html"><img
+							src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
+							class="lazy"
 							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
 							alt=""></a>
 					</div>
 				</div>
 				<div>
 					<div class="festival_offer">
-						<a href="product-filter.html"><img src="#" class="lazy"
+						<a href="product-filter.html"><img
+							src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
+							class="lazy"
 							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
 							alt=""></a>
 					</div>
 				</div>
 				<div>
 					<div class="festival_offer">
-						<a href="product-filter.html"><img src="#" class="lazy"
+						<a href="product-filter.html"><img
+							src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
+							class="lazy"
 							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
 							alt=""></a>
 					</div>
 				</div>
 				<div>
 					<div class="festival_offer">
-						<a href="product-filter.html"><img src="#" class="lazy"
+						<a href="product-filter.html"><img
+							src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
+							class="lazy"
 							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
 							alt=""></a>
 					</div>
@@ -286,1348 +205,159 @@
 
 
 	<!--new cake box-->
-	<div class="find_store">
-		<h2 class="sec_title">
-			<center>
-				Best Seller Cake <span>Best Seller Cake Regarding sublines</span>
-			</center>
-		</h2>
+	<c:forEach items="${flavTagStatusList}" var="statusFilter"
+		varStatus="count">
+		<c:choose>
+			<c:when test="${statusFilter.filterTypeId==5}">
+				<div class="find_store">
+					<h2 class="sec_title">
+						<center>
+							${statusFilter.filterName} <span>${statusFilter.filterName}</span>
+						</center>
+					</h2>
 
-		<div class="wrapper">
-			<section class="regular-cake slider">
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-								alt="" class="mobile_fit transition lazy">
+					<div class="wrapper">
+						<section class="regular-cake slider">
+							<div>
+								<c:forEach items="${prodHeaderList}" var="product"
+									varStatus="prodCount">
+									<c:choose>
+										<c:when
+											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==0}">
+											<div class="cake_one">
+												<div class="cake_pic">
+													<img src="${prodImgUrl}${product.prodImagePrimary}"
+														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+														class="mobile_fit transition lazy">
 
+													<div class="circle_tag active">
+														<img src="#" class="lazy"
+															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+															alt=""> <img src="#" class="lazy"
+															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+															alt="">
+													</div>
+													<div class="cake_prc">
+														<i class="fa fa-inr" aria-hidden="true"></i>499 <span
+															class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>649</span> <span class="prc_off">(23%
+															Off)</span>
+															
+															
+													</div>
+												</div>
+												<div class="cake_container">
+													<h4 class="cake_nm">
+														<a
+															href="${pageContext.request.contextPath}/showProdDetail/${product.productId}">${product.productName}</a>
+													</h4>
+													<div class="cake_dropdown">
+														<div class="cake_dropdown_l">
+														<!-- <div class="custom-select-new">
+															<select id="aaa">
+															<option value="A">A</option>
+															<option value="B">B</option>
+															</select>
+															</div> -->
+															<div class="custom-select-new">
+																     <select id="flav${product.productId}">
+																     
+																    
+<!-- 																<input type="hidden" name="gender">
+ -->																	<c:forEach items="${product.prodDetailList}"
+																		var="prodDetail">
+																		<c:forEach items="${flavTagStatusList}"
+																			var="flavorFilter" varStatus="flavorFilterCount">
+																			<c:choose>
+																				<c:when test="${flavorFilter.filterTypeId==1}">
+																					<c:when
+																						test="${prodDetail.flavorId==flavorFilter.filterId}"></c:when>
+																					<c:choose>
+																						<c:when
+																							test="${prodDetail.flavorId==product.defaultFlavorId}">
+																					<option value="${prodDetail.flavorId}" selected>${flavorFilter.adminName}</option>
+																						</c:when>
+																						<c:otherwise>
+																						<option value="1"> KKK</option>
+																					<option value="${prodDetail.flavorId}">${flavorFilter.adminName}</option>
+																						</c:otherwise>
+																					</c:choose>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+																	</c:forEach>
+																	</select>
+															</div>
+														</div>
+														<div class="cake_dropdown_r">
+															<div class="custom-select-new">
+														<select id="wt${product.productId}">
+															<c:forEach items="${product.prodDetailList}"
+																		var="prodDetail1">
+														<option value="${prodDetail1.qty}">${prodDetail1.qty}</option>
+														</c:forEach>
+														</select>
+															</div>
+														</div>
+														<div class="clr"></div>
+													</div>
+													<div class="cake_radio_row">
+														<div class="radio_l">
 
+															<div class="radio_1">
+																<ul>
+																	<li><input type="radio" id="a-option"
+																		name="selector"> <label for="a-option">Veg</label>
+																		<div class="check"></div></li>
 
-							<div class="circle_tag active">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
+																	<li><input type="radio" id="b-option"
+																		name="selector"> <label for="b-option">Non
+																			Veg</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div></li>
+
+																</ul>
+															</div>
+
+														</div>
+														<div class="radio_r">
+															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
+														</div>
+														<div class="clr"></div>
+													</div>
+												</div>
+
+											</div>
+											<!-- End of div cake one -->
+										</c:when>
+										<c:otherwise>
+
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+
 							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
 
+						</section>
+
+						<div class="more_cakes">
+							<a href="product.html">More ${statusFilter.filterName}</a>
 						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-										<ul>
-											<li><input type="radio" id="a-option" name="selector">
-												<label for="a-option">Veg</label>
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="b-option" name="selector">
-												<label for="b-option">Non Veg</label>
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
 					</div>
 				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
+				<!--  End of Find_Store Div -->
+			</c:when>
+			<c:otherwise>
 
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="c-option" name="selector">
-												<label for="c-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="d-option" name="selector">
-												<label for="d-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="e-option" name="selector">
-												<label for="e-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="f-option" name="selector">
-												<label for="f-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="g-option" name="selector">
-												<label for="g-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="h-option" name="selector">
-												<label for="h-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="i-option" name="selector">
-												<label for="i-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="iii-option" name="selector">
-												<label for="iii-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section>
-
-			<div class="more_cakes">
-				<a href="product.html">More Best Seller Cakes</a>
-			</div>
-		</div>
-
-
-	</div>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
 
 	<!--premium cake box-->
-	<div class="testimonial_bx">
-		<h2 class="sec_title">
-			<center>
-				Premium Cake <span>Premium Cake Regarding sublines</span>
-			</center>
 
-		</h2>
-
-		<div class="wrapper">
-			<section class="regular-cake slider">
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag active">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-										<ul>
-											<li><input type="radio" id="j-option" name="selector">
-												<label for="j-option">Veg</label>
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="k-option" name="selector">
-												<label for="k-option">Non Veg</label>
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="l-option" name="selector">
-												<label for="l-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="m-option" name="selector">
-												<label for="m-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="n-option" name="selector">
-												<label for="n-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="o-option" name="selector">
-												<label for="o-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="p-option" name="selector">
-												<label for="p-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="q-option" name="selector">
-												<label for="q-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="r-option" name="selector">
-												<label for="r-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="s-option" name="selector">
-												<label for="s-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section>
-
-			<div class="more_cakes">
-				<a href="product.html">More Premium Cakes</a>
-			</div>
-
-		</div>
-	</div>
 
 	<!--new cake box-->
-	<div class="find_store">
-		<h2 class="sec_title">
-			<center>
-				New Cake <span>New Cake Regarding sublines</span>
-			</center>
-		</h2>
-
-		<div class="wrapper">
-			<section class="regular-cake slider">
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag active">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-										<ul>
-											<li><input type="radio" id="t-option" name="selector">
-												<label for="t-option">Veg</label>
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="u-option" name="selector">
-												<label for="u-option">Non Veg</label>
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="v-option" name="selector">
-												<label for="v-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="w-option" name="selector">
-												<label for="w-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="x-option" name="selector">
-												<label for="x-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="y-option" name="selector">
-												<label for="y-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="z-option" name="selector">
-												<label for="z-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="aa-option" name="selector">
-												<label for="aa-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-				<div>
-					<div class="cake_one">
-						<div class="cake_pic">
-							<img src="#" 
-								data-src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-								alt="" class="mobile_fit transition lazy">
-							<div class="circle_tag">
-								<img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-									alt=""> <img src="#" class="lazy"
-									data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-									alt="">
-							</div>
-							<div class="cake_prc">
-								<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-									class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>649</span>
-								<span class="prc_off">(23% Off)</span>
-							</div>
-						</div>
-
-						<div class="cake_container">
-							<h4 class="cake_nm">
-								<a href="product-detail.html">Classic Red Velvet Cake (Half
-									Kg)</a>
-							</h4>
-							<div class="cake_dropdown">
-								<div class="cake_dropdown_l">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Flavour</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">Vanilla</li>
-											<li id="female">Pineapple</li>
-											<li id="female">Butter Scotch</li>
-										</ul>
-									</div>
-								</div>
-								<div class="cake_dropdown_r">
-									<div class="dropdown2">
-										<div class="select">
-											<span>Select Weight</span>
-										</div>
-										<input type="hidden" name="gender">
-										<ul class="dropdown-menu">
-											<li id="male">500 gm</li>
-											<li id="female">1 Kg</li>
-											<li id="female">2 Kg</li>
-										</ul>
-									</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="cake_radio_row">
-								<div class="radio_l">
-
-									<div class="radio_1">
-
-										<ul>
-											<li><input type="radio" id="bb-option" name="selector">
-												<label for="bb-option">Veg</label>
-
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="cc-option" name="selector">
-												<label for="cc-option">Non Veg</label>
-
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-
-										</ul>
-									</div>
-
-								</div>
-								<div class="radio_r">
-									<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-								</div>
-								<div class="clr"></div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</section>
-
-			<div class="more_cakes">
-				<a href="product.html">More New Cakes</a>
-			</div>
-		</div>
-
-		<div class="wrapper"></div>
-	</div>
 
 	<!--testimonial-box-->
 	<div class="testimonial_bx">
@@ -1746,7 +476,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!--strip-->
 	<div class="type_strip">
 		<div class="wrapper">
@@ -1777,7 +507,7 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
@@ -1786,7 +516,86 @@
 
 
 
-
+<script type="text/javascript">
+var x, i, j, l, ll, selElmnt, a, b, c;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select-new");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", 'select-selected');
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  b = document.createElement("DIV");
+  b.setAttribute("class", 'select-items select-hide');
+  for (j = 1; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+document.addEventListener("click", closeAllSelect);
+</script>
 
 
 
@@ -1822,7 +631,7 @@
 	</script>
 
 	<!--menuzord -->
-	
+
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#menuzord").menuzord({

@@ -1,4 +1,4 @@
-package com.ats.ecommerce;
+package com.ats.ecommerce.common;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

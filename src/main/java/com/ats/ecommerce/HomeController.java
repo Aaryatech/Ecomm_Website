@@ -15,13 +15,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ats.ecommerce.common.Constants;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @Scope("session")
+
 public class HomeController {
+	
 	 FEDataTraveller data=new FEDataTraveller();
+	 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
@@ -35,17 +39,8 @@ public class HomeController {
 						System.err.println("In If ");
 						HttpSession session = request.getSession();
 						session.setAttribute("custIdCookie", cookieArray[a].getValue());
-						returnPage = "home";
+						returnPage = "redirect:/home";
 						isCookieFound = 1;
-						
-						///home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/
-						/*
-						 * InputStream inJson = FEDataTraveller.class.getResourceAsStream(
-						 * "/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/4_.json");
-						 * System.err.println("inJson " +inJson); FEDataTraveller sample = new
-						 * ObjectMapper().readValue(inJson, FEDataTraveller.class);
-						 * System.err.println("sample " +sample.toString());
-						 */
 						
 						 ObjectMapper mapper = new ObjectMapper();
 						  data = mapper.readValue(new
@@ -73,14 +68,23 @@ public class HomeController {
 		// return "location";
 	}
 
+	//Modified By -Sachin
+	//Modific Date -03-11-2020
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession session = request.getSession();
 		String x = (String) session.getAttribute("custIdCookie");
-		System.err.println("Cust Id  " + x);
 		System.err.println("Cate List  " + data.getFranchiseCatList().toString());
+		
+		model.addAttribute("frCatList",data.getFranchiseCatList());
+		
+		model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
+		
+		model.addAttribute("prodHeaderList",data.getFeProductHeadList());
+		model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
 
+		System.err.println("data.getFeProductHeadList() " +data.getFeProductHeadList());
 		return "home";
 	}
 
