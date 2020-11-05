@@ -22,6 +22,19 @@ public class FEProdDetail {
 	private float displayRate;
 	private float actualRate;
 	
+	
+private int shapeId;  //Sachin 05-11-2020
+	
+	public int getShapeId() {
+		return shapeId;
+	}
+	public void setShapeId(int shapeId) {
+		this.shapeId = shapeId;
+	}
+	
+	
+	
+	
 	public String getConfDetailUuid() {
 		return confDetailUuid;
 	}
@@ -84,7 +97,8 @@ public class FEProdDetail {
 	public String toString() {
 		return "FEProdDetail [confDetailUuid=" + confDetailUuid + ", configDetailId=" + configDetailId + ", productId="
 				+ productId + ", flavorId=" + flavorId + ", isVeg=" + isVeg + ", rateSettingType=" + rateSettingType
-				+ ", qty=" + qty + ", displayRate=" + displayRate + ", actualRate=" + actualRate + "]";
+				+ ", qty=" + qty + ", displayRate=" + displayRate + ", actualRate=" + actualRate + ", shapeId="
+				+ shapeId + "]";
 	}
 	
 }

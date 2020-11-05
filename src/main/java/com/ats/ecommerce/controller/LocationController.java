@@ -28,7 +28,7 @@ public class LocationController {
 
 	FEDataTraveller data = new FEDataTraveller();
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/a", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
 		try {

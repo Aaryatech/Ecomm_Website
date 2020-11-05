@@ -9,7 +9,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
-<body>
+<body onload="changeFlavor(777)">
 
 
 	<div class="mongi_help">
@@ -222,8 +222,9 @@
 								<c:forEach items="${prodHeaderList}" var="product"
 									varStatus="prodCount">
 									<c:choose>
-										<c:when
-											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}">
+										<%-- <c:when
+											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}"> --%>
+										<c:when test="${product.prodStatusId==statusFilter.filterId}">
 											<div class="cake_one">
 												<div class="cake_pic">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
@@ -238,10 +239,10 @@
 															alt="">
 													</div>
 													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice} <span
-															class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span class="prc_off">(23%
-															Off)</span>
+														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+														<span class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span
+															class="prc_off">(23% Off)</span>
 													</div>
 												</div>
 												<div class="cake_container">
@@ -251,48 +252,48 @@
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
-															<div class="custom-select-new">
-																     <select id="flav${product.productId}">
-																	<c:forEach items="${product.prodDetailList}"
+															<div class="custom-select-new1">
+																<select id="flav${product.productId}"
+																	onchange="changeFlavor(${product.productId})">
+																	<c:forEach items="${product.flavourIds}"
 																		var="prodDetail">
-																		<option value="HHH">LLLL11 ${product.productId}</option>
 																		<c:forEach items="${flavTagStatusList}"
 																			var="flavorFilter" varStatus="flavorFilterCount">
-																			
-																				<c:if test="${flavorFilter.filterTypeId==4}">
-																				
+
+																			<c:if test="${flavorFilter.filterTypeId==4}">
+
 																				<c:choose>
-																					<c:when
-																						test="${prodDetail.flavorId==flavorFilter.filterId}">
-																					<c:choose>
-																						<c:when
-																							test="${prodDetail.flavorId==product.defaultFlavorId}">
-																					<option value="${prodDetail.flavorId}" selected>${flavorFilter.adminName}</option>
-																						</c:when>
-																						<c:otherwise>
-																						<option value="${prodDetail.flavorId}">${flavorFilter.adminName}</option>
-																						</c:otherwise>
-																					</c:choose>
+																					<c:when test="${prodDetail==flavorFilter.filterId}">
+																						<c:choose>
+																							<c:when
+																								test="${prodDetail==product.defaultFlavorId}">
+																								<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																							</c:when>
+																							<c:otherwise>
+																								<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																							</c:otherwise>
+																						</c:choose>
 																					</c:when>
 																					<c:otherwise>
-																					
+
 																					</c:otherwise>
-																					</c:choose>
-																				</c:if>
-																			
+																				</c:choose>
+																			</c:if>
+
 																		</c:forEach>
 																	</c:forEach>
-																	</select>
+																</select>
 															</div>
 														</div>
 														<div class="cake_dropdown_r">
-															<div class="custom-select-new">
-														<select id="wt${product.productId}">
-															<c:forEach items="${product.prodDetailList}"
+															<div class="custom-select-new1">
+																<select id="wt${product.productId}"
+																	onchange="changeWt(${product.productId})">
+																	<c:forEach items="${product.availInWeights}"
 																		var="prodDetailwt">
-														<option value="${prodDetailwt.qty}">${prodDetailwt.qty}</option>
-														</c:forEach>
-														</select>
+																		<option value="${prodDetailwt}">${prodDetailwt}</option>
+																	</c:forEach>
+																</select>
 															</div>
 														</div>
 														<div class="clr"></div>
@@ -322,61 +323,59 @@
 														</div>
 														<div class="clr"></div>
 													</div> -->
-													
-													
+
+
 													<div class="cake_radio_row">
 														<div class="radio_l">
 
 															<div class="radio_1">
 																<c:set var="isVegFound" value="0"></c:set>
 																<c:set var="isNonVegFound" value="0"></c:set>
-																<c:forEach items="${product.prodDetailList}"
-																		var="prodDetailVegNon">
-																
-																
+																<c:forEach items="${product.isVeg}"
+																	var="prodDetailVegNon">
+
+
 																	<c:forEach items="${flavTagStatusList}"
-																			var="vegNonFilter" varStatus="flavorFilterCount">
-																<c:if test="${vegNonFilter.filterTypeId==12}">
-																<c:if test="${vegNonFilter.filterId==prodDetailVegNon.isVeg}">
-																<c:if test="${vegNonFilter.adminName eq 'Veg'}">
-																<c:set var="isVegFound" value="1"></c:set>
-																</c:if>
-																
-																<c:if test="${vegNonFilter.adminName eq 'Non Veg'}">
-																<c:set var="isNonVegFound" value="1"></c:set>
-																</c:if>
-																</c:if>
-																</c:if>
+																		var="vegNonFilter" varStatus="flavorFilterCount">
+																		<c:if test="${vegNonFilter.filterTypeId==12}">
+																			<c:if
+																				test="${vegNonFilter.filterId==prodDetailVegNon}">
+																				<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																					<c:set var="isVegFound" value="1"></c:set>
+																				</c:if>
+
+																				<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
+																					<c:set var="isNonVegFound" value="1"></c:set>
+																				</c:if>
+																			</c:if>
+																		</c:if>
+																	</c:forEach>
+
 																</c:forEach>
-																
-																</c:forEach>
-																
-																
-																<c:choose>
-																<c:when test="${isVegFound==1}">
-																<input type="radio" id="prod_veg${product.productId}"
-																		name="prod_vnv${product.productId}"> <label for="b-option">
-																			Veg VG</label>
-																		<div class="check">
-																			<div class="inside"></div>
-																		</div>
-																		
-																		
-																</c:when>
-																
-																<c:when test="${isNonVegFound==1}">
-																<input type="radio" id="prod_NonVeg${product.productId}"
-																		name="prod_vnv${product.productId}"> <label for="b-option">Non
-																			Veg NV</label>
-																		<div class="check">
-																			<div class="inside"></div>
-																		</div>
-																</c:when>
-																<c:otherwise>
-																
-																</c:otherwise>
-																</c:choose>
-														
+
+
+
+																<c:if test="${isVegFound==1}">
+																	<input type="radio" id="prod_veg${product.productId}"
+																		name="prod_vnv${product.productId}">
+																	<label for="b-option"> Veg VG </label>
+																	<div class="check">
+																		<div class="inside"></div>
+																	</div>
+
+
+																</c:if>
+
+																<c:if test="${isNonVegFound==1}">
+																	<input type="radio"
+																		id="prod_nonveg${product.productId}"
+																		name="prod_vnv${product.productId}">
+																	<label for="b-option">Non Veg NV</label>
+																	<div class="check">
+																		<div class="inside"></div>
+																	</div>
+																</c:if>
+
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
 																		name="selector"> <label for="a-option">Veg</label>
@@ -394,11 +393,12 @@
 
 														</div>
 														<div class="radio_r">
-															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
+															<a href="#" onclick="changeFlavor(555)" class="cart_btn">Add
+																to Cart</a>
 														</div>
 														<div class="clr"></div>
 													</div>
-													
+
 												</div>
 
 											</div>
@@ -425,10 +425,10 @@
 
 			</c:otherwise>
 		</c:choose>
-		
+
 	</c:forEach>
 
-	<!--premium cake box-->
+	<!--premium cake box-- cake_one_demo>
 <%-- <div class="cake_one_demo">
 												<div class="cake_pic">
 													<img src="${prodImgUrl}dsd"
@@ -460,17 +460,20 @@
 														<div class="cake_dropdown_l">
 															<div class="custom-select-new">
 																     <select id="flav7LLL">
+																     <option value="a">A</option>
+																      <option value="b">B</option>
 																	</select>
 															</div>
 														</div>
 														<div class="cake_dropdown_r">
-															<div class="custom-select-new">
-														<select id="wt">
 															
+														<select onchange="changeWt1()" id="wt">
+															 <option value="a">A</option>
+																      <option value="b">B</option>
 														<option value="d2">ffffff</option>
 													
 														</select>
-															</div>
+															
 														</div>
 														<div class="clr"></div>
 													</div>
@@ -536,67 +539,6 @@
 						</div>
 					</div>
 				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-
 			</section>
 		</div>
 
@@ -657,12 +599,33 @@
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
+	<select id="jj" name="jjj" onchange="changeWt1()"><option></option></select>
 
 
 
+	<script type="text/javascript">
 
+	function changeFlavor(productId){
+	console.log("Sachin");
+	var x="${sessionScope.curDateTime}";
+	if(1==1){
+		var dataList='${sessionScope.dataList}';
+		var data=$.parseJSON(dataList);
+		alert(JSON.stringify(data));
+		var prodHead=JSON.stringify(data.feProductHeadList);
+		console.log(JSON.parse(prodHead).length);
+		} 
+	}//End of changeFlavor
+function changeWt(productId){
+	alert("AK changeWt" +productId)
+	}
+	
+function changeWt1(){
+	alert("AK- changeWt1")
+	}
 
-<script type="text/javascript">
+</script>
+	<script type="text/javascript">
 var x, i, j, l, ll, selElmnt, a, b, c;
 /*look for any elements with the class "custom-select":*/
 x = document.getElementsByClassName("custom-select-new");
@@ -742,9 +705,6 @@ function closeAllSelect(elmnt) {
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 </script>
-
-
-
 	<!--cart-sidepanel-->
 	<script type="text/javascript">
 		function openNav() {

@@ -3,6 +3,7 @@ package com.ats.ecommerce;
 import java.io.File;
 import java.io.InputStream;
 import java.util.Locale;
+import java.util.Scanner;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,10 +28,11 @@ public class HomeController {
 	
 	 FEDataTraveller data=new FEDataTraveller();
 	 
-	@RequestMapping(value = "/a", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
 		try {
+			HttpSession session = request.getSession();
 			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
 			if (cookieArray != null)
@@ -37,7 +40,6 @@ public class HomeController {
 					// if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
 					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
 						System.err.println("In If ");
-						HttpSession session = request.getSession();
 						session.setAttribute("custIdCookie", cookieArray[a].getValue());
 						returnPage = "redirect:/home";
 						isCookieFound = 1;
@@ -47,6 +49,11 @@ public class HomeController {
 						 File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json"),
 						 FEDataTraveller.class);
 						 System.err.println("data " +data.toString());
+						 
+						 String dataList = new Scanner(new File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json")).useDelimiter("\\Z").next();
+						 System.err.println(" dataList " +dataList);
+						 session.setAttribute("dataList", dataList);
+								 
 						break;
 					}
 				}
@@ -60,7 +67,7 @@ public class HomeController {
 
 				returnPage = "location";
 			}
-
+			session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
