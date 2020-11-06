@@ -931,7 +931,7 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
 .mobile_table{display: none;}
 
 .mobile_scroll{position: relative; width:100%; overflow-x:auto; }    
-/*--css code put in monginis css-->*/
+/*Start --css code put in monginis css-- Moh 02-11-2020>*/
 /*custom select*/
 /*the container must be positioned relative:*/
 .custom-select-new {
@@ -994,6 +994,8 @@ table.cart1 td {text-align: center; padding: 15px 8px; border-bottom: 1px solid 
 .select-items div:hover {
   background-color: #ed258f; color: #FFF;
 }
+/*End --css code put in monginis css-- Moh 02-11-2020>*/
+
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}

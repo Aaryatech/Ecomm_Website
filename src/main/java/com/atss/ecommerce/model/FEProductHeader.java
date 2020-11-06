@@ -134,9 +134,16 @@ public class FEProductHeader {
 	
 	
 private float defaultPrice;//Sachin 04-11-2020 new Add
-	
-	
-	
+private String defaultVegNonvegName;//Sachin 06-11-2020 new Add
+
+	public String getDefaultVegNonvegName() {
+	return defaultVegNonvegName;
+}
+
+public void setDefaultVegNonvegName(String defaultVegNonvegName) {
+	this.defaultVegNonvegName = defaultVegNonvegName;
+}
+
 	public float getDefaultPrice() {
 		return defaultPrice;
 	}
@@ -810,7 +817,8 @@ private float defaultPrice;//Sachin 04-11-2020 new Add
 				+ ", layeringCreamNames=" + layeringCreamNames + ", creamTypeName=" + creamTypeName + ", breadTypeName="
 				+ breadTypeName + ", vegNonvegName=" + vegNonvegName + ", defaultFlavorId=" + defaultFlavorId
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
-				+ ", defaultPrice=" + defaultPrice + ", prodDetailList=" + prodDetailList + "]";
+				+ ", defaultPrice=" + defaultPrice + ", defaultVegNonvegName=" + defaultVegNonvegName
+				+ ", prodDetailList=" + prodDetailList + "]";
 	}
 
 	

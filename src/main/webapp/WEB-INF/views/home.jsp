@@ -239,7 +239,7 @@
 															alt="">
 													</div>
 													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+														<i class="fa fa-inr" aria-hidden="true"></i><p id="cake_prc${product.productId}">${product.defaultPrice}</p>
 														<span class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
 															class="prc_off">(23% Off)</span>
@@ -253,10 +253,12 @@
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
 															<div class="custom-select-new1">
+															<c:if test="${product.flavourIds!=0}">
 																<select id="flav${product.productId}"
 																	onchange="changeFlavor(${product.productId})">
 																	<c:forEach items="${product.flavourIds}"
 																		var="prodDetail">
+																		
 																		<c:forEach items="${flavTagStatusList}"
 																			var="flavorFilter" varStatus="flavorFilterCount">
 
@@ -283,12 +285,14 @@
 																		</c:forEach>
 																	</c:forEach>
 																</select>
+																</c:if>
 															</div>
 														</div>
 														<div class="cake_dropdown_r">
 															<div class="custom-select-new1">
 																<select id="wt${product.productId}"
 																	onchange="changeWt(${product.productId})">
+																	<option value="7">7</option>
 																	<c:forEach items="${product.availInWeights}"
 																		var="prodDetailwt">
 																		<option value="${prodDetailwt}">${prodDetailwt}</option>
@@ -356,7 +360,7 @@
 
 
 																<c:if test="${isVegFound==1}">
-																	<input type="radio" id="prod_veg${product.productId}"
+																	<input type="radio" value="0" id="prod_veg${product.productId}"
 																		name="prod_vnv${product.productId}">
 																	<label for="b-option"> Veg VG </label>
 																	<div class="check">
@@ -367,7 +371,7 @@
 																</c:if>
 
 																<c:if test="${isNonVegFound==1}">
-																	<input type="radio"
+																	<input type="radio" value="1"
 																		id="prod_nonveg${product.productId}"
 																		name="prod_vnv${product.productId}">
 																	<label for="b-option">Non Veg NV</label>
@@ -393,7 +397,7 @@
 
 														</div>
 														<div class="radio_r">
-															<a href="#" onclick="changeFlavor(555)" class="cart_btn">Add
+															<a href="#" onclick="addToCartClick(${product.productId})" class="cart_btn">Add
 																to Cart</a>
 														</div>
 														<div class="clr"></div>
@@ -608,21 +612,160 @@
 	function changeFlavor(productId){
 	console.log("Sachin");
 	var x="${sessionScope.curDateTime}";
-	if(1==1){
 		var dataList='${sessionScope.dataList}';
 		var data=$.parseJSON(dataList);
-		alert(JSON.stringify(data));
+	//	alert(JSON.stringify(data));
 		var prodHead=JSON.stringify(data.feProductHeadList);
 		console.log(JSON.parse(prodHead).length);
-		} 
+		var selectWt = document.getElementById("wt"+productId).value;
+		var selectFlav = document.getElementById("flav"+productId).value;
+		alert("selectWt "+ selectWt + "selectFlav " +selectFlav);
 	}//End of changeFlavor
 function changeWt(productId){
-	alert("AK changeWt" +productId)
+	var selectWt = document.getElementById("wt"+productId).value;
+	var selectFlav=0;
+	try{
+		selectFlav = document.getElementById("flav"+productId).value;
+	}catch (e) {
+		selectFlav=0;
 	}
+	if(selectFlav==""||isNaN(selectFlav)||selectFlav==null){
+		selectFlav=0;
+	}
+	var isVeg=$('input[name="prod_vnv'+productId+'"]:checked').val();
+	var dataList='${sessionScope.dataList}';
+	var data=$.parseJSON(dataList);
+	var selectVegNon="Veg";
+	var prodHead=data.feProductHeadList;
+	var prodMaster;
+	for(var h=0;h<prodHead.length;h++){
+		if(parseInt(productId)==parseInt(prodHead[h].productId)){
+			prodMaster=prodHead[h];
+				if (typeof(isVeg) == "undefined"){
+					selectVegNon=prodMaster.defaultVegNonvegName;
+				}else if(parseInt(isVeg)==1){
+					selectVegNon="NonVeg";
+				}else{
+					selectVegNon="Veg";
+				}
+			break;
+		}
+	}//end of prodHead For H
+	var prodDetail=prodMaster.prodDetailList;
+	for(var d=0;d<prodDetail.length;d++){
+		if(parseInt(prodMaster.defaultShapeId)==parseInt(prodDetail[d].shapeId)){
+			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
+				if(prodDetail[d].vegNonvegName==selectVegNon){
+					//Calc Price;
+					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
+					
+						//alert(prodDetail[d].configDetailId);
+					var qty=1;
+					document.getElementById("cake_prc"+productId).innerHTML = ""+prodDetail[d].actualRate;
+					actualRate=prodDetail[d].actualRate;
+					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
+					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
+					break;
+					}
+					//alert("Do calc");
+				}else{
+					continue;
+				}
+			}else{
+				continue;
+			}
+		}else{
+			continue;
+		}
+	}//end of For prodDetailList pd
 	
-function changeWt1(){
-	alert("AK- changeWt1")
+}//end of Function changeWt
+	
+function addToCartClick(productId){
+	alert("In addToCartClick " +productId);
+	var selectWt = document.getElementById("wt"+productId).value;
+	var selectFlav=0;
+	try{
+		selectFlav = document.getElementById("flav"+productId).value;
+	}catch (e) {
+		selectFlav=0;
 	}
+	if(selectFlav==""||isNaN(selectFlav)||selectFlav==null){
+		selectFlav=0;
+	}
+	var isVeg=$('input[name="prod_vnv'+productId+'"]:checked').val();
+	var dataList='${sessionScope.dataList}';
+	var data=$.parseJSON(dataList);
+	var selectVegNon="Veg";
+	var prodHead=data.feProductHeadList;
+	var prodMaster;
+	for(var h=0;h<prodHead.length;h++){
+		if(parseInt(productId)==parseInt(prodHead[h].productId)){
+			prodMaster=prodHead[h];
+				if (typeof(isVeg) == "undefined"){
+					selectVegNon=prodMaster.defaultVegNonvegName;
+				}else if(parseInt(isVeg)==1){
+					selectVegNon="NonVeg";
+				}else{
+					selectVegNon="Veg";
+				}
+			break;
+		}
+	}//end of prodHead For H
+	var prodDetail=prodMaster.prodDetailList;
+	for(var d=0;d<prodDetail.length;d++){
+		//alert("OKkk");
+		if(parseInt(prodMaster.defaultShapeId)==parseInt(prodDetail[d].shapeId)){
+			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
+				if(prodDetail[d].vegNonvegName==selectVegNon){
+					//Calc Price;
+					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
+					alert(prodDetail[d].configDetailId);
+					var qty=1;
+					document.getElementById("cake_prc"+productId).innerHTML = ""+prodDetail[d].actualRate;
+					actualRate=prodDetail[d].actualRate;
+					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
+					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
+					//alert(offPer);
+					if (sessionStorage.getItem("cartValue") == null) {
+						var table = [];
+						sessionStorage.setItem("cartValue", JSON.stringify(table));
+					}
+					
+					var cartValue = sessionStorage.getItem("cartValue");
+					var table = $.parseJSON(cartValue);
+					
+					table.push({
+						  itemId: 00,
+						  price: 0,
+						  itemName: 0,
+						  qty: 1,
+						  total: 11,
+						  cgstPer : 5,
+						  sgstPer :5,
+						  igstPer : 2.5,
+						  specialremark : ''
+					});
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+					}
+					//alert("Do calc");
+				}else{
+					continue;
+				}
+			}else{
+				continue;
+			}
+		}else{
+			continue;
+		}
+		
+	}//end of For prodDetailList pd
+	var cartValue = sessionStorage.getItem("cartValue");
+	var table = $.parseJSON(cartValue);
+	alert(table.length)
+	
+	
+	}//end of Function addToCartClick
 
 </script>
 	<script type="text/javascript">
@@ -761,6 +904,7 @@ document.addEventListener("click", closeAllSelect);
 												fieldName = $(this).attr(
 														'field');
 												// Get its current value
+												alert("fieldName" +fieldName)
 												var currentVal = parseInt($(
 														'input[name='
 																+ fieldName
@@ -830,7 +974,7 @@ document.addEventListener("click", closeAllSelect);
 				autoplay : true,
 				responsive : [ {
 					breakpoint : 1024,
-					settings : {
+					settings : {x`
 						slidesToShow : 3,
 						slidesToScroll : 1,
 						infinite : true,
