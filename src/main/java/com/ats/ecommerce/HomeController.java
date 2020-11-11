@@ -13,12 +13,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.atss.ecommerce.model.FEDataTraveller;
+import com.atss.ecommerce.model.FEProductHeader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -95,6 +97,31 @@ public class HomeController {
 		return "home";
 	}
 
+	
+		//Modified By -Sachin
+		//Modific Date -11-11-2020
+		@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
+		public String showProdDetailIndex(@PathVariable int index,Model model,
+				HttpServletRequest request, HttpServletResponse response) {
+			System.err.println("In Show Prod Detail");
+			try {
+				model.addAttribute("frCatList",data.getFranchiseCatList());
+				
+				model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
+				
+				model.addAttribute("prodHeaderList",data.getFeProductHeadList());
+				model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
+				
+				FEProductHeader prodHeader=data.getFeProductHeadList().get(index);
+				model.addAttribute("prodHeader",prodHeader);
+				
+				
+			}catch (Exception e) {
+					
+			}
+			return "productdetail";
+	}
+	
 	@RequestMapping(value = "/landing", method = RequestMethod.GET)
 	public String landing(Locale locale, Model model) {
 		return "landing";

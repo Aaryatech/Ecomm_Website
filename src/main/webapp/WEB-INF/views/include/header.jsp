@@ -171,16 +171,17 @@
 										<div class="clr"></div>
 									</div>
 								</div>
-
+<div id="proc_chkout">
 								<div class="proc_chkout">
 									<!-- <span>Total : Rs. 1390/- </span> <a href="my-cart.html">Proceed
 										to Checkout</a> -->
+								</div>
 								</div>
 
 
 							</div>
 							<button class="openbtn count" onclick="openNav()">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="cart_item_count">0</span>
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="cart_item_count" id="cart_item_count">0</span>
 							</button>
 						</div>
 
