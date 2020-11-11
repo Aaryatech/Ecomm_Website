@@ -9,7 +9,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
-<body onload="changeFlavor(777)">
+<body>
 
 
 	<div class="mongi_help">
@@ -255,7 +255,7 @@
 															<div class="custom-select-new1">
 															<c:if test="${product.flavourIds!=0}">
 																<select id="flav${product.productId}"
-																	onchange="changeFlavor(${product.productId})">
+																	onchange="changeWtFlavor('${product.productId}')">
 																	<c:forEach items="${product.flavourIds}"
 																		var="prodDetail">
 																		
@@ -291,7 +291,7 @@
 														<div class="cake_dropdown_r">
 															<div class="custom-select-new1">
 																<select id="wt${product.productId}"
-																	onchange="changeWt(${product.productId})">
+																	onchange="changeWtFlavor('${product.productId}')">
 																	<option value="7">7</option>
 																	<c:forEach items="${product.availInWeights}"
 																		var="prodDetailwt">
@@ -397,7 +397,7 @@
 
 														</div>
 														<div class="radio_r">
-															<a href="#" onclick="addToCartClick(${product.productId})" class="cart_btn">Add
+															<a href="#" onclick="addToCartClick('${product.productId}')" class="cart_btn">Add
 																to Cart</a>
 														</div>
 														<div class="clr"></div>
@@ -515,7 +515,7 @@
 	<!--testimonial-box-->
 	<div class="testimonial_bx">
 		<h2 class="sec_title">
-			<center>
+			<center onclick="clearData()">
 				Our Testimonials <span>Customer Reviews regarding to our Shop</span>
 			</center>
 		</h2>
@@ -621,7 +621,7 @@
 		var selectFlav = document.getElementById("flav"+productId).value;
 		alert("selectWt "+ selectWt + "selectFlav " +selectFlav);
 	}//End of changeFlavor
-function changeWt(productId){
+function changeWtFlavor(productId){
 	var selectWt = document.getElementById("wt"+productId).value;
 	var selectFlav=0;
 	try{
@@ -679,10 +679,10 @@ function changeWt(productId){
 		}
 	}//end of For prodDetailList pd
 	
-}//end of Function changeWt
+}//end of Function changeWtFlavor
 	
 function addToCartClick(productId){
-	alert("In addToCartClick " +productId);
+	//alert("In addToCartClick " +productId);
 	var selectWt = document.getElementById("wt"+productId).value;
 	var selectFlav=0;
 	try{
@@ -720,13 +720,22 @@ function addToCartClick(productId){
 				if(prodDetail[d].vegNonvegName==selectVegNon){
 					//Calc Price;
 					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
-					alert(prodDetail[d].configDetailId);
+					//alert(prodDetail[d].configDetailId);
 					var qty=1;
 					document.getElementById("cake_prc"+productId).innerHTML = ""+prodDetail[d].actualRate;
 					actualRate=prodDetail[d].actualRate;
 					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
 					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
-					//alert(offPer);
+					
+					taxableAmt=actualRate;
+					
+					cgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.cgstPer))/100;
+					sgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.sgstPer))/100;
+					igstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.igstPer))/100;
+					
+					taxAmt=(cgstAmt+sgstAmt+igstAmt).toFixed(2);
+					totalAmt=(parseFloat(taxableAmt)+parseFloat(taxAmt)).toFixed(2);
+					
 					if (sessionStorage.getItem("cartValue") == null) {
 						var table = [];
 						sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -736,17 +745,41 @@ function addToCartClick(productId){
 					var table = $.parseJSON(cartValue);
 					
 					table.push({
-						  itemId: 00,
-						  price: 0,
-						  itemName: 0,
-						  qty: 1,
-						  total: 11,
-						  cgstPer : 5,
-						  sgstPer :5,
-						  igstPer : 2.5,
-						  specialremark : ''
+						orderDetailId: 0,
+						orderId: 0,
+						itemId: prodMaster.productId,
+						hsnCode:prodMaster.hsnCode,
+						qty: 1,
+						mrp : prodDetail[d].displayRate,
+						rate :prodDetail[d].actualRate,
+						taxableAmt : 2.5,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer: prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer ,
+						cgstAmt: cgstAmt,
+						sgstAmt: sgstAmt,
+						igstAmt: igstAmt,
+						discAmt: 0,
+						taxAmt: taxAmt,
+						totalAmt :totalAmt ,
+						delStatus :1 ,
+						remark : 'no remark',
+						exInt1 : prodDetail[d].configDetailId ,
+						exInt2 : prodDetail[d].flavorId,
+						exInt3 : prodDetail[d].isVeg,
+						exInt4 : prodDetail[d].shapeId,
+						exVar1 : prodMaster.productName ,
+						exVar2 : 1,
+						exVar3 : 1,
+						exVar4 : 1,
+						exFloat1 :1 ,
+						exFloat2 :1 ,
+						exFloat3: 1,
+						exFloat4 :1 ,
 					});
 					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				appendCartData();
+					break;
 					}
 					//alert("Do calc");
 				}else{
@@ -760,13 +793,52 @@ function addToCartClick(productId){
 		}
 		
 	}//end of For prodDetailList pd
+
+	}//end of Function addToCartClick
+function appendCartData(){
 	var cartValue = sessionStorage.getItem("cartValue");
 	var table = $.parseJSON(cartValue);
-	alert(table.length)
+	 $("#item_cart_list").html('');
+	 $("#proc_chkout").html('');
+	 $("#cart_item_count").html('');
+	 var subtotal=0.0;
+	for(var i = 0 ; i<table.length ; i++){
+		//alert(i);
+		subtotal=(parseFloat(subtotal)+parseFloat(table[i].totalAm)).toFixed(2);
+		$("#item_cart_list").append('<div class="like_one">'+
+		'<div class="like_pic">'+
+			'<img src="${pageContext.request.contextPath}/resources/images/like_pic.jpg" class="lazy"'+
+				'data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"'+
+				'alt="">'+
+		'</div>'+
+		'<div class="like_cont">'+
+			'<h4 class="like_cake_nm">'+table[i].exVar1+'</h4>'+
+			'<p class="like_prc">Rs.'+table[i].totalAmt+'</p>'+
+			'<div class="like_quant">'+
+				'<span>Qty.</span>'+
+				'<form id="myform" method="POST" action="#">'+
+					'<input type="button" value="-" class="qtyminus"'+
+						'field="quantity"/><input type="text" name="quantity"'+
+						'value="0" class="qty" /> <input type="button" value="+"'+
+						'class="qtyplus" field="quantity"/>'+
+				'</form>'+
+			'</div>'+
+		'</div>'+
+		'<div class="clr"></div>'+
+	'</div>')
+		
+	}//End of For loop I
+	 $("#cart_item_count").innerHTML(table.length);
 	
+	 $("#proc_chkout").append('<div class="proc_chkout">'+
+		'<span>Total : Rs.'+subtotal+'/- </span> <a href="my-cart.html">Proceed'+
+			'to Checkout</a>'+
+	'</div>')
 	
-	}//end of Function addToCartClick
-
+	}
+	function clearData(){
+		sessionStorage.clear();
+	}
 </script>
 	<script type="text/javascript">
 var x, i, j, l, ll, selElmnt, a, b, c;
