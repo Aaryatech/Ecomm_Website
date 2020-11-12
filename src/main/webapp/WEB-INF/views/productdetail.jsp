@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -115,9 +118,8 @@
 
 				<div class="breadcrums">
 					<a href="#">Home</a> <i class="fa fa-angle-right"
-						aria-hidden="true"></i> <a href="#">Eggless Cakes</a> <i
-						class="fa fa-angle-right" aria-hidden="true"></i> Black Forest
-					Cake
+						aria-hidden="true"></i> <a href="#">${prodHeader.subCatName}</a> <i
+						class="fa fa-angle-right" aria-hidden="true"></i>${prodHeader.productName}
 
 				</div>
 
@@ -125,23 +127,30 @@
 					<div class="detail_l">
 						<div class="detail_slide">
 							<!-- <div id="el"></div> -->
-							
+
 							<div class="xzoom-container">
-          <img class="xzoom" id="xzoom-default" src="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" xoriginal="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" />
-          
-          <div class="mobile_Scrl">
-          <div class="xzoom-thumbs">
-            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg"  xpreview="${pageContext.request.contextPath}/resources/images/zoom_slide_1.jpg" title="The description goes here"></a>
-            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_2.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_2.jpg" title="The description goes here"></a>
-            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_3.jpg" title="The description goes here"></a>
-            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_4.jpg" title="The description goes here"></a>
-            <a href="${pageContext.request.contextPath}/resources/images/zoom_slide_5.jpg"><img class="xzoom-gallery" width="80" src="${pageContext.request.contextPath}/resources/images/zoom_slide_5.jpg" title="The description goes here"></a>
-              </div>
-              
-          </div>
-        </div>
-							
-							
+								<img class="xzoom" id="xzoom-default"
+									src="${prodImgUrl}${prodHeader.prodImagePrimary}"
+									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}" />
+								<div class="mobile_Scrl">
+									<div class="xzoom-thumbs">
+										<a href="${prodImgUrl}${prodHeader.prodImagePrimary}"><img
+											class="xzoom-gallery" width="80"
+											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
+											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
+											title="The description goes here"></a>
+										<c:forEach items="${prodHeader.productImages}"
+											var="prod_image">
+											<a href="${prodImgUrl}${prod_image}"><img
+												class="xzoom-gallery" width="80"
+												src="${prodImgUrl}${prod_image}"
+												title="The description goes here"></a>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+
+
 						</div>
 					</div>
 					<div class="detail_r">
@@ -150,7 +159,7 @@
 							<div class="stock_row">
 								<div class="stock_l">
 									<h2 class="product_nm">
-										<span>In Stock</span> Fudge Brownie Cake Half kg
+										<span>In Stock</span>${prodHeader.productName}
 									</h2>
 									<div class="stock_review">
 										4.8 <img
@@ -167,24 +176,85 @@
 							</div>
 							<!--product price row-->
 							<div class="stock_prc">
-								599 <span class="act_prc">749</span> <span class="save">
-									20% off (Save 150) </span> <span class="inclusive_txt">Inclusive
-									of all taxes</span>
+								${prodHeader.defaultPrice}<span class="act_prc">${prodHeader.displayRate}</span>
+								<span class="save"> 20% off (Save 150) </span> <span
+									class="inclusive_txt">Inclusive of all taxes</span>
 							</div>
 							<!--product txt row-->
-							<div class="prod_txt">This classic round Black Forest cake
-								makes a highly tempting gift. It weighs half kg, and is stuffed
-								with whipped cream and studded with cherries. Its eggless
-								version is also available. You can give this gift on any joyous
-								occasion. Key attributes :</div>
+							<div class="prod_txt">${prodHeader.productDesc}.Key
+								attributes :</div>
 
 							<ul class="shape_list">
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Shape :
+								<!-- <li><i class="fa fa-circle" aria-hidden="true"></i> Shape :
 									Round</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i>
 									Flavours : Black Forest</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
-									: 0.5 kg</li>
+									: 0.5 kg</li> -->
+
+								<li>Shape<select id="shape">
+										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
+											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
+												varStatus="flavorFilterCount">
+
+												<c:if test="${flavorFilter.filterTypeId==1}">
+
+													<c:choose>
+														<c:when test="${prodDetail==flavorFilter.filterId}">
+															<c:choose>
+																<c:when test="${prodDetail==prodHeader.defaultShapeId}">
+																	<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																</c:otherwise>
+															</c:choose>
+														</c:when>
+														<c:otherwise>
+
+														</c:otherwise>
+													</c:choose>
+												</c:if>
+											</c:forEach>
+										</c:forEach>
+
+										
+								</select></li>
+
+								<li>Flavor<select id="flavor">
+									<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
+											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
+												varStatus="flavorFilterCount">
+
+												<c:if test="${flavorFilter.filterTypeId==4}">
+
+													<c:choose>
+														<c:when test="${prodDetail==flavorFilter.filterId}">
+															<c:choose>
+																<c:when test="${prodDetail==prodHeader.defaultFlavorId}">
+																	<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																</c:when>
+																<c:otherwise>
+																	<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																</c:otherwise>
+															</c:choose>
+														</c:when>
+														<c:otherwise>
+
+														</c:otherwise>
+													</c:choose>
+												</c:if>
+											</c:forEach>
+										</c:forEach>
+								</select></li>
+
+								<li>Weight<select id="weight">
+											<c:forEach items="${prodHeader.availInWeights}"
+																		var="prodDetailwt">
+																		<option value="${prodDetailwt}">${prodDetailwt}</option>
+																	</c:forEach>
+								</select></li>
+
 							</ul>
 
 							<div class="delivery_row">
@@ -299,12 +369,12 @@
 									href="my-cart.html" class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
-							
+
 							<!--mobile-buttons-->
-                    <div class="mobile_button">
-                        <a href="#" class="mobile_cart">Add To Cart</a>
-                        <a href="my-cart.html" class="mobile_buy">Buy Now</a>
-                    </div>
+							<div class="mobile_button">
+								<a href="#" class="mobile_cart">Add To Cart</a> <a
+									href="my-cart.html" class="mobile_buy">Buy Now</a>
+							</div>
 
 						</div>
 					</div>
@@ -614,7 +684,7 @@
 
 
 	<!--zoom slider-->
-	
+
 
 	<%-- <script src="${pageContext.request.contextPath}/resources/js/zoomy.js"></script>
 	<link type="text/css" rel="stylesheet"
@@ -873,9 +943,12 @@
 				});
 	</script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/xzoom.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/xzoom.css" media="all" />    
-<script src="${pageContext.request.contextPath}/resources/js/setup.js"></script>  
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/xzoom.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="${pageContext.request.contextPath}/resources/css/xzoom.css"
+		media="all" />
+	<script src="${pageContext.request.contextPath}/resources/js/setup.js"></script>
 
 	<script type="text/javascript">
 		document

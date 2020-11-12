@@ -138,7 +138,7 @@
 
 				<c:forEach items="${frCatList}" var="frCat" varStatus="count">
 					<div class="prod_cat_1">
-						<div class="cakes_cat_1">
+						<div class="cakes_cat_1 new">
 							<a
 								href="${pageContext.request.contextPath}/filterCategoryProduct/${frCat.catId}">
 								<div class="img_cap">
@@ -146,7 +146,7 @@
 										src="https://d3s16h6oq3j5fb.cloudfront.net/img/Spinner-2.gif"
 										class="lazy" data-src="${catImgUrl}${frCat.imageName}" alt="">
 									<div class="prod_cat_cap">
-										<span>Cakes</span>
+										<span>${frCat.catName}</span>
 									</div>
 								</div>
 							</a>
@@ -218,13 +218,14 @@
 
 					<div class="wrapper">
 						<section class="regular-cake slider">
-							<div>
+							
 								<c:forEach items="${prodHeaderList}" var="product"
 									varStatus="prodCount">
 									<c:choose>
 										<%-- <c:when
 											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}"> --%>
 										<c:when test="${product.prodStatusId==statusFilter.filterId}">
+										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
@@ -333,6 +334,7 @@
 														<div class="radio_l">
 
 															<div class="radio_1">
+															<ul>
 																<c:set var="isVegFound" value="0"></c:set>
 																<c:set var="isNonVegFound" value="0"></c:set>
 																<c:forEach items="${product.isVeg}"
@@ -360,26 +362,29 @@
 
 
 																<c:if test="${isVegFound==1}">
+																<li>
 																	<input type="radio" value="0" id="prod_veg${product.productId}"
 																		name="prod_vnv${product.productId}">
-																	<label for="b-option"> Veg VG </label>
+																	<label for="prod_veg${product.productId}"> Veg VG </label>
 																	<div class="check">
 																		<div class="inside"></div>
 																	</div>
-
+</li>
 
 																</c:if>
 
 																<c:if test="${isNonVegFound==1}">
+																<li>
 																	<input type="radio" value="1"
 																		id="prod_nonveg${product.productId}"
 																		name="prod_vnv${product.productId}">
-																	<label for="b-option">Non Veg NV</label>
+																	<label for="prod_nonveg${product.productId}">Non Veg NV</label>
 																	<div class="check">
 																		<div class="inside"></div>
 																	</div>
+																	</li>
 																</c:if>
-
+</ul>
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
 																		name="selector"> <label for="a-option">Veg</label>
@@ -406,6 +411,7 @@
 												</div>
 
 											</div>
+											</div>
 											<!-- End of div cake one -->
 										</c:when>
 										<c:otherwise>
@@ -414,7 +420,7 @@
 									</c:choose>
 								</c:forEach>
 
-							</div>
+							
 
 						</section>
 
@@ -599,11 +605,11 @@
 			</ul>
 		</div>
 	</div>
+	<select id="jj" name="jjj" onchange="changeWt1()"><option></option></select>
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
-	<select id="jj" name="jjj" onchange="changeWt1()"><option></option></select>
 
 
 

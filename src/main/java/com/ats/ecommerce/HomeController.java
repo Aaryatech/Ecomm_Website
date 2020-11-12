@@ -55,7 +55,7 @@ public class HomeController {
 						 String dataList = new Scanner(new File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json")).useDelimiter("\\Z").next();
 						 System.err.println(" dataList " +dataList);
 						 session.setAttribute("dataList", dataList);
-								 
+	 
 						break;
 					}
 				}
@@ -89,7 +89,8 @@ public class HomeController {
 		model.addAttribute("frCatList",data.getFranchiseCatList());
 		
 		model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
-		
+		model.addAttribute("prodImgUrl",Constants.PROD_IMG_VIEW_URL);
+
 		model.addAttribute("prodHeaderList",data.getFeProductHeadList());
 		model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
 
@@ -108,7 +109,7 @@ public class HomeController {
 				model.addAttribute("frCatList",data.getFranchiseCatList());
 				
 				model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
-				
+				model.addAttribute("prodImgUrl",Constants.PROD_IMG_VIEW_URL);
 				model.addAttribute("prodHeaderList",data.getFeProductHeadList());
 				model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
 				

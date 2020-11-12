@@ -6,6 +6,7 @@ package com.ats.ecommerce.common;
 public class Constants {
 	public static final String JSON_FILES_PATH="/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/";
 	public static final String CAT_IMG_VIEW_URL="http://localhost:8080/IMG_UP/";
-	
+	public static final String PROD_IMG_VIEW_URL="http://localhost:8080/IMG_UP/";
+
 	
 }

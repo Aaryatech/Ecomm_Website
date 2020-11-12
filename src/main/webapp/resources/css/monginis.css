@@ -102,6 +102,8 @@ header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 1
 
 
 .cakes_cat_1{background: #FFF; padding: 5px; min-height: 600px; width: 100%; -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -ms-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); overflow: hidden;}
+.cakes_cat_1.new{min-height:auto;}
+.cakes_cat_1.new img{width: 100%;height: 250px;}
 .prod_cat_cap{position: absolute; bottom: 0; left: 0; background: url(../images/offer_caption.png) repeat-x left bottom; width: 100%; min-height: 126px; text-align: center; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; text-transform: uppercase; line-height: 103px;}
 .prod_cat_cap span{vertical-align: bottom; line-height: 20px; }
 .img_cap{position: relative; overflow: hidden; /*transition: transform .5s, filter 1s ease-in-out;*/}
@@ -400,7 +402,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .circle_tag:hover img:last-child,.circle_tag.active img:last-child{display: inline-block;}
 
 .cake_container{display: block; text-align: left; padding: 10px 0 0 0; position: relative; overflow: inherit;}
-.cake_nm,.cake_nm a{color: #333; font-size: 15px; margin: 0 0 10px 0; font-family: 'Hind-Medium';}
+.cake_nm,.cake_nm a{color: #333; font-size: 15px; margin: 0 0 10px 0; font-family: 'Hind-Medium';text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 .cake_one:hover .cake_nm a{color: #ec2c92;}
 
 .cake_dropdown{margin: 0 0 10px 0; position: relative; z-index: 99;}
