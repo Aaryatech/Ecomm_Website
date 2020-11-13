@@ -230,3 +230,91 @@
 		alt=""> <!--<i class="fa fa-bars" aria-hidden="true"></i>--></span>
 
 </header>
+<script>
+
+function appendCartData(){
+	var cartValue = sessionStorage.getItem("cartValue");
+	var table = $.parseJSON(cartValue);
+	 $("#item_cart_list").html('');
+	 $("#proc_chkout").html('');
+	 $("#cart_item_count").html('');
+	 var subtotal=0;
+	for(var i = 0 ; i<table.length ; i++){
+		//alert(i);
+		subtotal=(parseFloat(subtotal)+parseFloat(table[i].totalAmt)).toFixed(2);
+		$("#item_cart_list").append('<div class="like_one">'+
+		'<div class="like_pic">'+
+			'<img src="${pageContext.request.contextPath}/resources/images/like_pic.jpg" class="lazy"'+
+				'data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"'+
+				'alt="">'+
+		'</div>'+
+		'<div class="like_cont">'+
+			'<h4 class="like_cake_nm">'+table[i].exVar1+'</h4>'+
+			'<p class="like_prc">Rs.'+table[i].totalAmt+'</p>'+
+			'<div class="like_quant">'+
+				'<span>Qty.</span>'+
+				'<form id="myform" method="POST" action="#">'+
+					'<input type="button" value="-" onclick="setQty('+table[i].itemId+','+i+','+table[i].qty+',0)" class="qtyminus"'+
+						'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
+						'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('+table[i].itemId+','+i+','+table[i].qty+',1)" value="+"'+
+						'class="qtyplus" field="quantity"/>'+
+				'</form>'+
+			'</div>'+
+		'</div>'+
+		'<div class="clr"></div>'+
+	'</div>')
+		
+	}//End of For loop I
+	document.getElementById("cart_item_count").innerHTML=""+table.length;
+	 $("#proc_chkout").append('<div class="proc_chkout">'+
+		'<span>Total : Rs.'+subtotal+'/- </span> <a href="my-cart.html">Proceed'+
+			'to Checkout</a>'+
+	'</div>')
+	
+	}
+	function setQty(productId,position,curQty,buttonType){
+		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
+		//prod_quantity+productId;
+		var ischanged=0;
+		if(parseInt(buttonType)==0&&parseInt(curQty)>1){
+			//Its Minus call;
+			//alert("If")
+			curQty=parseInt(curQty)-1;
+			ischanged=1;
+		}else if(parseInt(buttonType)==1){
+			//Its Plus;
+			//alert("Else")
+			curQty=parseInt(curQty)+1;
+			ischanged=1;
+		}
+		
+		if(parseInt(ischanged)==1){
+		var cartValue = sessionStorage.getItem("cartValue");
+		var table = $.parseJSON(cartValue);
+		table[position].qty=curQty;
+		
+		var qty=parseFloat(curQty);
+		var taxableAmt=parseFloat(table[position].rate)*parseFloat(qty).toFixed(2);
+		var cgstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].cgstPer))/100;
+		var sgstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].sgstPer))/100;
+		var igstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].igstPer))/100;
+		
+		var taxAmt=(cgstAmt+sgstAmt+igstAmt).toFixed(2);
+		var totalAmt=parseFloat(taxableAmt).toFixed(2);
+		
+		table[position].taxableAmt=taxableAmt;
+		table[position].cgstAmt=cgstAmt;
+		table[position].sgstAmt=sgstAmt;
+		table[position].igstAmt=igstAmt;
+		table[position].taxAmt=taxAmt;
+		table[position].totalAmt=totalAmt;
+		console.log(table);
+		sessionStorage.setItem("cartValue", JSON.stringify(table));
+		appendCartData();
+		}//end of If ischanged==1
+	}
+	function clearData(){
+		sessionStorage.clear();
+	}
+	appendCartData(); // Onload call.
+</script>

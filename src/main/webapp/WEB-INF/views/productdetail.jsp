@@ -176,15 +176,16 @@
 							</div>
 							<!--product price row-->
 							<div class="stock_prc">
-								${prodHeader.defaultPrice}<span class="act_prc">${prodHeader.displayRate}</span>
+								${prodHeader.defaultPrice}<span class="act_prc" id="cake_price">${prodHeader.displayRate}</span>
 								<span class="save"> 20% off (Save 150) </span> <span
 									class="inclusive_txt">Inclusive of all taxes</span>
 							</div>
 							<!--product txt row-->
-							<div class="prod_txt">${prodHeader.productDesc}.Key
+							<div class="prod_txt">${prodHeader.productDesc}. Key
 								attributes :</div>
+			<div class="detail_drop">
 
-							<ul class="shape_list">
+							<ul>
 								<!-- <li><i class="fa fa-circle" aria-hidden="true"></i> Shape :
 									Round</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i>
@@ -192,7 +193,7 @@
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
 									: 0.5 kg</li> -->
 
-								<li>Shape<select id="shape">
+								<li>Shape<select class="select-css" id="shape" name="shape">
 										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -221,7 +222,7 @@
 										
 								</select></li>
 
-								<li>Flavor<select id="flavor">
+								<li>Flavor<select class="select-css" name="flavor" id="flavor">
 									<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -248,159 +249,148 @@
 										</c:forEach>
 								</select></li>
 
-								<li>Weight<select id="weight">
+								<li>Weight<select class="select-css" id="weight">
 											<c:forEach items="${prodHeader.availInWeights}"
-																		var="prodDetailwt">
-																		<option value="${prodDetailwt}">${prodDetailwt}</option>
-																	</c:forEach>
+											 var="prodDetailwt">
+											<option value="${prodDetailwt}">${prodDetailwt}</option>
+											</c:forEach>
 								</select></li>
 
 							</ul>
-
+</div>
 							<div class="delivery_row">
 								<div class="delivery_l">
 									<div class="a">
 										<h4 class="highlight_title">Product Highlights :</h4>
 										<ul class="highlist_list">
 											<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-												Flavour: Black Forest</li>
+												Flavour: ${prodHeader.flavorNames}</li>
 											<li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Cake: Cream</li>
+												of Cake: ${prodHeader.creamTypeName}</li>
 											<li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Bread: Chocolate</li>
+												of Bread: ${prodHeader.breadTypeName}</li>
 										</ul>
-										<a href="#" class="more_highlight">Read More</a>
+										<a href="#" onclick="moveCursor()" class="more_highlight">Read More</a>
 									</div>
 
 									<!--eagless or with eeg row-->
 									<div class="eagless_row">
 										<ul>
-											<li><label class="radio-button"> <input
-													type="radio" name="radio" checked="checked"> <span
-													class="label-visible"> <span
-														class="fake-radiobutton"></span> Eggless Cake
-												</span>
-											</label></li>
-											<li><label class="radio-button"> <input
-													type="radio" name="radio"> <span
-													class="label-visible"> <span
-														class="fake-radiobutton"></span> Eggbass Cake
-												</span>
-											</label></li>
-										</ul>
+										
+										<c:set var="isVegFound" value="0"></c:set>
+																<c:set var="isNonVegFound" value="0"></c:set>
+																<c:forEach items="${prodHeader.isVeg}"
+																	var="prodDetailVegNon">
 
+
+																	<c:forEach items="${flavTagStatusList}"
+																		var="vegNonFilter" varStatus="flavorFilterCount">
+																		<c:if test="${vegNonFilter.filterTypeId==12}">
+																			<c:if
+																				test="${vegNonFilter.filterId==prodDetailVegNon}">
+																				<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																					<c:set var="isVegFound" value="1"></c:set>
+																				</c:if>
+
+																				<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
+																					<c:set var="isNonVegFound" value="1"></c:set>
+																				</c:if>
+																			</c:if>
+																		</c:if>
+																	</c:forEach>
+
+																</c:forEach>
+																
+											<c:if test="${isVegFound==1}">
+											<li><label class="radio-button"> <input
+													type="radio" id="v_radio" value="0" name="vnv_radio"> <span
+													class="label-visible"> <span
+														class="fake-radiobutton"></span> Veg
+												</span>
+											</label></li>
+											</c:if>
+											<c:if test="${isNonVegFound==1}">
+											<li><label class="radio-button"> <input
+													type="radio" value="1" id="nv_radio" name="vnv_radio"> <span
+													class="label-visible"> <span
+														class="fake-radiobutton"></span>Non Veg
+												</span>
+											</label></li>
+											</c:if>
+										</ul> 
 										<div class="clr"></div>
-
 									</div>
-
 									<!--cake-kgs-->
-									<div class="radio_1 detail_kg">
-										<ul>
-											<li><input type="radio" id="zzz-option" name="selector"
-												class="detail_round"> <label for="zzz-option">Veg</label>
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="yyy-option" name="selector"
-												tabindex="-1" class="detail_round"> <label
-												for="yyy-option">1 Kg</label>
-												<div class="check">
-													<div class="inside"></div>
-												</div></li>
-
-											<li><input type="radio" id="www-option" name="selector"
-												class="detail_round"> <label for="www-option">2
-													kg</label>
-												<div class="check"></div></li>
-
-											<li><input type="radio" id="xxx-option" name="selector"
-												class="detail_round"> <label for="xxx-option">3
-													kg</label>
-												<div class="check"></div></li>
-
-										</ul>
-									</div>
-
-
 								</div>
-
 								<!--right form-->
 								<div class="delivery_r">
 									<div class="delivery_bx">
 										<h4 class="delivery_title">Delivery Details</h4>
-
 										<div class="delivery_frm">
 											<form action="" method="get">
 												<div class="delivery_frm_l">
 													<img
-														src="${pageContext.request.contextPath}/resources/images/pic.jpg"
-														alt="">
-
+														alt="" id="del_image" name="del_image"/>
 													<div class="inputbrowsebtn">
-
 														<label for="test"> <span class="fg">Upload
-																Image </span> <input type="file" id="test">
+																Image </span> <input type="file" accept="image/*" name="img_input_btn" id="img_input_btn" 
+												accept=".jpg,.png,.gif,.jpeg,.bmp" onchange="loadFile(event)">
 														</label>
-
-
-
 													</div>
 												</div>
 												<div class="delivery_frm_r">
 													<div class="delivery_txtarea">
-														<textarea name="" cols="" rows="3" class="input_txt"
+														<textarea name="" cols="" id="sp_inst", name="sp_inst" rows="3" class="input_txt"
 															placeholder="Special Instructon"></textarea>
 													</div>
 													<div class="a">
-														<input name="" type="text" class="input_txt"
+														<input name="" type="text" id="msg_on_cake" name="msg_on_cake" class="input_txt"
 															placeholder="Message / Name on the Cake" />
 													</div>
 												</div>
 												<div class="clr"></div>
 											</form>
 										</div>
-
 									</div>
 								</div>
 								<div class="clr"></div>
 							</div>
 
 							<div class="button_row">
-								<a href="#" class="cart_button">Add To Cart</a> <a
-									href="my-cart.html" class="buy_button">Buy Now</a>
+								<a href="#" class="cart_button" onclick="addToCartClick(${prodHeader.productId})">Add To Cart</a> <a
+									href="${pageContext.request.contextPath}/viewcart" class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
 
 							<!--mobile-buttons-->
 							<div class="mobile_button">
-								<a href="#" class="mobile_cart">Add To Cart</a> <a
-									href="my-cart.html" class="mobile_buy">Buy Now</a>
+								<a href="#" class="mobile_cart" onclick="addToCartClick('${prodHeader.productId}')">Add To Cart</a> <a
+									href="${pageContext.request.contextPath}/viewcart" class="mobile_buy">Buy Now</a>
 							</div>
-
 						</div>
 					</div>
 					<div class="clr"></div>
 				</div>
 
 				<!--product-discription-->
-				<div class="prod_disc">
+				<div class="prod_disc" id="prod_disc">
 					<h3 class="prod_title">Product Description:</h3>
-
 					<div class="prod_listing">
 						<div class="prod_listing_one">
 							<h4 class="highlight_title">Highlights :</h4>
 							<ul class="highlist_list">
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-									Flavour: Black Forest</li>
+									Flavor: ${prodHeader.flavorNames}</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Cake: Cream</li>
+									Cake: ${prodHeader.prodTypeName}</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Bread: Chocolate</li>
+									Bread: ${prodHeader.breadTypeName}</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									cream: Vanilla</li>
+									cream: ${prodHeader.creamTypeName}</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Filling
-									in Layers: Dark cherry</li>
+									in Layers: ${prodHeader.layeringCreamNames}</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i>
-									Toppings: Chocolate Flakes &amp; Red Cherry</li>
+									Toppings: ${prodHeader.toppingCreamNames} &amp; Red Cherry</li>
 							</ul>
 						</div>
 
@@ -427,7 +417,6 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 
 				<div class="product_boxes">
@@ -437,7 +426,6 @@
 								Free Shipping in India</span>
 						</center>
 					</h2>
-
 
 					<ul>
 						<!--product-row-1-->
@@ -520,14 +508,11 @@
 											Off)</span>
 									</div>
 								</div>
-
 								<div class="cake_container">
 									<h4 class="cake_nm single_row">
 										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
 									</h4>
-
 								</div>
-
 							</div>
 						</li>
 						<li>
@@ -550,28 +535,18 @@
 											Off)</span>
 									</div>
 								</div>
-
 								<div class="cake_container">
 									<h4 class="cake_nm single_row">
 										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
 									</h4>
-
 								</div>
-
 							</div>
 						</li>
-
 					</ul>
-
 					<div class="more_product">
 						<a href="#">Load More Products</a>
 					</div>
 				</div>
-
-
-
-
-
 			</div>
 		</div>
 	</div>
@@ -607,67 +582,6 @@
 						</div>
 					</div>
 				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-
 			</section>
 		</div>
 
@@ -680,7 +594,156 @@
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
+<script type="text/javascript">
 
+function addToCartClick(productId){
+	//alert("In addToCartClick " +productId);
+	
+	var selectWt = document.getElementById("weight").value;
+	var selectFlav=0;
+	try{
+		selectFlav = document.getElementById("flavor").value;
+	}catch (e) {
+		selectFlav=0;
+	}
+	if(selectFlav==""||isNaN(selectFlav)||selectFlav==null){
+		selectFlav=0;
+	}
+	//Shape
+	
+	var selectShape=0;
+	try{
+		selectShape = document.getElementById("shape").value;
+	}catch (e) {
+		selectShape=0;
+	}
+	if(selectShape==""||isNaN(selectShape)||selectShape==null){
+		selectShape=0;
+	}
+	
+	//End of Shape
+	
+	var isVeg=$('input[name="vnv_radio"]:checked').val();
+	var dataList='${sessionScope.dataList}';
+	var data=$.parseJSON(dataList);
+	var selectVegNon="Veg";
+	var prodHead=data.feProductHeadList;
+	var prodMaster;
+	for(var h=0;h<prodHead.length;h++){
+		if(parseInt(productId)==parseInt(prodHead[h].productId)){
+			prodMaster=prodHead[h];
+				if (typeof(isVeg) == "undefined"){
+					selectVegNon=prodMaster.defaultVegNonvegName;
+				}else if(parseInt(isVeg)==1){
+					selectVegNon="NonVeg";
+				}else{
+					selectVegNon="Veg";
+				}
+			break;
+		}
+	}//end of prodHead For H
+	var prodDetail=prodMaster.prodDetailList;
+	for(var d=0;d<prodDetail.length;d++){
+		//alert("OKkk");
+		if(parseInt(selectShape)==parseInt(prodDetail[d].shapeId)){
+			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
+				if(prodDetail[d].vegNonvegName==selectVegNon){
+					//Calc Price;
+					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
+					//alert(prodDetail[d].configDetailId);
+					var qty=1;cdss
+					document.getElementById("cake_price").innerHTML = ""+prodDetail[d].actualRate;
+					actualRate=prodDetail[d].actualRate;
+					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
+					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
+					
+					taxableAmt=actualRate;
+					
+					cgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.cgstPer))/100;
+					sgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.sgstPer))/100;
+					igstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.igstPer))/100;
+					
+					taxAmt=(cgstAmt+sgstAmt+igstAmt).toFixed(2);
+					totalAmt=(parseFloat(taxableAmt)).toFixed(2);
+					
+					if (sessionStorage.getItem("cartValue") == null) {
+						var table = [];
+						sessionStorage.setItem("cartValue", JSON.stringify(table));
+					}
+					
+					var cartValue = sessionStorage.getItem("cartValue");
+					var table = $.parseJSON(cartValue);
+					
+					table.push({
+						orderDetailId: 0,
+						orderId: 0,
+						itemId: prodMaster.productId,
+						hsnCode:prodMaster.hsnCode,
+						qty: 1,
+						mrp : prodDetail[d].displayRate,
+						rate :prodDetail[d].actualRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer: prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer ,
+						cgstAmt: cgstAmt,
+						sgstAmt: sgstAmt,
+						igstAmt: igstAmt,
+						discAmt: 0,
+						taxAmt: taxAmt,
+						totalAmt :totalAmt ,
+						delStatus :1 ,
+						remark : 'no remark',
+						exInt1 : prodDetail[d].configDetailId ,
+						exInt2 : prodDetail[d].flavorId,
+						exInt3 : prodDetail[d].isVeg,
+						exInt4 : prodDetail[d].shapeId,
+						exVar1 : prodMaster.productName ,
+						exVar2 : 1,
+						exVar3 : 1,
+						exVar4 : 1,
+						exFloat1 :1 ,
+						exFloat2 :1 ,
+						exFloat3: 1,
+						exFloat4 :1 ,
+					});
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				appendCartData();
+					break;
+					}
+					//alert("Do calc");
+				}else{
+					continue;
+				}
+			}else{
+				continue;
+			}
+		}else{
+			continue;
+		}
+		
+	}//end of For prodDetailList pd
+
+	}//end of Function addToCartClick
+	
+function moveCursor(){
+	$('html,body').animate({
+	        scrollTop: $(".prod_disc").offset().top},
+	        'slow'); 
+		//var elmnt = document.getElementById("prod_disc");
+	  //elmnt.scrollIntoView();
+}
+	var loadFile = function(event) {
+	 document.getElementById('del_image').style.display="none";
+	 try {
+		var image = document.getElementById('del_image');
+		image.src = URL.createObjectURL(event.target.files[0]);
+		document.getElementById('del_image').style="display:block"
+	 } catch(err) {
+		 console.log(err);
+		}
+	};
+</script>
 
 
 	<!--zoom slider-->

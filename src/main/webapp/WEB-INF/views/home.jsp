@@ -253,9 +253,8 @@
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
-															<div class="custom-select-new1">
 															<c:if test="${product.flavourIds!=0}">
-																<select id="flav${product.productId}"
+																<select class="select-css" id="flav${product.productId}"
 																	onchange="changeWtFlavor('${product.productId}')">
 																	<c:forEach items="${product.flavourIds}"
 																		var="prodDetail">
@@ -287,11 +286,11 @@
 																	</c:forEach>
 																</select>
 																</c:if>
-															</div>
+															
 														</div>
 														<div class="cake_dropdown_r">
-															<div class="custom-select-new1">
-																<select id="wt${product.productId}"
+															<!-- <div class="custom-select-new1"> -->
+																<select class="select-css" id="wt${product.productId}"
 																	onchange="changeWtFlavor('${product.productId}')">
 																	<option value="7">7</option>
 																	<c:forEach items="${product.availInWeights}"
@@ -299,7 +298,7 @@
 																		<option value="${prodDetailwt}">${prodDetailwt}</option>
 																	</c:forEach>
 																</select>
-															</div>
+															<!-- </div> -->
 														</div>
 														<div class="clr"></div>
 													</div>
@@ -365,7 +364,7 @@
 																<li>
 																	<input type="radio" value="0" id="prod_veg${product.productId}"
 																		name="prod_vnv${product.productId}">
-																	<label for="prod_veg${product.productId}"> Veg VG </label>
+																	<label for="prod_veg${product.productId}"> Veg</label>
 																	<div class="check">
 																		<div class="inside"></div>
 																	</div>
@@ -378,13 +377,13 @@
 																	<input type="radio" value="1"
 																		id="prod_nonveg${product.productId}"
 																		name="prod_vnv${product.productId}">
-																	<label for="prod_nonveg${product.productId}">Non Veg NV</label>
+																	<label for="prod_nonveg${product.productId}"> Non Veg</label>
 																	<div class="check">
 																		<div class="inside"></div>
 																	</div>
 																	</li>
 																</c:if>
-</ul>
+															</ul>
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
 																		name="selector"> <label for="a-option">Veg</label>
@@ -885,87 +884,7 @@ function appendCartData(){
 	function clearData(){
 		sessionStorage.clear();
 	}
-	appendCartData(); // Onload call.
-</script>
-	<script type="text/javascript">
-var x, i, j, l, ll, selElmnt, a, b, c;
-/*look for any elements with the class "custom-select":*/
-x = document.getElementsByClassName("custom-select-new");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /*for each element, create a new DIV that will act as the selected item:*/
-  a = document.createElement("DIV");
-  a.setAttribute("class", 'select-selected');
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /*for each element, create a new DIV that will contain the option list:*/
-  b = document.createElement("DIV");
-  b.setAttribute("class", 'select-items select-hide');
-  for (j = 1; j < ll; j++) {
-    /*for each option in the original select element,
-    create a new DIV that will act as an option item:*/
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /*when an item is clicked, update the original select box,
-        and the selected item:*/
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
-        }
-        h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-      /*when the select box is clicked, close any other select boxes,
-      and open/close the current select box:*/
-      e.stopPropagation();
-      closeAllSelect(this);
-      this.nextSibling.classList.toggle("select-hide");
-      this.classList.toggle("select-arrow-active");
-    });
-}
-function closeAllSelect(elmnt) {
-  /*a function that will close all select boxes in the document,
-  except the current select box:*/
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
-    }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-/*if the user clicks anywhere outside the select box,
-then close all select boxes:*/
-document.addEventListener("click", closeAllSelect);
+	//appendCartData(); // Onload call.
 </script>
 	<!--cart-sidepanel-->
 	<script type="text/javascript">
@@ -986,20 +905,16 @@ document.addEventListener("click", closeAllSelect);
 			document.getElementById("mySidepanel2").style.width = "0";
 		}
 	</script>
-
 	<!--main-menu-js-->
 	<script>
 		function openNav1() {
 			document.getElementById("myNav").style.height = "100%";
 		}
-
 		function closeNav1() {
 			document.getElementById("myNav").style.height = "0%";
 		}
 	</script>
-
 	<!--menuzord -->
-
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#menuzord").menuzord({
@@ -1008,81 +923,7 @@ document.addEventListener("click", closeAllSelect);
 		});
 	</script>
 	<!--menuzord-->
-
-	<script type="text/javascript">
-		jQuery(document)
-				.ready(
-						function() {
-							// This button will increment the value
-							$('.qtyplus1')
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												alert("fieldName" +fieldName)
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If is not undefined
-												if (!isNaN(currentVal)) {
-													// Increment
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal + 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-							// This button will decrement the value till 0
-							$(".qtyminus1")
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If it isn't undefined or its greater than 0
-												if (!isNaN(currentVal)
-														&& currentVal > 0) {
-													// Decrement one
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal - 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-						});
-	</script>
-
-
 	<!--slick slider-->
-
 	<script type="text/javascript">
 		$(document).on('ready', function() {
 			$(".regular").slick({
@@ -1112,12 +953,8 @@ document.addEventListener("click", closeAllSelect);
 						slidesToScroll : 1
 					}
 				}
-				// You can unslick at a given breakpoint now by adding:
-				// settings: "unslick"
-				// instead of a settings object
 				]
 			});
-
 			$(".regular-cake").slick({
 				dots : true,
 				infinite : true,
@@ -1145,18 +982,10 @@ document.addEventListener("click", closeAllSelect);
 						slidesToScroll : 1
 					}
 				}
-				// You can unslick at a given breakpoint now by adding:
-				// settings: "unslick"
-				// instead of a settings object
 				]
 			});
-
 		});
 	</script>
-
-
-
-
 	<script type="text/javascript">
 		/*Dropdown Menu*/
 		$('.dropdown').click(function() {
@@ -1176,7 +1005,6 @@ document.addEventListener("click", closeAllSelect);
 							$(this).attr('id'));
 				});
 		/*End Dropdown Menu*/
-
 		$('.dropdown2').click(function() {
 			$(this).attr('tabindex', 1).focus();
 			$(this).toggleClass('active');
@@ -1194,16 +1022,12 @@ document.addEventListener("click", closeAllSelect);
 							$(this).attr('id'));
 				});
 	</script>
-
-
-
 	<script type="text/javascript">
 		document
 				.addEventListener(
 						"DOMContentLoaded",
 						function() {
 							var lazyloadImages;
-
 							if ("IntersectionObserver" in window) {
 								lazyloadImages = document
 										.querySelectorAll(".lazy");
@@ -1234,7 +1058,6 @@ document.addEventListener("click", closeAllSelect);
 									if (lazyloadThrottleTimeout) {
 										clearTimeout(lazyloadThrottleTimeout);
 									}
-
 									lazyloadThrottleTimeout = setTimeout(
 											function() {
 												var scrollTop = window.pageYOffset;
@@ -1260,7 +1083,6 @@ document.addEventListener("click", closeAllSelect);
 												}
 											}, 20);
 								}
-
 								document.addEventListener("scroll", lazyload);
 								window.addEventListener("resize", lazyload);
 								window.addEventListener("orientationChange",
@@ -1268,8 +1090,5 @@ document.addEventListener("click", closeAllSelect);
 							}
 						})
 	</script>
-
-
 </body>
-
 </html>

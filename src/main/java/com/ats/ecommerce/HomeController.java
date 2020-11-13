@@ -48,12 +48,12 @@ public class HomeController {
 						
 						 ObjectMapper mapper = new ObjectMapper();
 						  data = mapper.readValue(new
-						 File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json"),
+						 File(Constants.JSON_FILES_PATH+"27_.json"),
 						 FEDataTraveller.class);
-						 System.err.println("data " +data.toString());
+						// System.err.println("data " +data.toString());
 						 
-						 String dataList = new Scanner(new File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/27_.json")).useDelimiter("\\Z").next();
-						 System.err.println(" dataList " +dataList);
+						 String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+"27_.json")).useDelimiter("\\Z").next();
+						// System.err.println(" dataList " +dataList);
 						 session.setAttribute("dataList", dataList);
 	 
 						break;
@@ -69,7 +69,7 @@ public class HomeController {
 
 				returnPage = "location";
 			}
-			session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
+			//session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -84,7 +84,7 @@ public class HomeController {
 
 		HttpSession session = request.getSession();
 		String x = (String) session.getAttribute("custIdCookie");
-		System.err.println("Cate List  " + data.getFranchiseCatList().toString());
+		//System.err.println("Cate List  " + data.getFranchiseCatList().toString());
 		
 		model.addAttribute("frCatList",data.getFranchiseCatList());
 		
@@ -94,7 +94,7 @@ public class HomeController {
 		model.addAttribute("prodHeaderList",data.getFeProductHeadList());
 		model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
 
-		System.err.println("data.getFeProductHeadList() " +data.getFeProductHeadList());
+		//System.err.println("data.getFeProductHeadList() " +data.getFeProductHeadList());
 		return "home";
 	}
 

@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ats.ecommerce.common.Constants;
 import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -51,11 +52,11 @@ public class LocationController {
 			if (isCookieFound == 0) {
 				System.err.println("In Else ");
 				ObjectMapper mapper = new ObjectMapper();
-				CityData[] city = mapper.readValue(new File("/home/lenovo/Documents/pdf/" + "AllCityData_.json"),
+				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
 						CityData[].class);
 				List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 				// System.out.println(cityList);
-				String frData = new Scanner(new File("/home/lenovo/Documents/pdf/AllFrData_.json")).useDelimiter("\\Z").next();
+				String frData = new Scanner(new File(Constants.JSON_FILES_PATH+"AllFrData_.json")).useDelimiter("\\Z").next();
  
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);
