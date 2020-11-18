@@ -1022,7 +1022,10 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 
 
 /*End of code  Mohsin Sir 13-11-2020  */
-
+/*Sachin 18-11-2020*/
+.cake_prc_detail_iclass{float: left;margin: 6px 2px 0px 0px;}
+.cake_prc_detail_pclass{float: left; margin-right: 10px;}
+/*End of code 18-11-2020*/
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}

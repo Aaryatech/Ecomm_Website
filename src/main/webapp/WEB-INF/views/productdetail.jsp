@@ -192,8 +192,8 @@
 									Flavours : Black Forest</li>
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
 									: 0.5 kg</li> -->
-
-								<li>Shape<select class="select-css" id="shape" name="shape">
+<c:if test="${prodHeader.defaultShapeId!=0}">
+								<li>Shape${prodHeader.defaultShapeId}<select class="select-css" id="shape" name="shape">
 										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -220,7 +220,8 @@
 										</c:forEach>
 
 										
-								</select></li>
+								</select></li></c:if>
+<c:if test="${prodHeader.defaultFlavorId!=0}">
 
 								<li>Flavor<select class="select-css" name="flavor" id="flavor">
 									<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
@@ -247,7 +248,7 @@
 												</c:if>
 											</c:forEach>
 										</c:forEach>
-								</select></li>
+								</select></li></c:if>
 
 								<li>Weight<select class="select-css" id="weight">
 											<c:forEach items="${prodHeader.availInWeights}"
@@ -263,12 +264,14 @@
 									<div class="a">
 										<h4 class="highlight_title">Product Highlights :</h4>
 										<ul class="highlist_list">
+										<c:if test="${prodHeader.defaultFlavorId!=0}">
 											<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-												Flavour: ${prodHeader.flavorNames}</li>
+												Flavour: ${prodHeader.flavorNames}</li></c:if>
+												<c:if test="${prodHeader.prodTypeId!=0}">
 											<li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Cake: ${prodHeader.creamTypeName}</li>
-											<li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Bread: ${prodHeader.breadTypeName}</li>
+												of Cake: ${prodHeader.prodTypeName}</li></c:if>
+											<c:if test="${prodHeader.typeOfBread!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type
+												of Bread: ${prodHeader.breadTypeName}</li></c:if>
 										</ul>
 										<a href="#" onclick="moveCursor()" class="more_highlight">Read More</a>
 									</div>
@@ -327,12 +330,12 @@
 									<div class="delivery_bx">
 										<h4 class="delivery_title">Delivery Details</h4>
 										<div class="delivery_frm">
-											<form action="" method="get">
+											<form action="" method="post">
 												<div class="delivery_frm_l">
 													<img
-														alt="" id="del_image" name="del_image"/>
+														alt="" id="del_image" style="size: portrait;" name="del_image"/>
 													<div class="inputbrowsebtn">
-														<label for="test"> <span class="fg">Upload
+														<label for="img_input_btn"> <span class="fg">Upload
 																Image </span> <input type="file" accept="image/*" name="img_input_btn" id="img_input_btn" 
 												accept=".jpg,.png,.gif,.jpeg,.bmp" onchange="loadFile(event)">
 														</label>
@@ -379,18 +382,19 @@
 						<div class="prod_listing_one">
 							<h4 class="highlight_title">Highlights :</h4>
 							<ul class="highlist_list">
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-									Flavor: ${prodHeader.flavorNames}</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Cake: ${prodHeader.prodTypeName}</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Bread: ${prodHeader.breadTypeName}</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									cream: ${prodHeader.creamTypeName}</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Filling
-									in Layers: ${prodHeader.layeringCreamNames}</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i>
-									Toppings: ${prodHeader.toppingCreamNames} &amp; Red Cherry</li>
+								
+								<c:if test="${prodHeader.defaultFlavorId!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Cake
+									Flavor: ${prodHeader.flavorNames}</li></c:if>
+								<c:if test="${prodHeader.prodTypeId!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
+									Cake: ${prodHeader.prodTypeName}</li></c:if>
+								<c:if test="${prodHeader.typeOfBread!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
+									Bread: ${prodHeader.breadTypeName}</li></c:if>
+								<c:if test="${prodHeader.typeOfCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
+									cream: ${prodHeader.creamTypeName}</li></c:if>
+								<c:if test="${prodHeader.layeringCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Filling
+									in Layers: ${prodHeader.layeringCreamNames}</li></c:if>
+								<c:if test="${prodHeader.toppingCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i>
+									Toppings: ${prodHeader.toppingCreamNames}</li></c:if>
 							</ul>
 						</div>
 
@@ -429,11 +433,13 @@
 
 					<ul>
 						<!--product-row-1-->
+						<c:forEach items="${prodHeaderList}" var="product"
+									varStatus="prodCount">
 						<li>
 							<div class="cake_one product_padd">
 								<div class="cake_pic">
 									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
+										src="${prodImgUrl}${product.prodImagePrimary}"
 										alt="" class="mobile_fit transition">
 									<div class="circle_tag">
 										<img
@@ -443,105 +449,25 @@
 											alt="">
 									</div>
 									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
+										<!-- <i class="fa fa-inr" aria-hidden="true"></i>499 <span
 											class="off_prc"><i class="fa fa-inr"
 											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
+											Off)</span> -->
+														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc${product.productId}">${product.defaultPrice}</p>
+														<span class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span
+															class="prc_off">(23% Off)</span>
 									</div>
 								</div>
 
 								<div class="cake_container">
 									<h4 class="cake_nm single_row">
-										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
-									</h4>
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-										alt="" class="mobile_fit transition">
-									<div class="circle_tag">
-										<img
-											src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt=""> <img
-											src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
-									</div>
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-										alt="" class="mobile_fit transition">
-									<div class="circle_tag">
-										<img
-											src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt=""> <img
-											src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
-									</div>
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
+										<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
 									</h4>
 								</div>
 							</div>
 						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-										alt="" class="mobile_fit transition">
-									<div class="circle_tag">
-										<img
-											src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt=""> <img
-											src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
-									</div>
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="#">Classic Red Velvet Cake (Half Kg)</a>
-									</h4>
-								</div>
-							</div>
-						</li>
+						</c:forEach>
 					</ul>
 					<div class="more_product">
 						<a href="#">Load More Products</a>
@@ -617,9 +543,6 @@ function addToCartClick(productId){
 	}catch (e) {
 		selectShape=0;
 	}
-	if(selectShape==""||isNaN(selectShape)||selectShape==null){
-		selectShape=0;
-	}
 	
 	//End of Shape
 	
@@ -627,6 +550,7 @@ function addToCartClick(productId){
 	var dataList='${sessionScope.dataList}';
 	var data=$.parseJSON(dataList);
 	var selectVegNon="Veg";
+
 	var prodHead=data.feProductHeadList;
 	var prodMaster;
 	for(var h=0;h<prodHead.length;h++){
@@ -642,16 +566,21 @@ function addToCartClick(productId){
 			break;
 		}
 	}//end of prodHead For H
+	if(selectShape==""||isNaN(selectShape)||selectShape==null){
+		selectShape=0;
+		selectShape=prodMaster.defaultShapeId;
+	}
+
 	var prodDetail=prodMaster.prodDetailList;
 	for(var d=0;d<prodDetail.length;d++){
-		//alert("OKkk");
+		
 		if(parseInt(selectShape)==parseInt(prodDetail[d].shapeId)){
 			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
 				if(prodDetail[d].vegNonvegName==selectVegNon){
 					//Calc Price;
 					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
-					//alert(prodDetail[d].configDetailId);
-					var qty=1;cdss
+					alert(prodDetail[d].configDetailId);
+					var qty=1;
 					document.getElementById("cake_price").innerHTML = ""+prodDetail[d].actualRate;
 					actualRate=prodDetail[d].actualRate;
 					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
