@@ -218,13 +218,13 @@
 
 					<div class="wrapper">
 						<section class="regular-cake slider">
-							
-								<c:forEach items="${prodHeaderList}" var="product"
-									varStatus="prodCount">
-									<c:choose>
-										<%-- <c:when
+
+							<c:forEach items="${prodHeaderList}" var="product"
+								varStatus="prodCount">
+								<c:choose>
+									<%-- <c:when
 											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}"> --%>
-										<c:when test="${product.prodStatusId==statusFilter.filterId}">
+									<c:when test="${product.prodStatusId==statusFilter.filterId}">
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
@@ -239,12 +239,25 @@
 															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
 															alt="">
 													</div>
+													<%-- <div class="cake_prc">
+														<i class="fa fa-inr" aria-hidden="true"></i>
+														<p id="cake_prc${product.productId}">${product.defaultPrice}</p>
+														<span class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span
+															class="prc_off">(23% Off)</span>
+													</div> --%>
+
+
 													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i><p id="cake_prc${product.productId}">${product.defaultPrice}</p>
+														<i class="fa fa-inr cake_prc_detail_iclass"
+															aria-hidden="true"></i>
+														<p class="cake_prc_detail_pclass"
+															id="cake_prc${product.productId}">${product.defaultPrice}</p>
 														<span class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
 															class="prc_off">(23% Off)</span>
 													</div>
+
 												</div>
 												<div class="cake_container">
 													<h4 class="cake_nm">
@@ -258,7 +271,7 @@
 																	onchange="changeWtFlavor('${product.productId}')">
 																	<c:forEach items="${product.flavourIds}"
 																		var="prodDetail">
-																		
+
 																		<c:forEach items="${flavTagStatusList}"
 																			var="flavorFilter" varStatus="flavorFilterCount">
 
@@ -285,19 +298,19 @@
 																		</c:forEach>
 																	</c:forEach>
 																</select>
-																</c:if>
-															
+															</c:if>
+
 														</div>
 														<div class="cake_dropdown_r">
 															<!-- <div class="custom-select-new1"> -->
-																<select class="select-css" id="wt${product.productId}"
-																	onchange="changeWtFlavor('${product.productId}')">
-																	<option value="7">7</option>
-																	<c:forEach items="${product.availInWeights}"
-																		var="prodDetailwt">
-																		<option value="${prodDetailwt}">${prodDetailwt}</option>
-																	</c:forEach>
-																</select>
+															<select class="select-css" id="wt${product.productId}"
+																onchange="changeWtFlavor('${product.productId}')">
+																<option value="7">7</option>
+																<c:forEach items="${product.availInWeights}"
+																	var="prodDetailwt">
+																	<option value="${prodDetailwt}">${prodDetailwt}</option>
+																</c:forEach>
+															</select>
 															<!-- </div> -->
 														</div>
 														<div class="clr"></div>
@@ -333,57 +346,55 @@
 														<div class="radio_l">
 
 															<div class="radio_1">
-															<ul>
-																<c:set var="isVegFound" value="0"></c:set>
-																<c:set var="isNonVegFound" value="0"></c:set>
-																<c:forEach items="${product.isVeg}"
-																	var="prodDetailVegNon">
+																<ul>
+																	<c:set var="isVegFound" value="0"></c:set>
+																	<c:set var="isNonVegFound" value="0"></c:set>
+																	<c:forEach items="${product.isVeg}"
+																		var="prodDetailVegNon">
 
 
-																	<c:forEach items="${flavTagStatusList}"
-																		var="vegNonFilter" varStatus="flavorFilterCount">
-																		<c:if test="${vegNonFilter.filterTypeId==12}">
-																			<c:if
-																				test="${vegNonFilter.filterId==prodDetailVegNon}">
-																				<c:if test="${vegNonFilter.adminName eq 'Veg'}">
-																					<c:set var="isVegFound" value="1"></c:set>
-																				</c:if>
+																		<c:forEach items="${flavTagStatusList}"
+																			var="vegNonFilter" varStatus="flavorFilterCount">
+																			<c:if test="${vegNonFilter.filterTypeId==12}">
+																				<c:if
+																					test="${vegNonFilter.filterId==prodDetailVegNon}">
+																					<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																						<c:set var="isVegFound" value="1"></c:set>
+																					</c:if>
 
-																				<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
-																					<c:set var="isNonVegFound" value="1"></c:set>
+																					<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
+																						<c:set var="isNonVegFound" value="1"></c:set>
+																					</c:if>
 																				</c:if>
 																			</c:if>
-																		</c:if>
+																		</c:forEach>
+
 																	</c:forEach>
 
-																</c:forEach>
 
 
+																	<c:if test="${isVegFound==1}">
+																		<li><input type="radio" value="0"
+																			id="prod_veg${product.productId}"
+																			name="prod_vnv${product.productId}"> <label
+																			for="prod_veg${product.productId}"> Veg</label>
+																			<div class="check">
+																				<div class="inside"></div>
+																			</div></li>
 
-																<c:if test="${isVegFound==1}">
-																<li>
-																	<input type="radio" value="0" id="prod_veg${product.productId}"
-																		name="prod_vnv${product.productId}">
-																	<label for="prod_veg${product.productId}"> Veg</label>
-																	<div class="check">
-																		<div class="inside"></div>
-																	</div>
-</li>
+																	</c:if>
 
-																</c:if>
-
-																<c:if test="${isNonVegFound==1}">
-																<li>
-																	<input type="radio" value="1"
-																		id="prod_nonveg${product.productId}"
-																		name="prod_vnv${product.productId}">
-																	<label for="prod_nonveg${product.productId}"> Non Veg</label>
-																	<div class="check">
-																		<div class="inside"></div>
-																	</div>
-																	</li>
-																</c:if>
-															</ul>
+																	<c:if test="${isNonVegFound==1}">
+																		<li><input type="radio" value="1"
+																			id="prod_nonveg${product.productId}"
+																			name="prod_vnv${product.productId}"> <label
+																			for="prod_nonveg${product.productId}"> Non
+																				Veg</label>
+																			<div class="check">
+																				<div class="inside"></div>
+																			</div></li>
+																	</c:if>
+																</ul>
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
 																		name="selector"> <label for="a-option">Veg</label>
@@ -401,8 +412,9 @@
 
 														</div>
 														<div class="radio_r">
-															<a href="#" onclick="addToCartClick('${product.productId}')" class="cart_btn">Add
-																to Cart</a>
+															<a href="#"
+																onclick="addToCartClick('${product.productId}')"
+																class="cart_btn">Add to Cart</a>
 														</div>
 														<div class="clr"></div>
 													</div>
@@ -410,16 +422,16 @@
 												</div>
 
 											</div>
-											</div>
-											<!-- End of div cake one -->
-										</c:when>
-										<c:otherwise>
+										</div>
+										<!-- End of div cake one -->
+									</c:when>
+									<c:otherwise>
 
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 
-							
+
 
 						</section>
 
@@ -613,288 +625,367 @@
 
 
 	<script type="text/javascript">
-
-	function changeFlavor(productId){
-	console.log("Sachin");
-	var x="${sessionScope.curDateTime}";
-		var dataList='${sessionScope.dataList}';
-		var data=$.parseJSON(dataList);
-	//	alert(JSON.stringify(data));
-		var prodHead=JSON.stringify(data.feProductHeadList);
-		console.log(JSON.parse(prodHead).length);
-		var selectWt = document.getElementById("wt"+productId).value;
-		var selectFlav = document.getElementById("flav"+productId).value;
-		alert("selectWt "+ selectWt + "selectFlav " +selectFlav);
-	}//End of changeFlavor
-function changeWtFlavor(productId){
-	var selectWt = document.getElementById("wt"+productId).value;
-	var selectFlav=0;
-	try{
-		selectFlav = document.getElementById("flav"+productId).value;
-	}catch (e) {
-		selectFlav=0;
-	}
-	if(selectFlav==""||isNaN(selectFlav)||selectFlav==null){
-		selectFlav=0;
-	}
-	var isVeg=$('input[name="prod_vnv'+productId+'"]:checked').val();
-	var dataList='${sessionScope.dataList}';
-	var data=$.parseJSON(dataList);
-	var selectVegNon="Veg";
-	var prodHead=data.feProductHeadList;
-	var prodMaster;
-	for(var h=0;h<prodHead.length;h++){
-		if(parseInt(productId)==parseInt(prodHead[h].productId)){
-			prodMaster=prodHead[h];
-				if (typeof(isVeg) == "undefined"){
-					selectVegNon=prodMaster.defaultVegNonvegName;
-				}else if(parseInt(isVeg)==1){
-					selectVegNon="NonVeg";
-				}else{
-					selectVegNon="Veg";
-				}
-			break;
-		}
-	}//end of prodHead For H
-	var prodDetail=prodMaster.prodDetailList;
-	for(var d=0;d<prodDetail.length;d++){
-		if(parseInt(prodMaster.defaultShapeId)==parseInt(prodDetail[d].shapeId)){
-			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
-				if(prodDetail[d].vegNonvegName==selectVegNon){
-					//Calc Price;
-					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
-					
-						//alert(prodDetail[d].configDetailId);
-					var qty=1;
-					document.getElementById("cake_prc"+productId).innerHTML = ""+prodDetail[d].actualRate;
-					actualRate=prodDetail[d].actualRate;
-					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
-					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
-					break;
+		function changeFlavor(productId) {
+			console.log("Sachin");
+			var x = "${sessionScope.curDateTime}";
+			var dataList = '${sessionScope.dataList}';
+			var data = $.parseJSON(dataList);
+			//	alert(JSON.stringify(data));
+			var prodHead = JSON.stringify(data.feProductHeadList);
+			console.log(JSON.parse(prodHead).length);
+			var selectWt = document.getElementById("wt" + productId).value;
+			var selectFlav = document.getElementById("flav" + productId).value;
+			alert("selectWt " + selectWt + "selectFlav " + selectFlav);
+		}//End of changeFlavor
+		function changeWtFlavor(productId) {
+			var selectWt = document.getElementById("wt" + productId).value;
+			var selectFlav = 0;
+			try {
+				selectFlav = document.getElementById("flav" + productId).value;
+			} catch (e) {
+				selectFlav = 0;
+			}
+			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+				selectFlav = 0;
+			}
+			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked')
+					.val();
+			var dataList = '${sessionScope.dataList}';
+			var data = $.parseJSON(dataList);
+			var selectVegNon = "Veg";
+			var prodHead = data.feProductHeadList;
+			var prodMaster;
+			for (var h = 0; h < prodHead.length; h++) {
+				if (parseInt(productId) == parseInt(prodHead[h].productId)) {
+					prodMaster = prodHead[h];
+					if (typeof (isVeg) == "undefined") {
+						selectVegNon = prodMaster.defaultVegNonvegName;
+					} else if (parseInt(isVeg) == 1) {
+						selectVegNon = "NonVeg";
+					} else {
+						selectVegNon = "Veg";
 					}
-					//alert("Do calc");
-				}else{
+					break;
+				}
+			}//end of prodHead For H
+			var prodDetail = prodMaster.prodDetailList;
+			for (var d = 0; d < prodDetail.length; d++) {
+				if (parseInt(prodMaster.defaultShapeId) == parseInt(prodDetail[d].shapeId)) {
+					if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+						if (prodDetail[d].vegNonvegName == selectVegNon) {
+							//Calc Price;
+							if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+
+								//alert(prodDetail[d].configDetailId);
+								var qty = 1;
+								document.getElementById("cake_prc" + productId).innerHTML = ""
+										+ prodDetail[d].actualRate;
+								actualRate = prodDetail[d].actualRate;
+								var priceDiff = parseFloat(prodDetail[d].displayRate)
+										- parseFloat(actualRate);
+								offPer = (parseFloat(priceDiff)
+										/ parseFloat(prodDetail[d].displayRate) * 100);
+								break;
+							}
+							//alert("Do calc");
+						} else {
+							continue;
+						}
+					} else {
+						continue;
+					}
+				} else {
 					continue;
 				}
-			}else{
-				continue;
+			}//end of For prodDetailList pd
+
+		}//end of Function changeWtFlavor
+
+		function addToCartClick(productId) {
+			//alert("In addToCartClick " +productId);
+			var selectWt = document.getElementById("wt" + productId).value;
+			var selectFlav = 0;
+			try {
+				selectFlav = document.getElementById("flav" + productId).value;
+			} catch (e) {
+				selectFlav = 0;
 			}
-		}else{
-			continue;
-		}
-	}//end of For prodDetailList pd
-	
-}//end of Function changeWtFlavor
-	
-function addToCartClick(productId){
-	//alert("In addToCartClick " +productId);
-	var selectWt = document.getElementById("wt"+productId).value;
-	var selectFlav=0;
-	try{
-		selectFlav = document.getElementById("flav"+productId).value;
-	}catch (e) {
-		selectFlav=0;
-	}
-	if(selectFlav==""||isNaN(selectFlav)||selectFlav==null){
-		selectFlav=0;
-	}
-	var isVeg=$('input[name="prod_vnv'+productId+'"]:checked').val();
-	var dataList='${sessionScope.dataList}';
-	var data=$.parseJSON(dataList);
-	var selectVegNon="Veg";
-	var prodHead=data.feProductHeadList;
-	var prodMaster;
-	for(var h=0;h<prodHead.length;h++){
-		if(parseInt(productId)==parseInt(prodHead[h].productId)){
-			prodMaster=prodHead[h];
-				if (typeof(isVeg) == "undefined"){
-					selectVegNon=prodMaster.defaultVegNonvegName;
-				}else if(parseInt(isVeg)==1){
-					selectVegNon="NonVeg";
-				}else{
-					selectVegNon="Veg";
-				}
-			break;
-		}
-	}//end of prodHead For H
-	var prodDetail=prodMaster.prodDetailList;
-	for(var d=0;d<prodDetail.length;d++){
-		//alert("OKkk");
-		if(parseInt(prodMaster.defaultShapeId)==parseInt(prodDetail[d].shapeId)){
-			if(parseInt(prodDetail[d].flavorId)==parseInt(selectFlav)){
-				if(prodDetail[d].vegNonvegName==selectVegNon){
-					//Calc Price;
-					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
-					//alert(prodDetail[d].configDetailId);
-					var qty=1;
-					document.getElementById("cake_prc"+productId).innerHTML = ""+prodDetail[d].actualRate;
-					actualRate=prodDetail[d].actualRate;
-					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
-					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
-					
-					taxableAmt=actualRate;
-					
-					cgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.cgstPer))/100;
-					sgstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.sgstPer))/100;
-					igstAmt=(parseFloat(actualRate)*parseFloat(prodMaster.igstPer))/100;
-					
-					taxAmt=(cgstAmt+sgstAmt+igstAmt).toFixed(2);
-					totalAmt=(parseFloat(taxableAmt)).toFixed(2);
-					
-					if (sessionStorage.getItem("cartValue") == null) {
-						var table = [];
-						sessionStorage.setItem("cartValue", JSON.stringify(table));
+			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+				selectFlav = 0;
+			}
+
+			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked')
+					.val();
+			var dataList = '${sessionScope.dataList}';
+			var data = $.parseJSON(dataList);
+			var selectVegNon = "Veg";
+			var prodHead = data.feProductHeadList;
+			var prodMaster;
+			for (var h = 0; h < prodHead.length; h++) {
+				if (parseInt(productId) == parseInt(prodHead[h].productId)) {
+					prodMaster = prodHead[h];
+					if (typeof (isVeg) == "undefined") {
+						selectVegNon = prodMaster.defaultVegNonvegName;
+					} else if (parseInt(isVeg) == 1) {
+						selectVegNon = "NonVeg";
+					} else {
+						selectVegNon = "Veg";
 					}
-					
-					var cartValue = sessionStorage.getItem("cartValue");
-					var table = $.parseJSON(cartValue);
-					
-					table.push({
-						orderDetailId: 0,
-						orderId: 0,
-						itemId: prodMaster.productId,
-						hsnCode:prodMaster.hsnCode,
-						qty: 1,
-						mrp : prodDetail[d].displayRate,
-						rate :prodDetail[d].actualRate,
-						taxableAmt : taxableAmt,
-						cgstPer : prodMaster.cgstPer,
-						sgstPer: prodMaster.sgstPer,
-						igstPer : prodMaster.igstPer ,
-						cgstAmt: cgstAmt,
-						sgstAmt: sgstAmt,
-						igstAmt: igstAmt,
-						discAmt: 0,
-						taxAmt: taxAmt,
-						totalAmt :totalAmt ,
-						delStatus :1 ,
-						remark : 'no remark',
-						exInt1 : prodDetail[d].configDetailId ,
-						exInt2 : prodDetail[d].flavorId,
-						exInt3 : prodDetail[d].isVeg,
-						exInt4 : prodDetail[d].shapeId,
-						exVar1 : prodMaster.productName ,
-						exVar2 : 1,
-						exVar3 : 1,
-						exVar4 : 1,
-						exFloat1 :1 ,
-						exFloat2 :1 ,
-						exFloat3: 1,
-						exFloat4 :1 ,
-					});
+					break;
+				}
+			}//end of prodHead For H
+			var prodDetail = prodMaster.prodDetailList;
+			for (var d = 0; d < prodDetail.length; d++) {
+				//alert("OKkk");
+				if (parseInt(prodMaster.defaultShapeId) == parseInt(prodDetail[d].shapeId)) {
+					if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+						if (prodDetail[d].vegNonvegName == selectVegNon) {
+							//Calc Price;
+							if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+								//alert(prodDetail[d].configDetailId);
+								var qty = 1;
+								document.getElementById("cake_prc" + productId).innerHTML = ""
+										+ prodDetail[d].actualRate;
+								actualRate = prodDetail[d].actualRate;
+								var priceDiff = parseFloat(prodDetail[d].displayRate)
+										- parseFloat(actualRate);
+								offPer = (parseFloat(priceDiff)
+										/ parseFloat(prodDetail[d].displayRate) * 100);
+
+								taxableAmt = actualRate;
+
+								cgstAmt = (parseFloat(actualRate) * parseFloat(prodMaster.cgstPer)) / 100;
+								sgstAmt = (parseFloat(actualRate) * parseFloat(prodMaster.sgstPer)) / 100;
+								igstAmt = (parseFloat(actualRate) * parseFloat(prodMaster.igstPer)) / 100;
+
+								taxAmt = (cgstAmt + sgstAmt + igstAmt)
+										.toFixed(2);
+								totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+
+								if (sessionStorage.getItem("cartValue") == null) {
+									var table = [];
+									sessionStorage.setItem("cartValue", JSON
+											.stringify(table));
+								}
+
+								var cartValue = sessionStorage
+										.getItem("cartValue");
+								var table = $.parseJSON(cartValue);
+
+								table.push({
+									orderDetailId : 0,
+									orderId : 0,
+									itemId : prodMaster.productId,
+									hsnCode : prodMaster.hsnCode,
+									qty : 1,
+									mrp : prodDetail[d].displayRate,
+									rate : prodDetail[d].actualRate,
+									taxableAmt : taxableAmt,
+									cgstPer : prodMaster.cgstPer,
+									sgstPer : prodMaster.sgstPer,
+									igstPer : prodMaster.igstPer,
+									cgstAmt : cgstAmt,
+									sgstAmt : sgstAmt,
+									igstAmt : igstAmt,
+									discAmt : 0,
+									taxAmt : taxAmt,
+									totalAmt : totalAmt,
+									delStatus : 1,
+									remark : '',
+									exInt1 : prodDetail[d].configDetailId,
+									exInt2 : prodDetail[d].flavorId,
+									exInt3 : prodDetail[d].isVeg,
+									exInt4 : prodDetail[d].shapeId,
+									exVar1 : prodMaster.productName,
+									exVar2 : '',
+									exVar3 : '',
+									exVar4 : '',
+									exFloat1 : 1,
+									exFloat2 : 1,
+									exFloat3 : 1,
+									exFloat4 : 1,
+									weight : selectWt,
+									veg : selectVegNon
+								});
+								sessionStorage.setItem("cartValue", JSON
+										.stringify(table));
+								appendCartData();
+								break;
+							}
+							//alert("Do calc");
+						} else {
+							continue;
+						}
+					} else {
+						continue;
+					}
+				} else {
+					continue;
+				}
+
+			}//end of For prodDetailList pd
+
+		}//end of Function addToCartClick
+		function appendCartData() {
+
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			$("#item_cart_list").html('');
+			$("#proc_chkout").html('');
+			$("#cart_item_count").html('');
+
+			var subtotal = 0;
+
+			for (var j = 0; j < allItemArr.length; j++) {
+				for (var i = 0; i < table.length; i++) {
+
+					if (table[i].itemId == allItemArr[j].productId) {
+
+						//alert(i);
+						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
+								.toFixed(2);
+						$("#item_cart_list")
+								.append(
+										'<div class="like_one">'
+												+ '<div class="like_pic">'
+												+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
+				'data-src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
+				'alt="">'
+												+ '</div>'
+												+ '<div class="like_cont">'
+												+ '<h4 class="like_cake_nm">'
+												+ table[i].exVar1
+												+ '</h4>'
+												+ '<p class="like_prc">Rs.'
+												+ table[i].totalAmt
+												+ '</p>'
+												+ '<div class="like_quant">'
+												+ '<span>Qty.</span>'
+												+ '<form id="myform" method="POST" action="#">'
+												+ '<input type="button" value="-" onclick="setQty('
+												+ table[i].itemId
+												+ ','
+												+ i
+												+ ','
+												+ table[i].qty
+												+ ',0)" class="qtyminus"'
+												+ 'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
+						'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('
+												+ table[i].itemId
+												+ ','
+												+ i
+												+ ','
+												+ table[i].qty
+												+ ',1)" value="+"'
+												+ 'class="qtyplus" field="quantity"/>'
+												+ '</form>'
+												+ '</div>'
+												+ '</div>'
+												+ '<div class="clr"></div>'
+												+ '</div>')
+
+					}//IF
+				}//End of For loop 2
+			}//End of loop 1
+			document.getElementById("cart_item_count").innerHTML = ""
+					+ table.length;
+			$("#proc_chkout")
+					.append(
+							'<div class="proc_chkout">'
+									+ '<span>Total : Rs.'
+									+ subtotal
+									+ '/- </span> <a href="${pageContext.request.contextPath}/checkout">Proceed'
+									+ 'to Checkout</a>' + '</div>')
+
+		}
+		function setQty(productId, position, curQty, buttonType) {
+			//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
+			//prod_quantity+productId;
+			var ischanged = 0;
+
+			if (parseInt(buttonType) == 0 && parseInt(curQty) > 1) {
+				//Its Minus call;
+				//alert("If")
+				curQty = parseInt(curQty) - 1;
+				ischanged = 1;
+			} else if (parseInt(buttonType) == 1) {
+				//Its Plus;
+				//alert("Else")
+				curQty = parseInt(curQty) + 1;
+				ischanged = 1;
+			}
+
+			/* else {
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
 					sessionStorage.setItem("cartValue", JSON.stringify(table));
-				appendCartData();
-					break;
-					}
-					//alert("Do calc");
-				}else{
-					continue;
 				}
-			}else{
-				continue;
-			}
-		}else{
-			continue;
-		}
-		
-	}//end of For prodDetailList pd
 
-	}//end of Function addToCartClick
-function appendCartData(){
-	var cartValue = sessionStorage.getItem("cartValue");
-	var table = $.parseJSON(cartValue);
-	 $("#item_cart_list").html('');
-	 $("#proc_chkout").html('');
-	 $("#cart_item_count").html('');
-	 var subtotal=0;
-	for(var i = 0 ; i<table.length ; i++){
-		//alert(i);
-		subtotal=(parseFloat(subtotal)+parseFloat(table[i].totalAmt)).toFixed(2);
-		$("#item_cart_list").append('<div class="like_one">'+
-		'<div class="like_pic">'+
-			'<img src="${pageContext.request.contextPath}/resources/images/like_pic.jpg" class="lazy"'+
-				'data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"'+
-				'alt="">'+
-		'</div>'+
-		'<div class="like_cont">'+
-			'<h4 class="like_cake_nm">'+table[i].exVar1+'</h4>'+
-			'<p class="like_prc">Rs.'+table[i].totalAmt+'</p>'+
-			'<div class="like_quant">'+
-				'<span>Qty.</span>'+
-				'<form id="myform" method="POST" action="#">'+
-					'<input type="button" value="-" onclick="setQty('+table[i].itemId+','+i+','+table[i].qty+',0)" class="qtyminus"'+
-						'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
-						'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('+table[i].itemId+','+i+','+table[i].qty+',1)" value="+"'+
-						'class="qtyplus" field="quantity"/>'+
-				'</form>'+
-			'</div>'+
-		'</div>'+
-		'<div class="clr"></div>'+
-	'</div>')
-		
-	}//End of For loop I
-	document.getElementById("cart_item_count").innerHTML=""+table.length;
-	 $("#proc_chkout").append('<div class="proc_chkout">'+
-		'<span>Total : Rs.'+subtotal+'/- </span> <a href="my-cart.html">Proceed'+
-			'to Checkout</a>'+
-	'</div>')
-	
-	}
-	function setQty(productId,position,curQty,buttonType){
-		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
-		//prod_quantity+productId;
-		var ischanged=0;
-		if(parseInt(buttonType)==0&&parseInt(curQty)>1){
-			//Its Minus call;
-			alert("If")
-			curQty=parseInt(curQty)-1;
-			ischanged=1;
-		}else if(parseInt(buttonType)==1){
-			//Its Plus;
-			alert("Else")
-			curQty=parseInt(curQty)+1;
-			ischanged=1;
+				var cartValue = sessionStorage.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+
+				var newCartVal = [];
+
+				for (var i = 0; i < table.length; i++) {
+					if (productId != table[i].itemId) {
+						newCartVal.push(table[i]);
+					}
+				}
+
+				sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+				appendCartData();
+			} */
+
+			if (parseInt(ischanged) == 1) {
+				var cartValue = sessionStorage.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				table[position].qty = curQty;
+
+				var qty = parseFloat(curQty);
+				var taxableAmt = parseFloat(table[position].rate)
+						* parseFloat(qty).toFixed(2);
+				var cgstAmt = (parseFloat(table[position].rate)
+						* parseFloat(qty) * parseFloat(table[position].cgstPer)) / 100;
+				var sgstAmt = (parseFloat(table[position].rate)
+						* parseFloat(qty) * parseFloat(table[position].sgstPer)) / 100;
+				var igstAmt = (parseFloat(table[position].rate)
+						* parseFloat(qty) * parseFloat(table[position].igstPer)) / 100;
+
+				var taxAmt = (cgstAmt + sgstAmt + igstAmt).toFixed(2);
+				var totalAmt = parseFloat(taxableAmt).toFixed(2);
+
+				table[position].taxableAmt = taxableAmt;
+				table[position].cgstAmt = cgstAmt;
+				table[position].sgstAmt = sgstAmt;
+				table[position].igstAmt = igstAmt;
+				table[position].taxAmt = taxAmt;
+				table[position].totalAmt = totalAmt;
+				console.log(table);
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+				appendCartData();
+			}//end of If ischanged==1
 		}
-		
-		if(parseInt(ischanged)==1){
-		var cartValue = sessionStorage.getItem("cartValue");
-		var table = $.parseJSON(cartValue);
-		table[position].qty=curQty;
-		
-		var qty=parseFloat(curQty);
-		var taxableAmt=parseFloat(table[position].rate)*parseFloat(qty).toFixed(2);
-		var cgstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].cgstPer))/100;
-		var sgstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].sgstPer))/100;
-		var igstAmt=(parseFloat(table[position].rate)*parseFloat(qty)*parseFloat(table[position].igstPer))/100;
-		
-		var taxAmt=(cgstAmt+sgstAmt+igstAmt).toFixed(2);
-		var totalAmt=parseFloat(taxableAmt).toFixed(2);
-		
-		table[position].taxableAmt=taxableAmt;
-		table[position].cgstAmt=cgstAmt;
-		table[position].sgstAmt=sgstAmt;
-		table[position].igstAmt=igstAmt;
-		table[position].taxAmt=taxAmt;
-		table[position].totalAmt=totalAmt;
-		console.log(table);
-		sessionStorage.setItem("cartValue", JSON.stringify(table));
-		appendCartData();
-		}//end of If ischanged==1
-	}
-	function clearData(){
-		sessionStorage.clear();
-	}
-	//appendCartData(); // Onload call.
-</script>
-	<!--cart-sidepanel-->
-	<script type="text/javascript">
-		function openNav() {
-			document.getElementById("mySidepanel").style.width = "300px";
+		function clearData() {
+			sessionStorage.clear();
 		}
-		function closeNav() {
-			document.getElementById("mySidepanel").style.width = "0";
-		}
+		//appendCartData(); // Onload call.
 	</script>
+
 
 	<!--cart-sidepanel-->
 	<script type="text/javascript">
@@ -952,8 +1043,7 @@ function appendCartData(){
 						slidesToShow : 1,
 						slidesToScroll : 1
 					}
-				}
-				]
+				} ]
 			});
 			$(".regular-cake").slick({
 				dots : true,
@@ -981,8 +1071,7 @@ function appendCartData(){
 						slidesToShow : 1,
 						slidesToScroll : 1
 					}
-				}
-				]
+				} ]
 			});
 		});
 	</script>

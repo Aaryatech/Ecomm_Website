@@ -5,8 +5,8 @@
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
 <style>
-.xdsoft_datetimepicker{
-z-index: 999999 !important;
+.xdsoft_datetimepicker {
+	z-index: 999999 !important;
 }
 </style>
 
@@ -14,12 +14,12 @@ z-index: 999999 !important;
 
 
 	<!--mongi help-popup-->
-	<div class="mongi_help">
+	<%-- 	<div class="mongi_help">
 		<a href="#mongi" class="initialism mongi_open"><img
 			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
 			alt=""></a>
 	</div>
-
+ --%>
 	<!--apply now pop up-->
 	<div id="mongi" class="well">
 		<div class="mongi_title">
@@ -122,249 +122,194 @@ z-index: 999999 !important;
 
 				<div class="cart_row">
 					<div class="cart_l">
-					
-					<!-- desktop table-->
-					<div class="cart_able_bx">
-                <div class="table_bx">
-                    <table class="cart">
-    <tr>
-      <th>Product Name</th>
-      <th>Quantity</th>
-      <th>Delivery Option</th>
-      <th>Sub Total</th>
-      <th>Action</th>
-    </tr>                   
-    <tr>
-      <td>
-        <div class="cart_pic_row">
-            <div class="cart_pic">
-                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg" alt="">
-            <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">
-            </div>
-            <div class="cart_cont">
-                <h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
-                <h3 class="cart_prc">495.00</h3>
-                <div class="cart_show" style="display: none;"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
-                <div class="cart_det">
-                    Weight - 500 gm <br>
-                    Eggless - False <br>
-                    Heart Shape - False <br>
-                </div>
-            
-            </div>
-        </div>  
-      </td>
-      <td>
-        
-          <form id="myform" method="POST" action="#">
-            <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
-            <input type="text" name="quantity" value="0" class="qty cart">
-            <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        </form>
-        <span class="cart_remove"><a href="#">Remove</a></span>
-        
-      </td>
-      <td>
-        <div class="cart_option">
-            <img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt="">
-            <span>Message in the cake</span>
-        </div>  
-      </td>
-      <td><div class="cart_prc_1">  990.00</div></td>
-      <td><div class="cart_delete"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>
-    </tr>
-                        
-    <tr>
-      <td>
-        <div class="cart_pic_row">
-            <div class="cart_pic">
-                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg" alt="">
-            <img src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png" alt="" class="veg_icn">
-            </div>
-            <div class="cart_cont">
-                <h3 class="cart_cake">Classic Red Velvet Cake</h3>
-                <h3 class="cart_prc"> 495.00</h3>
-                <div class="cart_show"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
-                <div class="cart_det" style="display: none;">
-                    Weight - 500 gm <br>
-                    Eggless - False <br>
-                    Heart Shape - False <br>
-                </div>
-            
-            </div>
-        </div>    
-      </td>
-      <td>
-        
-          <form id="myform" method="POST" action="#">
-            <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
-            <input type="text" name="quantity" value="0" class="qty cart">
-            <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        </form>
-        <span class="cart_remove"><a href="#">Remove</a></span>
-        
-      </td>
-      <td>
-           <div class="cart_option">
-            <img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt="">
-            <span>Message in the cake</span>
-        </div>
-      </td>
-      <td><div class="cart_prc_1">  990.00</div></td>
-      <td><div class="cart_delete"><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>
-    </tr>
-    
-  </table>
-                </div>
-            </div>
-						
-						
-						
+
+						<!-- desktop table-->
+						<div class="cart_able_bx">
+							<div class="table_bx">
+								<table class="cart" id="cartTable">
+									<thead>
+											<th>Product Name</th>
+											<th>Quantity</th>
+											<th>Delivery Option</th>
+											<th>Sub Total</th>
+											<th>Action</th>
+									</thead>
+
+									<tbody></tbody>
+
+								</table>
+							</div>
+						</div>
+
+
+
 						<!-- mobile-table-->
-            <div class="mobile_table">
-                <!--mobile-row-1-->
-                <div class="row_1">
-                    <div class="mob_prod">
-                        <div class="mob_prod_title">Product Name</div>
-                        <div class="cart_pic_row mobile_width">
-            <div class="cart_pic">
-                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg" alt="">
-            <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">
-            </div>
-            <div class="cart_cont width_inc">
-                <h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
-                <h3 class="cart_prc">495.00</h3>
-                <div class="cart_show" style="display: none;"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
-                <div class="cart_det">
-                    Weight - 500 gm <br>
-                    Eggless - False <br>
-                    Heart Shape - False <br>
-                </div>
-            
-            </div>
-        </div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Quantity</div>
-                        <div class="mob_quan_r">
-                            <form id="myform" method="POST" action="#">
-                                <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                <input type="text" name="quantity" value="0" class="qty cart">
-                                <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Delivery Option</div>
-                        <div class="mob_quan_r">
-                            <div class="cart_option">
-                                <img src="images/user_pic.jpg" alt="">
-                                <span>Message in the cake</span>
-                            </div>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Sub Total</div>
-                        <div class="mob_quan_r">
-                             990.00
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Action</div>
-                        <div class="mob_quan_r">
-                            <div class="cart_delete">
-                             <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                </div>
-                
-                <!--mobile-row-2-->
-                <div class="row_1">
-                    <div class="mob_prod">
-                        <div class="mob_prod_title">Product Name</div>
-                        <div class="cart_pic_row mobile_width">
-            <div class="cart_pic">
-                <img src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg" alt="">
-            <img src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png" alt="" class="veg_icn">
-            </div>
-            <div class="cart_cont width_inc">
-                <h3 class="cart_cake">Classic Red Velvet Cake</h3>
-                <h3 class="cart_prc">495.00</h3>
-                <div class="cart_show"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i> Show Details</a></div>
-                <div class="cart_det" style="display: none;">
-                    Weight - 500 gm <br>
-                    Eggless - False <br>
-                    Heart Shape - False <br>
-                </div>
-            
-            </div>
-        </div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Quantity</div>
-                        <div class="mob_quan_r">
-                            <form id="myform" method="POST" action="#">
-                                <button type="button" value="" field="quantity" class="qtyminus cart"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                                <input type="text" name="quantity" value="0" class="qty cart">
-                                <button type="button" value="" field="quantity" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                            </form>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Delivery Option</div>
-                        <div class="mob_quan_r">
-                            <div class="cart_option">
-                                <img src="images/user_pic.jpg" alt="">
-                                <span>Message in the cake</span>
-                            </div>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Sub Total</div>
-                        <div class="mob_quan_r">
-                            <div class="cart_prc_1"> 990.00</div>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="mob_quan_l">Action</div>
-                        <div class="mob_quan_r">
-                            <div class="cart_delete">
-                             <a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
-                        </div>
-                        <div class="clr"></div>
-                    </div>
-                </div>
-            </div> 
-						
-						
+						<div class="mobile_table">
+							<!--mobile-row-1-->
+							<div class="row_1">
+								<div class="mob_prod">
+									<div class="mob_prod_title">Product Name</div>
+									<div class="cart_pic_row mobile_width">
+										<div class="cart_pic">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/cart_pic_1.jpg"
+												alt=""> <img
+												src="${pageContext.request.contextPath}/resources/images/icon_veg.png"
+												alt="" class="veg_icn">
+										</div>
+										<div class="cart_cont width_inc">
+											<h3 class="cart_cake">Cars Lightning McQueen Cake</h3>
+											<h3 class="cart_prc">495.00</h3>
+											<div class="cart_show" style="display: none;">
+												<a href="#"><i class="fa fa-eye" aria-hidden="true"></i>
+													Show Details</a>
+											</div>
+											<div class="cart_det">
+												Weight - 500 gm <br> Eggless - False <br> Heart
+												Shape - False <br>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Quantity</div>
+									<div class="mob_quan_r">
+										<form id="myform" method="POST" action="#">
+											<button type="button" value="" field="quantity"
+												class="qtyminus cart">
+												<i class="fa fa-minus" aria-hidden="true"></i>
+											</button>
+											<input type="text" name="quantity" value="0" class="qty cart">
+											<button type="button" value="" field="quantity"
+												class="qtyplus cart">
+												<i class="fa fa-plus" aria-hidden="true"></i>
+											</button>
+										</form>
+									</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Delivery Option</div>
+									<div class="mob_quan_r">
+										<div class="cart_option">
+											<img src="images/user_pic.jpg" alt=""> <span>Message
+												in the cake</span>
+										</div>
+									</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Sub Total</div>
+									<div class="mob_quan_r">990.00</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Action</div>
+									<div class="mob_quan_r">
+										<div class="cart_delete">
+											<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+										</div>
+									</div>
+									<div class="clr"></div>
+								</div>
+							</div>
+
+							<!--mobile-row-2-->
+							<div class="row_1">
+								<div class="mob_prod">
+									<div class="mob_prod_title">Product Name</div>
+									<div class="cart_pic_row mobile_width">
+										<div class="cart_pic">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/cart_pic_2.jpg"
+												alt=""> <img
+												src="${pageContext.request.contextPath}/resources/images/icon_nonveg.png"
+												alt="" class="veg_icn">
+										</div>
+										<div class="cart_cont width_inc">
+											<h3 class="cart_cake">Classic Red Velvet Cake</h3>
+											<h3 class="cart_prc">495.00</h3>
+											<div class="cart_show">
+												<a href="#"><i class="fa fa-eye" aria-hidden="true"></i>
+													Show Details</a>
+											</div>
+											<div class="cart_det" style="display: none;">
+												Weight - 500 gm <br> Eggless - False <br> Heart
+												Shape - False <br>
+											</div>
+
+										</div>
+									</div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Quantity</div>
+									<div class="mob_quan_r">
+										<form id="myform" method="POST" action="#">
+											<button type="button" value="" field="quantity"
+												class="qtyminus cart">
+												<i class="fa fa-minus" aria-hidden="true"></i>
+											</button>
+											<input type="text" name="quantity" value="0" class="qty cart">
+											<button type="button" value="" field="quantity"
+												class="qtyplus cart">
+												<i class="fa fa-plus" aria-hidden="true"></i>
+											</button>
+										</form>
+									</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Delivery Option</div>
+									<div class="mob_quan_r">
+										<div class="cart_option">
+											<img src="images/user_pic.jpg" alt=""> <span>Message
+												in the cake</span>
+										</div>
+									</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Sub Total</div>
+									<div class="mob_quan_r">
+										<div class="cart_prc_1">990.00</div>
+									</div>
+									<div class="clr"></div>
+								</div>
+								<div class="mob_quan">
+									<div class="mob_quan_l">Action</div>
+									<div class="mob_quan_r">
+										<div class="cart_delete">
+											<a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+										</div>
+									</div>
+									<div class="clr"></div>
+								</div>
+							</div>
+						</div>
+
+
 						<!-- desktop table-->
 						<div class="total_row">
 							<!--cart-right-->
 							<div class="total_row_r">
 								<div class="total_one">
-									Items subtotal <span>Rs. 1500.00</span>
+									Items subtotal <span>Rs. <label id="lbl_ItemTotal">0.00</label></span>
 								</div>
 								<div class="total_one pink">
 									Delivery <span>Free</span>
 								</div>
 								<div class="total_one">
-									Sales tax <span>Rs. 50.00</span>
+									Sales tax <span>Rs. <label id="lbl_SalesTax">0.00</label></span>
 								</div>
 								<div class="total_one">
-									Tip <span>Rs. 50.00</span>
+									Tip <span>Rs. <label id="lbl_Tip">0.00</label></span>
 								</div>
 								<div class="total_one">
-									Total <span>Rs. 18.00</span>
+									Total <span>Rs. <label id="lbl_Total">0.00</label></span>
 								</div>
 								<div class="total_row_btm">
-									Total <span>1600.00</span>
+									Total <span><label id="lbl_FinalTotal">0.00</label></span>
 								</div>
 
 							</div>
@@ -375,7 +320,7 @@ z-index: 999999 !important;
 								<div class="promo_row">
 									<div class="promo_row_l">Promo Code</div>
 									<div class="promo_row_r">
-										<input name="" type="text" class="input_two" 
+										<input name="" type="text" class="input_two"
 											placeholder="Enter Your Offer Code" />
 									</div>
 								</div>
@@ -437,8 +382,8 @@ z-index: 999999 !important;
 						</div>
 
 
-						
-						
+
+
 
 					</div>
 
@@ -547,34 +492,36 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input  type="text" class="input_place" id="txtCity"
+									<input type="text" class="input_place" id="txtCity"
 										name="txtCity" disabled="disabled"
 										placeholder="Enter Your City" /> <label
 										class="form-label-hint-error" id="errorCity"
 										style="display: none;">please enter city</label>
 								</div>
 								<div class="place_row_r">
-									<input  type="text" class="input_place"
-										disabled="disabled" placeholder="City Related Landmark" />
+									<input type="text" class="input_place" disabled="disabled"
+										placeholder="City Related Landmark" />
 								</div>
 								<div class="clr"></div>
 							</div>
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input  type="text" class="input_place" id="txtBillName"
-										name="txtBillName" placeholder="Billing Name" autocomplete="off" /> <label
-										class="form-label-hint-error" id="errorBillName"
-										style="display: none;">please enter billing name</label>
+									<input type="text" class="input_place" id="txtBillName"
+										name="txtBillName" placeholder="Billing Name"
+										autocomplete="off" /> <label class="form-label-hint-error"
+										id="errorBillName" style="display: none;">please enter
+										billing name</label>
 
 								</div>
 								<div class="place_row_r">
-									<input type="text" class="input_place" id="txtMobile" maxlength="10"
-										name="txtMobile" placeholder="Mobile Number" autocomplete="off" /> <label
-										class="form-label-hint-error" id="errorMobile"
-										style="display: none;">please enter mobile number</label> <label
-										class="form-label-hint-error" id="errorMobileInvalid"
-										style="display: none;">invalid mobile number</label>
+									<input type="text" class="input_place" id="txtMobile"
+										maxlength="10" name="txtMobile" placeholder="Mobile Number"
+										autocomplete="off" /> <label class="form-label-hint-error"
+										id="errorMobile" style="display: none;">please enter
+										mobile number</label> <label class="form-label-hint-error"
+										id="errorMobileInvalid" style="display: none;">invalid
+										mobile number</label>
 
 								</div>
 								<div class="clr"></div>
@@ -582,9 +529,9 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input  type="text" class="input_place" id="txtEmail"
-										name="txtEmail" placeholder="Email ID" autocomplete="off" /> <label
-										class="form-label-hint-error" id="errorEmail"
+									<input type="text" class="input_place" id="txtEmail"
+										name="txtEmail" placeholder="Email ID" autocomplete="off" />
+									<label class="form-label-hint-error" id="errorEmail"
 										style="display: none;">please enter email id</label> <label
 										class="form-label-hint-error" id="errorEmailInvalid"
 										style="display: none;">invalid email id</label>
@@ -595,8 +542,8 @@ z-index: 999999 !important;
 									<div class="gender_r">
 										<div class="radio_1 gender">
 											<ul>
-												<li><input type="radio" id="a-option" name="selector" checked="checked">
-													<label for="a-option">Male</label>
+												<li><input type="radio" id="a-option" name="selector"
+													checked="checked"> <label for="a-option">Male</label>
 													<div class="check"></div></li>
 
 												<li><input type="radio" id="b-option" name="selector">
@@ -615,15 +562,15 @@ z-index: 999999 !important;
 							<div class="place_row">
 								<div class="place_row_l">
 									<input type="text" class="input_place" id="txtDob"
-										name="txtDob" placeholder="Date of Birth" autocomplete="off"/> <label
-										class="form-label-hint-error" id="errorDob"
+										name="txtDob" placeholder="Date of Birth" autocomplete="off" />
+									<label class="form-label-hint-error" id="errorDob"
 										style="display: none;">please enter date of birth</label>
 
 								</div>
 								<div class="place_row_r">
 									<input type="text" class="input_place" id="txtGst"
-										name="txtGst" placeholder="GST Number" autocomplete="off" /> <label
-										class="form-label-hint-error" id="errorGst"
+										name="txtGst" placeholder="GST Number" autocomplete="off" />
+									<label class="form-label-hint-error" id="errorGst"
 										style="display: none;">invalid GST number</label>
 
 								</div>
@@ -643,21 +590,22 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off" id="txtDelvFlat" name="txtDelvFlat"
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtDelvFlat" name="txtDelvFlat"
 										placeholder="Flat, House no., Building, Company, Apartment" />
-										
-										<label
-										class="form-label-hint-error" id="errorDelvFlat"
-										style="display: none;">please enter flat, house no., building, company, apartment</label>
+
+									<label class="form-label-hint-error" id="errorDelvFlat"
+										style="display: none;">please enter flat, house no.,
+										building, company, apartment</label>
 								</div>
 								<div class="place_row_r">
-									<input  type="text" class="input_place" autocomplete="off" id="txtDelvArea" name="txtDelvArea"
-										placeholder="Area, Colony, Street, Sector, Village" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtDelvArea" name="txtDelvArea"
+										placeholder="Area, Colony, Street, Sector, Village" /> <label
 										class="form-label-hint-error" id="errorDelvArea"
-										style="display: none;">please enter area, colony, street, sector, village</label>
-										
+										style="display: none;">please enter area, colony,
+										street, sector, village</label>
+
 								</div>
 								<div class="clr"></div>
 							</div>
@@ -666,19 +614,17 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off" id="txtDelvLandmark" name="txtDelvLandmark"
-										placeholder="Landmark" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtDelvLandmark" name="txtDelvLandmark"
+										placeholder="Landmark" /> <label
 										class="form-label-hint-error" id="errorDelvLandmark"
 										style="display: none;">please enter landmark</label>
-										
+
 								</div>
 								<div class="place_row_r">
-									<input  type="text" class="input_place" autocomplete="off" id="txtDelvPincode" name="txtDelvPincode"
-										placeholder="Shipping Pincode" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtDelvPincode" name="txtDelvPincode"
+										placeholder="Shipping Pincode" /> <label
 										class="form-label-hint-error" id="errorDelvPincode"
 										style="display: none;">please enter pincode</label>
 								</div>
@@ -694,9 +640,10 @@ z-index: 999999 !important;
 									<h3 class="payment_title">Billing Address</h3>
 								</div>
 								<div class="place_row_r">
-									<input type="checkbox" id="chkbox" name="chkbox" onchange="setBillingDataByCheckbox()"
-										class="payment_title" value="chkbox"> <label
-										for="chkbox"> Same as delivery address</label>
+									<input type="checkbox" id="chkbox" name="chkbox"
+										onchange="setBillingDataByCheckbox()" class="payment_title"
+										value="chkbox"> <label for="chkbox"> Same as
+										delivery address</label>
 								</div>
 								<div class="clr"></div>
 							</div>
@@ -704,20 +651,21 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off" id="txtBillingFlat" name="txtBillingFlat"
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtBillingFlat" name="txtBillingFlat"
 										placeholder="Flat, House no., Building, Company, Apartment" />
-										
-									<label
-										class="form-label-hint-error" id="errorBillingFlat"
-										style="display: none;">please enter flat, house no., building, company, apartment</label>
+
+									<label class="form-label-hint-error" id="errorBillingFlat"
+										style="display: none;">please enter flat, house no.,
+										building, company, apartment</label>
 								</div>
 								<div class="place_row_r">
-									<input  type="text" class="input_place" autocomplete="off" id="txtBillingArea" name="txtBillingArea"
-										placeholder="Area, Colony, Street, Sector, Village" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtBillingArea" name="txtBillingArea"
+										placeholder="Area, Colony, Street, Sector, Village" /> <label
 										class="form-label-hint-error" id="errorBillingArea"
-										style="display: none;">please enter area, colony, street, sector, village</label>
+										style="display: none;">please enter area, colony,
+										street, sector, village</label>
 								</div>
 								<div class="clr"></div>
 							</div>
@@ -726,18 +674,16 @@ z-index: 999999 !important;
 
 							<div class="place_row">
 								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off" id="txtBillingLandmark" name="txtBillingLandmark"
-										placeholder="Landmark" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtBillingLandmark" name="txtBillingLandmark"
+										placeholder="Landmark" /> <label
 										class="form-label-hint-error" id="errorBillingLandmark"
 										style="display: none;">please enter landmark</label>
 								</div>
 								<div class="place_row_r">
-									<input  type="text" class="input_place" autocomplete="off" id="txtBillingPincode" name="txtBillingPincode"
-										placeholder="Billing Pincode" />
-										
-									<label
+									<input type="text" class="input_place" autocomplete="off"
+										id="txtBillingPincode" name="txtBillingPincode"
+										placeholder="Billing Pincode" /> <label
 										class="form-label-hint-error" id="errorBillingPincode"
 										style="display: none;">please enter pincode</label>
 								</div>
@@ -816,16 +762,357 @@ z-index: 999999 !important;
 					'use strict';
 					jQuery('#filter-date, #search-from-date, #search-to-date')
 							.datetimepicker();
+
+					// SET CART DATA
+
+					getItemList();
+
 				});
 	</script>
 
-	<!--cart-sidepanel-->
-	<script type="text/javascript">
-		function openNav() {
-			document.getElementById("mySidepanel").style.width = "300px";
+
+	<script>
+		function getItemList() {
+
+			//document.getElementById("loaderimg").style.display = "block";
+			var fd = new FormData();
+			$.ajax({
+				url : '${pageContext.request.contextPath}/getAllFrWiseData',
+				type : 'post',
+				dataType : 'json',
+				data : fd,
+				contentType : false,
+				processData : false,
+				success : function(response) {
+					//document.getElementById("loaderimg").style.display = "none";
+					//alert(JSON.stringify(response.feProductHeadList))
+					sessionStorage.setItem("allItemList", JSON
+							.stringify(response.feProductHeadList));
+
+					setCartData();
+
+				},
+			});
+
 		}
-		function closeNav() {
-			document.getElementById("mySidepanel").style.width = "0";
+
+		function setCartData() {
+
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			$("#cartTable tbody").empty();
+			var subtotal = 0;
+			var taxtotal = 0;
+			var finaltotal = 0;
+			var discPer = 0;
+			var discAmt = 0;
+
+			for (var j = 0; j < allItemArr.length; j++) {
+
+				for (var i = 0; i < table.length; i++) {
+
+					if (table[i].itemId == allItemArr[j].productId) {
+
+						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
+								.toFixed(2);
+
+						var tbl_data = '<tr>'
+								+ '<td><div class="cart_pic_row">'
+								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt=""> <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn"></div>'
+								+ '<div class="cart_cont">'
+								+ '<h3 class="cart_cake">'
+								+ table[i].exVar1
+								+ '</h3>'
+								+ '<h3 class="cart_prc"> &#8377;'
+								+ table[i].mrp
+								+ '</h3>'
+								+ '<div class="cart_show" ><a href="javascript:void(0)" onclick="showDetail('
+								+ table[i].itemId
+								+ ')" id="aTagShowDetail'
+								+ table[i].itemId
+								+ '"><i class="fa fa-eye" aria-hidden="true"></i>Show Details</a><div>'
+								+ '<div class="cart_det" style="display: none;" id="detail'+table[i].itemId+'">Weight - '
+								+ table[i].weight
+								+ ' '
+								+ allItemArr[j].uomShowName
+								+ ' <br> '
+								+ table[i].veg
+								+ ' <br> Cake Shape - '
+								+ allItemArr[j].shapeNames
+								+ ' <br></div>'
+								+ '</div>'
+								+ '</div></td>'
+								+
+
+								'<td>'
+								+ '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
+								+ table[i].itemId
+								+ '"  name="btnMin'
+								+ table[i].itemId
+								+ '" onclick="minusQty('
+								+ table[i].itemId
+								+ ','
+								+ table[i].qty
+								+ ')"> <i class="fa fa-minus" aria-hidden="true"></i> </button>'
+
+								+ '<input type="text" id="quantity'
+								+ table[i].itemId
+								+ '" name="quantity'
+								+ table[i].itemId
+								+ '" value="'
+								+ table[i].qty
+								+ '" class="qty cart" onblur="typeQty('
+								+ table[i].itemId
+								+ ')"> '
+
+								+ '<button type="button" value="" field="quantity" class="qtyplus cart" id="btnPlus'
+								+ table[i].itemId
+								+ '"  name="btnPlus'
+								+ table[i].itemId
+								+ '" onclick="plusQty('
+								+ table[i].itemId
+								+ ','
+								+ table[i].qty
+								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
+
+								+ '<span class="cart_remove"><a href="javascript:void(0)" onclick="removeQty('
+								+ table[i].itemId
+								+ ')">Remove</a></span>'
+								+ '</td>'
+								+
+
+								'<td><div class="cart_option">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt=""> <span>Message in the cake</span>'
+								+ '</div></td>'
+								+
+
+								'<td><div class="cart_prc_1"> &#8377; '
+								+ table[i].totalAmt
+								+ '</div></td>'
+								+
+
+								'<td><div class="cart_delete"><a href="javascript:void(0)" onclick="removeQty('
+								+ table[i].itemId
+								+ ')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>'
+								+
+
+								'</tr>';
+
+						$('#cartTable').append(tbl_data);
+
+					}
+				}
+			}
+
+			finaltotal = (parseFloat(finaltotal) + parseFloat(subtotal))
+					.toFixed(2);
+
+			document.getElementById("lbl_ItemTotal").innerHTML = subtotal;
+			document.getElementById("lbl_FinalTotal").innerHTML = finaltotal;
+
+			document.getElementById("cart_item_count").innerHTML = ""
+					+ table.length;
+
+		}
+
+		function minusQty(id, curQty) {
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			var newCartVal = [];
+
+			if (curQty == 1) {
+
+				for (var i = 0; i < table.length; i++) {
+					if (id != table[i].itemId && curQty == 1) {
+						newCartVal.push(table[i]);
+					}
+				}
+
+			} else {
+
+				for (var i = 0; i < table.length; i++) {
+					var qty = curQty - 1;
+
+					if (id == table[i].itemId) {
+						table[i].qty = qty;
+
+						var taxableAmt = parseFloat(table[i].rate)
+								* parseFloat(qty).toFixed(2);
+						var cgstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].cgstPer)) / 100;
+						var sgstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].sgstPer)) / 100;
+						var igstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].igstPer)) / 100;
+
+						var taxAmt = (cgstAmt + sgstAmt + igstAmt).toFixed(2);
+						var totalAmt = parseFloat(taxableAmt).toFixed(2);
+
+						table[i].taxableAmt = taxableAmt;
+						table[i].cgstAmt = cgstAmt;
+						table[i].sgstAmt = sgstAmt;
+						table[i].igstAmt = igstAmt;
+						table[i].taxAmt = taxAmt;
+						table[i].totalAmt = totalAmt;
+					}
+
+					newCartVal.push(table[i]);
+				}
+
+			}
+
+			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+
+			setCartData();
+		}
+
+		function plusQty(id, curQty) {
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			var newCartVal = [];
+
+			for (var i = 0; i < table.length; i++) {
+				var qty = curQty + 1;
+
+				if (id == table[i].itemId) {
+					table[i].qty = qty;
+
+					var taxableAmt = parseFloat(table[i].rate)
+							* parseFloat(qty).toFixed(2);
+					var cgstAmt = (parseFloat(table[i].rate) * parseFloat(qty) * parseFloat(table[i].cgstPer)) / 100;
+					var sgstAmt = (parseFloat(table[i].rate) * parseFloat(qty) * parseFloat(table[i].sgstPer)) / 100;
+					var igstAmt = (parseFloat(table[i].rate) * parseFloat(qty) * parseFloat(table[i].igstPer)) / 100;
+
+					var taxAmt = (cgstAmt + sgstAmt + igstAmt).toFixed(2);
+					var totalAmt = parseFloat(taxableAmt).toFixed(2);
+
+					table[i].taxableAmt = taxableAmt;
+					table[i].cgstAmt = cgstAmt;
+					table[i].sgstAmt = sgstAmt;
+					table[i].igstAmt = igstAmt;
+					table[i].taxAmt = taxAmt;
+					table[i].totalAmt = totalAmt;
+
+				}
+
+				newCartVal.push(table[i]);
+			}
+
+			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+			setCartData();
+		}
+
+		function removeQty(id) {
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			var newCartVal = [];
+
+			for (var i = 0; i < table.length; i++) {
+				if (id != table[i].itemId) {
+					newCartVal.push(table[i]);
+				}
+			}
+
+			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+
+			setCartData();
+		}
+
+		function typeQty(id) {
+
+			var qty = document.getElementById("quantity" + id).value;
+
+			if (qty > 0) {
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+
+				var cartValue = sessionStorage.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+
+				var newCartVal = [];
+
+				for (var i = 0; i < table.length; i++) {
+
+					if (id == table[i].itemId) {
+						table[i].qty = qty;
+
+						var taxableAmt = parseFloat(table[i].rate)
+								* parseFloat(qty).toFixed(2);
+						var cgstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].cgstPer)) / 100;
+						var sgstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].sgstPer)) / 100;
+						var igstAmt = (parseFloat(table[i].rate)
+								* parseFloat(qty) * parseFloat(table[i].igstPer)) / 100;
+
+						var taxAmt = (cgstAmt + sgstAmt + igstAmt).toFixed(2);
+						var totalAmt = parseFloat(taxableAmt).toFixed(2);
+
+						table[i].taxableAmt = taxableAmt;
+						table[i].cgstAmt = cgstAmt;
+						table[i].sgstAmt = sgstAmt;
+						table[i].igstAmt = igstAmt;
+						table[i].taxAmt = taxAmt;
+						table[i].totalAmt = totalAmt;
+
+					}
+
+					newCartVal.push(table[i]);
+				}
+
+				sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+
+				setCartData();
+
+			}
+
+		}
+
+		function showDetail(id) {
+
+			// $("aTagShowDetail"+id).hide();
+			//$("detail"+id).show();
+			document.getElementById("aTagShowDetail" + id).style.display = "none";
+			document.getElementById("detail" + id).style.display = "block";
+
 		}
 	</script>
 
@@ -1123,8 +1410,7 @@ z-index: 999999 !important;
 
 			var isError = true;
 
-			var  billName = true, mobile = true, email = true, dob = true, gst = true,delvFlat=true,delvArea=true,delvLand=true,delvPin=true,billFlat=true,billArea=true,billLand=true,billPin=true;
-
+			var billName = true, mobile = true, email = true, dob = true, gst = true, delvFlat = true, delvArea = true, delvLand = true, delvPin = true, billFlat = true, billArea = true, billLand = true, billPin = true;
 
 			if (!$("#txtBillName").val().trim()) {
 				billName = false;
@@ -1176,9 +1462,7 @@ z-index: 999999 !important;
 			} else {
 				$("#errorGst").hide();
 			}
-			
-			
-			
+
 			if (!$("#txtDelvFlat").val().trim()) {
 				delvFlat = false;
 				$("#errorDelvFlat").show();
@@ -1206,7 +1490,6 @@ z-index: 999999 !important;
 			} else {
 				$("#errorDelvPincode").hide();
 			}
-			
 
 			if (!$("#txtBillingFlat").val().trim()) {
 				billFlat = false;
@@ -1236,8 +1519,9 @@ z-index: 999999 !important;
 				$("#errorBillingPincode").hide();
 			}
 
-
-			if (!billName || !mobile || !email || !dob || !gst || !delvFlat || !delvArea || !delvLand || !delvPin || !billFlat || !billArea || !billLand || !billPin) {
+			if (!billName || !mobile || !email || !dob || !gst || !delvFlat
+					|| !delvArea || !delvLand || !delvPin || !billFlat
+					|| !billArea || !billLand || !billPin) {
 				isError = false;
 			}
 
@@ -1263,31 +1547,26 @@ z-index: 999999 !important;
 				return false;
 			}
 		}
-		
-		
-		function setBillingDataByCheckbox(){
-			
-			if(document.getElementById("chkbox").checked==true){
-				
+
+		function setBillingDataByCheckbox() {
+
+			if (document.getElementById("chkbox").checked == true) {
+
 				$("#txtBillingFlat").val($("#txtDelvFlat").val());
 				$("#txtBillingArea").val($("#txtDelvArea").val());
 				$("#txtBillingLandmark").val($("#txtDelvLandmark").val());
 				$("#txtBillingPincode").val($("#txtDelvPincode").val());
-				
-			}else{
-				
+
+			} else {
+
 				$("#txtBillingFlat").val("");
 				$("#txtBillingArea").val("");
 				$("#txtBillingLandmark").val("");
 				$("#txtBillingPincode").val("");
-				
+
 			}
-			
-			
-			
-			
+
 		}
-		
 
 		$('#txtDob').datetimepicker({
 			//yearOffset:222,
@@ -1298,8 +1577,6 @@ z-index: 999999 !important;
 		//minDate:'-1970/01/02', // yesterday is minimum date
 		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
-		
-		
 	</script>
 
 

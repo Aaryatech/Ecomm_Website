@@ -1,6 +1,7 @@
 package com.ats.ecommerce;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.Locale;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
@@ -27,9 +29,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Scope("session")
 
 public class HomeController {
-	
-	 FEDataTraveller data=new FEDataTraveller();
-	 
+
+	FEDataTraveller data = new FEDataTraveller();
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
@@ -45,17 +47,17 @@ public class HomeController {
 						session.setAttribute("custIdCookie", cookieArray[a].getValue());
 						returnPage = "redirect:/home";
 						isCookieFound = 1;
-						
-						 ObjectMapper mapper = new ObjectMapper();
-						  data = mapper.readValue(new
-						 File(Constants.JSON_FILES_PATH+"27_.json"),
-						 FEDataTraveller.class);
-						// System.err.println("data " +data.toString());
-						 
-						 String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+"27_.json")).useDelimiter("\\Z").next();
+
+						ObjectMapper mapper = new ObjectMapper();
+						data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "27_.json"),
+								FEDataTraveller.class);
+						System.err.println("data " + data.toString());
+
+						String dataList = new Scanner(new File(Constants.JSON_FILES_PATH + "27_.json"))
+								.useDelimiter("\\Z").next();
 						// System.err.println(" dataList " +dataList);
-						 session.setAttribute("dataList", dataList);
-	 
+						session.setAttribute("dataList", dataList);
+
 						break;
 					}
 				}
@@ -69,7 +71,7 @@ public class HomeController {
 
 				returnPage = "location";
 			}
-			//session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
+			// session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,52 +79,60 @@ public class HomeController {
 		// return "location";
 	}
 
-	//Modified By -Sachin
-	//Modific Date -03-11-2020
+	// Modified By -Sachin
+	// Modific Date -03-11-2020
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 
 		HttpSession session = request.getSession();
 		String x = (String) session.getAttribute("custIdCookie");
-		//System.err.println("Cate List  " + data.getFranchiseCatList().toString());
-		
-		model.addAttribute("frCatList",data.getFranchiseCatList());
-		
-		model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
-		model.addAttribute("prodImgUrl",Constants.PROD_IMG_VIEW_URL);
+		// System.err.println("Cate List " + data.getFranchiseCatList().toString());
 
-		model.addAttribute("prodHeaderList",data.getFeProductHeadList());
-		model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
+		model.addAttribute("frCatList", data.getFranchiseCatList());
 
-		//System.err.println("data.getFeProductHeadList() " +data.getFeProductHeadList());
+		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+
+		model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+		model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
+
+		// System.err.println("data.getFeProductHeadList() "
+		// +data.getFeProductHeadList());
 		return "home";
 	}
 
-	
-		//Modified By -Sachin
-		//Modific Date -11-11-2020
-		@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
-		public String showProdDetailIndex(@PathVariable int index,Model model,
-				HttpServletRequest request, HttpServletResponse response) {
-			System.err.println("In Show Prod Detail");
-			try {
-				model.addAttribute("frCatList",data.getFranchiseCatList());
-				
-				model.addAttribute("catImgUrl",Constants.CAT_IMG_VIEW_URL);
-				model.addAttribute("prodImgUrl",Constants.PROD_IMG_VIEW_URL);
-				model.addAttribute("prodHeaderList",data.getFeProductHeadList());
-				model.addAttribute("flavTagStatusList",data.getFlavorTagStatusList());
-				
-				FEProductHeader prodHeader=data.getFeProductHeadList().get(index);
-				model.addAttribute("prodHeader",prodHeader);
-				
-				
-			}catch (Exception e) {
-					
-			}
-			return "productdetail";
+	// Modified By -Sachin
+	// Modific Date -11-11-2020
+	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
+	public String showProdDetailIndex(@PathVariable int index, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		System.err.println("In Show Prod Detail");
+		try {
+			model.addAttribute("frCatList", data.getFranchiseCatList());
+
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
+
+			FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
+			model.addAttribute("prodHeader", prodHeader);
+
+		} catch (Exception e) {
+
+		}
+		return "productdetail";
 	}
 	
+	
+	@RequestMapping(value = "/getAllFrWiseData", method = RequestMethod.POST)
+	@ResponseBody
+	public FEDataTraveller getAllFrWiseData(HttpServletRequest request, HttpServletResponse response, Model model) {
+		return data;
+	}
+	
+	
+
 	@RequestMapping(value = "/landing", method = RequestMethod.GET)
 	public String landing(Locale locale, Model model) {
 		return "landing";
