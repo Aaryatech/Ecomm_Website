@@ -7,6 +7,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
 <body>
@@ -253,9 +254,9 @@
 															aria-hidden="true"></i>
 														<p class="cake_prc_detail_pclass"
 															id="cake_prc${product.productId}">${product.defaultPrice}</p>
-														<span class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+														<span class="off_prc" id="off_prc${product.productId}"><!-- <i class="fa fa-inr" 
+															aria-hidden="true"></i> --></span> <span
+															id="prc_off${product.productId}" class="prc_off"></span>
 													</div>
 
 												</div>
@@ -616,7 +617,6 @@
 			</ul>
 		</div>
 	</div>
-	<select id="jj" name="jjj" onchange="changeWt1()"><option></option></select>
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
@@ -626,7 +626,7 @@
 
 	<script type="text/javascript">
 		function changeFlavor(productId) {
-			console.log("Sachin");
+			//console.log("Sachin");
 			var x = "${sessionScope.curDateTime}";
 			var dataList = '${sessionScope.dataList}';
 			var data = $.parseJSON(dataList);
@@ -635,7 +635,7 @@
 			console.log(JSON.parse(prodHead).length);
 			var selectWt = document.getElementById("wt" + productId).value;
 			var selectFlav = document.getElementById("flav" + productId).value;
-			alert("selectWt " + selectWt + "selectFlav " + selectFlav);
+			//alert("selectWt " + selectWt + "selectFlav " + selectFlav);
 		}//End of changeFlavor
 		function changeWtFlavor(productId) {
 			var selectWt = document.getElementById("wt" + productId).value;
@@ -685,6 +685,13 @@
 										- parseFloat(actualRate);
 								offPer = (parseFloat(priceDiff)
 										/ parseFloat(prodDetail[d].displayRate) * 100);
+								//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
+								if(parseFloat(priceDiff)<=1){
+									priceDiff=10;
+								}
+									document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
+					//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
+								document.getElementById("prc_off" + productId).innerHTML = ""+offPer.toFixed(2);
 								break;
 							}
 							//alert("Do calc");

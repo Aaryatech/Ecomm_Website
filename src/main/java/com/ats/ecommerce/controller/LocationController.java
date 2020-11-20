@@ -31,6 +31,47 @@ public class LocationController {
 
 	@RequestMapping(value = "/a", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String returnPage = "landing";
+		try {
+			Cookie[] cookieArray = request.getCookies();
+			int isCookieFound = 0;
+			/*
+			 * if (cookieArray != null) for (int a = 0; a < cookieArray.length; a++) { //
+			 * if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) { if
+			 * (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
+			 * System.err.println("In If "); HttpSession session = request.getSession();
+			 * session.setAttribute("custIdCookie", cookieArray[a].getValue()); returnPage =
+			 * "redirect:/home"; isCookieFound = 1;
+			 * 
+			 * ObjectMapper mapper = new ObjectMapper(); data = mapper.readValue(new
+			 * File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/4_.json"),
+			 * FEDataTraveller.class); System.err.println("data " +data.toString()); break;
+			 * } }
+			 */
+
+			if (isCookieFound == 0) {
+				System.err.println("In Else ");
+				ObjectMapper mapper = new ObjectMapper();
+				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
+						CityData[].class);
+				List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+				// System.out.println(cityList);
+				String frData = new Scanner(new File(Constants.JSON_FILES_PATH+"AllFrData_.json")).useDelimiter("\\Z").next();
+ 
+				model.addAttribute("cityList", cityList);
+				model.addAttribute("frData", frData);
+				returnPage = "landing";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnPage;
+		// return "location";
+	}
+	
+	@RequestMapping(value = "/ak", method = RequestMethod.GET)
+	public String ak(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
 		try {
 			Cookie[] cookieArray = request.getCookies();
