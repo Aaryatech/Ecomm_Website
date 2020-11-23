@@ -15,12 +15,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.Constants;
+import com.atss.ecommerce.model.CategoryList;
 import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.FEDataTraveller;
+import com.atss.ecommerce.model.FETestimonial;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -55,11 +58,25 @@ public class LocationController {
 				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
 						CityData[].class);
 				List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
-				// System.out.println(cityList);
 				String frData = new Scanner(new File(Constants.JSON_FILES_PATH+"AllFrData_.json")).useDelimiter("\\Z").next();
  
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);
+				
+				
+				CategoryList[] catArray = mapper.readValue(new File(Constants.JSON_FILES_PATH+"MasterCategoryData_.json"),
+						CategoryList[].class);
+				List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+				model.addAttribute("catList", catList);
+				model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+				
+				FETestimonial[] testMonArray = mapper.readValue(new File(Constants.JSON_FILES_PATH+"MasterTestimonialData_.json"),
+						FETestimonial[].class);
+				List<FETestimonial> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+				model.addAttribute("testMonialList", testMonialList);
+				model.addAttribute("TetstimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+				
+				
 				returnPage = "landing";
 			}
 
@@ -110,4 +127,31 @@ public class LocationController {
 		return returnPage;
 		// return "location";
 	}
+	
+	//moreCakeStatusWise
+	
+	//product.html
+	@RequestMapping(value = "/moreCakeStatusWise/{statusId}", method = RequestMethod.GET)
+	public String moreCakeStatusWise(Model model, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable int statusId) {
+		String returnPage = "productlist";
+		try {
+			
+			ObjectMapper mapper = new ObjectMapper();
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "27_.json"),
+					FEDataTraveller.class);
+			
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+
+			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
+
+			model.addAttribute("statusId", statusId);
+			 
+		}catch (Exception e) {
+			return returnPage;
+		}
+		return returnPage;
+	}
+	
 }

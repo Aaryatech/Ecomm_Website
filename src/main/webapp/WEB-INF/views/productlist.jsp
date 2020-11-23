@@ -1,4 +1,9 @@
 <!-- this is mohsins product filter page -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -500,9 +505,12 @@
 			<div class="wrapper">
 
 				<div class="product_boxes">
+				<c:forEach items="${flavTagStatusList}" var="statusFilter"
+		varStatus="count">
+		<c:if test="${statusFilter.filterId==statusId}">
 					<h2 class="sec_title">
 						<center>
-							Shop by Best Seller Categories <span>3 Hour Delivery &amp;
+							Shop by ${statusFilter.filterName} <span>3 Hour Delivery &amp;
 								Free Shipping in India</span>
 						</center>
 					</h2>
@@ -510,316 +518,41 @@
 
 					<ul>
 						<!--product-row-1-->
+							<c:forEach items="${prodHeaderList}" var="product"
+								varStatus="prodCount">
+								<c:choose>
+									<c:when test="${product.prodStatusId==statusFilter.filterId}">
 						<li>
 							<div class="cake_one product_padd">
 								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-										alt="" class="mobile_fit transition">
+									<img src="${prodImgUrl}${product.prodImagePrimary}" data-src="${prodImgUrl}${product.prodImagePrimary}"
+									alt="" class="mobile_fit transition">
 									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
+										<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
+											aria-hidden="true"></i>${product.defaultPrice}</span> <span class="prc_off">(23%
 											Off)</span>
 									</div>
 								</div>
-
 								<div class="cake_container">
 									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
+									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
 									</h4>
-
-
 								</div>
-
 							</div>
 						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-
-						<!--product-row-2-->
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-
-
-						<!--product-row-3-->
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_1.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_2.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_3.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/new_cake_4.jpg"
-										alt="" class="mobile_fit transition">
-									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-									<div class="cake_prc">
-										<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span>
-									</div>
-								</div>
-
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="product-detail.html">Classic Red Velvet Cake
-											(Half Kg)</a>
-									</h4>
-
-								</div>
-
-							</div>
-						</li>
-
-					</ul>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+						</c:choose>
+						</c:forEach>
+						</ul>
+						</c:if>
+						</c:forEach>
 				</div>
-
+						<!--product-row-2-->
+						<!--product-row-3-->
 			</div>
 		</div>
 	</div>

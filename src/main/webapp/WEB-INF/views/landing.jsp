@@ -1,10 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
-<jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+<style type="text/css">
+.ui-autocomplete{
+z-index: 100;
+}
+</style>
+<jsp:include page="/WEB-INF/views/include/customjscss.jsp"></jsp:include>
 
+<style>
 
+</style>
 <body>
 
 
@@ -58,7 +69,7 @@
     </div>
     <script type="text/javascript">
     $(document).ready(function () {
-      $('#mongi').popup();
+  $('#mongi').popup();
     });
     </script>    
     
@@ -86,15 +97,33 @@
 <div class="find_store">
     <div class="wrapper">
         <div class="prod_cat_bx">
-            <div class="prod_cat_1">
+            <%-- <div class="prod_cat_1">
                 <div class="cakes_cat_1">                    
                         <div class="img_cap">
                             <img src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg" alt=""> 
                             <div class="prod_cat_cap"><span>Cakes</span></div>
                         </div>                        
                 </div>
-            </div>
-            <div class="prod_cat_2">
+            </div> --%>
+            
+            <c:forEach items="${catList}" var="cat" varStatus="count">
+					<div class="prod_cat_1">
+						<div class="cakes_cat_1 new">
+							<a
+								href="#">
+								<div class="img_cap">
+									<img
+										src="${catImgUrl}${cat.imageName}"
+										class="lazy" data-src="${catImgUrl}${cat.imageName}" alt="">
+									<div class="prod_cat_cap">
+										<span>${cat.catName}</span>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</c:forEach>
+            <%-- <div class="prod_cat_2">
                 <div class="divid_two">
                     <div class="divide_one_pic left">
                         <div class="single_pic">                            
@@ -147,7 +176,7 @@
                         <div class="prod_cat_cap1"><span>Combo</span></div>                             
                     </div>
                 </div>
-            </div>
+            </div> --%>
             <div class="clr"></div>
         </div>
     </div>
@@ -176,21 +205,24 @@
     
     <div class="wrapper">
         <section class="regular slider">
+         <c:forEach items="${testMonialList}" var="testmoni" varStatus="count">
             <div>
               <div class="testimonial_one">
                 <i class="fa fa-quote-left" aria-hidden="true"></i>  
-                <p class="testimoial_txt">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden.</p>
+                <p class="testimoial_txt">${testmoni.messages}</p>
 
                 <div class="testimonial_nm">
-                    <img src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg" alt="">
+                    <img src="${TetstimonialImgUrl}${testmoni.images}" alt="">
                     <h2 class="testimonial_date">
-                        Sumit Mahshalkar
-                        <span>Date : 17-09-2020</span>
-                        <span>Location: Nashik</span>
+                        ${testmoni.name}
+                        <span>Date : date</span>
+                       <!--  <span>Location: location</span> -->
                     </h2>
                   </div>  
               </div>
  </div>
+ </c:forEach>
+ 
             <div>
               <div class="testimonial_one">
                 <i class="fa fa-quote-left" aria-hidden="true"></i>   
@@ -281,7 +313,7 @@
 </div>
     
 <!--footer start here-->
-<footer>
+<<%-- footer>
     <div class="footer_menu">
         <div class="wrapper">
             <div class="menu_bx">
@@ -324,7 +356,7 @@
                 <div class="contact_address">
                     <h3 class="footer_title">Contact Us</h3>
                     <div class="cont_add"><i class="fa fa-map-marker" aria-hidden="true"></i> Shop 57, Near Shri Bhagvati Hotel Puriya Park 
-                        Road Panchvati Karanje, Mashik, Maharashtra 422003.</div>
+                        Road Panchvati Karanje, Nashik, Maharashtra 422003.</div>
                     <div class="cont_add"><i class="fa fa-phone" aria-hidden="true"></i> <a href="callto:(+91) 1234 567 890"> (+91) 1234 567 890</a>   <span>/</span>   <a href="callto:(+91) 9876 543 210">(+91) 9876 543 210</a></div>
                     <div class="cont_add"><i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:customercare@monginis.net">customercare@monginis.net</a>  <span>/</span>    <a href="mailto:info@monginis.net">info@monginis.net</a></div>
                     
@@ -335,7 +367,9 @@
         </div>
     </div>
     <div class="copyright"> &copy; Copyright 2019-20. All Right Reserv. Aarya Tech Solutions</div>
-</footer>
+</footer> --%>
+	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+
  
 <!--apply now pop up-->
     <div id="landingpop" class="well_landing">
@@ -361,7 +395,7 @@
                 <div class="place_search_row">
                     <form action="" method="get">
                         <div class="search_one">
-                            <div class="dropdown">
+                           <!--  <div class="dropdown">
                                 <div class="select"> <span>Other City</span></div>
                                 <input type="hidden" name="gender">
                                 <ul class="dropdown-menu">
@@ -369,16 +403,43 @@
                                   <li id="female">Pune</li>
                                     <li id="female">Gandhi Nagar</li>
                                 </ul>
-                              </div>
+                              </div> -->
+                              <div style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									<select id="citySel" name="citySel"
+										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;"
+										onchange="getCityName(this.value)">
+										<option value="0" id="city0" data-cityname="">select</option>
+										<c:forEach items="${cityList}" var="cityList">
+											<option value="${cityList.cityId}"
+												id="city${cityList.cityId}"
+												data-cityname="${cityList.cityName}">${cityList.cityName}</option>
+										</c:forEach>
+									</select>
+								</div>
                         </div>
-                        <div class="search_one">
+                        <div class="search_one"  style="display: none;">
                             <div class="search_one_l">
-                                <input name="" type="text" class="input_search" placeholder="Search your Area" /> <i class="fa fa-search" aria-hidden="true"></i>
+                                <input name="" type="text" class="input_search1" placeholder="Search your Area" /> <i class="fa fa-search" aria-hidden="true"></i>
                             </div>
                             <div class="search_one_r"><a href="get_location.html">Get Location</a></div>
                             <div class="clr"></div>
                             </div>
-                        <div class="search_one">
+                            
+                            <div class="search_one">
+								<div class="search_one_l">
+									<input name="txtPlaces" type="text" class="input_search"
+										placeholder="Search your Area" id="txtPlaces" /> <i
+										class="fa fa-search" aria-hidden="true"></i>
+								</div>
+								<div class="search_one_r">
+									<a href="${pageContext.request.contextPath}/viewmap">Get
+										Location</a>
+								</div>
+								<div class="clr"></div>
+							</div>
+							
+							
+                        <!-- <div class="search_one">
                             <div class="dropdown">
                                 <div class="select"> <span>Select your nearest franchisee</span></div>
                                 <input type="hidden" name="gender">
@@ -388,21 +449,27 @@
                                     <li id="female">Nashik</li>
                                 </ul>
                               </div>
-                        </div>
+                        </div> -->
+                        <div class="search_one">
+								<div
+									style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									<select id="selectShop" name="selectShop"
+										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
+										<!-- <option value="1">choose your default address 1</option>
+										<option value="2">choose your default address 2</option>
+										<option value="3">choose your default address 3</option> -->
+									</select>
+								</div>
+							</div>
                     </form>
                 </div>
                 
-                <!--<div class="place_login">If you are existing user Login</div>-->
-                
+<!--                 <div class="place_login">If you are existing user Login</div>
+ -->                
                 
                 <!--apply now pop up-->
-   
-    
-    
-                
-                
-                
-                <div class="select_location">
+                   
+                <div class="select_location" style="display: none;">
                     <span><img src="${pageContext.request.contextPath}/resources/images/current_icn.png" alt=""> Currently our services are unavailable at selected location.</span>
                 </div>
                 
@@ -418,6 +485,8 @@
     });
     </script>    
     
+  <script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBahlnISPYhetj3q50ADqVE6SECypRGe4A&libraries=places"></script>
   
     
     
@@ -459,8 +528,8 @@ function closeNav1() {
 </script>   
     
 <!--menuzord -->
-<script type="text/javascript" src="js/menuzord.js"></script>
-<script type="text/javascript">
+<!-- <script type="text/javascript" src="js/menuzord.js"></script>
+ --><script type="text/javascript">
 jQuery(document).ready(function(){
 	jQuery("#menuzord").menuzord({
 		align:"left"
@@ -468,50 +537,9 @@ jQuery(document).ready(function(){
 });
 </script>
 <!--menuzord-->
-    
-    <script type="text/javascript">
-        jQuery(document).ready(function(){
-    // This button will increment the value
-    $('.qtyplus').click(function(e){
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        fieldName = $(this).attr('field');
-        // Get its current value
-        var currentVal = parseInt($('input[name='+fieldName+']').val());
-        // If is not undefined
-        if (!isNaN(currentVal)) {
-            // Increment
-            $('input[name='+fieldName+']').val(currentVal + 1);
-        } else {
-            // Otherwise put a 0 there
-            $('input[name='+fieldName+']').val(0);
-        }
-    });
-    // This button will decrement the value till 0
-    $(".qtyminus").click(function(e) {
-        // Stop acting like a button
-        e.preventDefault();
-        // Get the field name
-        fieldName = $(this).attr('field');
-        // Get its current value
-        var currentVal = parseInt($('input[name='+fieldName+']').val());
-        // If it isn't undefined or its greater than 0
-        if (!isNaN(currentVal) && currentVal > 0) {
-            // Decrement one
-            $('input[name='+fieldName+']').val(currentVal - 1);
-        } else {
-            // Otherwise put a 0 there
-            $('input[name='+fieldName+']').val(0);
-        }
-    });
-});
-    </script>
-    
-
 <!--slick slider-->
-<script src="js/slick.js" type="text/javascript"></script>
-<script type="text/javascript">
+<!-- <script src="js/slick.js" type="text/javascript"></script>
+ --><script type="text/javascript">
 $(document).on('ready', function() {
       $(".regular").slick({
         dots: true,
@@ -588,6 +616,165 @@ $(document).on('ready', function() {
 });
 </script>
 
+	<script type="text/javascript">
+		$(document).ready(function($) {
+
+			var frData = '${frData}';
+			sessionStorage.setItem("frList", frData);
+			//console.log(frData)
+		});
+		$('.cityclass').click(function() {
+			//var id = this.value();
+			//var id = $(this).val();
+			var cityname = $(this).data("cityname");
+			$('#txtPlaces').val(cityname + " ");
+			document.getElementById("txtPlaces").focus();
+		});
+
+		function getCityName(val) {
+			var cityname = $("#city" + val).data("cityname");
+			$('#txtPlaces').val(cityname + " ");
+			document.getElementById("txtPlaces").focus();
+		}
+		function calculateDistance(latitude, longitude, type) {
+
+			/* alert(latitude)
+			alert(longitude) */
+			var bounds = new google.maps.LatLngBounds;
+
+			var origin1 = {
+				lat : latitude,
+				lng : longitude
+			};
+
+			var waypts = [];
+
+			var frList = sessionStorage.getItem("frList");
+			var list = $.parseJSON(frList);
+
+			for (var i = 0; i < list.length; i++) {
+
+				if (!isNaN(parseFloat(list[i].shopsLatitude))) {
+					var data_add = {
+						lat : parseFloat(list[i].shopsLatitude),
+						lng : parseFloat(list[i].shopsLogitude)
+					}
+					waypts.push(data_add);
+				}
+
+			}
+
+			//console.log(waypts);
+
+			var geocoder = new google.maps.Geocoder;
+			var service = new google.maps.DistanceMatrixService;
+			service
+					.getDistanceMatrix(
+							{
+								origins : [ origin1 ],
+								destinations : waypts,
+								travelMode : 'DRIVING',
+								unitSystem : google.maps.UnitSystem.METRIC,
+								avoidHighways : false,
+								avoidTolls : false
+							},
+							function(response, status) {
+
+								//alert(JSON.stringify(response))
+
+								if (status !== 'OK') {
+									alert('Error was: ' + status);
+								} else {
+									$('#selectShop').html('');
+									var html = '<option value="0" selected>Select Shop</option>';
+
+									var originList = response.originAddresses;
+									var destinationList = response.destinationAddresses;
+
+									var results = response.rows[0].elements;
+									var newFrList = [];
+
+									for (var j = 0; j < results.length; j++) {
+
+										try {
+											var km = (parseFloat((results[j].distance.value) / 1000))
+													.toFixed(2);
+											list[j].exInt1 = km;
+											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
+												newFrList.push(list[j]);
+											}
+
+										} catch (err) {
+
+										}
+
+									}
+									sortArray(newFrList, "exInt1");
+									for (var j = 0; j < newFrList.length; j++) {
+
+										//alert(newFrList[j].exInt1)
+										html += '<option value="' + newFrList[j].frId + '">'
+												+ newFrList[j].frName
+												+ ' ('
+												+ newFrList[j].frCode
+												+ ') - '
+												+ newFrList[j].frAddress
+												+ ' - '
+												+ newFrList[j].exInt1
+												+ ' KM</option>';
+
+									}
+
+									sessionStorage.setItem("frList", JSON
+											.stringify(newFrList));
+									$('#selectShop').html(html);
+
+								}
+							});
+
+		}
+		google.maps.event.addDomListener(window, 'load', function() {
+			var places = new google.maps.places.Autocomplete(document
+					.getElementById('txtPlaces'), {
+				fields : [ "name", "geometry.location", "place_id",
+						"formatted_address" ]
+			});
+			places.setFields([ "name", "geometry.location", "place_id",
+					"formatted_address" ]);
+			google.maps.event.addListener(places, 'place_changed', function() {
+
+				var place = places.getPlace();
+
+				//console.log(place);
+				try {
+					var address = place.formatted_address;
+					var latitude = place.geometry.location.lat();
+					var longitude = place.geometry.location.lng();
+					/* alert(latitude)
+					alert(longitude) */
+					calculateDistance(latitude, longitude, 1);
+
+				} catch (err) {
+
+				}
+
+			});
+
+		});
+		function sortArray(array, property, direction) {
+			direction = direction || 1;
+			array.sort(function compare(a, b) {
+				let comparison = 0;
+				if (a[property] > b[property]) {
+					comparison = 1 * direction;
+				} else if (a[property] < b[property]) {
+					comparison = -1 * direction;
+				}
+				return comparison;
+			});
+			return array; // Chainable
+		}
+	</script>
 
 
     

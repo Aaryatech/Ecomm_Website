@@ -223,9 +223,9 @@
 							<c:forEach items="${prodHeaderList}" var="product"
 								varStatus="prodCount">
 								<c:choose>
-									<%-- <c:when
-											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}"> --%>
-									<c:when test="${product.prodStatusId==statusFilter.filterId}">
+									<c:when
+											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}">
+								<%-- 	<c:when test="${product.prodStatusId==statusFilter.filterId}"> --%>
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
@@ -431,13 +431,9 @@
 									</c:otherwise>
 								</c:choose>
 							</c:forEach>
-
-
-
 						</section>
-
 						<div class="more_cakes">
-							<a href="product.html">More ${statusFilter.filterName}</a>
+							<a href="${pageContext.request.contextPath}/moreCakeStatusWise/${statusFilter.filterId}">More ${statusFilter.filterName}</a>
 						</div>
 					</div>
 				</div>
