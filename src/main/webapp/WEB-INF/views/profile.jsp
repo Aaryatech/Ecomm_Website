@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -113,47 +114,55 @@
 		<div class="find_store profile_bg">
 			<div class="wrapper">
 
-				<div class="profile_bx">
-					<div class="profile_l">
-						<div class="profile_picture">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/user_profile.jpg"
-								alt="">
-						</div>
+				<form action="${pageContext.request.contextPath}/updateCustProfile"
+					method="post" id="submitInsert"
+					enctype="multipart/form-data">
+					<div class="profile_bx">
+						<div class="profile_l">
+							<div class="profile_picture">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/user_profile.jpg"
+									alt=""><!-- src="${pageContext.request.contextPath}${profileImg}" -->
+							</div>
 
-						<div class="upload-btn-wrapper">
-							<button class="btn">
-								Upload a file <i class="fa fa-camera" aria-hidden="true"></i>
-							</button>
-							<input type="file" name="myfile" />
-						</div>
+							<div class="upload-btn-wrapper">
+								<button class="btn">
+									Upload a file <i class="fa fa-camera" aria-hidden="true"></i>
+								</button>
+								<input type="file" name="doc" id="doc" accept="image/*"
+									accept=".jpg,.png,.gif,.jpeg,.bmp" onchange="loadFile(event)" />
+							</div>
 
-						<div class="register_date">
-							Registerd Date <span>01 . Oct . 2020</span>
-						</div>
+							<div class="register_date">
+								Registerd Date <span>01 . Oct . 2020</span>
+							</div>
 
-					</div>
-					<div class="profile_r">
-						<h2 class="profile_title">User Profile</h2>
-						<div class="profile_cont">
-							<form action="${pageContext.request.contextPath}/profile"
-								method="post" onsubmit="return validateForm()">
+						</div>
+						<div class="profile_r">
+							<h2 class="profile_title">User Profile</h2>
+							<div class="profile_cont">
+
 								<div class="place_row">
 									<div class="place_row_l">
-										<label class="form-label-hint">Enter Your City</label> <input
-											type="text" class="input_two" id="txtCity" name="txtCity"
-											placeholder="Enter Your City" /> <label
-											class="form-label-hint-error" id="errorCity"
-											style="display: none;">please enter city</label>
+										<label class="form-label-hint">Enter Your City</label>
+										<div class="select-style">
+											<select id="city" name="city">
+												<c:forEach items="${cityList}" var="city">
+													<option value="${city.cityId}"
+														${city.cityId==cust.cityId ? 'selected' : ''}>${city.cityName}</option>
+												</c:forEach>
+											</select>
+										</div>
 									</div>
 									<div class="place_row_r">
 										<label class="form-label-hint">Choose your default
 											address</label>
 										<div class="select-style">
-											<select id="address" name="address">
-												<option value="1">choose your default address 1</option>
-												<option value="2">choose your default address 2</option>
-												<option value="3">choose your default address 3</option>
+											<select id="defltAddressId" name="defltAddressId">
+												<c:forEach items="${custAddList}" var="addrsList">
+													<option value="${addrsList.custDetailId}" ${addrsList.custDetailId==cust.exInt1 ? 'selected' : ''}>${addrsList.address},
+														${addrsList.exVar1}, ${addrsList.exVar2}</option>
+												</c:forEach>
 											</select>
 										</div>
 
@@ -170,14 +179,16 @@
 									<!--input_place-->
 									<div class="place_row_l">
 										<label class="form-label-hint">Billing Name</label> <input
-											type="text" class="input_two" id="txtBillName"
-											name="txtBillName" placeholder="Billing Name" /> <label
+											type="text" class="input_two" maxlength="180" id="txtBillName"
+											value="${cust.custName}" name="txtBillName"
+											placeholder="Billing Name" /> <label
 											class="form-label-hint-error" id="errorBillName"
 											style="display: none;">please enter billing name</label>
 									</div>
 									<div class="place_row_r">
 										<label class="form-label-hint">Mobile Number</label> <input
-											type="text" class="input_two" id="txtMobile" maxlength="10"
+											value="${cust.custMobileNo}" type="text" class="input_two"
+											id="txtMobile" maxlength="10"
 											oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
 											name="txtMobile" placeholder="Mobile Number" /> <label
 											class="form-label-hint-error" id="errorMobile"
@@ -191,29 +202,37 @@
 								<div class="place_row">
 									<div class="place_row_l">
 										<label class="form-label-hint">Email ID</label> <input
-											type="text" class="input_two" id="txtEmail" name="txtEmail"
-											placeholder="Email ID" /> <label
+											value="${cust.emailId}" type="text" class="input_two"
+											id="txtEmail" name="txtEmail" placeholder="Email ID" /> <label
 											class="form-label-hint-error" id="errorEmail"
 											style="display: none;">please enter email id</label> <label
 											class="form-label-hint-error" id="errorEmailInvalid"
 											style="display: none;">invalid email id</label>
 									</div>
 									<div class="place_row_r">
-									<label class="form-label-hint" style="display: block;">Gender</label>
+										<label class="form-label-hint" style="display: block;">Gender</label>
 										<!-- <div class="gender_l">Gender</div> -->
 										<div class="gender_r">
 											<div class="radio_1 gender">
 												<ul>
-													<li><input type="radio" id="a-option" name="selector"
-														checked="checked"> <label for="a-option">Male</label>
+													<li><input type="radio" id="a-option" name="gender"
+														value="1" ${cust.custGender==1 ? 'checked' : '' }>
+														<label for="a-option">Male</label>
 														<div class="check"></div></li>
 
-													<li><input type="radio" id="b-option" name="selector">
+													<li><input type="radio" id="b-option" name="gender"
+														value="2" ${cust.custGender==2 ? 'checked' : '' }>
 														<label for="b-option">Female</label>
 														<div class="check">
 															<div class="inside"></div>
 														</div></li>
 
+													<li><input type="radio" id="c-option" name="gender"
+														value="3" ${cust.custGender==3 ? 'checked' : '' }>
+														<label for="c-option">Other</label>
+														<div class="check">
+															<div class="inside"></div>
+														</div></li>
 												</ul>
 											</div>
 										</div>
@@ -225,14 +244,14 @@
 									<div class="place_row_l">
 										<label class="form-label-hint">Date of Birth</label> <input
 											type="text" class="input_two" id="txtDob" name="txtDob"
-											placeholder="Date of Birth" /> <label
+											value="${cust.dateOfBirth}" placeholder="Date of Birth" /> <label
 											class="form-label-hint-error" id="errorDob"
 											style="display: none;">please enter date of birth</label>
 									</div>
 									<div class="place_row_r">
-										<label class="form-label-hint">GST Number</label> <input
-											type="text" class="input_two" id="txtGst" name="txtGst"
-											placeholder="GST Number" /> <label
+										<label class="form-label-hint">GST Number</label> <input style="text-transform: uppercase;"
+											type="text" class="input_two" id="txtGst" name="txtGst" maxlength="15"
+											placeholder="GST Number" value="${cust.exVar2}"/> <label
 											class="form-label-hint-error" id="errorGst"
 											style="display: none;">invalid GST number</label>
 									</div>
@@ -252,11 +271,11 @@
 
 										<label class="form-label-hint">Flat, House no.,
 											Building, Company, Apartment</label> <input type="text"
-											class="input_two" id="txtFlat" name="txtFlat"
+											class="input_two" id="txtFlat" name="txtFlat" value="${getFlat}"
 											placeholder="Flat, House no., Building, Company, Apartment" />
 
 										<label class="form-label-hint-error" id="errorFlat"
-											style="display: none;">required</label>
+											style="display: none;">please enter Flat, House No.</label>
 
 									</div>
 									<div class="place_row_r">
@@ -264,10 +283,10 @@
 
 										<label class="form-label-hint">Area, Colony, Street,
 											Sector, Village</label> <input type="text" class="input_two"
-											id="txtArea" name="txtArea"
+											id="txtArea" name="txtArea" value="${getArea}"
 											placeholder="Area, Colony, Street, Sector, Village" /> <label
 											class="form-label-hint-error" id="errorArea"
-											style="display: none;">required</label>
+											style="display: none;">please enter area</label>
 
 
 									</div>
@@ -280,10 +299,10 @@
 									<div class="place_row_l">
 
 										<label class="form-label-hint">Landmark</label> <input
-											type="text" class="input_two" id="txtLandmark"
+											type="text" class="input_two" id="txtLandmark" value="${getLandmark}"
 											name="txtLandmark" placeholder="Landmark" /> <label
 											class="form-label-hint-error" id="errorLandmark"
-											style="display: none;">required</label>
+											style="display: none;">please enter landmark</label>
 
 
 									</div>
@@ -291,27 +310,30 @@
 
 
 										<label class="form-label-hint">Pincode</label> <input
-											type="text" class="input_two" id="txtPincode"
+											type="text" class="input_two" id="txtPincode" value="${getPin}"
 											name="txtPincode" placeholder="Pincode" /> <label
 											class="form-label-hint-error" id="errorPincode"
-											style="display: none;">required</label>
+											style="display: none;">please enter pincode</label>
 
 									</div>
 									<div class="clr"></div>
 								</div>
 
-
+								<input type="hidden" name="editImg" id="editImg"
+									value="${cust.profilePic}">
 
 								<div class="place_row">
 									<input name="" type="submit" value="Save Profile"
 										class="pop_place_btn" />
 								</div>
 
-							</form>
+
+							</div>
 						</div>
+						<div class="clr"></div>
 					</div>
-					<div class="clr"></div>
-				</div>
+				</form>
+				<!--  -->
 
 			</div>
 		</div>
@@ -474,6 +496,125 @@
 
 
 	<script type="text/javascript">
+	
+	$(document).ready(function($) {
+
+		$("#submitInsert").submit(function(e) {
+			var isError = false;
+			var errMsg = "";
+
+			
+			if (!$("#txtBillName").val().trim()) {
+				isError = true;
+				$("#errorBillName").show();
+			} else {
+				$("#errorBillName").hide();
+			}
+			
+			if (!$("#txtMobile").val().trim()) {
+				isError = true;
+				$("#errorMobile").show();
+			} else if ($("#txtMobile").val().trim().length != 10) {
+				isError = true;
+				$("#errorMobile").hide();
+				$("#errorMobileInvalid").show();
+			} else {
+				$("#errorMobile").hide();
+				$("#errorMobileInvalid").hide();
+			}
+			
+			if (!$("#txtEmail").val().trim()) {
+				isError = true;
+				$("#errorEmail").show();
+			} else if (!ValidateEmail($("#txtEmail").val().trim())) {
+				isError = true;
+				$("#errorEmailInvalid").show();
+				$("#errorEmail").hide();
+			} else {
+				$("#errorEmailInvalid").hide();
+				$("#errorEmail").hide();
+			}
+			
+			if (!$("#txtGst").val().trim() || checkGST($("#txtGst").val().trim()) == false) {
+				isError = true;
+				$("#errorGst").show();
+			} else {
+				$("#errorGst").hide();
+			}
+			
+			if (!$("#txtFlat").val().trim()) {
+				isError = true;
+				$("#errorFlat").show();
+			} else {
+				$("#errorFlat").hide();
+			}
+			
+			if (!$("#txtArea").val().trim()) {
+				isError = true;
+				$("#errorArea").show();
+			} else {
+				$("#errorArea").hide();
+			}
+			
+			if (!$("#txtLandmark").val().trim()) {
+				isError = true;
+				$("#errorLandmark").show();
+			} else {
+				$("#errorLandmark").hide();
+			}
+			
+			if (!$("#txtPincode").val().trim()) {
+				isError = true;
+				$("#errorPincode").show();
+			} else {
+				$("#errorPincode").hide();
+			}
+
+			
+			if (!isError) {
+				
+				var r = confirm("Are you sure you want to Submit?");
+				if (r == true) {
+					form
+					.submit();
+				} else {
+				  
+				}
+				/* bootbox
+						.confirm({
+							title : 'Confirm ',
+							message : 'Are you sure you want to Submit?',
+							buttons : {
+								confirm : {
+									label : 'Yes',
+									className : 'btn-success'
+								},
+								cancel : {
+									label : 'Cancel',
+									className : 'btn-danger'
+								}
+							},
+							callback : function(
+									result) {
+								if (result) {
+									$(".btn").attr("disabled", true);
+									var form = document
+											.getElementById("submitInsert")
+									form
+											.submit();
+								}
+							}
+						}); */
+				//end ajax send this to php page
+				return false;
+			}//end of if !isError
+
+			return false;
+
+		});
+	}); 
+	
+	
 		function validateForm() {
 
 			var isError = true;
@@ -573,6 +714,22 @@
 			formatDate : 'Y-m-d',
 		//minDate:'-1970/01/02', // yesterday is minimum date
 		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+		});
+
+		var loadFile = function(event) {
+			document.getElementById('output').style.display = "none";
+			try {
+				var image = document.getElementById('output');
+				image.src = URL.createObjectURL(event.target.files[0]);
+				document.getElementById('output').style = "display:block"
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		
+		$('.maxlength-badge-position').maxlength({
+		    alwaysShow: true,
+		    placement: 'top'
 		});
 	</script>
 
