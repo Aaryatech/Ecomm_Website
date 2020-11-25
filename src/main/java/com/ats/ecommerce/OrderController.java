@@ -70,7 +70,7 @@ public class OrderController {
 
 			orderList = new ArrayList<GetOrderHeaderDisplay>(Arrays.asList(orderRepArr));
 			model.addAttribute("orders", orderList);
-			
+			model.addAttribute("imgPath", Constants.PROD_IMG_VIEW_URL);
 		} catch (Exception e) {
 			System.out.println("Exception in /orderhistory : " + e.getMessage());
 			e.printStackTrace();

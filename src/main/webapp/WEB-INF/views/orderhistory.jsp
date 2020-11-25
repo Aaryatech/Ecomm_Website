@@ -202,7 +202,8 @@
 
 														<div class="table_detail_l">
 															<img
-																src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
+																src="${imgPath}${orderDetail.itemPic}">
+																<%-- ${pageContext.request.contextPath}/resources/images/cake_open.jpg --%>
 														</div>
 														<div class="table_detail_r">
 															<div class="detail_one">
