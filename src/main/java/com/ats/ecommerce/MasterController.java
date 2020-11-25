@@ -108,8 +108,8 @@ public class MasterController {
 	public String updateCustProfile(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("doc") MultipartFile doc) {
 		try {
+			
 			Date date = new Date();
-
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = CommonUtility.getCurrentYMDDateTime();	

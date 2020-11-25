@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -124,438 +125,382 @@
 							class="table cart two table-hover table-expandable table-striped">
 							<thead>
 								<tr>
+									<th>Sr. No.</th>
 									<th>Order Number</th>
 									<th>Order Date</th>
-									<th>total Rupees</th>
+									<th>Total Amt.</th>
 									<th>Payment Mode</th>
 									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>#123456</td>
-									<td>01 Oct 2020</td>
-									<td class="prc_amt">Rs. 450.00</td>
-									<td><span class="paid">COD (Cash on Delivery)</span></td>
-									<td><span class="deliverd">Delivered</span></td>
-								</tr>
+								<c:forEach items="${orders}" var="orders" varStatus="count">
+									<tr>
+										<td>${count.index+1}</td>
+										<td>${orders.orderNo}</td>
+										<td>${orders.orderDateDisplay}</td>
+										<td class="prc_amt">Rs. ${orders.totalAmt}</td>
 
-								<tr>
-									<td colspan="6">
-										<div class="table_detail">
+										<!-- Payment Mode -->
+										<c:choose>
+											<c:when test="${orders.paymentMethod==1}">
+												<td><span class="paid">Cash</span></td>
+											</c:when>
+											<c:when test="${orders.paymentMethod==2}">
+												<td><span class="paid">Card</span></td>
+											</c:when>
+											<c:otherwise>
+												<td><span class="paid">E-Pay</span></td>
+											</c:otherwise>
+										</c:choose>
 
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
+
+										<!-- Order Status -->
+										<c:choose>
+											<c:when test="${orders.orderStatus==0}">
+												<td><span class="deliverd">Park Order</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==1}">
+												<td><span class="deliverd">Shop Confirmation
+														Pending</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==2}">
+												<td><span class="deliverd">Accept</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==3}">
+												<td><span class="deliverd">Processing</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==4}">
+												<td><span class="deliverd">Delivery Pending</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==5}">
+												<td><span class="deliverd">Delivered</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==6}">
+												<td><span class="deliverd">Rejected by Shop</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==7}">
+												<td><span class="deliverd">Return Order</span></td>
+											</c:when>
+											<c:when test="${orders.orderStatus==8}">
+												<td><span class="deliverd">Cancelled Order</span></td>
+											</c:when>
+											<c:otherwise>
+												<td><span class="deliverd">Online Payment
+														Pending</span></td>
+											</c:otherwise>
+										</c:choose>
+									</tr>
+
+
+
+									<tr>
+										<td colspan="6"><c:forEach
+												items="${orders.orderDetailList}" var="orderDetail">
+												<c:if test="${orderDetail.orderId==orders.orderId}">
+													<div class="table_detail">
+
+														<div class="table_detail_l">
+															<img
+																src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
+														</div>
+														<div class="table_detail_r">
+															<div class="detail_one">
+																Product name <span> ${orderDetail.itemName}</span>
+															</div>
+															<div class="detail_one">
+																Product Amount <span class="tab_prx">Rs.
+																	${orderDetail.mrp}</span>
+															</div>
+															<div class="detail_one">
+																Product Quantity <span class="tab_kg">
+																	${orderDetail.qty} ${orderDetail.itemUom}</span>
+															</div>
+															<div class="detail_one">
+																Total <span class="tab_amt">
+																	Rs.${orderDetail.totalAmt}</span>
+															</div>
+
+
+														</div>
+														<div class="clr"></div>
+
+													</div>
+												</c:if>
+												
+											</c:forEach> <!--table-->
+											<div class="cart_able_bx drop_tab">
+												<div class="table_title_one">Order Log</div>
+												<div class="table_bx">
+													<table class="cart inner">
+														<tr>
+															<th>Status</th>
+															<th>Action By</th>
+															<th>Date Time</th>
+															<th>Remark</th>
+														</tr>
+														<!--cart-row-1-->
+														<c:forEach items="${orders.orderTrailList}"
+															var="orderTrail">
+															<c:if test="${orderTrail.orderId==orders.orderId}">
+																<tr>
+																	<!-- Order Log Status -->
+																	<c:choose>
+																		<c:when test="${orderTrail.status==0}">
+																			<td><span class="deliverd">Park Order</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==1}">
+																			<td><span class="deliverd">Shop
+																					Confirmation Pending</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==2}">
+																			<td><span class="deliverd">Accept</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==3}">
+																			<td><span class="deliverd">Processing</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==4}">
+																			<td><span class="deliverd">Delivery
+																					Pending</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==5}">
+																			<td><span class="deliverd">Delivered</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==6}">
+																			<td><span class="deliverd">Rejected by
+																					Shop</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==7}">
+																			<td><span class="deliverd">Return Order</span></td>
+																		</c:when>
+																		<c:when test="${orderTrail.status==8}">
+																			<td><span class="deliverd">Cancelled
+																					Order</span></td>
+																		</c:when>
+																		<c:otherwise>
+																			<td><span class="deliverd">Online Payment
+																					Pending</span></td>
+																		</c:otherwise>
+																	</c:choose>
+																	<td>${orderTrail.userName}</td>
+																	<td>${orderTrail.trailDate}</td>
+																	<td>${orderTrail.exVar1}</td>
+																</tr>
+															</c:if>
+														</c:forEach>
+													</table>
 												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div>
-
-										<div class="table_detail">
-
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
-												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div>
-
-										<div class="table_detail">
-
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
-												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div> <!--table-->
-										<div class="cart_able_bx drop_tab">
-											<div class="table_title_one">Order Log</div>
-											<div class="table_bx">
-												<table class="cart inner">
-													<tr>
-														<th>Status</th>
-														<th>Action By</th>
-														<th>Date Time</th>
-														<th>Remark</th>
-													</tr>
-													<!--cart-row-1-->
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-
-
-
-												</table>
-											</div>
-										</div>
-
-
-
-									</td>
-								</tr>
-
-								<tr>
-									<td>#123456</td>
-									<td>01 Oct 2020</td>
-									<td class="prc_amt">Rs. 450.00</td>
-									<td><span class="paid">Online Payment</span></td>
-									<td><span class="pending_ord">Pending</span></td>
-								</tr>
-								<tr>
-									<td colspan="6">
-										<div class="table_detail">
-
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
-												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div>
-
-										<div class="table_detail">
-
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
-												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div>
-
-										<div class="table_detail">
-
-											<div class="table_detail_l">
-												<img
-													src="${pageContext.request.contextPath}/resources/images/cake_open.jpg">
-											</div>
-											<div class="table_detail_r">
-												<div class="detail_one">
-													Product name <span> Cars Lightning McQueen Cake</span>
-												</div>
-												<div class="detail_one">
-													Product Amount <span class="tab_prx">Rs. 450.00</span>
-												</div>
-												<div class="detail_one">
-													Product Quantity <span class="tab_kg"> 4 Kg.</span>
-												</div>
-												<div class="detail_one">
-													Total <span class="tab_amt"> Rs.1800.00</span>
-												</div>
-
-
-											</div>
-											<div class="clr"></div>
-										</div> <!--table-->
-										<div class="cart_able_bx drop_tab">
-											<div class="table_title_one">Order Log</div>
-											<div class="table_bx">
-												<table class="cart inner">
-													<tr>
-														<th>Status</th>
-														<th>Action By</th>
-														<th>Date Time</th>
-														<th>Remark</th>
-													</tr>
-													<!--cart-row-1-->
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-													<tr>
-														<td>Accept Order For Process By Shop</td>
-														<td>Ats User (Test Franchisee)</td>
-														<td>17-09-2020 12:30:04 PM</td>
-														<td>product Quality Owesome</td>
-													</tr>
-
-
-
-												</table>
-											</div>
-										</div>
-
-
-
-									</td>
-								</tr>
+											</div></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
 				</div>
-				
-				
-				
+
+
+
 				<!--mobile-table-->
-        <div class="mobile_table">
-            <!--1-->
-            <div class="row_1">
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Order Number</div>
-                    <div class="mob_quan_r font">#123456</div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Order Date</div>
-                    <div class="mob_quan_r font">01 Oct 2020</div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Total Rupees</div>
-                    <div class="mob_quan_r font"><div class="prc_amt">Rs. 450.00</div></div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Payment Mode</div>
-                    <div class="mob_quan_r font"><div class="paid mobile">COD (Cash on Delivery)</div></div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Status</div>
-                    <div class="mob_quan_r font"><span class="deliverd">Delivered</span></div>
-                    <div class="clr"></div>
-                </div>
-                
-                <div class="click_open">
-                    <div class="mob_quan">
-                        <div class="click_opn_l"> Product Pic </div>
-                        <div class="click_opn_r"> <img src="${pageContext.request.contextPath}/resources/images/cake_open.jpg" alt="cake_open"></div>
-                        <div class="clr"></div>
-                    </div>
-                    
-                    <div class="mob_quan">
-                        <div class="click_opn_l"> Product name </div>
-                        <div class="click_opn_r"> Cars Lightning McQueen Cake</div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">  Product Amount  </div>
-                        <div class="click_opn_r"><div class="prc_amt"> Rs. 450.00</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">    Product Quantity   </div>
-                        <div class="click_opn_r"><div class="prc_kg"> 4 K.G</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">Total</div>
-                        <div class="click_opn_r"><div class="paid mobile">  Rs.1800.00</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    
-                </div>
-                
-                <div class="mob_order_log">
-                   <h3 class="mobile_order"> Order Log</h3>
-                    <div class="order_row_1">
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Status</h4>
-                            <p>Accept Order For Process By Shop </p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Action By</h4>
-                            <p>Ats User (Test Franchisee) </p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Date Time</h4>
-                            <p>17-09-2020 12:30:04 PM</p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Remark</h4>
-                            <p>product Quality Owesome</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-            </div>
-            
-            <!--2-->
-            <div class="row_1">
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Order Number</div>
-                    <div class="mob_quan_r font">#123456</div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Order Date</div>
-                    <div class="mob_quan_r font">01 Oct 2020</div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Total Rupees</div>
-                    <div class="mob_quan_r font"><div class="prc_amt">Rs. 450.00</div></div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Payment Mode</div>
-                    <div class="mob_quan_r font"><div class="paid mobile">Online Payment</div></div>
-                    <div class="clr"></div>
-                </div>
-                <div class="mob_quan">
-                    <div class="mob_quan_l history">Status</div>
-                    <div class="mob_quan_r font"><span class="pending_ord">Pending</span></div>
-                    <div class="clr"></div>
-                </div>
-                
-                <div class="click_open">
-                    <div class="mob_quan">
-                        <div class="click_opn_l"> Product Pic </div>
-                        <div class="click_opn_r"> <img src="${pageContext.request.contextPath}/resources/images/cake_open.jpg" alt="cake_open"></div>
-                        <div class="clr"></div>
-                    </div>
-                    
-                    <div class="mob_quan">
-                        <div class="click_opn_l"> Product name </div>
-                        <div class="click_opn_r"> Cars Lightning McQueen Cake</div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">  Product Amount  </div>
-                        <div class="click_opn_r"><div class="prc_amt"> Rs. 450.00</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">    Product Quantity   </div>
-                        <div class="click_opn_r"><div class="prc_kg"> 4 K.G</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    <div class="mob_quan">
-                        <div class="click_opn_l">Total</div>
-                        <div class="click_opn_r"><div class="paid mobile">  Rs.1800.00</div></div>
-                        <div class="clr"></div>
-                    </div>
-                    
-                </div>
-                
-                <div class="mob_order_log">
-                   <h3 class="mobile_order"> Order Log</h3>
-                    <div class="order_row_1">
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Status</h4>
-                            <p>Accept Order For Process By Shop </p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Action By</h4>
-                            <p>Ats User (Test Franchisee) </p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Date Time</h4>
-                            <p>17-09-2020 12:30:04 PM</p>
-                        </div>
-                        <div class="mob_log_one">
-                            <h4 class="mob_status">Remark</h4>
-                            <p>product Quality Owesome</p>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-            </div>
-        </div>
-				
+				<div class="mobile_table">
+					<!--1-->
+					<div class="row_1">
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Order Number</div>
+							<div class="mob_quan_r font">#123456</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Order Date</div>
+							<div class="mob_quan_r font">01 Oct 2020</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Total Rupees</div>
+							<div class="mob_quan_r font">
+								<div class="prc_amt">Rs. 450.00</div>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Payment Mode</div>
+							<div class="mob_quan_r font">
+								<div class="paid mobile">COD (Cash on Delivery)</div>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Status</div>
+							<div class="mob_quan_r font">
+								<span class="deliverd">Delivered</span>
+							</div>
+							<div class="clr"></div>
+						</div>
+
+						<div class="click_open">
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Pic</div>
+								<div class="click_opn_r">
+									<img
+										src="${pageContext.request.contextPath}/resources/images/cake_open.jpg"
+										alt="cake_open">
+								</div>
+								<div class="clr"></div>
+							</div>
+
+							<div class="mob_quan">
+								<div class="click_opn_l">Product name</div>
+								<div class="click_opn_r">Cars Lightning McQueen Cake</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Amount</div>
+								<div class="click_opn_r">
+									<div class="prc_amt">Rs. 450.00</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Quantity</div>
+								<div class="click_opn_r">
+									<div class="prc_kg">4 K.G</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Total</div>
+								<div class="click_opn_r">
+									<div class="paid mobile">Rs.1800.00</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+
+						</div>
+
+						<div class="mob_order_log">
+							<h3 class="mobile_order">Order Log</h3>
+							<div class="order_row_1">
+								<div class="mob_log_one">
+									<h4 class="mob_status">Status</h4>
+									<p>Accept Order For Process By Shop</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Action By</h4>
+									<p>Ats User (Test Franchisee)</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Date Time</h4>
+									<p>17-09-2020 12:30:04 PM</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Remark</h4>
+									<p>product Quality Owesome</p>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<!--2-->
+					<div class="row_1">
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Order Number</div>
+							<div class="mob_quan_r font">#123456</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Order Date</div>
+							<div class="mob_quan_r font">01 Oct 2020</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Total Rupees</div>
+							<div class="mob_quan_r font">
+								<div class="prc_amt">Rs. 450.00</div>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Payment Mode</div>
+							<div class="mob_quan_r font">
+								<div class="paid mobile">Online Payment</div>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="mob_quan">
+							<div class="mob_quan_l history">Status</div>
+							<div class="mob_quan_r font">
+								<span class="pending_ord">Pending</span>
+							</div>
+							<div class="clr"></div>
+						</div>
+
+						<div class="click_open">
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Pic</div>
+								<div class="click_opn_r">
+									<img
+										src="${pageContext.request.contextPath}/resources/images/cake_open.jpg"
+										alt="cake_open">
+								</div>
+								<div class="clr"></div>
+							</div>
+
+							<div class="mob_quan">
+								<div class="click_opn_l">Product name</div>
+								<div class="click_opn_r">Cars Lightning McQueen Cake</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Amount</div>
+								<div class="click_opn_r">
+									<div class="prc_amt">Rs. 450.00</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Product Quantity</div>
+								<div class="click_opn_r">
+									<div class="prc_kg">4 K.G</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="click_opn_l">Total</div>
+								<div class="click_opn_r">
+									<div class="paid mobile">Rs.1800.00</div>
+								</div>
+								<div class="clr"></div>
+							</div>
+
+						</div>
+
+						<div class="mob_order_log">
+							<h3 class="mobile_order">Order Log</h3>
+							<div class="order_row_1">
+								<div class="mob_log_one">
+									<h4 class="mob_status">Status</h4>
+									<p>Accept Order For Process By Shop</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Action By</h4>
+									<p>Ats User (Test Franchisee)</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Date Time</h4>
+									<p>17-09-2020 12:30:04 PM</p>
+								</div>
+								<div class="mob_log_one">
+									<h4 class="mob_status">Remark</h4>
+									<p>product Quality Owesome</p>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
 
 			</div>
 		</div>
