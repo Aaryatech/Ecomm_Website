@@ -555,6 +555,60 @@
 						<!--product-row-3-->
 			</div>
 		</div>
+		
+		
+		<!-- Prod Filter For Evenr Based Cakes -->
+<div class="find_store">
+			<div class="wrapper">
+<h2 class="sec_title">
+						<center>
+							Shop by ${festiveEvent.eventName} <span>3 Hour Delivery &amp;
+								Free Shipping in India</span>
+						</center>
+					</h2>
+
+				<div class="product_boxes">
+				<c:forEach items="${festiveEvent.productIds}" var="prodId"
+		varStatus="count">
+					
+
+					<ul>
+						<!--product-row-1-->
+							<c:forEach items="${prodHeaderList}" var="product"
+								varStatus="prodCount">
+								<c:choose>
+									<c:when test="${product.productId==prodId}">
+						<li>
+							<div class="cake_one product_padd">
+								<div class="cake_pic">
+									<img src="${prodImgUrl}${product.prodImagePrimary}" data-src="${prodImgUrl}${product.prodImagePrimary}"
+									alt="" class="mobile_fit transition">
+									<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
+									<div class="cake_prc">
+										<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
+											class="off_prc"><i class="fa fa-inr"
+											aria-hidden="true"></i>${product.defaultPrice}</span> <span class="prc_off">(23%
+											Off)</span>
+									</div>
+								</div>
+								<div class="cake_container">
+									<h4 class="cake_nm single_row">
+									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+									</h4>
+								</div>
+							</div>
+						</li>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+						</c:choose>
+						</c:forEach>
+						</ul>
+						</c:forEach>
+				</div>
+			</div>
+		</div>
+<!--End of Prod Filter For Event Based Cakes  -->		
 	</div>
 
 

@@ -163,44 +163,18 @@
 	<div class="testimonial_bx">
 		<div class="wrapper">
 			<section class="regular-cake slider">
+			<c:forEach items="${festiveEventList}" var="festEvent"
+		varStatus="count">
 				<div>
 					<div class="festival_offer">
-						<a href="product-filter.html"><img
-							src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
-							class="lazy"
-							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
+				<a href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}" title="${festEvent.description}">${festEvent.eventName}
+<img src="${festEventImgUrl}${festEvent.exVar2}"
+	class="lazy" data-src="${festEventImgUrl}${festEvent.exVar2}"
 							alt=""></a>
 					</div>
 				</div>
-				<div>
-					<div class="festival_offer">
-						<a href="product-filter.html"><img
-							src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
-							class="lazy"
-							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
-							alt=""></a>
-					</div>
-				</div>
-				<div>
-					<div class="festival_offer">
-						<a href="product-filter.html"><img
-							src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
-							class="lazy"
-							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_1.jpg"
-							alt=""></a>
-					</div>
-				</div>
-				<div>
-					<div class="festival_offer">
-						<a href="product-filter.html"><img
-							src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
-							class="lazy"
-							data-src="${pageContext.request.contextPath}/resources/images/festival_banner_2.jpg"
-							alt=""></a>
-					</div>
-				</div>
-
-			</section>
+				</c:forEach>
+				</section>
 		</div>
 	</div>
 
@@ -529,34 +503,30 @@
 	<!--testimonial-box-->
 	<div class="testimonial_bx">
 		<h2 class="sec_title">
-			<center onclick="clearData()">
+			<center >
 				Our Testimonials <span>Customer Reviews regarding to our Shop</span>
 			</center>
 		</h2>
 
 		<div class="wrapper">
 			<section class="regular slider">
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
+				<c:forEach items="${testMonialList}" var="testmoni" varStatus="count">
+            <div>
+              <div class="testimonial_one">
+                <i class="fa fa-quote-left" aria-hidden="true"></i>  
+                <p class="testimoial_txt">${testmoni.messages}</p>
 
-						<div class="testimonial_nm">
-							<img src="#" class="lazy"
-								data-src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
+                <div class="testimonial_nm">
+                    <img src="${TetstimonialImgUrl}${testmoni.images}" alt="">
+                    <h2 class="testimonial_date">
+                        ${testmoni.name}
+                        <span>Date : date</span>
+                       <!--  <span>Location: location</span> -->
+                    </h2>
+                  </div>  
+              </div>
+ </div>
+ </c:forEach>
 			</section>
 		</div>
 

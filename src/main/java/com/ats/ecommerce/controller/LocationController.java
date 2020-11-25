@@ -77,6 +77,7 @@ public class LocationController {
 				model.addAttribute("TetstimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 				
 				
+
 				returnPage = "landing";
 			}
 

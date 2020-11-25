@@ -97,9 +97,18 @@ public class HomeController {
 
 		model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 		model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
-
-		// System.err.println("data.getFeProductHeadList() "
-		// +data.getFeProductHeadList());
+		model.addAttribute("festiveEventList", data.getFestEventList());
+		
+		model.addAttribute("festiveEventList", data.getFestEventList());
+		model.addAttribute("festEventImgUrl", Constants.FEST_IMG_VIEW_URL);
+		
+		 System.err.println("Fest Event "+data.getFestEventList());
+		 
+		 
+		 model.addAttribute("testMonialList", data.getTestimonialList());
+			model.addAttribute("TetstimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+			
+			
 		return "home";
 	}
 
@@ -133,7 +142,26 @@ public class HomeController {
 		return data;
 	}
 	
-	
+	//Sachin 25-11-2020
+	//showEventBasedCakes
+	@RequestMapping(value = "/showEventBasedCakes/{index}", method = RequestMethod.GET)
+	public String showEventBasedCakesIndex(@PathVariable int index, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		String returnPage = "productlist";
+		try {
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+
+			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+		
+			model.addAttribute("festiveEvent", data.getFestEventList().get(index));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnPage;
+		
+		
+	}
 
 	@RequestMapping(value = "/landing", method = RequestMethod.GET)
 	public String landing(Locale locale, Model model) {
