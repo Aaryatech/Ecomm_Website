@@ -8,8 +8,10 @@
 <html>
 <style type="text/css">
 .ui-autocomplete{
-z-index: 100;
+position: relative; z-index:999999;
 }
+#txtPlaces, #city, .txtPlaces{position: relative; z-index:999999;}
+.pac-container{z-index:999999 !important;}
 </style>
 <jsp:include page="/WEB-INF/views/include/customjscss.jsp"></jsp:include>
 
@@ -212,7 +214,7 @@ z-index: 100;
                 <p class="testimoial_txt">${testmoni.messages}</p>
 
                 <div class="testimonial_nm">
-                    <img src="${TetstimonialImgUrl}${testmoni.images}" alt="">
+                    <img src="${TestimonialImgUrl}${testmoni.images}" alt="">
                     <h2 class="testimonial_date">
                         ${testmoni.name}
                         <span>Date : date</span>

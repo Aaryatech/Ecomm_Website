@@ -193,7 +193,7 @@
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
 									: 0.5 kg</li> -->
 <c:if test="${prodHeader.defaultShapeId!=0}">
-								<li>Shape${prodHeader.defaultShapeId}<select class="select-css" id="shape" name="shape">
+								<li>Shape<select class="select-css" id="shape" name="shape">
 										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -655,6 +655,89 @@ function addToCartClick(productId){
 
 	}//end of Function addToCartClick
 	
+	
+	<script type="text/javascript">
+	function changeWtFlavor(productId) {
+		var selectWt = document.getElementById("weight").value;
+		var selectFlav = 0;
+		try {
+			selectFlav = document.getElementById("flavor").value;
+		} catch (e) {
+			selectFlav = 0;
+		}
+		if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+			selectFlav = 0;
+		}
+		
+		//Shape
+		
+		var selectShape=0;
+		try{
+			selectShape = document.getElementById("shape").value;
+		}catch (e) {
+			selectShape=0;
+		}
+		
+		//End of Shape
+		
+		var isVeg=$('input[name="vnv_radio"]:checked').val();
+		
+		var isVeg = $('input[name="vnv_radio"]:checked').val();
+		var dataList = '${sessionScope.dataList}';
+		var data = $.parseJSON(dataList);
+		var selectVegNon = "Veg";
+		var prodHead = data.feProductHeadList;
+		var prodMaster;
+		for (var h = 0; h < prodHead.length; h++) {
+			if (parseInt(productId) == parseInt(prodHead[h].productId)) {
+				prodMaster = prodHead[h];
+				if (typeof (isVeg) == "undefined") {
+					selectVegNon = prodMaster.defaultVegNonvegName;
+				} else if (parseInt(isVeg) == 1) {
+					selectVegNon = "NonVeg";
+				} else {
+					selectVegNon = "Veg";
+				}
+				break;
+			}
+		}//end of prodHead For H
+		var prodDetail = prodMaster.prodDetailList;
+		for (var d = 0; d < prodDetail.length; d++) {
+			if (parseInt(prodMaster.defaultShapeId) == parseInt(prodDetail[d].shapeId)) {
+				if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+					if (prodDetail[d].vegNonvegName == selectVegNon) {
+						//Calc Price;
+						if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+
+							var qty = 1;
+						document.getElementById("cake_prc").innerHTML = ""+prodDetail[d].actualRate;
+						actualRate = prodDetail[d].actualRate;
+							var priceDiff = parseFloat(prodDetail[d].displayRate) - parseFloat(actualRate);
+							offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
+							//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
+							if(parseFloat(priceDiff)<=1){
+								priceDiff=10;
+							}dfd
+								document.getElementById('off_prc').innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
+				//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
+							document.getElementById("prc_off").innerHTML = ""+offPer.toFixed(2);
+							break;
+						}
+						//alert("Do calc");
+					} else {
+						continue;
+					}
+				} else {
+					continue;
+				}
+			} else {
+				continue;
+			}
+		}//end of For prodDetailList pd
+
+	}//end of Function changeWtFlavor
+</script>
+
 function moveCursor(){
 	$('html,body').animate({
 	        scrollTop: $(".prod_disc").offset().top},

@@ -74,7 +74,7 @@ public class LocationController {
 						FETestimonial[].class);
 				List<FETestimonial> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 				model.addAttribute("testMonialList", testMonialList);
-				model.addAttribute("TetstimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 				
 				
 

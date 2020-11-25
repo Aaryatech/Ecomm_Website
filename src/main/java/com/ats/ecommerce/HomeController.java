@@ -106,7 +106,7 @@ public class HomeController {
 		 
 		 
 		 model.addAttribute("testMonialList", data.getTestimonialList());
-			model.addAttribute("TetstimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 			
 			
 		return "home";

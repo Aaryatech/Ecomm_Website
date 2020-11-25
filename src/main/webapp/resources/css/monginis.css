@@ -163,7 +163,7 @@ header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 1
 .input_search::-webkit-input-placeholder {color: #a6a6a6 !important;opacity: 1 !important;}
 .input_search:-moz-placeholder { color: #a6a6a6 !important;opacity: 1 !important;}
 .input_search::-moz-placeholder {color: #a6a6a6!important;opacity: 1 !important;}
-.search_one i{position: absolute; left: 12px; top: 12px; color: #a6a5a5; font-size: 16px;}
+.search_one i{position: absolute; left: 12px; top: 12px; color: #a6a5a5; z-index:999999; font-size: 16px;}
 
 /*Styling Selectbox*/
 .dropdown {width: 100%; background:url(../images/ddarow.png) no-repeat right top; background-position:97% 19px; display: inline-block; background-color: #FFF; border-bottom:none; transition: all .5s ease; position: relative; font-size: 16px; color: #a6a6a6; height: 100%; text-align: left; border-radius: 3px;}
@@ -392,7 +392,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 
 .cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
 .cake_prc i{font-size: 16px;}
-.off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; display: inline-block;}
+.off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex;}
 .off_prc i{font-size: 14px;}
 .prc_off{display: inline-block; margin: 0 0 0 5px; color: #ec268f; font-size: 14px; font-family: 'Hind-Medium';}
 

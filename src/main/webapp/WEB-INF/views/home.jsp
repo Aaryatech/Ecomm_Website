@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ page import = "java.util.Date" %>
+	<%@ page import = "java.text.SimpleDateFormat" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -165,6 +167,19 @@
 			<section class="regular-cake slider">
 			<c:forEach items="${festiveEventList}" var="festEvent"
 		varStatus="count">
+		<c:set var="td" value="${festEvent.toDate}"></c:set>
+		<%String dt=(String)pageContext.getAttribute("td");
+		Date curDate=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
+		Date date=sdf.parse(dt);
+		if(curDate.compareTo(date)<=0){
+			pageContext.setAttribute("show",1);
+		}else{
+			pageContext.setAttribute("show",0);
+		}
+		%>
+		<c:set var="isShow" value="${show}"></c:set>
+		<c:if test="${isShow==1}">
 				<div>
 					<div class="festival_offer">
 				<a href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}" title="${festEvent.description}">${festEvent.eventName}
@@ -173,6 +188,7 @@
 							alt=""></a>
 					</div>
 				</div>
+				</c:if>
 				</c:forEach>
 				</section>
 		</div>
@@ -279,7 +295,7 @@
 														<div class="cake_dropdown_r">
 															<!-- <div class="custom-select-new1"> -->
 															<select class="select-css" id="wt${product.productId}"
-																onchange="changeWtFlavor('${product.productId}')">
+																 onchange="changeWtFlavor('${product.productId}')" >
 																<option value="7">7</option>
 																<c:forEach items="${product.availInWeights}"
 																	var="prodDetailwt">
@@ -517,7 +533,7 @@
                 <p class="testimoial_txt">${testmoni.messages}</p>
 
                 <div class="testimonial_nm">
-                    <img src="${TetstimonialImgUrl}${testmoni.images}" alt="">
+                    <img src="${TestimonialImgUrl}${testmoni.images}" alt="">
                     <h2 class="testimonial_date">
                         ${testmoni.name}
                         <span>Date : date</span>
@@ -591,18 +607,6 @@
 
 
 	<script type="text/javascript">
-		function changeFlavor(productId) {
-			//console.log("Sachin");
-			var x = "${sessionScope.curDateTime}";
-			var dataList = '${sessionScope.dataList}';
-			var data = $.parseJSON(dataList);
-			//	alert(JSON.stringify(data));
-			var prodHead = JSON.stringify(data.feProductHeadList);
-			console.log(JSON.parse(prodHead).length);
-			var selectWt = document.getElementById("wt" + productId).value;
-			var selectFlav = document.getElementById("flav" + productId).value;
-			//alert("selectWt " + selectWt + "selectFlav " + selectFlav);
-		}//End of changeFlavor
 		function changeWtFlavor(productId) {
 			var selectWt = document.getElementById("wt" + productId).value;
 			var selectFlav = 0;
@@ -614,8 +618,7 @@
 			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
 				selectFlav = 0;
 			}
-			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked')
-					.val();
+			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked').val();
 			var dataList = '${sessionScope.dataList}';
 			var data = $.parseJSON(dataList);
 			var selectVegNon = "Veg";
@@ -642,15 +645,11 @@
 							//Calc Price;
 							if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
 
-								//alert(prodDetail[d].configDetailId);
 								var qty = 1;
-								document.getElementById("cake_prc" + productId).innerHTML = ""
-										+ prodDetail[d].actualRate;
-								actualRate = prodDetail[d].actualRate;
-								var priceDiff = parseFloat(prodDetail[d].displayRate)
-										- parseFloat(actualRate);
-								offPer = (parseFloat(priceDiff)
-										/ parseFloat(prodDetail[d].displayRate) * 100);
+							document.getElementById("cake_prc" + productId).innerHTML = ""+prodDetail[d].actualRate;
+							actualRate = prodDetail[d].actualRate;
+								var priceDiff = parseFloat(prodDetail[d].displayRate) - parseFloat(actualRate);
+								offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
 								//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
 								if(parseFloat(priceDiff)<=1){
 									priceDiff=10;
@@ -673,7 +672,8 @@
 			}//end of For prodDetailList pd
 
 		}//end of Function changeWtFlavor
-
+</script>
+<script type="text/javascript">
 		function addToCartClick(productId) {
 			//alert("In addToCartClick " +productId);
 			var selectWt = document.getElementById("wt" + productId).value;
