@@ -160,10 +160,10 @@ public class HomeController {
 //		return "profile";
 //	}
 
-	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
-	public String orderHistory(Locale locale, Model model) {
-		return "orderhistory";
-	}
+//	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
+//	public String orderHistory(Locale locale, Model model) {
+//		return "orderhistory";
+//	}
 
 	@RequestMapping(value = "/viewcart", method = RequestMethod.GET)
 	public String viewCart(Locale locale, Model model) {
