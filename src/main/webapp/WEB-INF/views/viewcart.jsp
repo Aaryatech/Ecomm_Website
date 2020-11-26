@@ -372,10 +372,10 @@
 
 
 								<script type="text/javascript">
-										$(document).ready(function() {
-											$('#place').popup();
-										});
-									</script>
+									$(document).ready(function() {
+										$('#place').popup();
+									});
+								</script>
 
 
 
@@ -723,8 +723,8 @@
 
 
 						<div class="place_row">
-							<input name="" type="button" value="Place Order" id="place_orderBtn"
-								class="pop_place_btn" onclick="placeOrder()" />
+							<input name="" type="button" value="Place Order"
+								id="place_orderBtn" class="pop_place_btn" onclick="placeOrder()" />
 						</div>
 
 						<!-- </form> -->
@@ -1607,81 +1607,91 @@
 	</script>
 	<!------------------------------------------------------- Place Order--------------------------------------------------- -->
 	<script type="text/javascript">
-	function placeOrder() {
-		var cartValue = sessionStorage.getItem("cartValue");
-		var table = $.parseJSON(cartValue);		
-		
-		$.getJSON('${placeOrder}', {
-			promoCode : $("#promoCode").val(),
-			paymentMode : $("#paymentMode").val(),
-			delvrInst : $("#delvrInst").val(),
-			delvrDateTime : $("#delvrDateTime").val(),
-			
-			txtCity : $("#txtCity").val(),
-			txtBillName : $("#txtBillName").val(),
-			txtMobile : $("#txtMobile").val(),
-			txtEmail : $("#txtEmail").val(),
-			gender : $("input[name='gender']:checked").val(),
-			txtDob : $("#txtDob").val(),
-			txtGst : $("#txtGst").val(),
-			
-			txtDelvFlat : $("#txtDelvFlat").val(),
-			txtDelvArea : $("#txtDelvArea").val(),
-			txtDelvLandmark : $("#txtDelvLandmark").val(),
-			txtDelvPincode : $("#txtDelvPincode").val(),
-			
-			txtBillingFlat : $("#txtBillingFlat").val(),
-			txtBillingArea : $("#txtBillingArea").val(),
-			txtBillingLandmark : $("#txtBillingLandmark").val(),
-			txtBillingPincode : $("#txtBillingPincode").val(),
-			
-			itemData : JSON.stringify(table),
-			
-			ajax : 'true'
-		}, function(data) {
-			//alert(JSON.stringify(data.error));
-			if (data.error==false) {
-				
-				$("#promoCode").val('');
-				$("#paymentMode").val('');
-				$("#delvrInst").val('');
-				$("#delvrDateTime").val('');
-				
-				$("#txtCity").val('');
-				$("#txtBillName").val('');
-				$("#txtMobile").val('');
-				$("#txtEmail").val('');
-				$("#txtGst").val('');
-				
-				$("#txtDelvFlat").val('');
-				$("#txtDelvArea").val('');
-				$("#txtDelvLandmark").val('');
-				$("#txtDelvPincode").val('');
-				
-				$("#txtBillingFlat").val('');
-				$("#txtBillingArea").val('');
-				$("#txtBillingLandmark").val('');
-				$("#txtBillingPincode").val('');
-				
-				var table = [];
-				sessionStorage.setItem("cartValue", JSON.stringify(table));
-				  $("#place").hide();
-			
-			}
-			var url = '${pageContext.request.contextPath}/home';
-			window.location = url;
-		});
-	}
-	
-	
-	$('#txtDelvPincode').on('input', function() {
-		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
-	
-	$('#txtBillingPincode').on('input', function() {
-		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-		});
+		function placeOrder() {
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
 
+			var r = confirm("Are you sure you want to submit?");
+			if (r == true) {
+
+				$.getJSON('${placeOrder}', {
+					promoCode : $("#promoCode").val(),
+					paymentMode : $("#paymentMode").val(),
+					delvrInst : $("#delvrInst").val(),
+					delvrDateTime : $("#delvrDateTime").val(),
+
+					txtCity : $("#txtCity").val(),
+					txtBillName : $("#txtBillName").val(),
+					txtMobile : $("#txtMobile").val(),
+					txtEmail : $("#txtEmail").val(),
+					gender : $("input[name='gender']:checked").val(),
+					txtDob : $("#txtDob").val(),
+					txtGst : $("#txtGst").val(),
+
+					txtDelvFlat : $("#txtDelvFlat").val(),
+					txtDelvArea : $("#txtDelvArea").val(),
+					txtDelvLandmark : $("#txtDelvLandmark").val(),
+					txtDelvPincode : $("#txtDelvPincode").val(),
+
+					txtBillingFlat : $("#txtBillingFlat").val(),
+					txtBillingArea : $("#txtBillingArea").val(),
+					txtBillingLandmark : $("#txtBillingLandmark").val(),
+					txtBillingPincode : $("#txtBillingPincode").val(),
+
+					itemData : JSON.stringify(table),
+
+					ajax : 'true'
+				}, function(data) {
+					//alert(JSON.stringify(data.error));
+					if (data.error == false) {
+
+						$("#promoCode").val('');
+						$("#paymentMode").val('');
+						$("#delvrInst").val('');
+						$("#delvrDateTime").val('');
+
+						$("#txtCity").val('');
+						$("#txtBillName").val('');
+						$("#txtMobile").val('');
+						$("#txtEmail").val('');
+						$("#txtGst").val('');
+
+						$("#txtDelvFlat").val('');
+						$("#txtDelvArea").val('');
+						$("#txtDelvLandmark").val('');
+						$("#txtDelvPincode").val('');
+
+						$("#txtBillingFlat").val('');
+						$("#txtBillingArea").val('');
+						$("#txtBillingLandmark").val('');
+						$("#txtBillingPincode").val('');
+
+						var table = [];
+						sessionStorage.setItem("cartValue", JSON
+								.stringify(table));
+						$("#place").hide();
+
+					}
+
+					var url = '${pageContext.request.contextPath}/home';
+					window.location = url;
+				});
+			}
+		}
+
+		$('#txtDelvPincode').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+
+		$('#txtBillingPincode').on(
+				'input',
+				function() {
+					this.value = this.value.replace(/[^0-9]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
 	</script>
 
 </body>
