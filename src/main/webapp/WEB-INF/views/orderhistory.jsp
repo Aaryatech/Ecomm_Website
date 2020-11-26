@@ -118,7 +118,7 @@
 		<!--product listing-->
 		<div class="find_store">
 			<div class="wrapper">
-
+				<!-- desktop table -->
 				<div class="cart_able_bx drop_tab">
 					<div class="table_bx">
 						<table

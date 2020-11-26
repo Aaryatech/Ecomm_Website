@@ -358,7 +358,7 @@
 								<div>
 
 									<input name="" type="button" class="place_btn place_open"
-										value="Place Order" />
+										value="Place Order" onclick="checkCustSession()" />
 								</div>
 
 
@@ -372,9 +372,26 @@
 
 
 								<script type="text/javascript">
-									$(document).ready(function() {
+								function checkCustSession(){
+									var sessCustId = '<%= session.getAttribute("custId") %>';
+									
+									if(sessCustId>0){
+										 $(document).ready(function() {
+												$('#place').popup();
+											}); 
+									}else{
+										var r = confirm("Please give your details");
+										if (r == true) {
+											var url = '${pageContext.request.contextPath}/addNewCustomer';
+											window.location = url;
+										}
+									}
+									
+								}
+								
+									/* $(document).ready(function() {
 										$('#place').popup();
-									});
+									}); */
 								</script>
 
 
@@ -616,7 +633,7 @@
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvFlat" name="txtDelvFlat"
+									id="txtDelvFlat" name="txtDelvFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
 
 								<label class="form-label-hint-error" id="errorDelvFlat"
@@ -625,7 +642,7 @@
 							</div>
 							<div class="place_row_r">
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvArea" name="txtDelvArea"
+									id="txtDelvArea" name="txtDelvArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
 									class="form-label-hint-error" id="errorDelvArea"
 									style="display: none;">please enter area, colony,
@@ -640,14 +657,14 @@
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvLandmark" name="txtDelvLandmark"
+									id="txtDelvLandmark" name="txtDelvLandmark" value="${getLandmark}"
 									placeholder="Landmark" /> <label class="form-label-hint-error"
 									id="errorDelvLandmark" style="display: none;">please
 									enter landmark</label>
 
 							</div>
 							<div class="place_row_r">
-								<input type="text" class="input_place" autocomplete="off"
+								<input type="text" class="input_place" autocomplete="off" value="${getPin}"
 									id="txtDelvPincode" name="txtDelvPincode" maxlength="6"
 									placeholder="Shipping Pincode" /> <label
 									class="form-label-hint-error" id="errorDelvPincode"

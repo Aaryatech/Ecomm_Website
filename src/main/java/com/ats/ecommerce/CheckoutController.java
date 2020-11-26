@@ -1,5 +1,6 @@
 package com.ats.ecommerce;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.DateConvertor;
 import com.atss.ecommerce.model.City;
+import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.Customer;
 import com.atss.ecommerce.model.Info;
 import com.atss.ecommerce.model.order.ItemJsonImportData;
@@ -41,26 +43,41 @@ public class CheckoutController {
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String viewCart(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		HttpSession session = request.getSession();
+		try {
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
-		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
-		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			int compId = (Integer) session.getAttribute("companyId");
+			map.add("compId", compId);
 
-		int compId = (Integer) session.getAttribute("companyId");
-		map.add("compId", compId);
+//		City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map, City[].class);
+//		List<City> cityList = new ArrayList<City>(Arrays.asList(cityArr));
 
-		City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map, City[].class);
-		List<City> cityList = new ArrayList<City>(Arrays.asList(cityArr));
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+					CityData[].class);
+			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 
-		model.addAttribute("cityList", cityList);
+			model.addAttribute("cityList", cityList);
 
-		map = new LinkedMultiValueMap<>();
-		int custId = (Integer) session.getAttribute("custId");
-		map.add("custId", custId);
-		Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map, Customer.class);
-		model.addAttribute("cust", cust);
-
+			map = new LinkedMultiValueMap<>();
+			int custId = (Integer) session.getAttribute("custId");
+			map.add("custId", custId);
+			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer.class);
+			model.addAttribute("cust", cust);
+			
+			String[] billAddress = cust.getExVar3().split("~");
+			model.addAttribute("getFlat", billAddress[0]);
+			model.addAttribute("getArea", billAddress[1]);
+			model.addAttribute("getLandmark", billAddress[2]);
+			model.addAttribute("getPin", billAddress[3]);
+			
+		} catch (Exception e) {
+			System.out.println("Exception in checkout : " + e.getMessage());
+		}
 		return "viewcart";
 	}
 
@@ -195,7 +212,7 @@ public class CheckoutController {
 				order.setIsAgent(0);
 				order.setOrderDeliveredBy(0);
 			}
-			
+
 			List<OrderDetail> orderDetailList = new ArrayList<>();
 
 			float grandTotal = 0;
@@ -263,11 +280,11 @@ public class CheckoutController {
 
 				finaTaxableAmt = Float.parseFloat(df.format(finaTaxableAmt + taxableAmt));
 				finaTaxAmt = Float.parseFloat(df.format(finaTaxAmt + taxAmt));
-				
-				orderDetail.setDelStatus(1);				
+
+				orderDetail.setDelStatus(1);
 				orderDetailList.add(orderDetail);
 			}
-			
+
 			finaTotalAmt = finaTaxableAmt + finaTaxAmt;
 
 			order.setDiscAmt(totalDiscAmt - applyWalletAmt);
