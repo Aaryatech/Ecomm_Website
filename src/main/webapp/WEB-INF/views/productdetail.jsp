@@ -138,13 +138,13 @@
 											class="xzoom-gallery" width="80"
 											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
-											title="The description goes here"></a>
+											title="${prodHeader.productDesc}"></a>
 										<c:forEach items="${prodHeader.productImages}"
 											var="prod_image">
 											<a href="${prodImgUrl}${prod_image}"><img
 												class="xzoom-gallery" width="80"
 												src="${prodImgUrl}${prod_image}"
-												title="The description goes here"></a>
+												title="${prodHeader.productDesc}"></a>
 										</c:forEach>
 									</div>
 								</div>
@@ -193,7 +193,8 @@
 								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
 									: 0.5 kg</li> -->
 <c:if test="${prodHeader.defaultShapeId!=0}">
-								<li>Shape<select class="select-css" id="shape" name="shape">
+								<li>Shape<select class="select-css" id="shape" name="shape" 
+								onchange="changeWtFlavor('${prodHeader.productId}')" >
 										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -223,7 +224,8 @@
 								</select></li></c:if>
 <c:if test="${prodHeader.defaultFlavorId!=0}">
 
-								<li>Flavor<select class="select-css" name="flavor" id="flavor">
+								<li>Flavor<select class="select-css" name="flavor" id="flavor" 
+								onchange="changeWtFlavor('${prodHeader.productId}')" >
 									<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
 											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
 												varStatus="flavorFilterCount">
@@ -250,7 +252,7 @@
 										</c:forEach>
 								</select></li></c:if>
 
-								<li>Weight<select class="select-css" id="weight">
+								<li>Weight<select class="select-css" id="weight" onchange="changeWtFlavor('${prodHeader.productId}')">
 											<c:forEach items="${prodHeader.availInWeights}"
 											 var="prodDetailwt">
 											<option value="${prodDetailwt}">${prodDetailwt}</option>

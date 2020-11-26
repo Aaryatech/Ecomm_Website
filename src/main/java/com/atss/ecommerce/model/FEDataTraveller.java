@@ -3,6 +3,7 @@ package com.atss.ecommerce.model;
 import java.util.List;
 
 
+
 public class FEDataTraveller {
 
 	List<FEProductHeader> feProductHeadList; //each header includes list of details inside
@@ -22,6 +23,8 @@ public class FEDataTraveller {
 	 List<Franchise> frList;   //All Active Franchise List by Master company Id
 
 	 List<FestiveEvent> festEventList;  //All Festive Events List and comma separated productIds 24-11-2020
+
+	 List<CateFilterConfig> catFilterConfig;//Filter configured to Category 26-11-2020
 
 	 
 	public List<FEProductHeader> getFeProductHeadList() {
