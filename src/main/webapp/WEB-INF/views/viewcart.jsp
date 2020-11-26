@@ -648,7 +648,7 @@
 							</div>
 							<div class="place_row_r">
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvPincode" name="txtDelvPincode"
+									id="txtDelvPincode" name="txtDelvPincode" maxlength="6"
 									placeholder="Shipping Pincode" /> <label
 									class="form-label-hint-error" id="errorDelvPincode"
 									style="display: none;">please enter pincode</label>
@@ -1639,10 +1639,34 @@
 			
 			ajax : 'true'
 		}, function(data) {
-		//	alert(JSON.stringify(data));
-			if (!error) {
-				sessionStorage.removeItem("cartValue");
-			//	alert("Session removed")
+			//alert(JSON.stringify(data.error));
+			if (data.error==false) {
+				
+				$("#promoCode").val('');
+				$("#paymentMode").val('');
+				$("#delvrInst").val('');
+				$("#delvrDateTime").val('');
+				
+				$("#txtCity").val('');
+				$("#txtBillName").val('');
+				$("#txtMobile").val('');
+				$("#txtEmail").val('');
+				$("#txtGst").val('');
+				
+				$("#txtDelvFlat").val('');
+				$("#txtDelvArea").val('');
+				$("#txtDelvLandmark").val('');
+				$("#txtDelvPincode").val('');
+				
+				$("#txtBillingFlat").val('');
+				$("#txtBillingArea").val('');
+				$("#txtBillingLandmark").val('');
+				$("#txtBillingPincode").val('');
+				
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+				  $("#place").hide();
+			
 			}
 			var url = '${pageContext.request.contextPath}/home';
 			window.location = url;
@@ -1650,80 +1674,14 @@
 	}
 	
 	
+	$('#txtDelvPincode').on('input', function() {
+		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 	
-		function placeOrder1() {
-			alert(22)
-			var cartValue = sessionStorage.getItem("cartValue");
-			var table = $.parseJSON(cartValue);
-			console.log(JSON.stringify(table));
-			alert(JSON.stringify(table))
+	$('#txtBillingPincode').on('input', function() {
+		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
 
-		
-
-			//fd.append("itemData", JSON.stringify(table));
-
-			//fd.append("promoCode", $("#promoCode").val());
-			/* fd.append("paymentMode", $("#paymentMode").val());
-			fd.append("delvrInst", $("#delvrInst").val());
-			fd.append("delvrDateTime", $("#delvrDateTime").val()); */
-
-			/* fd.append("txtCity", $("#txtCity").val());
-			fd.append("txtBillName", $("#txtBillName").val());
-			fd.append("txtMobile", $("#txtMobile").val());
-			fd.append("txtEmail", $("#txtEmail").val());
-			fd.append("gender", $("input[name='gender']:checked").val());
-			fd.append("txtDob", $("#txtDob").val());
-			fd.append("txtGst", $("#txtGst").val()); */
-
-			/* Delivery Address */
-			/* fd.append("txtDelvFlat", $("#txtDelvFlat").val());
-			fd.append("txtDelvArea", $("#txtDelvArea").val());
-			fd.append("txtDelvLandmark", $("#txtDelvLandmark").val());
-			fd.append("txtDelvPincode", $("#txtDelvPincode").val());
- */
-			/* Billing Address */
-		/* 	fd.append("txtBillingFlat", $("#txtBillingFlat").val());
-			fd.append("txtBillingArea", $("#txtBillingArea").val());
-			fd.append("txtBillingLandmark", $("#txtBillingLandmark").val());
-			fd.append("txtBillingPincode", $("#txtBillingPincode").val());
- */
- 
- 		
- 
-			 $.ajax({
-				url : '${pageContext.request.contextPath}/placeOrder',
-				type : 'post',
-				dataType : 'json',
-				data : JSON.stringify(fd),
-				contentType : false,
-				processData : false,
-				success : function(response) {
-
-					if (response.error == false) {
-
-						var data_add = {
-
-							"dateTime" : response.insertDateTime,
-							"frId" : response.frId,
-							"userId" : response.userId,
-							"orderId" : response.orderId,
-							"status" : response.status,
-							"paymentStatus" : response.paymentStatus,
-							"uuidNo" : response.uuidNo
-						}
-
-						/* var key = firebase.database().ref().child(today_date_temp+"/"+response.uuidNo).update(
-								data_add).key; */
-
-						sessionStorage.removeItem("cartValue");
-
-					}
-					var url = '${pageContext.request.contextPath}/home';
-					window.location = url;
-
-				},
-			}); 
-		}
 	</script>
 
 </body>
