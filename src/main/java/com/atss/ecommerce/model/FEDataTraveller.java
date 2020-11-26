@@ -27,6 +27,16 @@ public class FEDataTraveller {
 	 List<CateFilterConfig> catFilterConfig;//Filter configured to Category 26-11-2020
 
 	 
+	 
+	 
+	public List<CateFilterConfig> getCatFilterConfig() {
+		return catFilterConfig;
+	}
+
+	public void setCatFilterConfig(List<CateFilterConfig> catFilterConfig) {
+		this.catFilterConfig = catFilterConfig;
+	}
+
 	public List<FEProductHeader> getFeProductHeadList() {
 		return feProductHeadList;
 	}
@@ -107,7 +117,9 @@ public class FEDataTraveller {
 				+ ", franchiseCatList=" + franchiseCatList + ", flavorTagStatusList=" + flavorTagStatusList
 				+ ", testimonialList=" + testimonialList + ", companyBannerList=" + companyBannerList
 				+ ", franchiseBannerList=" + franchiseBannerList + ", frList=" + frList + ", festEventList="
-				+ festEventList + "]";
+				+ festEventList + ", catFilterConfig=" + catFilterConfig + "]";
 	}
+
+	
 	 
 }
