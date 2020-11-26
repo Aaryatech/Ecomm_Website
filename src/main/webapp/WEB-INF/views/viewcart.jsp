@@ -723,7 +723,7 @@
 
 
 						<div class="place_row">
-							<input name="" type="button" value="Place Order"
+							<input name="" type="button" value="Place Order" id="place_orderBtn"
 								class="pop_place_btn" onclick="placeOrder()" />
 						</div>
 
