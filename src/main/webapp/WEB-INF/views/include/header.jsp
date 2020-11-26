@@ -221,7 +221,7 @@
 		<div class="overlay-content">
 			<a href="${pageContext.request.contextPath}/orderhistory"> My Order </a> <a
 				href="multi-address.html"> My Address Book </a> <a
-				href="profile.html"> Profile </a> <a href="#">Help</a> <a
+				href="${pageContext.request.contextPath}/profile"> Profile </a> <a href="#">Help</a> <a
 				href="location.html">Logout</a>
 
 			<!-- <a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> -->
