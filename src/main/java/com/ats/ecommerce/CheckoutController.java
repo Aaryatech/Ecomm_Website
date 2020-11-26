@@ -78,6 +78,7 @@ public class CheckoutController {
 			int frId = (int) session.getAttribute("frId");
 			int userId = (int) session.getAttribute("userId");
 			int custId = (Integer) session.getAttribute("custId");
+			int compId = (Integer) session.getAttribute("companyId");
 
 			String promoCode = request.getParameter("promoCode");
 
@@ -178,8 +179,10 @@ public class CheckoutController {
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
 			order.setDeliveryInstText(delvrInst);
+			order.setDelStatus(1);
 			order.setUuidNo(uuid);
 			order.setExFloat1(0);// Wallet Amt
+			order.setExInt1(compId);
 			order.setExVar1(txtGst);
 			order.setExVar2(promoCode);
 			order.setOfferId(0);
@@ -260,7 +263,8 @@ public class CheckoutController {
 
 				finaTaxableAmt = Float.parseFloat(df.format(finaTaxableAmt + taxableAmt));
 				finaTaxAmt = Float.parseFloat(df.format(finaTaxAmt + taxAmt));
-
+				
+				orderDetail.setDelStatus(1);				
 				orderDetailList.add(orderDetail);
 			}
 			

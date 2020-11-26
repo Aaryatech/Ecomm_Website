@@ -89,7 +89,7 @@ public class HomeController {
 		session.setAttribute("custId", 1);
 		session.setAttribute("companyId", 1);
 		session.setAttribute("frId", 1);
-		session.setAttribute("userId", 1);
+		session.setAttribute("userId", 8);
 		// System.err.println("Cate List " + data.getFranchiseCatList().toString());
 
 		model.addAttribute("frCatList", data.getFranchiseCatList());

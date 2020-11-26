@@ -219,7 +219,7 @@
 	<div id="myNav" class="overlay">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 		<div class="overlay-content">
-			<a href="order-history.html"> My Order </a> <a
+			<a href="${pageContext.request.contextPath}/orderhistory"> My Order </a> <a
 				href="multi-address.html"> My Address Book </a> <a
 				href="profile.html"> Profile </a> <a href="#">Help</a> <a
 				href="location.html">Logout</a>
