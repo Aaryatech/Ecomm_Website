@@ -1,10 +1,5 @@
 package com.atss.ecommerce.model.order;
 
-import java.util.Date;
-
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class OrderHeader {
 
 	private int orderId;
@@ -55,7 +50,7 @@ public class OrderHeader {
 
 	private String landmark;
 
-	private Date deliveryDate;
+	private String deliveryDate;
 
 	private String deliveryTime;
 
@@ -97,9 +92,9 @@ public class OrderHeader {
 
 	private float exFloat4;
 
-	private Date exDate1;
+	private String exDate1;
 
-	private Date exDate2;
+	private String exDate2;
 	
 	private String billingName;
 
@@ -107,7 +102,7 @@ public class OrderHeader {
 
 	private String customerGstnNo;
 	
-	private Date productionDate;
+	private String productionDate;
 	
 	private String productionTime;
 
@@ -317,12 +312,12 @@ public class OrderHeader {
 	public void setLandmark(String landmark) {
 		this.landmark = landmark;
 	}
-	@JsonFormat(locale = "hi", timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getDeliveryDate() {
+	
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -485,20 +480,20 @@ public class OrderHeader {
 	public void setExFloat4(float exFloat4) {
 		this.exFloat4 = exFloat4;
 	}
-	@JsonFormat(locale = "hi", timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getExDate1() {
+	
+	public String getExDate1() {
 		return exDate1;
 	}
 
-	public void setExDate1(Date exDate1) {
+	public void setExDate1(String exDate1) {
 		this.exDate1 = exDate1;
 	}
-	@JsonFormat(locale = "hi", timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
-	public Date getExDate2() {
+	
+	public String getExDate2() {
 		return exDate2;
 	}
 
-	public void setExDate2(Date exDate2) {
+	public void setExDate2(String exDate2) {
 		this.exDate2 = exDate2;
 	}
 
@@ -590,6 +585,22 @@ public class OrderHeader {
 		this.uuidNo = uuidNo;
 	}
 
+	public String getProductionDate() {
+		return productionDate;
+	}
+
+	public void setProductionDate(String productionDate) {
+		this.productionDate = productionDate;
+	}
+
+	public String getProductionTime() {
+		return productionTime;
+	}
+
+	public void setProductionTime(String productionTime) {
+		this.productionTime = productionTime;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderHeader [orderId=" + orderId + ", orderNo=" + orderNo + ", orderDate=" + orderDate + ", frId="
@@ -606,8 +617,9 @@ public class OrderHeader {
 				+ ", exVar2=" + exVar2 + ", exVar3=" + exVar3 + ", exVar4=" + exVar4 + ", exFloat1=" + exFloat1
 				+ ", exFloat2=" + exFloat2 + ", exFloat3=" + exFloat3 + ", exFloat4=" + exFloat4 + ", exDate1="
 				+ exDate1 + ", exDate2=" + exDate2 + ", billingName=" + billingName + ", billingAddress="
-				+ billingAddress + ", customerGstnNo=" + customerGstnNo + ", deliveryInstText=" + deliveryInstText
-				+ ", deliveryType=" + deliveryType + ", deliveryInstId=" + deliveryInstId + ", deliveryKm=" + deliveryKm
+				+ billingAddress + ", customerGstnNo=" + customerGstnNo + ", productionDate=" + productionDate
+				+ ", productionTime=" + productionTime + ", deliveryInstText=" + deliveryInstText + ", deliveryType="
+				+ deliveryType + ", deliveryInstId=" + deliveryInstId + ", deliveryKm=" + deliveryKm
 				+ ", deliveryCharges=" + deliveryCharges + ", paymentSubMode=" + paymentSubMode + ", isAgent=" + isAgent
 				+ ", uuidNo=" + uuidNo + "]";
 	}

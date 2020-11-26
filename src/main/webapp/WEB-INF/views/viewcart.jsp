@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -11,6 +12,7 @@
 </style>
 
 <body>
+	<c:url var="placeOrder" value="/placeOrder" />
 
 
 	<!--mongi help-popup-->
@@ -128,11 +130,11 @@
 							<div class="table_bx">
 								<table class="cart" id="cartTable">
 									<thead>
-											<th>Product Name</th>
-											<th>Quantity</th>
-											<th>Delivery Option</th>
-											<th>Sub Total</th>
-											<th>Action</th>
+										<th>Product Name</th>
+										<th>Quantity</th>
+										<th>Delivery Option</th>
+										<th>Sub Total</th>
+										<th>Action</th>
 									</thead>
 
 									<tbody></tbody>
@@ -320,56 +322,56 @@
 								<div class="promo_row">
 									<div class="promo_row_l">Promo Code</div>
 									<div class="promo_row_r">
-										<input name="" type="text" class="input_two"
-											placeholder="Enter Your Offer Code" />
+										<input name="promoCode" id="promoCode" type="text"
+											class="input_two" placeholder="Enter Your Offer Code" />
 									</div>
 								</div>
 
 								<h3 class="payment_title">Payment Method</h3>
-								<form action="" method="get">
-									<div class="payment_one">
-										<div class="select-style">
-											<select>
-												<option value="All">Select Payment Type</option>
-												<option value="All">COD (Cash on Delivery)</option>
-												<option value="All">Online Payment</option>
-												<option value="All">UPI</option>
-											</select>
+								<!-- <form action="" method="get"> -->
+								<div class="payment_one">
+									<div class="select-style">
+										<select name="paymentMode" id="paymentMode">
+											<option value="">Select Payment Type</option>
+											<option value="1">COD (Cash on Delivery)</option>
+											<option value="2">Card</option>
+											<option value="3">E-Pay</option>
+										</select>
+									</div>
+								</div>
+								<div>
+									<div class="payment_two left">
+										<input name="delvrInst" id="delvrInst" type="text"
+											class="input_two" placeholder="Delivery Instruction" />
+									</div>
+									<div class="payment_two right">
+										<div id="filters">
+											<input type="text" name="delvrDateTime" id="delvrDateTime"
+												class="input_two" placeholder="Delivery Date or Time" />
 										</div>
 									</div>
-									<div>
-										<div class="payment_two left">
-											<input name="" type="text" class="input_two"
-												placeholder="Delivery Instruction" />
-										</div>
-										<div class="payment_two right">
-											<div id="filters">
-												<input type="text" name="filter-date" id="filter-date"
-													class="input_two" placeholder="Delivery Date or Time" />
-											</div>
-										</div>
-									</div>
-									<div class="payment_click">
-										By Clicking the button, you agree to the <a href="#">Terms
-											and Conditions.</a>
-									</div>
-									<div>
+								</div>
+								<div class="payment_click">
+									By Clicking the button, you agree to the <a href="#">Terms
+										and Conditions.</a>
+								</div>
+								<div>
 
-										<input name="" type="button" class="place_btn place_open"
-											value="Place Order" />
-									</div>
+									<input name="" type="button" class="place_btn place_open"
+										value="Place Order" />
+								</div>
 
 
 
 
-									<!--mongi help-popup-->
+								<!--mongi help-popup-->
 
 
-									<!--apply now pop up-->
+								<!--apply now pop up-->
 
 
 
-									<script type="text/javascript">
+								<script type="text/javascript">
 										$(document).ready(function() {
 											$('#place').popup();
 										});
@@ -377,7 +379,7 @@
 
 
 
-								</form>
+								<!-- </form> -->
 							</div>
 						</div>
 
@@ -487,222 +489,245 @@
 					</div>
 					<div class="mongi_cont">
 
-						<form action="${pageContext.request.contextPath}/viewcart"
-							method="post" onsubmit="return validateForm()">
+						<%-- <form action="${pageContext.request.contextPath}/viewcart"
+							method="post" onsubmit="return validateForm()"> --%>
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" id="txtCity"
-										name="txtCity" disabled="disabled"
-										placeholder="Enter Your City" /> <label
-										class="form-label-hint-error" id="errorCity"
-										style="display: none;">please enter city</label>
+						<div class="place_row">
+							<div class="place_row_l">
+								<div class="select-style">
+									<select id="txtCity" name=txtCity>
+										<c:forEach items="${cityList}" var="city">
+											<option value="${city.cityId}"
+												${city.cityId==cust.cityId ? 'selected' : ''}>${city.cityName}</option>
+										</c:forEach>
+									</select>
 								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" disabled="disabled"
-										placeholder="City Related Landmark" />
-								</div>
-								<div class="clr"></div>
+								<!-- <input type="text" class="input_place" id="txtCity"
+										name="txtCity" readonly="readonly" value=""
+										placeholder="Enter Your City" /> -->
+								<label class="form-label-hint-error" id="errorCity"
+									style="display: none;">please enter city</label>
 							</div>
-
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" id="txtBillName"
-										name="txtBillName" placeholder="Billing Name"
-										autocomplete="off" /> <label class="form-label-hint-error"
-										id="errorBillName" style="display: none;">please enter
-										billing name</label>
-
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" id="txtMobile"
-										maxlength="10" name="txtMobile" placeholder="Mobile Number"
-										autocomplete="off" /> <label class="form-label-hint-error"
-										id="errorMobile" style="display: none;">please enter
-										mobile number</label> <label class="form-label-hint-error"
-										id="errorMobileInvalid" style="display: none;">invalid
-										mobile number</label>
-
-								</div>
-								<div class="clr"></div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" readonly="readonly"
+									placeholder="City Related Landmark" />
 							</div>
+							<div class="clr"></div>
+						</div>
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" id="txtEmail"
-										name="txtEmail" placeholder="Email ID" autocomplete="off" />
-									<label class="form-label-hint-error" id="errorEmail"
-										style="display: none;">please enter email id</label> <label
-										class="form-label-hint-error" id="errorEmailInvalid"
-										style="display: none;">invalid email id</label>
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" id="txtBillName"
+									readonly="readonly" name="txtBillName"
+									placeholder="Billing Name" value="${cust.custName}"
+									autocomplete="off" /> <label class="form-label-hint-error"
+									id="errorBillName" style="display: none;">please enter
+									billing name</label>
 
-								</div>
-								<div class="place_row_r">
-									<div class="gender_l">Gender</div>
-									<div class="gender_r">
-										<div class="radio_1 gender">
-											<ul>
-												<li><input type="radio" id="a-option" name="selector"
-													checked="checked"> <label for="a-option">Male</label>
-													<div class="check"></div></li>
+							</div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" id="txtMobile"
+									value="${cust.custMobileNo}" maxlength="10" name="txtMobile"
+									placeholder="Mobile Number" readonly="readonly"
+									autocomplete="off" /> <label class="form-label-hint-error"
+									id="errorMobile" style="display: none;">please enter
+									mobile number</label> <label class="form-label-hint-error"
+									id="errorMobileInvalid" style="display: none;">invalid
+									mobile number</label>
 
-												<li><input type="radio" id="b-option" name="selector">
-													<label for="b-option">Female</label>
-													<div class="check">
-														<div class="inside"></div>
-													</div></li>
+							</div>
+							<div class="clr"></div>
+						</div>
 
-											</ul>
-										</div>
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" id="txtEmail"
+									value="${cust.emailId}" name="txtEmail" placeholder="Email ID"
+									autocomplete="off" readonly="readonly" /> <label
+									class="form-label-hint-error" id="errorEmail"
+									style="display: none;">please enter email id</label> <label
+									class="form-label-hint-error" id="errorEmailInvalid"
+									style="display: none;">invalid email id</label>
+
+							</div>
+							<div class="place_row_r">
+								<div class="gender_l">Gender</div>
+								<div class="gender_r">
+									<div class="radio_1 gender">
+										<ul>
+											<li><input type="radio" id="a-option" name="gender"
+												value="1" ${cust.custGender==1 ? 'checked' : ''}> <label
+												for="a-option">Male</label>
+												<div class="check"></div></li>
+
+											<li><input type="radio" id="b-option" name="gender"
+												value="2" ${cust.custGender==2 ? 'checked' : ''}> <label
+												for="b-option">Female</label>
+												<div class="check">
+													<div class="inside"></div>
+												</div></li>
+
+											<li><input type="radio" id="c-option" name="gender"
+												value="3" ${cust.custGender==3 ? 'checked' : ''}> <label
+												for="c-option">Other</label>
+												<div class="check">
+													<div class="inside"></div>
+												</div></li>
+
+										</ul>
 									</div>
 								</div>
-								<div class="clr"></div>
 							</div>
+							<div class="clr"></div>
+						</div>
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" id="txtDob"
-										name="txtDob" placeholder="Date of Birth" autocomplete="off" />
-									<label class="form-label-hint-error" id="errorDob"
-										style="display: none;">please enter date of birth</label>
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" id="txtDob"
+									value="${cust.dateOfBirth}" name="txtDob"
+									placeholder="Date of Birth" autocomplete="off"
+									readonly="readonly" /> <label class="form-label-hint-error"
+									id="errorDob" style="display: none;">please enter date
+									of birth</label>
 
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" id="txtGst"
-										name="txtGst" placeholder="GST Number" autocomplete="off" />
-									<label class="form-label-hint-error" id="errorGst"
-										style="display: none;">invalid GST number</label>
-
-								</div>
-								<div class="clr"></div>
 							</div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" id="txtGst"
+									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
+									autocomplete="off" readonly="readonly" /> <label
+									class="form-label-hint-error" id="errorGst"
+									style="display: none;">invalid GST number</label>
 
-							<!-- ------------------------ -->
-
-							<div class="place_row">
-								<div class="place_row_l">
-									<h3 class="payment_title">Delivery Address</h3>
-								</div>
-								<div class="place_row_r"></div>
-								<div class="clr"></div>
 							</div>
+							<div class="clr"></div>
+						</div>
 
+						<!-- ------------------------ -->
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtDelvFlat" name="txtDelvFlat"
-										placeholder="Flat, House no., Building, Company, Apartment" />
-
-									<label class="form-label-hint-error" id="errorDelvFlat"
-										style="display: none;">please enter flat, house no.,
-										building, company, apartment</label>
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtDelvArea" name="txtDelvArea"
-										placeholder="Area, Colony, Street, Sector, Village" /> <label
-										class="form-label-hint-error" id="errorDelvArea"
-										style="display: none;">please enter area, colony,
-										street, sector, village</label>
-
-								</div>
-								<div class="clr"></div>
+						<div class="place_row">
+							<div class="place_row_l">
+								<h3 class="payment_title">Delivery Address</h3>
 							</div>
+							<div class="place_row_r"></div>
+							<div class="clr"></div>
+						</div>
 
 
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtDelvFlat" name="txtDelvFlat"
+									placeholder="Flat, House no., Building, Company, Apartment" />
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtDelvLandmark" name="txtDelvLandmark"
-										placeholder="Landmark" /> <label
-										class="form-label-hint-error" id="errorDelvLandmark"
-										style="display: none;">please enter landmark</label>
-
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtDelvPincode" name="txtDelvPincode"
-										placeholder="Shipping Pincode" /> <label
-										class="form-label-hint-error" id="errorDelvPincode"
-										style="display: none;">please enter pincode</label>
-								</div>
-								<div class="clr"></div>
+								<label class="form-label-hint-error" id="errorDelvFlat"
+									style="display: none;">please enter flat, house no.,
+									building, company, apartment</label>
 							</div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtDelvArea" name="txtDelvArea"
+									placeholder="Area, Colony, Street, Sector, Village" /> <label
+									class="form-label-hint-error" id="errorDelvArea"
+									style="display: none;">please enter area, colony,
+									street, sector, village</label>
 
-
-
-							<!-- BILLING ADDRESS -->
-
-							<div class="place_row">
-								<div class="place_row_l">
-									<h3 class="payment_title">Billing Address</h3>
-								</div>
-								<div class="place_row_r">
-									<input type="checkbox" id="chkbox" name="chkbox"
-										onchange="setBillingDataByCheckbox()" class="payment_title"
-										value="chkbox"> <label for="chkbox"> Same as
-										delivery address</label>
-								</div>
-								<div class="clr"></div>
 							</div>
+							<div class="clr"></div>
+						</div>
 
 
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtBillingFlat" name="txtBillingFlat"
-										placeholder="Flat, House no., Building, Company, Apartment" />
 
-									<label class="form-label-hint-error" id="errorBillingFlat"
-										style="display: none;">please enter flat, house no.,
-										building, company, apartment</label>
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtBillingArea" name="txtBillingArea"
-										placeholder="Area, Colony, Street, Sector, Village" /> <label
-										class="form-label-hint-error" id="errorBillingArea"
-										style="display: none;">please enter area, colony,
-										street, sector, village</label>
-								</div>
-								<div class="clr"></div>
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtDelvLandmark" name="txtDelvLandmark"
+									placeholder="Landmark" /> <label class="form-label-hint-error"
+									id="errorDelvLandmark" style="display: none;">please
+									enter landmark</label>
+
 							</div>
-
-
-
-							<div class="place_row">
-								<div class="place_row_l">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtBillingLandmark" name="txtBillingLandmark"
-										placeholder="Landmark" /> <label
-										class="form-label-hint-error" id="errorBillingLandmark"
-										style="display: none;">please enter landmark</label>
-								</div>
-								<div class="place_row_r">
-									<input type="text" class="input_place" autocomplete="off"
-										id="txtBillingPincode" name="txtBillingPincode"
-										placeholder="Billing Pincode" /> <label
-										class="form-label-hint-error" id="errorBillingPincode"
-										style="display: none;">please enter pincode</label>
-								</div>
-								<div class="clr"></div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtDelvPincode" name="txtDelvPincode"
+									placeholder="Shipping Pincode" /> <label
+									class="form-label-hint-error" id="errorDelvPincode"
+									style="display: none;">please enter pincode</label>
 							</div>
-
-
-							<!-- ------------------------ -->
-
-
+							<div class="clr"></div>
+						</div>
 
 
 
-							<div class="place_row">
-								<input name="" type="submit" value="Place Order"
-									class="pop_place_btn" />
+						<!-- BILLING ADDRESS -->
+
+						<div class="place_row">
+							<div class="place_row_l">
+								<h3 class="payment_title">Billing Address</h3>
 							</div>
+							<div class="place_row_r">
+								<input type="checkbox" id="chkbox" name="chkbox"
+									onchange="setBillingDataByCheckbox()" class="payment_title"
+									value="chkbox"> <label for="chkbox"> Same as
+									delivery address</label>
+							</div>
+							<div class="clr"></div>
+						</div>
 
-						</form>
+
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtBillingFlat" name="txtBillingFlat"
+									placeholder="Flat, House no., Building, Company, Apartment" />
+
+								<label class="form-label-hint-error" id="errorBillingFlat"
+									style="display: none;">please enter flat, house no.,
+									building, company, apartment</label>
+							</div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtBillingArea" name="txtBillingArea"
+									placeholder="Area, Colony, Street, Sector, Village" /> <label
+									class="form-label-hint-error" id="errorBillingArea"
+									style="display: none;">please enter area, colony,
+									street, sector, village</label>
+							</div>
+							<div class="clr"></div>
+						</div>
+
+
+
+						<div class="place_row">
+							<div class="place_row_l">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtBillingLandmark" name="txtBillingLandmark"
+									placeholder="Landmark" /> <label class="form-label-hint-error"
+									id="errorBillingLandmark" style="display: none;">please
+									enter landmark</label>
+							</div>
+							<div class="place_row_r">
+								<input type="text" class="input_place" autocomplete="off"
+									id="txtBillingPincode" name="txtBillingPincode"
+									placeholder="Billing Pincode" /> <label
+									class="form-label-hint-error" id="errorBillingPincode"
+									style="display: none;">please enter pincode</label>
+							</div>
+							<div class="clr"></div>
+						</div>
+
+
+						<!-- ------------------------ -->
+
+
+
+
+
+						<div class="place_row">
+							<input name="" type="button" value="Place Order"
+								class="pop_place_btn" onclick="placeOrder()" />
+						</div>
+
+						<!-- </form> -->
 
 					</div>
 
@@ -757,17 +782,19 @@
 	<script>
 		/*jslint browser:true*/
 		/*global jQuery, document*/
-		jQuery(document).ready(
-				function() {
-					'use strict';
-					jQuery('#filter-date, #search-from-date, #search-to-date')
-							.datetimepicker();
+		jQuery(document)
+				.ready(
+						function() {
+							'use strict';
+							jQuery(
+									'#delvrDateTime, #search-from-date, #search-to-date')
+									.datetimepicker();
 
-					// SET CART DATA
+							// SET CART DATA
 
-					getItemList();
+							getItemList();
 
-				});
+						});
 	</script>
 
 
@@ -1578,7 +1605,126 @@
 		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
 	</script>
+	<!------------------------------------------------------- Place Order--------------------------------------------------- -->
+	<script type="text/javascript">
+	function placeOrder() {
+		var cartValue = sessionStorage.getItem("cartValue");
+		var table = $.parseJSON(cartValue);		
+		
+		$.getJSON('${placeOrder}', {
+			promoCode : $("#promoCode").val(),
+			paymentMode : $("#paymentMode").val(),
+			delvrInst : $("#delvrInst").val(),
+			delvrDateTime : $("#delvrDateTime").val(),
+			
+			txtCity : $("#txtCity").val(),
+			txtBillName : $("#txtBillName").val(),
+			txtMobile : $("#txtMobile").val(),
+			txtEmail : $("#txtEmail").val(),
+			gender : $("input[name='gender']:checked").val(),
+			txtDob : $("#txtDob").val(),
+			txtGst : $("#txtGst").val(),
+			
+			txtDelvFlat : $("#txtDelvFlat").val(),
+			txtDelvArea : $("#txtDelvArea").val(),
+			txtDelvLandmark : $("#txtDelvLandmark").val(),
+			txtDelvPincode : $("#txtDelvPincode").val(),
+			
+			txtBillingFlat : $("#txtBillingFlat").val(),
+			txtBillingArea : $("#txtBillingArea").val(),
+			txtBillingLandmark : $("#txtBillingLandmark").val(),
+			txtBillingPincode : $("#txtBillingPincode").val(),
+			
+			itemData : JSON.stringify(table),
+			
+			ajax : 'true'
+		}, function(data) {
+		//	alert(JSON.stringify(data));
+			if (!error) {
+				sessionStorage.removeItem("cartValue");
+			//	alert("Session removed")
+			}
+			var url = '${pageContext.request.contextPath}/home';
+			window.location = url;
+		});
+	}
+	
+	
+	
+		function placeOrder1() {
+			alert(22)
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+			console.log(JSON.stringify(table));
+			alert(JSON.stringify(table))
 
+		
+
+			//fd.append("itemData", JSON.stringify(table));
+
+			//fd.append("promoCode", $("#promoCode").val());
+			/* fd.append("paymentMode", $("#paymentMode").val());
+			fd.append("delvrInst", $("#delvrInst").val());
+			fd.append("delvrDateTime", $("#delvrDateTime").val()); */
+
+			/* fd.append("txtCity", $("#txtCity").val());
+			fd.append("txtBillName", $("#txtBillName").val());
+			fd.append("txtMobile", $("#txtMobile").val());
+			fd.append("txtEmail", $("#txtEmail").val());
+			fd.append("gender", $("input[name='gender']:checked").val());
+			fd.append("txtDob", $("#txtDob").val());
+			fd.append("txtGst", $("#txtGst").val()); */
+
+			/* Delivery Address */
+			/* fd.append("txtDelvFlat", $("#txtDelvFlat").val());
+			fd.append("txtDelvArea", $("#txtDelvArea").val());
+			fd.append("txtDelvLandmark", $("#txtDelvLandmark").val());
+			fd.append("txtDelvPincode", $("#txtDelvPincode").val());
+ */
+			/* Billing Address */
+		/* 	fd.append("txtBillingFlat", $("#txtBillingFlat").val());
+			fd.append("txtBillingArea", $("#txtBillingArea").val());
+			fd.append("txtBillingLandmark", $("#txtBillingLandmark").val());
+			fd.append("txtBillingPincode", $("#txtBillingPincode").val());
+ */
+ 
+ 		
+ 
+			 $.ajax({
+				url : '${pageContext.request.contextPath}/placeOrder',
+				type : 'post',
+				dataType : 'json',
+				data : JSON.stringify(fd),
+				contentType : false,
+				processData : false,
+				success : function(response) {
+
+					if (response.error == false) {
+
+						var data_add = {
+
+							"dateTime" : response.insertDateTime,
+							"frId" : response.frId,
+							"userId" : response.userId,
+							"orderId" : response.orderId,
+							"status" : response.status,
+							"paymentStatus" : response.paymentStatus,
+							"uuidNo" : response.uuidNo
+						}
+
+						/* var key = firebase.database().ref().child(today_date_temp+"/"+response.uuidNo).update(
+								data_add).key; */
+
+						sessionStorage.removeItem("cartValue");
+
+					}
+					var url = '${pageContext.request.contextPath}/home';
+					window.location = url;
+
+				},
+			}); 
+		}
+	</script>
 
 </body>
 
