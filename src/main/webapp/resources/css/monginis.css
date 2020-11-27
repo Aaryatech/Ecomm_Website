@@ -427,6 +427,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 /*radio button css*/
 .radio_1{display: block; position: relative;}
 .radio_1 ul{list-style: none; margin: 0; padding: 0; overflow: auto;}
+.radio_1.one_row ul li{width: 20%;}
 .radio_1 ul li{color: #808080; width: 50%; display: inline-block; position: relative; float: left;}
 .radio_1 ul li input[type=radio]{position: absolute; visibility: hidden;}
 .radio_1 ul li label{display: block; position: relative; font-size: 13px; padding: 5px 5px 5px 15px; height: auto; z-index: 9; cursor: pointer; -webkit-transition: all 0.25s linear;}

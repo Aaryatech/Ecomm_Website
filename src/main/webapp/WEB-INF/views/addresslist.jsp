@@ -110,155 +110,74 @@
 
 	<div class="head_marg">
 		<!--product listing-->
-		<div class="find_store">
+		<div class="find_store" style="padding: 10px 0;">
 			<div class="wrapper">
 
 
 				<div class="cart_row">
-					<div class="cart_l">
-
+					<!-- <div class="cart_l"> -->
 						<h2 class="address_title">
 							Shipping Address <span>Is the address you'd like to use
-								displayed below? If so, click the corresponnding "Deliver to
-								this address" button. <a href="location.html">Add Address</a>
+								displayed below? If so, click the corresponding "Deliver to this
+								address" button. <a href="location.html">Add Address</a>
 							</span>
 						</h2>
-						
+
+						<h4 id="respMsg" style="text-align: center;" >${sessionScope.msg}</h4>
+						<%
+							request.getSession().removeAttribute("msg");
+						%>
 						<div class="address_row">
 							<ul>
-							<c:forEach items="${custAddList}" var="addressList">
-								<li>
-									<div class="address_one">
-										<h3 class="address_txt">
-											<i class="fa fa-user user_icn" aria-hidden="true"></i> ${addressList.custName}<span><i class="fa fa-map-marker"
-												aria-hidden="true"></i> ${addressList.address}, 
-												${addressList.exVar2}, ${addressList.exVar3}-422005 <br> MAHARASHTRA, India.</span>
-											 <span>Landmark :
-												${addressList.landmark}</span>
-											<span><i class="fa fa-phone" aria-hidden="true"></i>
-												+91 ${addressList.custMobileNo}</span>
-
-										</h3>
-
-										<div class="deliver_add">
-											<a href="#">Deliver to this address</a>
-										</div>
-
-										<div class="dropdown border_one">
-											<div class="select">
-												<span>Select your nearest franchisee</span>
+								<c:forEach items="${custAddList}" var="addressList" varStatus="cnt">
+									<li>
+										<div class="address_one">
+											<div class="cart_delete">
+												<a href="javascript:void(0)"
+													onclick="deltDeliveryAddress('${addressList.custDetailId}')"><i
+													class="fa fa-trash-o" aria-hidden="true"></i></a>
 											</div>
-											<input type="hidden" name="gender">
-											<ul class="dropdown-menu">
-												<li id="male">Pune</li>
-												<li id="female">Mumbai</li>
-												<li id="female">Nashik</li>
-											</ul>
-										</div>
 
-										<div class="delivery_two">
-											<div class="deliver_edit">
-												<a href="#">Edit</a>
+											<h3 class="address_txt">
+												<i class="fa fa-user user_icn" aria-hidden="true"></i>
+												${addressList.custName}<span><i
+													class="fa fa-map-marker" aria-hidden="true"></i>
+													${addressList.address}, ${addressList.exVar2},
+													${addressList.exVar3}-422005 <br> MAHARASHTRA, India.</span>
+												<span>Landmark : ${addressList.landmark}</span> <span><i
+													class="fa fa-phone" aria-hidden="true"></i> +91
+													${addressList.custMobileNo}</span>
+
+
+											</h3>
+
+											<div class="deliver_add">
+												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
 											</div>
-											<div class="deliver_edit right_side">
-												<a href="#">Delete</a>
+
+											<div class="dropdown border_one frdiv" id="frdiv${cnt.index+1}" style="display: none;">
+												<div class="select">
+													<span>Select your nearest franchisee</span>
+												</div>
+												<input type="hidden" name="gender">
+												<ul class="dropdown-menu">
+													<li id="male">Pune</li>
+													<li id="female">Mumbai</li>
+													<li id="female">Nashik</li>
+												</ul>
 											</div>
-											<div class="clr"></div>
 										</div>
-									</div>
-								</li>
+									</li>
 								</c:forEach>
-								
-								<!-- <li>
-									<div class="address_one">
-										<h3 class="address_txt">
-											<i class="fa fa-user user_icn" aria-hidden="true"></i> David
-											Johnson Warner <span><i class="fa fa-map-marker"
-												aria-hidden="true"></i> Arham Hospital, Canada Corner, Near
-												Kulkarni Garden. NASHIK-422005 <br> MAHARASHTRA, India.</span>
-											<span><i class="fa fa-phone" aria-hidden="true"></i>
-												+91 9011877864</span>
-
-										</h3>
-
-
-										<div class="deliver_add">
-											<a href="#">Deliver to this address</a>
-										</div>
-
-										<div class="dropdown border_one">
-											<div class="select">
-												<span>Select your nearest franchisee</span>
-											</div>
-											<input type="hidden" name="gender">
-											<ul class="dropdown-menu">
-												<li id="male">Pune</li>
-												<li id="female">Mumbai</li>
-												<li id="female">Nashik</li>
-											</ul>
-										</div>
-
-										<div class="delivery_two">
-											<div class="deliver_edit">
-												<a href="#">Edit</a>
-											</div>
-											<div class="deliver_edit right_side">
-												<a href="#">Delete</a>
-											</div>
-											<div class="clr"></div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="address_one">
-										<h3 class="address_txt">
-											<i class="fa fa-user user_icn" aria-hidden="true"></i> David
-											Johnson Warner <span><i class="fa fa-map-marker"
-												aria-hidden="true"></i> Arham Hospital, Canada Corner, Near
-												Kulkarni Garden. NASHIK-422005 <br> MAHARASHTRA, India.</span>
-											<span><i class="fa fa-phone" aria-hidden="true"></i>
-												+91 9011877864</span>
-
-										</h3>
-
-
-										<div class="deliver_add">
-											<a href="#">Deliver to this address</a>
-										</div>
-
-										<div class="dropdown border_one">
-											<div class="select">
-												<span>Select your nearest franchisee</span>
-											</div>
-											<input type="hidden" name="gender">
-											<ul class="dropdown-menu">
-												<li id="male">Pune</li>
-												<li id="female">Mumbai</li>
-												<li id="female">Nashik</li>
-											</ul>
-										</div>
-
-										<div class="delivery_two">
-											<div class="deliver_edit">
-												<a href="#">Edit</a>
-											</div>
-											<div class="deliver_edit right_side">
-												<a href="#">Delete</a>
-											</div>
-											<div class="clr"></div>
-										</div>
-									</div>
-								</li> -->
 							</ul>
 						</div>
-
-					</div>
+					<!-- </div> -->
 
 
 
 
 					<!--related-product-box-->
-					<div class="cart_r">
+					<%-- <div class="cart_r">
 						<h3 class="sidebar_title">Order Summary</h3>
 						<div class="related_container">
 
@@ -305,7 +224,7 @@
 
 
 						</div>
-					</div>
+					</div> --%>
 					<div class="clr"></div>
 				</div>
 
@@ -664,6 +583,34 @@
 										lazyload);
 							}
 						})
+	</script>
+	<script type="text/javascript">
+		function deltDeliveryAddress(addressDtlId) {
+			var r = confirm("Are you sure you want to delete?");
+			if (r == true) {
+				var url = '${pageContext.request.contextPath}/deleteAddressDetlById?addressDtlId='
+						+ addressDtlId;
+				window.location = url;
+			}
+
+		}
+
+		$("#respMsg").show().delay(5000).fadeOut();
+		
+		function showFrDiv(val){
+			$(".frdiv")
+			.each(
+					function(counter) {
+						//$('.frdiv')[counter].toggle("slide");
+						document.getElementsByClassName("frdiv")[counter].style.display='none';
+					});
+			
+			$('#frdiv'+val).toggle("slide");	
+			
+		}
+		
+		 
+		     
 	</script>
 
 

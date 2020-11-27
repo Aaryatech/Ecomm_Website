@@ -387,5 +387,41 @@ public class MasterController {
 		}
 		return "addresslist";
 	}
+	
+	
+	@RequestMapping(value = "/deleteAddressDetlById", method = RequestMethod.GET)
+	public String deleteAddressDetlById(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		String redirect = new String();
+		try {
+			HttpSession session = request.getSession();		
+			
+			Date date = new Date();
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+
+			int custId = (Integer) session.getAttribute("custId");
+			
+			int addressDtlId = Integer.parseInt(request.getParameter("addressDtlId"));
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("custDetId", addressDtlId);
+			map.add("userId", custId);
+			map.add("dateTime", df.format(date));
+			
+			Info info = Constants.getRestTemplate()
+					.postForObject(Constants.url + "deleteCustDetById", map, Info.class);
+			
+			if(!info.isError())
+			{
+				redirect="redirect:/addresslist";
+				session.setAttribute("msg", "Customer Address Detail Deleted Successfully");
+			}else {
+				redirect="redirect:/addresslist";
+				session.setAttribute("msg", "Failed to Delete Customer Address Detail");
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return redirect;
+	}
 
 }
