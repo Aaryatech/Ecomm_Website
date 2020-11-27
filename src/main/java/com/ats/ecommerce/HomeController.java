@@ -64,11 +64,10 @@ public class HomeController {
 
 			if (isCookieFound == 0) {
 				System.err.println("In Else ");
-
-				Cookie custCookie = new Cookie("custIdCookie", "" + 5);
-				custCookie.setMaxAge(60 * 60 * 24 * 15);
-				response.addCookie(custCookie);
-
+				/*
+				 * Cookie custCookie = new Cookie("custIdCookie", ""); custCookie.setMaxAge(60 *
+				 * 60 * 24 * 15); response.addCookie(custCookie);
+				 */
 				returnPage = "location";
 			}
 			// session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());

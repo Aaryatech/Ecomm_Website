@@ -176,9 +176,12 @@
 							</div>
 							<!--product price row-->
 							<div class="stock_prc">
-								${prodHeader.defaultPrice}<span class="act_prc" id="cake_price">${prodHeader.displayRate}</span>
-								<span class="save"> 20% off (Save 150) </span> <span
-									class="inclusive_txt">Inclusive of all taxes</span>
+								<i class="fa fa-inr cake_prc_detail_iclass"
+															aria-hidden="true"></i>
+														<p class="cake_prc_detail_pclass"
+															id="cake_prc1">${prodHeader.defaultPrice}</p>
+														<span class="off_prc" id="off_prc1"></span> <span
+															id="prc_off1" class="prc_off"></span>
 							</div>
 							<!--product txt row-->
 							<div class="prod_txt">${prodHeader.productDesc}. Key
@@ -328,11 +331,13 @@
 									<!--cake-kgs-->
 								</div>
 								<!--right form-->
+								<c:if test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
 								<div class="delivery_r">
 									<div class="delivery_bx">
 										<h4 class="delivery_title">Delivery Details</h4>
 										<div class="delivery_frm">
 											<form action="" method="post">
+											<c:if test="${prodHeader.allowBasePhotoUpload==1}">
 												<div class="delivery_frm_l">
 													<img
 														alt="" id="del_image" style="size: portrait;" name="del_image"/>
@@ -343,6 +348,8 @@
 														</label>
 													</div>
 												</div>
+												</c:if>
+											<c:if test="${prodHeader.allowSpecialInstruction==1}">
 												<div class="delivery_frm_r">
 													<div class="delivery_txtarea">
 														<textarea name="" cols="" id="sp_inst", name="sp_inst" rows="3" class="input_txt"
@@ -353,11 +360,13 @@
 															placeholder="Message / Name on the Cake" />
 													</div>
 												</div>
+												</c:if>
 												<div class="clr"></div>
 											</form>
 										</div>
 									</div>
 								</div>
+								</c:if>
 								<div class="clr"></div>
 							</div>
 
@@ -451,14 +460,10 @@
 											alt="">
 									</div>
 									<div class="cake_prc">
-										<!-- <i class="fa fa-inr" aria-hidden="true"></i>499 <span
-											class="off_prc"><i class="fa fa-inr"
-											aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-											Off)</span> -->
-														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc${product.productId}">${product.defaultPrice}</p>
-														<span class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc" >xx${product.defaultPrice}</p>
+														<span class="off_prc" id="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i></span> <span
+															class="prc_off" id="prc_off"></span>
 									</div>
 								</div>
 
@@ -657,7 +662,7 @@ function addToCartClick(productId){
 
 	}//end of Function addToCartClick
 	
-	
+	</script>
 	<script type="text/javascript">
 	function changeWtFlavor(productId) {
 		var selectWt = document.getElementById("weight").value;
@@ -684,7 +689,6 @@ function addToCartClick(productId){
 		
 		var isVeg=$('input[name="vnv_radio"]:checked').val();
 		
-		var isVeg = $('input[name="vnv_radio"]:checked').val();
 		var dataList = '${sessionScope.dataList}';
 		var data = $.parseJSON(dataList);
 		var selectVegNon = "Veg";
@@ -712,17 +716,20 @@ function addToCartClick(productId){
 						if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
 
 							var qty = 1;
-						document.getElementById("cake_prc").innerHTML = ""+prodDetail[d].actualRate;
-						actualRate = prodDetail[d].actualRate;
+						document.getElementById("cake_prc").innerHTML=""+prodDetail[d].actualRate;
+						document.getElementById("cake_prc1").innerHTML=""+prodDetail[d].actualRate;
+					//alert("" +prodDetail[d].actualRate);
+						var actualRate = prodDetail[d].actualRate;
 							var priceDiff = parseFloat(prodDetail[d].displayRate) - parseFloat(actualRate);
-							offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
-							//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
-							if(parseFloat(priceDiff)<=1){
-								priceDiff=10;
-							}dfd
-								document.getElementById('off_prc').innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
-				//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
+							var offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
+							
+							
+							document.getElementById('off_prc').innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
 							document.getElementById("prc_off").innerHTML = ""+offPer.toFixed(2);
+							
+							document.getElementById('off_prc1').innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
+							document.getElementById("prc_off1").innerHTML = ""+offPer.toFixed(2);
+						
 							break;
 						}
 						//alert("Do calc");
@@ -739,7 +746,7 @@ function addToCartClick(productId){
 
 	}//end of Function changeWtFlavor
 </script>
-
+<script>
 function moveCursor(){
 	$('html,body').animate({
 	        scrollTop: $(".prod_disc").offset().top},

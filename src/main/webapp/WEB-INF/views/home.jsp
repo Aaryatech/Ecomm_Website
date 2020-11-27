@@ -651,9 +651,6 @@
 								var priceDiff = parseFloat(prodDetail[d].displayRate) - parseFloat(actualRate);
 								offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
 								//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
-								if(parseFloat(priceDiff)<=1){
-									priceDiff=10;
-								}
 									document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
 					//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
 								document.getElementById("prc_off" + productId).innerHTML = ""+offPer.toFixed(2);
