@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 import javax.servlet.http.HttpServletRequest;
@@ -355,6 +356,36 @@ public class MasterController {
 
 		return "redirect:/checkout";
 
+	}
+	
+	@RequestMapping(value = "/addresslist", method = RequestMethod.GET)
+	public String addressList(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		try {
+			HttpSession session = request.getSession();
+
+			int custId = (Integer) session.getAttribute("custId");
+			int companyId = (int) session.getAttribute("companyId");
+			
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer.class);
+			model.addAttribute("cust", cust);			
+
+			map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			map.add("compId", companyId);
+			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
+			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+
+			model.addAttribute("custAddList", custAddList);
+			
+		}catch (Exception e) {
+			System.out.println("Exception in /addresslist : " + e.getMessage());
+			e.printStackTrace();
+		}
+		return "addresslist";
 	}
 
 }

@@ -201,9 +201,8 @@
 													<div class="table_detail">
 
 														<div class="table_detail_l">
-															<img
-																src="${imgPath}${orderDetail.itemPic}">
-																<%-- ${pageContext.request.contextPath}/resources/images/cake_open.jpg --%>
+															<img src="${imgPath}${orderDetail.itemPic}">
+															<%-- ${pageContext.request.contextPath}/resources/images/cake_open.jpg --%>
 														</div>
 														<div class="table_detail_r">
 															<div class="detail_one">
@@ -228,7 +227,7 @@
 
 													</div>
 												</c:if>
-												
+
 											</c:forEach> <!--table-->
 											<div class="cart_able_bx drop_tab">
 												<div class="table_title_one">Order Log</div>
@@ -304,205 +303,219 @@
 				<!--mobile-table-->
 				<div class="mobile_table">
 					<!--1-->
-					<div class="row_1">
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Order Number</div>
-							<div class="mob_quan_r font">#123456</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Order Date</div>
-							<div class="mob_quan_r font">01 Oct 2020</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Total Rupees</div>
-							<div class="mob_quan_r font">
-								<div class="prc_amt">Rs. 450.00</div>
-							</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Payment Mode</div>
-							<div class="mob_quan_r font">
-								<div class="paid mobile">COD (Cash on Delivery)</div>
-							</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Status</div>
-							<div class="mob_quan_r font">
-								<span class="deliverd">Delivered</span>
-							</div>
-							<div class="clr"></div>
-						</div>
-
-						<div class="click_open">
+					<!-- MobView Order Header -->
+					<c:forEach items="${orders}" var="orders" varStatus="count">
+					<c:set value="0" var="orderHeadId "/>
+						<div class="row_1">
+						<c:set value="${count.index+1}" var="orderHeadId"/>
+						<div onclick="showOrderDtl(${count.index+1})">
 							<div class="mob_quan">
-								<div class="click_opn_l">Product Pic</div>
-								<div class="click_opn_r">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/cake_open.jpg"
-										alt="cake_open">
-								</div>
-								<div class="clr"></div>
-							</div>
-
-							<div class="mob_quan">
-								<div class="click_opn_l">Product name</div>
-								<div class="click_opn_r">Cars Lightning McQueen Cake</div>
+								<div class="mob_quan_l history">Order Number</div>
+								<div class="mob_quan_r font"><b>${orders.orderNo}</b></div>
 								<div class="clr"></div>
 							</div>
 							<div class="mob_quan">
-								<div class="click_opn_l">Product Amount</div>
-								<div class="click_opn_r">
-									<div class="prc_amt">Rs. 450.00</div>
+								<div class="mob_quan_l history">Order Date</div>
+								<div class="mob_quan_r font">${orders.orderDateDisplay}</div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="mob_quan_l history">Total Rupees</div>
+								<div class="mob_quan_r font">
+									<div class="prc_amt">Rs. ${orders.totalAmt}</div>
 								</div>
 								<div class="clr"></div>
 							</div>
 							<div class="mob_quan">
-								<div class="click_opn_l">Product Quantity</div>
-								<div class="click_opn_r">
-									<div class="prc_kg">4 K.G</div>
+								<c:set value="E-Pay" var="paymentMethod" />
+								<c:choose>
+									<c:when test="${orders.paymentMethod==1}">
+										<c:set value="Cash" var="paymentMethod" />
+									</c:when>
+									<c:when test="${orders.paymentMethod==2}">
+										<c:set value="Card" var="paymentMethod" />
+									</c:when>
+									<c:otherwise>
+										<c:set value="E-Pay" var="paymentMethod" />
+									</c:otherwise>
+								</c:choose>
+								<div class="mob_quan_l history">Payment Mode</div>
+								<div class="mob_quan_r font">
+									<div class="paid mobile">${paymentMethod}</div>
 								</div>
 								<div class="clr"></div>
 							</div>
-							<div class="mob_quan">
-								<div class="click_opn_l">Total</div>
-								<div class="click_opn_r">
-									<div class="paid mobile">Rs.1800.00</div>
-								</div>
-								<div class="clr"></div>
-							</div>
 
-						</div>
-
-						<div class="mob_order_log">
-							<h3 class="mobile_order">Order Log</h3>
-							<div class="order_row_1">
-								<div class="mob_log_one">
-									<h4 class="mob_status">Status</h4>
-									<p>Accept Order For Process By Shop</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Action By</h4>
-									<p>Ats User (Test Franchisee)</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Date Time</h4>
-									<p>17-09-2020 12:30:04 PM</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Remark</h4>
-									<p>product Quality Owesome</p>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
-
-					<!--2-->
-					<div class="row_1">
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Order Number</div>
-							<div class="mob_quan_r font">#123456</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Order Date</div>
-							<div class="mob_quan_r font">01 Oct 2020</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Total Rupees</div>
-							<div class="mob_quan_r font">
-								<div class="prc_amt">Rs. 450.00</div>
-							</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Payment Mode</div>
-							<div class="mob_quan_r font">
-								<div class="paid mobile">Online Payment</div>
-							</div>
-							<div class="clr"></div>
-						</div>
-						<div class="mob_quan">
-							<div class="mob_quan_l history">Status</div>
-							<div class="mob_quan_r font">
-								<span class="pending_ord">Pending</span>
-							</div>
-							<div class="clr"></div>
-						</div>
-
-						<div class="click_open">
-							<div class="mob_quan">
-								<div class="click_opn_l">Product Pic</div>
-								<div class="click_opn_r">
-									<img
-										src="${pageContext.request.contextPath}/resources/images/cake_open.jpg"
-										alt="cake_open">
-								</div>
-								<div class="clr"></div>
-							</div>
 
 							<div class="mob_quan">
-								<div class="click_opn_l">Product name</div>
-								<div class="click_opn_r">Cars Lightning McQueen Cake</div>
+								<div class="mob_quan_l history">Status</div>
+								<c:choose>
+									<c:when test="${orders.orderStatus==0}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Park Order</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==1}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Shop Confirmation Pending</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==2}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Accept</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==3}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Processing</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==4}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Delivery Pending</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==5}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Delivered</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==6}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Rejected by Shop</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==7}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Return Order</span>
+										</div>
+									</c:when>
+									<c:when test="${orders.orderStatus==8}">
+										<div class="mob_quan_r font">
+											<span class="deliverd">Cancelled Order</span>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="mob_quan_r font">
+											<span class="deliverd">Online Payment Pending</span>
+										</div>
+									</c:otherwise>
+								</c:choose>
 								<div class="clr"></div>
 							</div>
-							<div class="mob_quan">
-								<div class="click_opn_l">Product Amount</div>
-								<div class="click_opn_r">
-									<div class="prc_amt">Rs. 450.00</div>
-								</div>
-								<div class="clr"></div>
 							</div>
-							<div class="mob_quan">
-								<div class="click_opn_l">Product Quantity</div>
-								<div class="click_opn_r">
-									<div class="prc_kg">4 K.G</div>
-								</div>
-								<div class="clr"></div>
-							</div>
-							<div class="mob_quan">
-								<div class="click_opn_l">Total</div>
-								<div class="click_opn_r">
-									<div class="paid mobile">Rs.1800.00</div>
-								</div>
-								<div class="clr"></div>
-							</div>
+							<br>
 
+							<!--MobView Order Detail -->
+							
+							<c:forEach items="${orders.orderDetailList}" var="orderDetail" varStatus="cnt">
+								<c:if test="${orderDetail.orderId==orders.orderId}">
+								<div style="display: none;" class="order_dtl${orderHeadId}">
+									<div class="click_open">
+										<div class="mob_quan">
+											<div class="click_opn_l">Product Pic</div>
+											<div class="click_opn_r">
+												<img src="${imgPath}${orderDetail.itemPic}" alt="cake_open">
+											</div>
+											<div class="clr"></div>
+										</div>
+
+										<div class="mob_quan">
+											<div class="click_opn_l">Product name</div>
+											<div class="click_opn_r">${orderDetail.itemName}</div>
+											<div class="clr"></div>
+										</div>
+										<div class="mob_quan">
+											<div class="click_opn_l">Product Amount</div>
+											<div class="click_opn_r">
+												<div class="prc_amt">Rs. ${orderDetail.mrp}</div>
+											</div>
+											<div class="clr"></div>
+										</div>
+										<div class="mob_quan">
+											<div class="click_opn_l">Product Quantity</div>
+											<div class="click_opn_r">
+												<div class="prc_kg">${orderDetail.qty}
+													${orderDetail.itemUom}</div>
+											</div>
+											<div class="clr"></div>
+										</div>
+										<div class="mob_quan">
+											<div class="click_opn_l">Total</div>
+											<div class="click_opn_r">
+												<div class="paid mobile">Rs.${orderDetail.totalAmt}</div>
+											</div>
+											<div class="clr"></div>
+										</div>
+									</div>
+									</div>
+								</c:if>
+							</c:forEach>
+
+
+							<!-- MobView Order Log -->
+							<div style="display: none;" class="order_log${orderHeadId}">
+							<c:forEach items="${orders.orderTrailList}" var="orderTrail" varStatus="count">
+								<c:if test="${orderTrail.orderId==orders.orderId}">
+									<div class="mob_order_log">
+										<h3 class="mobile_order">Order Log ${count.index+1}</h3>
+										<div class="order_row_1">
+											<div class="mob_log_one">
+												<h4 class="mob_status">Status</h4>
+												<c:choose>
+													<c:when test="${orderTrail.status==0}">
+														<p>Park Order</p>
+													</c:when>
+													<c:when test="${orderTrail.status==1}">
+														<p>Shop Confirmation Pending</p>
+													</c:when>
+													<c:when test="${orderTrail.status==2}">
+														<p>Accept</p>
+													</c:when>
+													<c:when test="${orderTrail.status==3}">
+														<p>Processing</p>
+													</c:when>
+													<c:when test="${orderTrail.status==4}">
+														<p>Delivery Pending</p>
+													</c:when>
+													<c:when test="${orderTrail.status==5}">
+														<p>Delivered</p>
+													</c:when>
+													<c:when test="${orderTrail.status==6}">
+														<p>Rejected by Shop</p>
+													</c:when>
+													<c:when test="${orderTrail.status==7}">
+														<p>Return Order</p>
+													</c:when>
+													<c:when test="${orderTrail.status==8}">
+														<p>Cancelled Order</p>
+													</c:when>
+													<c:otherwise>
+														<p>Online Payment Pending</p>
+													</c:otherwise>
+												</c:choose>
+											</div>
+											<div class="mob_log_one">
+												<h4 class="mob_status">Action By</h4>
+												<p>${orderTrail.userName}</p>
+											</div>
+											<div class="mob_log_one">
+												<h4 class="mob_status">Date Time</h4>
+												<p>${orderTrail.trailDate}</p>
+											</div>
+											<div class="mob_log_one">
+												<h4 class="mob_status">Remark</h4>
+												<p>${orderTrail.exVar1}</p>
+											</div>
+										</div>
+
+									</div>
+								</c:if>
+							</c:forEach>
+							</div>
 						</div>
-
-						<div class="mob_order_log">
-							<h3 class="mobile_order">Order Log</h3>
-							<div class="order_row_1">
-								<div class="mob_log_one">
-									<h4 class="mob_status">Status</h4>
-									<p>Accept Order For Process By Shop</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Action By</h4>
-									<p>Ats User (Test Franchisee)</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Date Time</h4>
-									<p>17-09-2020 12:30:04 PM</p>
-								</div>
-								<div class="mob_log_one">
-									<h4 class="mob_status">Remark</h4>
-									<p>product Quality Owesome</p>
-								</div>
-							</div>
-
-						</div>
-
-					</div>
+					</c:forEach>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
@@ -548,6 +561,15 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js"></script>
 	<script>
+	function showOrderDtl(val){
+		$('.order_dtl'+val).toggle("slide");
+		$('.order_log'+val).toggle("slide");
+	}
+	
+	/* $('#orderHead').click(function() {
+	      $('#order_dtl').toggle("slide");
+	    }); */
+	
 		/*jslint browser:true*/
 		/*global jQuery, document*/
 		jQuery(document).ready(

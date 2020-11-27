@@ -220,7 +220,7 @@
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 		<div class="overlay-content">
 			<a href="${pageContext.request.contextPath}/orderhistory"> My Order </a> <a
-				href="multi-address.html"> My Address Book </a> <a
+				href="${pageContext.request.contextPath}/addresslist"> My Address Book </a> <a
 				href="${pageContext.request.contextPath}/profile"> Profile </a> <a href="#">Help</a> <a
 				href="location.html">Logout</a>
 

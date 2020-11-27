@@ -179,10 +179,10 @@ public class HomeController {
 		return "productdetail";
 	}
 
-	@RequestMapping(value = "/addresslist", method = RequestMethod.GET)
-	public String addressList(Locale locale, Model model) {
-		return "addresslist";
-	}
+//	@RequestMapping(value = "/addresslist", method = RequestMethod.GET)
+//	public String addressList(Locale locale, Model model) {
+//		return "addresslist";
+//	}
 
 //	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 //	public String profile(Locale locale, Model model) {

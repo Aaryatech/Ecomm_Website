@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -121,13 +122,54 @@
 								displayed below? If so, click the corresponnding "Deliver to
 								this address" button. <a href="location.html">Add Address</a>
 							</span>
-
-
 						</h2>
-
+						
 						<div class="address_row">
 							<ul>
+							<c:forEach items="${custAddList}" var="addressList">
 								<li>
+									<div class="address_one">
+										<h3 class="address_txt">
+											<i class="fa fa-user user_icn" aria-hidden="true"></i> ${addressList.custName}<span><i class="fa fa-map-marker"
+												aria-hidden="true"></i> ${addressList.address}, 
+												${addressList.exVar2}, ${addressList.exVar3}-422005 <br> MAHARASHTRA, India.</span>
+											 <span>Landmark :
+												${addressList.landmark}</span>
+											<span><i class="fa fa-phone" aria-hidden="true"></i>
+												+91 ${addressList.custMobileNo}</span>
+
+										</h3>
+
+										<div class="deliver_add">
+											<a href="#">Deliver to this address</a>
+										</div>
+
+										<div class="dropdown border_one">
+											<div class="select">
+												<span>Select your nearest franchisee</span>
+											</div>
+											<input type="hidden" name="gender">
+											<ul class="dropdown-menu">
+												<li id="male">Pune</li>
+												<li id="female">Mumbai</li>
+												<li id="female">Nashik</li>
+											</ul>
+										</div>
+
+										<div class="delivery_two">
+											<div class="deliver_edit">
+												<a href="#">Edit</a>
+											</div>
+											<div class="deliver_edit right_side">
+												<a href="#">Delete</a>
+											</div>
+											<div class="clr"></div>
+										</div>
+									</div>
+								</li>
+								</c:forEach>
+								
+								<!-- <li>
 									<div class="address_one">
 										<h3 class="address_txt">
 											<i class="fa fa-user user_icn" aria-hidden="true"></i> David
@@ -206,47 +248,7 @@
 											<div class="clr"></div>
 										</div>
 									</div>
-								</li>
-								<li>
-									<div class="address_one">
-										<h3 class="address_txt">
-											<i class="fa fa-user user_icn" aria-hidden="true"></i> David
-											Johnson Warner <span><i class="fa fa-map-marker"
-												aria-hidden="true"></i> Arham Hospital, Canada Corner, Near
-												Kulkarni Garden. NASHIK-422005 <br> MAHARASHTRA, India.</span>
-											<span><i class="fa fa-phone" aria-hidden="true"></i>
-												+91 9011877864</span>
-
-										</h3>
-
-
-										<div class="deliver_add">
-											<a href="#">Deliver to this address</a>
-										</div>
-
-										<div class="dropdown border_one">
-											<div class="select">
-												<span>Select your nearest franchisee</span>
-											</div>
-											<input type="hidden" name="gender">
-											<ul class="dropdown-menu">
-												<li id="male">Pune</li>
-												<li id="female">Mumbai</li>
-												<li id="female">Nashik</li>
-											</ul>
-										</div>
-
-										<div class="delivery_two">
-											<div class="deliver_edit">
-												<a href="#">Edit</a>
-											</div>
-											<div class="deliver_edit right_side">
-												<a href="#">Delete</a>
-											</div>
-											<div class="clr"></div>
-										</div>
-									</div>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 
