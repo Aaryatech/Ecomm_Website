@@ -63,9 +63,8 @@
 
 										<c:forEach items="${allData.flavorTagStatusList}"
 											var="filterType">
-${filterType.filterId}
+											${filterType.filterId}
 											<c:if test="${fn:contains(menuCat.filterIds, filterType.filterId)} ">
-											
 											
 												<div class="row_one">
 													<ul class="drop_mainmenu">
