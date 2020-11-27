@@ -588,7 +588,9 @@ function addToCartClick(productId){
 					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
 					alert(prodDetail[d].configDetailId);
 					var qty=1;
-					document.getElementById("cake_price").innerHTML = ""+prodDetail[d].actualRate;
+					//document.getElementById("cake_price").innerHTML = ""+prodDetail[d].actualRate;
+					document.getElementById("cake_prc").innerHTML=""+prodDetail[d].actualRate;
+					document.getElementById("cake_prc1").innerHTML=""+prodDetail[d].actualRate;
 					actualRate=prodDetail[d].actualRate;
 					var priceDiff=parseFloat(prodDetail[d].displayRate)-parseFloat(actualRate);
 					offPer=(parseFloat(priceDiff)/parseFloat(prodDetail[d].displayRate)*100);
