@@ -58,7 +58,7 @@ public class ImageUploadController {
 				info.setMsg("Upload Successfully ");
 			} else {
 				info.setError(true);
-				info.setMsg("Error While Uploading Image");
+				info.setMsg("Error While Uploading Image / check for image extensions in Constant");
 			}
 		} catch (Exception e) {
 			info.setError(true);

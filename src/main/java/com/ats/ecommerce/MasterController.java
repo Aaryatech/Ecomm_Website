@@ -66,7 +66,7 @@ public class MasterController {
 			model.addAttribute("getArea", billAddress[1]);
 			model.addAttribute("getLandmark", billAddress[2]);
 			model.addAttribute("getPin", billAddress[3]);
-			model.addAttribute("profileImg", Constants.UPLOAD_URL + cust.getProfilePic());
+			model.addAttribute("profileImg", Constants.VIEW_URL + cust.getProfilePic());
 
 			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getAllCustomerDetailByCustId", map, CustomerAddDetail[].class);

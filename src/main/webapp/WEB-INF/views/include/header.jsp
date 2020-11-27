@@ -193,12 +193,12 @@
 						<!--user-dropdown-->
 						<div class="user_login">
 							<ul class="login_menu">
-								<li><a href="#"><img src="#" class="lazy"
-										data-src="${pageContext.request.contextPath}/resources/images/user_pic.jpg"
-										alt=""> Hi Kate <!-- <i class="fa fa-angle-down"
-										aria-hidden="true"></i> --></a>
+								<li><a href="${pageContext.request.contextPath}/profile"><img src="" class="lazy"
+										data-src="${sessionScope.profileImg}"
+										alt=""> Hi ${sessionScope.userName}<!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a><!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<ul>
-										<li class="lgn_nm">Hello <span>kate@gmail.com</span></li>
+										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
 										<li></li>
 										<li></li>

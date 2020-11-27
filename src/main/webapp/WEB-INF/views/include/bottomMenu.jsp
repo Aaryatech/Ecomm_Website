@@ -59,7 +59,7 @@
 					<h3 class="footer_title">Contact Us</h3>
 					<div class="cont_add">
 						<i class="fa fa-map-marker" aria-hidden="true"></i> Shop 57, Near
-						Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Mashik,
+						Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Nashik,
 						Maharashtra 422003.
 					</div>
 					<div class="cont_add">
