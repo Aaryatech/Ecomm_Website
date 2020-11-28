@@ -3,6 +3,8 @@ package com.ats.ecommerce;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -27,6 +29,7 @@ import com.ats.ecommerce.common.EncodeDecode;
 import com.atss.ecommerce.model.Customer;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.atss.ecommerce.model.FEProductHeader;
+import com.atss.ecommerce.model.GetFlavorTagStatusList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -152,6 +155,30 @@ public class HomeController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+		
+		model.addAttribute("tagsJson", jsonStr);
+		
+		
 		return "home";
 	}
 

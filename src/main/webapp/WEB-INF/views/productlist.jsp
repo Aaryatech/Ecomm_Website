@@ -11,7 +11,7 @@
 <body>
 
 
-	<!--mongi help-popup-->
+	<%-- <!--mongi help-popup-->
 	<div class="mongi_help">
 		<a href="#mongi" class="initialism mongi_open"><img
 			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
@@ -49,8 +49,12 @@
 		$(document).ready(function() {
 			$('#mongi').popup();
 		});
-	</script>
+	</script> --%>
 
+
+	<!-- TAGS -->
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
+	<!-- TAGS End -->
 
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
@@ -988,8 +992,7 @@
 		}
 
 		function itemSearchByTagFilter() {
-			
-			
+
 			if (sessionStorage.getItem("selTags") == null) {
 				var table = [];
 				sessionStorage.setItem("selTags", JSON.stringify(table));
@@ -1005,23 +1008,21 @@
 
 			var tags = sessionStorage.getItem("selTags");
 			var selTags = $.parseJSON(tags);
-			
-			alert(selTags+"    ====> ");
-			
+
+			alert(selTags + "    ====> ");
+
 			for (var i = 0; i < allItemArr.length; i++) {
 				for (var t = 0; t < selTags.length; t++) {
-					
-					if(allItemArr[i].appliTagNames === selTags[t]){
-						
+
+					if (allItemArr[i].appliTagNames === selTags[t]) {
+
 						alert(allItemArr[i]);
-						
+
 					}
-					
+
 				}
 			}
 
-			
-	
 			/* $(".item_div")
 					.each(
 							function(counter) {

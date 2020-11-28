@@ -128,30 +128,6 @@ public class ProductDisplayController {
 			} catch (Exception e) {
 			}
 
-			// ALL PRODUCT LIST
-			List<FEProductHeader> allProductList = new ArrayList<>();
-			try {
-
-				
-				StringBuilder str=new StringBuilder();
-				
-				for (FEProductHeader item : data.getFeProductHeadList()) {
-
-					str.append(String.join(",", item.getFlavorNames()));
-					str.append(String.join(",", item.getAppliTagNames()));
-					str.append(String.join(",", item.getShapeNames()));
-					str.append(String.join(",", item.getProdTypeName()));
-
-					item.setCommonStr(str.toString());
-
-					allProductList.add(item);
-				}
-				
-
-			} catch (Exception e) {
-			}
-
-			model.addAttribute("allItems", allProductList);
 			model.addAttribute("tagsJson", jsonStr);
 			model.addAttribute("statusId", statusId);
 			model.addAttribute("allListFilter", 1);

@@ -44,17 +44,29 @@
 									<!--row-1-->
 									<div class="row_one">
 										<ul class="drop_mainmenu">
+
 											<li>By Price</li>
-											<li><input type="checkbox" class="menuPrice"
-												value="0-499">Under 499</li>
-											<li><input type="checkbox" class="menuPrice"
-												value="500-599">500 to 599</li>
-											<li><input type="checkbox" class="menuPrice"
-												value="600-999">600 to 999</li>
-											<li><input type="checkbox" class="menuPrice"
-												value="1000-1999">1000 to 1999</li>
-											<li><input type="checkbox" class="menuPrice"
-												value="2000-50000">Above 2000</li>
+
+											<li><input type="radio" id="radioPrice"
+												name="radioPrice" class="menuPrice" value="0-499"> <label
+												for="male">Under 499</label></li>
+
+											<li><input type="radio" id="radioPrice"
+												name="radioPrice" class="menuPrice" value="500-599">
+												<label for="male">500 to 599</label></li>
+
+											<li><input type="radio" id="radioPrice"
+												name="radioPrice" class="menuPrice" value="600-999">
+												<label for="male">600 to 999</label></li>
+
+											<li><input type="radio" id="radioPrice"
+												name="radioPrice" class="menuPrice" value="1000-1999">
+												<label for="male">1000 to 1999</label></li>
+
+											<li><input type="radio" id="radioPrice"
+												name="radioPrice" class="menuPrice" value="2000-50000">
+												<label for="male">Above 2000</label></li>
+
 										</ul>
 									</div>
 
@@ -95,6 +107,7 @@
 															<li><a href="#"> Black Forest Cakes </a></li>
 															<li><a href="#"> Butter Scotch Cakes </a></li>
 															<li><a href="#"> Strawberry Cakes </a></li> -->
+
 														</ul>
 													</div>
 
@@ -122,48 +135,23 @@
 
 		<div class="arrow_right">
 			<ul>
-				<li><a href="#"><i class="fa fa-arrow-up"
-						aria-hidden="true"></i></a></li>
-				<li><a href="#"><i class="fa fa-arrow-down"
-						aria-hidden="true"></i></a></li>
+				<li><a href="javascript:void(0)" onclick="priceSort(1)"><i
+						class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+				<li><a href="javascript:void(0)" onclick="priceSort(0)"><i
+						class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
 			</ul>
 		</div>
 	</div>
 
 	<div class="head_marg with_menu">
-		<section class="product_category">
-			<div class="wrapper">
-				<div class="mobile_scroll">
-
-					<div class="prod_filt">
-						<ul>
-
-							<c:forEach items="${allData.festEventList}" var="events">
-								<li>
-									<div class="product_filter_one">
-										<a href="#"><img
-											src="${pageContext.request.contextPath}/resources/images/birthday-cake-20.jpg"
-											alt=""> <c:out value="${events.eventName}"></c:out> </a>
-									</div>
-								</li>
-							</c:forEach>
-
-						</ul>
-					</div>
-
-				</div>
-
-
-			</div>
-		</section>
-
-
 
 		<!--product listing-->
 		<div class="find_store">
 			<div class="wrapper">
 
 				<div class="product_boxes">
+
+					<div id="hiddenProductList" style="display: none;"></div>
 
 					<ul id="itemListUl">
 						<!--product-row-1-->
@@ -626,10 +614,6 @@
 		});
 
 		function loadData() {
-			
-			
-			
-			
 
 			if (sessionStorage.getItem("selTags") == null) {
 				var table = [];
@@ -640,6 +624,27 @@
 				var table = [];
 				sessionStorage.setItem("allItemList", JSON.stringify(table));
 			}
+
+			if (sessionStorage.getItem("priceFilterMin") == null) {
+				sessionStorage.setItem("priceFilterMin", "0");
+			}
+
+			if (sessionStorage.getItem("priceFilterMax") == null) {
+				sessionStorage.setItem("priceFilterMax", "0");
+			}
+
+			if (sessionStorage.getItem("menuFilterName") == null) {
+				sessionStorage.setItem("menuFilterName", "");
+			}
+
+			var filterArr = [];
+			var menuFilter=sessionStorage.getItem("menuFilterName");
+			if(menuFilter!=''){
+				filterArr=menuFilter.split(",");
+			}
+
+			var min = sessionStorage.getItem("priceFilterMin");
+			var max = sessionStorage.getItem("priceFilterMax");
 
 			var allItemList = sessionStorage.getItem("allItemList");
 			var allItemArr = $.parseJSON(allItemList);
@@ -652,16 +657,140 @@
 			var divStr = "";
 
 			var count = 0;
+			
+			var hiddenProductListArr = [];
 
 			for (var i = 0; i < allItemArr.length; i++) {
 
 				if (selTags.length > 0) {
-
+					
 					for (var t = 0; t < selTags.length; t++) {
 
 						if (allItemArr[i].appliTagNames === selTags[t]) {
+							
+							hiddenProductListArr.push(allItemArr[i]);
 
-							//alert(allItemArr[i]);
+							divStr = divStr
+									+ '<li>'
+									+ ' <div class="item_div">'
+									+ ' <div class="cake_one product_padd"> '
+									+ ' <div class="cake_pic"> '
+									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+									+ allItemArr[i].defaultPrice
+									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+									+ allItemArr[i].defaultPrice
+									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+									+ ' </div> '
+									+ ' <div class="cake_container"> '
+									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+									+ allItemArr[i].productName + '</a> </h4>'
+									+ ' </div> </div> </div> </li> ';
+
+							count++;
+
+						}
+					}
+
+				} else {
+					
+				
+					
+						if(filterArr.length>0){
+							
+							for (var f = 0; f < filterArr.length; f++) {
+								
+								var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+								
+								if(tempFilterArr.length>0){
+
+									if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].defaultPrice >= min
+											&& allItemArr[i].defaultPrice <= max && max >0) {
+										
+										hiddenProductListArr.push(allItemArr[i]);
+										
+										divStr = divStr
+											+ '<li>'
+											+ ' <div class="item_div"> '
+											+ ' <div class="cake_one product_padd"> '
+											+ ' <div class="cake_pic"> '
+											+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+											+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+											+ allItemArr[i].defaultPrice
+											+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+											+ allItemArr[i].defaultPrice
+											+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+											+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+											+ ' </div> '
+											+ ' <div class="cake_container"> '
+											+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+											+ allItemArr[i].productName + '</a> </h4>'
+											+ ' </div> </div> </div> </li> ';
+
+										count++;
+										
+									}else if(max==0 && tempFilterArr.includes(filterArr[f])){
+										
+										hiddenProductListArr.push(allItemArr[i]);
+										
+										divStr = divStr
+										+ '<li>'
+										+ ' <div class="item_div"> '
+										+ ' <div class="cake_one product_padd"> '
+										+ ' <div class="cake_pic"> '
+										+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+										+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+										+ allItemArr[i].defaultPrice
+										+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+										+ allItemArr[i].defaultPrice
+										+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+										+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+										+ ' </div> '
+										+ ' <div class="cake_container"> '
+										+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+										+ allItemArr[i].productName + '</a> </h4>'
+										+ ' </div> </div> </div> </li> ';
+
+									count++;
+										
+									}
+
+								}
+								
+							}
+							
+						}else{
+							
+							
+							if (allItemArr[i].defaultPrice >= min
+									&& allItemArr[i].defaultPrice <= max && max >0) {
+								
+								hiddenProductListArr.push(allItemArr[i]);
+								
+								divStr = divStr
+										+ '<li>'
+										+ ' <div class="item_div"> '
+										+ ' <div class="cake_one product_padd"> '
+										+ ' <div class="cake_pic"> '
+										+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+										+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+										+ allItemArr[i].defaultPrice
+										+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+										+ allItemArr[i].defaultPrice
+										+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+										+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+										+ ' </div> '
+										+ ' <div class="cake_container"> '
+										+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+										+ allItemArr[i].productName + '</a> </h4>'
+										+ ' </div> </div> </div> </li> ';
+
+								count++;
+
+						} else if(max == 0) {
+							
+							hiddenProductListArr.push(allItemArr[i]);
 
 							divStr = divStr
 									+ '<li>'
@@ -679,40 +808,24 @@
 									+ ' <div class="cake_container"> '
 									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
 									+ allItemArr[i].productName + '</a> </h4>'
-									+ ' </div> </div> </div> </li> '
+									+ ' </div> </div> </div> </li> ';
 
 							count++;
 
 						}
-
+							
 					}
-
-				} else {
-
-					divStr = divStr
-							+ '<li>'
-							+ ' <div class="item_div"> '
-							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-							+ ' </div> '
-							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-							+ allItemArr[i].productName + '</a> </h4>'
-							+ ' </div> </div> </div> </li> '
-
-					count++;
 
 				}
 
 			}
+			
 			document.getElementById("itemListUl").innerHTML = divStr;
+			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(hiddenProductListArr);
+			
+			sessionStorage.setItem("priceFilterMin", "0");
+			sessionStorage.setItem("priceFilterMax", "0");
+			sessionStorage.setItem("menuFilterName", "");
 
 		}
 
@@ -846,6 +959,9 @@
 		}
 
 		function searchMenu() {
+			
+			var table = [];
+			sessionStorage.setItem("selTags", JSON.stringify(table));
 
 			var priceListTemp = [];
 
@@ -861,42 +977,103 @@
 								}
 							});
 
-			var price = [];
-
 			if (priceListTemp.length > 0) {
 
 				for (var i = 0; i < priceListTemp.length; i++) {
 					//alert()
-					var temp=priceListTemp[i].split("-");
-					if(temp.length>0){
-						price.push(temp[0]);
-						price.push(temp[1]);
-						
+					var temp = priceListTemp[i].split("-");
+					if (temp.length > 0) {
+						sessionStorage.setItem("priceFilterMin", temp[0]);
+						sessionStorage.setItem("priceFilterMax", temp[1]);
 					}
-					
 				}
 
+			} else {
+				sessionStorage.setItem("priceFilterMin", "0");
+				sessionStorage.setItem("priceFilterMax", "0");
 			}
 
-			alert(JSON.stringify(price));
-			
 			var nameFilter = [];
-			
-			$(".menuFilter")
-			.each(
-					function(counter) {
-						if (document
-								.getElementsByClassName("menuFilter")[counter].checked) {
 
-							nameFilter
-									.push(document
-											.getElementsByClassName("menuFilter")[counter].value);
-						}
-					});
+			$(".menuFilter")
+					.each(
+							function(counter) {
+								if (document
+										.getElementsByClassName("menuFilter")[counter].checked) {
+
+									nameFilter
+											.push(document
+													.getElementsByClassName("menuFilter")[counter].value);
+								}
+							});
+
+			/* alert(JSON.stringify(nameFilter)); */
 			
-			alert(JSON.stringify(nameFilter));
+			sessionStorage.setItem("menuFilterName", nameFilter);
+
+			window.open('${pageContext.request.contextPath}/products/0',
+					'_self');
 
 		}
+		
+		
+		function priceSort(val){
+
+			var tempArr=$.parseJSON(document.getElementById("hiddenProductList").innerHTML);
+			//alert(tempArr)
+			
+			
+			
+			if(tempArr.length>0){
+				
+				if(val==1){
+					tempArr.sort(function(a, b){
+					    return parseFloat(b.defaultPrice)-parseFloat(a.defaultPrice)
+					})
+
+				}else{
+					tempArr.sort(function(a, b){
+					    return parseFloat(a.defaultPrice)-parseFloat(b.defaultPrice)
+					})
+
+				}
+				
+			
+				//alert(JSON.stringify(tempArr))
+				
+				var divStr="";
+				var count=0;
+				for (var i = 0; i < tempArr.length; i++) {
+					
+						divStr = divStr
+								+ '<li>'
+								+ ' <div class="item_div"> '
+								+ ' <div class="cake_one product_padd"> '
+								+ ' <div class="cake_pic"> '
+								+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+								+ tempArr[i].defaultPrice
+								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+								+ tempArr[i].defaultPrice
+								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
+								+ ' </div> '
+								+ ' <div class="cake_container"> '
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+								+ tempArr[i].productName + '</a> </h4>'
+								+ ' </div> </div> </div> </li> '
+
+						count++;
+
+				}
+				document.getElementById("itemListUl").innerHTML = "";
+				document.getElementById("itemListUl").innerHTML = divStr;
+				
+			}
+			
+			
+		}
+		
 	</script>
 
 </body>

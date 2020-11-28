@@ -1,28 +1,31 @@
 package com.atss.ecommerce.model;
 
+import java.util.List;
 
 public class CateFilterConfig {
 	private int cateFilterConfigId;
-	
+
 	private int cateId;
-	
+
 	private String filterIds;
-	
+
 	private int delStatus;
-	
+
 	private int isActive;
-	
+
 	private int exInt1;
-	
+
 	private int exInt2;
-	
+
 	private String exVar1;
-	
+
 	private String exVar2;
-	
+
 	private int compId;
-	
+
 	private String makerDateTime;
+
+	private List<Integer> typeIdList;
 
 	public int getCateFilterConfigId() {
 		return cateFilterConfigId;
@@ -112,13 +115,20 @@ public class CateFilterConfig {
 		this.makerDateTime = makerDateTime;
 	}
 
+	public List<Integer> getTypeIdList() {
+		return typeIdList;
+	}
+
+	public void setTypeIdList(List<Integer> typeIdList) {
+		this.typeIdList = typeIdList;
+	}
+
 	@Override
 	public String toString() {
 		return "CateFilterConfig [cateFilterConfigId=" + cateFilterConfigId + ", cateId=" + cateId + ", filterIds="
 				+ filterIds + ", delStatus=" + delStatus + ", isActive=" + isActive + ", exInt1=" + exInt1 + ", exInt2="
 				+ exInt2 + ", exVar1=" + exVar1 + ", exVar2=" + exVar2 + ", compId=" + compId + ", makerDateTime="
-				+ makerDateTime + "]";
+				+ makerDateTime + ", typeIdList=" + typeIdList + "]";
 	}
-	
-	
+
 }

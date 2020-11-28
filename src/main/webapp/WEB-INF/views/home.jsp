@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ page import = "java.util.Date" %>
-	<%@ page import = "java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -15,102 +15,9 @@
 <body>
 
 
-	<div class="mongi_help">
-		<a href="#mongi" class="initialism mongi_open"><img src="#"
-			class="lazy"
-			data-src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
-			alt=""></a>
-	</div>
-
-	<!--apply now pop up-->
-	<div id="mongi" class="well">
-		<div class="mongi_title">
-			<span><a href="#"> Clear</a></span> Select Our Best Filter
-			<div class="mongi_close close_pop">
-				<i class="fa fa-times" aria-hidden="true"></i>
-			</div>
-		</div>
-		<div class="mongi_cont">
-			<ul class="ks-cboxtags">
-				<li><input type="checkbox" id="checkboxOne"><label
-					for="checkboxOne">Chocolate Cakes</label></li>
-				<li><input type="checkbox" id="checkboxtwo"><label
-					for="checkboxtwo">Exotic Cakes</label></li>
-				<li><input type="checkbox" id="checkboxthree"><label
-					for="checkboxthree">Black Forest Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfour"><label
-					for="checkboxfour">Designer Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfive"><label
-					for="checkboxfive">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxsix"><label
-					for="checkboxsix">Party Celebration Cakes</label></li>
-				<li><input type="checkbox" id="checkboxseven"><label
-					for="checkboxseven">Wedding Cakes</label></li>
-				<li><input type="checkbox" id="checkboxeight"><label
-					for="checkboxeight">Photo Cakes</label></li>
-				<li><input type="checkbox" id="checkboxnine"><label
-					for="checkboxnine">Cakes For Kids</label></li>
-				<li><input type="checkbox" id="checkboxten"><label
-					for="checkboxten">Medley</label></li>
-				<li><input type="checkbox" id="checkboxeleven"><label
-					for="checkboxeleven">Party Celebration Cakes</label></li>
-
-				<li><input type="checkbox" id="checkboxtwel"><label
-					for="checkboxtwel">Pizza</label></li>
-				<li><input type="checkbox" id="checkboxthirteen" checked><label
-					for="checkboxthirteen">Sandwich</label></li>
-				<li><input type="checkbox" id="checkboxfourteen"><label
-					for="checkboxfourteen">Fish</label></li>
-				<li><input type="checkbox" id="checkboxfifteen"><label
-					for="checkboxfifteen">Desert</label></li>
-				<li><input type="checkbox" id="checkboxsixteen"><label
-					for="checkboxsixteen">Salad</label></li>
-				<li><input type="checkbox" id="checkboxseventeen"><label
-					for="checkboxseventeen">Italian</label></li>
-				<li><input type="checkbox" id="checkboxeighteen"><label
-					for="checkboxeighteen">Indian</label></li>
-				<li><input type="checkbox" id="checkboxninteen"><label
-					for="checkboxninteen">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxtwenteen"><label
-					for="checkboxtwenteen">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtwenone"><label
-					for="checkboxtwenone">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwentwo"><label
-					for="checkboxtwentwo">Discord</label></li>
-				<li><input type="checkbox" id="checkboxtewnthree"><label
-					for="checkboxtewnthree">Clover</label></li>
-				<li><input type="checkbox" id="checkboxTwenfour"><label
-					for="checkboxTwenfour">Baby Moondancer</label></li>
-				<li><input type="checkbox" id="checkboxtwenfive"><label
-					for="checkboxtwenfive">Medley</label></li>
-				<li><input type="checkbox" id="checkboxtwensix"><label
-					for="checkboxtwensix">Firefly</label></li>
-				<li><input type="checkbox" id="checkboxtwenseven"><label
-					for="checkboxtwenseven">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtweneight"><label
-					for="checkboxtweneight">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwennine"><label
-					for="checkboxtwennine">Discord</label></li>
-				<li><input type="checkbox" id="checkboxthirtee"><label
-					for="checkboxthirtee">Clover</label></li>
-				<li><input type="checkbox" id="checkboxthirteeone"><label
-					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul>
-
-
-
-		</div>
-
-		<div class="proceend_bnt">
-			<a href="product.html" class="proceed_btn">Proceed</a>
-		</div>
-
-	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#mongi').popup();
-		});
-	</script>
+	<!-- TAGS -->
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
+	<!-- TAGS End -->
 
 
 	<!-- Header -->
@@ -165,32 +72,34 @@
 	<div class="testimonial_bx">
 		<div class="wrapper">
 			<section class="regular-cake slider">
-			<c:forEach items="${festiveEventList}" var="festEvent"
-		varStatus="count">
-		<c:set var="td" value="${festEvent.toDate}"></c:set>
-		<%String dt=(String)pageContext.getAttribute("td");
-		Date curDate=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyyy");
-		Date date=sdf.parse(dt);
-		if(curDate.compareTo(date)<=0){
-			pageContext.setAttribute("show",1);
-		}else{
-			pageContext.setAttribute("show",0);
-		}
-		%>
-		<c:set var="isShow" value="${show}"></c:set>
-		<c:if test="${isShow==1}">
-				<div>
-					<div class="festival_offer">
-				<a href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}" title="${festEvent.description}">${festEvent.eventName}
-<img src="${festEventImgUrl}${festEvent.exVar2}"
-	class="lazy" data-src="${festEventImgUrl}${festEvent.exVar2}"
-							alt=""></a>
-					</div>
-				</div>
-				</c:if>
+				<c:forEach items="${festiveEventList}" var="festEvent"
+					varStatus="count">
+					<c:set var="td" value="${festEvent.toDate}"></c:set>
+					<%
+						String dt = (String) pageContext.getAttribute("td");
+							Date curDate = new Date();
+							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+							Date date = sdf.parse(dt);
+							if (curDate.compareTo(date) <= 0) {
+								pageContext.setAttribute("show", 1);
+							} else {
+								pageContext.setAttribute("show", 0);
+							}
+					%>
+					<c:set var="isShow" value="${show}"></c:set>
+					<c:if test="${isShow==1}">
+						<div>
+							<div class="festival_offer">
+								<a
+									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
+									title="${festEvent.description}">${festEvent.eventName} <img
+									src="${festEventImgUrl}${festEvent.exVar2}" class="lazy"
+									data-src="${festEventImgUrl}${festEvent.exVar2}" alt=""></a>
+							</div>
+						</div>
+					</c:if>
 				</c:forEach>
-				</section>
+			</section>
 		</div>
 	</div>
 
@@ -214,8 +123,8 @@
 								varStatus="prodCount">
 								<c:choose>
 									<c:when
-											test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}">
-								<%-- 	<c:when test="${product.prodStatusId==statusFilter.filterId}"> --%>
+										test="${product.prodStatusId==statusFilter.filterId && product.isHomePageProd==1}">
+										<%-- 	<c:when test="${product.prodStatusId==statusFilter.filterId}"> --%>
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
@@ -244,9 +153,10 @@
 															aria-hidden="true"></i>
 														<p class="cake_prc_detail_pclass"
 															id="cake_prc${product.productId}">${product.defaultPrice}</p>
-														<span class="off_prc" id="off_prc${product.productId}"><!-- <i class="fa fa-inr" 
-															aria-hidden="true"></i> --></span> <span
-															id="prc_off${product.productId}" class="prc_off"></span>
+														<span class="off_prc" id="off_prc${product.productId}">
+															<!-- <i class="fa fa-inr" 
+															aria-hidden="true"></i> -->
+														</span> <span id="prc_off${product.productId}" class="prc_off"></span>
 													</div>
 
 												</div>
@@ -295,7 +205,7 @@
 														<div class="cake_dropdown_r">
 															<!-- <div class="custom-select-new1"> -->
 															<select class="select-css" id="wt${product.productId}"
-																 onchange="changeWtFlavor('${product.productId}')" >
+																onchange="changeWtFlavor('${product.productId}')">
 																<option value="7">7</option>
 																<c:forEach items="${product.availInWeights}"
 																	var="prodDetailwt">
@@ -423,7 +333,9 @@
 							</c:forEach>
 						</section>
 						<div class="more_cakes">
-							<a href="${pageContext.request.contextPath}/moreCakeStatusWise/${statusFilter.filterId}">More ${statusFilter.filterName}</a>
+							<a
+								href="${pageContext.request.contextPath}/moreCakeStatusWise/${statusFilter.filterId}">More
+								${statusFilter.filterName}</a>
 						</div>
 					</div>
 				</div>
@@ -519,30 +431,30 @@
 	<!--testimonial-box-->
 	<div class="testimonial_bx">
 		<h2 class="sec_title">
-			<center >
+			<center>
 				Our Testimonials <span>Customer Reviews regarding to our Shop</span>
 			</center>
 		</h2>
 
 		<div class="wrapper">
 			<section class="regular slider">
-				<c:forEach items="${testMonialList}" var="testmoni" varStatus="count">
-            <div>
-              <div class="testimonial_one">
-                <i class="fa fa-quote-left" aria-hidden="true"></i>  
-                <p class="testimoial_txt">${testmoni.messages}</p>
+				<c:forEach items="${testMonialList}" var="testmoni"
+					varStatus="count">
+					<div>
+						<div class="testimonial_one">
+							<i class="fa fa-quote-left" aria-hidden="true"></i>
+							<p class="testimoial_txt">${testmoni.messages}</p>
 
-                <div class="testimonial_nm">
-                    <img src="${TestimonialImgUrl}${testmoni.images}" alt="">
-                    <h2 class="testimonial_date">
-                        ${testmoni.name}
-                        <span>Date : date</span>
-                       <!--  <span>Location: location</span> -->
-                    </h2>
-                  </div>  
-              </div>
- </div>
- </c:forEach>
+							<div class="testimonial_nm">
+								<img src="${TestimonialImgUrl}${testmoni.images}" alt="">
+								<h2 class="testimonial_date">
+									${testmoni.name} <span>Date : date</span>
+									<!--  <span>Location: location</span> -->
+								</h2>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 			</section>
 		</div>
 
@@ -618,7 +530,8 @@
 			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
 				selectFlav = 0;
 			}
-			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked').val();
+			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked')
+					.val();
 			var dataList = '${sessionScope.dataList}';
 			var data = $.parseJSON(dataList);
 			var selectVegNon = "Veg";
@@ -646,14 +559,19 @@
 							if (parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
 
 								var qty = 1;
-							document.getElementById("cake_prc" + productId).innerHTML = ""+prodDetail[d].actualRate;
-							actualRate = prodDetail[d].actualRate;
-								var priceDiff = parseFloat(prodDetail[d].displayRate) - parseFloat(actualRate);
-								offPer = (parseFloat(priceDiff) / parseFloat(prodDetail[d].displayRate) * 100);
+								document.getElementById("cake_prc" + productId).innerHTML = ""
+										+ prodDetail[d].actualRate;
+								actualRate = prodDetail[d].actualRate;
+								var priceDiff = parseFloat(prodDetail[d].displayRate)
+										- parseFloat(actualRate);
+								offPer = (parseFloat(priceDiff)
+										/ parseFloat(prodDetail[d].displayRate) * 100);
 								//document.getElementById("prc_off" + productId).innerHTML = ""+priceDiff.toFixed(2);
-									document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"+priceDiff.toFixed(2)+"</i>";
-					//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
-								document.getElementById("prc_off" + productId).innerHTML = ""+offPer.toFixed(2);
+								document.getElementById('off_prc' + productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>"
+										+ priceDiff.toFixed(2) + "</i>";
+								//document.getElementById('off_prc'+productId).innerHTML = "<i class='fa fa-inr' aria-hidden='true'>414</i>";
+								document.getElementById("prc_off" + productId).innerHTML = ""
+										+ offPer.toFixed(2);
 								break;
 							}
 							//alert("Do calc");
@@ -669,8 +587,8 @@
 			}//end of For prodDetailList pd
 
 		}//end of Function changeWtFlavor
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		function addToCartClick(productId) {
 			//alert("In addToCartClick " +productId);
 			var selectWt = document.getElementById("wt" + productId).value;
