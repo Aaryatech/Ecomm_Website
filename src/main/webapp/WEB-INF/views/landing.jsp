@@ -377,7 +377,7 @@ position: relative; z-index:999999;
     <div id="landingpop" class="well_landing">
        <h2 class="location_title">Select your Delivery Location
         <div class="landingpop_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></h2>
-        
+            <form id="validation-form" action="${pageContext.request.contextPath}/preHome" method="post">
         <div class="location_padd">
                 <div class="current_location"><a href="#"><img src="${pageContext.request.contextPath}/resources/images/location_icn.png" alt=""> use Current Location </a></div>
                 <div class="location_or">Or</div>
@@ -395,7 +395,7 @@ position: relative; z-index:999999;
                 </div>
                 
                 <div class="place_search_row">
-                    <form action="" method="get">
+                
                         <div class="search_one">
                            <!--  <div class="dropdown">
                                 <div class="select"> <span>Other City</span></div>
@@ -463,7 +463,7 @@ position: relative; z-index:999999;
 									</select>
 								</div>
 							</div>
-                    </form>
+                    
                 </div>
                 
 <!--                 <div class="place_login">If you are existing user Login</div>
@@ -475,9 +475,10 @@ position: relative; z-index:999999;
                     <span><img src="${pageContext.request.contextPath}/resources/images/current_icn.png" alt=""> Currently our services are unavailable at selected location.</span>
                 </div>
                 
-                <div class="proceed_btn_1"><a href="home.html"><input name="" type="button" value="Proceed" class="proceed" /></a></div>
+                <div class="proceed_btn_1"><a  href="#"><input name="" type="submit" value="Proceed" class="proceed" /></a></div>
                 
             </div>
+            </form>
         
     </div>
      
@@ -485,6 +486,11 @@ position: relative; z-index:999999;
     $(document).ready(function () {
       $('#landingpop').popup();
     });
+    function gotoHome(){
+    	  var form = document.getElementById("validation-form");
+    	    form.action ="home";
+    	    form.submit();
+    }
     </script>    
     
   <script type="text/javascript"

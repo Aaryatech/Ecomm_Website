@@ -135,6 +135,7 @@ public class FEProductHeader {
 	
 private float defaultPrice;//Sachin 04-11-2020 new Add
 private String defaultVegNonvegName;//Sachin 06-11-2020 new Add
+private String allFilterNames;//Sachin 28-11-2020 new Add
 
 	public String getDefaultVegNonvegName() {
 	return defaultVegNonvegName;
@@ -786,6 +787,14 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 	public void setDefaultShapeId(int defaultShapeId) {
 		this.defaultShapeId = defaultShapeId;
 	}
+	
+	public String getAllFilterNames() {
+		return allFilterNames;
+	}
+
+	public void setAllFilterNames(String allFilterNames) {
+		this.allFilterNames = allFilterNames;
+	}
 
 	@Override
 	public String toString() {
@@ -818,7 +827,7 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 				+ breadTypeName + ", vegNonvegName=" + vegNonvegName + ", defaultFlavorId=" + defaultFlavorId
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
 				+ ", defaultPrice=" + defaultPrice + ", defaultVegNonvegName=" + defaultVegNonvegName
-				+ ", prodDetailList=" + prodDetailList + "]";
+				+ ", allFilterNames=" + allFilterNames + ", prodDetailList=" + prodDetailList + "]";
 	}
 
 	

@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
+import com.ats.ecommerce.common.EncodeDecode;
+import com.atss.ecommerce.model.Customer;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.atss.ecommerce.model.FEProductHeader;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,7 +36,7 @@ public class HomeController {
 
 	FEDataTraveller data = new FEDataTraveller();
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/aa", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
 		try {
@@ -82,15 +86,37 @@ public class HomeController {
 	// Modific Date -03-11-2020
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
-
+		//System.err.println("Data home " +data.toString());
 		HttpSession session = request.getSession();
-		String x = (String) session.getAttribute("custIdCookie");
-		session.setAttribute("custId", 1);
-		session.setAttribute("companyId", 1);
-		session.setAttribute("frId", 1);
-		session.setAttribute("userId", 8);
-		// System.err.println("Cate List " + data.getFranchiseCatList().toString());
+		String strFrId="0";int frId=0;
+		try {
+			strFrId = (String) session.getAttribute("frId");
+			
+			System.err.println("Fr Id " + strFrId);
+		}catch (Exception e) {
+			System.err.println("In Home catch");
+		}
+		try {
+			frId=Integer.parseInt(strFrId);
+		}catch (Exception e) {
+			frId=0;
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+		data = mapper.readValue(new File(Constants.JSON_FILES_PATH+frId+"_.json"),
+				FEDataTraveller.class);
+		System.err.println("data " + data.toString());
+		try {
+		session.setAttribute("companyId", data.getFranchiseCatList().get(0).getCompanyId());
+		}catch (Exception e) {
+			session.setAttribute("companyId",0);
+		}
 
+		String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+frId+"_.json"))
+				.useDelimiter("\\Z").next();
+		session.setAttribute("dataList", dataList);
+		
 		model.addAttribute("frCatList", data.getFranchiseCatList());
 
 		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
@@ -102,17 +128,69 @@ public class HomeController {
 		
 		model.addAttribute("festiveEventList", data.getFestEventList());
 		model.addAttribute("festEventImgUrl", Constants.FEST_IMG_VIEW_URL);
-		
-		 System.err.println("Fest Event "+data.getFestEventList());
-		 
 		 
 		 model.addAttribute("testMonialList", data.getTestimonialList());
-			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
-			
-			
+		 model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+			 
+		int custId = (int) session.getAttribute("custId");
+		System.err.println("custId " + custId);
+		try {
+		if(custId>0) {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		map.add("custId", custId);
+		Customer cust =
+		Constants.getRestTemplate().postForObject(Constants.url +
+		"getCustById", map,
+		Customer.class);
+		session.setAttribute("userName", cust.getCustName());
+		session.setAttribute("userEmail", cust.getEmailId());
+		session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+		}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "home";
 	}
 
+	
+	@RequestMapping(value = "/preHome", method = RequestMethod.POST)
+	public String preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in Pre Home");
+		HttpSession session = request.getSession();
+		session.setAttribute("custId", 0);
+		int frId=0;
+		
+		try {
+			frId=Integer.parseInt(request.getParameter("selectShop"));
+			session.setAttribute("frId", frId);
+			try {
+				String landMark=request.getParameter("txtPlaces");
+				session.setAttribute("landMark", landMark);
+				System.err.println("landMark " + landMark);
+			}catch (Exception em) {
+				System.err.println("In Landmark Catch");
+			}
+		}catch (Exception e) {
+			System.err.println("In Catch "+frId);
+			try {
+				System.err.println("Inner Try "+frId);
+			session.setAttribute("frId", session.getAttribute("frId"));
+			}catch (Exception ex) {
+				System.err.println("Inner Catch ");
+				session.setAttribute("frId",0);
+			}
+		}
+		
+		Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt(""+frId)); 
+		frIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+		response.addCookie(frIdCookie);
+		
+		session.setAttribute("userId", 0);
+		return "redirect:/home";
+	}
 	// Modified By -Sachin
 	// Modific Date -11-11-2020
 	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)

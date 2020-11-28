@@ -8,8 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Scanner;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
-import com.atss.ecommerce.model.City;
+import com.ats.ecommerce.common.EncodeDecode;
 import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.Customer;
 import com.atss.ecommerce.model.CustomerAddDetail;
@@ -43,17 +43,7 @@ public class MasterController {
 
 			HttpSession session = request.getSession();
 
-//			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-//			Info view = AccessControll.checkAccess("showCustomers", "showCustomers", "1", "0", "0", "0", newModuleList);
-//
-//			if (view.isError() == true) {
-//
-//				mav = "accessDenied";
-//
-//			} else {
-
 			int custId = (Integer) session.getAttribute("custId");
-			int compId = (Integer) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("custId", custId);
@@ -66,7 +56,7 @@ public class MasterController {
 			model.addAttribute("getArea", billAddress[1]);
 			model.addAttribute("getLandmark", billAddress[2]);
 			model.addAttribute("getPin", billAddress[3]);
-			model.addAttribute("profileImg", Constants.VIEW_URL + cust.getProfilePic());
+			model.addAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 
 			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getAllCustomerDetailByCustId", map, CustomerAddDetail[].class);
@@ -74,13 +64,6 @@ public class MasterController {
 
 			model.addAttribute("custAddList", custAddList);
 
-			map = new LinkedMultiValueMap<>();
-			map.add("compId", compId);
-
-//			City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map,
-//					City[].class);
-//			List<City> cityList = new ArrayList<City>(Arrays.asList(cityArr));
-			
 			ObjectMapper mapper = new ObjectMapper();
 			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
 					CityData[].class);
@@ -88,26 +71,6 @@ public class MasterController {
 
 			model.addAttribute("cityList", cityList);
 
-//				Info add = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "1", "0", "0",
-//						newModuleList);
-//				Info edit = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "1", "0",
-//						newModuleList);
-//				Info delete = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "0", "1",
-//						newModuleList);
-//
-//				if (add.isError() == false) { // System.out.println(" add Accessable ");
-//					model.addAttribute("addAccess", 0);
-//
-//				}
-//				if (edit.isError() == false) { // System.out.println(" edit Accessable ");
-//					model.addAttribute("editAccess", 0);
-//				}
-//				if (delete.isError() == false) { //
-//					System.out.println(" delete Accessable ");
-//					model.addAttribute("deleteAccess", 0);
-//
-//				}
-//			}		
 		} catch (Exception e) {
 			System.out.println("Exception in /profile : " + e.getMessage());
 			e.printStackTrace();
@@ -195,6 +158,16 @@ public class MasterController {
 
 			if (res.getCustId() > 0) {
 				session.setAttribute("successMsg", "Profile Update Successfully");
+				session.setAttribute("custId",res.getCustId());
+				
+				Cookie custCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
+				custCookie.setMaxAge(60 *  60 * 24 * 15); 
+				response.addCookie(custCookie);
+				
+				session.setAttribute("userName", cust.getCustName());
+				session.setAttribute("userEmail", cust.getEmailId());
+				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+				
 			} else {
 				session.setAttribute("errorMsg", "Failed to Update Profile");
 			}
@@ -210,49 +183,12 @@ public class MasterController {
 	@RequestMapping(value = "/addNewCustomer", method = RequestMethod.GET)
 	public String addNewCustomer(HttpServletRequest request, HttpServletResponse response, Model model) {
 		try {
-
 			HttpSession session = request.getSession();
-
-//			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-//			Info view = AccessControll.checkAccess("showCustomers", "showCustomers", "1", "0", "0", "0", newModuleList);
-//
-//			if (view.isError() == true) {
-//
-//				mav = "accessDenied";
-//
-//			} else {
-
-			int compId = (Integer) session.getAttribute("companyId");
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("compId", compId);
-
 			ObjectMapper mapper = new ObjectMapper();
 			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
 					CityData[].class);
 			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 			model.addAttribute("cityList", cityList);
-
-//				Info add = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "1", "0", "0",
-//						newModuleList);
-//				Info edit = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "1", "0",
-//						newModuleList);
-//				Info delete = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "0", "1",
-//						newModuleList);
-//
-//				if (add.isError() == false) { // System.out.println(" add Accessable ");
-//					model.addAttribute("addAccess", 0);
-//
-//				}
-//				if (edit.isError() == false) { // System.out.println(" edit Accessable ");
-//					model.addAttribute("editAccess", 0);
-//				}
-//				if (delete.isError() == false) { //
-//					System.out.println(" delete Accessable ");
-//					model.addAttribute("deleteAccess", 0);
-//
-//				}
-//			}		
 		} catch (Exception e) {
 			System.out.println("Exception in /addNewCustomer : " + e.getMessage());
 			e.printStackTrace();
@@ -347,6 +283,10 @@ public class MasterController {
 				Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
 						Customer.class);
 				session.setAttribute("custId", res.getCustId());
+				
+				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
+				custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+				response.addCookie(custIdCookie);
 			}
 
 		} catch (Exception e) {

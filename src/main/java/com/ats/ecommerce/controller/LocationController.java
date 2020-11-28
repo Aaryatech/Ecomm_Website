@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.Constants;
+import com.ats.ecommerce.common.EncodeDecode;
 import com.atss.ecommerce.model.CategoryList;
 import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.FEDataTraveller;
@@ -32,28 +33,47 @@ public class LocationController {
 
 	FEDataTraveller data = new FEDataTraveller();
 
-	@RequestMapping(value = "/a", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "landing";
+		System.err.println("In slash page landing");
 		try {
+			HttpSession session = request.getSession();
 			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
-			/*
-			 * if (cookieArray != null) for (int a = 0; a < cookieArray.length; a++) { //
-			 * if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) { if
-			 * (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
-			 * System.err.println("In If "); HttpSession session = request.getSession();
-			 * session.setAttribute("custIdCookie", cookieArray[a].getValue()); returnPage =
-			 * "redirect:/home"; isCookieFound = 1;
-			 * 
-			 * ObjectMapper mapper = new ObjectMapper(); data = mapper.readValue(new
-			 * File("/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/4_.json"),
-			 * FEDataTraveller.class); System.err.println("data " +data.toString()); break;
-			 * } }
-			 */
+			if (cookieArray != null)
+				for (int a = 0; a < cookieArray.length; a++) {
+					// if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
+					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
+						session.setAttribute("custId", Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+						System.err.println("In custIdCookie " +EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+						returnPage = "redirect:/home";
+						isCookieFound = 1;
+						break;
+					}
+				}
+			if (cookieArray != null)
+			for (int a = 0; a < cookieArray.length; a++) {
+				if (cookieArray[a].getName().equalsIgnoreCase("frIdCookie")) {
+					session.setAttribute("frId", EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+					int frId=Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+					System.err.println("In frIdCookie " +EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+
+					ObjectMapper mapper = new ObjectMapper();
+					data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
+							FEDataTraveller.class);
+					System.err.println("data " + data.toString());
+
+					String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+frId+"_.json"))
+							.useDelimiter("\\Z").next();
+					session.setAttribute("dataList", dataList);
+					break;
+				}
+			}
+			
 
 			if (isCookieFound == 0) {
-				System.err.println("In Else ");
+				System.err.println("In Else part of / Mapping ");
 				ObjectMapper mapper = new ObjectMapper();
 				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
 						CityData[].class);
@@ -75,9 +95,6 @@ public class LocationController {
 				List<FETestimonial> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 				model.addAttribute("testMonialList", testMonialList);
 				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
-				
-				
-
 				returnPage = "landing";
 			}
 
@@ -137,9 +154,11 @@ public class LocationController {
 			@PathVariable int statusId) {
 		String returnPage = "productlist";
 		try {
+			HttpSession session=request.getSession();
 			
+			int frId=(int) session.getAttribute("frId");
 			ObjectMapper mapper = new ObjectMapper();
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "27_.json"),
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
 					FEDataTraveller.class);
 			
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);

@@ -26,7 +26,7 @@
 					</div>
 				</div>
 				<div class="top_address">
-					<span><p>Delivery</p> Location :</span> Bandra Cake ShopMumbai.
+					<span><p>Delivery</p> Location :</span> ${landMark}.
 					<ul class="login_menu edit">
 						<li><a href="#"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>
@@ -193,7 +193,7 @@
 						<!--user-dropdown-->
 						<div class="user_login">
 							<ul class="login_menu">
-								<li><a href="${pageContext.request.contextPath}/profile"><img src="" class="lazy"
+								<li><a href="${pageContext.request.contextPath}/profile"><img src="${sessionScope.profileImg}" class="lazy"
 										data-src="${sessionScope.profileImg}"
 										alt=""> Hi ${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a><!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->

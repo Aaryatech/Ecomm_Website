@@ -632,10 +632,10 @@
 			}
 		};
 		
-		$('.maxlength-badge-position').maxlength({
+		/* $('.maxlength-badge-position').maxlength({
 		    alwaysShow: true,
 		    placement: 'top'
-		});
+		}); */
 	</script>
 
 
