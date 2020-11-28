@@ -34,7 +34,6 @@
 
 					<li><a href="#" class="same_day">Same Day Delivery </a></li>
 
-
 					<c:forEach items="${allData.catFilterConfig}" var="menuCat">
 
 						<li><a href="#">${menuCat.exVar2} <span><i
@@ -42,45 +41,73 @@
 							<ul class="megamenu four-row">
 								<div class="four_row_dropdown">
 
-
 									<!--row-1-->
 									<div class="row_one">
 										<ul class="drop_mainmenu">
 											<li>By Price</li>
-											<li><a href="#"> Under 499 </a></li>
-											<li><a href="#"> 500 to 599 </a></li>
-											<li><a href="#"> 600 to 999 </a></li>
-											<li><a href="#"> 1000 to 1999 </a></li>
-											<li><a href="#"> Above 2000 </a></li>
+											<li><input type="checkbox" class="menuPrice"
+												value="0-499">Under 499</li>
+											<li><input type="checkbox" class="menuPrice"
+												value="500-599">500 to 599</li>
+											<li><input type="checkbox" class="menuPrice"
+												value="600-999">600 to 999</li>
+											<li><input type="checkbox" class="menuPrice"
+												value="1000-1999">1000 to 1999</li>
+											<li><input type="checkbox" class="menuPrice"
+												value="2000-50000">Above 2000</li>
 										</ul>
 									</div>
 
+									<%-- ${menuCat.typeIdList} --%>
 
-									
 
 
-									
+									<c:forEach items="${menuCat.typeIdList}" var="menuTypeList">
 
-										<c:forEach items="${allData.flavorTagStatusList}"
-											var="filterType">
-											${filterType.filterId}
-											<c:if test="${fn:contains(menuCat.filterIds, filterType.filterId)} ">
-											
-												<div class="row_one">
-													<ul class="drop_mainmenu">
-														<li>${filterType.filterName}</li>
-														<li><a href="#"> Chocolate Cakes </a></li>
-														<li><a href="#"> Red Velvet Cakes </a></li>
-														<li><a href="#"> Black Forest Cakes </a></li>
-														<li><a href="#"> Butter Scotch Cakes </a></li>
-														<li><a href="#"> Strawberry Cakes </a></li>
-													</ul>
-												</div>
-											</c:if>
+										<c:forEach items="${allFilterTypeList}" var="filterType">
+
+											<c:choose>
+
+												<c:when test="${menuTypeList == filterType.filterTypeId}">
+
+													<div class="row_one">
+														<ul class="drop_mainmenu">
+															<li>${filterType.filterTypeName}</li>
+
+															<c:forEach items="${allFilterList}" var="filter">
+
+																<c:choose>
+
+																	<c:when
+																		test="${filterType.filterTypeId == filter.filterTypeId}">
+
+																		<li><input type="checkbox" class="menuFilter"
+																			value="${filter.adminName}">${filter.adminName}</li>
+
+																	</c:when>
+
+																</c:choose>
+
+															</c:forEach>
+
+															<!--<li><a href="#"> Chocolate Cakes </a></li>
+															<li><a href="#"> Red Velvet Cakes </a></li>
+															<li><a href="#"> Black Forest Cakes </a></li>
+															<li><a href="#"> Butter Scotch Cakes </a></li>
+															<li><a href="#"> Strawberry Cakes </a></li> -->
+														</ul>
+													</div>
+
+												</c:when>
+											</c:choose>
 
 										</c:forEach>
 
-									
+									</c:forEach>
+
+
+									<a href="javascript:void(0)" class="proceed_btn"
+										onclick="searchMenu()">Search</a>
 
 								</div>
 							</ul></li>
@@ -599,6 +626,10 @@
 		});
 
 		function loadData() {
+			
+			
+			
+			
 
 			if (sessionStorage.getItem("selTags") == null) {
 				var table = [];
@@ -811,6 +842,59 @@
 
 			window.open('${pageContext.request.contextPath}/products/0',
 					'_self');
+
+		}
+
+		function searchMenu() {
+
+			var priceListTemp = [];
+
+			$(".menuPrice")
+					.each(
+							function(counter) {
+								if (document
+										.getElementsByClassName("menuPrice")[counter].checked) {
+
+									priceListTemp
+											.push(document
+													.getElementsByClassName("menuPrice")[counter].value);
+								}
+							});
+
+			var price = [];
+
+			if (priceListTemp.length > 0) {
+
+				for (var i = 0; i < priceListTemp.length; i++) {
+					//alert()
+					var temp=priceListTemp[i].split("-");
+					if(temp.length>0){
+						price.push(temp[0]);
+						price.push(temp[1]);
+						
+					}
+					
+				}
+
+			}
+
+			alert(JSON.stringify(price));
+			
+			var nameFilter = [];
+			
+			$(".menuFilter")
+			.each(
+					function(counter) {
+						if (document
+								.getElementsByClassName("menuFilter")[counter].checked) {
+
+							nameFilter
+									.push(document
+											.getElementsByClassName("menuFilter")[counter].value);
+						}
+					});
+			
+			alert(JSON.stringify(nameFilter));
 
 		}
 	</script>
