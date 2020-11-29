@@ -156,7 +156,7 @@ public class LocationController {
 		try {
 			HttpSession session=request.getSession();
 			
-			int frId=(int) session.getAttribute("frId");
+			int frId=(int) session.getAttribute("strFrId");
 			ObjectMapper mapper = new ObjectMapper();
 			data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
 					FEDataTraveller.class);

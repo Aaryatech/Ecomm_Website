@@ -121,7 +121,14 @@
 		<div class="find_store">
 			<div class="wrapper">
 
-
+				<h4 id="successMsg" style="text-align: center; color: green;">${sessionScope.successMsg}</h4>
+				<%
+					request.getSession().removeAttribute("successMsg");
+				%>
+				<h4 id="respMsg" style="text-align: center; color: red;">${sessionScope.respMsg}</h4>
+				<%
+					request.getSession().removeAttribute("respMsg");
+				%>
 				<div class="cart_row">
 					<div class="cart_l">
 
@@ -373,22 +380,22 @@
 
 								<script type="text/javascript">
 								function checkCustSession(){
-									var sessCustId = '<%= session.getAttribute("custId") %>';
-									
-									if(sessCustId>0){
-										 $(document).ready(function() {
+									var sessCustId = '<%=session.getAttribute("custId")%>';
+
+										if (sessCustId > 0) {
+											$(document).ready(function() {
 												$('#place').popup();
-											}); 
-									}else{
-										var r = confirm("Please give your details");
-										if (r == true) {
-											var url = '${pageContext.request.contextPath}/addNewCustomer';
-											window.location = url;
+											});
+										} else {
+											var r = confirm("Please give your details");
+											if (r == true) {
+												var url = '${pageContext.request.contextPath}/addNewCustomer';
+												window.location = url;
+											}
 										}
+
 									}
-									
-								}
-								
+
 									/* $(document).ready(function() {
 										$('#place').popup();
 									}); */
@@ -657,16 +664,16 @@
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvLandmark" name="txtDelvLandmark" value="${getLandmark}"
-									placeholder="Landmark" /> <label class="form-label-hint-error"
-									id="errorDelvLandmark" style="display: none;">please
-									enter landmark</label>
+									id="txtDelvLandmark" name="txtDelvLandmark"
+									value="${getLandmark}" placeholder="Landmark" /> <label
+									class="form-label-hint-error" id="errorDelvLandmark"
+									style="display: none;">please enter landmark</label>
 
 							</div>
 							<div class="place_row_r">
-								<input type="text" class="input_place" autocomplete="off" value="${getPin}"
-									id="txtDelvPincode" name="txtDelvPincode" maxlength="6"
-									placeholder="Shipping Pincode" /> <label
+								<input type="text" class="input_place" autocomplete="off"
+									value="${getPin}" id="txtDelvPincode" name="txtDelvPincode"
+									maxlength="6" placeholder="Shipping Pincode" /> <label
 									class="form-label-hint-error" id="errorDelvPincode"
 									style="display: none;">please enter pincode</label>
 							</div>
@@ -1709,6 +1716,8 @@
 					this.value = this.value.replace(/[^0-9]/g, '').replace(
 							/(\..*)\./g, '$1');
 				});
+		$("#respMsg").show().delay(5000).fadeOut();
+		$("#successMsg").show().delay(5000).fadeOut();
 	</script>
 
 </body>

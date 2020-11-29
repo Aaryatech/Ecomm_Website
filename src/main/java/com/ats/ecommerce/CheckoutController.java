@@ -92,7 +92,7 @@ public class CheckoutController {
 			SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
 			SimpleDateFormat dttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-			int frId = (int) session.getAttribute("frId");
+			int frId = (int) session.getAttribute("strFrId");
 			int userId = (int) session.getAttribute("userId");
 			int custId = (Integer) session.getAttribute("custId");
 			int compId = (Integer) session.getAttribute("companyId");

@@ -6,7 +6,8 @@
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
 <body>
-
+	<c:url value="/validateCustEmail" var="validateCustEmail"></c:url>
+	<c:url value="/validateCustMob" var="validateCustMob"></c:url>
 
 	<!--mongi help-popup-->
 	<div class="mongi_help">
@@ -119,8 +120,8 @@
 					<div class="profile_bx">
 						<div class="profile_l">
 							<div class="profile_picture">
-								<img id="output" src=""
-									alt=""><!-- src="${pageContext.request.contextPath}${profileImg}" -->
+								<img id="output" src="" alt="">
+								<!-- src="${pageContext.request.contextPath}${profileImg}" -->
 							</div>
 
 							<div class="upload-btn-wrapper">
@@ -140,15 +141,16 @@
 							<h2 class="profile_title">New User</h2>
 							<div class="profile_cont">
 
-								<div class="place_row">									
+								<div class="place_row">
 									<div class="place_row_l">
 										<label class="form-label-hint">Billing Name</label> <input
-											type="text" class="input_two" maxlength="180" id="txtBillName"
-											 name="txtBillName" placeholder="Billing Name" /> <label
+											type="text" class="input_two" maxlength="180"
+											id="txtBillName" name="txtBillName"
+											placeholder="Billing Name" /> <label
 											class="form-label-hint-error" id="errorBillName"
 											style="display: none;">please enter billing name</label>
 									</div>
-									
+
 									<div class="place_row_r">
 										<label class="form-label-hint">Enter Your City</label>
 										<div class="select-style">
@@ -166,56 +168,63 @@
 									<!--input_place-->
 									<div class="place_row_l">
 										<label class="form-label-hint">Email ID</label> <input
-											type="text" class="input_two"
-											id="txtEmail" name="txtEmail" placeholder="Email ID" /> <label
+											type="text" class="input_two" id="txtEmail" name="txtEmail"
+											placeholder="Email ID" /> <label
 											class="form-label-hint-error" id="errorEmail"
 											style="display: none;">please enter email id</label> <label
 											class="form-label-hint-error" id="errorEmailInvalid"
 											style="display: none;">invalid email id</label>
+											 <label
+											class="form-label-hint-error" id="unq_email"
+											style="display: none;">This email id is already exist</label>
+
 									</div>
 									<div class="place_row_r">
-										<label class="form-label-hint">Mobile Number</label> <input 
-										type="text" class="input_two" id="txtMobile" maxlength="10"
+										<label class="form-label-hint">Mobile Number</label> <input
+											type="text" class="input_two" id="txtMobile" maxlength="10"
 											oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
 											name="txtMobile" placeholder="Mobile Number" /> <label
 											class="form-label-hint-error" id="errorMobile"
 											style="display: none;">please enter mobile number</label> <label
 											class="form-label-hint-error" id="errorMobileInvalid"
 											style="display: none;">invalid mobile number</label>
+											<label
+											class="form-label-hint-error" id="unq_mob"
+											style="display: none;">This mobile No. is already
+											exist</label>
 									</div>
 									<div class="clr"></div>
 								</div>
-								
+
 								<div class="place_row">
-								<label class="form-label-hint" style="display: block;">Gender</label>
-								<div class="radio_1 one_row gender">
-												<ul>
-													<li><input type="radio" id="a-option" name="gender"
-														value="1">
-														<label for="a-option">Male</label>
-														<div class="check"></div></li>
+									<label class="form-label-hint" style="display: block;">Gender</label>
+									<div class="radio_1 one_row gender">
+										<ul>
+											<li><input type="radio" id="a-option" name="gender"
+												value="1"> <label for="a-option">Male</label>
+												<div class="check"></div></li>
 
-													<li><input type="radio" id="b-option" name="gender"
-														value="2">
-														<label for="b-option">Female</label>
-														<div class="check">
-															<div class="inside"></div>
-														</div></li>
+											<li><input type="radio" id="b-option" name="gender"
+												value="2"> <label for="b-option">Female</label>
+												<div class="check">
+													<div class="inside"></div>
+												</div></li>
 
-													<li><input type="radio" id="c-option" name="gender"
-														value="3">
-														<label for="c-option">Other</label>
-														<div class="check">
-															<div class="inside"></div>
-														</div></li>
-												</ul>
-											</div>
+											<li><input type="radio" id="c-option" name="gender"
+												value="3"> <label for="c-option">Other</label>
+												<div class="check">
+													<div class="inside"></div>
+												</div></li>
+										</ul>
+										<label
+											class="form-label-hint-error" id="errorGender"
+											style="display: none;">please select gender</label>
+									</div>
 								</div>
 
-								<div class="place_row">									
-									<div class="place_row_r">										
-										<div class="gender_r">											
-										</div>
+								<div class="place_row">
+									<div class="place_row_r">
+										<div class="gender_r"></div>
 									</div>
 									<div class="clr"></div>
 								</div>
@@ -229,9 +238,10 @@
 											style="display: none;">please enter date of birth</label>
 									</div>
 									<div class="place_row_r">
-										<label class="form-label-hint">GST Number</label> <input style="text-transform: uppercase;"
-											type="text" class="input_two" id="txtGst" name="txtGst" maxlength="15"
-											placeholder="GST Number"/> <label
+										<label class="form-label-hint">GST Number</label> <input
+											style="text-transform: uppercase;" type="text"
+											class="input_two" id="txtGst" name="txtGst" maxlength="15"
+											placeholder="GST Number" /> <label
 											class="form-label-hint-error" id="errorGst"
 											style="display: none;">invalid GST number</label>
 									</div>
@@ -251,7 +261,7 @@
 
 										<label class="form-label-hint">Flat, House no.,
 											Building, Company, Apartment</label> <input type="text"
-											class="input_two" id="txtFlat" name="txtFlat" 
+											class="input_two" id="txtFlat" name="txtFlat"
 											placeholder="Flat, House no., Building, Company, Apartment" />
 
 										<label class="form-label-hint-error" id="errorFlat"
@@ -263,7 +273,7 @@
 
 										<label class="form-label-hint">Area, Colony, Street,
 											Sector, Village</label> <input type="text" class="input_two"
-											id="txtArea" name="txtArea" 
+											id="txtArea" name="txtArea"
 											placeholder="Area, Colony, Street, Sector, Village" /> <label
 											class="form-label-hint-error" id="errorArea"
 											style="display: none;">please enter area</label>
@@ -290,7 +300,7 @@
 
 
 										<label class="form-label-hint">Pincode</label> <input
-											type="text" class="input_two" id="txtPincode" 
+											type="text" class="input_two" id="txtPincode"
 											name="txtPincode" placeholder="Pincode" /> <label
 											class="form-label-hint-error" id="errorPincode"
 											style="display: none;">please enter pincode</label>
@@ -298,7 +308,7 @@
 									</div>
 									<div class="clr"></div>
 								</div>
-								
+
 								<div class="place_row">
 									<input name="" type="submit" value="Save Profile"
 										class="pop_place_btn" />
@@ -473,124 +483,147 @@
 
 
 	<script type="text/javascript">
-	
-	$(document).ready(function($) {
+		$(document)
+				.ready(
+						function($) {
 
-		$("#submitInsert").submit(function(e) {
-			var isError = false;
-			var errMsg = "";
+							$("#submitInsert")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
-			
-			if (!$("#txtBillName").val().trim()) {
-				isError = true;
-				$("#errorBillName").show();
-			} else {
-				$("#errorBillName").hide();
-			}
-			
-			if (!$("#txtMobile").val().trim()) {
-				isError = true;
-				$("#errorMobile").show();
-			} else if ($("#txtMobile").val().trim().length != 10) {
-				isError = true;
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").show();
-			} else {
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").hide();
-			}
-			
-			if (!$("#txtEmail").val().trim()) {
-				isError = true;
-				$("#errorEmail").show();
-			} else if (!ValidateEmail($("#txtEmail").val().trim())) {
-				isError = true;
-				$("#errorEmailInvalid").show();
-				$("#errorEmail").hide();
-			} else {
-				$("#errorEmailInvalid").hide();
-				$("#errorEmail").hide();
-			}
-			
-			if (!$("#txtGst").val().trim() || checkGST($("#txtGst").val().trim()) == false) {
-				isError = true;
-				$("#errorGst").show();
-			} else {
-				$("#errorGst").hide();
-			}
-			
-			if (!$("#txtFlat").val().trim()) {
-				isError = true;
-				$("#errorFlat").show();
-			} else {
-				$("#errorFlat").hide();
-			}
-			
-			if (!$("#txtArea").val().trim()) {
-				isError = true;
-				$("#errorArea").show();
-			} else {
-				$("#errorArea").hide();
-			}
-			
-			if (!$("#txtLandmark").val().trim()) {
-				isError = true;
-				$("#errorLandmark").show();
-			} else {
-				$("#errorLandmark").hide();
-			}
-			
-			if (!$("#txtPincode").val().trim()) {
-				isError = true;
-				$("#errorPincode").show();
-			} else {
-				$("#errorPincode").hide();
-			}
+												if (!$("#txtBillName").val()
+														.trim()) {
+													isError = true;
+													$("#errorBillName").show();
+												} else {
+													$("#errorBillName").hide();
+												}
 
-			
-			if (!isError) {
-				
-				var r = confirm("Are you sure you want to Submit?");
-				if (r == true) {
-					form
-					.submit();
-				} else {
-				  
-				}
-				/* bootbox
-						.confirm({
-							title : 'Confirm ',
-							message : 'Are you sure you want to Submit?',
-							buttons : {
-								confirm : {
-									label : 'Yes',
-									className : 'btn-success'
-								},
-								cancel : {
-									label : 'Cancel',
-									className : 'btn-danger'
-								}
-							},
-							callback : function(
-									result) {
-								if (result) {
-									$(".btn").attr("disabled", true);
-									var form = document
-											.getElementById("submitInsert")
-									form
-											.submit();
-								}
-							}
-						}); */
-				//end ajax send this to php page
-				return false;
-			}//end of if !isError
+												if (!$("#txtMobile").val()
+														.trim()) {
+													$("#unq_mob").hide();
+													isError = true;
+													$("#errorMobile").show();
+												} else if ($("#txtMobile")
+														.val().trim().length != 10) {
+													isError = true;
+													$("#errorMobile").hide();
+													$("#errorMobileInvalid")
+															.show();
+												} else {
+													$("#errorMobile").hide();
+													$("#errorMobileInvalid")
+															.hide();
+												}
 
-			return false;
+												if (!$("#txtEmail").val()
+														.trim()) {
+													$("#unq_email").hide();
+													isError = true;
+													$("#errorEmail").show();
+												} else if (!ValidateEmail($(
+														"#txtEmail").val()
+														.trim())) {
+													isError = true;
+													$("#errorEmailInvalid")
+															.show();
+													$("#errorEmail").hide();
+												} else {
+													$("#errorEmailInvalid")
+															.hide();
+													$("#errorEmail").hide();
+												}
 
-		});
-	}); 
-	
+												if (!$("#txtGst").val().trim()
+														|| checkGST($("#txtGst")
+																.val().trim()) == false) {
+													isError = true;
+													$("#errorGst").show();
+												} else {
+													$("#errorGst").hide();
+												}
+
+												if (!$("#txtFlat").val().trim()) {
+													isError = true;
+													$("#errorFlat").show();
+												} else {
+													$("#errorFlat").hide();
+												}
+
+												if (!$("#txtArea").val().trim()) {
+													isError = true;
+													$("#errorArea").show();
+												} else {
+													$("#errorArea").hide();
+												}
+
+												if (!$("#txtLandmark").val()
+														.trim()) {
+													isError = true;
+													$("#errorLandmark").show();
+												} else {
+													$("#errorLandmark").hide();
+												}
+
+												if (!$("#txtPincode").val()
+														.trim()) {
+													isError = true;
+													$("#errorPincode").show();
+												} else {
+													$("#errorPincode").hide();
+												}
+												
+												var checked_gender = document.querySelector('input[name = "gender"]:checked');
+												if(checked_gender != null) {
+													$("#errorGender").hide();
+												}else{
+													isError = true;
+													$("#errorGender").show();
+												}
+
+												if (!isError) {
+
+													var r = confirm("Are you sure you want to Submit?");
+													if (r == true) {
+														form.submit();
+													} else {
+
+													}
+													/* bootbox
+															.confirm({
+																title : 'Confirm ',
+																message : 'Are you sure you want to Submit?',
+																buttons : {
+																	confirm : {
+																		label : 'Yes',
+																		className : 'btn-success'
+																	},
+																	cancel : {
+																		label : 'Cancel',
+																		className : 'btn-danger'
+																	}
+																},
+																callback : function(
+																		result) {
+																	if (result) {
+																		$(".btn").attr("disabled", true);
+																		var form = document
+																				.getElementById("submitInsert")
+																		form
+																				.submit();
+																	}
+																}
+															}); */
+													//end ajax send this to php page
+													return false;
+												}//end of if !isError
+
+												return false;
+
+											});
+						});
 
 		function ValidateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -631,11 +664,49 @@
 				console.log(err);
 			}
 		};
-		
+
 		/* $('.maxlength-badge-position').maxlength({
 		    alwaysShow: true,
 		    placement: 'top'
 		}); */
+		
+		$("#txtMobile").change(function() {
+			var mobNo = $("#txtMobile").val();
+			//alert(mobNo)
+			$.getJSON('${validateCustMob}', {
+				mobNo : mobNo,
+				ajax : 'true',
+			}, function(data) {
+
+				if (data.error == false) {
+					$("#unq_mob").show();
+					$("#txtMobile").val('');
+					document.getElementById("txtMobile").focus();
+				} else {
+					$("#unq_mob").hide();
+				}
+			});
+		});
+
+		$("#txtEmail").change(function() {
+			var email = $("#txtEmail").val();
+			//alert(email)
+
+			$.getJSON('${validateCustEmail}', {
+				email : email,
+				ajax : 'true',
+			}, function(data) {
+
+				if (data.error == false) {
+					$("#unq_email").show();
+					$("#txtEmail").val('');
+					document.getElementById("txtEmail").focus();
+				} else {
+					$("#unq_email").hide();
+				}
+			});
+		});
+		
 	</script>
 
 

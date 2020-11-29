@@ -6,7 +6,8 @@
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
 <body>
-
+	<c:url value="/validateCustEmail" var="validateCustEmail"></c:url>
+	<c:url value="/validateCustMob" var="validateCustMob"></c:url>
 
 	<!--mongi help-popup-->
 	<div class="mongi_help">
@@ -115,14 +116,14 @@
 			<div class="wrapper">
 
 				<form action="${pageContext.request.contextPath}/updateCustProfile"
-					method="post" id="submitInsert"
-					enctype="multipart/form-data">
+					method="post" id="submitInsert" enctype="multipart/form-data">
 					<div class="profile_bx">
 						<div class="profile_l">
 							<div class="profile_picture">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/user_profile.jpg"
-									alt=""><!-- src="${pageContext.request.contextPath}${profileImg}" -->
+									alt="">
+								<!-- src="${pageContext.request.contextPath}${profileImg}" -->
 							</div>
 
 							<div class="upload-btn-wrapper">
@@ -139,7 +140,16 @@
 
 						</div>
 						<div class="profile_r">
-							<h2 class="profile_title">User Profile</h2>
+							<h2 class="profile_title">User Profile</h2>							
+							
+						<h4 id="successMsg" style="text-align: center; color: green;" >${sessionScope.successMsg}</h4>
+						<%
+							request.getSession().removeAttribute("successMsg");
+						%>
+						<h4 id="respMsg" style="text-align: center; color: red;" >${sessionScope.respMsg}</h4>
+						<%
+							request.getSession().removeAttribute("respMsg");
+						%>
 							<div class="profile_cont">
 
 								<div class="place_row">
@@ -160,7 +170,8 @@
 										<div class="select-style">
 											<select id="defltAddressId" name="defltAddressId">
 												<c:forEach items="${custAddList}" var="addrsList">
-													<option value="${addrsList.custDetailId}" ${addrsList.custDetailId==cust.exInt1 ? 'selected' : ''}>${addrsList.address},
+													<option value="${addrsList.custDetailId}"
+														${addrsList.custDetailId==cust.exInt1 ? 'selected' : ''}>${addrsList.address},
 														${addrsList.exVar1}, ${addrsList.exVar2}</option>
 												</c:forEach>
 											</select>
@@ -179,8 +190,8 @@
 									<!--input_place-->
 									<div class="place_row_l">
 										<label class="form-label-hint">Billing Name</label> <input
-											type="text" class="input_two" maxlength="180" id="txtBillName"
-											value="${cust.custName}" name="txtBillName"
+											type="text" class="input_two" maxlength="180"
+											id="txtBillName" value="${cust.custName}" name="txtBillName"
 											placeholder="Billing Name" /> <label
 											class="form-label-hint-error" id="errorBillName"
 											style="display: none;">please enter billing name</label>
@@ -194,7 +205,10 @@
 											class="form-label-hint-error" id="errorMobile"
 											style="display: none;">please enter mobile number</label> <label
 											class="form-label-hint-error" id="errorMobileInvalid"
-											style="display: none;">invalid mobile number</label>
+											style="display: none;">invalid mobile number</label> <label
+											class="form-label-hint-error" id="unq_mob"
+											style="display: none;">This mobile No. is already
+											exist</label>
 									</div>
 									<div class="clr"></div>
 								</div>
@@ -207,7 +221,10 @@
 											class="form-label-hint-error" id="errorEmail"
 											style="display: none;">please enter email id</label> <label
 											class="form-label-hint-error" id="errorEmailInvalid"
-											style="display: none;">invalid email id</label>
+											style="display: none;">invalid email id</label> <label
+											class="form-label-hint-error" id="unq_email"
+											style="display: none;">This email id is already exist</label>
+
 									</div>
 									<div class="place_row_r">
 										<label class="form-label-hint" style="display: block;">Gender</label>
@@ -249,9 +266,10 @@
 											style="display: none;">please enter date of birth</label>
 									</div>
 									<div class="place_row_r">
-										<label class="form-label-hint">GST Number</label> <input style="text-transform: uppercase;"
-											type="text" class="input_two" id="txtGst" name="txtGst" maxlength="15"
-											placeholder="GST Number" value="${cust.exVar2}"/> <label
+										<label class="form-label-hint">GST Number</label> <input
+											style="text-transform: uppercase;" type="text"
+											class="input_two" id="txtGst" name="txtGst" maxlength="15"
+											placeholder="GST Number" value="${cust.exVar2}" /> <label
 											class="form-label-hint-error" id="errorGst"
 											style="display: none;">invalid GST number</label>
 									</div>
@@ -271,7 +289,8 @@
 
 										<label class="form-label-hint">Flat, House no.,
 											Building, Company, Apartment</label> <input type="text"
-											class="input_two" id="txtFlat" name="txtFlat" value="${getFlat}"
+											class="input_two" id="txtFlat" name="txtFlat"
+											value="${getFlat}"
 											placeholder="Flat, House no., Building, Company, Apartment" />
 
 										<label class="form-label-hint-error" id="errorFlat"
@@ -299,8 +318,9 @@
 									<div class="place_row_l">
 
 										<label class="form-label-hint">Landmark</label> <input
-											type="text" class="input_two" id="txtLandmark" value="${getLandmark}"
-											name="txtLandmark" placeholder="Landmark" /> <label
+											type="text" class="input_two" id="txtLandmark"
+											value="${getLandmark}" name="txtLandmark"
+											placeholder="Landmark" /> <label
 											class="form-label-hint-error" id="errorLandmark"
 											style="display: none;">please enter landmark</label>
 
@@ -310,9 +330,9 @@
 
 
 										<label class="form-label-hint">Pincode</label> <input
-											type="text" class="input_two" id="txtPincode" value="${getPin}"
-											name="txtPincode" placeholder="Pincode" /> <label
-											class="form-label-hint-error" id="errorPincode"
+											type="text" class="input_two" id="txtPincode"
+											value="${getPin}" name="txtPincode" placeholder="Pincode" />
+										<label class="form-label-hint-error" id="errorPincode"
 											style="display: none;">please enter pincode</label>
 
 									</div>
@@ -496,196 +516,141 @@
 
 
 	<script type="text/javascript">
-	
-	$(document).ready(function($) {
+		$(document)
+				.ready(
+						function($) {
 
-		$("#submitInsert").submit(function(e) {
-			var isError = false;
-			var errMsg = "";
+							$("#submitInsert")
+									.submit(
+											function(e) {
+												var isError = false;
+												var errMsg = "";
 
-			
-			if (!$("#txtBillName").val().trim()) {
-				isError = true;
-				$("#errorBillName").show();
-			} else {
-				$("#errorBillName").hide();
-			}
-			
-			if (!$("#txtMobile").val().trim()) {
-				isError = true;
-				$("#errorMobile").show();
-			} else if ($("#txtMobile").val().trim().length != 10) {
-				isError = true;
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").show();
-			} else {
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").hide();
-			}
-			
-			if (!$("#txtEmail").val().trim()) {
-				isError = true;
-				$("#errorEmail").show();
-			} else if (!ValidateEmail($("#txtEmail").val().trim())) {
-				isError = true;
-				$("#errorEmailInvalid").show();
-				$("#errorEmail").hide();
-			} else {
-				$("#errorEmailInvalid").hide();
-				$("#errorEmail").hide();
-			}
-			
-			if (!$("#txtGst").val().trim() || checkGST($("#txtGst").val().trim()) == false) {
-				isError = true;
-				$("#errorGst").show();
-			} else {
-				$("#errorGst").hide();
-			}
-			
-			if (!$("#txtFlat").val().trim()) {
-				isError = true;
-				$("#errorFlat").show();
-			} else {
-				$("#errorFlat").hide();
-			}
-			
-			if (!$("#txtArea").val().trim()) {
-				isError = true;
-				$("#errorArea").show();
-			} else {
-				$("#errorArea").hide();
-			}
-			
-			if (!$("#txtLandmark").val().trim()) {
-				isError = true;
-				$("#errorLandmark").show();
-			} else {
-				$("#errorLandmark").hide();
-			}
-			
-			if (!$("#txtPincode").val().trim()) {
-				isError = true;
-				$("#errorPincode").show();
-			} else {
-				$("#errorPincode").hide();
-			}
+												if (!$("#txtBillName").val()
+														.trim()) {
+													isError = true;
+													$("#errorBillName").show();
+												} else {
+													$("#errorBillName").hide();
+												}
 
-			
-			if (!isError) {
-				
-				var r = confirm("Are you sure you want to Submit?");
-				if (r == true) {
-					form
-					.submit();
-				} else {
-				  
-				}
-				/* bootbox
-						.confirm({
-							title : 'Confirm ',
-							message : 'Are you sure you want to Submit?',
-							buttons : {
-								confirm : {
-									label : 'Yes',
-									className : 'btn-success'
-								},
-								cancel : {
-									label : 'Cancel',
-									className : 'btn-danger'
-								}
-							},
-							callback : function(
-									result) {
-								if (result) {
-									$(".btn").attr("disabled", true);
-									var form = document
-											.getElementById("submitInsert")
-									form
-											.submit();
-								}
-							}
-						}); */
-				//end ajax send this to php page
-				return false;
-			}//end of if !isError
+												if (!$("#txtMobile").val()
+														.trim()) {
+													isError = true;
+													$("#errorMobile").show();
+													$("#unq_mob").hide();
+												} else if ($("#txtMobile")
+														.val().trim().length != 10) {
+													isError = true;
+													$("#errorMobile").hide();
+													$("#errorMobileInvalid")
+															.show();
 
-			return false;
+												} else {
+													$("#errorMobile").hide();
+													$("#errorMobileInvalid")
+															.hide();
+												}
 
-		});
-	}); 
-	
-	
-		function validateForm() {
+												if (!$("#txtEmail").val()
+														.trim()) {
+													isError = true;
+													$("#errorEmail").show();
+													$("#unq_email").hide();
+												} else if (!ValidateEmail($(
+														"#txtEmail").val()
+														.trim())) {
+													isError = true;
+													$("#errorEmailInvalid")
+															.show();
+													$("#errorEmail").hide();
+												} else {
+													$("#errorEmailInvalid")
+															.hide();
+													$("#errorEmail").hide();
+												}
+												
+												
+												if (!$("#txtGst").val().trim()
+														|| checkGST($("#txtGst")
+																.val().trim()) == false) {
+													isError = true;
+													$("#errorGst").show();
+												} else {
+													$("#errorGst").hide();
+												}
 
-			var isError = true;
+												if (!$("#txtFlat").val().trim()) {
+													isError = true;
+													$("#errorFlat").show();
+												} else {
+													$("#errorFlat").hide();
+												}
 
-			var city = true, billName = true, mobile = true, email = true, dob = true, gst = true;
+												if (!$("#txtArea").val().trim()) {
+													isError = true;
+													$("#errorArea").show();
+												} else {
+													$("#errorArea").hide();
+												}
 
-			if (!$("#txtCity").val().trim()) {
-				city = false;
-				$("#errorCity").show();
-			} else {
-				$("#errorCity").hide();
-			}
+												if (!$("#txtLandmark").val()
+														.trim()) {
+													isError = true;
+													$("#errorLandmark").show();
+												} else {
+													$("#errorLandmark").hide();
+												}
 
-			if (!$("#txtBillName").val().trim()) {
-				billName = false;
-				$("#errorBillName").show();
-			} else {
-				$("#errorBillName").hide();
-			}
+												if (!$("#txtPincode").val()
+														.trim()) {
+													isError = true;
+													$("#errorPincode").show();
+												} else {
+													$("#errorPincode").hide();
+												}
 
-			if (!$("#txtMobile").val().trim()) {
-				mobile = false;
-				$("#errorMobile").show();
-			} else if ($("#txtMobile").val().trim().length != 10) {
-				mobile = false;
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").show();
-			} else {
-				$("#errorMobile").hide();
-				$("#errorMobileInvalid").hide();
-			}
+												if (!isError) {
 
-			if (!$("#txtEmail").val().trim()) {
-				email = false;
-				$("#errorEmail").show();
-			} else if (!ValidateEmail($("#txtEmail").val().trim())) {
-				email = false;
-				$("#errorEmailInvalid").show();
-				$("#errorEmail").hide();
-			} else {
-				$("#errorEmailInvalid").hide();
-				$("#errorEmail").hide();
-			}
+													var r = confirm("Are you sure you want to Submit?");
+													if (r == true) {
+														form.submit();
+													} else {
 
-			if (!$("#txtDob").val().trim()) {
-				dob = false;
-				$("#errorDob").show();
-			} else {
-				$("#errorDob").hide();
-			}
+													}
+													/* bootbox
+															.confirm({
+																title : 'Confirm ',
+																message : 'Are you sure you want to Submit?',
+																buttons : {
+																	confirm : {
+																		label : 'Yes',
+																		className : 'btn-success'
+																	},
+																	cancel : {
+																		label : 'Cancel',
+																		className : 'btn-danger'
+																	}
+																},
+																callback : function(
+																		result) {
+																	if (result) {
+																		$(".btn").attr("disabled", true);
+																		var form = document
+																				.getElementById("submitInsert")
+																		form
+																				.submit();
+																	}
+																}
+															}); */
+													//end ajax send this to php page
+													return false;
+												}//end of if !isError
 
-			if ($("#txtGst").val().trim()) {
+												return false;
 
-				if (checkGST($("#txtGst").val().trim()) == false) {
-					gst = false;
-					$("#errorGst").show();
-				} else {
-					$("#errorGst").hide();
-				}
-
-			} else {
-				$("#errorGst").hide();
-			}
-
-			if (!city || !billName || !mobile || !email || !dob || !gst) {
-				isError = false;
-			}
-
-			return isError;
-
-		}
+											});
+						});
 
 		function ValidateEmail(email) {
 			var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
@@ -705,6 +670,7 @@
 				return false;
 			}
 		}
+
 
 		$('#txtDob').datetimepicker({
 			//yearOffset:222,
@@ -726,11 +692,51 @@
 				console.log(err);
 			}
 		};
-		
-		$('.maxlength-badge-position').maxlength({
+
+		/* $('.maxlength-badge-position').maxlength({
 		    alwaysShow: true,
 		    placement: 'top'
+		}); */
+
+		$("#txtMobile").change(function() {
+			var mobNo = $("#txtMobile").val();
+			//alert(mobNo)
+			$.getJSON('${validateCustMob}', {
+				mobNo : mobNo,
+				ajax : 'true',
+			}, function(data) {
+
+				if (data.error == false) {
+					$("#unq_mob").show();
+					$("#txtMobile").val('');
+					document.getElementById("txtMobile").focus();
+				} else {
+					$("#unq_mob").hide();
+				}
+			});
 		});
+
+		$("#txtEmail").change(function() {
+			var email = $("#txtEmail").val();
+			//alert(email)
+
+			$.getJSON('${validateCustEmail}', {
+				email : email,
+				ajax : 'true',
+			}, function(data) {
+
+				if (data.error == false) {
+					$("#unq_email").show();
+					$("#txtEmail").val('');
+					document.getElementById("txtEmail").focus();
+				} else {
+					$("#unq_email").hide();
+				}
+			});
+		});
+		
+		$("#respMsg").show().delay(5000).fadeOut();
+		$("#successMsg").show().delay(5000).fadeOut();
 	</script>
 
 
