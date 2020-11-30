@@ -246,8 +246,7 @@ public class MasterController {
 			int custId = (int) session.getAttribute("custId");
 			String email = request.getParameter("txtEmail");
 			String mobNo = request.getParameter("txtMobile");
-			System.err.println(email+" "+mobNo);
-			
+						
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("email", email);
 			map.add("custId", custId);
@@ -269,7 +268,7 @@ public class MasterController {
 				session.setAttribute("respMsg", "Mobile No. already exist");
 				redirect = "redirect:/checkout";
 			} else {
-				
+			
 			if (custId == 0) {
 				Date date = new Date();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -296,29 +295,12 @@ public class MasterController {
 				String billArea = request.getParameter("txtArea");
 				String billLandmark = request.getParameter("txtLandmark");
 				String billPincode = request.getParameter("txtPincode");
+				
+				int cityId = Integer.parseInt(request.getParameter("city"));
 
 				String billAddress = billFlat + "~" + billArea + "~" + billLandmark + "~" + billPincode;
 
 				Customer cust = new Customer();
-
-				if (custId > 0) {
-				map = new LinkedMultiValueMap<>();
-					map.add("custId", custId);
-					Customer cust1 = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-							Customer.class);
-
-					cust.setUpdtDttime(curDateTime);
-					cust.setInsertDttime(cust1.getInsertDttime());
-					cust.setAgeRange(cust1.getAgeRange());
-					cust.setMakerUserId(cust1.getMakerUserId());
-					cust.setLanguageId(cust1.getLanguageId());
-				} else {
-					cust.setUpdtDttime(curDateTime);
-					cust.setInsertDttime(curDateTime);
-					cust.setAgeRange(2);
-					cust.setMakerUserId(0);
-					cust.setLanguageId(1);
-				}
 
 				int defaultCustAddrs = 0;
 				try {
@@ -326,7 +308,7 @@ public class MasterController {
 				} catch (Exception e) {
 					defaultCustAddrs = 0;
 				}
-				cust.setCityId(Integer.parseInt(request.getParameter("city")));
+				cust.setCityId(cityId);
 				cust.setCustAddPlatform(2);
 				cust.setCustGender(Integer.parseInt(request.getParameter("gender")));
 				cust.setCustId(custId);
@@ -344,13 +326,44 @@ public class MasterController {
 				cust.setExInt3(0);
 				cust.setExVar1("NA");
 				cust.setExVar2(request.getParameter("txtGst"));
-				cust.setExVar3(billAddress);
+				cust.setExVar3(billAddress);				
+				cust.setUpdtDttime(curDateTime);
+				cust.setInsertDttime(curDateTime);
+				cust.setAgeRange(2);
+				cust.setMakerUserId(0);
+				cust.setLanguageId(1);
 
 				System.err.println(cust.toString());
 				Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
 						Customer.class);
 				if (res.getCustId() > 0) {
 					session.setAttribute("successMsg", "New customer added successfully");
+					
+					CustomerAddDetail custDet = new CustomerAddDetail();
+
+					custDet.setAddress(billFlat);
+					custDet.setAreaId(0);
+					custDet.setCaption("NA");
+					custDet.setCityId(cityId);
+					custDet.setCustDetailId(0);
+					custDet.setCustId(res.getCustId());
+					custDet.setLandmark(billLandmark);
+					custDet.setLatitude("NA");
+					custDet.setLongitude("NA");
+					custDet.setIsActive(1);
+					custDet.setDelStatus(1);
+					custDet.setExInt1(0);
+					custDet.setExInt2(0);
+					custDet.setExInt3(0);
+					custDet.setExVar1(billArea);
+					custDet.setExVar2(billPincode);
+					custDet.setExVar3("NA");
+					custDet.setMakerUserId(res.getCustId());
+					custDet.setInsertDttime(curDateTime);
+					custDet.setUpdtDttime(curDateTime);
+					
+					CustomerAddDetail saveCustAdd = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomerDet",
+							custDet, CustomerAddDetail.class);
 				} else {
 					session.setAttribute("respMsg", "Failed to add New customer");
 				}

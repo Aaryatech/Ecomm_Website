@@ -143,7 +143,7 @@
 												${addressList.custName}<span><i
 													class="fa fa-map-marker" aria-hidden="true"></i>
 													${addressList.address}, ${addressList.exVar2},
-													${addressList.exVar3}-422005 <br> MAHARASHTRA, India.</span>
+													<br> MAHARASHTRA, India.</span>
 												<span>Landmark : ${addressList.landmark}</span> <span><i
 													class="fa fa-phone" aria-hidden="true"></i> +91
 													${addressList.custMobileNo}</span>
