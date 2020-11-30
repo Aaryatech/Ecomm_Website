@@ -786,7 +786,7 @@ function moveCursor(){
         success: function(resData, textStatus, jqXHR)
         {
         	alert(resData);
-        },
+        }, 
         error: function(jqXHR, textStatus, errorThrown)
         {
             console.log('ERRORS: ' + textStatus);
