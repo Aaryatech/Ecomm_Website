@@ -586,7 +586,7 @@ function addToCartClick(productId){
 				if(prodDetail[d].vegNonvegName==selectVegNon){
 					//Calc Price;
 					if(parseFloat(selectWt)==parseFloat(prodDetail[d].qty)){
-					alert(prodDetail[d].configDetailId);
+					//alert(prodDetail[d].configDetailId);
 					var qty=1;
 					//document.getElementById("cake_price").innerHTML = ""+prodDetail[d].actualRate;
 					document.getElementById("cake_prc").innerHTML=""+prodDetail[d].actualRate;
@@ -763,20 +763,23 @@ function moveCursor(){
 		var image = document.getElementById('del_image');
 		image.src = URL.createObjectURL(event.target.files[0]);
 		document.getElementById('del_image').style="display:block"
-			postFilesData(event.target.files[0]);
+			//postFilesData(event.target.files[0]);
+			postFilesData();
 	 } catch(err) {
 		 console.log(err);
 		}
 	};
 	
-	function postFilesData(data1)
+	function postFilesData()
 	{
-		//alert(JSON.stringify(data1));
+		var file = $('#img_input_btn')[0].files[0];
+		//alert("after file1 " +file.size);
+		var fd = new FormData();
+		fd.append('data', file);
 	 $.ajax({
         url: '${pageContext.request.contextPath}/uploadImg',
         type: 'POST',
-        data: data1,
-        cache: false,
+        data: fd,
         dataType: 'json',
         processData: false, 
         contentType: false, 

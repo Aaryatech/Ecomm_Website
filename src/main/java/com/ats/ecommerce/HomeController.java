@@ -274,7 +274,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
-	public@ResponseBody String uploadImg(@RequestParam("data") MultipartFile data) {
+	public @ResponseBody Object uploadImg(@RequestParam("data") MultipartFile data) {
+		System.err.println("In uploadImg");
 		try {
 		
 			System.err.println("data " +data.getOriginalFilename());
