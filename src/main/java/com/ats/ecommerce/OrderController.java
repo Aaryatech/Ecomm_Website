@@ -36,37 +36,14 @@ public class OrderController {
 			HttpSession session = request.getSession();
 
 			int compId = (int) session.getAttribute("companyId");
-			int custId = (Integer) session.getAttribute("custId");
-			
-//			String dateStr = request.getParameter("dates");
-//			String[] strDate = dateStr.split("to");
-//			fromDate = strDate[0];
-//			toDate = strDate[1];
-
-			Date date = new Date();
-			DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-			
-
-//			String statusStr = request.getParameter("status");
-//
-//			String statusListString = "";
-//
-//			if (statusStr != null) {
-//
-//				statusListString = statusStr.toString().substring(1, statusStr.toString().length() - 1);
-//				statusListString = statusListString.replaceAll("\"", "");
-//				statusListString = statusListString.replaceAll(" ", "");
-//			}
+			int custId = (Integer) session.getAttribute("custId");			
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			map.add("fromDate", CommonUtility.convertToYMD("01-01-2020"));
-			map.add("toDate", CommonUtility.convertToYMD(df.format(date)));
-//			map.add("status", statusListString);
 			map.add("compId", compId);
 			map.add("custId", custId);
 
 			GetOrderHeaderDisplay[] orderRepArr = Constants.getRestTemplate()
-					.postForObject(Constants.url + "/getOrderListByDatesAndCustId", map, GetOrderHeaderDisplay[].class);
+					.postForObject(Constants.url + "/getOrderHistoryListByCustId", map, GetOrderHeaderDisplay[].class);
 
 			orderList = new ArrayList<GetOrderHeaderDisplay>(Arrays.asList(orderRepArr));
 			model.addAttribute("orders", orderList);
