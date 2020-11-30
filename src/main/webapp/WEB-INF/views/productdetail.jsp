@@ -647,6 +647,7 @@ function addToCartClick(productId){
 					});
 					sessionStorage.setItem("cartValue", JSON.stringify(table));
 				appendCartData();
+				
 					break;
 					}
 					//alert("Do calc");
@@ -762,10 +763,33 @@ function moveCursor(){
 		var image = document.getElementById('del_image');
 		image.src = URL.createObjectURL(event.target.files[0]);
 		document.getElementById('del_image').style="display:block"
+			postFilesData(event.target.files[0]);
 	 } catch(err) {
 		 console.log(err);
 		}
 	};
+	
+	function postFilesData(data1)
+	{
+		//alert(JSON.stringify(data1));
+	 $.ajax({
+        url: '${pageContext.request.contextPath}/uploadImg',
+        type: 'POST',
+        data: data1,
+        cache: false,
+        dataType: 'json',
+        processData: false, 
+        contentType: false, 
+        success: function(resData, textStatus, jqXHR)
+        {
+        	alert(resData);
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            console.log('ERRORS: ' + textStatus);
+        }
+	    });
+	}
 </script>
 
 

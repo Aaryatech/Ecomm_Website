@@ -49,7 +49,7 @@ public class CheckoutController {
 
 			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
-			int compId = (Integer) session.getAttribute("companyId");
+			int compId = (int) session.getAttribute("companyId");
 			map.add("compId", compId);
 
 //		City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map, City[].class);
@@ -63,7 +63,7 @@ public class CheckoutController {
 			model.addAttribute("cityList", cityList);
 
 			map = new LinkedMultiValueMap<>();
-			int custId = (Integer) session.getAttribute("custId");
+			int custId = (int) session.getAttribute("custId");
 			map.add("custId", custId);
 			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 					Customer.class);
@@ -92,7 +92,7 @@ public class CheckoutController {
 			SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy");
 			SimpleDateFormat dttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-			int frId = (int) session.getAttribute("strFrId");
+			int frId = (int) session.getAttribute("frId");
 			int userId = (int) session.getAttribute("userId");
 			int custId = (Integer) session.getAttribute("custId");
 			int compId = (Integer) session.getAttribute("companyId");

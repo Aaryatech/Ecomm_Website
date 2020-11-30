@@ -21,7 +21,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
@@ -39,52 +41,6 @@ public class HomeController {
 
 	FEDataTraveller data = new FEDataTraveller();
 
-	@RequestMapping(value = "/aa", method = RequestMethod.GET)
-	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
-		String returnPage = "location";
-		try {
-			HttpSession session = request.getSession();
-			Cookie[] cookieArray = request.getCookies();
-			int isCookieFound = 0;
-			if (cookieArray != null)
-				for (int a = 0; a < cookieArray.length; a++) {
-					// if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
-					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
-						System.err.println("In If ");
-						session.setAttribute("custIdCookie", cookieArray[a].getValue());
-						returnPage = "redirect:/home";
-						isCookieFound = 1;
-
-						ObjectMapper mapper = new ObjectMapper();
-						data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "27_.json"),
-								FEDataTraveller.class);
-						System.err.println("data " + data.toString());
-
-						String dataList = new Scanner(new File(Constants.JSON_FILES_PATH + "27_.json"))
-								.useDelimiter("\\Z").next();
-						// System.err.println(" dataList " +dataList);
-						session.setAttribute("dataList", dataList);
-
-						break;
-					}
-				}
-
-			if (isCookieFound == 0) {
-				System.err.println("In Else ");
-				/*
-				 * Cookie custCookie = new Cookie("custIdCookie", ""); custCookie.setMaxAge(60 *
-				 * 60 * 24 * 15); response.addCookie(custCookie);
-				 */
-				returnPage = "location";
-			}
-			// session.setAttribute("curDateTime", CommonUtility.getCurrentYMDDateTime());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return returnPage;
-		// return "location";
-	}
-
 	// Modified By -Sachin
 	// Modific Date -03-11-2020
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
@@ -93,30 +49,28 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		String strFrId="0";int frId=0;
 		try {
-			strFrId = (String) session.getAttribute("frId");
+			frId = (int) session.getAttribute("frId");
 			
 			System.err.println("Fr Id " + strFrId);
 		}catch (Exception e) {
 			System.err.println("In Home catch");
 		}
-		try {
-			frId=Integer.parseInt(strFrId);
-		}catch (Exception e) {
-			frId=0;
-		}
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
+			if(frId>0)
 		data = mapper.readValue(new File(Constants.JSON_FILES_PATH+frId+"_.json"),
 				FEDataTraveller.class);
 		System.err.println("data " + data.toString());
 		try {
+			if(frId>0)
 		session.setAttribute("companyId", data.getFranchiseCatList().get(0).getCompanyId());
 		}catch (Exception e) {
 			session.setAttribute("companyId",0);
 		}
-
-		String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+frId+"_.json"))
+		String dataList=new String();
+		if(frId>0) {
+		 dataList = new Scanner(new File(Constants.JSON_FILES_PATH+frId+"_.json"))
 				.useDelimiter("\\Z").next();
 		session.setAttribute("dataList", dataList);
 		
@@ -134,13 +88,14 @@ public class HomeController {
 		 
 		 model.addAttribute("testMonialList", data.getTestimonialList());
 		 model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+		}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-			 
+		try {	 
 		int custId = (int) session.getAttribute("custId");
 		System.err.println("custId " + custId);
-		try {
+		
 		if(custId>0) {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		map.add("custId", custId);
@@ -153,7 +108,8 @@ public class HomeController {
 		session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 		}
 		}catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("In Home catch");
+			//e.printStackTrace();
 		}
 		
 		
@@ -178,8 +134,10 @@ public class HomeController {
 		
 		model.addAttribute("tagsJson", jsonStr);
 		
-		
+		if(frId>0)
 		return "home";
+		else
+			return "redirect:/";
 	}
 
 	
@@ -192,6 +150,7 @@ public class HomeController {
 		
 		try {
 			frId=Integer.parseInt(request.getParameter("selectShop"));
+			System.err.println("FrId " +frId);
 			session.setAttribute("frId", frId);
 			try {
 				String landMark=request.getParameter("txtPlaces");
@@ -204,10 +163,10 @@ public class HomeController {
 			System.err.println("In Catch "+frId);
 			try {
 				System.err.println("Inner Try "+frId);
-			session.setAttribute("frId", session.getAttribute("frId"));
+			//session.setAttribute("frId", session.getAttribute("frId"));
 			}catch (Exception ex) {
 				System.err.println("Inner Catch ");
-				session.setAttribute("frId",0);
+				//session.setAttribute("frId",0);
 			}
 		}
 		
@@ -314,4 +273,15 @@ public class HomeController {
 		return "viewmap";
 	}
 
+	@RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
+	public@ResponseBody String uploadImg(@RequestParam("data") MultipartFile data) {
+		try {
+		
+			System.err.println("data " +data.getOriginalFilename());
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "viewmap";
+	}
 }

@@ -44,30 +44,21 @@ public class MasterController {
 
 			HttpSession session = request.getSession();
 
-//			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-//			Info view = AccessControll.checkAccess("showCustomers", "showCustomers", "1", "0", "0", "0", newModuleList);
-//
-//			if (view.isError() == true) {
-//
-//				mav = "accessDenied";
-//
-//			} else {
-
-			int custId = (Integer) session.getAttribute("custId");
-			int compId = (Integer) session.getAttribute("companyId");
+			int custId = (int) session.getAttribute("custId");
+			int compId = (int) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("custId", custId);
 			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 					Customer.class);
 			model.addAttribute("cust", cust);
-
+			
 			String[] billAddress = cust.getExVar3().split("~");
 			model.addAttribute("getFlat", billAddress[0]);
 			model.addAttribute("getArea", billAddress[1]);
 			model.addAttribute("getLandmark", billAddress[2]);
 			model.addAttribute("getPin", billAddress[3]);
-			model.addAttribute("profileImg", Constants.VIEW_URL + cust.getProfilePic());
+			model.addAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 
 			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getAllCustomerDetailByCustId", map, CustomerAddDetail[].class);
@@ -78,10 +69,6 @@ public class MasterController {
 			map = new LinkedMultiValueMap<>();
 			map.add("compId", compId);
 
-//			City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map,
-//					City[].class);
-//			List<City> cityList = new ArrayList<City>(Arrays.asList(cityArr));
-
 			ObjectMapper mapper = new ObjectMapper();
 			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
 					CityData[].class);
@@ -89,26 +76,6 @@ public class MasterController {
 
 			model.addAttribute("cityList", cityList);
 
-//				Info add = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "1", "0", "0",
-//						newModuleList);
-//				Info edit = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "1", "0",
-//						newModuleList);
-//				Info delete = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "0", "1",
-//						newModuleList);
-//
-//				if (add.isError() == false) { // System.out.println(" add Accessable ");
-//					model.addAttribute("addAccess", 0);
-//
-//				}
-//				if (edit.isError() == false) { // System.out.println(" edit Accessable ");
-//					model.addAttribute("editAccess", 0);
-//				}
-//				if (delete.isError() == false) { //
-//					System.out.println(" delete Accessable ");
-//					model.addAttribute("deleteAccess", 0);
-//
-//				}
-//			}		
 		} catch (Exception e) {
 			System.out.println("Exception in /profile : " + e.getMessage());
 			e.printStackTrace();
@@ -131,7 +98,7 @@ public class MasterController {
 
 			HttpSession session = request.getSession();
 			int companyId = (int) session.getAttribute("companyId");
-			int custId = (Integer) session.getAttribute("custId");
+			int custId = (int) session.getAttribute("custId");
 
 			Info info = new Info();
 
@@ -225,6 +192,10 @@ public class MasterController {
 
 				if (res.getCustId() > 0) {
 					session.setAttribute("successMsg", "Profile Update Successfully");
+					session.setAttribute("custId",res.getCustId());
+					session.setAttribute("userName", cust.getCustName());
+					session.setAttribute("userEmail", cust.getEmailId());
+					session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				} else {
 					session.setAttribute("respMsg", "Failed to Update Profile");
 				}
@@ -245,16 +216,7 @@ public class MasterController {
 
 			HttpSession session = request.getSession();
 
-//			List<ModuleJson> newModuleList = (List<ModuleJson>) session.getAttribute("newModuleList");
-//			Info view = AccessControll.checkAccess("showCustomers", "showCustomers", "1", "0", "0", "0", newModuleList);
-//
-//			if (view.isError() == true) {
-//
-//				mav = "accessDenied";
-//
-//			} else {
-
-			int compId = (Integer) session.getAttribute("companyId");
+			int compId = (int) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("compId", compId);
@@ -265,26 +227,6 @@ public class MasterController {
 			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 			model.addAttribute("cityList", cityList);
 
-//				Info add = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "1", "0", "0",
-//						newModuleList);
-//				Info edit = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "1", "0",
-//						newModuleList);
-//				Info delete = AccessControll.checkAccess("showCustomers", "showCustomers", "0", "0", "0", "1",
-//						newModuleList);
-//
-//				if (add.isError() == false) { // System.out.println(" add Accessable ");
-//					model.addAttribute("addAccess", 0);
-//
-//				}
-//				if (edit.isError() == false) { // System.out.println(" edit Accessable ");
-//					model.addAttribute("editAccess", 0);
-//				}
-//				if (delete.isError() == false) { //
-//					System.out.println(" delete Accessable ");
-//					model.addAttribute("deleteAccess", 0);
-//
-//				}
-//			}		
 		} catch (Exception e) {
 			System.out.println("Exception in /addNewCustomer : " + e.getMessage());
 			e.printStackTrace();
@@ -301,7 +243,7 @@ public class MasterController {
 			
 			HttpSession session = request.getSession();
 
-			int custId = (Integer) session.getAttribute("custId");
+			int custId = (int) session.getAttribute("custId");
 			String email = request.getParameter("txtEmail");
 			String mobNo = request.getParameter("txtMobile");
 			System.err.println(email+" "+mobNo);
@@ -311,7 +253,6 @@ public class MasterController {
 			map.add("custId", custId);
 			Customer chkEmail = Constants.getRestTemplate().postForObject(Constants.url + "getCustByEmailId", map,
 					Customer.class);
-			
 			
 			map = new LinkedMultiValueMap<>();
 			map.add("mobNo", mobNo);
@@ -414,6 +355,9 @@ public class MasterController {
 					session.setAttribute("respMsg", "Failed to add New customer");
 				}
 				session.setAttribute("custId", res.getCustId());
+				session.setAttribute("userName", cust.getCustName());
+				session.setAttribute("userEmail", cust.getEmailId());
+				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				redirect = "redirect:/checkout";
 			}
 			

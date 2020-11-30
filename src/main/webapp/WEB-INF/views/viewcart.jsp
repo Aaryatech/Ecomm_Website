@@ -380,9 +380,11 @@
 
 								<script type="text/javascript">
 								function checkCustSession(){
-									var sessCustId = '<%=session.getAttribute("custId")%>';
-
-										if (sessCustId > 0) {
+									var sessCustId ='${sessionScope.custId}';
+									
+									<%--  '<%=session.getAttribute("custId")%>'; --%>
+	
+										if (parseInt(sessCustId) > 0) {
 											$(document).ready(function() {
 												$('#place').popup();
 											});
@@ -533,7 +535,7 @@
 									style="display: none;">please enter city</label>
 							</div>
 							<div class="place_row_r">
-								<input type="text" class="input_place" readonly="readonly"
+								<input type="text" value="${sessionScope.landMark}" class="input_place" readonly="readonly"
 									placeholder="City Related Landmark" />
 							</div>
 							<div class="clr"></div>
@@ -618,9 +620,9 @@
 							<div class="place_row_r">
 								<input type="text" class="input_place" id="txtGst"
 									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
-									autocomplete="off" readonly="readonly" /> <label
+									autocomplete="off" readonly="readonly" /> <span
 									class="form-label-hint-error" id="errorGst"
-									style="display: none;">invalid GST number</label>
+									style="display: none;">invalid GST number</span>
 
 							</div>
 							<div class="clr"></div>

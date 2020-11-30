@@ -36,17 +36,14 @@ public class LocationController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "landing";
-		System.err.println("In slash page landing");
 		try {
 			HttpSession session = request.getSession();
 			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
 			if (cookieArray != null)
 				for (int a = 0; a < cookieArray.length; a++) {
-					// if(cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
 					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
 						session.setAttribute("custId", Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
-						System.err.println("In custIdCookie " +EncodeDecode.DecodeKey(cookieArray[a].getValue()));
 						returnPage = "redirect:/home";
 						isCookieFound = 1;
 						break;
@@ -55,9 +52,8 @@ public class LocationController {
 			if (cookieArray != null)
 			for (int a = 0; a < cookieArray.length; a++) {
 				if (cookieArray[a].getName().equalsIgnoreCase("frIdCookie")) {
-					session.setAttribute("frId", EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+					session.setAttribute("frId", Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
 					int frId=Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue()));
-					System.err.println("In frIdCookie " +EncodeDecode.DecodeKey(cookieArray[a].getValue()));
 
 					ObjectMapper mapper = new ObjectMapper();
 					data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
@@ -102,7 +98,6 @@ public class LocationController {
 			e.printStackTrace();
 		}
 		return returnPage;
-		// return "location";
 	}
 	
 	@RequestMapping(value = "/ak", method = RequestMethod.GET)
@@ -156,7 +151,7 @@ public class LocationController {
 		try {
 			HttpSession session=request.getSession();
 			
-			int frId=(int) session.getAttribute("strFrId");
+			int frId=(int) session.getAttribute("frId");
 			ObjectMapper mapper = new ObjectMapper();
 			data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
 					FEDataTraveller.class);
@@ -171,6 +166,7 @@ public class LocationController {
 		}catch (Exception e) {
 			return returnPage;
 		}
+		
 		return returnPage;
 	}
 	
