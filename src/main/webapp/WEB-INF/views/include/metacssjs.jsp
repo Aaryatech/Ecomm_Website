@@ -47,6 +47,6 @@
 	href="${pageContext.request.contextPath}/resources/css/jquery.datetimepicker.css" />
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js"></script>
-
+	
 
 </head>

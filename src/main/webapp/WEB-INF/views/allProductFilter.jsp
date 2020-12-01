@@ -73,7 +73,6 @@
 									<%-- ${menuCat.typeIdList} --%>
 
 
-
 									<c:forEach items="${menuCat.typeIdList}" var="menuTypeList">
 
 										<c:forEach items="${allFilterTypeList}" var="filterType">

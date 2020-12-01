@@ -58,9 +58,11 @@
 						<!--main search-->
 						<form action="" method="get">
 							<div class="input_one">
-								<input name="" type="text" class="search_input"
+								<input name="glbSearch" id="glbSearch" type="text" onchange="globalSearch()"
+									list="glbTemplates" class="search_input" autocomplete="on"
 									placeholder="Search..." />
-								<button class="search_btn">
+								<datalist id="glbTemplates"></datalist>
+								<button class="search_btn" id="btnGlbSearch" onclick="globalSearch()">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -193,10 +195,11 @@
 						<!--user-dropdown-->
 						<div class="user_login">
 							<ul class="login_menu">
-								<li><a href="${pageContext.request.contextPath}/profile"><img src="${sessionScope.profileImg}" class="lazy"
-										data-src="${sessionScope.profileImg}"
-										alt=""> Hi ${sessionScope.userName}<!-- <i class="fa fa-angle-down"
-										aria-hidden="true"></i> --></a><!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
+								<li><a href="${pageContext.request.contextPath}/profile"><img
+										src="${sessionScope.profileImg}" class="lazy"
+										data-src="${sessionScope.profileImg}" alt=""> Hi
+										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
@@ -219,10 +222,11 @@
 	<div id="myNav" class="overlay">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav1()">&times;</a>
 		<div class="overlay-content">
-			<a href="${pageContext.request.contextPath}/orderhistory"> My Order </a> <a
-				href="${pageContext.request.contextPath}/addresslist"> My Address Book </a> <a
-				href="${pageContext.request.contextPath}/profile"> Profile </a> <a href="#">Help</a> <a
-				href="location.html">Logout</a>
+			<a href="${pageContext.request.contextPath}/orderhistory"> My
+				Order </a> <a href="${pageContext.request.contextPath}/addresslist">
+				My Address Book </a> <a
+				href="${pageContext.request.contextPath}/profile"> Profile </a> <a
+				href="#">Help</a> <a href="location.html">Logout</a>
 
 			<!-- <a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> -->
 		</div>
@@ -387,21 +391,86 @@
 				sessionStorage.setItem("allItemList", JSON
 						.stringify(response.feProductHeadList));
 
+				if(response.feProductHeadList.length>0){
+					
+					var arr=[];
+					
+					for(var i=0; i<response.feProductHeadList.length; i++){
+						
+						//arr.push(response.feProductHeadList[i].productName);
+						//arr.push(response.feProductHeadList[i].shortName);
+						arr.push(response.feProductHeadList[i].flavorNames);
+						arr.push(response.feProductHeadList[i].ingerdiants);
+						arr.push(response.feProductHeadList[i].appliTagNames);
+						arr.push(response.feProductHeadList[i].layeringCreamNames);
+						arr.push(response.feProductHeadList[i].prodStatusName);
+						
+					}
+					
+					//alert(arr);
+					
+					//var a = [ 'a', 'a', '1' ];
+					var unique = arr.filter(onlyUnique);
+					//alert(unique)
+					$('#glbTemplates').find('option').remove().end()
+					
+					for(var i=0;i<unique.length;i++){
+						var flag = 0;
+						$("#glbTemplates").append(
+								$("<option></option>")
+										.attr("value", unique[i]).text(
+												unique[i]));
+					}
+					$("#glbTemplates").trigger("chosen:updated");
+					
+				}
+				
+			
+				
+				
+				
 				appendCartData();
 
 			},
 		});
 
 	}
+	
+	function onlyUnique(value, index, self) {
+		return self.indexOf(value) === index;
+	}
 
 	function openNav() {
 		appendCartData();
 		document.getElementById("mySidepanel").style.width = "300px";
 	}
-	
+
 	function closeNav() {
 		document.getElementById("mySidepanel").style.width = "0";
 	}
 	
+	
+	var input = document.getElementById("glbSearch");
+	input.addEventListener("keyup", function(event) {
+	  if (event.keyCode === 13) {
+	   event.preventDefault();
+	   document.getElementById("btnGlbSearch").click();
+	  }
+	});
+	
+	function globalSearch() {
+		
+		//alert(document.getElementById("glbSearch").value);
+		
+		sessionStorage.setItem("menuFilterName", document.getElementById("glbSearch").value);
+
+		window.open('${pageContext.request.contextPath}/products/0',
+				'_self');
+
+		
+		
+	}
+	
 </script>
+
 
