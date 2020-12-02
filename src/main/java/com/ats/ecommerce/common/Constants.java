@@ -16,25 +16,28 @@ public class Constants {
 	 */
 
 	// Sachin Local Path
-	public static final String JSON_FILES_PATH = "/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/IMG_UP/";
-	// public static final String
-	// JSON_FILES_PATH="http://192.168.2.12:8080/IMG_UP/";
+	private final static String BASEPATH_URL="/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/";
+	private final static String IP_URL ="http://192.168.2.2:8080/";
 
-	public static final String CAT_IMG_VIEW_URL = "http://192.168.2.12:8080/IMG_UP/";
-	public static final String PROD_IMG_VIEW_URL = "http://192.168.2.12:8080/IMG_UP/";
-	public static final String TESTMON_IMG_VIEW_URL = "http://192.168.2.12:8080/IMG_UP/";
+	public static final String JSON_FILES_PATH = BASEPATH_URL+"IMG_UP/";
 
-	public static final String UPLOAD_URL = null;
+	public static final String CAT_IMG_VIEW_URL = IP_URL+"IMG_UP/";
+	public static final String PROD_IMG_VIEW_URL = IP_URL+"IMG_UP/";
+	public static final String TESTMON_IMG_VIEW_URL = IP_URL+"IMG_UP/";
 
-	public static final String PROD_IMG_UPLOAD_URL = null;
+	public static final String UPLOAD_URL = BASEPATH_URL+"IMG_UP/";
 
-	public static final String FEST_IMG_VIEW_URL = "http://192.168.2.12:8080/IMG_UP/";;
+	public static final String PROD_IMG_UPLOAD_URL = BASEPATH_URL+"IMG_UP/";
+
+	public static final String FEST_IMG_VIEW_URL = IP_URL+"IMG_UP/";
+
+	public static final String PROFILE_IMG_VIEW_URL = IP_URL+"IMG_UP/";
 
 	public static RestTemplate rest = new RestTemplate();
 
-	public static String url;
+	public static String url="http://localhost:8094/";
 
-	public static String[] imageFileExtensions;
+	public static String[] imageFileExtensions={"jpg","jpeg","png"};
 
 	public static RestTemplate getRestTemplate() {
 		rest = new RestTemplate();
