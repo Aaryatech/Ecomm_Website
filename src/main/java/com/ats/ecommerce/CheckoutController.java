@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -142,7 +143,7 @@ public class CheckoutController {
 			String itemData = request.getParameter("itemData");
 
 			int addCustAgent = 0;
-			int agentId = 0;
+			int deliveryBoy = 0;
 			float deliveryCharges = 0;
 			float discAmt = 0;
 			float applyWalletAmt = 0;
@@ -159,7 +160,7 @@ public class CheckoutController {
 			float finalsgstAmt = 0;
 			float finalIgstAmt = 0;
 
-			String uuid = "0";
+			String uuid = UUID.randomUUID().toString();
 
 			DecimalFormat df = new DecimalFormat("#.00");
 
@@ -206,10 +207,10 @@ public class CheckoutController {
 
 			if (addCustAgent > 0) {
 				order.setIsAgent(1);
-				order.setOrderDeliveredBy(agentId);
+				order.setOrderDeliveredBy(deliveryBoy);
 			} else {
 				order.setIsAgent(0);
-				order.setOrderDeliveredBy(0);
+				order.setOrderDeliveredBy(deliveryBoy);
 			}
 
 			List<OrderDetail> orderDetailList = new ArrayList<>();
