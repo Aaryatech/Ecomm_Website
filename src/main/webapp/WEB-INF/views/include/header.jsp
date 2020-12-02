@@ -463,6 +463,9 @@
 		//alert(document.getElementById("glbSearch").value);
 		
 		sessionStorage.setItem("menuFilterName", document.getElementById("glbSearch").value);
+		
+		sessionStorage.setItem("priceFilterMin", "0");
+		sessionStorage.setItem("priceFilterMax", "0");
 
 		window.open('${pageContext.request.contextPath}/products/0',
 				'_self');
