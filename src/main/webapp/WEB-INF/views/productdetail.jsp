@@ -460,7 +460,7 @@
 											alt="">
 									</div>
 									<div class="cake_prc">
-														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc" >xx${product.defaultPrice}</p>
+														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc" >${product.defaultPrice}</p>
 														<span class="off_prc" id="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i></span> <span
 															class="prc_off" id="prc_off"></span>
@@ -470,6 +470,7 @@
 								<div class="cake_container">
 									<h4 class="cake_nm single_row">
 										<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+										<input type="hidden" id="prodIdText" value="${product.productId}"/>
 									</h4>
 								</div>
 							</div>
@@ -517,7 +518,7 @@
 				</div>
 			</section>
 		</div>
-
+<canvas id="canvas-element"></canvas>
 	</div>
 
 
@@ -764,12 +765,113 @@ function moveCursor(){
 		image.src = URL.createObjectURL(event.target.files[0]);
 		document.getElementById('del_image').style="display:block"
 			//postFilesData(event.target.files[0]);
-			postFilesData();
+			var imgName=makeUniqueString(7);
+			var prodIdText=document.getElementById('prodIdText').value
+			imgName=imgName+"_"+prodIdText;
+			//alert(imgName);
+			var imgFile = $('#img_input_btn')[0].files[0];
+				  var imgCanvas = document.getElementById('canvas-element'),
+		       		 imgContext = imgCanvas.getContext("2d");
+			
+			    var img = document.getElementById('del_image');
+			    imgCanvas.width = (img.width/4);
+			    imgCanvas.height = (img.height/4);
+
+			    // Draw image into canvas element
+			    imgContext.drawImage(img, 0, 0, (img.width), (img.height));
+			    // Get canvas contents as a data URL
+			    var imgAsDataURL = imgCanvas.toDataURL("image/png");
+			//postFilesData();
 	 } catch(err) {
 		 console.log(err);
 		}
+	 //bulkImageUpload();
 	};
-	
+	//function x(){
+		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			  document.getElementById('img_input_btn').addEventListener('change', handleFileSelect, false);
+			} else {
+			  alert('The File APIs are not fully supported in this browser.');
+			}
+			function handleFileSelect(evt) {
+				 var base64String;
+				var imgName=makeUniqueString(7);
+				var prodIdText=document.getElementById('prodIdText').value
+				imgName=imgName+"_"+prodIdText;
+				
+				var f = evt.target.files[0]; // FileList object
+			  var reader = new FileReader();
+			  // Closure to capture the file information.
+			  reader.onload = (function(theFile) {
+			    return function(e) {
+			      var binaryData = e.target.result;
+			      //Converting Binary Data to base 64
+			      base64String = window.btoa(binaryData);
+			      //showing file converted to base64
+			     // document.getElementById('base64').value = base64String;
+			      var src = $('#img_input_btn').val(); // "static/images/banner/blue.jpg"
+			      var tarr = src.split('.');      // ["static","images","banner","blue.jpg"]
+			      var imgExt =tarr[tarr.length-1] //file.split('.')[0];  // "blue"
+			     
+			      if (sessionStorage.getItem("prodImageList") == null) {
+						var table = [];
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
+					}
+				  var cartValue = sessionStorage .getItem("prodImageList");
+					var table = $.parseJSON(cartValue);
+					isFound=0;
+					for(var i=0;i<table.length;i++){
+						if(parseInt(prodIdText)==parseInt(table[i].itemId)){
+							isFound=0;
+							table.splice(i);
+							break;
+						}
+					}
+					if(parseInt(isFound)==0){
+					table.push({
+						itemId : prodIdText,
+						imgName : imgName+"."+imgExt,
+						//imgFile : imgAsDataURL
+						imgFile : base64String,
+					});
+					}
+					sessionStorage.setItem("prodImageList", JSON
+							.stringify(table));
+					//bulkImageUpload();
+			    };
+			  })(f);
+			  // Read in the image file as a data URL.
+			  reader.readAsBinaryString(f);
+			}
+	//}
+	function bulkImageUpload(){
+		//alert("In ")
+		var cartValue = sessionStorage.getItem("prodImageList");
+		var table = $.parseJSON(cartValue);
+		imageData = JSON.stringify(table);
+		
+		var fd = new FormData();
+		fd.append('imageData', imageData);
+		$.ajax({
+	        url: '${pageContext.request.contextPath}/uploadImg',
+	        type: 'POST',
+	        data: fd,
+	        dataType: 'json',
+	        processData: false, 
+	        contentType: false, 
+	        async:false,
+	        success: function(resData, textStatus, jqXHR)
+	        {
+	        	//alert(resData);
+	        }, 
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	            console.log('ERRORS: ' + textStatus);
+	        }
+		    });
+		
+	}
 	function postFilesData()
 	{
 		var file = $('#img_input_btn')[0].files[0];
@@ -785,7 +887,7 @@ function moveCursor(){
         contentType: false, 
         success: function(resData, textStatus, jqXHR)
         {
-        	alert(resData);
+        	//alert(resData);
         }, 
         error: function(jqXHR, textStatus, errorThrown)
         {
@@ -793,6 +895,16 @@ function moveCursor(){
         }
 	    });
 	}
+	
+	function makeUniqueString(length) {
+		   var result           = '';
+		   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+		   var charactersLength = characters.length;
+		   for ( var i = 0; i < length; i++ ) {
+		      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+		   }
+		   return result;
+		}
 </script>
 
 

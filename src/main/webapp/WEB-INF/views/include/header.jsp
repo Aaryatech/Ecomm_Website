@@ -261,12 +261,12 @@
 		$("#proc_chkout").html('');
 		$("#cart_item_count").html('');
 		var subtotal = 0;
-
+var prodIdStr="";
 		for (var j = 0; j < allItemArr.length; j++) {
 			for (var i = 0; i < table.length; i++) {
 
 				if (table[i].itemId == allItemArr[j].productId) {
-
+					prodIdStr=prodIdStr+","+allItemArr[j].productId;
 					//alert(i);
 					subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 							.toFixed(2);
@@ -321,8 +321,8 @@
 						'<div class="proc_chkout">'
 								+ '<span>Total : Rs.'
 								+ subtotal
-								+ '/- </span> <a href="${pageContext.request.contextPath}/checkout">Proceed'
-								+ 'to Checkout</a>' + '</div>')
+								+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
+								+ ' to Checkout</a>' + '</div>')
 
 	}
 	function setQty(productId, position, curQty, buttonType) {

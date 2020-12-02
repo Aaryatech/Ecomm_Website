@@ -429,7 +429,7 @@ position: relative; z-index:999999;
                             
                             <div class="search_one">
 								<div class="search_one_l">
-									<input name="txtPlaces" required type="text" class="input_search"
+									<input name="txtPlaces" value="Pune Univeristy Building" required type="text" class="input_search"
 										placeholder="Search your Area" id="txtPlaces" /> <i
 										class="fa fa-search" aria-hidden="true"></i>
 								</div>
@@ -457,9 +457,7 @@ position: relative; z-index:999999;
 									style="background-color: #FFF; border-radius: 3px; width: 100%;">
 									<select required id="selectShop" name="selectShop"
 										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
-										<!-- <option value="1">choose your default address 1</option>
-										<option value="2">choose your default address 2</option>
-										<option value="3">choose your default address 3</option> -->
+										<option selected value="27">FR ID 27</option>
 									</select>
 								</div>
 							</div>

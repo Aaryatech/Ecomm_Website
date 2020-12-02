@@ -38,6 +38,30 @@ public class ImageUploadController {
 		Files.write(path, bytes);
 
 	}
+	//Sachin New 02-12-2020
+	public static void saveImgWithByteArray(byte[] bytes, String imageName,int width,int height) throws IOException {
+		System.err.println(" Width " + width + " Height " + height + " name  " +imageName);
+		Path path = Paths.get(Constants.UPLOAD_URL + imageName);
+
+			path = Paths.get(Constants.UPLOAD_URL + imageName);
+			System.err.println("Success");
+			
+		Files.write(path, bytes);
+		Image img = null;
+		BufferedImage tempPNG = null;
+
+		File newFilePNG = null;
+
+		img = ImageIO.read(new File(Constants.UPLOAD_URL + imageName));
+		tempPNG = resizeImage(img, width,height);
+
+		newFilePNG = new File(Constants.UPLOAD_URL + imageName);
+
+		//ImageIO.write(tempPNG, imageName.split(".")[1], newFilePNG);
+		ImageIO.write(tempPNG, imageName, newFilePNG);
+
+
+	}
 	
 	public static Info saveImgFiles(MultipartFile file, String[] allowExt, String imageName)
 			throws IOException {
@@ -162,6 +186,46 @@ public class ImageUploadController {
 		graphics2D.drawImage(image, 0, 0, width, height, null);
 		graphics2D.dispose();
 		return bufferedImage;
+	}
+	
+	
+	public static Info saveUploadedImgeWithResizeUseBytes(byte[] bytes, String imageName, int width, int hieght)
+			throws IOException {
+
+		Info info = new Info();
+
+		try {
+			String extension = FilenameUtils.getExtension(imageName);
+
+			Path path = Paths.get(Constants.UPLOAD_URL + imageName);
+
+			//byte[] bytes = file.getBytes();
+
+
+			//Files.write(path, bytes);
+			Image img = null;
+			BufferedImage tempPNG = null;
+
+			File newFilePNG = null;
+
+			img = ImageIO.read(new File(Constants.UPLOAD_URL + imageName));
+			tempPNG = resizeImage(img, width, hieght);
+
+			newFilePNG = new File(Constants.UPLOAD_URL + imageName);
+
+			ImageIO.write(tempPNG, extension, newFilePNG);
+
+			info.setError(false);
+			info.setMsg("Upload Successfully ");
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMsg("Error While Uploading Image");
+		}
+		return info;
+
 	}
 
 }

@@ -1,13 +1,17 @@
 package com.ats.ecommerce;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +36,16 @@ import com.atss.ecommerce.model.Customer;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.atss.ecommerce.model.FEProductHeader;
 import com.atss.ecommerce.model.GetFlavorTagStatusList;
+import com.atss.ecommerce.model.TempImageHolder;
+import com.atss.ecommerce.model.order.OrderDetail;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jdk.jfr.ContentType;
+
+import java.util.Base64;
+import java.util.Base64.Decoder;
+
+
 
 @Controller
 @Scope("session")
@@ -274,15 +287,55 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
-	public @ResponseBody Object uploadImg(@RequestParam("data") MultipartFile data) {
+	public @ResponseBody Object uploadImg(HttpServletRequest request,
+			HttpServletResponse response) {
 		System.err.println("In uploadImg");
 		try {
-		
-			System.err.println("data " +data.getOriginalFilename());
+		String imgData=request.getParameter("imageData");
+		System.err.println(" imgData " +imgData);
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		// convert json string to object
+		TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
+			System.err.println("imageJsonArray " +imageJsonArray[0].toString());
+			System.err.println("img " +decodeToImage(imageJsonArray[0].getImgFile()));
+			//ImageUploadController.saveImgFiles(decodeToImage(imageJsonArray[0].getImgFile()), Constants.imageFileExtensions, imageJsonArray[0].getImgName());
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "viewmap";
 	}
+	
+	
+	public static BufferedImage decodeToImage(String imageString) {
+		 
+        BufferedImage image = null;
+        byte[] imageByte;
+        ByteArrayInputStream bis = null;
+        try {
+            Decoder decoder = Base64.getDecoder();
+            imageByte = decoder.decode(imageString);
+             bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+          
+            System.err.println("original width" +image.getWidth() +"height " +image.getHeight());
+           
+            int  height = (int) ((image.getHeight())-(image.getHeight() * 0.25) );
+             int  width = (int) ((image.getWidth())-(image.getWidth() * 0.25) );
+           System.err.println("width" +width +"height " +height);
+		ImageUploadController.saveImgWithByteArray(imageByte,"sai11.jpeg",width,height);
+            bis.close();
+        } catch (Exception e) {
+        	try {
+				bis.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+            e.printStackTrace();
+        }
+       
+        return image;
+        
+    }
 }

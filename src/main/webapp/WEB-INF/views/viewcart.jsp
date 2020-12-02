@@ -102,7 +102,7 @@
 		</div>
 
 		<div class="proceend_bnt">
-			<a href="product.html" class="proceed_btn">Proceed</a>
+			<a href="#" class="proceed_btn">Proceed</a>
 		</div>
 
 	</div>
@@ -381,7 +381,7 @@
 								<script type="text/javascript">
 								function checkCustSession(){
 									var sessCustId ='${sessionScope.custId}';
-									
+									//alert(sessCustId);
 									<%--  '<%=session.getAttribute("custId")%>'; --%>
 	
 										if (parseInt(sessCustId) > 0) {
@@ -423,81 +423,32 @@
 						<h3 class="sidebar_title">Related Item</h3>
 						<div class="related_container">
 							<!--related-product-1-->
-							<div class="related_one">
+						<%-- <c:forEach items="${relateItemList}" var="relatedItem">
+						<c:forEach items="${prodHeaderList}" var="product"
+								varStatus="prodCount">
+								<c:choose>
+								<c:when test="${relatedItem==product.productId}">
+								
+								<div class="related_one">
 								<a href="#"><img
-									src="${pageContext.request.contextPath}/resources/images/related_itm_1.jpg"
-									alt=""></a> <a href="#" class="related_nm">Black Forest
-									Cake (Half Kg)</a>
+									src="${prodImgUrl}${product.prodImagePrimary}"
+									data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+									alt=""></a> <a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
 								<div class="related_prc">
-									490.00 <span> 690.00</span>
+									${product.defaultPrice}<span>${product.defaultPrice}</span>
 								</div>
-								<div class="related_deliver">
+								<!-- <div class="related_deliver">
 									Earlist Delivery : <span>Today</span>
-								</div>
-
-								<a href="#" class="related_cart">Add To Cart</a>
-
+								</div> -->
+								<!-- <a href="#" class="related_cart">Add To Cart</a> -->
 							</div>
-							<!--related-product-2-->
-							<div class="related_one">
-								<a href="#"><img
-									src="${pageContext.request.contextPath}/resources/images/related_itm_2.jpg"
-									alt=""></a> <a href="#" class="related_nm">Black Forest
-									Cake (Half Kg)</a>
-								<div class="related_prc">
-									490.00 <span>690.00</span>
-								</div>
-								<div class="related_deliver">
-									Earlist Delivery : <span>Today</span>
-								</div>
-
-								<a href="#" class="related_cart">Add To Cart</a>
-							</div>
-							<!--related-product-3-->
-							<div class="related_one">
-								<a href="#"><img
-									src="${pageContext.request.contextPath}/resources/images/related_itm_3.jpg"
-									alt=""></a> <a href="#" class="related_nm">Black Forest
-									Cake (Half Kg)</a>
-								<div class="related_prc">
-									490.00 <span> 690.00</span>
-								</div>
-								<div class="related_deliver">
-									Earlist Delivery : <span>Today</span>
-								</div>
-
-								<a href="#" class="related_cart">Add To Cart</a>
-							</div>
-							<!--related-product-4-->
-							<div class="related_one">
-								<a href="#"><img
-									src="${pageContext.request.contextPath}/resources/images/related_itm_4.jpg"
-									alt=""></a> <a href="#" class="related_nm">Black Forest
-									Cake (Half Kg)</a>
-								<div class="related_prc">
-									490.00 <span>690.00</span>
-								</div>
-								<div class="related_deliver">
-									Earlist Delivery : <span>Today</span>
-								</div>
-
-								<a href="#" class="related_cart">Add To Cart</a>
-							</div>
-							<!--related-product-5-->
-							<div class="related_one">
-								<a href="#"><img
-									src="${pageContext.request.contextPath}/resources/images/related_itm_5.jpg"
-									alt=""></a> <a href="#" class="related_nm">Black Forest
-									Cake (Half Kg)</a>
-								<div class="related_prc">
-									490.00 <span>690.00</span>
-								</div>
-								<div class="related_deliver">
-									Earlist Delivery : <span>Today</span>
-								</div>
-
-								<a href="#" class="related_cart">Add To Cart</a>
-							</div>
+								
+								</c:when>
+								
+								</c:choose>
+								</c:forEach>
+						</c:forEach> --%>
+							
 						</div>
 					</div>
 					<div class="clr"></div>
@@ -1636,11 +1587,14 @@
 		function placeOrder() {
 			var cartValue = sessionStorage.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
+			
+			var imgCartValue = sessionStorage.getItem("prodImageList");
+			var imgTable = $.parseJSON(imgCartValue);
 
 			var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
 
-				$.getJSON('${placeOrder}', {
+				/* $.getJSON('${placeOrder}', {
 					promoCode : $("#promoCode").val(),
 					paymentMode : $("#paymentMode").val(),
 					delvrInst : $("#delvrInst").val(),
@@ -1665,7 +1619,7 @@
 					txtBillingPincode : $("#txtBillingPincode").val(),
 
 					itemData : JSON.stringify(table),
-
+					imageData : JSON.stringify(imgTable),
 					ajax : 'true'
 				}, function(data) {
 					//alert(JSON.stringify(data.error));
@@ -1693,15 +1647,69 @@
 						$("#txtBillingPincode").val('');
 
 						var table = [];
+						
 						sessionStorage.setItem("cartValue", JSON
 								.stringify(table));
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
 						$("#place").hide();
-
 					}
-
 					var url = '${pageContext.request.contextPath}/home';
 					window.location = url;
-				});
+				}); */
+				
+				var fd = new FormData();
+							fd.append('imageData', JSON.stringify(imgTable));
+							fd.append('itemData', JSON.stringify(table));
+
+							fd.append('promoCode', $("#promoCode").val());
+							fd.append('paymentMode', $("#paymentMode").val());
+							fd.append('delvrInst' , $("#delvrInst").val());
+							fd.append('delvrDateTime', $("#delvrDateTime").val());
+
+							fd.append('txtCity', $("#txtCity").val());
+							fd.append('txtBillName', $("#txtBillName").val());
+							fd.append('txtMobile',$("#txtMobile").val());
+							fd.append('txtEmail', $("#txtEmail").val());
+							fd.append('gender', $("input[name='gender']:checked").val());
+							fd.append('txtDob', $("#txtDob").val());
+							fd.append('txtGst', $("#txtGst").val());
+
+							fd.append('txtDelvFlat', $("#txtDelvFlat").val());
+							fd.append('txtDelvArea', $("#txtDelvArea").val());
+							fd.append('txtDelvLandmark', $("#txtDelvLandmark").val())
+							fd.append('txtDelvPincode',$("#txtDelvPincode").val());
+
+							fd.append('txtBillingFlat', $("#txtBillingFlat").val());
+							fd.append('txtBillingArea',  $("#txtBillingArea").val());
+							fd.append('txtBillingLandmark', $("#txtBillingLandmark").val());
+							fd.append('txtBillingPincode' , $("#txtBillingPincode").val());
+							$.ajax({
+						        url: '${pageContext.request.contextPath}/placeOrder',
+						        type: 'POST',
+						        data: fd,
+						        dataType: 'json',
+						        processData: false, 
+						        contentType: false, 
+						        async:true,
+						        success: function(resData, textStatus, jqXHR)
+						        {
+						        	//alert(resData);
+						        }, 
+						        error: function(jqXHR, textStatus, errorThrown)
+						        {
+						            console.log('ERRORS: ' + textStatus);
+						        }
+							    });
+							var table = [];
+							
+							sessionStorage.setItem("cartValue", JSON
+									.stringify(table));
+							sessionStorage.setItem("prodImageList", JSON
+									.stringify(table));
+							$("#place").hide();
+						var url = '${pageContext.request.contextPath}/home';
+						window.location = url;
 			}
 		}
 
