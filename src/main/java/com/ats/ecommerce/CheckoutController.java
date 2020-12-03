@@ -50,6 +50,63 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CheckoutController {
 
+	
+	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
+	public String viewCart(Model model,
+			HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		try {
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+
+			int compId = (int) session.getAttribute("companyId");
+			map.add("compId", compId);
+
+//		City[] cityArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllCities", map, City[].class);
+//		List<City> cityList = new ArrayList<City>(Arrays.asList(cityArr));
+
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+					CityData[].class);
+			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+
+			model.addAttribute("cityList", cityList);
+			FEDataTraveller data = new FEDataTraveller();
+			int frId = (int) session.getAttribute("frId");
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH+frId+"_.json"),
+					FEDataTraveller.class);
+			System.err.println("data " + data.toString());
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+
+			try {
+			
+			map = new LinkedMultiValueMap<>();
+			int custId = (int) session.getAttribute("custId");
+			map.add("custId", custId);
+			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer.class);
+			model.addAttribute("cust", cust);
+			
+			
+			String[] billAddress = cust.getExVar3().split("~");
+			model.addAttribute("getFlat", billAddress[0]);
+			model.addAttribute("getArea", billAddress[1]);
+			model.addAttribute("getLandmark", billAddress[2]);
+			model.addAttribute("getPin", billAddress[3]);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Exception in checkout : " + e.getMessage());
+		}
+		return "viewcart";
+	}
+	
 	@RequestMapping(value = "/checkout/{prodIdStr}", method = RequestMethod.GET)
 	public String viewCart(@PathVariable String prodIdStr,Model model,
 			HttpServletRequest request, HttpServletResponse response) {

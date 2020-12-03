@@ -121,8 +121,8 @@
 						<div class="profile_l">
 							<div class="profile_picture">
 								<img
-									src="${pageContext.request.contextPath}/resources/images/user_profile.jpg"
-									alt="">
+									alt="${pageContext.request.contextPath}/resources/images/user_profile.jpg"
+									src="${sessionScope.profileImg}">
 								<!-- src="${pageContext.request.contextPath}${profileImg}" -->
 							</div>
 

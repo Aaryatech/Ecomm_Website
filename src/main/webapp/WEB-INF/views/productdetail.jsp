@@ -844,58 +844,7 @@ function moveCursor(){
 			  // Read in the image file as a data URL.
 			  reader.readAsBinaryString(f);
 			}
-	//}
-	function bulkImageUpload(){
-		//alert("In ")
-		var cartValue = sessionStorage.getItem("prodImageList");
-		var table = $.parseJSON(cartValue);
-		imageData = JSON.stringify(table);
-		
-		var fd = new FormData();
-		fd.append('imageData', imageData);
-		$.ajax({
-	        url: '${pageContext.request.contextPath}/uploadImg',
-	        type: 'POST',
-	        data: fd,
-	        dataType: 'json',
-	        processData: false, 
-	        contentType: false, 
-	        async:false,
-	        success: function(resData, textStatus, jqXHR)
-	        {
-	        	//alert(resData);
-	        }, 
-	        error: function(jqXHR, textStatus, errorThrown)
-	        {
-	            console.log('ERRORS: ' + textStatus);
-	        }
-		    });
-		
-	}
-	function postFilesData()
-	{
-		var file = $('#img_input_btn')[0].files[0];
-		//alert("after file1 " +file.size);
-		var fd = new FormData();
-		fd.append('data', file);
-	 $.ajax({
-        url: '${pageContext.request.contextPath}/uploadImg',
-        type: 'POST',
-        data: fd,
-        dataType: 'json',
-        processData: false, 
-        contentType: false, 
-        success: function(resData, textStatus, jqXHR)
-        {
-        	//alert(resData);
-        }, 
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            console.log('ERRORS: ' + textStatus);
-        }
-	    });
-	}
-	
+			//the below makeUniqueString function used in function handleFileSelect(evt)
 	function makeUniqueString(length) {
 		   var result           = '';
 		   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

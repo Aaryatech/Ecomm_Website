@@ -196,8 +196,8 @@
 						<div class="user_login">
 							<ul class="login_menu">
 								<li><a href="${pageContext.request.contextPath}/profile"><img
-										src="${sessionScope.profileImg}" class="lazy"
-										data-src="${sessionScope.profileImg}" alt=""> Hi
+										src="${sessionScope.profileImg}" class="lazy" width="25" height="25"
+										data-src="${sessionScope.profileImg}" alt="">
 										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<ul>
@@ -473,6 +473,22 @@ var prodIdStr="";
 		
 		
 	}
+	function getCookie(cname) {
+		  var name = cname + "=";
+		  var decodedCookie = decodeURIComponent(document.cookie);
+		  var ca = decodedCookie.split(';');
+		  for(var i = 0; i <ca.length; i++) {
+		    var c = ca[i];
+		    while (c.charAt(0) == ' ') {
+		      c = c.substring(1);
+		    }
+		    if (c.indexOf(name) == 0) {
+		    	alert(c.substring(name.length, c.length))
+		      return c.substring(name.length, c.length);
+		    }
+		  }
+		  return "";
+		}
 	
 </script>
 

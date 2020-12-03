@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
+import com.ats.ecommerce.common.EncodeDecode;
 import com.atss.ecommerce.model.City;
 import com.atss.ecommerce.model.CityData;
 import com.atss.ecommerce.model.Customer;
@@ -90,7 +92,7 @@ public class MasterController {
 		try {
 
 			Date date = new Date();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmms");
 			Calendar cal = Calendar.getInstance();
 			String curDateTime = CommonUtility.getCurrentYMDDateTime();
 
@@ -193,6 +195,9 @@ public class MasterController {
 				if (res.getCustId() > 0) {
 					session.setAttribute("successMsg", "Profile Update Successfully");
 					session.setAttribute("custId",res.getCustId());
+					Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
+					custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+					response.addCookie(custIdCookie);
 					session.setAttribute("userName", cust.getCustName());
 					session.setAttribute("userEmail", cust.getEmailId());
 					session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
@@ -271,7 +276,7 @@ public class MasterController {
 			
 			if (custId == 0) {
 				Date date = new Date();
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmms");
 				Calendar cal = Calendar.getInstance();
 				String curDateTime = CommonUtility.getCurrentYMDDateTime();
 
@@ -338,7 +343,9 @@ public class MasterController {
 						Customer.class);
 				if (res.getCustId() > 0) {
 					session.setAttribute("successMsg", "New customer added successfully");
-					
+					Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
+					custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+					response.addCookie(custIdCookie);
 					CustomerAddDetail custDet = new CustomerAddDetail();
 
 					custDet.setAddress(billFlat);
