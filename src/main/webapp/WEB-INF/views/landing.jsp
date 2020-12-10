@@ -406,9 +406,9 @@ position: relative; z-index:999999;
                                     <li id="female">Gandhi Nagar</li>
                                 </ul>
                               </div> -->
-                              <div style="background-color: #FFF; border-radius: 3px; width: 100%;">
+                              <div>
 									<select id="citySel" name="citySel"
-										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;"
+										style="border-radius: 3px; background:#FFF; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;"
 										onchange="getCityName(this.value)">
 										<option value="0" id="city0" data-cityname="">select</option>
 										<c:forEach items="${cityList}" var="cityList">
@@ -454,9 +454,9 @@ position: relative; z-index:999999;
                         </div> -->
                         <div class="search_one">
 								<div
-									style="background-color: #FFF; border-radius: 3px; width: 100%;">
+									style="  width: 100%;">
 									<select required id="selectShop" name="selectShop"
-										style="padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
+										style="background-color: #FFF; border-radius: 3px; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
 										<option selected value="27">FR ID 27</option>
 									</select>
 								</div>
