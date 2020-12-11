@@ -50,10 +50,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CheckoutController {
 
-	
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-	public String viewCart(Model model,
-			HttpServletRequest request, HttpServletResponse response) {
+	public String viewCart(Model model, HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		try {
 			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
@@ -75,41 +73,39 @@ public class CheckoutController {
 			model.addAttribute("cityList", cityList);
 			FEDataTraveller data = new FEDataTraveller();
 			int frId = (int) session.getAttribute("frId");
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH+frId+"_.json"),
-					FEDataTraveller.class);
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
 			System.err.println("data " + data.toString());
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
 			try {
-			
-			map = new LinkedMultiValueMap<>();
-			int custId = (int) session.getAttribute("custId");
-			map.add("custId", custId);
-			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-					Customer.class);
-			model.addAttribute("cust", cust);
-			
-			
-			String[] billAddress = cust.getExVar3().split("~");
-			model.addAttribute("getFlat", billAddress[0]);
-			model.addAttribute("getArea", billAddress[1]);
-			model.addAttribute("getLandmark", billAddress[2]);
-			model.addAttribute("getPin", billAddress[3]);
-			}catch (Exception e) {
+
+				map = new LinkedMultiValueMap<>();
+				int custId = (int) session.getAttribute("custId");
+				map.add("custId", custId);
+				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+						Customer.class);
+				model.addAttribute("cust", cust);
+
+				String[] billAddress = cust.getExVar3().split("~");
+				model.addAttribute("getFlat", billAddress[0]);
+				model.addAttribute("getArea", billAddress[1]);
+				model.addAttribute("getLandmark", billAddress[2]);
+				model.addAttribute("getPin", billAddress[3]);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
 		}
 		return "viewcart";
 	}
-	
+
 	@RequestMapping(value = "/checkout/{prodIdStr}", method = RequestMethod.GET)
-	public String viewCart(@PathVariable String prodIdStr,Model model,
-			HttpServletRequest request, HttpServletResponse response) {
+	public String viewCart(@PathVariable String prodIdStr, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		try {
 			System.err.println("prodIdStr " + prodIdStr);
@@ -132,46 +128,43 @@ public class CheckoutController {
 			model.addAttribute("cityList", cityList);
 			FEDataTraveller data = new FEDataTraveller();
 			int frId = (int) session.getAttribute("frId");
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH+frId+"_.json"),
-					FEDataTraveller.class);
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
 			System.err.println("data " + data.toString());
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
-			
+
 			try {
 				map = new LinkedMultiValueMap<>();
 				int companyId = (int) session.getAttribute("companyId");
 				map.add("compId", companyId);
 				map.add("itemIds", prodIdStr);
-				List[] relateItemArray = Constants.getRestTemplate().postForObject(Constants.url + "getRelateProductByProductIds", map,
-						List[].class);
-				//System.err.println("relateItemArray " +relateItemArray[0]);
-			}catch (Exception e) {
+				List[] relateItemArray = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getRelateProductByProductIds", map, List[].class);
+				// System.err.println("relateItemArray " +relateItemArray[0]);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
+
 			model.addAttribute("relateItemList", "relateItemList");
 
 			try {
-			
-			map = new LinkedMultiValueMap<>();
-			int custId = (int) session.getAttribute("custId");
-			map.add("custId", custId);
-			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-					Customer.class);
-			model.addAttribute("cust", cust);
-			
-			
-			String[] billAddress = cust.getExVar3().split("~");
-			model.addAttribute("getFlat", billAddress[0]);
-			model.addAttribute("getArea", billAddress[1]);
-			model.addAttribute("getLandmark", billAddress[2]);
-			model.addAttribute("getPin", billAddress[3]);
-			}catch (Exception e) {
+
+				map = new LinkedMultiValueMap<>();
+				int custId = (int) session.getAttribute("custId");
+				map.add("custId", custId);
+				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+						Customer.class);
+				model.addAttribute("cust", cust);
+
+				String[] billAddress = cust.getExVar3().split("~");
+				model.addAttribute("getFlat", billAddress[0]);
+				model.addAttribute("getArea", billAddress[1]);
+				model.addAttribute("getLandmark", billAddress[2]);
+				model.addAttribute("getPin", billAddress[3]);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
@@ -250,8 +243,6 @@ public class CheckoutController {
 			// convert json string to object
 			OrderDetail[] itemJsonImportData = objectMapper.readValue(itemData, OrderDetail[].class);
 
-			
-			
 			float finaTaxableAmt = 0;
 			float finaTaxAmt = 0;
 			float finaTotalAmt = 0;
@@ -320,19 +311,19 @@ public class CheckoutController {
 			}
 
 			float totalDiscAmt = 0, totalAddChargesAmt = 0;
-			String imgData=request.getParameter("imageData");
+			String imgData = request.getParameter("imageData");
 			TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
 			for (int i = 0; i < itemJsonImportData.length; i++) {
 				OrderDetail orderDetail = new OrderDetail();
 				try {
-				if(imageJsonArray.length>0)
-				for(int j=0;j<imageJsonArray.length;j++) {
-					if(imageJsonArray[j].getItemId()==itemJsonImportData[i].getItemId()) {
-						decodeToImageAndUpload(imageJsonArray[j].getImgFile(),imageJsonArray[j].getImgName());
-						orderDetail.setExVar4(imageJsonArray[j].getImgName());
-					}
-				}
-				}catch (Exception e) {
+					if (imageJsonArray.length > 0)
+						for (int j = 0; j < imageJsonArray.length; j++) {
+							if (imageJsonArray[j].getItemId() == itemJsonImportData[i].getItemId()) {
+								decodeToImageAndUpload(imageJsonArray[j].getImgFile(), imageJsonArray[j].getImgName());
+								orderDetail.setExVar4(imageJsonArray[j].getImgName());
+							}
+						}
+				} catch (Exception e) {
 					// TODO: handle exception
 				}
 				orderDetail.setItemId(itemJsonImportData[i].getItemId());
@@ -416,47 +407,52 @@ public class CheckoutController {
 			orderTrail.setExVar1("-");
 
 			OrderSaveData orderSaveData = new OrderSaveData();
+
 			orderSaveData.setOrderDetailList(orderDetailList);
 			orderSaveData.setOrderHeader(order);
 			orderSaveData.setOrderTrail(orderTrail);
 
-			info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
-					Info.class);
+			session.setAttribute("orderSaveData", orderSaveData);
+			System.err.println("Order Save Method is commented will not be saved in Db");
+			/*
+			 * info = Constants.getRestTemplate().postForObject(Constants.url +
+			 * "saveCloudOrder", orderSaveData, Info.class);
+			 */
 
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		return info;
 	}
-	
-	public static BufferedImage decodeToImageAndUpload(String imageString,String imgName) {
-		 
-        BufferedImage image = null;
-        byte[] imageByte;
-        ByteArrayInputStream bis = null;
-        try {
-            Decoder decoder = Base64.getDecoder();
-            imageByte = decoder.decode(imageString);
-             bis = new ByteArrayInputStream(imageByte);
-            image = ImageIO.read(bis);
-          
-            System.err.println("original width" +image.getWidth() +"height " +image.getHeight());
-           
-            int  height = (int) ((image.getHeight())-(image.getHeight() * 0.25) );
-             int  width = (int) ((image.getWidth())-(image.getWidth() * 0.25) );
-           System.err.println("width" +width +"height " +height);
-		ImageUploadController.saveImgWithByteArray(imageByte,imgName,width,height);
-            bis.close();
-        } catch (Exception e) {
-        	try {
+
+	public static BufferedImage decodeToImageAndUpload(String imageString, String imgName) {
+
+		BufferedImage image = null;
+		byte[] imageByte;
+		ByteArrayInputStream bis = null;
+		try {
+			Decoder decoder = Base64.getDecoder();
+			imageByte = decoder.decode(imageString);
+			bis = new ByteArrayInputStream(imageByte);
+			image = ImageIO.read(bis);
+
+			System.err.println("original width" + image.getWidth() + "height " + image.getHeight());
+
+			int height = (int) ((image.getHeight()) - (image.getHeight() * 0.25));
+			int width = (int) ((image.getWidth()) - (image.getWidth() * 0.25));
+			System.err.println("width" + width + "height " + height);
+			ImageUploadController.saveImgWithByteArray(imageByte, imgName, width, height);
+			bis.close();
+		} catch (Exception e) {
+			try {
 				bis.close();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-            e.printStackTrace();
-        }
-       
-        return image;
-        
-    }
+			e.printStackTrace();
+		}
+
+		return image;
+
+	}
 }
