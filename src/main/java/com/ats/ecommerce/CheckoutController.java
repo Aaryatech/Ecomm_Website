@@ -413,14 +413,27 @@ public class CheckoutController {
 			orderSaveData.setOrderTrail(orderTrail);
 
 			session.setAttribute("orderSaveData", orderSaveData);
-			System.err.println("Order Save Method is commented will not be saved in Db");
-			/*
-			 * info = Constants.getRestTemplate().postForObject(Constants.url +
-			 * "saveCloudOrder", orderSaveData, Info.class);
-			 */
-
+			//System.err.println("Order Save Method is commented will not be saved in Db");
+			
+			  info = Constants.getRestTemplate().postForObject(Constants.url +
+			  "saveCloudOrder", orderSaveData, Info.class);
+			 if(!info.getMsg().equalsIgnoreCase(null)) {
+				 //Order saved successfully.
+				 session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
+				if(orderSaveData.getOrderHeader().getPaymentMethod()==2) {
+					//ie paid by elecronic way
+					
+					info.setMsg("epay");
+					info.setResponseObject1("");
+					
+				}else {
+					info.setMsg("cashpay");
+					info.setResponseObject1("");
+				}
+			 }
+System.err.println("Info " +info.toString());
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return info;
 	}

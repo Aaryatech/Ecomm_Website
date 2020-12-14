@@ -341,8 +341,8 @@
 										<select name="paymentMode" id="paymentMode">
 											<option value="">Select Payment Type</option>
 											<option value="1">COD (Cash on Delivery)</option>
-											<option value="2">Card</option>
-											<option value="3">E-Pay</option>
+											<!-- <option value="2">Card</option> -->
+											<option value="2">E-Pay</option>
 										</select>
 									</div>
 								</div>
@@ -1694,14 +1694,28 @@
 						        async:true,
 						        success: function(resData, textStatus, jqXHR)
 						        {
-						        	//alert(resData);
+						        	alert(JSON.stringify(resData));
+						        	var table = [];
+									sessionStorage.setItem("cartValue", JSON
+											.stringify(table));
+									sessionStorage.setItem("prodImageList", JSON
+											.stringify(table));
+									$("#place").hide();
+						        	if(resData.msg=='epay'){
+										var url = '${pageContext.request.contextPath}/goToPay';
+										window.location = url;
+						        	}else{
+										var url = '${pageContext.request.contextPath}/home';
+										window.location = url;
+						        	}
+						        					        	
 						        }, 
 						        error: function(jqXHR, textStatus, errorThrown)
 						        {
 						            console.log('ERRORS: ' + textStatus);
 						        }
 							    });
-							var table = [];
+							/* var table = [];
 							
 							sessionStorage.setItem("cartValue", JSON
 									.stringify(table));
@@ -1709,7 +1723,7 @@
 									.stringify(table));
 							$("#place").hide();
 						var url = '${pageContext.request.contextPath}/home';
-						window.location = url;
+						window.location = url; */
 			}
 		}
 

@@ -118,6 +118,8 @@ public class HomeController {
 		Customer.class);
 		session.setAttribute("userName", cust.getCustName());
 		session.setAttribute("userEmail", cust.getEmailId());
+		session.setAttribute("userMobile", cust.getCustMobileNo());
+		session.setAttribute("userAddress", cust.getExVar3());
 		session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 		}
 		}catch (Exception e) {
@@ -208,7 +210,7 @@ public class HomeController {
 			model.addAttribute("prodHeader", prodHeader);
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return "productdetail";
 	}

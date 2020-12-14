@@ -104,7 +104,6 @@ public class LocationController {
 	public String ak(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
 		try {
-			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
 			/*
 			 * if (cookieArray != null) for (int a = 0; a < cookieArray.length; a++) { //

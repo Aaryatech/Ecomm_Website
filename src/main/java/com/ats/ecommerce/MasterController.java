@@ -199,6 +199,7 @@ public class MasterController {
 					custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
 					response.addCookie(custIdCookie);
 					session.setAttribute("userName", cust.getCustName());
+					session.setAttribute("userMobile", cust.getCustMobileNo());
 					session.setAttribute("userEmail", cust.getEmailId());
 					session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				} else {
@@ -376,6 +377,7 @@ public class MasterController {
 				}
 				session.setAttribute("custId", res.getCustId());
 				session.setAttribute("userName", cust.getCustName());
+				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userEmail", cust.getEmailId());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				redirect = "redirect:/checkout";

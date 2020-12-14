@@ -7,25 +7,25 @@
 <title>Payment Info</title>
 </head>
 <body >
-<button id="rzp-button1" style="display: none;">Pay</button>
+<button id="rzp-button1" style="display:inline;">Pay ${sessionScope.userName}</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
     "key": "rzp_test_1eXaKykckwM8kP", // Enter the Key ID generated from the Dashboard
-    "amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "amount": "450", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
-    "name": "Akhilesh",
-    "description": "Test Transaction",
+    "name": "Pay To Monginis",
+    "description": "Order Value from  ${sessionScope.userName}",
     "image": "${pageContext.request.contextPath}/resources/images/logo_monginis-trasPng.png",
     "order_id": "${orderId}",
     "callback_url": "http://localhost:8989/ecommerce/payResponse",
     "prefill": {
-        "name": "Akhilesh",
-        "email": "akshaykasar72@gmail.com",
-        "contact": "9028290286"
+        "name": "${sessionScope.userName}",
+        "email": "${sessionScope.userEmail}",
+        "contact": "${sessionScope.userMobile}",
     },
     "notes": {
-        "address": "Razorpay Corporate Office"
+        "address": "${sessionScope.landMark}"
     },
     "theme": {
        "color": "#ec268f"
