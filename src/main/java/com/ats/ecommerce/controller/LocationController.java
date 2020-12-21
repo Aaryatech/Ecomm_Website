@@ -37,57 +37,66 @@ public class LocationController {
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "landing";
 		try {
+
 			HttpSession session = request.getSession();
 			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
 			if (cookieArray != null)
 				for (int a = 0; a < cookieArray.length; a++) {
 					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
-						session.setAttribute("custId", Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+						session.setAttribute("custId",
+								Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
 						returnPage = "redirect:/home";
 						isCookieFound = 1;
 						break;
 					}
 				}
-			if (cookieArray != null)
-			for (int a = 0; a < cookieArray.length; a++) {
-				if (cookieArray[a].getName().equalsIgnoreCase("frIdCookie")) {
-					session.setAttribute("frId", Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
-					int frId=Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+			if (cookieArray != null) {
+				try {
+					for (int a = 0; a < cookieArray.length; a++) {
+						if (cookieArray[a].getName().equalsIgnoreCase("frIdCookie")) {
+							session.setAttribute("frId",
+									Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+							int frId = Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue()));
 
-					ObjectMapper mapper = new ObjectMapper();
-					data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
-							FEDataTraveller.class);
-					System.err.println("data " + data.toString());
+							ObjectMapper mapper = new ObjectMapper();
+							data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"),
+									FEDataTraveller.class);
+							System.err.println("data " + data.toString());
 
-					String dataList = new Scanner(new File(Constants.JSON_FILES_PATH+frId+"_.json"))
-							.useDelimiter("\\Z").next();
-					session.setAttribute("dataList", dataList);
-					break;
+							String dataList = new Scanner(new File(Constants.JSON_FILES_PATH + frId + "_.json"))
+									.useDelimiter("\\Z").next();
+							session.setAttribute("dataList", dataList);
+							break;
+						}
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
 			}
-			
 
 			if (isCookieFound == 0) {
 				System.err.println("In Else part of / Mapping ");
 				ObjectMapper mapper = new ObjectMapper();
-				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
+				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
 						CityData[].class);
 				List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
-				String frData = new Scanner(new File(Constants.JSON_FILES_PATH+"AllFrData_.json")).useDelimiter("\\Z").next();
- 
+				String frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+						.next();
+				
+				System.err.println("FR --------------> "+frData);
+
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);
-				
-				
-				CategoryList[] catArray = mapper.readValue(new File(Constants.JSON_FILES_PATH+"MasterCategoryData_.json"),
-						CategoryList[].class);
+
+				CategoryList[] catArray = mapper.readValue(
+						new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
 				List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
 				model.addAttribute("catList", catList);
 				model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
-				
-				FETestimonial[] testMonArray = mapper.readValue(new File(Constants.JSON_FILES_PATH+"MasterTestimonialData_.json"),
-						FETestimonial[].class);
+
+				FETestimonial[] testMonArray = mapper.readValue(
+						new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), FETestimonial[].class);
 				List<FETestimonial> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 				model.addAttribute("testMonialList", testMonialList);
 				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
@@ -99,7 +108,7 @@ public class LocationController {
 		}
 		return returnPage;
 	}
-	
+
 	@RequestMapping(value = "/ak", method = RequestMethod.GET)
 	public String ak(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "location";
@@ -122,12 +131,13 @@ public class LocationController {
 			if (isCookieFound == 0) {
 				System.err.println("In Else ");
 				ObjectMapper mapper = new ObjectMapper();
-				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH+"AllCityData_.json"),
+				CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
 						CityData[].class);
 				List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 				// System.out.println(cityList);
-				String frData = new Scanner(new File(Constants.JSON_FILES_PATH+"AllFrData_.json")).useDelimiter("\\Z").next();
- 
+				String frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+						.next();
+
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);
 				returnPage = "location";
@@ -139,34 +149,33 @@ public class LocationController {
 		return returnPage;
 		// return "location";
 	}
-	
-	//moreCakeStatusWise
-	
-	//product.html
+
+	// moreCakeStatusWise
+
+	// product.html
 	@RequestMapping(value = "/moreCakeStatusWise/{statusId}", method = RequestMethod.GET)
 	public String moreCakeStatusWise(Model model, HttpServletRequest request, HttpServletResponse response,
 			@PathVariable int statusId) {
 		String returnPage = "productlist";
 		try {
-			HttpSession session=request.getSession();
-			
-			int frId=(int) session.getAttribute("frId");
+			HttpSession session = request.getSession();
+
+			int frId = (int) session.getAttribute("frId");
 			ObjectMapper mapper = new ObjectMapper();
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH +frId+"_.json"),
-					FEDataTraveller.class);
-			
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
+
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
 
 			model.addAttribute("statusId", statusId);
-			 
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			return returnPage;
 		}
-		
+
 		return returnPage;
 	}
-	
+
 }

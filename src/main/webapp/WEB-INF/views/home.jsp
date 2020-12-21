@@ -27,7 +27,7 @@
 	<div class="head_marg">
 
 		<!--main banner -->
-		<div class="main_banner"
+		<%-- <div class="main_banner"
 			style="background: url(${pageContext.request.contextPath}/resources/images/main_banner.jpg) no-repeat center top; background-size: cover;">
 			<div class="banner_caption">
 				<h3 class="banner_title">
@@ -36,8 +36,8 @@
 				<p class="banner_txt">Choose Same Day Delivery Gifts</p>
 				<a href="${pageContext.request.contextPath}/productlist"
 					class="send_now_btn">Send Now</a>
-					
-					<!-- <form action="https://www.example.com/payment/success/" method="POST">
+
+				<!-- <form action="https://www.example.com/payment/success/" method="POST">
 <script
     src="https://checkout.razorpay.com/v1/checkout.js"
     data-key="rzp_test_1eXaKykckwM8kP" // Enter the Test API Key ID generated from Dashboard → Settings → API Keys
@@ -55,58 +55,250 @@
 <input type="hidden" custom="Hidden Element" name="hidden">
 </form> -->
 
-<a href="${pageContext.request.contextPath}/goToPay" id="11">Go to Pay</a>
+				<a href="${pageContext.request.contextPath}/goToPay" id="11">Go
+					to Pay</a>
 
-<button id="rzp-button2">Pay2</button>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-var options = {
-    "key": "rzp_test_1eXaKykckwM8kP", // Enter the Key ID generated from the Dashboard
-    "amount": "50", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp11",
-    "description": "Test Transaction11",
-    "image": "https://example.com/your_logo",
-    "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature)
-    },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
-var rzp1 = new Razorpay(options);
-rzp1.on('payment.failed', function (response){
-        alert(response.error.code);
-        alert(response.error.description);
-        alert(response.error.source);
-        alert(response.error.step);
-        alert(response.error.reason);
-        alert(response.error.metadata.order_id);
-        alert(response.error.metadata.payment_id);
-});
-document.getElementById('rzp-button2').onclick = function(e){
-    rzp1.open();
-    e.preventDefault();
-}
-</script>
+				<button id="rzp-button2">Pay2</button>
+				<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+				<script>
+					var options = {
+						"key" : "rzp_test_1eXaKykckwM8kP", // Enter the Key ID generated from the Dashboard
+						"amount" : "50", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+						"currency" : "INR",
+						"name" : "Acme Corp11",
+						"description" : "Test Transaction11",
+						"image" : "https://example.com/your_logo",
+						"order_id" : "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+						"handler" : function(response) {
+							alert(response.razorpay_payment_id);
+							alert(response.razorpay_order_id);
+							alert(response.razorpay_signature)
+						},
+						"prefill" : {
+							"name" : "Gaurav Kumar",
+							"email" : "gaurav.kumar@example.com",
+							"contact" : "9999999999"
+						},
+						"notes" : {
+							"address" : "Razorpay Corporate Office"
+						},
+						"theme" : {
+							"color" : "#3399cc"
+						}
+					};
+					var rzp1 = new Razorpay(options);
+					rzp1.on('payment.failed', function(response) {
+						alert(response.error.code);
+						alert(response.error.description);
+						alert(response.error.source);
+						alert(response.error.step);
+						alert(response.error.reason);
+						alert(response.error.metadata.order_id);
+						alert(response.error.metadata.payment_id);
+					});
+					document.getElementById('rzp-button2').onclick = function(e) {
+						rzp1.open();
+						e.preventDefault();
+					}
+				</script>
 			</div>
-		</div>
+		</div> --%>
+
+
+
+		<!-- BANNER -->
+
+		<%-- <c:forEach items="${bannerList}" var="banner">
+
+			<div class="main_banner"
+				style="background-image: url('${offerImgUrl}${banner.bannerImage}') no-repeat center top; background-size: cover;">
+				<div class="banner_caption">
+					<h3 class="banner_title">
+						${banner.bannerEventName} <span>${banner.captionOnproductPage}</span>
+					</h3>
+					<a href="javascript:void(0)"
+						onclick="openProductListPageByTags('${banner.tagIds}')"
+						class="send_now_btn">Send Now</a>
+				</div>
+			</div>
+
+		</c:forEach> --%>
+
+
+		<section class="lazy slider" data-sizes="50vw">
+
+			<c:forEach items="${bannerList}" var="banner">
+
+				<div class="main_banner"
+					style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>') no-repeat center top; background-size: cover;">
+
+					<div class="rotate-banner">
+						<div class="banner_caption">
+							<h3 class="banner_title">
+								${banner.bannerEventName} <span>${banner.captionOnproductPage}</span>
+							</h3>
+							<a href="javascript:void(0)"
+								onclick="openProductListPageByTags('${banner.tagIds}')"
+								class="send_now_btn">Send Now</a>
+						</div>
+					</div>
+				</div>
+
+			</c:forEach>
+
+
+
+		</section>
+
+
+
+		<script type="text/javascript">
+			$(document).on('ready', function() {
+				$(".lazy").slick({
+					lazyLoad : 'ondemand', // ondemand progressive anticipated
+					infinite : true
+				});
+			});
+		</script>
+
+
 
 	</div>
 
+	<!-- STATIC -->
+
 	<!-- multiple product boxes -->
 	<div class="find_store">
+		<div class="wrapper">
+			<div class="prod_cat_bx">
+				<div class="prod_cat_1">
+					<div class="cakes_cat_1">
+						<a
+							href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+							<div class="img_cap">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
+									alt="">
+								<div class="prod_cat_cap">
+									<span>Cakes</span>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="prod_cat_2">
+					<div class="divid_two">
+						<div class="divide_one_pic left">
+							<div class="single_pic">
+								<a
+									href="${pageContext.request.contextPath}/filterCategoryProduct/2">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Pastries</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="divide_one_pic right">
+							<div class="single_pic">
+								<a
+									href="${pageContext.request.contextPath}/filterCategoryProduct/3">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Savories</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="divid_two">
+						<div class="divide_one_pic left">
+							<div class="single_pic">
+								<a
+									href="${pageContext.request.contextPath}/filterCategoryProduct/9">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Packaged Cakes</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="divide_one_pic right">
+							<div class="single_pic">
+								<a
+									href="${pageContext.request.contextPath}/filterCategoryProduct/4">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Chocolates</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="single_prod">
+						<div class="single_pic">
+							<a
+								href="${pageContext.request.contextPath}/filterCategoryProduct/8">
+								<img
+								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Bakersware</span>
+								</div>
+							</a>
+
+						</div>
+					</div>
+				</div>
+				<div class="prod_cat_3">
+					<div class="lst_tow marg_btm divice">
+						<div class="single_pic">
+							<a
+								href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+								<img
+								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Combo</span>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="lst_tow divice1">
+						<div class="single_pic ">
+							<a
+								href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+								<img
+								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Combo</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="clr"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!-- multiple product boxes -->
+	<%-- <div class="find_store">
 		<div class="wrapper">
 			<div class="prod_cat_bx">
 
@@ -131,7 +323,8 @@ document.getElementById('rzp-button2').onclick = function(e){
 				<div class="clr"></div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
+
 	<!--festival offoer box-->
 	<div class="testimonial_bx">
 		<div class="wrapper">
@@ -139,15 +332,19 @@ document.getElementById('rzp-button2').onclick = function(e){
 				<c:forEach items="${festiveEventList}" var="festEvent"
 					varStatus="count">
 					<c:set var="td" value="${festEvent.toDate}"></c:set>
+					<c:set var="fd" value="${festEvent.fromDate}"></c:set>
 					<%
 						String dt = (String) pageContext.getAttribute("td");
+							String dtfrm = (String) pageContext.getAttribute("fd");
 							Date curDate = new Date();
 							SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 							Date date = sdf.parse(dt);
-							if (curDate.compareTo(date) <= 0) {
+							Date frmDate = sdf.parse(dtfrm);
+
+							if (curDate.compareTo(frmDate) >= 0 && curDate.compareTo(date) <= 0) {
 								pageContext.setAttribute("show", 1);
 							} else {
-								pageContext.setAttribute("show", 0);
+								pageContext.setAttribute("show", 1);
 							}
 					%>
 					<c:set var="isShow" value="${show}"></c:set>
@@ -203,13 +400,7 @@ document.getElementById('rzp-button2').onclick = function(e){
 															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
 															alt="">
 													</div>
-													<%-- <div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>
-														<p id="cake_prc${product.productId}">${product.defaultPrice}</p>
-														<span class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
-													</div> --%>
+
 
 
 													<div class="cake_prc">
@@ -231,52 +422,108 @@ document.getElementById('rzp-button2').onclick = function(e){
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
-															<c:if test="${product.flavourIds!=0}">
-																<select class="select-css" id="flav${product.productId}"
-																	onchange="changeWtFlavor('${product.productId}')">
-																	<c:forEach items="${product.flavourIds}"
-																		var="prodDetail">
 
-																		<c:forEach items="${flavTagStatusList}"
-																			var="flavorFilter" varStatus="flavorFilterCount">
 
-																			<c:if test="${flavorFilter.filterTypeId==4}">
+															<c:choose>
 
-																				<c:choose>
-																					<c:when test="${prodDetail==flavorFilter.filterId}">
-																						<c:choose>
-																							<c:when
-																								test="${prodDetail==product.defaultFlavorId}">
-																								<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																							</c:when>
-																							<c:otherwise>
-																								<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																							</c:otherwise>
-																						</c:choose>
-																					</c:when>
-																					<c:otherwise>
+																<c:when test="${product.rateSettingType==0}">
+																	<!-- <input type="number" id="wt" value="1" max="2" min="0"
+																		limit="1" style="text-align: center;"> -->
 
-																					</c:otherwise>
-																				</c:choose>
-																			</c:if>
+																	<button type="button" value="" field="quantity"
+																		class="qtyminus cart"
+																		onclick="setQtyText(${product.productId},0,'${product.prodDetailList}')">
+																		<i class="fa fa-minus" aria-hidden="true"></i>
+																	</button>
+																	<input type="text" id="txtWt${product.productId}"
+																		value="1" style="text-align: center;" class="qty cart">
+																	<button type="button" value="" field="quantity"
+																		onclick="setQtyText(${product.productId},1,'${product.prodDetailList}')"
+																		class="qtyplus cart">
+																		<i class="fa fa-plus" aria-hidden="true"></i>
+																	</button>
 
+																</c:when>
+
+																<c:otherwise>
+
+																	<!-- <div class="custom-select-new1"> -->
+																	<select class="select-css" id="wt${product.productId}"
+																		onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
+																		<!-- <option value="7">7</option> -->
+																		<c:forEach items="${product.availInWeights}"
+																			var="prodDetailwt">
+																			<option value="${prodDetailwt}">${prodDetailwt}</option>
 																		</c:forEach>
-																	</c:forEach>
-																</select>
-															</c:if>
+																	</select>
+																	<!-- </div> -->
+
+																</c:otherwise>
+
+															</c:choose>
+
+															<span>${product.uomShowName}</span>
 
 														</div>
 														<div class="cake_dropdown_r">
-															<!-- <div class="custom-select-new1"> -->
-															<select class="select-css" id="wt${product.productId}"
-																onchange="changeWtFlavor('${product.productId}')">
-																<option value="7">7</option>
-																<c:forEach items="${product.availInWeights}"
-																	var="prodDetailwt">
-																	<option value="${prodDetailwt}">${prodDetailwt}</option>
-																</c:forEach>
-															</select>
-															<!-- </div> -->
+
+
+
+
+
+															<div>
+																<i class="fa fa-inr cake_prc_detail_iclass"
+																	aria-hidden="true"></i>
+
+																<c:set value="${product.defaultPrice}" var="price"></c:set>
+																<c:set value="1" var="defaultWt"></c:set>
+
+																<c:choose>
+
+																	<c:when test="${product.rateSettingType == 1}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:set value="${product.defaultPrice * defaultWt}"
+																			var="price"></c:set>
+
+																	</c:when>
+
+																	<c:when test="${product.rateSettingType == 2}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:forEach items="${product.prodDetailList}"
+																			var="proDetail">
+
+																			<c:choose>
+																				<c:when
+																					test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																					<c:set value="${proDetail.actualRate}" var="price"></c:set>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+
+																	</c:when>
+
+
+																</c:choose>
+
+																<p class="cake_prc_detail_pclass"
+																	id="newPrice${product.productId}">${price}</p>
+
+															</div>
+
+
+
+
+
 														</div>
 														<div class="clr"></div>
 													</div>
@@ -321,13 +568,16 @@ document.getElementById('rzp-button2').onclick = function(e){
 																		<c:forEach items="${flavTagStatusList}"
 																			var="vegNonFilter" varStatus="flavorFilterCount">
 																			<c:if test="${vegNonFilter.filterTypeId==12}">
+
+
+
 																				<c:if
 																					test="${vegNonFilter.filterId==prodDetailVegNon}">
-																					<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																					<c:if test="${vegNonFilter.adminName eq 'VEG'}">
 																						<c:set var="isVegFound" value="1"></c:set>
 																					</c:if>
 
-																					<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
+																					<c:if test="${vegNonFilter.adminName eq 'NONVEG'}">
 																						<c:set var="isNonVegFound" value="1"></c:set>
 																					</c:if>
 																				</c:if>
@@ -338,7 +588,7 @@ document.getElementById('rzp-button2').onclick = function(e){
 
 
 
-																	<c:if test="${isVegFound==1}">
+																	<%-- <c:if test="${isVegFound==1}">
 																		<li><input type="radio" value="0"
 																			id="prod_veg${product.productId}"
 																			name="prod_vnv${product.productId}"> <label
@@ -358,7 +608,44 @@ document.getElementById('rzp-button2').onclick = function(e){
 																			<div class="check">
 																				<div class="inside"></div>
 																			</div></li>
+																	</c:if> --%>
+
+																	<c:if test="${product.flavourIds!=0}">
+																		<select class="select-css"
+																			id="flav${product.productId}"
+																			onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
+																			<c:forEach items="${product.flavourIds}"
+																				var="prodDetail">
+
+																				<c:forEach items="${flavTagStatusList}"
+																					var="flavorFilter" varStatus="flavorFilterCount">
+
+																					<c:if test="${flavorFilter.filterTypeId==4}">
+
+																						<c:choose>
+																							<c:when
+																								test="${prodDetail==flavorFilter.filterId}">
+																								<c:choose>
+																									<c:when
+																										test="${prodDetail==product.defaultFlavorId}">
+																										<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																									</c:when>
+																									<c:otherwise>
+																										<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																									</c:otherwise>
+																								</c:choose>
+																							</c:when>
+																							<c:otherwise>
+
+																							</c:otherwise>
+																						</c:choose>
+																					</c:if>
+
+																				</c:forEach>
+																			</c:forEach>
+																		</select>
 																	</c:if>
+
 																</ul>
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
@@ -377,8 +664,8 @@ document.getElementById('rzp-button2').onclick = function(e){
 
 														</div>
 														<div class="radio_r">
-															<a href="#"
-																onclick="addToCartClick('${product.productId}')"
+															<a href="javascript:void(0)"
+																onclick="addCart('${product.productId}','${product.rateSettingType}')"
 																class="cart_btn">Add to Cart</a>
 														</div>
 														<div class="clr"></div>
@@ -412,85 +699,7 @@ document.getElementById('rzp-button2').onclick = function(e){
 
 	</c:forEach>
 
-	<!--premium cake box-- cake_one_demo>
-<%-- <div class="cake_one_demo">
-												<div class="cake_pic">
-													<img src="${prodImgUrl}dsd"
-														data-src="${prodImgUrl}dsds" alt=""
-														class="mobile_fit transition lazy">
 
-													<div class="circle_tag active">
-														<img src="#" class="lazy"
-															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-															alt=""> <img src="#" class="lazy"
-															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-															alt="">
-													</div>
-													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>499 <span
-															class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>649</span> <span class="prc_off">(23%
-															Off)</span>
-															
-															
-													</div>
-												</div>
-												<div class="cake_container">
-													<h4 class="cake_nm">
-														<a
-															href="${pageContext.request.contextPath}/showProdDetail/14">KKKKK</a>
-													</h4>
-													<div class="cake_dropdown">
-														<div class="cake_dropdown_l">
-															<div class="custom-select-new">
-																     <select id="flav7LLL">
-																     <option value="a">A</option>
-																      <option value="b">B</option>
-																	</select>
-															</div>
-														</div>
-														<div class="cake_dropdown_r">
-															
-														<select onchange="changeWt1()" id="wt">
-															 <option value="a">A</option>
-																      <option value="b">B</option>
-														<option value="d2">ffffff</option>
-													
-														</select>
-															
-														</div>
-														<div class="clr"></div>
-													</div>
-													<div class="cake_radio_row">
-														<div class="radio_l">
-
-															<div class="radio_1">
-																<ul>
-																	<li><input type="radio" id="a-option"
-																		name="selector"> <label for="a-option">Veg</label>
-																		<div class="check"></div></li>
-
-																	<li><input type="radio" id="b-option"
-																		name="selector"> <label for="b-option">Non
-																			Veg</label>
-																		<div class="check">
-																			<div class="inside"></div>
-																		</div></li>
-
-																</ul>
-															</div>
-
-														</div>
-														<div class="radio_r">
-															<a href="my-cart.html" class="cart_btn">Add to Cart222</a>
-														</div>
-														<div class="clr"></div>
-													</div>
-												</div>
-
-											</div> --%>
-
-	<!--new cake box-->
 
 	<!--testimonial-box-->
 	<div class="testimonial_bx">
@@ -512,7 +721,7 @@ document.getElementById('rzp-button2').onclick = function(e){
 							<div class="testimonial_nm">
 								<img src="${TestimonialImgUrl}${testmoni.images}" alt="">
 								<h2 class="testimonial_date">
-									${testmoni.name} <span>Date : date</span>
+									${testmoni.name} <span>${testmoni.designation}</span>
 									<!--  <span>Location: location</span> -->
 								</h2>
 							</div>
@@ -654,8 +863,9 @@ document.getElementById('rzp-button2').onclick = function(e){
 	</script>
 	<script type="text/javascript">
 		function addToCartClick(productId) {
-			//alert("In addToCartClick " +productId);
+			alert("In addToCartClick " + productId);
 			var selectWt = document.getElementById("wt" + productId).value;
+
 			var selectFlav = 0;
 			try {
 				selectFlav = document.getElementById("flav" + productId).value;
@@ -778,6 +988,7 @@ document.getElementById('rzp-button2').onclick = function(e){
 			}//end of For prodDetailList pd
 
 		}//end of Function addToCartClick
+
 		function appendCartData() {
 
 			if (sessionStorage.getItem("allItemList") == null) {
@@ -801,15 +1012,28 @@ document.getElementById('rzp-button2').onclick = function(e){
 			$("#cart_item_count").html('');
 
 			var subtotal = 0;
-var prodIdStr="";
+			var prodIdStr = "";
 			for (var j = 0; j < allItemArr.length; j++) {
 				for (var i = 0; i < table.length; i++) {
 
 					if (table[i].itemId == allItemArr[j].productId) {
-						prodIdStr=prodIdStr+","+allItemArr[j].productId;
+						prodIdStr = prodIdStr + "," + allItemArr[j].productId;
 						//alert(i);
 						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 								.toFixed(2);
+						
+						
+						var prodName="";
+						
+						if(table[i].rateSettingType == 0){
+							prodName=table[i].exVar1;
+						}else {
+							
+							prodName=table[i].exVar1+" Flavour - "+table[i].flvName+" Weight - "+table[i].weight;
+							
+						}
+						
+						
 						$("#item_cart_list")
 								.append(
 										'<div class="like_one">'
@@ -820,7 +1044,7 @@ var prodIdStr="";
 												+ '</div>'
 												+ '<div class="like_cont">'
 												+ '<h4 class="like_cake_nm">'
-												+ table[i].exVar1
+												+ prodName
 												+ '</h4>'
 												+ '<p class="like_prc">Rs.'
 												+ table[i].totalAmt
@@ -1130,6 +1354,389 @@ var prodIdStr="";
 										lazyload);
 							}
 						})
+
+		function openProductListPageByTags(tagIds) {
+
+			if (sessionStorage.getItem("allTagList") == null) {
+				var table = [];
+				sessionStorage.setItem("allTagList", JSON.stringify(table));
+			}
+
+			var allTagList = sessionStorage.getItem("allTagList");
+			var allTags = $.parseJSON(allTagList);
+			alert(allTags)
+
+			var idArray = tagIds.split(",");
+
+			var selTags = [];
+
+			for (var i = 0; i < idArray.length; i++) {
+				for (var j = 0; j < allTags.length; j++) {
+
+					if (idArray[i] == allTags[j].filterId) {
+						selTags.push(allTags[j].filterName);
+					}
+
+				}
+			}
+
+			sessionStorage.setItem("selTags", JSON.stringify(selTags));
+
+			alert(tagIds)
+			window.open("${pageContext.request.contextPath}/products/0",
+					"_self");
+
+		}
+
+		function setQtyText(id, type) {
+
+			/* type  :  0 - minus,  1 - plus */
+			
+			var wt=document.getElementById("txtWt"+id).value;
+		//alert(id+"    "+type+ "     "+wt)
+		
+		//alert(detailList);
+			
+			if(type==0){
+			
+				var newWt=wt+1;
+				if(wt>0 && wt<=10){
+					wt=parseInt(wt)-1;
+				}
+				
+			}
+			
+			else if(type==1){
+				if(wt>=0 && wt<10){
+					wt=parseInt(wt)+1;
+				}
+			}
+			
+			document.getElementById("txtWt"+id).value=wt;
+			
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var rate=0;
+			
+			for(var i=0;i<allItemArr.length;i++){
+				
+				if(allItemArr[i].productId==id){
+			
+					rate=parseFloat(allItemArr[i].prodDetailList[0].actualRate);
+				}
+				
+			}
+			
+			rate=rate*wt;
+			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			
+
+		}
+		
+		
+		function setPriceByWtAndFlavour(id,type) {
+			
+			//alert(id+"      "+type)
+			
+			var selectWt = document.getElementById("wt" + id).value;
+			var selectFlav = 0;
+			try {
+				selectFlav = document.getElementById("flav" + id).value;
+			} catch (e) {
+				selectFlav = 0;
+			}
+			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+				selectFlav = 0;
+			}
+			
+			//alert(selectWt+"          "+selectFlav)
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var rate=0;
+			
+			for(var i=0;i<allItemArr.length;i++){
+				if(allItemArr[i].productId==id){
+					rate=parseFloat(allItemArr[i].defaultPrice);
+				}
+			}
+			
+			for(var i=0;i<allItemArr.length;i++){
+				if(allItemArr[i].productId==id){
+					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
+						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}
+					}
+				}
+			}
+			
+			if(type==1){
+				rate=rate*parseFloat(selectWt);
+			}
+			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			
+		}
+		
+		
+	 	
+		function addCart(id,type) {
+			
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(type == 0){
+				selectWt = document.getElementById("txtWt"+id).value;	
+			}else if(type == 1 || type == 2){
+				selectWt = document.getElementById("wt" + id).value;
+				
+				try {
+					selectFlav = document.getElementById("flav" + id).value;
+					
+					var docFlv = document.getElementById("flav" + id);
+					selFlvName = docFlv.options[docFlv.selectedIndex].text;
+					
+				} catch (e) {
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			
+			
+				
+				
+				var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
+
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+				
+				//alert("dfdfd "+prodHead )
+				
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				
+				var prodDetail = prodMaster.prodDetailList;
+				alert(prodDetail)
+				
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				 for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(type == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(type == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+
+						}
+						
+					} else if(type == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+
+						}
+						
+					} 
+
+				}
+				 
+				
+				
+				
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+
+				taxableAmt = calRate;
+
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				if(type==0){
+					calRate=actualRate;
+				}
+				
+				
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				
+				var obj={
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName
+						
+					}
+				
+				var index=0,itemFound=0;
+				for(var i=0; i<cartArray.length;i++){
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						break;
+					}else if(configDetailId==cartArray[i].exInt1){
+						index=i;
+						itemFound=1;
+						break;
+					}
+				}
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+ 
+			
+			
+		} 
+		
+		
 	</script>
+
+
+
+
+
+
 </body>
 </html>

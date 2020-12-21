@@ -1054,7 +1054,7 @@
 								+ tempArr[i].defaultPrice
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ tempArr[i].defaultPrice
-								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ '</span> <span class="prc_off">(0% Off)</span> </div> '
 								+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '

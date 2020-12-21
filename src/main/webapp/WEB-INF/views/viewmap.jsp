@@ -53,6 +53,8 @@ html, body {
 
 	<input type="hidden" value="" id="latVal" name="latVal">
 	<input type="hidden" value="" id="lngVal" name="lngVal">
+	<input type="hidden" value="" id="latlng" name="latlng">
+	<input type="hidden" value="" id="addr" name="addr">
 
 
 	<script>
@@ -65,15 +67,19 @@ html, body {
 		}
 
 		function initMap(position) {
-
-			var latVal = 0;
-			var lngVal = 0;
 			
-			latVal = position.coords.latitude;
-			lngVal = position.coords.longitude;
+			var latVal = ${lat};
+			var lngVal = ${lng};
 			
-			console.log("loc-------> " + position.coords.latitude + "     "
-					+ position.coords.longitude);
+			//alert(latVal+"       "+lngVal)
+			
+			if(latVal ==0 && lngVal ==0){
+				latVal = position.coords.latitude;
+				lngVal = position.coords.longitude;
+				
+				console.log("loc-------> " + position.coords.latitude + "     "
+						+ position.coords.longitude);
+			}
 
 			$("#latVal").val(latVal);
 			$("#lngVal").val(lngVal);
@@ -84,8 +90,13 @@ html, body {
 				lat : latVal,
 				lng : lngVal
 			};
+			
+			document.getElementById("latlng").value=myLatlng;
 
-			console.log("location -------> " + latVal + "     " + lngVal);
+			//console.log("location -------> " + latVal + "     " + lngVal);
+			
+			//alert(latVal+"       "+lngVal)
+
 
 			var map = new google.maps.Map(document.getElementById('map'), {
 				zoom : 18,
@@ -107,6 +118,10 @@ html, body {
 				  });
 			 
 			 var geocoder = new google.maps.Geocoder();
+			 
+			 var infowindow = new google.maps.InfoWindow();
+			 
+			 geocodeLatLng(geocoder, latVal,lngVal, infowindow);
 			 
 			 map
 				.addListener(
@@ -138,60 +153,69 @@ html, body {
 							      }
 							    }
 							  }); */
+							  
+							  
+							geocodeLatLng(geocoder, lat,lng, infowindow);
+							  
 							
 						});
 			 
 			 
 			 
 
-			// Create the initial InfoWindow.
-			/* var infoWindow = new google.maps.InfoWindow({
-				content : 'Click the map to get Lat/Lng!',
-				position : myLatlng
-			});
-			infoWindow.open(map); */
-
-			// Configure the click listener.
-			/* map
-					.addListener(
-							'click',
-							function(mapsMouseEvent) {
-								// Close the current InfoWindow.
-								infoWindow.close();
-
-								// Create a new InfoWindow.
-								infoWindow = new google.maps.InfoWindow({
-									position : mapsMouseEvent.latLng
-								});
-								infoWindow.setContent(mapsMouseEvent.latLng
-										.toString());
-								infoWindow.open(map);
-
-								window
-										.open(
-												'${pageContext.request.contextPath}/home',
-												'_self');
-
-							}); */
 		}
+		
+		
+		
+		function geocodeLatLng(geocoder, lat,lng, infowindow) {
+	
+			  var latlng = {
+			    lat: parseFloat(lat),
+			    lng: parseFloat(lng),
+			  };
+			  
+			  geocoder.geocode({ location: latlng }, (results, status) => {
+			    if (status === "OK") {
+			      if (results[0]) {
+			    	  //alert("--> "+results[0].formatted_address)
+			    	 
+			    	  document.getElementById("addr").value=results[0].formatted_address;
+			      } else {
+			        alert("No results found");
+			        document.getElementById("addr").value="";
+			      }
+			    } else {
+			      alert("Geocoder failed due to: " + status);
+			        document.getElementById("addr").value="";
+
+			    }
+			  });
+			}
 		
 		
 		function setLocation(){
 			
 			var lat=document.getElementById("latVal").value;
+			var lng=document.getElementById("lngVal").value;
+			var addr=document.getElementById("addr").value;
 			
-			//alert(lat)
+			//alert(lat+"    --   "+lng+"    --      "+addr)
+			
+			sessionStorage.setItem("selLat", lat);
+			sessionStorage.setItem("selLng", lng);
+			sessionStorage.setItem("selAddr", addr);
+			
 			
 			 window
 			.open(
-					'${pageContext.request.contextPath}/home',
-					'_self'); 
+					'${pageContext.request.contextPath}/',
+					'_self');
 		}
 		
 		
 	</script>
 	<script defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBahlnISPYhetj3q50ADqVE6SECypRGe4A&callback=getBrowserLocation">
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBahlnISPYhetj3q50ADqVE6SECypRGe4A&libraries=places&callback=getBrowserLocation">
 		
 	</script>
 </body>

@@ -58,11 +58,12 @@
 						<!--main search-->
 						<form action="" method="get">
 							<div class="input_one">
-								<input name="glbSearch" id="glbSearch" type="text" onchange="globalSearch()"
-									list="glbTemplates" class="search_input" autocomplete="on"
-									placeholder="Search..." />
+								<input name="glbSearch" id="glbSearch" type="text"
+									onchange="globalSearch()" list="glbTemplates"
+									class="search_input" autocomplete="on" placeholder="Search..." />
 								<datalist id="glbTemplates"></datalist>
-								<button class="search_btn" id="btnGlbSearch" onclick="globalSearch()">
+								<button class="search_btn" id="btnGlbSearch"
+									onclick="globalSearch()">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -196,8 +197,8 @@
 						<div class="user_login">
 							<ul class="login_menu">
 								<li><a href="${pageContext.request.contextPath}/profile"><img
-										src="${sessionScope.profileImg}" class="lazy" width="25" height="25"
-										data-src="${sessionScope.profileImg}" alt="">
+										src="${sessionScope.profileImg}" class="lazy" width="25"
+										height="25" data-src="${sessionScope.profileImg}" alt="">
 										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<ul>
@@ -261,18 +262,39 @@
 		$("#proc_chkout").html('');
 		$("#cart_item_count").html('');
 		var subtotal = 0;
-var prodIdStr="";
+		var prodIdStr = "";
+
 		for (var j = 0; j < allItemArr.length; j++) {
 			for (var i = 0; i < table.length; i++) {
 
 				if (table[i].itemId == allItemArr[j].productId) {
-					prodIdStr=prodIdStr+","+allItemArr[j].productId;
+					prodIdStr = prodIdStr + "," + allItemArr[j].productId;
 					//alert(i);
 					subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 							.toFixed(2);
+
+					var prodName = "";
+
+					if (table[i].rateSettingType == 0) {
+						prodName = table[i].exVar1;
+					} else {
+
+						if (table[i].exInt2 != 0 || table[i].flvName=="undefined" || table[i].flvName=="" || table[i].flvName=="NA" ) {
+							prodName = table[i].exVar1 + " Flavour - "
+									+ table[i].flvName + " Weight - "
+									+ table[i].weight;
+
+						} else {
+							prodName = table[i].exVar1 + " Weight - "
+									+ table[i].weight;
+
+						}
+
+					}
+
 					$("#item_cart_list")
 							.append(
-									'<div class="like_one">'
+									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('+table[i].exInt1+')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
 											+ '<div class="like_pic">'
 											+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
 				'data-src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
@@ -280,7 +302,7 @@ var prodIdStr="";
 											+ '</div>'
 											+ '<div class="like_cont">'
 											+ '<h4 class="like_cake_nm">'
-											+ table[i].exVar1
+											+ prodName
 											+ '</h4>'
 											+ '<p class="like_prc">Rs.'
 											+ table[i].totalAmt
@@ -303,13 +325,14 @@ var prodIdStr="";
 											+ ','
 											+ table[i].qty
 											+ ',1)" value="+"'
-											+ 'class="qtyplus" field="quantity"/>'
-											+ '</form>'
+											+ 'class="qtyplus" field="quantity"/> '
+											+ '</form>  '
 											+ '</div>'
 											+ '</div>'
 											+ '<div class="clr"></div>'
 											+ '</div>')
 
+											
 				}//IF
 			}//End of For loop 2
 		}//End of loop 1
@@ -328,6 +351,7 @@ var prodIdStr="";
 	function setQty(productId, position, curQty, buttonType) {
 		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
 		//prod_quantity+productId;
+
 		var ischanged = 0;
 		if (parseInt(buttonType) == 0 && parseInt(curQty) > 1) {
 			//Its Minus call;
@@ -342,11 +366,21 @@ var prodIdStr="";
 		}
 
 		if (parseInt(ischanged) == 1) {
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
 			var cartValue = sessionStorage.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
+
 			table[position].qty = curQty;
 
 			var qty = parseFloat(curQty);
+
+			alert(table[position].rate)
+
 			var taxableAmt = parseFloat(table[position].rate)
 					* parseFloat(qty).toFixed(2);
 			var cgstAmt = (parseFloat(table[position].rate) * parseFloat(qty) * parseFloat(table[position].cgstPer)) / 100;
@@ -378,64 +412,65 @@ var prodIdStr="";
 
 		//document.getElementById("loaderimg").style.display = "block";
 		var fd = new FormData();
-		$.ajax({
-			url : '${pageContext.request.contextPath}/getAllFrWiseData',
-			type : 'post',
-			dataType : 'json',
-			data : fd,
-			contentType : false,
-			processData : false,
-			success : function(response) {
-				//document.getElementById("loaderimg").style.display = "none";
-				//alert(JSON.stringify(response.feProductHeadList))
-				sessionStorage.setItem("allItemList", JSON
-						.stringify(response.feProductHeadList));
+		$
+				.ajax({
+					url : '${pageContext.request.contextPath}/getAllFrWiseData',
+					type : 'post',
+					dataType : 'json',
+					data : fd,
+					contentType : false,
+					processData : false,
+					success : function(response) {
+						//document.getElementById("loaderimg").style.display = "none";
+						//alert(JSON.stringify(response.feProductHeadList))
+						sessionStorage.setItem("allItemList", JSON
+								.stringify(response.feProductHeadList));
 
-				if(response.feProductHeadList.length>0){
-					
-					var arr=[];
-					
-					for(var i=0; i<response.feProductHeadList.length; i++){
-						
-						//arr.push(response.feProductHeadList[i].productName);
-						//arr.push(response.feProductHeadList[i].shortName);
-						arr.push(response.feProductHeadList[i].flavorNames);
-						arr.push(response.feProductHeadList[i].ingerdiants);
-						arr.push(response.feProductHeadList[i].appliTagNames);
-						arr.push(response.feProductHeadList[i].layeringCreamNames);
-						arr.push(response.feProductHeadList[i].prodStatusName);
-						
-					}
-					
-					//alert(arr);
-					
-					//var a = [ 'a', 'a', '1' ];
-					var unique = arr.filter(onlyUnique);
-					//alert(unique)
-					$('#glbTemplates').find('option').remove().end()
-					
-					for(var i=0;i<unique.length;i++){
-						var flag = 0;
-						$("#glbTemplates").append(
-								$("<option></option>")
-										.attr("value", unique[i]).text(
-												unique[i]));
-					}
-					$("#glbTemplates").trigger("chosen:updated");
-					
-				}
-				
-			
-				
-				
-				
-				appendCartData();
+						if (response.feProductHeadList.length > 0) {
 
-			},
-		});
+							var arr = [];
+
+							for (var i = 0; i < response.feProductHeadList.length; i++) {
+
+								//arr.push(response.feProductHeadList[i].productName);
+								//arr.push(response.feProductHeadList[i].shortName);
+								arr
+										.push(response.feProductHeadList[i].flavorNames);
+								arr
+										.push(response.feProductHeadList[i].ingerdiants);
+								arr
+										.push(response.feProductHeadList[i].appliTagNames);
+								arr
+										.push(response.feProductHeadList[i].layeringCreamNames);
+								arr
+										.push(response.feProductHeadList[i].prodStatusName);
+
+							}
+
+							//alert(arr);
+
+							//var a = [ 'a', 'a', '1' ];
+							var unique = arr.filter(onlyUnique);
+							//alert(unique)
+							$('#glbTemplates').find('option').remove().end()
+
+							for (var i = 0; i < unique.length; i++) {
+								var flag = 0;
+								$("#glbTemplates").append(
+										$("<option></option>").attr("value",
+												unique[i]).text(unique[i]));
+							}
+							$("#glbTemplates").trigger("chosen:updated");
+
+						}
+
+						appendCartData();
+
+					},
+				});
 
 	}
-	
+
 	function onlyUnique(value, index, self) {
 		return self.indexOf(value) === index;
 	}
@@ -448,47 +483,68 @@ var prodIdStr="";
 	function closeNav() {
 		document.getElementById("mySidepanel").style.width = "0";
 	}
-	
-	
+
 	var input = document.getElementById("glbSearch");
 	input.addEventListener("keyup", function(event) {
-	  if (event.keyCode === 13) {
-	   event.preventDefault();
-	   document.getElementById("btnGlbSearch").click();
-	  }
+		if (event.keyCode === 13) {
+			event.preventDefault();
+			document.getElementById("btnGlbSearch").click();
+		}
 	});
-	
+
 	function globalSearch() {
-		
+
 		//alert(document.getElementById("glbSearch").value);
-		
-		sessionStorage.setItem("menuFilterName", document.getElementById("glbSearch").value);
-		
+
+		sessionStorage.setItem("menuFilterName", document
+				.getElementById("glbSearch").value);
+
 		sessionStorage.setItem("priceFilterMin", "0");
 		sessionStorage.setItem("priceFilterMax", "0");
 
-		window.open('${pageContext.request.contextPath}/products/0',
-				'_self');
+		window.open('${pageContext.request.contextPath}/products/0', '_self');
 
-		
-		
 	}
 	function getCookie(cname) {
-		  var name = cname + "=";
-		  var decodedCookie = decodeURIComponent(document.cookie);
-		  var ca = decodedCookie.split(';');
-		  for(var i = 0; i <ca.length; i++) {
-		    var c = ca[i];
-		    while (c.charAt(0) == ' ') {
-		      c = c.substring(1);
-		    }
-		    if (c.indexOf(name) == 0) {
-		    	alert(c.substring(name.length, c.length))
-		      return c.substring(name.length, c.length);
-		    }
-		  }
-		  return "";
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				alert(c.substring(name.length, c.length))
+				return c.substring(name.length, c.length);
+			}
 		}
+		return "";
+	}
+	
+	function deleteItemFromCart(configDetailId){
+		
+		if (sessionStorage.getItem("cartValue") == null) {
+			var table = [];
+			sessionStorage.setItem("cartValue", JSON.stringify(table));
+		}
+
+		var cartValue = sessionStorage.getItem("cartValue");
+		var table = $.parseJSON(cartValue);
+
+		var newCartVal = [];
+
+		for (var i = 0; i < table.length; i++) {
+			if (configDetailId != table[i].exInt1) {
+				newCartVal.push(table[i]);
+			}
+		}
+
+		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+
+		appendCartData();
+		
+	}
 	
 </script>
 

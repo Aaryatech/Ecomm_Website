@@ -53,7 +53,7 @@
 
 
 	<!-- TAGS -->
-	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
+	<%-- <jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include> --%>
 	<!-- TAGS End -->
 
 	<!-- Header -->

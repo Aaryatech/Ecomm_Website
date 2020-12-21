@@ -176,210 +176,258 @@
 							</div>
 							<!--product price row-->
 							<div class="stock_prc">
-								<i class="fa fa-inr cake_prc_detail_iclass"
-															aria-hidden="true"></i>
-														<p class="cake_prc_detail_pclass"
-															id="cake_prc1">${prodHeader.defaultPrice}</p>
-														<span class="off_prc" id="off_prc1"></span> <span
-															id="prc_off1" class="prc_off"></span>
+								<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>
+								<p class="cake_prc_detail_pclass" id="cake_prc1">${prodHeader.defaultPrice}</p>
+								<span class="off_prc" id="off_prc1"></span> <span id="prc_off1"
+									class="prc_off"></span> <span class="act_prc"><i
+									class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>${prodHeader.defaultPrice}</span>
+								<span class="save"> 20% off (Save 150) </span> <span
+									class="inclusive_txt">Inclusive of all taxes</span>
+
+
 							</div>
 							<!--product txt row-->
-							<div class="prod_txt">${prodHeader.productDesc}. Key
-								attributes :</div>
-			<div class="detail_drop">
+							<div class="prod_txt">${prodHeader.productDesc}Thisclassic
+								round Black Forest cake makes a highly tempting gift. It weighs
+								half kg, and is stuffed with whipped cream and studded with
+								cherries. Its eggless version is also available. You can give
+								this gift on any joyous occasion. Key attributes :</div>
 
-							<ul>
-								<!-- <li><i class="fa fa-circle" aria-hidden="true"></i> Shape :
-									Round</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i>
-									Flavours : Black Forest</li>
-								<li><i class="fa fa-circle" aria-hidden="true"></i> Weight
-									: 0.5 kg</li> -->
-<c:if test="${prodHeader.defaultShapeId!=0}">
-								<li>Shape<select class="select-css" id="shape" name="shape" 
-								onchange="changeWtFlavor('${prodHeader.productId}')" >
-										<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
-											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
-												varStatus="flavorFilterCount">
 
-												<c:if test="${flavorFilter.filterTypeId==1}">
 
-													<c:choose>
-														<c:when test="${prodDetail==flavorFilter.filterId}">
-															<c:choose>
-																<c:when test="${prodDetail==prodHeader.defaultShapeId}">
-																	<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																</c:when>
-																<c:otherwise>
-																	<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																</c:otherwise>
-															</c:choose>
-														</c:when>
-														<c:otherwise>
-
-														</c:otherwise>
-													</c:choose>
-												</c:if>
-											</c:forEach>
-										</c:forEach>
-
-										
-								</select></li></c:if>
-<c:if test="${prodHeader.defaultFlavorId!=0}">
-
-								<li>Flavor<select class="select-css" name="flavor" id="flavor" 
-								onchange="changeWtFlavor('${prodHeader.productId}')" >
-									<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
-											<c:forEach items="${flavTagStatusList}" var="flavorFilter"
-												varStatus="flavorFilterCount">
-
-												<c:if test="${flavorFilter.filterTypeId==4}">
-
-													<c:choose>
-														<c:when test="${prodDetail==flavorFilter.filterId}">
-															<c:choose>
-																<c:when test="${prodDetail==prodHeader.defaultFlavorId}">
-																	<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																</c:when>
-																<c:otherwise>
-																	<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																</c:otherwise>
-															</c:choose>
-														</c:when>
-														<c:otherwise>
-
-														</c:otherwise>
-													</c:choose>
-												</c:if>
-											</c:forEach>
-										</c:forEach>
-								</select></li></c:if>
-
-								<li>Weight<select class="select-css" id="weight" onchange="changeWtFlavor('${prodHeader.productId}')">
-											<c:forEach items="${prodHeader.availInWeights}"
-											 var="prodDetailwt">
-											<option value="${prodDetailwt}">${prodDetailwt}</option>
-											</c:forEach>
-								</select></li>
-
-							</ul>
-</div>
 							<div class="delivery_row">
 								<div class="delivery_l">
 									<div class="a">
 										<h4 class="highlight_title">Product Highlights :</h4>
 										<ul class="highlist_list">
-										<c:if test="${prodHeader.defaultFlavorId!=0}">
-											<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-												Flavour: ${prodHeader.flavorNames}</li></c:if>
-												<c:if test="${prodHeader.prodTypeId!=0}">
-											<li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Cake: ${prodHeader.prodTypeName}</li></c:if>
-											<c:if test="${prodHeader.typeOfBread!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type
-												of Bread: ${prodHeader.breadTypeName}</li></c:if>
+
+											<li><i class="fa fa-circle" aria-hidden="true"></i> Sub
+												Category: ${prodHeader.subCatName}</li>
+
+											<c:if test="${prodHeader.prodTypeId!=0}">
+												<li><i class="fa fa-circle" aria-hidden="true"></i>
+													Type of Cake: ${prodHeader.prodTypeName}</li>
+											</c:if>
+
+											<c:if test="${prodHeader.defaultFlavorId!=0}">
+												<li><i class="fa fa-circle" aria-hidden="true"></i>
+													Cake Flavour: ${prodHeader.flavorNames}</li>
+											</c:if>
+
+
+
+											<%-- <c:if test="${prodHeader.typeOfBread!=0}">
+												<li><i class="fa fa-circle" aria-hidden="true"></i>
+													Type of Bread: ${prodHeader.breadTypeName}</li>
+											</c:if> --%>
 										</ul>
-										<a href="#" onclick="moveCursor()" class="more_highlight">Read More</a>
+										<a href="#" onclick="moveCursor()" class="more_highlight">Read
+											More</a>
 									</div>
 
 									<!--eagless or with eeg row-->
 									<div class="eagless_row">
 										<ul>
-										
-										<c:set var="isVegFound" value="0"></c:set>
-																<c:set var="isNonVegFound" value="0"></c:set>
-																<c:forEach items="${prodHeader.isVeg}"
-																	var="prodDetailVegNon">
+
+											<c:set var="isVegFound" value="0"></c:set>
+											<c:set var="isNonVegFound" value="0"></c:set>
+											<c:forEach items="${prodHeader.isVeg}" var="prodDetailVegNon">
 
 
-																	<c:forEach items="${flavTagStatusList}"
-																		var="vegNonFilter" varStatus="flavorFilterCount">
-																		<c:if test="${vegNonFilter.filterTypeId==12}">
-																			<c:if
-																				test="${vegNonFilter.filterId==prodDetailVegNon}">
-																				<c:if test="${vegNonFilter.adminName eq 'Veg'}">
-																					<c:set var="isVegFound" value="1"></c:set>
-																				</c:if>
+												<c:forEach items="${flavTagStatusList}" var="vegNonFilter"
+													varStatus="flavorFilterCount">
+													<c:if test="${vegNonFilter.filterTypeId==12}">
+														<c:if test="${vegNonFilter.filterId==prodDetailVegNon}">
+															<c:if test="${vegNonFilter.adminName eq 'Veg'}">
+																<c:set var="isVegFound" value="1"></c:set>
+															</c:if>
 
-																				<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
-																					<c:set var="isNonVegFound" value="1"></c:set>
-																				</c:if>
-																			</c:if>
-																		</c:if>
-																	</c:forEach>
+															<c:if test="${vegNonFilter.adminName eq 'NonVeg'}">
+																<c:set var="isNonVegFound" value="1"></c:set>
+															</c:if>
+														</c:if>
+													</c:if>
+												</c:forEach>
 
-																</c:forEach>
-																
+											</c:forEach>
+
 											<c:if test="${isVegFound==1}">
-											<li><label class="radio-button"> <input
-													type="radio" id="v_radio" value="0" name="vnv_radio"> <span
-													class="label-visible"> <span
-														class="fake-radiobutton"></span> Veg
-												</span>
-											</label></li>
+												<li><label class="radio-button"> <input
+														type="radio" id="v_radio" value="0" name="vnv_radio">
+														<span class="label-visible"> <span
+															class="fake-radiobutton"></span> Veg
+													</span>
+												</label></li>
 											</c:if>
 											<c:if test="${isNonVegFound==1}">
-											<li><label class="radio-button"> <input
-													type="radio" value="1" id="nv_radio" name="vnv_radio"> <span
-													class="label-visible"> <span
-														class="fake-radiobutton"></span>Non Veg
-												</span>
-											</label></li>
+												<li><label class="radio-button"> <input
+														type="radio" value="1" id="nv_radio" name="vnv_radio">
+														<span class="label-visible"> <span
+															class="fake-radiobutton"></span>Non Veg
+													</span>
+												</label></li>
 											</c:if>
-										</ul> 
+										</ul>
 										<div class="clr"></div>
 									</div>
 									<!--cake-kgs-->
 								</div>
+								
+								
 								<!--right form-->
-								<c:if test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
-								<div class="delivery_r">
-									<div class="delivery_bx">
-										<h4 class="delivery_title">Delivery Details</h4>
-										<div class="delivery_frm">
-											<form action="" method="post">
-											<c:if test="${prodHeader.allowBasePhotoUpload==1}">
-												<div class="delivery_frm_l">
-													<img
-														alt="" id="del_image" style="size: portrait;" name="del_image"/>
-													<div class="inputbrowsebtn">
-														<label for="img_input_btn"> <span class="fg">Upload
-																Image </span> <input type="file" accept="image/*" name="img_input_btn" id="img_input_btn" 
-												accept=".jpg,.png,.gif,.jpeg,.bmp" onchange="loadFile(event)">
-														</label>
+								<c:if
+									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
+									<div class="delivery_r">
+										<div class="delivery_bx">
+											<h4 class="delivery_title">Delivery Details</h4>
+											<div class="delivery_frm">
+												<form action="" method="post">
+													<c:if test="${prodHeader.allowBasePhotoUpload==1}">
+														<div class="delivery_frm_l">
+															<img alt="" id="del_image" style="size: portrait;"
+																name="del_image" />
+															<div class="inputbrowsebtn">
+																<label for="img_input_btn"> <span class="fg">Upload
+																		Image </span> <input type="file" accept="image/*"
+																	name="img_input_btn" id="img_input_btn"
+																	accept=".jpg,.png,.gif,.jpeg,.bmp"
+																	onchange="loadFile(event)">
+																</label>
+															</div>
+														</div>
+													</c:if>
+
+													<div class="delivery_frm_r">
+														<c:if test="${prodHeader.allowSpecialInstruction==1}">
+
+															<div class="delivery_txtarea">
+																<textarea name="" cols="" id="sp_inst" , name="sp_inst"
+																	rows="3" class="input_txt"
+																	placeholder="Special Instructon"></textarea>
+															</div>
+
+
+														</c:if>
+
+														<c:if test="${prodHeader.allowMsgOnCake==1}">
+
+															<div class="a">
+																<input name="" type="text" id="msg_on_cake"
+																	name="msg_on_cake" class="input_txt"
+																	placeholder="Message / Name on the Cake" />
+															</div>
+
+														</c:if>
 													</div>
-												</div>
-												</c:if>
-											<c:if test="${prodHeader.allowSpecialInstruction==1}">
-												<div class="delivery_frm_r">
-													<div class="delivery_txtarea">
-														<textarea name="" cols="" id="sp_inst", name="sp_inst" rows="3" class="input_txt"
-															placeholder="Special Instructon"></textarea>
-													</div>
-													<div class="a">
-														<input name="" type="text" id="msg_on_cake" name="msg_on_cake" class="input_txt"
-															placeholder="Message / Name on the Cake" />
-													</div>
-												</div>
-												</c:if>
-												<div class="clr"></div>
-											</form>
+
+													
+
+
+													<div class="clr"></div>
+												</form>
+											</div>
 										</div>
 									</div>
-								</div>
 								</c:if>
 								<div class="clr"></div>
 							</div>
 
+							<div class="detail_drop">
+								<ul>
+
+									<%-- <c:if test="${prodHeader.defaultShapeId!=0}">
+										<li>Shape<select class="select-css" id="shape"
+											name="shape"
+											onchange="changeWtFlavor('${prodHeader.productId}')">
+												<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
+													<c:forEach items="${flavTagStatusList}" var="flavorFilter"
+														varStatus="flavorFilterCount">
+
+														<c:if test="${flavorFilter.filterTypeId==1}">
+
+															<c:choose>
+																<c:when test="${prodDetail==flavorFilter.filterId}">
+																	<c:choose>
+																		<c:when
+																			test="${prodDetail==prodHeader.defaultShapeId}">
+																			<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																		</c:when>
+																		<c:otherwise>
+																			<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																		</c:otherwise>
+																	</c:choose>
+																</c:when>
+																<c:otherwise>
+
+																</c:otherwise>
+															</c:choose>
+															
+														</c:if>
+													</c:forEach>
+												</c:forEach>
+
+
+										</select></li>
+									</c:if> --%>
+
+									<c:if test="${prodHeader.defaultFlavorId!=0}">
+
+										<li>Flavor<select class="select-css" name="flavor"
+											id="flavor"
+											onchange="changeWtFlavor('${prodHeader.productId}')">
+												<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
+													<c:forEach items="${flavTagStatusList}" var="flavorFilter"
+														varStatus="flavorFilterCount">
+
+														<c:if test="${flavorFilter.filterTypeId==4}">
+
+															<c:choose>
+																<c:when test="${prodDetail==flavorFilter.filterId}">
+																	<c:choose>
+																		<c:when
+																			test="${prodDetail==prodHeader.defaultFlavorId}">
+																			<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																		</c:when>
+																		<c:otherwise>
+																			<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																		</c:otherwise>
+																	</c:choose>
+																</c:when>
+																<c:otherwise>
+
+																</c:otherwise>
+															</c:choose>
+														</c:if>
+													</c:forEach>
+												</c:forEach>
+										</select></li>
+									</c:if>
+
+									<li>Weight<select class="select-css" id="weight"
+										onchange="changeWtFlavor('${prodHeader.productId}')">
+											<c:forEach items="${prodHeader.availInWeights}"
+												var="prodDetailwt">
+												<option value="${prodDetailwt}">${prodDetailwt}</option>
+											</c:forEach>
+									</select></li>
+
+								</ul>
+							</div>
+
 							<div class="button_row">
-								<a href="#" class="cart_button" onclick="addToCartClick(${prodHeader.productId})">Add To Cart</a> <a
-									href="${pageContext.request.contextPath}/viewcart" class="buy_button">Buy Now</a>
+								<a href="#" class="cart_button"
+									onclick="addToCartClick(${prodHeader.productId})">Add To
+									Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+									class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
 
 							<!--mobile-buttons-->
 							<div class="mobile_button">
-								<a href="#" class="mobile_cart" onclick="addToCartClick('${prodHeader.productId}')">Add To Cart</a> <a
-									href="${pageContext.request.contextPath}/viewcart" class="mobile_buy">Buy Now</a>
+								<a href="#" class="mobile_cart"
+									onclick="addToCartClick('${prodHeader.productId}')">Add To
+									Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+									class="mobile_buy">Buy Now</a>
 							</div>
 						</div>
 					</div>
@@ -393,19 +441,31 @@
 						<div class="prod_listing_one">
 							<h4 class="highlight_title">Highlights :</h4>
 							<ul class="highlist_list">
-								
-								<c:if test="${prodHeader.defaultFlavorId!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Cake
-									Flavor: ${prodHeader.flavorNames}</li></c:if>
-								<c:if test="${prodHeader.prodTypeId!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Cake: ${prodHeader.prodTypeName}</li></c:if>
-								<c:if test="${prodHeader.typeOfBread!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									Bread: ${prodHeader.breadTypeName}</li></c:if>
-								<c:if test="${prodHeader.typeOfCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Type of
-									cream: ${prodHeader.creamTypeName}</li></c:if>
-								<c:if test="${prodHeader.layeringCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i> Filling
-									in Layers: ${prodHeader.layeringCreamNames}</li></c:if>
-								<c:if test="${prodHeader.toppingCream!=0}"><li><i class="fa fa-circle" aria-hidden="true"></i>
-									Toppings: ${prodHeader.toppingCreamNames}</li></c:if>
+
+								<c:if test="${prodHeader.defaultFlavorId!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i> Cake
+										Flavor: ${prodHeader.flavorNames}</li>
+								</c:if>
+								<c:if test="${prodHeader.prodTypeId!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i> Type
+										of Cake: ${prodHeader.prodTypeName}</li>
+								</c:if>
+								<c:if test="${prodHeader.typeOfBread!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i> Type
+										of Bread: ${prodHeader.breadTypeName}</li>
+								</c:if>
+								<c:if test="${prodHeader.typeOfCream!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i> Type
+										of cream: ${prodHeader.creamTypeName}</li>
+								</c:if>
+								<c:if test="${prodHeader.layeringCream!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i>
+										Filling in Layers: ${prodHeader.layeringCreamNames}</li>
+								</c:if>
+								<c:if test="${prodHeader.toppingCream!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i>
+										Toppings: ${prodHeader.toppingCreamNames}</li>
+								</c:if>
 							</ul>
 						</div>
 
@@ -445,36 +505,39 @@
 					<ul>
 						<!--product-row-1-->
 						<c:forEach items="${prodHeaderList}" var="product"
-									varStatus="prodCount">
-						<li>
-							<div class="cake_one product_padd">
-								<div class="cake_pic">
-									<img
-										src="${prodImgUrl}${product.prodImagePrimary}"
-										alt="" class="mobile_fit transition">
-									<div class="circle_tag">
-										<img
-											src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt=""> <img
-											src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
+							varStatus="prodCount">
+							<li>
+								<div class="cake_one product_padd">
+									<div class="cake_pic">
+										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+											class="mobile_fit transition">
+										<div class="circle_tag">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+												alt=""> <img
+												src="${pageContext.request.contextPath}/resources/images/heart.svg"
+												alt="">
+										</div>
+										<div class="cake_prc">
+											<i class="fa fa-inr cake_prc_detail_iclass"
+												aria-hidden="true"></i>
+											<p class="cake_prc_detail_pclass" id="cake_prc">${product.defaultPrice}</p>
+											<span class="off_prc" id="off_prc"><i
+												class="fa fa-inr" aria-hidden="true"></i></span> <span
+												class="prc_off" id="prc_off"></span>
+										</div>
 									</div>
-									<div class="cake_prc">
-														<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i><p class="cake_prc_detail_pclass" id="cake_prc" >${product.defaultPrice}</p>
-														<span class="off_prc" id="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i></span> <span
-															class="prc_off" id="prc_off"></span>
-									</div>
-								</div>
 
-								<div class="cake_container">
-									<h4 class="cake_nm single_row">
-										<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
-										<input type="hidden" id="prodIdText" value="${product.productId}"/>
-									</h4>
+									<div class="cake_container">
+										<h4 class="cake_nm single_row">
+											<a
+												href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+											<input type="hidden" id="prodIdText"
+												value="${product.productId}" />
+										</h4>
+									</div>
 								</div>
-							</div>
-						</li>
+							</li>
 						</c:forEach>
 					</ul>
 					<div class="more_product">
@@ -518,7 +581,7 @@
 				</div>
 			</section>
 		</div>
-<canvas id="canvas-element"></canvas>
+		<canvas id="canvas-element"></canvas>
 	</div>
 
 
@@ -528,7 +591,7 @@
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
 function addToCartClick(productId){
 	//alert("In addToCartClick " +productId);
@@ -750,7 +813,7 @@ function addToCartClick(productId){
 
 	}//end of Function changeWtFlavor
 </script>
-<script>
+	<script>
 function moveCursor(){
 	$('html,body').animate({
 	        scrollTop: $(".prod_disc").offset().top},

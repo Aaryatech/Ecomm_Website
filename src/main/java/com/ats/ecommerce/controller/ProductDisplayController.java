@@ -46,7 +46,7 @@ public class ProductDisplayController {
 		try {
 
 			ObjectMapper mapper = new ObjectMapper();
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "27_.json"), FEDataTraveller.class);
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + "13_.json"), FEDataTraveller.class);
 
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
@@ -105,9 +105,9 @@ public class ProductDisplayController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("compId", compId);
 
-				MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
-						MFilter[].class);
-				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
+//				MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
+//						MFilter[].class);
+//				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
 			}
@@ -121,9 +121,9 @@ public class ProductDisplayController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("compId", compId);
 
-				FilterTypes[] filterArr = Constants.getRestTemplate()
-						.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
-				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
+//				FilterTypes[] filterArr = Constants.getRestTemplate()
+//						.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
+//				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
 			}
