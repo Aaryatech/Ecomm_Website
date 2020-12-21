@@ -114,12 +114,12 @@
 					<div>
 						<div class="testimonial_one">
 							<i class="fa fa-quote-left" aria-hidden="true"></i>
-							<p class="testimoial_txt">${testmoni.messages}</p>
+							<p class="testimoial_txt">${testmoni.message}</p>
 
 							<div class="testimonial_nm">
-								<img src="${TestimonialImgUrl}${testmoni.images}" alt="">
+								<img src="${TestimonialImgUrl}${testmoni.photo}" alt="">
 								<h2 class="testimonial_date">
-									${testmoni.name} <span>Date : date</span>
+									${testmoni.name}<!--  <span>Date : date</span> -->
 									<!--  <span>Location: location</span> -->
 								</h2>
 							</div>
@@ -127,7 +127,7 @@
 					</div>
 				</c:forEach>
 
-				<div>
+				<%-- <div>
 					<div class="testimonial_one">
 						<i class="fa fa-quote-left" aria-hidden="true"></i>
 						<p class="testimoial_txt">There are many variations of
@@ -186,7 +186,7 @@
 							</h2>
 						</div>
 					</div>
-				</div>
+				</div> --%>
 
 			</section>
 		</div>

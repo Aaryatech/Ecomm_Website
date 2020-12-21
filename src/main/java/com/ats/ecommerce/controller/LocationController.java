@@ -23,6 +23,7 @@ import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
 import com.atss.ecommerce.model.CategoryList;
 import com.atss.ecommerce.model.CityData;
+import com.atss.ecommerce.model.CompanyTestomonials;
 import com.atss.ecommerce.model.FEDataTraveller;
 import com.atss.ecommerce.model.FETestimonial;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -95,9 +96,9 @@ public class LocationController {
 				model.addAttribute("catList", catList);
 				model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
 
-				FETestimonial[] testMonArray = mapper.readValue(
-						new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), FETestimonial[].class);
-				List<FETestimonial> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+				CompanyTestomonials[] testMonArray = mapper.readValue(
+						new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), CompanyTestomonials[].class);
+				List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 				model.addAttribute("testMonialList", testMonialList);
 				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 				returnPage = "landing";
