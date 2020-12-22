@@ -1,5 +1,8 @@
 package com.ats.ecommerce.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
@@ -13,16 +16,30 @@ import org.apache.commons.text.CharacterPredicates;
 import org.apache.commons.text.RandomStringGenerator;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import com.ats.ecommerce.common.Constants;
-import com.atss.ecommerce.model.Info;
-import com.atss.ecommerce.model.order.OrderSaveData;
+import com.ats.ecommerce.model.Franchise;
+import com.ats.ecommerce.model.Info;
+import com.ats.ecommerce.model.order.OrderSaveData;
+import com.ats.ecommerce.model.payment.GenOrder;
+import com.ats.ecommerce.model.payment.OrderRes;
+import com.ats.ecommerce.model.payment.Transfer;
+import com.ats.ecommerce.model.payment.TransferRes;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
@@ -47,7 +64,6 @@ public class PaymentController {
 			 * toUpperCase() if you want
 		* System.err.println("goToPay Page " + randomString);*/
 		try {
-			RazorpayClient razorpay = new RazorpayClient("rzp_test_1eXaKykckwM8kP", "V03Z05bFj27PTZEs8G4RJQJB");
 			  
 			//  String sign=Signature.calculateRFC2104HMAC(data, secret);
 				//HttpSession session = request.getSession();
@@ -57,18 +73,97 @@ public class PaymentController {
 				orderRequest.put("amount", 100);
 			  orderRequest.put("currency", "INR");
 			  orderRequest.put("receipt", "Okaa");
+				RazorpayClient razorpay = new RazorpayClient("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
 
 			  Order order = razorpay.Orders.create(orderRequest);
 			  System.err.println("Order " +order.get("id"));
-			model.addAttribute("orderId", order.get("id"));
-			model.addAttribute("amount", order.get("amount"));
-			HttpSession session = request.getSession();
+				/*
+				 * model.addAttribute("orderId", order.get("id")); model.addAttribute("amount",
+				 * order.get("amount"));
+				 */
+			  HttpSession session = request.getSession();
 			
-			model.addAttribute("landMark",session.getAttribute("landMark"));
+			  model.addAttribute("landMark",session.getAttribute("landMark"));
 			} catch (RazorpayException e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
+		
+		
+		//22-12-2020
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set("Content-Type", "application/json");
+		//httpHeaders.set("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+		String plainCreds = "rzp_live_1xwIfbV7BUaBxt:95FT7Or1sftfjQEweSpB3Gaq";
+		byte[] plainCredsBytes = plainCreds.getBytes();
+		byte[] base64CredsBytes = Base64.getEncoder().encode(plainCredsBytes);
+		String base64Creds = new String(base64CredsBytes);
+
+		httpHeaders.add("Authorization", "Basic " + base64Creds);
+
+		
+		GenOrder order=new GenOrder();
+		
+		order.setAmount(200);
+		order.setCurrency("INR");
+		
+		Transfer transfer=new  Transfer();
+		
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+		
+		map.add("frId", request.getSession().getAttribute("frId"));
+		
+		Franchise frData = Constants.getRestTemplate().postForObject(Constants.url + "getFranchiseById", map,
+				Franchise.class);
+		
+		//transfer.setAccount("acc_GG4Qoe8oK4muer");//Sumit HDFC/Sachin Uni
+		transfer.setAccount(frData.getPaymentGetwayLink());
+		transfer.setAmount(200);
+		transfer.setCurrency("INR");
+			/*
+			 * transfer.setOnHold(1); transfer.setOnHoldUntil(1);
+			 */
+		
+		List<Transfer> transfers=new ArrayList<Transfer>();
+		
+		transfers.add(transfer);
+		
+		order.setTransfers(transfers);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String jsonInString = mapper.writeValueAsString(order);
+		
+		System.out.println("All  Data" + jsonInString.toString());
+
+		HttpEntity<String> httpEntity = new HttpEntity<String>(jsonInString.toString(), httpHeaders);
+		OrderRes makeOrderResp=null;
+		RestTemplate restTemplate = new RestTemplate();
+		try {   
+				/*
+				 * makeOrderResp =
+				 * restTemplate.postForObject("https://api.razorpay.com/v1/orders" , httpEntity,
+				 * OrderRes.class);
+				 */
+		 
+		 ResponseEntity<OrderRes> response1= restTemplate.exchange("https://api.razorpay.com/v1/orders/", HttpMethod.POST, httpEntity, OrderRes.class);
+		 makeOrderResp = response1.getBody();
+		  
+	/*	}catch (RestClientException httpClientExce) {
+			System.err.println("httpClientExce " +httpClientExce.toString());
+		}*/
+		}catch (HttpClientErrorException httpClientExce) {
+			System.err.println("httpClientExce " +httpClientExce.getResponseBodyAsString());
+		}
+		
+		System.err.println("makeOrderResp Id " +makeOrderResp.getId());
+		System.err.println("makeOrderResp " +makeOrderResp.toString());
+		
+		model.addAttribute("orderId", makeOrderResp.getId());
+		model.addAttribute("amount", makeOrderResp.getAmount());
 		
 		}catch (Exception e) {
 			e.printStackTrace();
