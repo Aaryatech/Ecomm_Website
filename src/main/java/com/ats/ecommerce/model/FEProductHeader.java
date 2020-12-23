@@ -2,7 +2,6 @@ package com.ats.ecommerce.model;
 
 import java.util.List;
 
-
 //Author -Sachin
 //Created on -01-10-2020
 //Desc - to show product master data to front end pages.
@@ -24,7 +23,7 @@ public class FEProductHeader {
 
 	private int uomId;
 	private String shortName;
-	private String shapeId; //changed to String from int on 27-10-2020
+	private String shapeId; // changed to String from int on 27-10-2020
 
 	private int allowSameDayDelivery;
 	private String sameDayTimeAllowedSlot;
@@ -80,39 +79,37 @@ public class FEProductHeader {
 
 	private int configHeaderId; // Primary Key tn_item_config_header
 
-	
-	
-	//New fields on  06-10-2020
-	
+	// New fields on 06-10-2020
+
 	private String taxName;
 	private String hsnCode;
-	
+
 	private float cgstPer;
 	private float sgstPer;
 	private float igstPer;
 	private float cessPer;
 	private float totalTaxPer;
-	
+
 	private String subCatName;
-	
+
 	private int sortId;
 	private int shelfLife;
-	
+
 	private int isReturnAllow;
 	private float retPer;
-	
+
 	private int isSlotUsed;
-	
+
 	private int toppingCream;
 	private int layeringCream;
 
 	private int typeOfBread;
 	private int typeOfCream;
-	
+
 	private String uomShowName;
-	
+
 	private String sameDayTimeSlotNames;
-	
+
 	private String eventNames;
 	private String flavorNames;
 	private String appliTagNames;
@@ -121,29 +118,29 @@ public class FEProductHeader {
 	private String prodStatusName;
 	private String toppingCreamNames;
 	private String layeringCreamNames;
-	
+
 	private String creamTypeName;
 	private String breadTypeName;
-	
-	private String vegNonvegName; //Sachin 27-10-2020
-	
-	private int defaultFlavorId;//Sachin 30-10-2020 new Add
-	private int defaultVegnonvegId;//Sachin 30-10-2020 new Add
-	private int defaultShapeId;//Sachin 30-10-2020 new Add
-	
-	
-	
-private float defaultPrice;//Sachin 04-11-2020 new Add
-private String defaultVegNonvegName;//Sachin 06-11-2020 new Add
-private String allFilterNames;//Sachin 28-11-2020 new Add
+
+	private String vegNonvegName; // Sachin 27-10-2020
+
+	private int defaultFlavorId;// Sachin 30-10-2020 new Add
+	private int defaultVegnonvegId;// Sachin 30-10-2020 new Add
+	private int defaultShapeId;// Sachin 30-10-2020 new Add
+
+	private float defaultPrice;// Sachin 04-11-2020 new Add
+	private String defaultVegNonvegName;// Sachin 06-11-2020 new Add
+	private String allFilterNames;// Sachin 28-11-2020 new Add
+
+	private int isLike;
 
 	public String getDefaultVegNonvegName() {
-	return defaultVegNonvegName;
-}
+		return defaultVegNonvegName;
+	}
 
-public void setDefaultVegNonvegName(String defaultVegNonvegName) {
-	this.defaultVegNonvegName = defaultVegNonvegName;
-}
+	public void setDefaultVegNonvegName(String defaultVegNonvegName) {
+		this.defaultVegNonvegName = defaultVegNonvegName;
+	}
 
 	public float getDefaultPrice() {
 		return defaultPrice;
@@ -153,11 +150,8 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 		this.defaultPrice = defaultPrice;
 	}
 
-	
-	
 	List<FEProdDetail> prodDetailList;
-	
-	
+
 	public String getProdUuid() {
 		return prodUuid;
 	}
@@ -478,8 +472,6 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 		this.actualRate = actualRate;
 	}
 
-	
-
 	public int getFrachaseConfigId() {
 		return frachaseConfigId;
 	}
@@ -504,7 +496,6 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 		this.configHeaderId = configHeaderId;
 	}
 
-
 	public List<FEProdDetail> getProdDetailList() {
 		return prodDetailList;
 	}
@@ -512,11 +503,7 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 	public void setProdDetailList(List<FEProdDetail> prodDetailList) {
 		this.prodDetailList = prodDetailList;
 	}
-	
-	
-	
-	
-	
+
 	public String getTaxName() {
 		return taxName;
 	}
@@ -749,9 +736,6 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 		this.breadTypeName = breadTypeName;
 	}
 
-	
-	
-	
 	public String getVegNonvegName() {
 		return vegNonvegName;
 	}
@@ -760,10 +744,6 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 		this.vegNonvegName = vegNonvegName;
 	}
 
-	
-	
-	
-	
 	public int getDefaultFlavorId() {
 		return defaultFlavorId;
 	}
@@ -787,13 +767,21 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 	public void setDefaultShapeId(int defaultShapeId) {
 		this.defaultShapeId = defaultShapeId;
 	}
-	
+
 	public String getAllFilterNames() {
 		return allFilterNames;
 	}
 
 	public void setAllFilterNames(String allFilterNames) {
 		this.allFilterNames = allFilterNames;
+	}
+
+	public int getIsLike() {
+		return isLike;
+	}
+
+	public void setIsLike(int isLike) {
+		this.isLike = isLike;
 	}
 
 	@Override
@@ -827,9 +815,8 @@ public void setDefaultVegNonvegName(String defaultVegNonvegName) {
 				+ breadTypeName + ", vegNonvegName=" + vegNonvegName + ", defaultFlavorId=" + defaultFlavorId
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
 				+ ", defaultPrice=" + defaultPrice + ", defaultVegNonvegName=" + defaultVegNonvegName
-				+ ", allFilterNames=" + allFilterNames + ", prodDetailList=" + prodDetailList + "]";
+				+ ", allFilterNames=" + allFilterNames + ", isLike=" + isLike + ", prodDetailList=" + prodDetailList
+				+ "]";
 	}
 
-	
-	
 }

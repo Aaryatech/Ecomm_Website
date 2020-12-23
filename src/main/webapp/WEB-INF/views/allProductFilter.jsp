@@ -8,6 +8,8 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
+<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
+
 <body>
 
 
@@ -1070,12 +1072,28 @@
 						
 						displayListArr.push(hiddenProductListArr[i]);
 						
+						var isLike=allItemArr[i].isLike;
+						var like = '';
+						
+						if(isLike ==1){
+						
+							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+							+ '</div>';
+						}else{
+							
+							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+							+ '</div>';
+						}
+						
 						divStr = divStr
 						+ '<li>'
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
 						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1096,12 +1114,28 @@
 							
 							displayListArr.push(hiddenProductListArr[i]);
 							
+							var isLike=allItemArr[i].isLike;
+							var like = '';
+							
+							if(isLike ==1){
+							
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+								+ '</div>';
+							}else{
+								
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+								+ '</div>';
+							}
+							
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1119,12 +1153,28 @@
 						}else if(max == 0  && hiddenProductListArr[i].prodCatId == catId){
 							displayListArr.push(hiddenProductListArr[i]);
 							
+							var isLike=allItemArr[i].isLike;
+							var like = '';
+							
+							if(isLike ==1){
+							
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+								+ '</div>';
+							}else{
+								
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+								+ '</div>';
+							}
+							
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1160,12 +1210,29 @@
 						
 						displayListArr.push(allItemArr[i]);
 						
+						var isLike=allItemArr[i].isLike;
+						var like = '';
+						
+						if(isLike ==1){
+						
+							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+							+ '</div>';
+						}else{
+							
+							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+							+ '</div>';
+						}
+						
+						
 						divStr = divStr
 						+ '<li>'
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
 						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1342,12 +1409,28 @@
 								
 								displayListArr.push(allItemArr[i]);
 								
+								var isLike=allItemArr[i].isLike;
+								var like = '';
+								
+								if(isLike ==1){
+								
+									like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+									+ '</div>';
+								}else{
+									
+									like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+									+ '</div>';
+								}
+								
 								divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
 								+ ' <div class="cake_one product_padd"> '
 								+ ' <div class="cake_pic"> '
 								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+								+ like
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1370,12 +1453,28 @@
 							
 							//alert("hi")
 							
+							var isLike=allItemArr[i].isLike;
+							var like = '';
+							
+							if(isLike ==1){
+							
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+								+ '</div>';
+							}else{
+								
+								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+								+ '</div>';
+							}
+							
  							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1430,6 +1529,34 @@
 			
 			document.getElementById("prodCount").innerHTML = prodCountTxt;
 
+		}
+		
+		
+		function setLike(id) {
+			
+			$.getJSON(
+					'${setLikeOrDislike}',
+					{
+						prodId : id,
+						ajax : 'true'
+					},
+					function(data) {
+						//alert(JSON.stringify(data));
+						
+						if(data.msg ==1){
+							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+						}else{
+							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+						}
+						
+						
+						var data1=JSON.parse(data.statusText);
+						
+						sessionStorage.setItem("allItemList", JSON.stringify(data1.feProductHeadList));
+						
+						
+					});
+			
 		}
 		
 	</script>

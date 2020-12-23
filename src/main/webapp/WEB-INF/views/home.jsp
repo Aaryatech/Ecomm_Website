@@ -12,6 +12,8 @@
 
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
+<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
+
 <body>
 
 
@@ -174,7 +176,7 @@
 				<div class="prod_cat_1">
 					<div class="cakes_cat_1">
 						<a
-							href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+							href="${pageContext.request.contextPath}/showProductListCategory/1">
 							<div class="img_cap">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
@@ -191,7 +193,7 @@
 						<div class="divide_one_pic left">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/filterCategoryProduct/2">
+									href="${pageContext.request.contextPath}/showProductListCategory/2">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
 									alt="">
@@ -204,7 +206,7 @@
 						<div class="divide_one_pic right">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/filterCategoryProduct/3">
+									href="${pageContext.request.contextPath}/showProductListCategory/3">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
 									alt="">
@@ -220,7 +222,7 @@
 						<div class="divide_one_pic left">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/filterCategoryProduct/9">
+									href="${pageContext.request.contextPath}/showProductListCategory/9">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
 									alt="">
@@ -233,7 +235,7 @@
 						<div class="divide_one_pic right">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/filterCategoryProduct/4">
+									href="${pageContext.request.contextPath}/showProductListCategory/4">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
 									alt="">
@@ -248,7 +250,7 @@
 					<div class="single_prod">
 						<div class="single_pic">
 							<a
-								href="${pageContext.request.contextPath}/filterCategoryProduct/8">
+								href="${pageContext.request.contextPath}/showProductListCategory/8">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
 								alt="">
@@ -264,7 +266,7 @@
 					<div class="lst_tow marg_btm divice">
 						<div class="single_pic">
 							<a
-								href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+								href="${pageContext.request.contextPath}/showProductListCategory/1">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
 								alt="">
@@ -277,7 +279,7 @@
 					<div class="lst_tow divice1">
 						<div class="single_pic ">
 							<a
-								href="${pageContext.request.contextPath}/filterCategoryProduct/1">
+								href="${pageContext.request.contextPath}/showProductListCategory/1">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
 								alt="">
@@ -393,12 +395,34 @@
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 														class="mobile_fit transition lazy">
 
-													<div class="circle_tag active">
+													<%-- <div class="circle_tag active">
 														<img src="#" class="lazy"
 															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
 															alt=""> <img src="#" class="lazy"
 															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
 															alt="">
+													</div> --%>
+													
+													
+													<div class="circle_tag active"
+														onclick="setLike(${product.productId})">
+														
+														<c:choose>
+														
+														<c:when test="${product.isLike==0}">
+														<img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+															alt="">
+														</c:when>
+														<c:when test="${product.isLike==1}">
+														<img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+															alt="">
+														</c:when>
+														
+														</c:choose>
+														
+														
 													</div>
 
 
@@ -1758,6 +1782,33 @@
 			
 			
 		} 
+		
+		
+		function setLike(id) {
+			
+			
+			$.getJSON(
+					'${setLikeOrDislike}',
+					{
+						prodId : id,
+						ajax : 'true'
+					},
+					function(data) {
+						//alert(JSON.stringify(data));
+						
+						if(data.msg ==1){
+							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+							
+						}else{
+							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+							
+						}
+						
+					});
+
+			
+			
+		}
 		
 		
 	</script>

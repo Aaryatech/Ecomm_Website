@@ -76,7 +76,7 @@
 						<!--like product-->
 						<div class="product_like">
 
-							<a href="like-product.html"> <i class="fa fa-heart"
+							<a href="${pageContext.request.contextPath}/likeproducts"> <i class="fa fa-heart"
 								aria-hidden="true"></i></a>
 
 						</div>

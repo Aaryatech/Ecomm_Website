@@ -40,6 +40,7 @@ import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.order.OrderDetail;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import java.util.Base64;
 import java.util.Base64.Decoder;
@@ -72,6 +73,41 @@ public class HomeController {
 			if (frId > 0)
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
 			System.err.println("data " + data.toString());
+
+			try {
+
+				Gson gson = new Gson();
+				FEDataTraveller old = gson.fromJson(session.getAttribute("allDataJson").toString(),
+						FEDataTraveller.class);
+
+				if (old != null) {
+
+					for (FEProductHeader prod : data.getFeProductHeadList()) {
+
+						for (FEProductHeader oldProd : old.getFeProductHeadList()) {
+
+							if (oldProd.getProductId() == prod.getProductId()) {
+
+								prod.setIsLike(oldProd.getIsLike());
+								break;
+
+							}
+
+						}
+
+					}
+
+				}
+				
+				String jsonStr = mapper.writeValueAsString(data);
+				session.setAttribute("allDataJson", jsonStr);
+
+			} catch (Exception e) {
+				String jsonStr = mapper.writeValueAsString(data);
+				session.setAttribute("allDataJson", jsonStr);
+			}
+			
+
 			try {
 				if (frId > 0)
 					session.setAttribute("companyId", data.getFranchiseCatList().get(0).getCompanyId());
@@ -204,7 +240,7 @@ public class HomeController {
 
 			FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
-			
+
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
 
 			try {
@@ -223,7 +259,7 @@ public class HomeController {
 				jsonStr = Obj.writeValueAsString(tagList);
 			} catch (Exception e) {
 			}
-			
+
 			model.addAttribute("tagsJson", jsonStr);
 
 		} catch (Exception e) {
@@ -231,8 +267,7 @@ public class HomeController {
 		}
 		return "productdetail";
 	}
-	
-	
+
 	@RequestMapping(value = "/showProductDetail/{id}", method = RequestMethod.GET)
 	public String showProductDetail(@PathVariable int id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -246,20 +281,19 @@ public class HomeController {
 			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
 
 			FEProductHeader prodHeader = null;
-			
-			if(data.getFeProductHeadList()!=null) {
-				for(FEProductHeader prod : data.getFeProductHeadList()) {
-					if(prod.getProductId()==id) {
-						prodHeader=prod;
+
+			if (data.getFeProductHeadList() != null) {
+				for (FEProductHeader prod : data.getFeProductHeadList()) {
+					if (prod.getProductId() == id) {
+						prodHeader = prod;
 						break;
 					}
 				}
 			}
-			
-			//FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
+
+			// FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
-			
-			
+
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
 
 			try {
@@ -278,7 +312,7 @@ public class HomeController {
 				jsonStr = Obj.writeValueAsString(tagList);
 			} catch (Exception e) {
 			}
-			
+
 			model.addAttribute("tagsJson", jsonStr);
 
 		} catch (Exception e) {
@@ -286,12 +320,16 @@ public class HomeController {
 		}
 		return "productdetail";
 	}
-	
-	
 
 	@RequestMapping(value = "/getAllFrWiseData", method = RequestMethod.POST)
 	@ResponseBody
 	public FEDataTraveller getAllFrWiseData(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		HttpSession session = request.getSession();
+
+		Gson gson = new Gson();
+		FEDataTraveller data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
+		
 		return data;
 	}
 
@@ -307,8 +345,8 @@ public class HomeController {
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
 			model.addAttribute("festiveEvent", data.getFestEventList().get(index));
-			
-			System.err.println("INDEX - "+index+"    -------> "+data.getFestEventList().get(index));
+
+			System.err.println("INDEX - " + index + "    -------> " + data.getFestEventList().get(index));
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -352,10 +390,7 @@ public class HomeController {
 		return "viewcart";
 	}
 
-	@RequestMapping(value = "/likeproducts", method = RequestMethod.GET)
-	public String likeProducts(Locale locale, Model model) {
-		return "likeproducts";
-	}
+	
 
 	@RequestMapping(value = "/viewmap", method = RequestMethod.GET)
 	public String viewMap(Locale locale, Model model) {

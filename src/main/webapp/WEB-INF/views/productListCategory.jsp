@@ -1,107 +1,202 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<!-- this is mohsins product filter page -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
-
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+
+<style>
+html {
+	scroll-behavior: smooth;
+}
+</style>
 
 <c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
 
 <body>
 
+
+
+
+
+	<!-- TAGS -->
+	<%-- <jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include> --%>
+	<!-- TAGS End -->
+
+	<!-- Header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<!-- Header End -->
 
 
-	<div class="head_marg">
-		<!--product listing-->
-		<div class="find_store">
+	<div class="head_marg with_menu">
+		<section class="product_category">
 			<div class="wrapper">
+				<div class="mobile_scroll">
 
-				<div class="product_boxes">
-					<h2 class="sec_title">
-						<center>Customer Like this Products</center>
-					</h2>
+					<div class="prod_filt">
+						<ul>
 
+							<c:forEach items="${allData.frSubCatList}" var="subCat">
 
-					<ul id="itemListUl">
+								<c:set value="0" var="count"></c:set>
 
-						<c:forEach items="${allData.feProductHeadList}" var="product">
-
-							<c:if test="${product.isLike ==1}">
-
-								<li>
-									<div class="cake_one product_padd">
-										<div class="cake_pic">
-											<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-												class="mobile_fit transition">
-
-											<div class="circle_tag active"
-												onclick="setLike(${product.productId})">
-
-												<c:choose>
-
-													<c:when test="${product.isLike==0}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-															alt="">
-													</c:when>
-													<c:when test="${product.isLike==1}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-															alt="">
-													</c:when>
-
-												</c:choose>
+								<c:forEach items="${allData.feProductHeadList}" var="product">
+									<c:if test="${product.prodSubCatId == subCat.subCatId}">
+										<c:set value="1" var="count"></c:set>
+									</c:if>
+								</c:forEach>
 
 
-											</div>
-
-											<div class="cake_prc">
-												<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
-												<span class="off_prc"><i class="fa fa-inr"
-													aria-hidden="true"></i>${product.defaultPrice}</span> <span
-													class="prc_off">(23% Off)</span>
-											</div>
-
-
+								<c:if test="${subCat.catId == catId && count==1}">
+									<li>
+										<div class="product_filter_one">
+											<a href="#${subCat.subCatId}"
+												onclick="setDivPadding(${subCat.subCatId})"><img
+												src="${subCatImgUrl}${subCat.imageName}" alt=""> <c:out
+													value="${subCat.subCatName}"></c:out> </a>
 										</div>
+									</li>
+								</c:if>
+							</c:forEach>
 
-										<div class="cake_container">
-											<h4 class="cake_nm single_row">
-												<a
-													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
-											</h4>
-										</div>
+						</ul>
+					</div>
 
-									</div>
-								</li>
-
-							</c:if>
-
-
-						</c:forEach>
-
-
-					</ul>
 				</div>
 
 
+			</div>
+		</section>
 
 
-				<div class="store_banner"
-					style="background: url(${pageContext.request.contextPath}/resources/images/add_banner.jpg) no-repeat center top; background-size: cover;">
-					<div class="store_content">
-						<div class="visit_cont">
-							<div class="experiance_bx">
-								<div class="experiance_bor">
-									<h2 class="visit_title">Visit &amp; Experience Our Service
-										in Your City</h2>
-									<a href="#" class="find_btn">Find Stores <i
-										class="fa fa-angle-right" aria-hidden="true"></i></a>
-								</div>
+
+
+
+		<c:forEach items="${allData.frSubCatList}" var="subCat">
+
+
+			<c:set value="0" var="count"></c:set>
+
+			<c:forEach items="${allData.feProductHeadList}" var="product">
+				<c:if test="${product.prodSubCatId == subCat.subCatId}">
+					<c:set value="1" var="count"></c:set>
+				</c:if>
+			</c:forEach>
+
+			<c:if test="${subCat.catId==catId && count==1}">
+
+				<!--product listing-->
+				<div class="find_store" id="${subCat.subCatId}">
+					<div class="wrapper">
+
+
+						<div class="product_boxes">
+							<h2 class="sec_title">
+								<center>
+									Shop by ${subCat.subCatName}<span>${subCat.catName}</span>
+								</center>
+							</h2>
+
+
+							<ul>
+
+								<c:forEach items="${allData.feProductHeadList}" var="product">
+
+									<c:if test="${product.prodSubCatId == subCat.subCatId}">
+
+										<li>
+											<div class="cake_one product_padd">
+												<div class="cake_pic">
+													<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+														class="mobile_fit transition">
+
+													<div class="circle_tag active"
+														onclick="setLike(${product.productId})">
+														
+														<c:choose>
+														
+														<c:when test="${product.isLike==0}">
+														<img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+															alt="">
+														</c:when>
+														<c:when test="${product.isLike==1}">
+														<img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+															alt="">
+														</c:when>
+														
+														</c:choose>
+														
+														
+													</div>
+
+													<div class="cake_prc">
+														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+														<span class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span
+															class="prc_off">(23% Off)</span>
+													</div>
+
+												</div>
+
+												<div class="cake_container">
+													<h4 class="cake_nm single_row">
+														<a
+															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+													</h4>
+
+
+												</div>
+
+											</div>
+										</li>
+
+									</c:if>
+
+								</c:forEach>
+
+
+
+
+							</ul>
+						</div>
+
+					</div>
+				</div>
+
+			</c:if>
+
+
+
+		</c:forEach>
+
+
+
+
+
+
+
+
+	</div>
+
+
+	<!--find-store-->
+	<div class="find_store">
+		<div class="wrapper">
+			<div class="store_banner"
+				style="background: url(${pageContext.request.contextPath}/resources/images/add_banner.jpg) no-repeat center top; background-size: cover;">
+				<div class="store_content">
+					<div class="visit_cont">
+						<div class="experiance_bx">
+							<div class="experiance_bor">
+								<h2 class="visit_title">Visit &amp; Experience Our Service
+									in Your City</h2>
+								<a href="#" class="find_btn">Find Stores <i
+									class="fa fa-angle-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -116,23 +211,23 @@
 			<ul class="strip_divid">
 				<li>
 					<div class="strip_payment">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/secure_icn.png"
+						<img src="#" class="lazy"
+							data-src="${pageContext.request.contextPath}/resources/images/secure_icn.png"
 							alt=""> 100% Secure Payments <span>All major credit
 							&amp; debit cards accepted</span>
 					</div>
 				</li>
 				<li>
 					<div class="strip_payment extra_padd">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/customer.png"
+						<img src="#" class="lazy"
+							data-src="${pageContext.request.contextPath}/resources/images/customer.png"
 							alt=""> 3,000,000 <span>Customers across the world</span>
 					</div>
 				</li>
 				<li>
 					<div class="strip_payment extra_padd">
-						<img
-							src="${pageContext.request.contextPath}/resources/images/gifts.png"
+						<img src="#" class="lazy"
+							data-src="${pageContext.request.contextPath}/resources/images/gifts.png"
 							alt=""> 2 Million+ Gift <span>boxes delivered
 							worldwide</span>
 					</div>
@@ -141,8 +236,10 @@
 		</div>
 	</div>
 
+
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+
 
 
 	<!--cart-sidepanel-->
@@ -177,7 +274,6 @@
 	</script>
 
 	<!--menuzord -->
-	<script type="text/javascript" src="js/menuzord.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#menuzord").menuzord({
@@ -187,79 +283,10 @@
 	</script>
 	<!--menuzord-->
 
-	<script type="text/javascript">
-		jQuery(document)
-				.ready(
-						function() {
-							// This button will increment the value
-							$('.qtyplus')
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If is not undefined
-												if (!isNaN(currentVal)) {
-													// Increment
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal + 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-							// This button will decrement the value till 0
-							$(".qtyminus")
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If it isn't undefined or its greater than 0
-												if (!isNaN(currentVal)
-														&& currentVal > 0) {
-													// Decrement one
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal - 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-						});
-	</script>
+
 
 
 	<!--slick slider-->
-	<script src="js/slick.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).on('ready', function() {
 			$(".regular").slick({
@@ -441,12 +468,33 @@
 										lazyload);
 							}
 						})
-	</script>
+
+						
+						
+						
+						
+						</script>
+
 
 
 	<script type="text/javascript">
+
+	function setDivPadding(id) {
+		
+		$(".find_store")
+			.each(
+				function(counter) {
+					document.getElementsByClassName("find_store")[counter].style.paddingTop = "50px";
+					document.getElementsByClassName("find_store")[counter].style.paddingBottom = "0px";
+			});
+		
+		
+						document.getElementById(id).style.paddingTop = "135px";
+	}
+	
 	
 	function setLike(id) {
+		
 		
 		$.getJSON(
 				'${setLikeOrDislike}',
@@ -465,70 +513,15 @@
 						
 					}
 					
-					
-					
-					var divStr='';
-					
-					//alert(data.statusText)
-					
-					//alert(JSON.parse(data.statusText))
-					
-					var data1=JSON.parse(data.statusText);
-					
-					
-					$.each(data1.feProductHeadList,
-											function(key, product) {
-						
-						if(product.isLike ==1){
-							
-							var like='<div class="circle_tag active" onclick="setLike('+product.productId+')">'
-							+ '<img  id="like'+product.productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
-							+ '</div>';
-							
-							divStr = divStr
-							+ '<li>'
-							+ ' <div class="item_div"> '
-							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+product.prodImagePrimary+'" data-src="${prodImgUrl}'+product.prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-							+ like
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ product.defaultPrice
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-							+ product.defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-							+ ' <input type="hidden" class="tagNameHide" value="'+product.appliTagNames+'"> '
-							+ ' </div> '
-							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'">'
-							+ product.productName + '</a> </h4>'
-							+ ' </div> </div> </div> </li> ';
-							
-							
-						
-							
-							
-							
-							
-							
-						}
-						
-					
-						
-					});
-					
-					document.getElementById("itemListUl").innerHTML = divStr;
-					
 				});
 
 		
 		
 	}
 	
-	
-	
-	
+
 	</script>
+
 
 </body>
 
