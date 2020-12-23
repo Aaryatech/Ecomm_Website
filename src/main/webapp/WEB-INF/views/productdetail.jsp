@@ -10,103 +10,7 @@
 
 <body>
 
-
-	<div class="mongi_help">
-		<a href="#mongi" class="initialism mongi_open"><img
-			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
-			alt=""></a>
-	</div>
-
-	<!--apply now pop up-->
-	<div id="mongi" class="well">
-		<div class="mongi_title">
-			<span><a href="#"> Clear</a></span> Select Our Best Filter
-			<div class="mongi_close close_pop">
-				<i class="fa fa-times" aria-hidden="true"></i>
-			</div>
-		</div>
-		<div class="mongi_cont">
-			<ul class="ks-cboxtags">
-				<li><input type="checkbox" id="checkboxOne"><label
-					for="checkboxOne">Chocolate Cakes</label></li>
-				<li><input type="checkbox" id="checkboxtwo"><label
-					for="checkboxtwo">Exotic Cakes</label></li>
-				<li><input type="checkbox" id="checkboxthree"><label
-					for="checkboxthree">Black Forest Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfour"><label
-					for="checkboxfour">Designer Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfive"><label
-					for="checkboxfive">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxsix"><label
-					for="checkboxsix">Party Celebration Cakes</label></li>
-				<li><input type="checkbox" id="checkboxseven"><label
-					for="checkboxseven">Wedding Cakes</label></li>
-				<li><input type="checkbox" id="checkboxeight"><label
-					for="checkboxeight">Photo Cakes</label></li>
-				<li><input type="checkbox" id="checkboxnine"><label
-					for="checkboxnine">Cakes For Kids</label></li>
-				<li><input type="checkbox" id="checkboxten"><label
-					for="checkboxten">Medley</label></li>
-				<li><input type="checkbox" id="checkboxeleven"><label
-					for="checkboxeleven">Party Celebration Cakes</label></li>
-
-				<li><input type="checkbox" id="checkboxtwel"><label
-					for="checkboxtwel">Pizza</label></li>
-				<li><input type="checkbox" id="checkboxthirteen" checked><label
-					for="checkboxthirteen">Sandwich</label></li>
-				<li><input type="checkbox" id="checkboxfourteen"><label
-					for="checkboxfourteen">Fish</label></li>
-				<li><input type="checkbox" id="checkboxfifteen"><label
-					for="checkboxfifteen">Desert</label></li>
-				<li><input type="checkbox" id="checkboxsixteen"><label
-					for="checkboxsixteen">Salad</label></li>
-				<li><input type="checkbox" id="checkboxseventeen"><label
-					for="checkboxseventeen">Italian</label></li>
-				<li><input type="checkbox" id="checkboxeighteen"><label
-					for="checkboxeighteen">Indian</label></li>
-				<li><input type="checkbox" id="checkboxninteen"><label
-					for="checkboxninteen">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxtwenteen"><label
-					for="checkboxtwenteen">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtwenone"><label
-					for="checkboxtwenone">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwentwo"><label
-					for="checkboxtwentwo">Discord</label></li>
-				<li><input type="checkbox" id="checkboxtewnthree"><label
-					for="checkboxtewnthree">Clover</label></li>
-				<li><input type="checkbox" id="checkboxTwenfour"><label
-					for="checkboxTwenfour">Baby Moondancer</label></li>
-				<li><input type="checkbox" id="checkboxtwenfive"><label
-					for="checkboxtwenfive">Medley</label></li>
-				<li><input type="checkbox" id="checkboxtwensix"><label
-					for="checkboxtwensix">Firefly</label></li>
-				<li><input type="checkbox" id="checkboxtwenseven"><label
-					for="checkboxtwenseven">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtweneight"><label
-					for="checkboxtweneight">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwennine"><label
-					for="checkboxtwennine">Discord</label></li>
-				<li><input type="checkbox" id="checkboxthirtee"><label
-					for="checkboxthirtee">Clover</label></li>
-				<li><input type="checkbox" id="checkboxthirteeone"><label
-					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul>
-
-
-
-		</div>
-
-		<div class="proceend_bnt">
-			<a href="product.html" class="proceed_btn">Proceed</a>
-		</div>
-
-	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#mongi').popup();
-		});
-	</script>
-
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
@@ -120,6 +24,8 @@
 					<a href="#">Home</a> <i class="fa fa-angle-right"
 						aria-hidden="true"></i> <a href="#">${prodHeader.subCatName}</a> <i
 						class="fa fa-angle-right" aria-hidden="true"></i>${prodHeader.productName}
+
+
 
 				</div>
 
@@ -158,6 +64,8 @@
 							<!--product name row-->
 							<div class="stock_row">
 								<div class="stock_l">
+									<input type="hidden" id="prodId"
+										value="${prodHeader.productId}" />
 									<h2 class="product_nm">
 										<span>In Stock</span>${prodHeader.productName}
 									</h2>
@@ -272,8 +180,8 @@
 									</div>
 									<!--cake-kgs-->
 								</div>
-								
-								
+
+
 								<!--right form-->
 								<c:if
 									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
@@ -291,7 +199,8 @@
 																		Image </span> <input type="file" accept="image/*"
 																	name="img_input_btn" id="img_input_btn"
 																	accept=".jpg,.png,.gif,.jpeg,.bmp"
-																	onchange="loadFile(event)">
+																	onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
+
 																</label>
 															</div>
 														</div>
@@ -320,7 +229,7 @@
 														</c:if>
 													</div>
 
-													
+
 
 
 													<div class="clr"></div>
@@ -335,98 +244,144 @@
 							<div class="detail_drop">
 								<ul>
 
-									<%-- <c:if test="${prodHeader.defaultShapeId!=0}">
-										<li>Shape<select class="select-css" id="shape"
-											name="shape"
-											onchange="changeWtFlavor('${prodHeader.productId}')">
-												<c:forEach items="${prodHeader.shapeId}" var="prodDetail">
-													<c:forEach items="${flavTagStatusList}" var="flavorFilter"
-														varStatus="flavorFilterCount">
+									<c:choose>
 
-														<c:if test="${flavorFilter.filterTypeId==1}">
+										<c:when test="${prodHeader.rateSettingType==0}">
 
-															<c:choose>
-																<c:when test="${prodDetail==flavorFilter.filterId}">
+											<li>
+												<button type="button" value="" field="quantity"
+													class="qtyminus cart"
+													onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
+													<i class="fa fa-minus" aria-hidden="true"></i>
+												</button> <input type="text" id="txtWt" value="1"
+												style="text-align: center;" class="qty cart">
+												<button type="button" value="" field="quantity"
+													onclick="setQtyText(${prodHeader.productId},1,'${prodHeader.prodDetailList}')"
+													class="qtyplus cart">
+													<i class="fa fa-plus" aria-hidden="true"></i>
+												</button>
+
+											</li>
+
+										</c:when>
+
+										<c:otherwise>
+
+											<c:if test="${prodHeader.defaultFlavorId!=0}">
+
+												<li>Flavor <select class="select-css" name="flavor"
+													id="flavor"
+													onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+														<c:forEach items="${prodHeader.flavourIds}"
+															var="prodDetail">
+															<c:forEach items="${flavTagStatusList}"
+																var="flavorFilter" varStatus="flavorFilterCount">
+
+																<c:if test="${flavorFilter.filterTypeId==4}">
+
 																	<c:choose>
-																		<c:when
-																			test="${prodDetail==prodHeader.defaultShapeId}">
-																			<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																		<c:when test="${prodDetail==flavorFilter.filterId}">
+																			<c:choose>
+																				<c:when
+																					test="${prodDetail==prodHeader.defaultFlavorId}">
+																					<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																				</c:when>
+																				<c:otherwise>
+																					<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																				</c:otherwise>
+																			</c:choose>
 																		</c:when>
 																		<c:otherwise>
-																			<option value="${prodDetail}">${flavorFilter.adminName}</option>
+
 																		</c:otherwise>
 																	</c:choose>
-																</c:when>
-																<c:otherwise>
+																</c:if>
+															</c:forEach>
+														</c:forEach>
+												</select></li>
+											</c:if>
 
-																</c:otherwise>
-															</c:choose>
-															
-														</c:if>
+											<li>Weight<select class="select-css" id="weight"
+												onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+													<c:forEach items="${prodHeader.availInWeights}"
+														var="prodDetailwt">
+														<option value="${prodDetailwt}">${prodDetailwt}</option>
 													</c:forEach>
-												</c:forEach>
+											</select></li>
 
+										</c:otherwise>
 
-										</select></li>
-									</c:if> --%>
+									</c:choose>
 
-									<c:if test="${prodHeader.defaultFlavorId!=0}">
+								</ul>
 
-										<li>Flavor<select class="select-css" name="flavor"
-											id="flavor"
-											onchange="changeWtFlavor('${prodHeader.productId}')">
-												<c:forEach items="${prodHeader.flavourIds}" var="prodDetail">
-													<c:forEach items="${flavTagStatusList}" var="flavorFilter"
-														varStatus="flavorFilterCount">
+								<ul>
+									<li>
+										<div>
+											<i class="fa fa-inr cake_prc_detail_iclass"
+												aria-hidden="true"></i>
 
-														<c:if test="${flavorFilter.filterTypeId==4}">
+											<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
+											<c:set value="1" var="defaultWt"></c:set>
 
-															<c:choose>
-																<c:when test="${prodDetail==flavorFilter.filterId}">
-																	<c:choose>
-																		<c:when
-																			test="${prodDetail==prodHeader.defaultFlavorId}">
-																			<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																		</c:when>
-																		<c:otherwise>
-																			<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																		</c:otherwise>
-																	</c:choose>
-																</c:when>
-																<c:otherwise>
+											<c:choose>
 
-																</c:otherwise>
-															</c:choose>
-														</c:if>
+												<c:when test="${prodHeader.rateSettingType == 1}">
+
+													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
+														varStatus="loop" begin="0" end="0">
+														<c:set value="${proWt}" var="defaultWt"></c:set>
 													</c:forEach>
-												</c:forEach>
-										</select></li>
-									</c:if>
 
-									<li>Weight<select class="select-css" id="weight"
-										onchange="changeWtFlavor('${prodHeader.productId}')">
-											<c:forEach items="${prodHeader.availInWeights}"
-												var="prodDetailwt">
-												<option value="${prodDetailwt}">${prodDetailwt}</option>
-											</c:forEach>
-									</select></li>
+													<c:set value="${prodHeader.defaultPrice * defaultWt}"
+														var="price"></c:set>
 
+												</c:when>
+
+												<c:when test="${prodHeader.rateSettingType == 2}">
+
+													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
+														varStatus="loop" begin="0" end="0">
+														<c:set value="${proWt}" var="defaultWt"></c:set>
+													</c:forEach>
+
+													<c:forEach items="${prodHeader.prodDetailList}"
+														var="proDetail">
+
+														<c:choose>
+															<c:when
+																test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																<c:set value="${proDetail.actualRate}" var="price"></c:set>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+
+												</c:when>
+
+											</c:choose>
+
+
+
+											<p class="cake_prc_detail_pclass"
+												id="newPrice${prodHeader.productId}">${price}</p>
+										</div>
+									</li>
 								</ul>
 							</div>
 
 							<div class="button_row">
-								<a href="#" class="cart_button"
-									onclick="addToCartClick(${prodHeader.productId})">Add To
-									Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+								<a href="javascript:void(0)" class="cart_button"
+									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
+									To Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
 									class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
 
 							<!--mobile-buttons-->
 							<div class="mobile_button">
-								<a href="#" class="mobile_cart"
-									onclick="addToCartClick('${prodHeader.productId}')">Add To
-									Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+								<a href="javascript:void(0)" class="mobile_cart"
+									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
+									To Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
 									class="mobile_buy">Buy Now</a>
 							</div>
 						</div>
@@ -540,7 +495,7 @@
 							</li>
 						</c:forEach>
 					</ul>
-					<div class="more_product">
+					<div class="more_product" style="display: none;">
 						<a href="#">Load More Products</a>
 					</div>
 				</div>
@@ -829,7 +784,7 @@ function moveCursor(){
 		document.getElementById('del_image').style="display:block"
 			//postFilesData(event.target.files[0]);
 			var imgName=makeUniqueString(7);
-			var prodIdText=document.getElementById('prodIdText').value
+			var prodIdText=document.getElementById('prodId').value
 			imgName=imgName+"_"+prodIdText;
 			//alert(imgName);
 			var imgFile = $('#img_input_btn')[0].files[0];
@@ -859,8 +814,13 @@ function moveCursor(){
 			function handleFileSelect(evt) {
 				 var base64String;
 				var imgName=makeUniqueString(7);
-				var prodIdText=document.getElementById('prodIdText').value
+				var prodIdText=document.getElementById('prodId').value;
 				imgName=imgName+"_"+prodIdText;
+				
+				
+				var wt=document.getElementById('weight').value;
+				
+				
 				
 				var f = evt.target.files[0]; // FileList object
 			  var reader = new FileReader();
@@ -881,26 +841,45 @@ function moveCursor(){
 						sessionStorage.setItem("prodImageList", JSON
 								.stringify(table));
 					}
-				  var cartValue = sessionStorage .getItem("prodImageList");
+				/*   var cartValue = sessionStorage .getItem("prodImageList");
 					var table = $.parseJSON(cartValue);
 					isFound=0;
 					for(var i=0;i<table.length;i++){
-						if(parseInt(prodIdText)==parseInt(table[i].itemId)){
+						if(parseInt(prodIdText)==parseInt(table[i].itemId) && wt == table[i].weight){
 							isFound=0;
 							table.splice(i);
 							break;
 						}
 					}
+					
+					
+					var uniq = (new Date()).getTime();
+					
 					if(parseInt(isFound)==0){
 					table.push({
 						itemId : prodIdText,
 						imgName : imgName+"."+imgExt,
 						//imgFile : imgAsDataURL
 						imgFile : base64String,
+						weight : wt,
+						uniqueId : uniq
 					});
-					}
+					} */
+					
+					var uniq = (new Date()).getTime();
+					
+					var obj={
+							itemId : prodIdText,
+							imgName : imgName+"."+imgExt,
+							//imgFile : imgAsDataURL
+							imgFile : base64String,
+							weight : wt,
+							uniqueId : uniq
+						};
+					
+					
 					sessionStorage.setItem("prodImageList", JSON
-							.stringify(table));
+							.stringify(obj));
 					//bulkImageUpload();
 			    };
 			  })(f);
@@ -1258,6 +1237,396 @@ function moveCursor(){
 							}
 						})
 	</script>
+
+
+	<script type="text/javascript">
+	
+	
+	function setPriceByWtAndFlavour(id,type) {
+		
+		//alert(id+"      "+type)
+		
+		var selectWt = document.getElementById("weight").value;
+		var selectFlav = 0;
+		try {
+			selectFlav = document.getElementById("flavor").value;
+		} catch (e) {
+			selectFlav = 0;
+		}
+		if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+			selectFlav = 0;
+		}
+		
+		//alert(selectWt+"          "+selectFlav)
+		
+		if (sessionStorage.getItem("allItemList") == null) {
+			var table = [];
+			sessionStorage.setItem("allItemList", JSON.stringify(table));
+		}
+
+		var allItemList = sessionStorage.getItem("allItemList");
+		var allItemArr = $.parseJSON(allItemList);
+
+		var rate=0;
+		
+		for(var i=0;i<allItemArr.length;i++){
+			if(allItemArr[i].productId==id){
+				rate=parseFloat(allItemArr[i].defaultPrice);
+			}
+		}
+		
+		for(var i=0;i<allItemArr.length;i++){
+			if(allItemArr[i].productId==id){
+				for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
+					if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+						rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+						break;
+					}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+						rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+						break;
+					}
+				}
+			}
+		}
+		
+		if(type==1){
+			rate=rate*parseFloat(selectWt);
+		}
+		
+		document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+		
+	}
+	
+	
+	
+
+		function addCart(id,type) {
+			
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(type == 0){
+				selectWt = document.getElementById("txtWt").value;	
+			}else if(type == 1 || type == 2){
+				selectWt = document.getElementById("weight").value;
+				
+				try {
+					selectFlav = document.getElementById("flavor").value;
+					
+					var docFlv = document.getElementById("flavor");
+					selFlvName = docFlv.options[docFlv.selectedIndex].text;
+					
+				} catch (e) {
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			
+				
+				
+				var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
+		
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+				
+				//alert("dfdfd "+prodHead )
+				
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				
+				var prodDetail = prodMaster.prodDetailList;
+				//alert(prodDetail)
+				
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				var uniq = (new Date()).getTime();
+				//alert(uniq)
+						
+				 for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(type == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(type == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							//alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} else if(type == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} 
+		
+				}
+				 
+				
+				
+				
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+		
+				taxableAmt = calRate;
+		
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+		
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+		
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+		
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				if(type==0){
+					calRate=actualRate;
+				}
+				
+				
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+		
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				
+				 if (sessionStorage.getItem("prodImageList") == null) {
+						var table = [];
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
+					}
+			   		
+				var imgValue = sessionStorage .getItem("prodImageList");
+				var imgObj = $.parseJSON(imgValue);
+				
+				var imgFile="";
+				var imgName="";
+				if(id==imgObj.itemId){
+					imgFile=imgObj.imgFile;
+					imgName=imgObj.imgName;
+				}
+				
+				var obj={
+						uniqueId : uniq,
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName
+						
+					}
+				
+				var index=0,itemFound=0;
+				
+				
+				
+				for(var i=0; i<cartArray.length;i++){
+					
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						break;
+					}
+					/* else if(configDetailId==cartArray[i].exInt1){
+						index=i;
+						itemFound=1;
+						break;
+					} */
+				}
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+		
+			
+			
+		} 
+		
+		function changeWeight(){
+			document.getElementById("img_input_btn").value = "";
+			document.getElementById('del_image').style="display:none";
+		}
+		
+		
+		
+		function setQtyText(id, type) {
+
+			/* type  :  0 - minus,  1 - plus */
+			
+			var wt=document.getElementById("txtWt").value;
+		//alert(id+"    "+type+ "     "+wt)
+		
+		//alert(detailList);
+			
+			if(type==0){
+			
+				var newWt=wt+1;
+				if(wt>1 && wt<=10){
+					wt=parseInt(wt)-1;
+				}
+				
+			}
+			
+			else if(type==1){
+				if(wt>=1 && wt<10){
+					wt=parseInt(wt)+1;
+				}
+			}
+			
+			document.getElementById("txtWt").value=wt;
+			
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var rate=0;
+			
+			for(var i=0;i<allItemArr.length;i++){
+				
+				if(allItemArr[i].productId==id){
+			
+					rate=parseFloat(allItemArr[i].prodDetailList[0].actualRate);
+				}
+				
+			}
+			
+			rate=rate*wt;
+			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			
+
+		}
+
+
+	</script>
+
 
 
 

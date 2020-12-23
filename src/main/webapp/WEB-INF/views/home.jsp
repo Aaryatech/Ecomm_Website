@@ -389,7 +389,7 @@
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
-													<img src="${prodImgUrl}${product.prodImagePrimary}"
+													<img src="#"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 														class="mobile_fit transition lazy">
 
@@ -1400,14 +1400,14 @@
 			if(type==0){
 			
 				var newWt=wt+1;
-				if(wt>0 && wt<=10){
+				if(wt>1 && wt<=10){
 					wt=parseInt(wt)-1;
 				}
 				
 			}
 			
 			else if(type==1){
-				if(wt>=0 && wt<10){
+				if(wt>=1 && wt<10){
 					wt=parseInt(wt)+1;
 				}
 			}
@@ -1501,6 +1501,8 @@
 	 	
 		function addCart(id,type) {
 			
+			
+			
 			var selectFlav = 0;
 			
 			var selectWt = 0;
@@ -1550,7 +1552,7 @@
 				}
 				
 				var prodDetail = prodMaster.prodDetailList;
-				alert(prodDetail)
+				//alert(prodDetail)
 				
 				var actualRate=0;
 				var calRate=0;
@@ -1563,6 +1565,9 @@
 				
 				var qty = 1;
 				
+				var uniq = (new Date()).getTime();
+				//alert(uniq)
+						
 				 for (var d = 0; d < prodDetail.length; d++) {
 					
 					if(type == 0){
@@ -1584,9 +1589,9 @@
 						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
 							
 							
-							alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
 							
-							alert("1  - "+prodDetail[d].configDetailId)
+							//alert("1  - "+prodDetail[d].configDetailId)
 							
 							calRate=prodDetail[d].actualRate*selectWt;
 							actualRate=prodDetail[d].actualRate;
@@ -1663,8 +1668,43 @@
 				var cartValue = sessionStorage.getItem("cartValue");
 				var cartArray = $.parseJSON(cartValue);
 				
+				var imgFile="";
+				var imgName="";
+				
+			
+				
+				var index=0,itemFound=0;
+				
+			
+				
+				for(var i=0; i<cartArray.length;i++){
+					
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					/* else if(configDetailId==cartArray[i].exInt1){
+						index=i;
+						itemFound=1;
+						break;
+					} */
+				}
+				
 				
 				var obj={
+						uniqueId : uniq,
 						orderDetailId : 0,
 						orderId : 0,
 						itemId : prodMaster.productId,
@@ -1699,22 +1739,11 @@
 						weight : selectWt,
 						veg : "",
 						rateSettingType : type,
-						flvName : flvName
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName
 						
 					}
-				
-				var index=0,itemFound=0;
-				for(var i=0; i<cartArray.length;i++){
-					if(configDetailId==cartArray[i].exInt1 && type==0){
-						index=i;
-						itemFound=1;
-						break;
-					}else if(configDetailId==cartArray[i].exInt1){
-						index=i;
-						itemFound=1;
-						break;
-					}
-				}
 				
 				if(itemFound==1){
 					table[index]=obj;

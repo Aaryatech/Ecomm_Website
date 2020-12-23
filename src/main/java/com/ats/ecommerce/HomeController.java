@@ -204,12 +204,90 @@ public class HomeController {
 
 			FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
+			
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+			
+			model.addAttribute("tagsJson", jsonStr);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "productdetail";
 	}
+	
+	
+	@RequestMapping(value = "/showProductDetail/{id}", method = RequestMethod.GET)
+	public String showProductDetail(@PathVariable int id, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
+		System.err.println("In Show Product Detail");
+		try {
+			model.addAttribute("frCatList", data.getFranchiseCatList());
+
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
+			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
+
+			FEProductHeader prodHeader = null;
+			
+			if(data.getFeProductHeadList()!=null) {
+				for(FEProductHeader prod : data.getFeProductHeadList()) {
+					if(prod.getProductId()==id) {
+						prodHeader=prod;
+						break;
+					}
+				}
+			}
+			
+			//FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
+			model.addAttribute("prodHeader", prodHeader);
+			
+			
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+			
+			model.addAttribute("tagsJson", jsonStr);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "productdetail";
+	}
+	
+	
 
 	@RequestMapping(value = "/getAllFrWiseData", method = RequestMethod.POST)
 	@ResponseBody

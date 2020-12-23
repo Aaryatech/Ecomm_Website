@@ -59,11 +59,11 @@
 						<form action="" method="get">
 							<div class="input_one">
 								<input name="glbSearch" id="glbSearch" type="text"
-									onchange="globalSearch()" list="glbTemplates"
+									onchange="globalSearch(0)" list="glbTemplates"
 									class="search_input" autocomplete="on" placeholder="Search..." />
 								<datalist id="glbTemplates"></datalist>
 								<button class="search_btn" id="btnGlbSearch"
-									onclick="globalSearch()">
+									onclick="globalSearch(0)">
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
 							</div>
@@ -294,7 +294,7 @@
 
 					$("#item_cart_list")
 							.append(
-									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('+table[i].exInt1+')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
+									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('+table[i].uniqueId+')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
 											+ '<div class="like_pic">'
 											+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
 				'data-src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
@@ -492,7 +492,7 @@
 		}
 	});
 
-	function globalSearch() {
+	function globalSearch(catId) {
 
 		//alert(document.getElementById("glbSearch").value);
 
@@ -501,6 +501,11 @@
 
 		sessionStorage.setItem("priceFilterMin", "0");
 		sessionStorage.setItem("priceFilterMax", "0");
+		
+		sessionStorage.setItem("findCatId", catId);
+		
+		var table = [];
+		sessionStorage.setItem("selTags", JSON.stringify(table));
 
 		window.open('${pageContext.request.contextPath}/products/0', '_self');
 
@@ -522,7 +527,7 @@
 		return "";
 	}
 	
-	function deleteItemFromCart(configDetailId){
+	function deleteItemFromCart(uniqueId){
 		
 		if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
@@ -535,7 +540,7 @@
 		var newCartVal = [];
 
 		for (var i = 0; i < table.length; i++) {
-			if (configDetailId != table[i].exInt1) {
+			if (uniqueId != table[i].uniqueId) {
 				newCartVal.push(table[i]);
 			}
 		}

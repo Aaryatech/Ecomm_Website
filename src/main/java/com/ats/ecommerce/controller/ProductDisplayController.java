@@ -79,12 +79,12 @@ public class ProductDisplayController {
 
 				for (CateFilterConfig cat : data.getCatFilterConfig()) {
 
-					// List<Integer> typeIdList =
-					// Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt).collect(Collectors.toList());
+					List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
+							.collect(Collectors.toList());
 
-					List<Integer> typeIdList = new ArrayList<>();
-					typeIdList.add(4);
-					typeIdList.add(12);
+					// List<Integer> typeIdList = new ArrayList<>();
+					// typeIdList.add(4);
+					// typeIdList.add(12);
 
 					cat.setTypeIdList(typeIdList);
 
@@ -105,9 +105,9 @@ public class ProductDisplayController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("compId", compId);
 
-//				MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
-//						MFilter[].class);
-//				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
+				MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
+						MFilter[].class);
+				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
 			}
@@ -121,9 +121,9 @@ public class ProductDisplayController {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("compId", compId);
 
-//				FilterTypes[] filterArr = Constants.getRestTemplate()
-//						.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
-//				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
+				FilterTypes[] filterArr = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
+				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
 			}

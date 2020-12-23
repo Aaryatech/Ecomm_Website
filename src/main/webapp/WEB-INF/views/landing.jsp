@@ -39,10 +39,10 @@
 			<div class="landing_cont">
 				<div class="landing_button">
 					If user login first time or we didn't get any info of user from
-					browser cache then user land here <a href="javascript:void(0)" 
-						class="landingpop_open">Book your online order</a>
-						
-						<input type="button" id="openLocPopup" class="landingpop_open" value="aaaa" style="display: none;">
+					browser cache then user land here <a href="javascript:void(0)"
+						class="landingpop_open">Book your online order</a> <input
+						type="button" id="openLocPopup" class="landingpop_open"
+						value="aaaa" style="display: none;">
 				</div>
 			</div>
 		</div>
@@ -52,32 +52,120 @@
 
 
 
+
 	<!-- multiple product boxes -->
 	<div class="find_store">
 		<div class="wrapper">
 			<div class="prod_cat_bx">
-				
-
-				<c:forEach items="${catList}" var="cat" varStatus="count">
-					<div class="prod_cat_1">
-						<div class="cakes_cat_1 new">
-							<a href="javascript:void(0)" class="landingpop_open">
-								<div class="img_cap">
-									<img src="${catImgUrl}${cat.imageName}" class="lazy"
-										data-src="${catImgUrl}${cat.imageName}" alt="">
-									<div class="prod_cat_cap">
-										<span>${cat.catName}</span>
+				<div class="prod_cat_1">
+					<div class="cakes_cat_1">
+						<a href="javascript:void(0)" class="landingpop_open">
+							<div class="img_cap">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
+									alt="">
+								<div class="prod_cat_cap">
+									<span>Cakes</span>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="prod_cat_2">
+					<div class="divid_two">
+						<div class="divide_one_pic left">
+							<div class="single_pic">
+								<a href="javascript:void(0)" class="landingpop_open"> <img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Pastries</span>
 									</div>
+								</a>
+							</div>
+						</div>
+						<div class="divide_one_pic right">
+							<div class="single_pic">
+								<a href="javascript:void(0)" class="landingpop_open"> <img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Savories</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="divid_two">
+						<div class="divide_one_pic left">
+							<div class="single_pic">
+								<a href="javascript:void(0)" class="landingpop_open"> <img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Packaged Cakes</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="divide_one_pic right">
+							<div class="single_pic">
+								<a href="javascript:void(0)" class="landingpop_open"> <img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
+									alt="">
+									<div class="prod_cat_cap1">
+										<span>Chocolates</span>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="single_prod">
+						<div class="single_pic">
+							<a href="javascript:void(0)" class="landingpop_open"> <img
+								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Bakersware</span>
+								</div>
+							</a>
+
+						</div>
+					</div>
+				</div>
+				<div class="prod_cat_3">
+					<div class="lst_tow marg_btm divice">
+						<div class="single_pic">
+							<a href="javascript:void(0)" class="landingpop_open"> <img
+								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Combo</span>
 								</div>
 							</a>
 						</div>
 					</div>
-				</c:forEach>
-			
+					<div class="lst_tow divice1">
+						<div class="single_pic ">
+							<a href="javascript:void(0)" class="landingpop_open"> <img
+								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
+								alt="">
+								<div class="prod_cat_cap1">
+									<span>Combo</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
 				<div class="clr"></div>
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<div class="land_franchisee">
 		<div class="wrapper">
@@ -119,7 +207,8 @@
 							<div class="testimonial_nm">
 								<img src="${TestimonialImgUrl}${testmoni.photo}" alt="">
 								<h2 class="testimonial_date">
-									${testmoni.name}<!--  <span>Date : date</span> -->
+									${testmoni.name}
+									<!--  <span>Date : date</span> -->
 									<!--  <span>Location: location</span> -->
 								</h2>
 							</div>
@@ -316,22 +405,28 @@
 				<div class="location_city">
 					<h2 class="serv_city">Serving Cities</h2>
 					<ul>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Mumbai')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Mumbai')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_mumbai.png"
 								alt=""> Mumbai</a></li>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Delhi')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Delhi')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_delhi.png"
 								alt=""> Delhi</a></li>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Hyderabad')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Hyderabad')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_hydrabad.png"
 								alt=""> Hydrabad</a></li>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Agra')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Agra')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_agra.png"
 								alt=""> Agra</a></li>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Nashik')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Nashik')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_nashik.png"
 								alt=""> Nasik</a></li>
-						<li><a href="javascript:void(0)" onclick="setCityNameToInput('Goa')"><img
+						<li><a href="javascript:void(0)"
+							onclick="setCityNameToInput('Goa')"><img
 								src="${pageContext.request.contextPath}/resources/images/city_goa.png"
 								alt=""> Goa</a></li>
 					</ul>
@@ -380,17 +475,17 @@
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
 						</div>
 
-						<input name="hideLat" value="0" required type="hidden" id="hideLat" />
-						<input name="hideLong" value="0" required type="hidden" id="hideLong" />
+						<input name="hideLat" value="0" required type="hidden"
+							id="hideLat" /> <input name="hideLong" value="0" required
+							type="hidden" id="hideLong" />
 
 
 						<div class="search_one_r">
 							<%-- <a href="${pageContext.request.contextPath}/viewmap">Get
 								Location</a> --%>
-								
-								
-								<a href="javascript:void(0)" onclick="goToMap()">Get
-								Location</a>
+
+
+							<a href="javascript:void(0)" onclick="goToMap()">Get Location</a>
 						</div>
 						<div class="clr"></div>
 					</div>
@@ -442,35 +537,32 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			var frData = '${frData}';
 			//alert(frData)
 			sessionStorage.setItem("frList", frData);
-			
+
 			$('#landingpop').popup();
 			document.getElementById("openLocPopup").click();
-			
-			var lat=sessionStorage.getItem("selLat");
-			var lng=sessionStorage.getItem("selLng");
-			var addr=sessionStorage.getItem("selAddr");
 
-			
-			document.getElementById("txtPlaces").value=addr;
+			var lat = sessionStorage.getItem("selLat");
+			var lng = sessionStorage.getItem("selLng");
+			var addr = sessionStorage.getItem("selAddr");
+
+			document.getElementById("txtPlaces").value = addr;
 			sessionStorage.setItem("selLat", "");
 			sessionStorage.setItem("selLng", "");
 			sessionStorage.setItem("selAddr", "");
-			
-			if(lat==""){
-				lat=0;
+
+			if (lat == "") {
+				lat = 0;
 			}
-			if(lng==""){
-				lng=0;
+			if (lng == "") {
+				lng = 0;
 			}
-			
+
 			calculateDistance(parseFloat(lat), parseFloat(lng), 2);
-			
-			
-			
+
 		});
 		function gotoHome() {
 			var form = document.getElementById("validation-form");
@@ -537,10 +629,7 @@
  -->
 	<script type="text/javascript">
 		$(document).on('ready', function() {
-			
-			
-			
-			
+
 			$(".regular").slick({
 				dots : true,
 				infinite : true,
@@ -613,8 +702,6 @@
 	<script type="text/javascript">
 		$(document).ready(function($) {
 
-			
-			
 		});
 		$('.cityclass').click(function() {
 			//var id = this.value();
@@ -633,12 +720,12 @@
 
 			var frData = '${frData}';
 			sessionStorage.setItem("frList", frData);
-			
-			 //alert(latitude)
+
+			//alert(latitude)
 			//alert(longitude) 
-			
+
 			//alert("Prev ---> "+latitude+"     "+longitude);
-			
+
 			var bounds = new google.maps.LatLngBounds;
 
 			var origin1 = {
@@ -650,9 +737,9 @@
 
 			var frList = sessionStorage.getItem("frList");
 			var list = $.parseJSON(frList);
-			
+
 			//alert("fr count = "+list.length)
-			
+
 			for (var i = 0; i < list.length; i++) {
 
 				if (!isNaN(parseFloat(list[i].shopsLatitude))) {
@@ -661,19 +748,19 @@
 						lng : parseFloat(list[i].shopsLogitude)
 					}
 					waypts.push(data_add);
-					
+
 					//alert(list[i].frName+"       --> "+parseFloat(list[i].shopsLatitude)+"     "+parseFloat(list[i].shopsLogitude))
-					
-				}else{
+
+				} else {
 					var data_add = {
-							lat : parseFloat(0),
-							lng : parseFloat(0)
-						}
-						waypts.push(data_add);
+						lat : parseFloat(0),
+						lng : parseFloat(0)
+					}
+					waypts.push(data_add);
 				}
 
 			}
-			
+
 			//alert("fr count = "+waypts.length)
 
 			//console.log(waypts);
@@ -705,7 +792,7 @@
 
 									var results = response.rows[0].elements;
 									var newFrList = [];
-									
+
 									//alert("res count = "+results.length)
 
 									for (var j = 0; j < results.length; j++) {
@@ -713,16 +800,16 @@
 										try {
 											var km = (parseFloat((results[j].distance.value) / 1000))
 													.toFixed(2);
-											
+
 											//alert(list[j].frName+"    --->    "+km+"        ---> "+list[j].noOfKmAreaCover + "      latlng --> "+parseFloat(list[j].shopsLatitude)+"   "+parseFloat(list[j].shopsLogitude))
-											
+
 											list[j].exInt1 = km;
 											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
 												newFrList.push(list[j]);
 											}
 
 										} catch (err) {
-//alert("err---")
+											//alert("err---")
 										}
 
 									}
@@ -742,7 +829,7 @@
 
 									}
 
-									if(type!=2){
+									if (type != 2) {
 										sessionStorage.setItem("frList", JSON
 												.stringify(newFrList));
 									}
@@ -771,15 +858,15 @@
 					var longitude = place.geometry.location.lng();
 					/*  alert(latitude)
 					alert(longitude)  */
-					
-					document.getElementById('hideLong').value=longitude;
-					document.getElementById('hideLat').value=latitude;
+
+					document.getElementById('hideLong').value = longitude;
+					document.getElementById('hideLat').value = latitude;
 
 					calculateDistance(latitude, longitude, 1);
 
 				} catch (err) {
-					document.getElementById('hideLong').value=0;
-					document.getElementById('hideLat').value=0;
+					document.getElementById('hideLong').value = 0;
+					document.getElementById('hideLat').value = 0;
 				}
 
 			});
@@ -841,35 +928,33 @@
 	</script>
 
 
-<script type="text/javascript">
+	<script type="text/javascript">
+		function goToMap() {
 
-function goToMap() {
-	
-	var lat=document.getElementById("hideLat").value;
-	var lng=document.getElementById("hideLong").value;
-	//alert(lat+"     "+lng)
-	
-	//window.open("${pageContext.request.contextPath}/viewmap/"+lng+"/"+lng1,"_self");
-	
-	$.getJSON('${viewmapNew}', {
-		lat : lat,
-		lng : lng,
-		ajax : 'true'
-	}, function(data) {
-		//alert(JSON.stringify(data));
-		window.open("${pageContext.request.contextPath}/viewmap","_self");
-		
-	});
-	
-	
-}
+			var lat = document.getElementById("hideLat").value;
+			var lng = document.getElementById("hideLong").value;
+			//alert(lat+"     "+lng)
 
-function setCityNameToInput(cityname) {
-	$('#txtPlaces').val(cityname + " ");
-	document.getElementById("txtPlaces").focus();
-}
+			//window.open("${pageContext.request.contextPath}/viewmap/"+lng+"/"+lng1,"_self");
 
-</script>
+			$.getJSON('${viewmapNew}', {
+				lat : lat,
+				lng : lng,
+				ajax : 'true'
+			}, function(data) {
+				//alert(JSON.stringify(data));
+				window.open("${pageContext.request.contextPath}/viewmap",
+						"_self");
+
+			});
+
+		}
+
+		function setCityNameToInput(cityname) {
+			$('#txtPlaces').val(cityname + " ");
+			document.getElementById("txtPlaces").focus();
+		}
+	</script>
 
 
 

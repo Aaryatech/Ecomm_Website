@@ -2,33 +2,30 @@ package com.ats.ecommerce.model;
 
 import java.util.List;
 
-
-
 public class FEDataTraveller {
 
-	List<FEProductHeader> feProductHeadList; //each header includes list of details inside
-	
-	List<CategoryList> companyCatList; //category list For Company 
-	
-	List<CategoryList> franchiseCatList; //category list For Franchise 
+	List<FEProductHeader> feProductHeadList; // each header includes list of details inside
 
-	List<GetFlavorTagStatusList> flavorTagStatusList; //List of Flavor,Tag,Status (separate it in FE by filter Type)
-	
-	List<FETestimonial> testimonialList; //Common to Franchise and Company having comma separated frIds.
-	
-	List<FEBannerList> companyBannerList; //Banner List for Company
-	
-	List<FEBannerList> franchiseBannerList; //Banner List for Franchise
-	
-	 List<Franchise> frList;   //All Active Franchise List by Master company Id
+	List<CategoryList> companyCatList; // category list For Company
 
-	 List<FestiveEvent> festEventList;  //All Festive Events List and comma separated productIds 24-11-2020
+	List<CategoryList> franchiseCatList; // category list For Franchise
 
-	 List<CateFilterConfig> catFilterConfig;//Filter configured to Category 26-11-2020
+	List<GetFlavorTagStatusList> flavorTagStatusList; // List of Flavor,Tag,Status (separate it in FE by filter Type)
 
-	 
-	 
-	 
+	List<FETestimonial> testimonialList; // Common to Franchise and Company having comma separated frIds.
+
+	List<FEBannerList> companyBannerList; // Banner List for Company
+
+	List<FEBannerList> franchiseBannerList; // Banner List for Franchise
+
+	List<Franchise> frList; // All Active Franchise List by Master company Id
+
+	List<FestiveEvent> festEventList; // All Festive Events List and comma separated productIds 24-11-2020
+
+	List<CateFilterConfig> catFilterConfig;// Filter configured to Category 26-11-2020
+
+	private List<FrSubCatList> frSubCatList;
+
 	public List<CateFilterConfig> getCatFilterConfig() {
 		return catFilterConfig;
 	}
@@ -100,9 +97,7 @@ public class FEDataTraveller {
 	public void setFrList(List<Franchise> frList) {
 		this.frList = frList;
 	}
-	 
-	
-	
+
 	public List<FestiveEvent> getFestEventList() {
 		return festEventList;
 	}
@@ -111,15 +106,21 @@ public class FEDataTraveller {
 		this.festEventList = festEventList;
 	}
 
+	public List<FrSubCatList> getFrSubCatList() {
+		return frSubCatList;
+	}
+
+	public void setFrSubCatList(List<FrSubCatList> frSubCatList) {
+		this.frSubCatList = frSubCatList;
+	}
+
 	@Override
 	public String toString() {
 		return "FEDataTraveller [feProductHeadList=" + feProductHeadList + ", companyCatList=" + companyCatList
 				+ ", franchiseCatList=" + franchiseCatList + ", flavorTagStatusList=" + flavorTagStatusList
 				+ ", testimonialList=" + testimonialList + ", companyBannerList=" + companyBannerList
 				+ ", franchiseBannerList=" + franchiseBannerList + ", frList=" + frList + ", festEventList="
-				+ festEventList + ", catFilterConfig=" + catFilterConfig + "]";
+				+ festEventList + ", catFilterConfig=" + catFilterConfig + ", frSubCatList=" + frSubCatList + "]";
 	}
 
-	
-	 
 }

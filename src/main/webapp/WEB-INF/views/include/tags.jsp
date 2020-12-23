@@ -6,7 +6,7 @@
 
 <!--mongi help-popup-->
 <div class="mongi_help">
-	<a href="#mongi" class="initialism mongi_open"><img
+	<a href="javascript:void(0)" class="initialism mongi_open"><img
 		src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
 		alt=""></a>
 </div>

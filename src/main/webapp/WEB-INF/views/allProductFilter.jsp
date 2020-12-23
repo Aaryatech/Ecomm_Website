@@ -71,7 +71,7 @@
 									</div>
 
 									<%-- ${menuCat.typeIdList} --%>
-
+									<%-- ${allFilterTypeList} --%>
 
 									<c:forEach items="${menuCat.typeIdList}" var="menuTypeList">
 
@@ -101,11 +101,11 @@
 
 															</c:forEach>
 
-															<!--<li><a href="#"> Chocolate Cakes </a></li>
+															<!-- <li><a href="#"> Chocolate Cakes </a></li>
 															<li><a href="#"> Red Velvet Cakes </a></li>
 															<li><a href="#"> Black Forest Cakes </a></li>
 															<li><a href="#"> Butter Scotch Cakes </a></li>
-															<li><a href="#"> Strawberry Cakes </a></li> -->
+															<li><a href="#"> Strawberry Cakes </a></li>  -->
 
 														</ul>
 													</div>
@@ -119,7 +119,7 @@
 
 
 									<a href="javascript:void(0)" class="proceed_btn"
-										onclick="searchMenu()">Search</a>
+										onclick="searchMenu(${menuCat.cateId})">Search</a>
 
 								</div>
 							</ul></li>
@@ -149,8 +149,17 @@
 			<div class="wrapper">
 
 				<div class="product_boxes">
-
+				
 					<div id="hiddenProductList" style="display: none;"></div>
+
+					<div class="find_store">
+						<h2 class="sec_title">
+							<center>
+								<p id="prodCount"></p>
+							</center>
+						</h2>
+					</div>
+
 
 					<ul id="itemListUl">
 						<!--product-row-1-->
@@ -230,7 +239,7 @@
 												<div class="cake_container">
 													<h4 class="cake_nm single_row">
 														<a
-															href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
 													</h4>
 												</div>
 											</div>
@@ -604,229 +613,14 @@
 	</script>
 
 
-
+	<!-- ##################################################################################################################### -->
 
 	<!-- RESET TAGS -->
 	<script type="text/javascript">
 		$(document).ready(function() {
+			//setFlavourData();
 			loadData();
 		});
-
-		function loadData() {
-
-			if (sessionStorage.getItem("selTags") == null) {
-				var table = [];
-				sessionStorage.setItem("selTags", JSON.stringify(table));
-			}
-
-			if (sessionStorage.getItem("allItemList") == null) {
-				var table = [];
-				sessionStorage.setItem("allItemList", JSON.stringify(table));
-			}
-
-			if (sessionStorage.getItem("priceFilterMin") == null) {
-				sessionStorage.setItem("priceFilterMin", "0");
-			}
-
-			if (sessionStorage.getItem("priceFilterMax") == null) {
-				sessionStorage.setItem("priceFilterMax", "0");
-			}
-
-			if (sessionStorage.getItem("menuFilterName") == null) {
-				sessionStorage.setItem("menuFilterName", "");
-			}
-
-			var filterArr = [];
-			var menuFilter=sessionStorage.getItem("menuFilterName");
-			if(menuFilter!=''){
-				filterArr=menuFilter.split(",");
-			}
-
-			var min = sessionStorage.getItem("priceFilterMin");
-			var max = sessionStorage.getItem("priceFilterMax");
-
-			var allItemList = sessionStorage.getItem("allItemList");
-			var allItemArr = $.parseJSON(allItemList);
-
-			var tags = sessionStorage.getItem("selTags");
-			var selTags = $.parseJSON(tags);
-
-			//alert(selTags + "    ====> ");
-
-			var divStr = "";
-
-			var count = 0;
-			
-			var hiddenProductListArr = [];
-
-			for (var i = 0; i < allItemArr.length; i++) {
-
-				if (selTags.length > 0) {
-					
-					for (var t = 0; t < selTags.length; t++) {
-
-						if (allItemArr[i].appliTagNames === selTags[t]) {
-							
-							hiddenProductListArr.push(allItemArr[i]);
-
-							divStr = divStr
-									+ '<li>'
-									+ ' <div class="item_div">'
-									+ ' <div class="cake_one product_padd"> '
-									+ ' <div class="cake_pic"> '
-									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice
-									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice
-									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-									+ ' </div> '
-									+ ' <div class="cake_container"> '
-									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-									+ allItemArr[i].productName + '</a> </h4>'
-									+ ' </div> </div> </div> </li> ';
-
-							count++;
-
-						}
-					}
-
-				} else {
-					
-				
-					
-						if(filterArr.length>0){
-							
-							for (var f = 0; f < filterArr.length; f++) {
-								
-								var tempFilterArr=allItemArr[i].allFilterNames.split(",");
-								
-								if(tempFilterArr.length>0){
-
-									if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].defaultPrice >= min
-											&& allItemArr[i].defaultPrice <= max && max >0) {
-										
-										hiddenProductListArr.push(allItemArr[i]);
-										
-										divStr = divStr
-											+ '<li>'
-											+ ' <div class="item_div"> '
-											+ ' <div class="cake_one product_padd"> '
-											+ ' <div class="cake_pic"> '
-											+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-											+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-											+ allItemArr[i].defaultPrice
-											+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-											+ allItemArr[i].defaultPrice
-											+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-											+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-											+ ' </div> '
-											+ ' <div class="cake_container"> '
-											+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-											+ allItemArr[i].productName + '</a> </h4>'
-											+ ' </div> </div> </div> </li> ';
-
-										count++;
-										
-									}else if(max==0 && tempFilterArr.includes(filterArr[f])){
-										
-										hiddenProductListArr.push(allItemArr[i]);
-										
-										divStr = divStr
-										+ '<li>'
-										+ ' <div class="item_div"> '
-										+ ' <div class="cake_one product_padd"> '
-										+ ' <div class="cake_pic"> '
-										+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-										+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-										+ allItemArr[i].defaultPrice
-										+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-										+ allItemArr[i].defaultPrice
-										+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-										+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-										+ ' </div> '
-										+ ' <div class="cake_container"> '
-										+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-										+ allItemArr[i].productName + '</a> </h4>'
-										+ ' </div> </div> </div> </li> ';
-
-									count++;
-										
-									}
-
-								}
-								
-							}
-							
-						}else{
-							
-							
-							if (allItemArr[i].defaultPrice >= min
-									&& allItemArr[i].defaultPrice <= max && max >0) {
-								
-								hiddenProductListArr.push(allItemArr[i]);
-								
-								divStr = divStr
-										+ '<li>'
-										+ ' <div class="item_div"> '
-										+ ' <div class="cake_one product_padd"> '
-										+ ' <div class="cake_pic"> '
-										+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-										+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-										+ allItemArr[i].defaultPrice
-										+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-										+ allItemArr[i].defaultPrice
-										+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-										+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-										+ ' </div> '
-										+ ' <div class="cake_container"> '
-										+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-										+ allItemArr[i].productName + '</a> </h4>'
-										+ ' </div> </div> </div> </li> ';
-
-								count++;
-
-						} else if(max == 0) {
-							
-							hiddenProductListArr.push(allItemArr[i]);
-
-							divStr = divStr
-									+ '<li>'
-									+ ' <div class="item_div"> '
-									+ ' <div class="cake_one product_padd"> '
-									+ ' <div class="cake_pic"> '
-									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
-									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice
-									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice
-									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-									+ ' </div> '
-									+ ' <div class="cake_container"> '
-									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
-									+ allItemArr[i].productName + '</a> </h4>'
-									+ ' </div> </div> </div> </li> ';
-
-							count++;
-
-						}
-							
-					}
-
-				}
-
-			}
-			
-			document.getElementById("itemListUl").innerHTML = divStr;
-			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(hiddenProductListArr);
-			
-			sessionStorage.setItem("priceFilterMin", "0");
-			sessionStorage.setItem("priceFilterMax", "0");
-			sessionStorage.setItem("menuFilterName", "");
-
-		}
 
 		function resetAllTags() {
 
@@ -912,7 +706,7 @@
 									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 									+ ' </div> '
 									+ ' <div class="cake_container"> '
-									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 									+ allItemArr[i].productName + '</a> </h4>'
 									+ ' </div> </div> </div> </li> '
 
@@ -938,7 +732,7 @@
 							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 							+ allItemArr[i].productName + '</a> </h4>'
 							+ ' </div> </div> </div> </li> '
 
@@ -957,10 +751,14 @@
 
 		}
 
-		function searchMenu() {
+		function searchMenu(catId) {
+			
+			//alert(catId)
 			
 			var table = [];
 			sessionStorage.setItem("selTags", JSON.stringify(table));
+			
+			sessionStorage.setItem("findCatId", catId);
 
 			var priceListTemp = [];
 
@@ -1058,7 +856,7 @@
 								+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
-								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProdDetail/'+count+'">'
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
 								+ tempArr[i].productName + '</a> </h4>'
 								+ ' </div> </div> </div> </li> '
 
@@ -1073,8 +871,571 @@
 			
 		}
 		
+		
+		/* ********************************************************************** */
+		
+		
+		function loadData() {
+
+			if (sessionStorage.getItem("selTags") == null) {
+				var table = [];
+				sessionStorage.setItem("selTags", JSON.stringify(table));
+			}
+
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			if (sessionStorage.getItem("priceFilterMin") == null) {
+				sessionStorage.setItem("priceFilterMin", "0");
+			}
+
+			if (sessionStorage.getItem("priceFilterMax") == null) {
+				sessionStorage.setItem("priceFilterMax", "0");
+			}
+
+			if (sessionStorage.getItem("menuFilterName") == null) {
+				sessionStorage.setItem("menuFilterName", "");
+			}
+
+			var filterArr = [];
+			var menuFilter=sessionStorage.getItem("menuFilterName");
+			if(menuFilter!=''){
+				filterArr=menuFilter.split(",");
+			}
+
+			var min = sessionStorage.getItem("priceFilterMin");
+			var max = sessionStorage.getItem("priceFilterMax");
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var tags = sessionStorage.getItem("selTags");
+			var selTags = $.parseJSON(tags);
+			
+			var catId=sessionStorage.getItem("findCatId");
+			
+			/* var flvTagStatusList=parseJSON(document.getElementById("hideFlvList").innerHTML);
+			var flvTagStatusList=${allData};
+			alert(flvTagStatusList) */
+
+			var divStr = "";
+
+			var count = 0;
+			
+			var hiddenProductListArr = [];
+			var displayListArr = [];
+
+			for (var i = 0; i < allItemArr.length; i++) {
+
+				if (selTags.length > 0) {
+					
+					for (var t = 0; t < selTags.length; t++) {
+
+						if (allItemArr[i].appliTagNames.toLowerCase().indexOf(selTags[t].toLowerCase())>=0) {
+							
+							var isFound=0;
+							for(var y=0; y<hiddenProductListArr.length; y++){
+								if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+									isFound=1;
+								}
+							}
+							
+							if(isFound == 0){
+								hiddenProductListArr.push(allItemArr[i]);
+							}
+							
+							break;
+							
+						}
+					}
+
+				} else {
+					
+					//alert("filterArr  = "+filterArr.length);
+					
+						if(filterArr.length>0){
+							
+							for (var f = 0; f < filterArr.length; f++) {
+								
+								
+								if(catId == 0){
+									
+
+									var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+									
+									if(tempFilterArr.length>0){
+										
+										if (tempFilterArr.includes(filterArr[f])) {
+											
+											
+											var isFound=0;
+											for(var y=0; y<hiddenProductListArr.length; y++){
+												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+													isFound=1;
+												}
+											}
+											
+											if(isFound == 0){
+												hiddenProductListArr.push(allItemArr[i]);
+											}
+											
+											break;
+											
+										}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0 || allItemArr[i].allFilterNames.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0){
+											
+											var isFound=0;
+											for(var y=0; y<hiddenProductListArr.length; y++){
+												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+													isFound=1;
+												}
+											}
+											
+											if(isFound == 0){
+												hiddenProductListArr.push(allItemArr[i]);
+											}
+											
+											break;
+										
+											
+										}
+										
+									}
+									
+								}else{
+									
+									//alert("catId - "+catId)
+									
+
+									var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+									
+									if(tempFilterArr.length>0){
+										
+										if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].prodCatId == catId) {
+											
+											var isFound=0;
+											for(var y=0; y<hiddenProductListArr.length; y++){
+												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+													isFound=1;
+												}
+											}
+											
+											if(isFound == 0){
+												hiddenProductListArr.push(allItemArr[i]);
+											}
+											
+											break;
+											
+										}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0   && allItemArr[i].prodCatId == catId){
+											
+											var isFound=0;
+											for(var y=0; y<hiddenProductListArr.length; y++){
+												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+													isFound=1;
+												}
+											}
+											
+											if(isFound == 0){
+												hiddenProductListArr.push(allItemArr[i]);
+											}
+											
+											break;
+										
+										}
+										
+									}
+								}//else catId not zero
+								
+								
+								
+							}
+							
+						}
+						
+
+				}//tags else
+
+			}//all item list for end
+			
+			//alert(hiddenProductListArr.length)
+			
+			if(hiddenProductListArr.length > 0){
+				
+				
+				
+				for(var i=0; i<hiddenProductListArr.length; i++){
+					
+					if(catId==0){
+						
+						displayListArr.push(hiddenProductListArr[i]);
+						
+						divStr = divStr
+						+ '<li>'
+						+ ' <div class="item_div"> '
+						+ ' <div class="cake_one product_padd"> '
+						+ ' <div class="cake_pic"> '
+						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ hiddenProductListArr[i].defaultPrice
+						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ hiddenProductListArr[i].defaultPrice
+						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+						+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
+						+ ' </div> '
+						+ ' <div class="cake_container"> '
+						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+						+ hiddenProductListArr[i].productName + '</a> </h4>'
+						+ ' </div> </div> </div> </li> ';
+
+						count++;
+						
+					}else{
+						
+						if(max > 0 && hiddenProductListArr[i].defaultPrice >= min && hiddenProductListArr[i].defaultPrice <= max && hiddenProductListArr[i].prodCatId == catId){
+							
+							displayListArr.push(hiddenProductListArr[i]);
+							
+							divStr = divStr
+							+ '<li>'
+							+ ' <div class="item_div"> '
+							+ ' <div class="cake_one product_padd"> '
+							+ ' <div class="cake_pic"> '
+							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ hiddenProductListArr[i].defaultPrice
+							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ hiddenProductListArr[i].defaultPrice
+							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
+							+ ' </div> '
+							+ ' <div class="cake_container"> '
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							+ hiddenProductListArr[i].productName + '</a> </h4>'
+							+ ' </div> </div> </div> </li> ';
+
+							count++;
+							
+						}else if(max == 0  && hiddenProductListArr[i].prodCatId == catId){
+							displayListArr.push(hiddenProductListArr[i]);
+							
+							divStr = divStr
+							+ '<li>'
+							+ ' <div class="item_div"> '
+							+ ' <div class="cake_one product_padd"> '
+							+ ' <div class="cake_pic"> '
+							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ hiddenProductListArr[i].defaultPrice
+							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ hiddenProductListArr[i].defaultPrice
+							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
+							+ ' </div> '
+							+ ' <div class="cake_container"> '
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							+ hiddenProductListArr[i].productName + '</a> </h4>'
+							+ ' </div> </div> </div> </li> ';
+
+							count++;
+						}
+						
+					}
+					
+					
+					
+					
+					
+					
+					
+				}
+				
+			}else{
+				
+			
+				
+				for (var i = 0; i < allItemArr.length; i++) {
+					
+					if(catId == 0){
+						
+						displayListArr.push(allItemArr[i]);
+						
+						divStr = divStr
+						+ '<li>'
+						+ ' <div class="item_div"> '
+						+ ' <div class="cake_one product_padd"> '
+						+ ' <div class="cake_pic"> '
+						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ allItemArr[i].defaultPrice
+						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ allItemArr[i].defaultPrice
+						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+						+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+						+ ' </div> '
+						+ ' <div class="cake_container"> '
+						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+						+ allItemArr[i].productName + '</a> </h4>'
+						+ ' </div> </div> </div> </li> ';
+
+						//count++;
+						
+						/* var price=allItemArr[i].defaultPrice;
+						var defaultWt=1;
+						
+						var rateSetting='';
+						var rateSettingType=allItemArr[i].rateSettingType;
+						
+						
+						
+						if(allItemArr[i].rateSettingType == 0){
+							
+							rateSetting='<button type="button" value="" field="quantity" class="qtyminus cart" onclick="setQtyText('+allItemArr[i].productId+',0,'+allItemArr[i].prodDetailList+')"><i class="fa fa-minus" aria-hidden="true"></i></button>'
+							+ '<input type="text" id="txtWt'+allItemArr[i].productId+'" value="1" style="text-align: center;" class="qty cart">'
+							+ '<button type="button" value="" field="quantity" onclick="setQtyText('+allItemArr[i].productId+',1,'+allItemArr[i].prodDetailList+')" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>';	
+
+						
+						}else if(allItemArr[i].rateSettingType == 1){
+							
+							rateSetting ='<select class="select-css" id="wt'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')">';
+							var options='';
+							var wtStr=allItemArr[i].availInWeights.split(",");
+							
+							if(wtStr.length>0){
+								for(var w=0; w<wtStr.length; w++){
+									options = options+'<option value="'+wtStr[w]+'">'+wtStr[w]+'</option>';
+								}
+								defaultWt=parseFloat(wtStr[0]);
+								price = parseFloat(price) * defaultWt;
+							}
+									
+							rateSetting = rateSetting + options + '</select>';
+							
+						} 
+						
+						else if(allItemArr[i].rateSettingType == 2){
+							
+							rateSetting ='<select class="select-css" id="wt'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')">';
+							var options='';
+							var wtStr=allItemArr[i].availInWeights.split(",");
+							
+							if(wtStr.length>0){
+								for(var w=0; w<wtStr.length; w++){
+									options = options+'<option value="'+wtStr[w]+'">'+wtStr[w]+'</option>';
+								}
+								
+								defaultWt=parseFloat(wtStr[0]);
+							}
+							
+							if(allItemArr[i].prodDetailList.length > 0){
+								for(var p=0; p < allItemArr[i].prodDetailList.length; p++){
+									if(allItemArr[i].prodDetailList[p].flavorId == allItemArr[i].defaultFlavorId && allItemArr[i].prodDetailList[p].qty == defaultWt){
+										price = allItemArr[i].prodDetailList[p].actualRate;
+										break;
+									}
+										
+								}
+							}
+							
+							rateSetting = rateSetting + options + '</select>';
+							
+						}
+						
+						var flvDiv='';
+						
+						//var flvTagStatusList=${allData.flavorTagStatusList};
+						
+						
+						if(allItemArr[i].flavourIds !=0 ){
+							flvDiv = '<select class="select-css" id="flav'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+rateSettingType+')">';
+						
+							var options='';
+							
+							var flvStr=allItemArr[i].flavourIds.split(",");
+							
+						 	if(flvStr.length>0){
+								for(var w=0; w < flvStr.length; w++){
+									
+									for( var t=0 ; t < flvTagStatusList.length; t++){
+										
+										if(flvTagStatusList.filterTypeId == 4 && flvStr[w] == flvTagStatusList.filterId && flvStr[w] == allItemArr[i].defaultFlavorId){
+											options=options + '<option value="'+flvStr[w]+'" selected>'+flvTagStatusList.adminName+'</option>';
+										}else{
+											options=options + '<option value="'+flvStr[w]+'">'+flvTagStatusList.adminName+'</option>';
+										}
+										
+									}
+									
+								}
+							} 
+							
+							flvDiv = flvDiv + options + '</select>';
+							
+						
+						}
+						
+					
+						
+						
+						divStr = divStr
+						+ '<div class="cake_one">'
+						+ '<div class="cake_pic">'
+						+ '<img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition lazy">'
+						+ '<div class="circle_tag active">'
+						+ '<img src="#" class="lazy" data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">'
+						+ '<img src="#" class="lazy" data-src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
+						+ '</div>'
+						+ '<div class="cake_prc">'
+						+ '<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>'
+						+ '<p class="cake_prc_detail_pclass" id="cake_prc'+allItemArr[i].productId+'">'+allItemArr[i].defaultPrice+'</p>'
+						+ '<span class="off_prc" id="off_prc'+allItemArr[i].productId+'"></span>'
+						+ '<span id="prc_off'+allItemArr[i].productId+'" class="prc_off"></span>'
+						+ '</div>'
+						+ '</div>'
+						
+						+ '<div class="cake_container">'
+						+ '<h4 class="cake_nm">'
+						+ '<a href="${pageContext.request.contextPath}/showProdDetail/0">'+allItemArr[i].productName+'</a>'
+						+ '</h4>'
+						+ '</div>'
+						
+						+ '<div class="cake_dropdown">'
+						+ '<div class="cake_dropdown_l">'
+						+ rateSetting 
+						+ '<span>'+allItemArr[i].uomShowName+'</span>'
+						+ '</div>'
+ 						+ '<div class="cake_dropdown_r">'
+						+ '<div>'
+						+ '<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>'
+						+ '<p class="cake_prc_detail_pclass" id="newPrice'+allItemArr[i].productId+'">'+price+'</p>'
+						+ '</div>'
+						+ '</div>'
+						+ '<div class="clr"></div>'
+						+ '</div>'
+						
+						+ '<div class="cake_radio_row">'
+						+ '<div class="radio_l">'
+						+ '<div class="radio_1">'
+						+ '<ul>'
+						+ flvDiv
+						+ '</ul>'
+						+ '</div>'
+						+ '</div>'
+						+ '<div class="radio_r">'
+						+ '<a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+rateSettingType+')" class="cart_btn">Add to Cart</a>'
+						+ '</div>'
+						+ '<div class="clr"></div>'
+						+ '</div>'
+						
+						
+						+ '</div>';
+ */
+						
+
+						count++;
+						
+					}else{
+						
+						if(max > 0){
+							
+							if(allItemArr[i].defaultPrice >= min && allItemArr[i].defaultPrice <= max){
+								
+								displayListArr.push(allItemArr[i]);
+								
+								divStr = divStr
+								+ '<li>'
+								+ ' <div class="item_div"> '
+								+ ' <div class="cake_one product_padd"> '
+								+ ' <div class="cake_pic"> '
+								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+								+ allItemArr[i].defaultPrice
+								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+								+ allItemArr[i].defaultPrice
+								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+								+ ' </div> '
+								+ ' <div class="cake_container"> '
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								+ allItemArr[i].productName + '</a> </h4>'
+								+ ' </div> </div> </div> </li> ';
+
+								count++;
+								
+							}
+							
+						} else{
+							
+							displayListArr.push(allItemArr[i]);
+							
+							//alert("hi")
+							
+ 							divStr = divStr
+							+ '<li>'
+							+ ' <div class="item_div"> '
+							+ ' <div class="cake_one product_padd"> '
+							+ ' <div class="cake_pic"> '
+							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ allItemArr[i].defaultPrice
+							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ allItemArr[i].defaultPrice
+							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+							+ ' </div> '
+							+ ' <div class="cake_container"> '
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+							+ allItemArr[i].productName + '</a> </h4>'
+							+ ' </div> </div> </div> </li> ';
+ 
+							count++;
+							
+						}
+						
+					}
+					
+					
+					
+					
+					
+				}
+				
+			}
+			
+
+			
+			if (selTags.length > 0) {
+				for (var t = 0; t < selTags.length; t++) {
+					menuFilter=menuFilter+","+selTags[t];
+				}
+				menuFilter=menuFilter.slice(1);
+			}
+			
+			
+			
+			document.getElementById("itemListUl").innerHTML = divStr;
+			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(displayListArr);
+			
+			sessionStorage.setItem("priceFilterMin", "0");
+			sessionStorage.setItem("priceFilterMax", "0");
+			sessionStorage.setItem("menuFilterName", "");
+			sessionStorage.setItem("findCatId", "0");
+			
+			var prodCountTxt="";
+			if(menuFilter!=""){
+				prodCountTxt=count+' results found for '+'"'+menuFilter+'"';
+			}else{
+				prodCountTxt=count+" results found";
+			}
+			
+			document.getElementById("prodCount").innerHTML = prodCountTxt;
+
+		}
+		
 	</script>
 
 </body>
 
 </html>
+
+
