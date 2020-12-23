@@ -11,8 +11,8 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
-    "key": "rzp_test_1eXaKykckwM8kP", // Enter the Key ID generated from the Dashboard
-    "amount": "450", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "key": "rzp_live_1xwIfbV7BUaBxt", // Enter the Key ID generated from the Dashboard
+    "amount": "${amount}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
     "currency": "INR",
     "name": "Pay To Monginis",
     "description": "Order Value from  ${sessionScope.userName}",

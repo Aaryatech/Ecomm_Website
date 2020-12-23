@@ -5,7 +5,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ats.ecommerce.common.Constants;
-import com.atss.ecommerce.model.Info;
+import com.ats.ecommerce.model.Info;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;

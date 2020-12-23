@@ -31,18 +31,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.DateConvertor;
-import com.atss.ecommerce.model.City;
-import com.atss.ecommerce.model.CityData;
-import com.atss.ecommerce.model.Customer;
-import com.atss.ecommerce.model.FEDataTraveller;
-import com.atss.ecommerce.model.Info;
-import com.atss.ecommerce.model.TempImageHolder;
-import com.atss.ecommerce.model.order.ItemJsonImportData;
-import com.atss.ecommerce.model.order.OrderDetail;
-import com.atss.ecommerce.model.order.OrderHeader;
-import com.atss.ecommerce.model.order.OrderResponse;
-import com.atss.ecommerce.model.order.OrderSaveData;
-import com.atss.ecommerce.model.order.OrderTrail;
+import com.ats.ecommerce.model.City;
+import com.ats.ecommerce.model.CityData;
+import com.ats.ecommerce.model.Customer;
+import com.ats.ecommerce.model.FEDataTraveller;
+import com.ats.ecommerce.model.Info;
+import com.ats.ecommerce.model.TempImageHolder;
+import com.ats.ecommerce.model.order.ItemJsonImportData;
+import com.ats.ecommerce.model.order.OrderDetail;
+import com.ats.ecommerce.model.order.OrderHeader;
+import com.ats.ecommerce.model.order.OrderResponse;
+import com.ats.ecommerce.model.order.OrderSaveData;
+import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller

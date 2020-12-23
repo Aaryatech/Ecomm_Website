@@ -29,11 +29,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
-import com.atss.ecommerce.model.City;
-import com.atss.ecommerce.model.CityData;
-import com.atss.ecommerce.model.Customer;
-import com.atss.ecommerce.model.CustomerAddDetail;
-import com.atss.ecommerce.model.Info;
+import com.ats.ecommerce.model.City;
+import com.ats.ecommerce.model.CityData;
+import com.ats.ecommerce.model.Customer;
+import com.ats.ecommerce.model.CustomerAddDetail;
+import com.ats.ecommerce.model.Info;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller

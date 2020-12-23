@@ -4,7 +4,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.atss.ecommerce.model.Info;
+import com.ats.ecommerce.model.Info;
 
 
 //Sachin 3-Dec-2020

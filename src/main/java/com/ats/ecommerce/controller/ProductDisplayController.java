@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.Constants;
-import com.atss.ecommerce.model.CateFilterConfig;
-import com.atss.ecommerce.model.FEDataTraveller;
-import com.atss.ecommerce.model.FEProductHeader;
-import com.atss.ecommerce.model.FilterTypes;
-import com.atss.ecommerce.model.GetFlavorTagStatusList;
-import com.atss.ecommerce.model.MFilter;
+import com.ats.ecommerce.model.CateFilterConfig;
+import com.ats.ecommerce.model.FEDataTraveller;
+import com.ats.ecommerce.model.FEProductHeader;
+import com.ats.ecommerce.model.FilterTypes;
+import com.ats.ecommerce.model.GetFlavorTagStatusList;
+import com.ats.ecommerce.model.MFilter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller

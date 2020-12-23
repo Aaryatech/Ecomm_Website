@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
-import com.atss.ecommerce.model.order.GetOrderHeaderDisplay;
+import com.ats.ecommerce.model.order.GetOrderHeaderDisplay;
 
 @Controller
 @Scope("session")

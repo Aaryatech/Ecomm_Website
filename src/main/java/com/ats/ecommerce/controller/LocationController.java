@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
-import com.atss.ecommerce.model.CategoryList;
-import com.atss.ecommerce.model.CityData;
-import com.atss.ecommerce.model.CompanyTestomonials;
-import com.atss.ecommerce.model.FEDataTraveller;
-import com.atss.ecommerce.model.FETestimonial;
+import com.ats.ecommerce.model.CategoryList;
+import com.ats.ecommerce.model.CityData;
+import com.ats.ecommerce.model.CompanyTestomonials;
+import com.ats.ecommerce.model.FEDataTraveller;
+import com.ats.ecommerce.model.FETestimonial;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
