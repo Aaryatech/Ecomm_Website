@@ -379,7 +379,7 @@
 
 			var qty = parseFloat(curQty);
 
-			alert(table[position].rate)
+			//alert(table[position].rate)
 
 			var taxableAmt = parseFloat(table[position].rate)
 					* parseFloat(qty).toFixed(2);
