@@ -473,4 +473,25 @@ public class HomeController {
 		return image;
 
 	}
+	
+	
+	@RequestMapping(value = "/showAboutUsPage", method = RequestMethod.GET)
+	public String showAboutUsPage(Locale locale, Model model) {
+		return "about-us";
+	}
+	
+	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
+	public String showContactUsPage(Locale locale, Model model) {
+		return "contact-us";
+	}
+	
+	@RequestMapping(value = "/showT&CPage", method = RequestMethod.GET)
+	public String showT(Locale locale, Model model) {
+		return "terms-condition";
+	}
+	
+	@RequestMapping(value = "/showVistStorePage", method = RequestMethod.GET)
+	public String showVistStorePage(Locale locale, Model model) {
+		return "visit-stores";
+	}
 }

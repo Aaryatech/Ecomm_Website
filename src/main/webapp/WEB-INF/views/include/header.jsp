@@ -17,8 +17,8 @@
 							<li><a href="#">Partner with us <i
 									class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
-									<li><a href="#"> Become A Vendor </a></li>
-									<li><a href="#"> Become A Franchisee </a></li>
+									<li><a href="${pageContext.request.contextPath}/showVistStorePage"> Become A Vendor </a></li>
+									<li><a href="${pageContext.request.contextPath}/showVistStorePage"> Become A Franchisee </a></li>
 									<li><a href="#"> Corporate Gifts </a></li>
 								</ul></li>
 						</ul>
