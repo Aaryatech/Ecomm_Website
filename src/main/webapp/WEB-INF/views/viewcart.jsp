@@ -16,7 +16,7 @@
 		<img
 			src="${pageContext.request.contextPath}/resources/images/loader.svg"
 			alt="">
-	</div>
+	</div> 
 	<c:url var="placeOrder" value="/placeOrder" />
 <c:url var="getDeliveryChargesByKm" value="/getDeliveryChargesByKm"></c:url>
 <c:url var="getOfferDetailListAjax" value="/getOfferDetailListAjax"></c:url>
