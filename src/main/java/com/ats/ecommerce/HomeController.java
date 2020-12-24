@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -32,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
+import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FEProductHeader;
@@ -481,5 +483,42 @@ public class HomeController {
 
 		return image;
 
+	}
+	
+	
+	@RequestMapping(value = "/showAboutUsPage", method = RequestMethod.GET)
+	public String showAboutUsPage(Locale locale, Model model) {
+		return "about-us";
+	}
+	
+	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
+	public String showContactUsPage(Locale locale, Model model) {
+		return "contact-us";
+	}
+	
+	@RequestMapping(value = "/showT&CPage", method = RequestMethod.GET)
+	public String showT(Locale locale, Model model) {
+		return "terms-condition";
+	}
+	
+	@RequestMapping(value = "/showVistStorePage", method = RequestMethod.GET)
+	public String showVistStorePage(Locale locale, Model model) {
+		return "visit-stores";
+	}
+	
+	@RequestMapping(value = "/showBecmVendrFr", method = RequestMethod.GET)
+	public String showBecmVendrFr(Locale locale, Model model) {
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = mapper.readValue(new File(Constants.CITY_JSON_FILES_PATH),
+					CityData[].class);
+			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+
+			model.addAttribute("cityList", cityList);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return "becmVendorFr";
 	}
 }

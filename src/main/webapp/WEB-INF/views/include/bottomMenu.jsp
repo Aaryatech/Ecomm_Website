@@ -19,15 +19,15 @@
 				<div class="menu_list">
 					<h3 class="footer_title">Main Menu</h3>
 					<ul class="footer_menu_list">
-						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
+						<li><a href="${pageContext.request.contextPath}/showAboutUsPage"><i class="fa fa-check" aria-hidden="true"></i>
 								About Us</a></li>
 						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
 								Privacy Policy</a></li>
-						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
+						<li><a href="${pageContext.request.contextPath}/showT&CPage"><i class="fa fa-check" aria-hidden="true"></i>
 								Terms &amp; Condition</a></li>
 						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
 								Meet Our Team</a></li>
-						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
+						<li><a href="${pageContext.request.contextPath}/showContactUsPage"><i class="fa fa-check" aria-hidden="true"></i>
 								Contact Us</a></li>
 
 						<!--<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Our Moral Responsibility</a></li>

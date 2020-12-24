@@ -11,14 +11,14 @@
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
 							href="#">Help</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
-						<span><a href="#">Visit Stores</a></span>
+						<span><a href="${pageContext.request.contextPath}/showVistStorePage">Visit Stores</a></span>
 
 						<ul class="drop_menu">
 							<li><a href="#">Partner with us <i
 									class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
-									<li><a href="#"> Become A Vendor </a></li>
-									<li><a href="#"> Become A Franchisee </a></li>
+									<li><a href="${pageContext.request.contextPath}/showBecmVendrFr"> Become A Vendor </a></li>
+									<li><a href="${pageContext.request.contextPath}/showBecmVendrFr"> Become A Franchisee </a></li>
 									<li><a href="#"> Corporate Gifts </a></li>
 								</ul></li>
 						</ul>
