@@ -31,16 +31,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.DateConvertor;
-import com.ats.ecommerce.model.City;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
-import com.ats.ecommerce.model.order.ItemJsonImportData;
+import com.ats.ecommerce.model.offer.CkDeliveryCharges;
+import com.ats.ecommerce.model.offer.OfferDetail;
+import com.ats.ecommerce.model.offer.OfferList;
+import com.ats.ecommerce.model.offer.OrderCheckoutData;
 import com.ats.ecommerce.model.order.OrderDetail;
 import com.ats.ecommerce.model.order.OrderHeader;
-import com.ats.ecommerce.model.order.OrderResponse;
 import com.ats.ecommerce.model.order.OrderSaveData;
 import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,6 +50,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Scope("session")
 
 public class CheckoutController {
+	List<OfferDetail> offerDetailList = new ArrayList<>();
+	List<OfferList> offerHeaderList = new ArrayList<>();
 
 	@RequestMapping(value = "/checkout", method = RequestMethod.GET)
 	public String viewCart(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -74,7 +77,7 @@ public class CheckoutController {
 			FEDataTraveller data = new FEDataTraveller();
 			int frId = (int) session.getAttribute("frId");
 			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-			System.err.println("data " + data.toString());
+			// System.err.println("data " + data.toString());
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
@@ -92,6 +95,38 @@ public class CheckoutController {
 				model.addAttribute("getArea", billAddress[1]);
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
+
+				// 23-12-2020
+
+				float km = 0;
+
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("frId", frId);
+				map.add("km", km);
+
+				// System.err.println("FR - "+frId+" KM - "+km);
+
+				OrderCheckoutData data2 = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getOrderCheckoutData", map, OrderCheckoutData.class);
+				if (data2 != null) {
+					model.addAttribute("checkoutData", data2);
+					model.addAttribute("FrCharges", data2.getAdditionalCharges());
+					model.addAttribute("offerList", data2.getOfferList());
+					offerDetailList = data2.getOfferDetailList();
+					offerHeaderList = data2.getOfferList();
+
+					float addCh = 0;
+					try {
+						addCh = data2.getAdditionalCharges().getSurchargeFee()
+								+ data2.getAdditionalCharges().getHandlingChg()
+								+ data2.getAdditionalCharges().getPackingChg()
+								+ data2.getAdditionalCharges().getRoundOffAmt()
+								+ data2.getAdditionalCharges().getExtraChg();
+					} catch (Exception e) {
+					}
+					model.addAttribute("addCh", addCh);
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -129,7 +164,7 @@ public class CheckoutController {
 			FEDataTraveller data = new FEDataTraveller();
 			int frId = (int) session.getAttribute("frId");
 			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-			System.err.println("data " + data.toString());
+			// System.err.println("data " + data.toString());
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
@@ -161,8 +196,39 @@ public class CheckoutController {
 				model.addAttribute("getArea", billAddress[1]);
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
+
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+//23-12-2020
+
+			float km = 0;
+
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("frId", frId);
+			map.add("km", km);
+
+			// System.err.println("FR - "+frId+" KM - "+km);
+
+			OrderCheckoutData data2 = Constants.getRestTemplate().postForObject(Constants.url + "getOrderCheckoutData",
+					map, OrderCheckoutData.class);
+			if (data2 != null) {
+				model.addAttribute("checkoutData", data2);
+				model.addAttribute("FrCharges", data2.getAdditionalCharges());
+				model.addAttribute("offerList", data2.getOfferList());
+				offerDetailList = data2.getOfferDetailList();
+				offerHeaderList = data2.getOfferList();
+
+				float addCh = 0;
+				try {
+					addCh = data2.getAdditionalCharges().getSurchargeFee()
+							+ data2.getAdditionalCharges().getHandlingChg()
+							+ data2.getAdditionalCharges().getPackingChg()
+							+ data2.getAdditionalCharges().getRoundOffAmt()
+							+ data2.getAdditionalCharges().getExtraChg();
+				} catch (Exception e) {
+				}
+				model.addAttribute("addCh", addCh);
 			}
 
 		} catch (Exception e) {
@@ -170,6 +236,146 @@ public class CheckoutController {
 			System.out.println("Exception in checkout : " + e.getMessage());
 		}
 		return "viewcart";
+	}
+
+	@RequestMapping(value = "/getOrderCheckoutData", method = RequestMethod.GET)
+	public @ResponseBody OrderCheckoutData getOrderCheckoutData(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		OrderCheckoutData data = new OrderCheckoutData();
+		try {
+
+			float km = 0;
+			try {
+				if (request.getParameter("km") != null) {
+					km = Float.parseFloat(request.getParameter("km"));
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			HttpSession session = request.getSession();
+			int frId = (int) session.getAttribute("frId");
+
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map = new LinkedMultiValueMap<String, Object>();
+			map.add("frId", frId);
+			map.add("km", km);
+
+			System.err.println("FR - " + frId + "    KM - " + km);
+
+			data = Constants.getRestTemplate().postForObject(Constants.url + "getOrderCheckoutData", map,
+					OrderCheckoutData.class);
+
+			if (data == null) {
+				data = new OrderCheckoutData();
+			}
+
+			System.err.println("DATA -------------------- " + data);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return data;
+	}
+
+	@RequestMapping(value = "/getOfferDetailListAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OfferDetail> getOfferDetailListAjax(HttpServletRequest request, HttpServletResponse response) {
+		return offerDetailList;
+	}
+
+	@RequestMapping(value = "/getOfferHeaderListAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OfferList> getOfferHeaderListAjax(HttpServletRequest request, HttpServletResponse response) {
+		return offerHeaderList;
+	}
+
+	@RequestMapping(value = "/checkIsValidOffer", method = RequestMethod.GET)
+	@ResponseBody
+	public Info checkIsValidOffer(HttpServletRequest request, HttpServletResponse response) {
+
+		Info info = new Info();
+
+		int offerId = Integer.parseInt(request.getParameter("offerId"));
+		String coupon = request.getParameter("coupon");
+		int custId = Integer.parseInt(request.getParameter("custId"));
+
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("offerId", offerId);
+		map.add("coupon", coupon);
+		map.add("custId", custId);
+
+		info = Constants.getRestTemplate().postForObject(Constants.url + "checkIsValidOffer", map, Info.class);
+
+		return info;
+	}
+
+	@RequestMapping(value = "/getCouponOfferListAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OfferList> getCouponOfferListAjax(HttpServletRequest request, HttpServletResponse response) {
+
+		List<OfferList> offerList = new ArrayList<>();
+		HttpSession session = request.getSession();
+
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("frId", session.getAttribute("frId"));
+
+		OfferList[] arr = Constants.getRestTemplate().postForObject(Constants.url + "getCouponWiseBillOffers", map,
+				OfferList[].class);
+		offerList = new ArrayList<>(Arrays.asList(arr));
+
+		return offerList;
+	}
+
+	@RequestMapping(value = "/getCustomerOfferListAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<OfferList> getCustomerOfferListAjax(HttpServletRequest request, HttpServletResponse response) {
+
+		List<OfferList> offerList = new ArrayList<>();
+		HttpSession session = request.getSession();
+
+		int custId = Integer.parseInt(request.getParameter("custId"));
+
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		map.add("frId", session.getAttribute("frId"));
+		map.add("custId", custId);
+
+		OfferList[] arr = Constants.getRestTemplate().postForObject(Constants.url + "getCustomerWiseBillOffers", map,
+				OfferList[].class);
+		offerList = new ArrayList<>(Arrays.asList(arr));
+
+		return offerList;
+	}
+
+	@RequestMapping(value = "/getDeliveryChargesByKm", method = RequestMethod.GET)
+
+	@ResponseBody
+	public CkDeliveryCharges getDeliveryChargesByKm(HttpServletRequest request, HttpServletResponse response,
+			Model model) {
+
+		CkDeliveryCharges charges = null;
+		try {
+			float km = 0;
+			try {
+				if (request.getParameter("km") != null) {
+					km = (float) request.getSession().getAttribute("frKm");
+				}
+
+			} catch (Exception e) {
+			}  System.err.println("KM - " + km);
+
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			map.add("km", km);
+
+			charges = Constants.getRestTemplate().postForObject(Constants.url + "getDeliveryCharges", map,
+					CkDeliveryCharges.class);
+System.err.println("charges " +charges);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return charges;
 	}
 
 	@RequestMapping(value = "/placeOrder", method = RequestMethod.POST)
@@ -413,25 +619,25 @@ public class CheckoutController {
 			orderSaveData.setOrderTrail(orderTrail);
 
 			session.setAttribute("orderSaveData", orderSaveData);
-			//System.err.println("Order Save Method is commented will not be saved in Db");
-			
-			  info = Constants.getRestTemplate().postForObject(Constants.url +
-			  "saveCloudOrder", orderSaveData, Info.class);
-			 if(!info.getMsg().equalsIgnoreCase(null)) {
-				 //Order saved successfully.
-				 session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
-				if(orderSaveData.getOrderHeader().getPaymentMethod()==2) {
-					//ie paid by elecronic way
-					
+			// System.err.println("Order Save Method is commented will not be saved in Db");
+
+			info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
+					Info.class);
+			if (!info.getMsg().equalsIgnoreCase(null)) {
+				// Order saved successfully.
+				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
+				if (orderSaveData.getOrderHeader().getPaymentMethod() == 2) {
+					// ie paid by elecronic way
+
 					info.setMsg("epay");
 					info.setResponseObject1("");
-					
-				}else {
+
+				} else {
 					info.setMsg("cashpay");
 					info.setResponseObject1("");
 				}
-			 }
-System.err.println("Info " +info.toString());
+			}
+			System.err.println("Info " + info.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

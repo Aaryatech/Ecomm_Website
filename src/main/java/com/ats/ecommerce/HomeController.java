@@ -72,7 +72,7 @@ public class HomeController {
 		try {
 			if (frId > 0)
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-			System.err.println("data " + data.toString());
+			//System.err.println("data " + data.toString());
 
 			try {
 
@@ -193,11 +193,14 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		session.setAttribute("custId", 0);
 		int frId = 0;
-
+		float frKm=0;
 		try {
 			frId = Integer.parseInt(request.getParameter("selectShop"));
-			System.err.println("FrId " + frId);
+			frKm=Float.parseFloat(request.getParameter("frKm"));
+			
+			System.err.println("FrId " + frId +" frKm " +frKm);
 			session.setAttribute("frId", frId);
+			session.setAttribute("frKm", frKm);
 			try {
 				String landMark = request.getParameter("txtPlaces");
 				session.setAttribute("landMark", landMark);
@@ -219,6 +222,12 @@ public class HomeController {
 		Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
 		frIdCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frIdCookie);
+		
+		//24-12-2020
+		Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(frKmCookie);
+		
 
 		session.setAttribute("userId", 0);
 		return "redirect:/home";

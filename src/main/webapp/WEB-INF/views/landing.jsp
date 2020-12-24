@@ -216,67 +216,6 @@
 					</div>
 				</c:forEach>
 
-				<%-- <div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div>
-				<div>
-					<div class="testimonial_one">
-						<i class="fa fa-quote-left" aria-hidden="true"></i>
-						<p class="testimoial_txt">There are many variations of
-							passages of Lorem Ipsum available, but the majority have suffered
-							alteration in some form, by injected humour, or randomised words
-							which don't look even slightly believable. If you are going to
-							use a passage of Lorem Ipsum, you need to be sure there isn't
-							anything embarrassing hidden.</p>
-						<div class="testimonial_nm">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/testimonial_pic.jpg"
-								alt="">
-							<h2 class="testimonial_date">
-								Sumit Mahshalkar <span>Date : 17-09-2020</span> <span>Location:
-									Nashik</span>
-							</h2>
-						</div>
-					</div>
-				</div> --%>
-
 			</section>
 		</div>
 
@@ -333,57 +272,9 @@
 			</ul>
 		</div>
 	</div>
-
 	<!--footer start here-->
-	<<%-- footer> <div class="footer_menu"> <div class="wrapper"> <div
-	class="menu_bx"> <!--left-certificate--> <div class="certificate_one">
-	<h3 class="footer_title">Our Certificate</h3> <img
-	src="${pageContext.request.contextPath}/resources/images/iso_certificate.png"
-	alt=""> </div> <!--center menu list--> <div class="menu_list"> <h3
-	class="footer_title">Main Menu</h3> <ul class="footer_menu_list">
-	<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i> About
-	Us</a></li> <li><a href="#"><i class="fa fa-check"
-	aria-hidden="true"></i> Privacy Policy</a></li> <li><a href="#"><i
-	class="fa fa-check" aria-hidden="true"></i> Terms &amp;
-	Condition</a></li> <li><a href="#"><i class="fa fa-check"
-	aria-hidden="true"></i> Meet Our Team</a></li> <li><a href="#"><i
-	class="fa fa-check" aria-hidden="true"></i> Contact Us</a></li>
-
-	<!--<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Our
-	Moral Responsibility</a></li> <li><a href="#"><i class="fa fa-check"
-	aria-hidden="true"></i> Recognition &amp; Awards</a></li> <li><a
-	href="#"><i class="fa fa-check" aria-hidden="true"></i>
-	Disclaimer</a></li> <li><a href="#"><i class="fa fa-check"
-	aria-hidden="true"></i> Monginis Egypt</a></li> <li><a href="#"><i
-	class="fa fa-check" aria-hidden="true"></i> Cake Studies</a></li>
-	<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Delicias
-	Foods</a></li> <li><a href="#"><i class="fa fa-check"
-	aria-hidden="true"></i> Training Videos</a></li>--> </ul> <div
-	class="footer_social"> <ul> <li> Connect with Us : </li> <li><a
-	href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-	<li><a href="#"><i class="fa fa-twitter"
-	aria-hidden="true"></i></a></li> <li><a href="#"><i class="fa
-	fa-linkedin" aria-hidden="true"></i></a></li> <li><a href="#"><i
-	class="fa fa-google-plus" aria-hidden="true"></i></a></li> </ul> </div>
-
-	</div> <!--right-contact--> <div class="contact_address"> <h3
-	class="footer_title">Contact Us</h3> <div class="cont_add"><i class="fa
-	fa-map-marker" aria-hidden="true"></i> Shop 57, Near Shri Bhagvati
-	Hotel Puriya Park Road Panchvati Karanje, Nashik, Maharashtra
-	422003.</div> <div class="cont_add"><i class="fa fa-phone"
-	aria-hidden="true"></i> <a href="callto:(+91) 1234 567 890"> (+91) 1234
-	567 890</a> <span>/</span> <a href="callto:(+91) 9876 543 210">(+91)
-	9876 543 210</a></div> <div class="cont_add"><i class="fa fa-envelope"
-	aria-hidden="true"></i> <a
-	href="mailto:customercare@monginis.net">customercare@monginis.net</a>
-	<span>/</span> <a
-	href="mailto:info@monginis.net">info@monginis.net</a></div> </div>
-	</div> </div> </div> <div class="copyright"> &copy; Copyright 2019-20.
-	All Right Reserv. Aarya Tech Solutions</div> </footer> --%>
 	<jsp:include
 	page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-
-
 	<!--apply now pop up-->
 	<div id="landingpop" class="well_landing">
 		<h2 class="location_title">
@@ -504,7 +395,7 @@
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select required id="selectShop" name="selectShop"
+							<select required onchange="getKM(this)" id="selectShop" name="selectShop"
 								style="background-color: #FFF; border-radius: 3px; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
 								<option selected value="27">FR ID 27</option>
 							</select>
@@ -531,11 +422,21 @@
 				</div>
 
 			</div>
+			<input type="hidden" id="frKm" name="frKm" value="0"/>
 		</form>
 
 	</div>
 
 	<script type="text/javascript">
+	function getKM(thisobj){
+	/* 	var plant = document.getElementById('selectShop');
+		var fruitCount = plant.getAttribute('data-km'); // fruitCount = '12'
+		alert(fruitCount); */
+		
+		var totalDistance = $(thisobj).find(':selected').attr('data-km');
+		alert(totalDistance);
+		document.getElementById('frKm').value=totalDistance;
+	}
 		$(document).ready(function() {
 
 			var frData = '${frData}';
@@ -804,6 +705,9 @@
 											//alert(list[j].frName+"    --->    "+km+"        ---> "+list[j].noOfKmAreaCover + "      latlng --> "+parseFloat(list[j].shopsLatitude)+"   "+parseFloat(list[j].shopsLogitude))
 
 											list[j].exInt1 = km;
+											if(list[j].frId==13){
+												alert(list[j].exInt1);
+											}
 											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
 												newFrList.push(list[j]);
 											}
@@ -817,7 +721,7 @@
 									for (var j = 0; j < newFrList.length; j++) {
 
 										//alert(newFrList[j].exInt1)
-										html += '<option value="' + newFrList[j].frId + '">'
+										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">'
 												+ newFrList[j].frName
 												+ ' ('
 												+ newFrList[j].frCode

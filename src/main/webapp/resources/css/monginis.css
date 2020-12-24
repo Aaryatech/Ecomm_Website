@@ -450,9 +450,9 @@ input[type=radio]:checked ~ label{color: #ec2c92;}
 .testimonial_one{background: #FFF; padding: 25px; margin: 10px; position: relative; -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);}
 .testimonial_one i{font-size: 100px; position: absolute; left: 10px; top: 10px; color: #f0f0f0;}
 .testimoial_txt{position: relative; z-index: 1; color: #666666; font-size:15px; line-height: 24px; text-align: justify; height: 148px; overflow:hidden;}
-.testimonial_nm{margin: 15px 0 0 0; position: relative; padding: 0 0 0 90px; text-align: left;}
-.testimonial_nm img{position: absolute; left: 0; top: -7px; border-radius: 50%; width: 70px; height: 70px;}
-.testimonial_date{color: #ec268f; font-size: 18px; font-family: 'Hind-SemiBold'; line-height: 17px;}
+.testimonial_nm{margin: 15px 0 0 0; position: relative; padding: 0 0 0 60px /* 90px */; text-align: left;}
+.testimonial_nm img{position: absolute; left: 0; top: -7px; border-radius: 50%; width: 50px; height: 50px;}
+.testimonial_date{color: #ec268f; font-size: 18px; font-family: 'Hind-SemiBold'; line-height: 17px; margin: 3px 0 0 0; display: inline-block;}
 .testimonial_date span{display: block; color: #666666; font-size: 14px; font-family: 'Hind-Regular'; margin: 5px 0 0 0; }
 
 .more_cakes{display: inline-block; width: 100%; text-align: center; margin: 25px 0 0 0;}
@@ -1027,6 +1027,23 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 .cake_prc_detail_iclass{float: left;margin: 6px 2px 0px 0px;}
 .cake_prc_detail_pclass{float: left; margin-right: 10px;}
 /*End of code 18-11-2020*/
+
+.promo_one{display: inline-block; width: 100%; margin: 0 0 15px 0;}
+.applicabl_row{display: inline-block; width: 100%; margin: 0 0 10px 0;}
+.applicabl_row.last{margin: 0;}
+.applic_l{float: left; margin: 4px 15px 0 0;}
+.applic_r{float: left; width: 60%;}
+.radio_1.promo ul li label{font-size: 16px; padding: 5px 5px 5px 21px;}
+.radio_1.promo ul li .check{width: 14px; height:14px;}
+.radio_1.promo ul li .check::before{width: 8px; height: 8px;}
+
+
+
+
+
+
+
+
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}

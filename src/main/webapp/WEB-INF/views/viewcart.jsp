@@ -11,17 +11,19 @@
 }
 </style>
 
-<body>
-	<c:url var="placeOrder" value="/placeOrder" />
-
-
-	<!--mongi help-popup-->
-	<%-- 	<div class="mongi_help">
-		<a href="#mongi" class="initialism mongi_open"><img
-			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
-			alt=""></a>
+<body onload="getDeliveryCharges()">
+<div class="loader" style="text-align: center; width: 100%; vertical-align: middle; top:45%; left: 3%; position: absolute;" id="loaderimg" style="display: none;">
+		<img
+			src="${pageContext.request.contextPath}/resources/images/loader.svg"
+			alt="">
 	</div>
- --%>
+	<c:url var="placeOrder" value="/placeOrder" />
+<c:url var="getDeliveryChargesByKm" value="/getDeliveryChargesByKm"></c:url>
+<c:url var="getOfferDetailListAjax" value="/getOfferDetailListAjax"></c:url>
+<c:url var="getOfferHeaderListAjax" value="/getOfferHeaderListAjax"></c:url>
+<c:url var="checkIsValidOffer" value="/checkIsValidOffer"></c:url>
+<c:url var="getCouponOfferListAjax" value="/getCouponOfferListAjax"></c:url>
+<c:url var="getCustomerOfferListAjax" value="/getCustomerOfferListAjax"></c:url>
 	<!--apply now pop up-->
 	<div id="mongi" class="well">
 		<div class="mongi_title">
@@ -31,74 +33,6 @@
 			</div>
 		</div>
 		<div class="mongi_cont">
-			<ul class="ks-cboxtags">
-				<li><input type="checkbox" id="checkboxOne"><label
-					for="checkboxOne">Chocolate Cakes</label></li>
-				<li><input type="checkbox" id="checkboxtwo"><label
-					for="checkboxtwo">Exotic Cakes</label></li>
-				<li><input type="checkbox" id="checkboxthree"><label
-					for="checkboxthree">Black Forest Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfour"><label
-					for="checkboxfour">Designer Cakes</label></li>
-				<li><input type="checkbox" id="checkboxfive"><label
-					for="checkboxfive">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxsix"><label
-					for="checkboxsix">Party Celebration Cakes</label></li>
-				<li><input type="checkbox" id="checkboxseven"><label
-					for="checkboxseven">Wedding Cakes</label></li>
-				<li><input type="checkbox" id="checkboxeight"><label
-					for="checkboxeight">Photo Cakes</label></li>
-				<li><input type="checkbox" id="checkboxnine"><label
-					for="checkboxnine">Cakes For Kids</label></li>
-				<li><input type="checkbox" id="checkboxten"><label
-					for="checkboxten">Medley</label></li>
-				<li><input type="checkbox" id="checkboxeleven"><label
-					for="checkboxeleven">Party Celebration Cakes</label></li>
-
-				<li><input type="checkbox" id="checkboxtwel"><label
-					for="checkboxtwel">Pizza</label></li>
-				<li><input type="checkbox" id="checkboxthirteen" checked><label
-					for="checkboxthirteen">Sandwich</label></li>
-				<li><input type="checkbox" id="checkboxfourteen"><label
-					for="checkboxfourteen">Fish</label></li>
-				<li><input type="checkbox" id="checkboxfifteen"><label
-					for="checkboxfifteen">Desert</label></li>
-				<li><input type="checkbox" id="checkboxsixteen"><label
-					for="checkboxsixteen">Salad</label></li>
-				<li><input type="checkbox" id="checkboxseventeen"><label
-					for="checkboxseventeen">Italian</label></li>
-				<li><input type="checkbox" id="checkboxeighteen"><label
-					for="checkboxeighteen">Indian</label></li>
-				<li><input type="checkbox" id="checkboxninteen"><label
-					for="checkboxninteen">Derpy Hooves</label></li>
-				<li><input type="checkbox" id="checkboxtwenteen"><label
-					for="checkboxtwenteen">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtwenone"><label
-					for="checkboxtwenone">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwentwo"><label
-					for="checkboxtwentwo">Discord</label></li>
-				<li><input type="checkbox" id="checkboxtewnthree"><label
-					for="checkboxtewnthree">Clover</label></li>
-				<li><input type="checkbox" id="checkboxTwenfour"><label
-					for="checkboxTwenfour">Baby Moondancer</label></li>
-				<li><input type="checkbox" id="checkboxtwenfive"><label
-					for="checkboxtwenfive">Medley</label></li>
-				<li><input type="checkbox" id="checkboxtwensix"><label
-					for="checkboxtwensix">Firefly</label></li>
-				<li><input type="checkbox" id="checkboxtwenseven"><label
-					for="checkboxtwenseven">Princess Celestia</label></li>
-				<li><input type="checkbox" id="checkboxtweneight"><label
-					for="checkboxtweneight">Gusty</label></li>
-				<li><input type="checkbox" id="checkboxtwennine"><label
-					for="checkboxtwennine">Discord</label></li>
-				<li><input type="checkbox" id="checkboxthirtee"><label
-					for="checkboxthirtee">Clover</label></li>
-				<li><input type="checkbox" id="checkboxthirteeone"><label
-					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul>
-
-
-
 		</div>
 
 		<div class="proceend_bnt">
@@ -306,10 +240,10 @@
 									Items subtotal <span>Rs. <label id="lbl_ItemTotal">0.00</label></span>
 								</div>
 								<div class="total_one pink">
-									Delivery <span>Free</span>
+									Delivery & Additional Rs <span id="del_adc_rs"></span>
 								</div>
 								<div class="total_one">
-									Sales tax <span>Rs. <label id="lbl_SalesTax">0.00</label></span>
+									Offer Discount <span>Rs. <label id="discAmt">0.00</label></span>
 								</div>
 								<div class="total_one">
 									Tip <span>Rs. <label id="lbl_Tip">0.00</label></span>
@@ -327,13 +261,68 @@
 							<div class="total_row_l">
 
 								<div class="promo_row">
-									<div class="promo_row_l">Promo Code</div>
-									<div class="promo_row_r">
-										<input name="promoCode" id="promoCode" type="text"
-											class="input_two" placeholder="Enter Your Offer Code" />
+								<div class="applicabl_row last">
+									<div class="applic_l">Applicable Discount Offers</div>
+									<div class="applic_r">
+										<div class="radio_1 promo">
+											<ul>
+												<li><input
+										 type="radio" id="couponWise"
+										name="rdOfferType" class="option-input radio" onchange="setOfferList(1)" checked> <label for="couponWise">Coupon Wise</label>
+													<div class="check"></div></li>
+												<li><input
+										type="radio"
+										class="option-input radio" onchange="setOfferList(2)"  id="custWise" name="rdOfferType"> <label for="custWise">Customer Wise</label>
+													<div class="check">
+														<div class="inside"></div>
+													</div></li>
+											</ul>
+										</div>
 									</div>
 								</div>
-
+								
+								<div class="applicabl_row">
+									<div>
+									<div class="payment_two left">
+											<div class="select-style">
+											<select class="form-control"  id="offer"
+										onchange="getOfferDetails(this.value)" name="offer">
+										<option value="0">Select Offer</option>
+										</select>
+									</div>
+									</div>
+									<div class="payment_two right">
+										<input list="coupons" type="text" id="offerCoupon"
+										placeholder="Select Coupon/Promo Code"
+										onchange="setOfferDiscAmt()" name="offerCoupon"
+											class="input_two" />
+											<datalist id="coupons">
+									</datalist>
+									</div>
+								</div>
+								<div class="clr"></div>
+								</div>	
+									
+								<div class="chkout_divide">
+								<input type="hidden" value="0" id="tempDiscPer"
+									name="tempDiscPer" />
+									<input type="hidden" value="0" id="tempDiscMinAmt"
+									name="tempDiscMinAmt" />
+									
+									 <input type="hidden" value="0"
+									id="tempOfferLimit" name="tempOfferLimit" /> <input
+									type="hidden" value="0" id="tempOfferType" name="tempOfferType" />
+									
+									<!-- Additional Charges -->
+											<input name="addCh" id="addCh" type="hidden"
+												class="table_inpt numbersOnly" value="${addCh}"/> 
+									<input name="disc" id="disc"
+												type="hidden" class="table_inpt numbersOnly" value="0"/>
+												
+												<input name="discMin" id="discMin"
+												type="hidden" class="table_inpt numbersOnly" value="0"/>
+							</div>
+								</div>
 								<h3 class="payment_title">Payment Method</h3>
 								<!-- <form action="" method="get"> -->
 								<div class="payment_one">
@@ -363,27 +352,14 @@
 										and Conditions.</a>
 								</div>
 								<div>
-
 									<input name="" type="button" class="place_btn place_open"
 										value="Place Order" onclick="checkCustSession()" />
 								</div>
-
-
-
-
 								<!--mongi help-popup-->
-
-
 								<!--apply now pop up-->
-
-
-
 								<script type="text/javascript">
 								function checkCustSession(){
 									var sessCustId ='${sessionScope.custId}';
-									//alert(sessCustId);
-									<%--  '<%=session.getAttribute("custId")%>'; --%>
-	
 										if (parseInt(sessCustId) > 0) {
 											$(document).ready(function() {
 												$('#place').popup();
@@ -395,29 +371,234 @@
 												window.location = url;
 											}
 										}
-
-									}
-
-									/* $(document).ready(function() {
-										$('#place').popup();
-									}); */
+									}//End of function checkCustSession()
 								</script>
+<script type="text/javascript">
+//Sachin 24-12-2020
 
+		function getDeliveryCharges(){
+			//checkSession();
+			document.getElementById("loaderimg").style.display = "block";
+			var km='${sessionScope.frKm}'
+		alert("Km "+km)
+			$.getJSON('${getDeliveryChargesByKm}', {
+				km : km,
+				ajax : 'true'
+			}, function(data) {
+				alert(JSON.stringify(data));
+				 document.getElementById("loaderimg").style.display = "none";
+				 /*var itemSubTotal=$("#item_sub_total").val();
+				var taxTotal=document.getElementById("item_tax_total").innerHtml;
+				var cartValue = sessionStorage.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				$("#printtable1 tbody").empty();
+				var subtotal = 0;
+				var taxtotal = 0;
+				var billTotal = 0;
+				for (var i = 0; i < table.length; i++) {
+					var baseValue = (parseFloat(table[i].total)*100)/(100+parseFloat(table[i].igstPer)).toFixed(2);
+					var taxAmt = parseFloat(table[i].total)-parseFloat(baseValue).toFixed(2); 
+					subtotal = parseFloat(subtotal)+parseFloat(baseValue);
+					taxtotal = parseFloat(taxtotal)+parseFloat(taxAmt); 
+				}
+				billTotal=subtotal+taxtotal;
+				$('#placeBtn').show();
+				$('#parkBtn').show();
+				var addCh=document.getElementById("addCh").value;
+				if(parseFloat(billTotal).toFixed(2) >= data.minAmt && parseFloat(billTotal).toFixed(2) <= data.freeDelvLimit){
+					document.getElementById("deliveryCharges").value=data.amt1+parseFloat(addCh);
+					document.getElementById("minOrderMsgDiv").style.display="none";
+				}else if(parseFloat(billTotal).toFixed(2) >= data.freeDelvLimit){
+					document.getElementById("deliveryCharges").value=data.amt2+parseFloat(addCh);
+					document.getElementById("minOrderMsgDiv").style.display="none";
+				}else{
+					document.getElementById("deliveryCharges").value=0+parseFloat(addCh);
+					$('#placeBtn').hide();
+					$('#parkBtn').hide();
+					document.getElementById("minOrderMsgDiv").style.display="block";
+					document.getElementById("minOrderMsg").innerHTML="Minimum order amount should be "+data.minAmt+"/-";
+				} */
+			});
+			applyOffer();
+		}
+//Sachin 23-12-2020
+function checkValidOffer(){
+	var offerId=document.getElementById("offer").value;
+	var coupon=document.getElementById("offerCoupon").value;
+	var custId=${sessionScope.custId};
+	if(offerId!=0){
+		if(coupon==0){
+			alert("Please select coupon/promo code");
+			document.getElementById("offerCoupon").focus();
+			document.getElementById("disc").value=0;
+			document.getElementById("discMin").value=0;
+			//appendTableList();
+		}else{
+			document.getElementById("loaderimg").style.display = "block";
+			$.ajaxSetup({'async':false})
+			$.getJSON('${checkIsValidOffer}', {
+				offerId : offerId,
+				coupon : coupon,
+				custId : custId,
+				ajax : 'true'
+			}, function(data) {
+				//alert(JSON.stringify(data));
+				document.getElementById("loaderimg").style.display = "none";
+				if (data.error == true) {
+					res = true;
+					alert("Coupon/Promo code expires!");
+					document.getElementById('offerCoupon').value = '';
+				}else{
+					//alert("In elseee")
+					var discPer=document.getElementById("tempDiscPer").value;
+					document.getElementById("disc").value=discPer;
+					var discMinAmt=document.getElementById("tempDiscMinAmt").value;
+					document.getElementById("discMin").value=discMinAmt;
+					applyOffer();
+					//appendTableList();
+					//$("#error_offercoupon").hide();
+				}
+			});
+		}
+	}
+}//End of function checkValidOffer()
 
+function applyOffer(){
+	
+	var finaltotal=document.getElementById("lbl_FinalTotal").innerHTML;
+	//alert("finaltotal " +finaltotal);
+	
+	discPer=document.getElementById("disc").value;
+	//alert("discPer " +discPer);
+	discAmt=(parseFloat(discPer)*parseFloat(finaltotal))/100;
+	var discMinAmt=document.getElementById("discMin").value;
+	//alert("discMinAmt " +discMinAmt);
+	var deliveryCharges=25;
+	if(discMinAmt < discAmt){
+		discAmt=discMinAmt;
+	}
+	//alert("discAmt " + discAmt);
+	var billTotal=parseFloat(finaltotal)-parseFloat(discAmt)+parseFloat(deliveryCharges);
+	//alert("final BT " +billTotal);
+	$("#discAmt").html(discAmt);
+	$("#lbl_Total").html(parseFloat(finaltotal)+parseFloat(deliveryCharges));
+	$("#lbl_FinalTotal").html(billTotal);
+	$("#del_adc_rs").html(deliveryCharges);
+	
+}//End of function applyOffer()
+</script>
+<script type="text/javascript">
+function setOfferList(type){
+	var custId='${sessionScope.custId}';
+	//alert(custId)
+	if(type == 1){
+		$.getJSON('${getCouponOfferListAjax}', {
+			ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data));
+				var len = data.length;
+				$('#offer').find('option').remove().end()
+				$("#offer").append($("<option selected></option>").attr("value", 0).text("Select Offer"));
+				for (var i = 0; i < len; i++) {
+					$("#offer").append( $("<option></option>").attr("value", data[i].offerId).text(data[i].offerName));
+				}
+				$("#offer").trigger("chosen:updated");
+		});
+	}else if(type == 2){
+		$.getJSON('${getCustomerOfferListAjax}', {
+			custId : custId,
+			ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data));
+			var len = data.length;
+			$('#offer').find('option').remove().end()
+			$("#offer").append($("<option selected></option>").attr("value", 0).text("Select Offer"));
+			for (var i = 0; i < len; i++) {
+				$("#offer").append( $("<option></option>").attr("value", data[i].offerId).text(data[i].offerName));
+			}
+			$("#offer").trigger("chosen:updated");
+		});
+	}
+	$('#coupons').find('option').remove().end()
+	$("#coupons").trigger("chosen:updated");
+	document.getElementById("offerCoupon").value="";
+	document.getElementById("disc").value=0;
+	document.getElementById("discMin").value=0; 
+	//appendTableList();
+}//end of function setOfferList(type)
 
+function getOfferDetails(id){
+	//checkSession();
+	$.getJSON('${getOfferHeaderListAjax}', {
+		ajax : 'true'
+	}, function(data) {
+		//alert(JSON.stringify(data));
+		var discPer=0;
+		var offerType=0;
+		var offerLimit=0;
+		var discMinAmt=0;
+		
+		var len = data.length;
+		for (var i = 0; i < len; i++) {
+			if(data[i].offerId==id){
+				discPer=data[i].offerDetailList[0].discPer;
+				offerType=data[i].exInt1;
+				offerLimit=data[i].offerDetailList[0].offerLimit;
+				discMinAmt=data[i].offerDetailList[0].exFloat1;
+				break;
+			}
+		}
+		document.getElementById("tempDiscPer").value=discPer;
+		document.getElementById("tempDiscMinAmt").value=discMinAmt;
+		document.getElementById("tempOfferLimit").value=offerLimit;
+		document.getElementById("tempOfferType").value=offerType;
+		document.getElementById("disc").value=0;
+		document.getElementById("discMin").value=0;
+		//appendTableList();
+		document.getElementById("offerCoupon").value="";
+		document.getElementById('offerCoupon').focus();
+		
+	});
+		$.getJSON('${getOfferDetailListAjax}', {
+			ajax : 'true'
+		}, function(data) {
+			//alert(JSON.stringify(data));
+				var len = data.length;
+				$('#coupons').find('option').remove().end()
+				for (var i = 0; i < len; i++) {
+					if(data[i].offerId==id){
+						var coupons = data[i].couponCode.split(',');
+						for(var c = 0; c < coupons.length; c++){
+							$("#coupons").append(
+									$("<option></option>").attr("value",
+											coupons[c]).text(
+													coupons[c]));
+						}
+					}
+				}
+				$("#coupons").trigger("chosen:updated");
+		});
+}//End of function  getOfferDetails(id)
+
+function setOfferDiscAmt(){
+	//var billTotal=document.getElementById("bill_total").innerHTML;
+	
+	var billTotal=document.getElementById("lbl_FinalTotal").innerHTML;
+	
+	var offerLimit=document.getElementById("tempOfferLimit").value;
+	if(parseFloat(billTotal) >= parseFloat(offerLimit)){
+	//	alert("In billTotal >= offerLimit")
+		checkValidOffer();
+	}else{
+		alert("To use offer bill should be greater than "+offerLimit+"/-");
+		document.getElementById('offerCoupon').value = '';
+	}
+}//End of function setOfferDiscAmt()
+</script>
 								<!-- </form> -->
 							</div>
 						</div>
-
-
-
-
-
 					</div>
-
-
-
-
 					<!--related-product-box-->
 					<div class="cart_r">
 						<h3 class="sidebar_title">Related Item</h3>
@@ -453,11 +634,8 @@
 					</div>
 					<div class="clr"></div>
 				</div>
-
-
-
 				<!-- PLACE ORDER POPUP -->
-				<div id="place" class="well_palace">
+				<div id="place" class="well_palace" style="display: none;">
 					<div class="mongi_title">
 						Place Order Popup
 						<div class="place_close close_pop">
@@ -465,10 +643,8 @@
 						</div>
 					</div>
 					<div class="mongi_cont">
-
 						<%-- <form action="${pageContext.request.contextPath}/viewcart"
 							method="post" onsubmit="return validateForm()"> --%>
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<div class="select-style">
@@ -479,9 +655,6 @@
 										</c:forEach>
 									</select>
 								</div>
-								<!-- <input type="text" class="input_place" id="txtCity"
-										name="txtCity" readonly="readonly" value=""
-										placeholder="Enter Your City" /> -->
 								<label class="form-label-hint-error" id="errorCity"
 									style="display: none;">please enter city</label>
 							</div>
@@ -491,7 +664,6 @@
 							</div>
 							<div class="clr"></div>
 						</div>
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" id="txtBillName"
@@ -500,7 +672,6 @@
 									autocomplete="off" /> <label class="form-label-hint-error"
 									id="errorBillName" style="display: none;">please enter
 									billing name</label>
-
 							</div>
 							<div class="place_row_r">
 								<input type="text" class="input_place" id="txtMobile"
@@ -511,11 +682,9 @@
 									mobile number</label> <label class="form-label-hint-error"
 									id="errorMobileInvalid" style="display: none;">invalid
 									mobile number</label>
-
 							</div>
 							<div class="clr"></div>
 						</div>
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" id="txtEmail"
@@ -525,7 +694,6 @@
 									style="display: none;">please enter email id</label> <label
 									class="form-label-hint-error" id="errorEmailInvalid"
 									style="display: none;">invalid email id</label>
-
 							</div>
 							<div class="place_row_r">
 								<div class="gender_l">Gender</div>
@@ -536,21 +704,18 @@
 												value="1" ${cust.custGender==1 ? 'checked' : ''}> <label
 												for="a-option">Male</label>
 												<div class="check"></div></li>
-
 											<li><input type="radio" id="b-option" name="gender"
 												value="2" ${cust.custGender==2 ? 'checked' : ''}> <label
 												for="b-option">Female</label>
 												<div class="check">
 													<div class="inside"></div>
 												</div></li>
-
 											<li><input type="radio" id="c-option" name="gender"
 												value="3" ${cust.custGender==3 ? 'checked' : ''}> <label
 												for="c-option">Other</label>
 												<div class="check">
 													<div class="inside"></div>
 												</div></li>
-
 										</ul>
 									</div>
 								</div>
@@ -566,7 +731,6 @@
 									readonly="readonly" /> <label class="form-label-hint-error"
 									id="errorDob" style="display: none;">please enter date
 									of birth</label>
-
 							</div>
 							<div class="place_row_r">
 								<input type="text" class="input_place" id="txtGst"
@@ -574,13 +738,10 @@
 									autocomplete="off" readonly="readonly" /> <span
 									class="form-label-hint-error" id="errorGst"
 									style="display: none;">invalid GST number</span>
-
 							</div>
 							<div class="clr"></div>
 						</div>
-
 						<!-- ------------------------ -->
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<h3 class="payment_title">Delivery Address</h3>
@@ -588,8 +749,6 @@
 							<div class="place_row_r"></div>
 							<div class="clr"></div>
 						</div>
-
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
@@ -607,13 +766,9 @@
 									class="form-label-hint-error" id="errorDelvArea"
 									style="display: none;">please enter area, colony,
 									street, sector, village</label>
-
 							</div>
 							<div class="clr"></div>
 						</div>
-
-
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
@@ -633,8 +788,6 @@
 							<div class="clr"></div>
 						</div>
 
-
-
 						<!-- BILLING ADDRESS -->
 
 						<div class="place_row">
@@ -649,8 +802,6 @@
 							</div>
 							<div class="clr"></div>
 						</div>
-
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
@@ -671,9 +822,6 @@
 							</div>
 							<div class="clr"></div>
 						</div>
-
-
-
 						<div class="place_row">
 							<div class="place_row_l">
 								<input type="text" class="input_place" autocomplete="off"
@@ -691,30 +839,14 @@
 							</div>
 							<div class="clr"></div>
 						</div>
-
-
 						<!-- ------------------------ -->
-
-
-
-
-
 						<div class="place_row">
 							<input name="" type="button" value="Place Order"
 								id="place_orderBtn" class="pop_place_btn" onclick="placeOrder()" />
 						</div>
-
 						<!-- </form> -->
-
 					</div>
-
 				</div>
-
-
-
-
-
-
 			</div>
 		</div>
 	</div>
@@ -833,7 +965,9 @@
 
 						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 								.toFixed(2);
-
+						
+						//alert(table[i].taxAmt)
+						
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
 								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt=""> <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn"></div>'
@@ -922,14 +1056,12 @@
 				}
 			}
 
-			finaltotal = (parseFloat(finaltotal) + parseFloat(subtotal))
-					.toFixed(2);
+			finaltotal = (parseFloat(finaltotal) + parseFloat(subtotal)) .toFixed(2);
 
 			document.getElementById("lbl_ItemTotal").innerHTML = subtotal;
 			document.getElementById("lbl_FinalTotal").innerHTML = finaltotal;
 
-			document.getElementById("cart_item_count").innerHTML = ""
-					+ table.length;
+			document.getElementById("cart_item_count").innerHTML = ""+table.length;
 
 		}
 

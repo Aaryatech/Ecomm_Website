@@ -900,8 +900,7 @@
 				selectFlav = 0;
 			}
 
-			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked')
-					.val();
+			var isVeg = $('input[name="prod_vnv' + productId + '"]:checked').val();
 			var dataList = '${sessionScope.dataList}';
 			var data = $.parseJSON(dataList);
 			var selectVegNon = "Veg";

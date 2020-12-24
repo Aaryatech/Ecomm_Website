@@ -93,7 +93,7 @@
 	padding: 0 0
 }
 .slick-slide img {
-	max-width: 100%
+	max-width: 100%;
 }
 .slick-next:before, .slick-prev:before {
 	color: #000
