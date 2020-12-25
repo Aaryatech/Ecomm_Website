@@ -190,12 +190,15 @@ public class CheckoutController {
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 						Customer.class);
 				model.addAttribute("cust", cust);
-
+				try {
 				String[] billAddress = cust.getExVar3().split("~");
 				model.addAttribute("getFlat", billAddress[0]);
 				model.addAttribute("getArea", billAddress[1]);
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
+				}catch (Exception e) {
+					
+				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -350,7 +353,6 @@ public class CheckoutController {
 	}
 
 	@RequestMapping(value = "/getDeliveryChargesByKm", method = RequestMethod.GET)
-
 	@ResponseBody
 	public CkDeliveryCharges getDeliveryChargesByKm(HttpServletRequest request, HttpServletResponse response,
 			Model model) {
@@ -376,6 +378,33 @@ System.err.println("charges " +charges);
 			e.printStackTrace();
 		}
 		return charges;
+	}
+	
+	//25-12-2020
+	
+	@RequestMapping(value = "/getFrExCharges", method = RequestMethod.POST)
+	@ResponseBody
+	public Float getFrExCharges(HttpServletRequest request, HttpServletResponse response) {
+
+		Float frExCharges = 0.0f;
+		
+		try {
+			
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+			
+			map.add("frId", request.getSession().getAttribute("frId"));
+			
+			frExCharges = Constants.getRestTemplate().postForObject(Constants.url + "getFrExCharges", map,
+					Float.class);
+			
+			System.err.println("frExCharges " +frExCharges);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return frExCharges;
+		
 	}
 
 	@RequestMapping(value = "/placeOrder", method = RequestMethod.POST)

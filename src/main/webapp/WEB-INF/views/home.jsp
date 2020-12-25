@@ -494,96 +494,7 @@
 														<div class="cake_dropdown_r">
 
  
-
-
-
-															<div>
-																<i class="fa fa-inr cake_prc_detail_iclass"
-																	aria-hidden="true"></i>
-
-																<c:set value="${product.defaultPrice}" var="price"></c:set>
-																<c:set value="1" var="defaultWt"></c:set>
-
-																<c:choose>
-
-																	<c:when test="${product.rateSettingType == 1}">
-
-																		<c:forEach items="${product.availInWeights}"
-																			var="proWt" varStatus="loop" begin="0" end="0">
-																			<c:set value="${proWt}" var="defaultWt"></c:set>
-																		</c:forEach>
-
-																		<c:set value="${product.defaultPrice * defaultWt}"
-																			var="price"></c:set>
-
-																	</c:when>
-
-																	<c:when test="${product.rateSettingType == 2}">
-
-																		<c:forEach items="${product.availInWeights}"
-																			var="proWt" varStatus="loop" begin="0" end="0">
-																			<c:set value="${proWt}" var="defaultWt"></c:set>
-																		</c:forEach>
-
-																		<c:forEach items="${product.prodDetailList}"
-																			var="proDetail">
-
-																			<c:choose>
-																				<c:when
-																					test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
-																					<c:set value="${proDetail.actualRate}" var="price"></c:set>
-																				</c:when>
-																			</c:choose>
-																		</c:forEach>
-
-																	</c:when>
-
-
-																</c:choose>
-
-																<p class="cake_prc_detail_pclass"
-																	id="newPrice${product.productId}">${price}</p>
-
-															</div>
-
-
-
-
-
-														</div>
-														<div class="clr"></div>
-													</div>
-													<!-- <div class="cake_radio_row">
-														<div class="radio_l">
-
-															<div class="radio_1">
-																<ul>
-																	<li><input type="radio" id="a-option"
-																		name="selector"> <label for="a-option">Veg</label>
-																		<div class="check"></div></li>
-
-																	<li><input type="radio" id="b-option"
-																		name="selector"> <label for="b-option">Non
-																			Veg</label>
-																		<div class="check">
-																			<div class="inside"></div>
-																		</div></li>
-
-																</ul>
-															</div>
-
-														</div>
-														<div class="radio_r">
-															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
-														</div>
-														<div class="clr"></div>
-													</div> -->
-
-
-													<div class="cake_radio_row">
-														<div class="radio_l">
-
-															<div class="radio_1">
+<div class="radio_1">
 																<ul>
 																	<c:set var="isVegFound" value="0"></c:set>
 																	<c:set var="isNonVegFound" value="0"></c:set>
@@ -688,6 +599,99 @@
 																</ul> -->
 															</div>
 
+
+
+															
+
+
+
+
+
+														</div>
+														<div class="clr"></div>
+													</div>
+													<!-- <div class="cake_radio_row">
+														<div class="radio_l">
+
+															<div class="radio_1">
+																<ul>
+																	<li><input type="radio" id="a-option"
+																		name="selector"> <label for="a-option">Veg</label>
+																		<div class="check"></div></li>
+
+																	<li><input type="radio" id="b-option"
+																		name="selector"> <label for="b-option">Non
+																			Veg</label>
+																		<div class="check">
+																			<div class="inside"></div>
+																		</div></li>
+
+																</ul>
+															</div>
+
+														</div>
+														<div class="radio_r">
+															<a href="my-cart.html" class="cart_btn">Add to Cart</a>
+														</div>
+														<div class="clr"></div>
+													</div> -->
+
+
+													<div class="cake_radio_row">
+														<div class="radio_l">
+
+															<!-- Flavor 25-12-2020 -->
+															
+															<div>
+																<i class="fa fa-inr cake_prc_detail_iclass"
+																	aria-hidden="true"></i>
+
+																<c:set value="${product.defaultPrice}" var="price"></c:set>
+																<c:set value="1" var="defaultWt"></c:set>
+
+																<c:choose>
+
+																	<c:when test="${product.rateSettingType == 1}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:set value="${product.defaultPrice * defaultWt}"
+																			var="price"></c:set>
+
+																	</c:when>
+
+																	<c:when test="${product.rateSettingType == 2}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:forEach items="${product.prodDetailList}"
+																			var="proDetail">
+
+																			<c:choose>
+																				<c:when
+																					test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																					<c:set value="${proDetail.actualRate}" var="price"></c:set>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+
+																	</c:when>
+
+
+																</c:choose>
+
+																<p class="cake_prc_detail_pclass"
+																	id="newPrice${product.productId}">${price}</p>
+
+															</div>
+															
+															
 														</div>
 														<div class="radio_r">
 															<a href="javascript:void(0)"

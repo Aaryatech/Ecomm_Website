@@ -24,6 +24,9 @@
 <c:url var="checkIsValidOffer" value="/checkIsValidOffer"></c:url>
 <c:url var="getCouponOfferListAjax" value="/getCouponOfferListAjax"></c:url>
 <c:url var="getCustomerOfferListAjax" value="/getCustomerOfferListAjax"></c:url>
+
+<c:url var="getFrExCharges" value="/getFrExCharges"></c:url>
+
 	<!--apply now pop up-->
 	<div id="mongi" class="well">
 		<div class="mongi_title">
@@ -242,15 +245,17 @@
 								<div class="total_one pink">
 									Delivery & Additional Rs <span id="del_adc_rs"></span>
 								</div>
-								<div class="total_one">
-									Offer Discount <span>Rs. <label id="discAmt">0.00</label></span>
-								</div>
-								<div class="total_one">
+								
+								<!-- <div class="total_one">
 									Tip <span>Rs. <label id="lbl_Tip">0.00</label></span>
-								</div>
+								</div> -->
 								<div class="total_one">
 									Total <span>Rs. <label id="lbl_Total">0.00</label></span>
 								</div>
+								<div class="total_one">
+									Offer Discount <span>Rs. <label id="discAmt">0.00</label></span>
+								</div>
+								
 								<div class="total_row_btm">
 									Total <span><label id="lbl_FinalTotal">0.00</label></span>
 								</div>
@@ -321,6 +326,10 @@
 												
 												<input name="discMin" id="discMin"
 												type="hidden" class="table_inpt numbersOnly" value="0"/>
+												
+												<input name="deliveryCharges"  value="0" id="deliveryCharges"
+													readonly="readonly" type="hidden"/>
+													
 							</div>
 								</div>
 								<h3 class="payment_title">Payment Method</h3>
@@ -380,13 +389,50 @@
 			//checkSession();
 			document.getElementById("loaderimg").style.display = "block";
 			var km='${sessionScope.frKm}'
-		alert("Km "+km)
 			$.getJSON('${getDeliveryChargesByKm}', {
 				km : km,
 				ajax : 'true'
 			}, function(data) {
-				alert(JSON.stringify(data));
+				//alert(JSON.stringify(data));
 				 document.getElementById("loaderimg").style.display = "none";
+				 var fd = new FormData();
+					fd.append('frId', 0);
+				 $.ajax({
+				        url: '${pageContext.request.contextPath}/getFrExCharges',
+				        type: 'POST',
+				        data: fd,
+				        dataType: 'json',
+				        processData: false, 
+				        contentType: false, 
+				        async:false,
+				        success: function(resData, textStatus, jqXHR)
+				        {
+				        	//alert(data.amt1)
+				        	var addCh=resData;//document.getElementById("addCh").value;
+				        	var billTotal=document.getElementById("lbl_ItemTotal").innerHTML;
+							if(parseFloat(billTotal).toFixed(2) >= data.minAmt && parseFloat(billTotal).toFixed(2) <= data.freeDelvLimit){
+								document.getElementById("deliveryCharges").value=data.amt1+parseFloat(addCh);
+								//document.getElementById("minOrderMsgDiv").style.display="none";
+							}else if(parseFloat(billTotal).toFixed(2) >= data.freeDelvLimit){
+								document.getElementById("deliveryCharges").value=data.amt2+parseFloat(addCh);
+								//document.getElementById("minOrderMsgDiv").style.display="none";
+							}else{
+								document.getElementById("deliveryCharges").value=0+parseFloat(addCh);
+								//$('#placeBtn').hide();
+								//$('#parkBtn').hide();
+								//document.getElementById("minOrderMsgDiv").style.display="block";
+								//document.getElementById("minOrderMsg").innerHTML="Minimum order amount should be "+data.minAmt+"/-";
+							}
+							//alert("del " +document.getElementById("deliveryCharges").value)
+								//alert(addCh)
+							applyOffer();
+				        }, 
+				        error: function(jqXHR, textStatus, errorThrown)
+				        {
+				            console.log('ERRORS: ' + textStatus);
+				        }
+					    });
+				 
 				 /*var itemSubTotal=$("#item_sub_total").val();
 				var taxTotal=document.getElementById("item_tax_total").innerHtml;
 				var cartValue = sessionStorage.getItem("cartValue");
@@ -465,26 +511,23 @@ function checkValidOffer(){
 
 function applyOffer(){
 	
-	var finaltotal=document.getElementById("lbl_FinalTotal").innerHTML;
-	//alert("finaltotal " +finaltotal);
-	
+	var finaltotal=document.getElementById("lbl_ItemTotal").innerHTML;
 	discPer=document.getElementById("disc").value;
-	//alert("discPer " +discPer);
 	discAmt=(parseFloat(discPer)*parseFloat(finaltotal))/100;
 	var discMinAmt=document.getElementById("discMin").value;
-	//alert("discMinAmt " +discMinAmt);
-	var deliveryCharges=25;
+	var deliveryCharges=document.getElementById("deliveryCharges").value;
+	//alert("deliveryCharges applyOffer " +deliveryCharges)
 	if(discMinAmt < discAmt){
 		discAmt=discMinAmt;
 	}
-	//alert("discAmt " + discAmt);
+	//deliveryCharges.toFixed(2);
+	//billTotal=billTotal.toFixed(2)
+	//discAmt=discAmt.toFixed(2);
 	var billTotal=parseFloat(finaltotal)-parseFloat(discAmt)+parseFloat(deliveryCharges);
-	//alert("final BT " +billTotal);
 	$("#discAmt").html(discAmt);
 	$("#lbl_Total").html(parseFloat(finaltotal)+parseFloat(deliveryCharges));
 	$("#lbl_FinalTotal").html(billTotal);
 	$("#del_adc_rs").html(deliveryCharges);
-	
 }//End of function applyOffer()
 </script>
 <script type="text/javascript">
