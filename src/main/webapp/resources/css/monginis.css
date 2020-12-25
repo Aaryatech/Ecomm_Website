@@ -358,14 +358,16 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .login_menu.edit li:hover ul li a:hover { color:#ec268f;}
 
 
-.top_address{float: right; color: #636363; font-size: 15px; font-family: 'Hind-medium';}
-.top_address i{margin: 0 0 0 5px; font-size: 13px;}
+.top_address{float: right; color: #636363; font-size: 15px; font-family: 'Hind-medium';
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 50%;}
+    .top_address i{margin: 0 0 0 5px; font-size: 13px;}
 .top_address span{color: #ec268f;}
 .top_address span p{display: inline-block; margin: 0; padding: 0;}
 .top_address a{color: #636363; text-decoration: none; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .top_address a:hover{color: #ec268f; text-decoration: none; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
-.main_banner{display: table; height: 540px; vertical-align: middle; width: 100%;}
+.main_banner{display: inline-block; width: 100%; text-align: center; vertical-align: middle;}
+.rotate-banner{display: table; height: 540px; vertical-align: middle; width: 100%;}
 .banner_caption{display: table-cell; vertical-align: middle; text-align: center;}
 .banner_title{color: #bd0064; font-size: 36px; font-family: 'Hind-Bold'; line-height: 45px;}
 .banner_title span{display: block; color: #000; font-family: 'Hind-medium'; font-style: italic; font-size: 28px;}
@@ -1028,6 +1030,7 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 .cake_prc_detail_pclass{float: left; margin-right: 10px;}
 /*End of code 18-11-2020*/
 
+/*Mohsin 23-12-2020*/
 .promo_one{display: inline-block; width: 100%; margin: 0 0 15px 0;}
 .applicabl_row{display: inline-block; width: 100%; margin: 0 0 10px 0;}
 .applicabl_row.last{margin: 0;}
@@ -1036,7 +1039,7 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 .radio_1.promo ul li label{font-size: 16px; padding: 5px 5px 5px 21px;}
 .radio_1.promo ul li .check{width: 14px; height:14px;}
 .radio_1.promo ul li .check::before{width: 8px; height: 8px;}
-
+/* End of Code Mohsin 23-12-2020*/
 
 
 
