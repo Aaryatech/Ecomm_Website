@@ -100,7 +100,7 @@ public class ProductDisplayController {
 					// typeIdList.add(12);
 
 					cat.setTypeIdList(typeIdList);
-
+					cat.setExInt2(typeIdList.size()+1);
 					catMenuList.add(cat);
 				}
 

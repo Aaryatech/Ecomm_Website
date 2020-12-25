@@ -523,11 +523,12 @@ function applyOffer(){
 	//deliveryCharges.toFixed(2);
 	//billTotal=billTotal.toFixed(2)
 	//discAmt=discAmt.toFixed(2);
+	
 	var billTotal=parseFloat(finaltotal)-parseFloat(discAmt)+parseFloat(deliveryCharges);
-	$("#discAmt").html(discAmt);
+	$("#discAmt").html(parseFloat(discAmt).toFixed(2));
 	$("#lbl_Total").html(parseFloat(finaltotal)+parseFloat(deliveryCharges));
-	$("#lbl_FinalTotal").html(billTotal);
-	$("#del_adc_rs").html(deliveryCharges);
+	$("#lbl_FinalTotal").html(parseFloat(billTotal.toFixed(2)));
+	$("#del_adc_rs").html(parseFloat(deliveryCharges).toFixed(2));
 }//End of function applyOffer()
 </script>
 <script type="text/javascript">
@@ -1105,7 +1106,7 @@ function setOfferDiscAmt(){
 			document.getElementById("lbl_FinalTotal").innerHTML = finaltotal;
 
 			document.getElementById("cart_item_count").innerHTML = ""+table.length;
-
+			applyOffer();
 		}
 
 		function minusQty(id, curQty) {

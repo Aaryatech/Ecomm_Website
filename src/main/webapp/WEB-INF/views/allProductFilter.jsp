@@ -40,14 +40,31 @@
 
 						<li><a href="#">${menuCat.exVar2} <span><i
 									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--cake dropdown-->
-							<ul class="megamenu four-row">
+							
+								<c:if test="${menuCat.exInt2==1}">
+							<c:set value="dropdown" var="row_class"></c:set>
+							</c:if>
+							
+							<c:if test="${menuCat.exInt2==2}">
+							<c:set value="megamenu two-row" var="row_class"></c:set>
+							</c:if>
+							<c:if test="${menuCat.exInt2==3}">
+							<c:set value="megamenu three-row" var="row_class"></c:set>
+							
+							</c:if>
+							<c:if test="${menuCat.exInt2==4}">
+							<c:set value="megamenu four-row" var="row_class"></c:set>
+							</c:if>
+							<c:if test="${menuCat.exInt2>4}">
+							<c:set value="megamenu full-row" var="row_class"></c:set>
+							</c:if>
+							<ul class="${row_class}">
 								<div class="four_row_dropdown">
-
 									<!--row-1-->
 									<div class="row_one">
 										<ul class="drop_mainmenu">
 
-											<li>By Price</li>
+											<li>By Price ${menuCat.exInt2} ${row_class}</li>
 
 											<li><input type="radio" id="radioPrice"
 												name="radioPrice" class="menuPrice" value="0-499"> <label
