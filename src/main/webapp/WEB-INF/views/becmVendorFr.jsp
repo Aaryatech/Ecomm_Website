@@ -173,12 +173,12 @@
                                 <div class="select"> <span>Select Your City</span></div>
                                 <input type="hidden" id="city" name="city">
                                 <ul class="dropdown-menu">
-                                	<c:forEach items="${cityList}" var="city">
+                                	<%-- <c:forEach items="${cityList}" var="city">
                                 		 <li id="${city.cityName}">${city.cityName}</li>
-                                	</c:forEach>
-                                  <!-- <li id="Aurangabad">Aurangabad</li>
+                                	</c:forEach> --%>
+                                  <li id="Aurangabad">Aurangabad</li>
                                   <li id="Pune">Pune</li>
-                                  <li id="Gandhi Nagar">Gandhi Nagar</li> -->
+                                  <li id="Gandhi Nagar">Gandhi Nagar</li>
                                 </ul>
                               </div>
                             </div>
@@ -254,7 +254,7 @@ function chngTitle(val){
 	}
 	
 }
-$(document).ready(function($) {
+/* $(document).ready(function($) {
 
 	$("#submitInsert").submit(function(e) {
 		var isError = false;
@@ -313,7 +313,7 @@ $(document).ready(function($) {
 		return false;
 
 	});
-});
+}); */
 
 </script>
 <!--cart-sidepanel-->
