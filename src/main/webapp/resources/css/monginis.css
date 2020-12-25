@@ -1041,6 +1041,12 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 .radio_1.promo ul li .check::before{width: 8px; height: 8px;}
 /* End of Code Mohsin 23-12-2020*/
 
+/*25-12-2020*/
+.small_field{float: left; width: 60%; margin-right: 10px;}
+.prod_kgs{float: left; margin: 2px 0 0 0; font-size: 14px; font-family: 'Hind-SemiBold';}
+
+/*25-12-2020*/
+
 
 
 

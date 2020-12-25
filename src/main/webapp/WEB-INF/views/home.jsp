@@ -472,6 +472,7 @@
 																<c:otherwise>
 
 																	<!-- <div class="custom-select-new1"> -->
+																	<div class="small_field">
 																	<select class="select-css" id="wt${product.productId}"
 																		onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
 																		<!-- <option value="7">7</option> -->
@@ -481,12 +482,13 @@
 																		</c:forEach>
 																	</select>
 																	<!-- </div> -->
+																	</div>
 
 																</c:otherwise>
 
 															</c:choose>
 
-															<span>${product.uomShowName}</span>
+															<span class="prod_kgs">${product.uomShowName}</span>
 
 														</div>
 														<div class="cake_dropdown_r">
