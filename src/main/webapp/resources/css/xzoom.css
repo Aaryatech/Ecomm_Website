@@ -8,7 +8,7 @@
 
 /* xZoom Styles below */
 .xzoom-container { 
-  display: inline-block;  text-align: center;
+  display: inline-block;  text-align: center; width:100%;
 }
 
 .xzoom-thumbs {

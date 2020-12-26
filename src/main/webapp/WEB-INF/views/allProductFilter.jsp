@@ -244,9 +244,10 @@
 										<li>
 											<div class="cake_one product_padd">
 												<div class="cake_pic">
+													<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition">
+														class="mobile_fit transition"></a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 													<div class="cake_prc">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span

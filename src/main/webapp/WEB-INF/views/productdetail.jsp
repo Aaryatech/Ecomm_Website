@@ -315,9 +315,10 @@
 
 								</ul>
 
-								<ul>
-									<li>
-										<div>
+								<ul> 
+									<li>Price
+										<div class="detail_price_tp">
+										  
 											<i class="fa fa-inr cake_prc_detail_iclass"
 												aria-hidden="true"></i>
 
