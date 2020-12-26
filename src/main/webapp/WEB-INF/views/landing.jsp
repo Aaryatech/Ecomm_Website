@@ -434,7 +434,7 @@
 		alert(fruitCount); */
 		
 		var totalDistance = $(thisobj).find(':selected').attr('data-km');
-		alert(totalDistance);
+		//alert(totalDistance);
 		document.getElementById('frKm').value=totalDistance;
 	}
 		$(document).ready(function() {
@@ -705,9 +705,9 @@
 											//alert(list[j].frName+"    --->    "+km+"        ---> "+list[j].noOfKmAreaCover + "      latlng --> "+parseFloat(list[j].shopsLatitude)+"   "+parseFloat(list[j].shopsLogitude))
 
 											list[j].exInt1 = km;
-											if(list[j].frId==13){
+											/* if(list[j].frId==13){
 												alert(list[j].exInt1);
-											}
+											} */
 											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
 												newFrList.push(list[j]);
 											}

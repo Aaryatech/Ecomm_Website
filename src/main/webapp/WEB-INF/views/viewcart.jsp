@@ -338,9 +338,9 @@
 									<div class="select-style">
 										<select name="paymentMode" id="paymentMode">
 											<option value="">Select Payment Type</option>
-											<option value="1">COD (Cash on Delivery)</option>
+											<option value="1">Cash on Delivery (COD)</option>
 											<!-- <option value="2">Card</option> -->
-											<option value="2">E-Pay</option>
+											<option value="2">Online Payment</option>
 										</select>
 									</div>
 								</div>
@@ -357,7 +357,7 @@
 									</div>
 								</div>
 								<div class="payment_click">
-									By Clicking the button, you agree to the <a href="#">Terms
+									By Clicking the button, you agree to the <a target="_blank" href="${pageContext.request.contextPath}/showT&CPage">Terms
 										and Conditions.</a>
 								</div>
 								<div>
@@ -1020,22 +1020,22 @@ function setOfferDiscAmt(){
 								+ table[i].exVar1
 								+ '</h3>'
 								+ '<h3 class="cart_prc"> &#8377;'
-								+ table[i].mrp
+								+ table[i].mrp+' / '+allItemArr[j].uomShowName
 								+ '</h3>'
-								+ '<div class="cart_show" ><a href="javascript:void(0)" onclick="showDetail('
+								+ '<div class="cart_show" ><a style="display:none;" href="javascript:void(0)" onclick="showDetail('
 								+ table[i].itemId
 								+ ')" id="aTagShowDetail'
 								+ table[i].itemId
 								+ '"><i class="fa fa-eye" aria-hidden="true"></i>Show Details</a><div>'
-								+ '<div class="cart_det" style="display: none;" id="detail'+table[i].itemId+'">Weight - '
+								+ '<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 								+ table[i].weight
 								+ ' '
 								+ allItemArr[j].uomShowName
-								+ ' <br> '
+								+ ''
 								+ table[i].veg
-								+ ' <br> Cake Shape - '
-								+ allItemArr[j].shapeNames
-								+ ' <br></div>'
+								+ ' Cake Flavors - '
+								+ allItemArr[j].flavorNames
+								+ ' </div>'
 								+ '</div>'
 								+ '</div></td>'
 								+
@@ -1106,6 +1106,7 @@ function setOfferDiscAmt(){
 			document.getElementById("lbl_FinalTotal").innerHTML = finaltotal;
 
 			document.getElementById("cart_item_count").innerHTML = ""+table.length;
+			checkValidOffer();
 			applyOffer();
 		}
 

@@ -64,7 +64,7 @@
 									<div class="row_one">
 										<ul class="drop_mainmenu">
 
-											<li>By Price ${menuCat.exInt2} ${row_class}</li>
+											<li>By Price</li>
 
 											<li><input type="radio" id="radioPrice"
 												name="radioPrice" class="menuPrice" value="0-499"> <label

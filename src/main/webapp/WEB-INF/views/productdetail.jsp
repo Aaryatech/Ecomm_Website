@@ -95,11 +95,11 @@
 
 							</div>
 							<!--product txt row-->
-							<div class="prod_txt">${prodHeader.productDesc}Thisclassic
+							<div class="prod_txt">${prodHeader.productDesc}<!-- Thisclassic
 								round Black Forest cake makes a highly tempting gift. It weighs
 								half kg, and is stuffed with whipped cream and studded with
 								cherries. Its eggless version is also available. You can give
-								this gift on any joyous occasion. Key attributes :</div>
+								this gift on any joyous occasion -->. Key attributes :</div>
 
 
 

@@ -63,17 +63,19 @@ public class PaymentController {
 			 * .build(); String randomString=randomStringGenerator.generate(12); //
 			 * toUpperCase() if you want
 		* System.err.println("goToPay Page " + randomString);*/
+		HttpSession session = request.getSession();
+		OrderSaveData orderSaveData=(OrderSaveData) session.getAttribute("orderSaveData");
 		try {
 			  
 			//  String sign=Signature.calculateRFC2104HMAC(data, secret);
-				//HttpSession session = request.getSession();
-				//OrderSaveData orderSaveData=(OrderSaveData) session.getAttribute("orderSaveData");
-			  //orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt()*100); // amount in the smallest currency unit
+				
+				 // amount in the smallest currency unit
 			    JSONObject orderRequest = new JSONObject();
-				orderRequest.put("amount", 100);
-			  orderRequest.put("currency", "INR");
-			  orderRequest.put("receipt", "Okaa");
-				RazorpayClient razorpay = new RazorpayClient("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
+			//	orderRequest.put("amount", 100);
+			    orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt()*100);
+			    orderRequest.put("currency", "INR");
+			    orderRequest.put("receipt", "Okaa");
+				RazorpayClient razorpay = new RazorpayClient("rzp_test_1eXaKykckwM8kP", "V03Z05bFj27PTZEs8G4RJQJB");
 
 			  Order order = razorpay.Orders.create(orderRequest);
 			  System.err.println("Order " +order.get("id"));
@@ -81,7 +83,6 @@ public class PaymentController {
 				 * model.addAttribute("orderId", order.get("id")); model.addAttribute("amount",
 				 * order.get("amount"));
 				 */
-			  HttpSession session = request.getSession();
 			
 			  model.addAttribute("landMark",session.getAttribute("landMark"));
 			} catch (RazorpayException e) {
@@ -97,7 +98,7 @@ public class PaymentController {
 		//httpHeaders.set("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-		String plainCreds = "rzp_live_1xwIfbV7BUaBxt:95FT7Or1sftfjQEweSpB3Gaq";
+		String plainCreds = "rzp_test_1eXaKykckwM8kP:V03Z05bFj27PTZEs8G4RJQJB";
 		byte[] plainCredsBytes = plainCreds.getBytes();
 		byte[] base64CredsBytes = Base64.getEncoder().encode(plainCredsBytes);
 		String base64Creds = new String(base64CredsBytes);
@@ -107,7 +108,7 @@ public class PaymentController {
 		
 		GenOrder order=new GenOrder();
 		
-		order.setAmount(200);
+		order.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
 		order.setCurrency("INR");
 		
 		Transfer transfer=new  Transfer();
@@ -121,7 +122,7 @@ public class PaymentController {
 		
 		//transfer.setAccount("acc_GG4Qoe8oK4muer");//Sumit HDFC/Sachin Uni
 		transfer.setAccount(frData.getPaymentGetwayLink());
-		transfer.setAmount(200);
+		transfer.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
 		transfer.setCurrency("INR");
 			/*
 			 * transfer.setOnHold(1); transfer.setOnHoldUntil(1);

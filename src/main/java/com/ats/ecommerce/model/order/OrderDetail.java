@@ -2,6 +2,61 @@ package com.ats.ecommerce.model.order;
 
 public class OrderDetail {
 
+	private String uniqueId;
+	
+	private int rateSettingType;
+	
+	private String flvName;
+	
+	private String imgFile;
+	
+	private String imgName;
+	
+	
+	
+	
+	
+	
+	public String getImgFile() {
+		return imgFile;
+	}
+
+	public void setImgFile(String imgFile) {
+		this.imgFile = imgFile;
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public String getFlvName() {
+		return flvName;
+	}
+
+	public void setFlvName(String flvName) {
+		this.flvName = flvName;
+	}
+
+	public int getRateSettingType() {
+		return rateSettingType;
+	}
+
+	public void setRateSettingType(int rateSettingType) {
+		this.rateSettingType = rateSettingType;
+	}
+
+	public String getUniqueId() {
+		return uniqueId;
+	}
+
+	public void setUniqueId(String uniqueId) {
+		this.uniqueId = uniqueId;
+	}
+
 	private int orderDetailId;
 
 	private int orderId;
