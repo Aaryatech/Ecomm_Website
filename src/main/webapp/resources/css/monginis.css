@@ -265,7 +265,7 @@ header{display: block;}
 .mobile_search{display: none;}
 
 /*full menu*/
-.main_menu{position: absolute; right: 0; top: 42px; background: #cf0f75; color: #FFF; text-align: center; padding: 24px 20px 16px 20px;}
+.main_menu{position: absolute; right: 0; top: 42px; background: #cf0f75; color: #FFF; text-align: center; padding:24px 20px 16px 20px; cursor:pointer;}
 .overlay {height: 0%; width: 100%; position: fixed; z-index:999999  /*1*/; top: 0; left: 0; background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.9); overflow-y: hidden; transition: 0.5s;}
 .overlay-content {position: relative; top: 25%; width: 100%; text-align: center; margin-top: 30px;}
 .overlay a {padding: 8px; text-decoration: none; font-size: 36px; color: #818181; display: block; transition: 0.3s;}
@@ -328,7 +328,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .login_menu {margin: 0px; padding: 0px; display: inline-block; vertical-align: middle;}
 .login_menu li { list-style-type: none;  float:left; line-height: 30px;}
 .login_menu li i{margin: 0 0 0 4px; vertical-align: middle;}
-.login_menu li img{border-radius: 50%; margin: 0 5px 0 0;}
+.login_menu li img{border-radius: 50%; margin: 0 5px 0 0; width: 30px; height: 30px; object-fit: cover;}
 .login_menu li a {display:block; color:#FFF; text-decoration:none; font-size: 14px; font-family: 'Hind-medium';}
 .login_menu li a:hover{color: #FFF;}
 /* Submenu */
@@ -376,7 +376,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .send_now_btn:hover{background: #bd0064; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
 /*festival offer*/
-.festival_offer{display: block; margin: 0 0 10px 0;}
+.festival_offer{display: block; margin:0 10px /* 0 0 10px 0 */;}
 
 
 .cake_one{background: #FFF; padding: 8px; margin: 10px; border-radius: 2px; position: relative; -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); overflow: auto;}
@@ -394,9 +394,9 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 
 .cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
 .cake_prc i{font-size: 16px;}
-.off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex;}
-.off_prc i{font-size: 14px;}
-.prc_off{display: inline-block; margin: 0 0 0 5px; color: #ec268f; font-size: 14px; font-family: 'Hind-Medium';}
+.off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex; vertical-align: middle;}
+.off_prc i{font-size: 14px; margin: 5px 2px 0 0;}
+.prc_off{display: inline-block; vertical-align:middle; margin: 0 0 0 5px; color: #ec268f; font-size: 14px; font-family: 'Hind-Medium';}
 
 .circle_tag img:first-child{display: inline-block;}
 .circle_tag img:last-child{display: none;}
@@ -849,7 +849,7 @@ table.cart.two{width: 100%;}
 .prod_filt ul{margin: 0px; padding: 0px;}
 .prod_filt ul li{list-style-type: none; float: left; width: 16.666%; padding: 5px;}
 .product_filter_one{background: #FFF; width: 100%; padding: 5px; border-radius: 3px; display: block; text-align: center; color: #636363; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
-.product_filter_one img{display: block; margin: 0 0 5px 0; width: 194px; height: 219px;}
+.product_filter_one img{display: block; margin: 0 0 5px 0; width:100% /* 194px */; height: 219px; object-fit:cover;}
 .product_filter_one a,.product_filter_one a:hover{color: #636363; text-decoration: none; font-size: 14px; font-family: 'Hind-Medium'; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;} 
 
 .prod_fit_txt{display: inline-block; width: 100%; text-align: center; margin: 15px 0 0 0;}
@@ -881,14 +881,17 @@ table.cart.two{width: 100%;}
 .full_divid{width: 16.666%; float: left; vertical-align: top;}
 
 ul.drop_mainmenu{margin: 0px; padding: 0px;}
-ul.drop_mainmenu li{list-style-type: none; display: block; color: #636363; font-size: 14px; color: #777; width: 100%;}
+ul.drop_mainmenu li{list-style-type: none; display: block; color: #636363;  font-family:'Hind-Medium'; text-transform:uppercase;
+font-size: 14px; color: #777; width: 100%; white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
 ul.drop_mainmenu li a{color: #333; font-size: 13px; text-decoration: none; display: block; margin: 14px 0 0 0; font-family: 'Hind-Medium';}
 ul.drop_mainmenu li a:hover{color: #ec268f; text-decoration: none; }
 
 .menuzord-menu>li>.megamenu.three-row{max-width: 666px; background:#FFF url(../images/gift-img.jpg) no-repeat right bottom; padding: 15px;text-align: left; padding: 20px; margin-top: 0 /*9px*/;  vertical-align: top;}
 
 .menuzord-menu>li>.megamenu.two-row{max-width: 500px; background:#FFF; padding: 15px;text-align: left; padding: 20px; margin-top:0 /*9px*/;  vertical-align: top;}
-.menuzord-menu>li>.megamenu.full-row{max-width: 100%; background:#FFF url(../images/gift-img.jpg) no-repeat right bottom; padding: 15px;text-align: left; padding: 20px; margin-top: 0 /*9px*/;  vertical-align: top;}
+.menuzord-menu>li>.megamenu.full-row{max-width: 100%; background:#FFF url(../images/gift-img.jpg) no-repeat right bottom; padding: 15px;text-align: left; padding: /* 20px */ 20px 5px 20px 20px; margin-top: 0 /*9px*/;  vertical-align: top;}
 
 
 /*landing page css start here*/
@@ -1044,7 +1047,35 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 /*25-12-2020*/
 .small_field{float: left; width: 60%; margin-right: 10px;}
 .prod_kgs{float: left; margin: 2px 0 0 0; font-size: 14px; font-family: 'Hind-SemiBold';}
+.qtyminus.slide,.qtyplus.slide{background: none; border: none; background:#373991; color: #FFF; font-size: 14px; 
+line-height: 28px; margin: 0; width: 25px; height: 28px; text-align: center;}
+.qtyminus.slide{border-radius: 3px 0 0 3px;}
+.qtyplus.slide{border-radius: 0 3px 3px 0;}
+.qtyminus.slide:hover,.qtyplus.slide:hover{background: #ec268f; color: #FFF;}
+.qty.slide{background: #f1f3f6;border-radius: 0;color: #333;font-size: 15px;padding: 4px 10px; width: 50px; 
+height: 28px;line-height: 28px; border:1px solid #f1f3f6; margin: 0 -5px;}
+.plus_minus_one{float: left; width: 70%; margin: 0 10px 0 0; }
+.cake_prc_detail_iclass{font-size: 13px; }
+.cake_prc_detail_pclass{font-family:'Hind-Medium';}
+.cake_pic img{width: 100%; height:100%; object-fit: cover;}
+ul.login_menu ul li{width: 100px; padding: 10px;}
+.top_address{text-align: right;}
+.testimonial_nm img{object-fit:cover;}
+ul.drop_mainmenu li input[type="checkbox"]{vertical-align: text-top; margin: 4px 7px 0 0;}
+ul.drop_mainmenu li input[type="radio"]{vertical-align: text-top; margin: 4px 5px 0 0;}
+ul.drop_mainmenu li label,ul.drop_mainmenu li span{color: #333; font-size: 13px; text-decoration: none;
+ margin: 0; font-family: 'Hind-Medium'; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+ul.drop_mainmenu li{margin:14px 0 0 0;}  
+.four_row_dropdown{height:350px; overflow: auto;} 
 
+.drop_search{position:absolute; right:30px; top:35px; padding: 3px 10px; background: #373991; color: #FFF;
+font-size: 13px; font-family: 'Hind-Medium'; text-transform: uppercase; letter-spacing: 0.3px;
+margin: 0 auto; -webkit-transition: all ease 0.5s; -moz-transition: all ease 0.5s;
+-o-transition: all ease 0.5s; -ms-transition: all ease 0.5s; transition: all ease 0.5s;}
+.drop_search:hover{background: #ec268f; color: #FFF; -webkit-transition: all ease 0.5s; -moz-transition: all ease 0.5s; -o-transition: all ease 0.5s; -ms-transition: all ease 0.5s; transition: all ease 0.5s;}
+.festival_offer img {width: 100%; height:167px; object-fit: cover; margin: 5px 0 0 0;}
+.festival_offer a{font-size: 15px; font-family: 'Hind-Medium'; color: #ec268f;
+ text-transform: uppercase; letter-spacing: 0.3px; display: block;}
 /*25-12-2020*/
 
 

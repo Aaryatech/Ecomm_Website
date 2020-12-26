@@ -391,9 +391,10 @@
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
+												<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 													<img src="#"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition lazy">
+														class="mobile_fit transition lazy"></a>
 
 													<%-- <div class="circle_tag active">
 														<img src="#" class="lazy"
@@ -453,20 +454,20 @@
 																<c:when test="${product.rateSettingType==0}">
 																	<!-- <input type="number" id="wt" value="1" max="2" min="0"
 																		limit="1" style="text-align: center;"> -->
-
+																	<div class="plus_minus_one">
 																	<button type="button" value="" field="quantity"
-																		class="qtyminus cart"
+																		class="qtyminus slide"
 																		onclick="setQtyText(${product.productId},0,'${product.prodDetailList}')">
 																		<i class="fa fa-minus" aria-hidden="true"></i>
 																	</button>
 																	<input type="text" id="txtWt${product.productId}"
-																		value="1" style="text-align: center;" class="qty cart">
+																		value="1" style="text-align: center;" class="qty slide">
 																	<button type="button" value="" field="quantity"
 																		onclick="setQtyText(${product.productId},1,'${product.prodDetailList}')"
-																		class="qtyplus cart">
+																		class="qtyplus slide">
 																		<i class="fa fa-plus" aria-hidden="true"></i>
 																	</button>
-
+																	</div>
 																</c:when>
 
 																<c:otherwise>

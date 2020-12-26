@@ -9,7 +9,7 @@
 					<div class="top_menu">
 						<span><a href="#"><i class="fa fa-phone"
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
-							href="#">Help</a></span>
+							href="${pageContext.request.contextPath}/home">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
 						<span><a href="${pageContext.request.contextPath}/showVistStorePage">Visit Stores</a></span>
 
@@ -201,7 +201,7 @@
 										height="25" data-src="${sessionScope.profileImg}" alt="">
 										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
-									<ul>
+									<%-- <ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
 										<li></li>
@@ -209,7 +209,7 @@
 										<li></li>
 										<li></li>
 										<li class="lgn_out"></li>
-									</ul></li>
+									</ul> --%></li>
 							</ul>
 						</div>
 					</div>

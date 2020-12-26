@@ -112,7 +112,7 @@
 																		test="${filterType.filterTypeId == filter.filterTypeId}">
 
 																		<li><input type="checkbox" class="menuFilter"
-																			value="${filter.adminName}">${filter.adminName}</li>
+																			value="${filter.adminName}"><span>${filter.adminName}</span></li>
 
 																	</c:when>
 
@@ -136,8 +136,8 @@
 
 									</c:forEach>
 
-
-									<a href="javascript:void(0)" class="proceed_btn"
+									<!-- proceed_btn -->
+									<a href="javascript:void(0)" class="drop_search"
 										onclick="searchMenu(${menuCat.cateId})">Search</a>
 
 								</div>
