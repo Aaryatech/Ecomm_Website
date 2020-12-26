@@ -197,8 +197,9 @@
 						<div class="user_login">
 							<ul class="login_menu">
 								<li><a href="${pageContext.request.contextPath}/profile"><img
-										src="${sessionScope.profileImg}" class="lazy" width="25"
-										height="25" data-src="${sessionScope.profileImg}" alt="">
+										class="lazy" width="25"
+										height="25" data-src="${sessionScope.profileImg}"
+										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'" alt="">
 										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<%-- <ul>

@@ -132,7 +132,9 @@
 			<c:forEach items="${bannerList}" var="banner">
 
 				<div class="main_banner"
-					style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>') no-repeat center top; background-size: cover;">
+					style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>'),
+					url('${pageContext.request.contextPath}/resources/images/no_img_folder/no-banner-image.jpg')
+					  no-repeat center top; background-size: cover;">
 
 					<div class="rotate-banner">
 						<div class="banner_caption">
@@ -357,7 +359,7 @@
 									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
 									title="${festEvent.description}">${festEvent.eventName} <img
 									src="${festEventImgUrl}${festEvent.exVar2}" class="lazy"
-									data-src="${festEventImgUrl}${festEvent.exVar2}" alt=""></a>
+									data-src="${festEventImgUrl}${festEvent.exVar2}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-offer-image.jpg'"></a>
 							</div>
 						</div>
 					</c:if>
@@ -393,7 +395,7 @@
 												<div class="cake_pic">
 												<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 													<img src="#"
-														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+														data-src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 														class="mobile_fit transition lazy"></a>
 
 													<%-- <div class="circle_tag active">
@@ -750,7 +752,8 @@
 							<p class="testimoial_txt">${testmoni.messages}</p>
 
 							<div class="testimonial_nm">
-								<img src="${TestimonialImgUrl}${testmoni.images}" alt="">
+								<img src="${TestimonialImgUrl}${testmoni.images}"
+								onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-testimonial-picture.jpg'">
 								<h2 class="testimonial_date">
 									${testmoni.name} <span>${testmoni.designation}</span>
 									<!--  <span>Location: location</span> -->
