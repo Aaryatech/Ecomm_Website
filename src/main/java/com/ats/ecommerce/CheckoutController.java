@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -419,7 +420,7 @@ System.err.println("charges " +charges);
 			SimpleDateFormat dttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 			int frId = (int) session.getAttribute("frId");
-			int userId = (int) session.getAttribute("userId");
+			//int userId = (int) session.getAttribute("userId");
 			int custId = (Integer) session.getAttribute("custId");
 			int compId = (Integer) session.getAttribute("companyId");
 
@@ -478,12 +479,16 @@ System.err.println("charges " +charges);
 			// convert json string to object
 			OrderDetail[] itemJsonImportData = objectMapper.readValue(itemData, OrderDetail[].class);
 
-			float finaTaxableAmt = 0;
-			float finaTaxAmt = 0;
-			float finaTotalAmt = 0;
+			float finalTaxableAmt = 0;
+			float finalTaxAmt = 0;
+			float finalTotalAmt = 0;
 			float finalCgstAmt = 0;
-			float finalsgstAmt = 0;
+			float finalSgstAmt = 0;
 			float finalIgstAmt = 0;
+			float finalDiscAmt=0;
+			float finalAddCharges=0;
+			
+			
 
 			String uuid = UUID.randomUUID().toString();
 
@@ -523,7 +528,7 @@ System.err.println("charges " +charges);
 			order.setDeliveryInstText(delvrInst);
 			order.setDelStatus(1);
 			order.setUuidNo(uuid);
-			order.setExFloat1(0);// Wallet Amt
+			
 			order.setExInt1(compId);
 			order.setExVar1(txtGst);
 			order.setExVar2(promoCode);
@@ -540,14 +545,19 @@ System.err.println("charges " +charges);
 
 			List<OrderDetail> orderDetailList = new ArrayList<>();
 
-			float grandTotal = 0;
-			for (int i = 0; i < itemJsonImportData.length; i++) {
-				grandTotal = grandTotal + itemJsonImportData[i].getTotalAmt();
-			}
+			
 
-			float totalDiscAmt = 0, totalAddChargesAmt = 0;
 			String imgData = request.getParameter("imageData");
 			TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
+			
+			float grandItemTotal=Float.parseFloat(request.getParameter("itemTotal"));
+			float grandDiscAmt=Float.parseFloat(request.getParameter("discAmt"));
+			float grandAddCharge=Float.parseFloat(request.getParameter("addCharge"));
+			
+				System.err.println("grandItemTotal" +grandItemTotal +"grandDiscAmt " +grandDiscAmt + " grandAddCharge " + grandAddCharge);
+			
+			
+				order.setExFloat1(roundHalfUp(grandItemTotal,2));//Item total Amt excluding disc and addCharges
 			for (int i = 0; i < itemJsonImportData.length; i++) {
 				OrderDetail orderDetail = new OrderDetail();
 				try {
@@ -556,11 +566,78 @@ System.err.println("charges " +charges);
 							if (imageJsonArray[j].getItemId() == itemJsonImportData[i].getItemId()) {
 								decodeToImageAndUpload(imageJsonArray[j].getImgFile(), imageJsonArray[j].getImgName());
 								orderDetail.setExVar4(imageJsonArray[j].getImgName());
+								
+								break;
 							}
 						}
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
+				
+				float divFact=0;
+				float taxableAmt=0;
+				float itemDisc=0;
+				float itemAddCharge=0;
+				
+				float sgstAmt=0;
+				float cgstAmt=0;
+				float igstAmt=0;
+				
+				try {
+					if(grandItemTotal>0)
+						//System.err.println("qty " +itemJsonImportData[i].getQty() + "rate " + itemJsonImportData[i].getRate()) ;
+						divFact=(itemJsonImportData[i].getQty()*itemJsonImportData[i].getRate()*100)/(grandItemTotal);
+					
+					System.err.println("Div factor " +divFact);
+					
+					itemDisc=(divFact*grandDiscAmt)/100;
+					finalDiscAmt=finalDiscAmt+itemDisc;
+					
+					itemAddCharge=(divFact*grandAddCharge)/100;
+					finalAddCharges=finalAddCharges+itemAddCharge;
+					
+					taxableAmt=((itemJsonImportData[i].getQty()*itemJsonImportData[i].getRate())-itemDisc+itemAddCharge)*100/(100+itemJsonImportData[i].getCgstPer()+itemJsonImportData[i].getSgstPer());
+					finalTaxableAmt=finalTaxableAmt+taxableAmt;
+					
+					System.err.println("Taxable Amt "+taxableAmt +"itemDisc " +itemDisc + " itemAddCharge" +itemAddCharge);
+					sgstAmt=(taxableAmt*itemJsonImportData[i].getSgstPer())/100;
+					finalSgstAmt=finalSgstAmt+sgstAmt;
+					cgstAmt=(taxableAmt*itemJsonImportData[i].getCgstPer())/100;
+					finalCgstAmt=finalCgstAmt+cgstAmt;
+					
+					System.err.println("sgstAmt "+sgstAmt +" cgstAmt " +cgstAmt);
+					
+					igstAmt=(taxableAmt*itemJsonImportData[i].getIgstPer())/100;
+					igstAmt=0;
+					finalIgstAmt=finalIgstAmt+igstAmt;
+					
+					float totAmt=taxableAmt+(sgstAmt+cgstAmt);
+					System.err.println("item totAmt" +totAmt);
+					
+					orderDetail.setRate(itemJsonImportData[i].getRate());
+					orderDetail.setExFloat3(Float.parseFloat(itemJsonImportData[i].getWeight()));
+					orderDetail.setExInt1(itemJsonImportData[i].getRateSettingType());
+					
+					orderDetail.setTaxAmt(roundHalfUp((sgstAmt+cgstAmt), 2));
+					
+					finalTaxAmt=finalTaxAmt+(sgstAmt+cgstAmt);
+					//finalTaxAmt=finalTaxAmt+(igstAmt);
+					
+					orderDetail.setTaxableAmt(roundHalfUp(taxableAmt, 2));
+					orderDetail.setTotalAmt(roundHalfUp(totAmt, 2));
+					finalTotalAmt=finalTotalAmt+totAmt;
+					
+					orderDetail.setCgstAmt(roundHalfUp(cgstAmt,2));
+					orderDetail.setSgstAmt(roundHalfUp(sgstAmt,2));
+					orderDetail.setIgstAmt(roundHalfUp(igstAmt,2));
+
+					orderDetail.setDiscAmt(roundHalfUp(itemDisc,2));
+					orderDetail.setExFloat1(roundHalfUp(itemAddCharge,2));
+					
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 				orderDetail.setItemId(itemJsonImportData[i].getItemId());
 				orderDetail.setQty(itemJsonImportData[i].getQty());
 				orderDetail.setRate(itemJsonImportData[i].getRate());
@@ -568,74 +645,38 @@ System.err.println("charges " +charges);
 				orderDetail.setCgstPer(itemJsonImportData[i].getCgstPer());
 				orderDetail.setIgstPer(itemJsonImportData[i].getIgstPer());
 				orderDetail.setSgstPer(itemJsonImportData[i].getSgstPer());
-				orderDetail.setRemark(itemJsonImportData[i].getRemark());
-
-				float detailDiscPer = 0;
-				float detailDiscAmt = 0;
-
-				if (discAmt > 0) {
-					detailDiscPer = ((itemJsonImportData[i].getTotalAmt() * 100) / grandTotal);
-					detailDiscAmt = ((detailDiscPer * discAmt) / 100);
-					totalDiscAmt = totalDiscAmt + detailDiscAmt;
+				try {
+				orderDetail.setRemark(itemJsonImportData[i].getSpInst().trim());
+				}catch (Exception e) {
+					// TODO: handle exception
 				}
-
-				float chPer = 0, chAmt = 0;
-				if (deliveryCharges > 0) {
-					chPer = ((itemJsonImportData[i].getTotalAmt() * 100) / grandTotal);
-					chAmt = ((chPer * deliveryCharges) / 100);
-					totalAddChargesAmt = totalAddChargesAmt + chAmt;
+				try {
+				orderDetail.setExVar2(itemJsonImportData[i].getMsgonCake().trim());
+				}catch (Exception e) {
+					// TODO: handle exception
 				}
-
-				float detailTotal = itemJsonImportData[i].getTotalAmt() - detailDiscAmt + chAmt;
-
-				// float baseRate = (detailTotal * 100) / (100 +
-				// itemJsonImportData[i].getIgstPer());
-				// float taxAmt = Float.parseFloat(df.format(detailTotal - baseRate));
-				float taxAmt = itemJsonImportData[i].getTaxAmt();
-				orderDetail.setTaxAmt(taxAmt);
-
-				// float taxableAmt = detailTotal - taxAmt;
-				float taxableAmt = itemJsonImportData[i].getTaxableAmt();
-				orderDetail.setTaxableAmt(Float.parseFloat(df.format(taxableAmt)));
-
-				// orderDetail.setTotalAmt(itemJsonImportData[i].getTotal());
-				orderDetail.setTotalAmt(Float.parseFloat(df.format(detailTotal)));
-
-				float cgstAmt = Float.parseFloat(df.format(taxAmt / 2));
-
-				orderDetail.setCgstAmt(cgstAmt);
-				orderDetail.setSgstAmt(cgstAmt);
-				orderDetail.setIgstAmt(taxAmt);
-
-				orderDetail.setDiscAmt(detailDiscAmt);
-				orderDetail.setExFloat1(chAmt);
-
-				finalCgstAmt = Float.parseFloat(df.format(finalCgstAmt + (taxAmt / 2)));
-				finalsgstAmt = Float.parseFloat(df.format(finalsgstAmt + (taxAmt / 2)));
-				finalIgstAmt = Float.parseFloat(df.format(finalIgstAmt + (taxAmt)));
-
-				finaTaxableAmt = Float.parseFloat(df.format(finaTaxableAmt + taxableAmt));
-				finaTaxAmt = Float.parseFloat(df.format(finaTaxAmt + taxAmt));
-
 				orderDetail.setDelStatus(1);
+				orderDetail.setExInt2(itemJsonImportData[i].getExInt1());//ie config detail Id
+				System.err.println("orderDetail " +orderDetail.toString());
 				orderDetailList.add(orderDetail);
-			}
+				
+			}// End of loop itemJsonImportData
 
-			finaTotalAmt = finaTaxableAmt + finaTaxAmt;
 
-			order.setDiscAmt(totalDiscAmt - applyWalletAmt);
-			order.setDeliveryCharges(totalAddChargesAmt);// Delivery and additional charges
+			order.setDiscAmt(roundHalfUp(finalDiscAmt,2));
+			order.setDeliveryCharges(roundHalfUp(finalAddCharges,2));// Delivery and additional charges
 
-			order.setTaxableAmt(finaTaxableAmt);
-			order.setTaxAmt(finaTaxAmt);
-			// order.setTotalAmt(finaTotalAmt + deliveryCharges);
-			order.setTotalAmt(Float.parseFloat(df.format(finaTotalAmt)));
-			order.setSgstAmt(finalsgstAmt);
-			order.setCgstAmt(finalCgstAmt);
-			order.setIgstAmt(finalIgstAmt);
-
+			order.setTaxableAmt(roundHalfUp(finalTaxableAmt,2));
+			order.setTaxAmt(roundHalfUp(finalTaxAmt,2));
+			order.setTotalAmt(roundHalfUp(finalTotalAmt,2));
+			order.setSgstAmt(roundHalfUp(finalSgstAmt,2));
+			order.setCgstAmt(roundHalfUp(finalCgstAmt,2));
+			order.setIgstAmt(roundHalfUp(finalIgstAmt,2));
+			
+			order.setRemark("");
+			System.err.println("order " +order.toString());
 			OrderTrail orderTrail = new OrderTrail();
-			orderTrail.setActionByUserId(userId);
+			orderTrail.setActionByUserId(custId);
 			orderTrail.setActionDateTime(dttime.format(ct));
 			orderTrail.setStatus(status);
 			orderTrail.setExInt1(1);
@@ -648,10 +689,10 @@ System.err.println("charges " +charges);
 			orderSaveData.setOrderTrail(orderTrail);
 
 			session.setAttribute("orderSaveData", orderSaveData);
-			// System.err.println("Order Save Method is commented will not be saved in Db");
+			 System.err.println("Order Save Method is commented will not be saved in Db");
 
-			info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
-					Info.class);
+		//	info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
+			//		Info.class);
 			if (!info.getMsg().equalsIgnoreCase(null)) {
 				// Order saved successfully.
 				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
@@ -703,4 +744,18 @@ System.err.println("charges " +charges);
 		return image;
 
 	}
+	public static float roundHalfUp(float d, int scale) {
+		// return BigDecimal.valueOf(d).setScale(2,
+		// BigDecimal.ROUND_HALF_UP).floatValue();
+		return BigDecimal.valueOf(d).setScale(scale, BigDecimal.ROUND_HALF_UP).floatValue();
+	}
+
+	/*
+	 * showCategoryList
+	 * 
+	 * 
+	 * showAddSubCat showEditSubCat 
+	 * 
+	 * configFranchise
+	 */
 }

@@ -704,6 +704,7 @@ function setOfferDiscAmt(){
 							method="post" onsubmit="return validateForm()"> --%>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Select City</span>
 								<div class="select-style">
 									<select id="txtCity" name=txtCity>
 										<c:forEach items="${cityList}" var="city">
@@ -716,6 +717,7 @@ function setOfferDiscAmt(){
 									style="display: none;">please enter city</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Landmark</span>
 								<input type="text" value="${sessionScope.landMark}" class="input_place" readonly="readonly"
 									placeholder="City Related Landmark" />
 							</div>
@@ -723,6 +725,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Billing Name</span>
 								<input type="text" class="input_place" id="txtBillName"
 									readonly="readonly" name="txtBillName"
 									placeholder="Billing Name" value="${cust.custName}"
@@ -731,6 +734,7 @@ function setOfferDiscAmt(){
 									billing name</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Mobile Number</span>
 								<input type="text" class="input_place" id="txtMobile"
 									value="${cust.custMobileNo}" maxlength="10" name="txtMobile"
 									placeholder="Mobile Number" readonly="readonly"
@@ -744,6 +748,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Email Address</span>
 								<input type="text" class="input_place" id="txtEmail"
 									value="${cust.emailId}" name="txtEmail" placeholder="Email ID"
 									autocomplete="off" readonly="readonly" /> <label
@@ -782,6 +787,7 @@ function setOfferDiscAmt(){
 
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Dateof Birth</span>
 								<input type="text" class="input_place" id="txtDob"
 									value="${cust.dateOfBirth}" name="txtDob"
 									placeholder="Date of Birth" autocomplete="off"
@@ -790,6 +796,7 @@ function setOfferDiscAmt(){
 									of birth</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">GST Number</span>
 								<input type="text" class="input_place" id="txtGst"
 									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
 									autocomplete="off" readonly="readonly" /> <span
@@ -808,6 +815,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Your Address</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvFlat" name="txtDelvFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -817,6 +825,7 @@ function setOfferDiscAmt(){
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Your Area</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvArea" name="txtDelvArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -828,6 +837,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Your Landmark</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvLandmark" name="txtDelvLandmark"
 									value="${getLandmark}" placeholder="Landmark" /> <label
@@ -836,6 +846,7 @@ function setOfferDiscAmt(){
 
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Pincode</span>
 								<input type="text" class="input_place" autocomplete="off"
 									value="${getPin}" id="txtDelvPincode" name="txtDelvPincode"
 									maxlength="6" placeholder="Shipping Pincode" /> <label
@@ -861,6 +872,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Select Area</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingFlat" name="txtBillingFlat"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -870,6 +882,7 @@ function setOfferDiscAmt(){
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Select Colony</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingArea" name="txtBillingArea"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -881,6 +894,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
+								<span class="pop_lab_fld">Select Landmark</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingLandmark" name="txtBillingLandmark"
 									placeholder="Landmark" /> <label class="form-label-hint-error"
@@ -888,6 +902,7 @@ function setOfferDiscAmt(){
 									enter landmark</label>
 							</div>
 							<div class="place_row_r">
+								<span class="pop_lab_fld">Pincode</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingPincode" name="txtBillingPincode"
 									placeholder="Billing Pincode" /> <label

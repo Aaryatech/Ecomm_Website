@@ -12,11 +12,30 @@ public class OrderDetail {
 	
 	private String imgName;
 	
+	private String spInst;
+	private String msgonCake;
 	
 	
 	
 	
 	
+	
+	public String getSpInst() {
+		return spInst;
+	}
+
+	public void setSpInst(String spInst) {
+		this.spInst = spInst;
+	}
+
+	public String getMsgonCake() {
+		return msgonCake;
+	}
+
+	public void setMsgonCake(String msgonCake) {
+		this.msgonCake = msgonCake;
+	}
+
 	public String getImgFile() {
 		return imgFile;
 	}
@@ -390,12 +409,14 @@ public class OrderDetail {
 
 	@Override
 	public String toString() {
-		return "OrderDetail [orderDetailId=" + orderDetailId + ", orderId=" + orderId + ", itemId=" + itemId
-				+ ", hsnCode=" + hsnCode + ", qty=" + qty + ", mrp=" + mrp + ", rate=" + rate + ", taxableAmt="
-				+ taxableAmt + ", cgstPer=" + cgstPer + ", sgstPer=" + sgstPer + ", igstPer=" + igstPer + ", cgstAmt="
-				+ cgstAmt + ", sgstAmt=" + sgstAmt + ", igstAmt=" + igstAmt + ", discAmt=" + discAmt + ", taxAmt="
-				+ taxAmt + ", totalAmt=" + totalAmt + ", delStatus=" + delStatus + ", remark=" + remark + ", exInt1="
-				+ exInt1 + ", exInt2=" + exInt2 + ", exInt3=" + exInt3 + ", exInt4=" + exInt4 + ", exVar1=" + exVar1
+		return "OrderDetail [uniqueId=" + uniqueId + ", rateSettingType=" + rateSettingType + ", flvName=" + flvName
+				+ ", imgFile=" + imgFile + ", imgName=" + imgName + ", spInst=" + spInst + ", msgonCake=" + msgonCake
+				+ ", orderDetailId=" + orderDetailId + ", orderId=" + orderId + ", itemId=" + itemId + ", hsnCode="
+				+ hsnCode + ", qty=" + qty + ", mrp=" + mrp + ", rate=" + rate + ", taxableAmt=" + taxableAmt
+				+ ", cgstPer=" + cgstPer + ", sgstPer=" + sgstPer + ", igstPer=" + igstPer + ", cgstAmt=" + cgstAmt
+				+ ", sgstAmt=" + sgstAmt + ", igstAmt=" + igstAmt + ", discAmt=" + discAmt + ", taxAmt=" + taxAmt
+				+ ", totalAmt=" + totalAmt + ", delStatus=" + delStatus + ", remark=" + remark + ", exInt1=" + exInt1
+				+ ", exInt2=" + exInt2 + ", exInt3=" + exInt3 + ", exInt4=" + exInt4 + ", exVar1=" + exVar1
 				+ ", exVar2=" + exVar2 + ", exVar3=" + exVar3 + ", exVar4=" + exVar4 + ", exFloat1=" + exFloat1
 				+ ", exFloat2=" + exFloat2 + ", exFloat3=" + exFloat3 + ", exFloat4=" + exFloat4 + ", weight=" + weight
 				+ ", veg=" + veg + "]";
