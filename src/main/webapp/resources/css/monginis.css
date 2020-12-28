@@ -547,7 +547,7 @@ table.cart td {text-align: center; padding: 15px 8px; border-bottom: 1px solid #
 .cart_remove a{color: #ec268f;}
 .cart_remove a:hover{color: #373991;}
 .cart_option{color: #666666; font-size: 13px; line-height: 22px; text-align: center;}
-.cart_option img{margin: 0 0 5px 0;}
+.cart_option img{margin: 0 0 5px 0; width: 80px; height: 80px; object-fit:cover;}
 .cart_option span{display: block; color: #ec268f; font-size: 13px; font-family: 'Hind-Medium';}
 .cart_prc_1{text-align: center; color: #666666; font-size: 15px;}
 .cart_delete{text-align: center;}
@@ -1127,6 +1127,7 @@ border-width: 0 3px 3px 0; -webkit-transform: rotate(45deg); -ms-transform: rota
 position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6px; font-size: 10px;}
 .find_store.btm_space,.testimonial_bx.btm_space{padding: 40px 0 10px 0;}
 .radio_1.promo ul li{width: 50%;}
+.del_inst{font-size: 14px; color: #373991; font-family: 'Hind-Medium'; line-height: 20px; text-align: left;}
 /*25-12-2020*/
 
 

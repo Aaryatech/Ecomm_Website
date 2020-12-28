@@ -114,6 +114,7 @@
 												Weight - 500 gm <br> Eggless - False <br> Heart
 												Shape - False <br>
 											</div>
+											
 
 										</div>
 									</div>
@@ -180,6 +181,7 @@
 												<a href="#"><i class="fa fa-eye" aria-hidden="true"></i>
 													Show Details</a>
 											</div>
+											
 											<div class="cart_det" style="display: none;">
 												Weight - 500 gm <br> Eggless - False <br> Heart
 												Shape - False <br>
@@ -1048,7 +1050,7 @@ function setOfferDiscAmt(){
 								+ allItemArr[j].flavorNames
 								+ ' </div>'
 								+ '</div>'
-								+ '</div></td>'
+								+ '</div><p class="del_inst">delivery instruction : user put here special delivery instruction regarding to your Cake.</p></td>'
 								+
 
 								'<td>'
