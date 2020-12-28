@@ -543,7 +543,7 @@
 
 
 		<!-- Prod Filter For Evenr Based Cakes -->
-		<div class="find_store">
+		<div class="testimonial_bx">
 			<div class="wrapper">
 				<h2 class="sec_title">
 					<center>

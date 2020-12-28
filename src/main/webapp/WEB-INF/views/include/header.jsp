@@ -75,10 +75,10 @@
 
 						<!--like product-->
 						<div class="product_like">
-
-							<a href="${pageContext.request.contextPath}/likeproducts"> <i class="fa fa-heart"
-								aria-hidden="true"></i></a>
-
+							<a href="${pageContext.request.contextPath}/likeproducts"> 
+							<i class="fa fa-heart" aria-hidden="true"></i>
+							<span class="cart_item_count" id="">0</span>	
+							</a>
 						</div>
 
 						<!--cart-->

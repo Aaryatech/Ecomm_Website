@@ -278,7 +278,7 @@ header{display: block;}
 }
 
 .logo_right{float: right;}
-.product_like{float: left; font-size: 22px;}
+.product_like{float: left; font-size: 22px; position: relative;}
 .product_like a{color: #FFF;}
 .openbtn.heart{padding: 0; font-size: 24px; margin: 6px 0 0 0;}
 
@@ -522,7 +522,8 @@ ul.footer_menu_list li a{color: #FFF;}
 
 /*my cart page css start here*/
 .cart_row{display: inline-block; width: 100%;}
-.cart_l{float: left; width: 70%;}
+.cart_l{float: left; width: 75% /* 70% */;}
+.cart_r{float: right; width:23% /* 28% */; background: #FFF;}
 .cart_able_bx{background: #FFF; padding: 20px; border-radius: 3px;}
 
 .table_bx{overflow-x:auto;}
@@ -554,7 +555,7 @@ table.cart td {text-align: center; padding: 15px 8px; border-bottom: 1px solid #
 .cart_delete a:hover{color: #333;}
 
 
-.cart_r{float: right; width: 28%; background: #FFF;}
+
 .sidebar_title{color: #373991; font-size: 18px; padding: 12px 10px; border-bottom: 1px solid #f1f3f6; font-family: 'Hind-Medium'; margin: 0 0 5px 0;}
 .related_container{padding: 10px;}
 .related_one{position: relative; margin: 0 0 10px 0; padding: 0 0 0 131px; display: inline-block; width: 100%; vertical-align: top; min-height: 96px;}
@@ -597,7 +598,7 @@ background: #fff url(../images/cake_arrow.png) no-repeat 98% 50%; border-radius:
 .place_btn{background: #ec268f; border-radius: 3px; border: none; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; width: 100%; padding: 6px; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .place_btn:hover{background: #373991; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
-.total_row_r{float: right; width: 35%; background: #FFF; padding: 13px 15px; border-radius: 3px;}
+.total_row_r{float: right; width: 35%; background: #FFF; padding: 13px 15px; border-radius: 3px; margin:20px 0 0 0;}
 .total_one{color: #666666; font-size: 15px; line-height: 30px; font-family: 'Hind-Medium'; display: block;}
 .total_one.pink{color: #ec268f;}
 .total_one span{float: right; width: 40%; text-align: left;}
@@ -1101,139 +1102,31 @@ img.xzoom{width: 100%; height:389px; object-fit:cover;}
 .actual_off_prc{display: inline-block; color: #878787; font-size: 18px; text-decoration: line-through; vertical-align: middle;}
 #prodCount{font-size: 18px; font-family: 'Hind-Medium'; letter-spacing: 0.5px; line-height: 24px; margin: 0;}
 
-
-.radio_menu {
-  display: block;
-  position: relative;
-  padding-left: 22px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default radio button */
-.radio_menu input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-}
-
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 2px;
-  left: 0;
-  height: 14px;
-  width: 14px;
-  background-color: #FFF; border:1px solid #CCC;
-  border-radius: 50%;
-}
-
-/* On mouse-over, add a grey background color */
-.radio_menu:hover input ~ .checkmark {
-  background-color: #FFF; border:1px solid #CCC;
-}
-
-/* When the radio button is checked, add a blue background */
-.radio_menu input:checked ~ .checkmark {
-  background-color: #ec268f; border:1px solid #ec268f;
-}
-
-/* Create the indicator (the dot/circle - hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the indicator (dot/circle) when checked */
-.radio_menu input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the indicator (dot/circle) */
-.radio_menu .checkmark:after {
- 	top: 2px;
-	left: 2px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
-}
+/*radio css*/
+.radio_menu {display: block; position: relative; padding-left: 22px; cursor: pointer; font-size: 22px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+.radio_menu input {position: absolute; opacity: 0; cursor: pointer;}
+.checkmark {position: absolute;  top: 2px; left: 0; height: 14px; width: 14px; background-color: #FFF; border:1px solid #CCC; border-radius: 50%;}
+.radio_menu:hover input ~ .checkmark {background-color: #FFF; border:1px solid #CCC;}
+.radio_menu input:checked ~ .checkmark {background-color: #ec268f; border:1px solid #ec268f;}
+.checkmark:after {content: ""; position: absolute; display: none;}
+.radio_menu input:checked ~ .checkmark:after {display: block;}
+.radio_menu .checkmark:after {top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: white;}
 
 /*check box css*/
+.check_menu {display: block; position: relative; padding-left: 22px; margin-bottom: 12px; cursor: pointer; font-size: 22px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+.check_menu input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
+.checkmark_check {position: absolute; top: 3px; left: 0; height: 14px; width: 14px; background-color: #FFF; border: 1px solid #CCC;} 
+.check_menu:hover input ~ .checkmark_check {background-color: #FFF; border: 1px solid #CCC;}
+.check_menu input:checked ~ .checkmark_check {background-color: #ec268f; border:1px solid #ec268f; }
+.checkmark_check:after {content: ""; position: absolute; display: none;}
+.check_menu input:checked ~ .checkmark_check:after {display: block;}
+.check_menu .checkmark_check:after {left: 4px; top: 0; width: 5px; height: 10px; border: solid white; 
+border-width: 0 3px 3px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);}
 
-/* The container */
-.check_menu {
-  display: block;
-  position: relative;
-  padding-left: 22px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.check_menu input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark_check {
-  position: absolute;
-  top: 3px;
-  left: 0;
-  height: 14px;
-  width: 14px;
-  background-color: #FFF; border: 1px solid #CCC;
-} 
-
-/* On mouse-over, add a grey background color */
-.check_menu:hover input ~ .checkmark_check {
-  background-color: #FFF; border: 1px solid #CCC;
-}
-
-/* When the checkbox is checked, add a blue background */
-.check_menu input:checked ~ .checkmark_check {
-  background-color: #ec268f; border:1px solid #ec268f; 
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark_check:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.check_menu input:checked ~ .checkmark_check:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.check_menu .checkmark_check:after {
-  left: 4px;
-  top: 0;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
+.product_like span {background: #373991; font-family: 'Hind-Medium'; border-radius: 50%; width: 20px; height: 20px; 
+position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6px; font-size: 10px;}
+.find_store.btm_space,.testimonial_bx.btm_space{padding: 40px 0 10px 0;}
+.radio_1.promo ul li{width: 50%;}
 /*25-12-2020*/
 
 

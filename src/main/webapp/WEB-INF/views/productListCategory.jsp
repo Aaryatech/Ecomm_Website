@@ -74,7 +74,7 @@ html {
 
 
 
-
+		<c:set value="0" var="index"></c:set>
 		<c:forEach items="${allData.frSubCatList}" var="subCat">
 
 
@@ -88,91 +88,102 @@ html {
 
 			<c:if test="${subCat.catId==catId && count==1}">
 
+
 				<!--product listing-->
-				<div class="find_store" id="${subCat.subCatId}">
-					<div class="wrapper">
+				<c:choose>
+					<c:when test="${index%2==0}">
+						<div class="find_store btm_space" id="${subCat.subCatId}">
+					</c:when>
+					<c:otherwise>
+						<div class="testimonial_bx btm_space" id="${subCat.subCatId}">
+					</c:otherwise>
+				</c:choose>
+
+				<div class="wrapper">
 
 
-						<div class="product_boxes">
-							<h2 class="sec_title">
-								<center>
-									Shop by ${subCat.subCatName}<span>${subCat.catName}</span>
-								</center>
-							</h2>
+					<div class="product_boxes">
+						<h2 class="sec_title">
+							<center>
+								Shop by ${subCat.subCatName}<span>${subCat.catName}</span>
+							</center>
+						</h2>
 
 
-							<ul>
+						<ul>
 
-								<c:forEach items="${allData.feProductHeadList}" var="product">
+							<c:forEach items="${allData.feProductHeadList}" var="product">
 
-									<c:if test="${product.prodSubCatId == subCat.subCatId}">
+								<c:if test="${product.prodSubCatId == subCat.subCatId}">
 
-										<li>
-											<div class="cake_one product_padd">
-												<div class="cake_pic">
-													<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition">
+									<li>
+										<div class="cake_one product_padd">
+											<div class="cake_pic">
+												<a
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+												<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+													class="mobile_fit transition">
 
-													<div class="circle_tag active"
-														onclick="setLike(${product.productId})">
-														
-														<c:choose>
-														
+												<div class="circle_tag active"
+													onclick="setLike(${product.productId})">
+
+													<c:choose>
+
 														<c:when test="${product.isLike==0}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-															alt="">
+															<img src="#" class="lazy" id="like${product.productId}"
+																data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+																alt="">
 														</c:when>
 														<c:when test="${product.isLike==1}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-															alt="">
+															<img src="#" class="lazy" id="like${product.productId}"
+																data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+																alt="">
 														</c:when>
-														
-														</c:choose>
-														
-														
-													</div>
 
-													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
-														<span class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
-													</div>
-
-												</div>
-
-												<div class="cake_container">
-													<h4 class="cake_nm single_row">
-														<a
-															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
-													</h4>
+													</c:choose>
 
 
 												</div>
+
+												<div class="cake_prc">
+													<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+													<span class="off_prc"><i class="fa fa-inr"
+														aria-hidden="true"></i>${product.defaultPrice}</span> <span
+														class="prc_off">(23% Off)</span>
+												</div>
+											</a>
+											</div>
+
+											<div class="cake_container">
+												<h4 class="cake_nm single_row">
+													<a
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+												</h4>
+
 
 											</div>
-										</li>
 
-									</c:if>
+										</div>
+									</li>
 
-								</c:forEach>
+								</c:if>
+
+							</c:forEach>
 
 
 
 
-							</ul>
-						</div>
-
+						</ul>
 					</div>
+
 				</div>
+	</div>
+	<c:set value="${index+1}" var="index"></c:set>
+	</c:if>
 
-			</c:if>
 
 
-
-		</c:forEach>
+	</c:forEach>
 
 
 

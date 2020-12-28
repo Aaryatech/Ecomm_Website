@@ -34,7 +34,7 @@
 					class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
 
 
-					<li><a href="#" class="same_day">Same Day Delivery </a></li>
+					<li><a href="#" class="same_day">Same Day Delivery</a></li>
 
 					<c:forEach items="${allData.catFilterConfig}" var="menuCat">
 
@@ -66,25 +66,40 @@
 
 											<li>By Price</li>
 
-											<li><input type="radio" id="radioPrice"
-												name="radioPrice" class="menuPrice" value="0-499"> <label
-												for="male">Under 499</label></li>
+											<li>
+											<label class="radio_menu">Under 499
+											  <input type="radio" id="radioPrice" value="0-499" checked="checked" name="radioPrice">
+											  <span class="checkmark"></span>
+											</label>
+											</li>
 
-											<li><input type="radio" id="radioPrice"
-												name="radioPrice" class="menuPrice" value="500-599">
-												<label for="male">500 to 599</label></li>
+											<li>
+											<label class="radio_menu">500 to 599
+											  <input type="radio" id="radioPrice" value="500-599" checked="checked" name="radioPrice">
+											  <span class="checkmark"></span>
+											</label>
+											</li>
 
-											<li><input type="radio" id="radioPrice"
-												name="radioPrice" class="menuPrice" value="600-999">
-												<label for="male">600 to 999</label></li>
+											<li>
+											<label class="radio_menu">600 to 999
+											  <input type="radio" id="radioPrice" value="600-999" checked="checked" name="radioPrice">
+											  <span class="checkmark"></span>
+											</label>
+											</li>
 
-											<li><input type="radio" id="radioPrice"
-												name="radioPrice" class="menuPrice" value="1000-1999">
-												<label for="male">1000 to 1999</label></li>
+											<li>
+											<label class="radio_menu">1000 to 1999
+											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice">
+											  <span class="checkmark"></span>
+											</label>
+											</li>
 
-											<li><input type="radio" id="radioPrice"
-												name="radioPrice" class="menuPrice" value="2000-50000">
-												<label for="male">Above 2000</label></li>
+											<li>
+											<label class="radio_menu">Above 2000
+											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice">
+											  <span class="checkmark"></span>
+											</label>
+											</li>
 
 										</ul>
 									</div>
@@ -111,8 +126,15 @@
 																	<c:when
 																		test="${filterType.filterTypeId == filter.filterTypeId}">
 
-																		<li><input type="checkbox" class="menuFilter"
-																			value="${filter.adminName}"><span>${filter.adminName}</span></li>
+																		<li>
+																		<label class="check_menu">
+																		  <input type="checkbox" value="${filter.adminName}">
+																		  <span class="checkmark_check"></span>
+																		  ${filter.adminName}
+																		</label>
+																		
+																		<%-- <input type="checkbox" class="menuFilter"
+																			value="${filter.adminName}"><span>${filter.adminName}</span> --%></li>
 
 																	</c:when>
 
@@ -207,8 +229,7 @@
 										</div>
 										<div class="cake_container">
 											<h4 class="cake_nm single_row">
-												<a
-													href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+												<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
 											</h4>
 										</div>
 									</div>
@@ -1082,7 +1103,7 @@
 			
 			if(hiddenProductListArr.length > 0){
 				
-				
+				//alert("Anmol")
 				
 				for(var i=0; i<hiddenProductListArr.length; i++){
 					
@@ -1110,6 +1131,7 @@
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
+						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
 						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1118,6 +1140,7 @@
 						+ hiddenProductListArr[i].defaultPrice
 						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
+						+ ' </a> '
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
@@ -1226,6 +1249,7 @@
 					
 					if(catId == 0){
 						
+						
 						displayListArr.push(allItemArr[i]);
 						
 						var isLike=allItemArr[i].isLike;
@@ -1249,6 +1273,7 @@
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
+						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
 						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1257,6 +1282,7 @@
 						+ allItemArr[i].defaultPrice
 						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+						+ ' </a>'
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
