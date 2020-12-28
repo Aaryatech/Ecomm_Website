@@ -1000,7 +1000,9 @@
 									exFloat3 : 1,
 									exFloat4 : 1,
 									weight : selectWt,
-									veg : selectVegNon
+									veg : selectVegNon,
+									spInst : 'na spi',
+									msgonCake : 'na msgcake'
 								});
 								sessionStorage.setItem("cartValue", JSON
 										.stringify(table));

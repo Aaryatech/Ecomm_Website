@@ -1503,7 +1503,9 @@ function moveCursor(){
 					imgFile=imgObj.imgFile;
 					imgName=imgObj.imgName;
 				}
-				
+				var spInst=document.getElementById("sp_inst").value;
+				var msgonCake =document.getElementById("msg_on_cake").value;
+			
 				var obj={
 						uniqueId : uniq,
 						orderDetailId : 0,
@@ -1542,8 +1544,9 @@ function moveCursor(){
 						rateSettingType : type,
 						flvName : flvName,
 						imgFile : imgFile,
-						imgName : imgName
-						
+						imgName : imgName,
+						spInst : spInst,
+						msgonCake : msgonCake
 					}
 				
 				var index=0,itemFound=0;

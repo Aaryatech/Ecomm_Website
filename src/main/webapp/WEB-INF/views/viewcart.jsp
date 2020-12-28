@@ -469,6 +469,7 @@
 		}
 //Sachin 23-12-2020
 function checkValidOffer(){
+	//alert("In elseee checkValidOffer");
 	var offerId=document.getElementById("offer").value;
 	var coupon=document.getElementById("offerCoupon").value;
 	var custId=${sessionScope.custId};
@@ -494,8 +495,17 @@ function checkValidOffer(){
 					res = true;
 					alert("Coupon/Promo code expires!");
 					document.getElementById('offerCoupon').value = '';
+					
+					document.getElementById("tempDiscPer").value=discPer;
+					document.getElementById("tempDiscMinAmt").value=discMinAmt;
+					document.getElementById("tempOfferLimit").value=offerLimit;
+					document.getElementById("tempOfferType").value=offerType;
+					document.getElementById("disc").value=0;
+					document.getElementById("discMin").value=0;
+					document.getElementById("offerCoupon").value="";
+					document.getElementById('offerCoupon').focus();
 				}else{
-					//alert("In elseee")
+					//alert("In elseee checkValidOffer")
 					var discPer=document.getElementById("tempDiscPer").value;
 					document.getElementById("disc").value=discPer;
 					var discMinAmt=document.getElementById("tempDiscMinAmt").value;
@@ -512,6 +522,7 @@ function checkValidOffer(){
 function applyOffer(){
 	
 	var finaltotal=document.getElementById("lbl_ItemTotal").innerHTML;
+	//alert("Ap Offer finaltotal " +finaltotal);
 	discPer=document.getElementById("disc").value;
 	discAmt=(parseFloat(discPer)*parseFloat(finaltotal))/100;
 	var discMinAmt=document.getElementById("discMin").value;
@@ -1107,7 +1118,7 @@ function setOfferDiscAmt(){
 
 			document.getElementById("cart_item_count").innerHTML = ""+table.length;
 			checkValidOffer();
-			applyOffer();
+			//applyOffer();
 		}
 
 		function minusQty(id, curQty) {
@@ -1403,187 +1414,9 @@ function setOfferDiscAmt(){
 
 
 	<!--slick slider-->
-	<script type="text/javascript">
-		$(document).on('ready', function() {
-			$(".regular").slick({
-				dots : true,
-				infinite : true,
-				slidesToShow : 3,
-				slidesToScroll : 1,
-				autoplay : true,
-				responsive : [ {
-					breakpoint : 1024,
-					settings : {
-						slidesToShow : 3,
-						slidesToScroll : 1,
-						infinite : true,
-						dots : true
-					}
-				}, {
-					breakpoint : 768,
-					settings : {
-						slidesToShow : 2,
-						slidesToScroll : 1
-					}
-				}, {
-					breakpoint : 480,
-					settings : {
-						slidesToShow : 1,
-						slidesToScroll : 1
-					}
-				}
-				// You can unslick at a given breakpoint now by adding:
-				// settings: "unslick"
-				// instead of a settings object
-				]
-			});
+	
 
-			$(".regular-cake").slick({
-				dots : true,
-				infinite : true,
-				slidesToShow : 4,
-				slidesToScroll : 1,
-				autoplay : true,
-				responsive : [ {
-					breakpoint : 1024,
-					settings : {
-						slidesToShow : 3,
-						slidesToScroll : 1,
-						infinite : true,
-						dots : true
-					}
-				}, {
-					breakpoint : 768,
-					settings : {
-						slidesToShow : 2,
-						slidesToScroll : 1
-					}
-				}, {
-					breakpoint : 480,
-					settings : {
-						slidesToShow : 1,
-						slidesToScroll : 1
-					}
-				}
-				// You can unslick at a given breakpoint now by adding:
-				// settings: "unslick"
-				// instead of a settings object
-				]
-			});
-
-		});
-	</script>
-
-
-	<script type="text/javascript">
-		/*Dropdown Menu*/
-		$('.dropdown').click(function() {
-			$(this).attr('tabindex', 1).focus();
-			$(this).toggleClass('active');
-			$(this).find('.dropdown-menu').slideToggle(300);
-		});
-		$('.dropdown').focusout(function() {
-			$(this).removeClass('active');
-			$(this).find('.dropdown-menu').slideUp(300);
-		});
-		$('.dropdown .dropdown-menu li').click(
-				function() {
-					$(this).parents('.dropdown').find('span').text(
-							$(this).text());
-					$(this).parents('.dropdown').find('input').attr('value',
-							$(this).attr('id'));
-				});
-		/*End Dropdown Menu*/
-
-		$('.dropdown2').click(function() {
-			$(this).attr('tabindex', 1).focus();
-			$(this).toggleClass('active');
-			$(this).find('.dropdown-menu').slideToggle(300);
-		});
-		$('.dropdown2').focusout(function() {
-			$(this).removeClass('active');
-			$(this).find('.dropdown-menu').slideUp(300);
-		});
-		$('.dropdown2 .dropdown-menu li').click(
-				function() {
-					$(this).parents('.dropdown2').find('span').text(
-							$(this).text());
-					$(this).parents('.dropdown2').find('input').attr('value',
-							$(this).attr('id'));
-				});
-	</script>
-
-	<script type="text/javascript">
-		document
-				.addEventListener(
-						"DOMContentLoaded",
-						function() {
-							var lazyloadImages;
-
-							if ("IntersectionObserver" in window) {
-								lazyloadImages = document
-										.querySelectorAll(".lazy");
-								var imageObserver = new IntersectionObserver(
-										function(entries, observer) {
-											entries
-													.forEach(function(entry) {
-														if (entry.isIntersecting) {
-															var image = entry.target;
-															image.src = image.dataset.src;
-															image.classList
-																	.remove("lazy");
-															imageObserver
-																	.unobserve(image);
-														}
-													});
-										});
-
-								lazyloadImages.forEach(function(image) {
-									imageObserver.observe(image);
-								});
-							} else {
-								var lazyloadThrottleTimeout;
-								lazyloadImages = document
-										.querySelectorAll(".lazy");
-
-								function lazyload() {
-									if (lazyloadThrottleTimeout) {
-										clearTimeout(lazyloadThrottleTimeout);
-									}
-
-									lazyloadThrottleTimeout = setTimeout(
-											function() {
-												var scrollTop = window.pageYOffset;
-												lazyloadImages
-														.forEach(function(img) {
-															if (img.offsetTop < (window.innerHeight + scrollTop)) {
-																img.src = img.dataset.src;
-																img.classList
-																		.remove('lazy');
-															}
-														});
-												if (lazyloadImages.length == 0) {
-													document
-															.removeEventListener(
-																	"scroll",
-																	lazyload);
-													window.removeEventListener(
-															"resize", lazyload);
-													window
-															.removeEventListener(
-																	"orientationChange",
-																	lazyload);
-												}
-											}, 20);
-								}
-
-								document.addEventListener("scroll", lazyload);
-								window.addEventListener("resize", lazyload);
-								window.addEventListener("orientationChange",
-										lazyload);
-							}
-						})
-	</script>
+	
 
 
 	<script type="text/javascript">
@@ -1770,72 +1603,15 @@ function setOfferDiscAmt(){
 
 			var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
-
-				/* $.getJSON('${placeOrder}', {
-					promoCode : $("#promoCode").val(),
-					paymentMode : $("#paymentMode").val(),
-					delvrInst : $("#delvrInst").val(),
-					delvrDateTime : $("#delvrDateTime").val(),
-
-					txtCity : $("#txtCity").val(),
-					txtBillName : $("#txtBillName").val(),
-					txtMobile : $("#txtMobile").val(),
-					txtEmail : $("#txtEmail").val(),
-					gender : $("input[name='gender']:checked").val(),
-					txtDob : $("#txtDob").val(),
-					txtGst : $("#txtGst").val(),
-
-					txtDelvFlat : $("#txtDelvFlat").val(),
-					txtDelvArea : $("#txtDelvArea").val(),
-					txtDelvLandmark : $("#txtDelvLandmark").val(),
-					txtDelvPincode : $("#txtDelvPincode").val(),
-
-					txtBillingFlat : $("#txtBillingFlat").val(),
-					txtBillingArea : $("#txtBillingArea").val(),
-					txtBillingLandmark : $("#txtBillingLandmark").val(),
-					txtBillingPincode : $("#txtBillingPincode").val(),
-
-					itemData : JSON.stringify(table),
-					imageData : JSON.stringify(imgTable),
-					ajax : 'true'
-				}, function(data) {
-					//alert(JSON.stringify(data.error));
-					if (data.error == false) {
-
-						$("#promoCode").val('');
-						$("#paymentMode").val('');
-						$("#delvrInst").val('');
-						$("#delvrDateTime").val('');
-
-						$("#txtCity").val('');
-						$("#txtBillName").val('');
-						$("#txtMobile").val('');
-						$("#txtEmail").val('');
-						$("#txtGst").val('');
-
-						$("#txtDelvFlat").val('');
-						$("#txtDelvArea").val('');
-						$("#txtDelvLandmark").val('');
-						$("#txtDelvPincode").val('');
-
-						$("#txtBillingFlat").val('');
-						$("#txtBillingArea").val('');
-						$("#txtBillingLandmark").val('');
-						$("#txtBillingPincode").val('');
-
-						var table = [];
-						
-						sessionStorage.setItem("cartValue", JSON
-								.stringify(table));
-						sessionStorage.setItem("prodImageList", JSON
-								.stringify(table));
-						$("#place").hide();
-					}
-					var url = '${pageContext.request.contextPath}/home';
-					window.location = url;
-				}); */
-				
 				var fd = new FormData();
+							var itemTotal=document.getElementById("lbl_ItemTotal").innerHTML;
+							
+							fd.append('itemTotal', itemTotal);
+							fd.append('discAmt', document.getElementById("discAmt").innerHTML);
+							fd.append('addCharge', document.getElementById("del_adc_rs").innerHTML);
+				
+							//fd.append('itemtotal', document.getElementById("lbl_ItemTotal").innerHTML;);
+							
 							fd.append('imageData', JSON.stringify(imgTable));
 							fd.append('itemData', JSON.stringify(table));
 
@@ -1871,9 +1647,10 @@ function setOfferDiscAmt(){
 						        async:true,
 						        success: function(resData, textStatus, jqXHR)
 						        {
-						        	alert(JSON.stringify(resData));
+						        	//alert(JSON.stringify(resData));
 						        	var table = [];
-									sessionStorage.setItem("cartValue", JSON
+						        	//un comment it-Sachin
+									/* tc 26-12 sessionStorage.setItem("cartValue", JSON
 											.stringify(table));
 									sessionStorage.setItem("prodImageList", JSON
 											.stringify(table));
@@ -1884,7 +1661,7 @@ function setOfferDiscAmt(){
 						        	}else{
 										var url = '${pageContext.request.contextPath}/home';
 										window.location = url;
-						        	}
+						        	} */
 						        					        	
 						        }, 
 						        error: function(jqXHR, textStatus, errorThrown)
@@ -1921,6 +1698,187 @@ function setOfferDiscAmt(){
 		$("#successMsg").show().delay(5000).fadeOut();
 	</script>
 
+
+<script type="text/javascript">
+		document
+				.addEventListener(
+						"DOMContentLoaded",
+						function() {
+							var lazyloadImages;
+
+							if ("IntersectionObserver" in window) {
+								lazyloadImages = document
+										.querySelectorAll(".lazy");
+								var imageObserver = new IntersectionObserver(
+										function(entries, observer) {
+											entries
+													.forEach(function(entry) {
+														if (entry.isIntersecting) {
+															var image = entry.target;
+															image.src = image.dataset.src;
+															image.classList
+																	.remove("lazy");
+															imageObserver
+																	.unobserve(image);
+														}
+													});
+										});
+
+								lazyloadImages.forEach(function(image) {
+									imageObserver.observe(image);
+								});
+							} else {
+								var lazyloadThrottleTimeout;
+								lazyloadImages = document
+										.querySelectorAll(".lazy");
+
+								function lazyload() {
+									if (lazyloadThrottleTimeout) {
+										clearTimeout(lazyloadThrottleTimeout);
+									}
+
+									lazyloadThrottleTimeout = setTimeout(
+											function() {
+												var scrollTop = window.pageYOffset;
+												lazyloadImages
+														.forEach(function(img) {
+															if (img.offsetTop < (window.innerHeight + scrollTop)) {
+																img.src = img.dataset.src;
+																img.classList
+																		.remove('lazy');
+															}
+														});
+												if (lazyloadImages.length == 0) {
+													document
+															.removeEventListener(
+																	"scroll",
+																	lazyload);
+													window.removeEventListener(
+															"resize", lazyload);
+													window
+															.removeEventListener(
+																	"orientationChange",
+																	lazyload);
+												}
+											}, 20);
+								}
+
+								document.addEventListener("scroll", lazyload);
+								window.addEventListener("resize", lazyload);
+								window.addEventListener("orientationChange",
+										lazyload);
+							}
+						})
+	</script>
+	<script type="text/javascript">
+		$(document).on('ready', function() {
+			$(".regular").slick({
+				dots : true,
+				infinite : true,
+				slidesToShow : 3,
+				slidesToScroll : 1,
+				autoplay : true,
+				responsive : [ {
+					breakpoint : 1024,
+					settings : {
+						slidesToShow : 3,
+						slidesToScroll : 1,
+						infinite : true,
+						dots : true
+					}
+				}, {
+					breakpoint : 768,
+					settings : {
+						slidesToShow : 2,
+						slidesToScroll : 1
+					}
+				}, {
+					breakpoint : 480,
+					settings : {
+						slidesToShow : 1,
+						slidesToScroll : 1
+					}
+				}
+				// You can unslick at a given breakpoint now by adding:
+				// settings: "unslick"
+				// instead of a settings object
+				]
+			});
+
+			$(".regular-cake").slick({
+				dots : true,
+				infinite : true,
+				slidesToShow : 4,
+				slidesToScroll : 1,
+				autoplay : true,
+				responsive : [ {
+					breakpoint : 1024,
+					settings : {
+						slidesToShow : 3,
+						slidesToScroll : 1,
+						infinite : true,
+						dots : true
+					}
+				}, {
+					breakpoint : 768,
+					settings : {
+						slidesToShow : 2,
+						slidesToScroll : 1
+					}
+				}, {
+					breakpoint : 480,
+					settings : {
+						slidesToShow : 1,
+						slidesToScroll : 1
+					}
+				}
+				// You can unslick at a given breakpoint now by adding:
+				// settings: "unslick"
+				// instead of a settings object
+				]
+			});
+
+		});
+	</script>
+
+
+	<script type="text/javascript">
+		/*Dropdown Menu*/
+		$('.dropdown').click(function() {
+			$(this).attr('tabindex', 1).focus();
+			$(this).toggleClass('active');
+			$(this).find('.dropdown-menu').slideToggle(300);
+		});
+		$('.dropdown').focusout(function() {
+			$(this).removeClass('active');
+			$(this).find('.dropdown-menu').slideUp(300);
+		});
+		$('.dropdown .dropdown-menu li').click(
+				function() {
+					$(this).parents('.dropdown').find('span').text(
+							$(this).text());
+					$(this).parents('.dropdown').find('input').attr('value',
+							$(this).attr('id'));
+				});
+		/*End Dropdown Menu*/
+
+		$('.dropdown2').click(function() {
+			$(this).attr('tabindex', 1).focus();
+			$(this).toggleClass('active');
+			$(this).find('.dropdown-menu').slideToggle(300);
+		});
+		$('.dropdown2').focusout(function() {
+			$(this).removeClass('active');
+			$(this).find('.dropdown-menu').slideUp(300);
+		});
+		$('.dropdown2 .dropdown-menu li').click(
+				function() {
+					$(this).parents('.dropdown2').find('span').text(
+							$(this).text());
+					$(this).parents('.dropdown2').find('input').attr('value',
+							$(this).attr('id'));
+				});
+	</script>
 </body>
 
 </html>
