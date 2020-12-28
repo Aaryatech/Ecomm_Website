@@ -394,6 +394,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 
 .cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
 .cake_prc i{font-size: 16px;}
+.cake_prc a{color: #FFF; text-decoration: none;}
 .off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex; vertical-align: middle;}
 .off_prc i{font-size: 14px; margin: 5px 2px 0 0;}
 .prc_off{display: inline-block; vertical-align:middle; margin: 0 0 0 5px; color: #ec268f; font-size: 14px; font-family: 'Hind-Medium';}
@@ -430,7 +431,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .radio_1{display: block; position: relative;}
 .radio_1 ul{list-style: none; margin: 0; padding: 0; overflow: auto;}
 .radio_1.one_row ul li{width: 20%;}
-.radio_1 ul li{color: #808080; width: 50%; display: inline-block; position: relative; float: left;}
+.radio_1 ul li{color: #808080; width:33.333% /* 50% */; display: inline-block; position: relative; float: left;}
 .radio_1 ul li input[type=radio]{position: absolute; visibility: hidden;}
 .radio_1 ul li label{display: block; position: relative; font-size: 13px; padding: 5px 5px 5px 15px; height: auto; z-index: 9; cursor: pointer; -webkit-transition: all 0.25s linear;}
 .radio_1 ul li:hover label{color: #ec2c92;}
@@ -451,7 +452,7 @@ input[type=radio]:checked ~ label{color: #ec2c92;}
 .sec_title span{display: block; color: #636363; font-size: 17px;}
 .testimonial_one{background: #FFF; padding: 25px; margin: 10px; position: relative; -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);}
 .testimonial_one i{font-size: 100px; position: absolute; left: 10px; top: 10px; color: #f0f0f0;}
-.testimoial_txt{position: relative; z-index: 1; color: #666666; font-size:15px; line-height: 24px; text-align: justify; height: 148px; overflow:hidden;}
+.testimoial_txt{position: relative; z-index: 1; color: #585858 /* 666666 */; font-size:15px; line-height: 24px; text-align: justify; height: 148px; overflow:hidden;}
 .testimonial_nm{margin: 15px 0 0 0; position: relative; padding: 0 0 0 60px /* 90px */; text-align: left;}
 .testimonial_nm img{position: absolute; left: 0; top: -7px; border-radius: 50%; width: 50px; height: 50px;}
 .testimonial_date{color: #ec268f; font-size: 18px; font-family: 'Hind-SemiBold'; line-height: 17px; margin: 3px 0 0 0; display: inline-block;}
@@ -623,8 +624,8 @@ box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.50); -webkit-transition: all ease 0
 .mobile_location:hover{background: #373991; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
 /*product detail page css*/
-.find_store.with_bread{padding-top: 20px;}
-.breadcrums{margin: 0 0 20px 0; color: #6e6e6e; font-size: 14px; font-family: 'Hind-Regular';}
+.find_store.with_bread{padding-top: 10px /* 20px */;}
+.breadcrums{margin:0 0 10px 0 /* 0 0 20px 0 */; color: #6e6e6e; font-size: 14px; font-family: 'Hind-Regular';}
 .breadcrums i{margin: 0 7px;}
 .breadcrums a{font-family: 'Hind-Medium'; font-size: 14px; color: #6e6e6e;}
 .breadcrums a:hover{color: #ec268f; font-family: 'Hind-Medium';}
@@ -643,7 +644,8 @@ box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.50); -webkit-transition: all ease 0
 .stock_review img{margin: 0 3px; display: inline-block;}
 .stock_review span{color: #666666; font-size: 14px;}
 .stock_r{float: right;}
-.stock_prc{color: #333333; font-size: 36px; font-family: 'Hind-Medium';}
+.stock_prc{color: #333333; font-size: 36px; font-family: 'Hind-Medium';
+display: inline-block;}
 .act_prc{color: #878787; font-size: 16px; font-family: 'Hind-Regular'; display: inline-block; vertical-align: middle; margin: 0 10px; text-decoration: line-through;}
 .save{color: #ec268f; font-size: 16px; font-family: 'Hind-Medium'; display: inline-block; vertical-align: middle;}
 .inclusive_txt{color: #636466; font-size: 13px; font-family: 'Hind-Regular'; display: inline-block; vertical-align: middle;}
@@ -653,7 +655,7 @@ ul.shape_list li{list-style-type: none; display: inline-block; margin: 0 20px 0 
 padding: 0 0 0 15px;}
 ul.shape_list li i{position: absolute; left: 0; top: 0; color: #dfe1e4; font-size: 7px;}
 
-.delivery_row{display: inline-block; margin: 20px 0; width: 100%;}
+.delivery_row{display: inline-block; margin:20px 0 0 0 /* 20px 0 */; width: 100%;}
 .delivery_l{float: left; width: 50%;}
 .more_highlight{text-decoration: underline; color: #ec268f; font-size: 14px; text-transform: uppercase;}
 
@@ -799,7 +801,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f7fc', end
 .profile_l{float: left; width: 28%; padding: 20px; background: #FFF; border-radius: 5px; -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30);
 -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30); -ms-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30); box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30);}
 .profile_picture{text-align: center; margin: 0 0 20px 0;}
-.profile_picture img{border-radius: 50%; height: 170px;}
+.profile_picture img{border-radius: 50%; height: 170px; width: 170px; object-fit:cover;}
 
 .profile_r{float: right; width: 70%; background: #FFF; border-radius: 5px; -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30);
 -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30); -ms-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30); box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.30);}
@@ -1023,13 +1025,13 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 
 .detail_drop{display: inline-block; width: 100%; margin: 15px 0 0 0;}
 .detail_drop ul{margin: 0px; padding: 0px;}
-.detail_drop ul li{list-style-type: none; float: left; width: 25%; padding: 0 20px 15px 0;}
+.detail_drop ul li{list-style-type: none; float: left; width:50% /* 25% */; padding: 0 20px 10px 0;}
 
 
 
 /*End of code  Mohsin Sir 13-11-2020  */
 /*Sachin 18-11-2020*/
-.cake_prc_detail_iclass{float: left;margin: 6px 2px 0px 0px;}
+.cake_prc_detail_iclass{float: left;margin: 7px 2px 0px 0px;}
 .cake_prc_detail_pclass{float: left; margin-right: 10px;}
 /*End of code 18-11-2020*/
 
@@ -1056,7 +1058,10 @@ line-height: 28px; margin: 0; width: 25px; height: 28px; text-align: center;}
 height: 28px;line-height: 28px; border:1px solid #f1f3f6; margin: 0 -5px;}
 .plus_minus_one{float: left; width: 70%; margin: 0 10px 0 0; }
 .cake_prc_detail_iclass{font-size: 13px; }
-.cake_prc_detail_pclass{font-family:'Hind-Medium';}
+
+.cake_prc_detail_iclass.aaa{font-size: 28px; margin: 12px 5px 0 0; vertical-align: middle;}
+.cake_prc_detail_pclass.aaa{font-size: 36px;}
+.cake_prc_detail_pclass{font-family:'Hind-Medium'; font-size: 20px; float: left; margin: 0 15px 0 0;}
 .cake_pic img{width: 100%; height:100%; object-fit: cover;}
 ul.login_menu ul li{width: 100px; padding: 10px;}
 .top_address{text-align: right;}
@@ -1078,6 +1083,14 @@ margin: 0 auto; -webkit-transition: all ease 0.5s; -moz-transition: all ease 0.5
  text-transform: uppercase; letter-spacing: 0.3px; display: block;}
 img.xzoom{width: 100%; height:389px; object-fit:cover;}
 .detail_price_tp{color: #ec268f; font-size: 16px; margin:2px 0 0 0; font-family:'Hind-Medium'; vertical-align: middle;}
+.radio_1.gender{display: inline-block; width: 100%;}
+.detail_price_tp span{float: left; margin: 2px 10px 0 0; color: #333;}
+.off_prc.aaa,.prc_off1.aaa,.act_prc.aaa,.save.aaa
+{float: left; margin: 12px 15px 0 0;}
+.inclusive_txt.aaa{float: left; margin: 14px 15px 0 0;}
+.cake_prc_detail_iclass.aprice{font-size: 17px; margin:6px 5px 0 0;}
+.button_row.btm{margin:-10px 0 10px 0;}
+
 /*25-12-2020*/
 
 

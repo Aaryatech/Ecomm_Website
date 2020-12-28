@@ -35,6 +35,7 @@
 								<li>
 									<div class="cake_one product_padd">
 										<div class="cake_pic">
+											<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 											<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 												class="mobile_fit transition">
 
@@ -66,7 +67,7 @@
 													class="prc_off">(23% Off)</span>
 											</div>
 
-
+											</a>
 										</div>
 
 										<div class="cake_container">

@@ -229,7 +229,7 @@
 									<div class="place_row_r">
 										<label class="form-label-hint" style="display: block;">Gender</label>
 										<!-- <div class="gender_l">Gender</div> -->
-										<div class="gender_r">
+										
 											<div class="radio_1 gender">
 												<ul>
 													<li><input type="radio" id="a-option" name="gender"
@@ -252,7 +252,7 @@
 														</div></li>
 												</ul>
 											</div>
-										</div>
+										
 									</div>
 									<div class="clr"></div>
 								</div>

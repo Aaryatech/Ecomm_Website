@@ -84,15 +84,13 @@
 							</div>
 							<!--product price row-->
 							<div class="stock_prc">
-								<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>
-								<p class="cake_prc_detail_pclass" id="cake_prc1">${prodHeader.defaultPrice}</p>
-								<span class="off_prc" id="off_prc1"></span> <span id="prc_off1"
-									class="prc_off"></span> <span class="act_prc"><i
-									class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>${prodHeader.defaultPrice}</span>
-								<span class="save"> 20% off (Save 150) </span> <span
-									class="inclusive_txt">Inclusive of all taxes</span>
-
-
+								<i class="fa fa-inr cake_prc_detail_iclass aaa" aria-hidden="true"></i>
+								<p class="cake_prc_detail_pclass aaa" id="cake_prc1">${prodHeader.defaultPrice}</p>
+								<span class="off_prc aaa" id="off_prc1"></span> 
+								<span id="prc_off1 aaa" class="prc_off"></span> 
+								<span class="act_prc aaa"><i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>${prodHeader.defaultPrice}</span>
+								<span class="save aaa"> 20% off (Save 150) </span> 
+								<span class="inclusive_txt aaa">Inclusive of all taxes</span>
 							</div>
 							<!--product txt row-->
 							<div class="prod_txt">${prodHeader.productDesc}<!-- Thisclassic
@@ -134,7 +132,7 @@
 									</div>
 
 									<!--eagless or with eeg row-->
-									<div class="eagless_row">
+									<%-- <div class="eagless_row">
 										<ul>
 
 											<c:set var="isVegFound" value="0"></c:set>
@@ -177,71 +175,10 @@
 											</c:if>
 										</ul>
 										<div class="clr"></div>
-									</div>
+									</div> --%>
 									<!--cake-kgs-->
-								</div>
-
-
-								<!--right form-->
-								<c:if
-									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
-									<div class="delivery_r">
-										<div class="delivery_bx">
-											<h4 class="delivery_title">Delivery Details</h4>
-											<div class="delivery_frm">
-												<form action="" method="post">
-													<c:if test="${prodHeader.allowBasePhotoUpload==1}">
-														<div class="delivery_frm_l">
-															<img alt="" id="del_image" style="size: portrait;"
-																name="del_image" />
-															<div class="inputbrowsebtn">
-																<label for="img_input_btn"> <span class="fg">Upload
-																		Image </span> <input type="file" accept="image/*"
-																	name="img_input_btn" id="img_input_btn"
-																	accept=".jpg,.png,.gif,.jpeg,.bmp"
-																	onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
-
-																</label>
-															</div>
-														</div>
-													</c:if>
-
-													<div class="delivery_frm_r">
-														<c:if test="${prodHeader.allowSpecialInstruction==1}">
-
-															<div class="delivery_txtarea">
-																<textarea name="" cols="" id="sp_inst" , name="sp_inst"
-																	rows="3" class="input_txt"
-																	placeholder="Special Instructon"></textarea>
-															</div>
-
-
-														</c:if>
-
-														<c:if test="${prodHeader.allowMsgOnCake==1}">
-
-															<div class="a">
-																<input name="" type="text" id="msg_on_cake"
-																	name="msg_on_cake" class="input_txt"
-																	placeholder="Message / Name on the Cake" />
-															</div>
-
-														</c:if>
-													</div>
-
-
-
-
-													<div class="clr"></div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</c:if>
-								<div class="clr"></div>
-							</div>
-
-							<div class="detail_drop">
+									
+									<div class="detail_drop">
 								<ul>
 
 									<c:choose>
@@ -316,10 +253,10 @@
 								</ul>
 
 								<ul> 
-									<li>Price
+									<li>
 										<div class="detail_price_tp">
-										  
-											<i class="fa fa-inr cake_prc_detail_iclass"
+										    <span>Price :</span>
+											<i class="fa fa-inr cake_prc_detail_iclass aprice"
 												aria-hidden="true"></i>
 
 											<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
@@ -369,8 +306,73 @@
 									</li>
 								</ul>
 							</div>
+									
+									
+								</div>
 
-							<div class="button_row">
+
+								<!--right form-->
+								<c:if
+									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
+									<div class="delivery_r">
+										<div class="delivery_bx">
+											<h4 class="delivery_title">Delivery Details</h4>
+											<div class="delivery_frm">
+												<form action="" method="post">
+													<c:if test="${prodHeader.allowBasePhotoUpload==1}">
+														<div class="delivery_frm_l">
+															<img alt="" id="del_image" style="size: portrait;"
+																name="del_image" />
+															<div class="inputbrowsebtn">
+																<label for="img_input_btn"> <span class="fg">Upload
+																		Image </span> <input type="file" accept="image/*"
+																	name="img_input_btn" id="img_input_btn"
+																	accept=".jpg,.png,.gif,.jpeg,.bmp"
+																	onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
+
+																</label>
+															</div>
+														</div>
+													</c:if>
+
+													<div class="delivery_frm_r">
+														<c:if test="${prodHeader.allowSpecialInstruction==1}">
+
+															<div class="delivery_txtarea">
+																<textarea name="" cols="" id="sp_inst" , name="sp_inst"
+																	rows="3" class="input_txt"
+																	placeholder="Special Instructon"></textarea>
+															</div>
+
+
+														</c:if>
+
+														<c:if test="${prodHeader.allowMsgOnCake==1}">
+
+															<div class="a">
+																<input name="" type="text" id="msg_on_cake"
+																	name="msg_on_cake" class="input_txt"
+																	placeholder="Message / Name on the Cake" />
+															</div>
+
+														</c:if>
+													</div>
+
+
+
+
+													<div class="clr"></div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</c:if>
+								<div class="clr"></div>
+							</div>
+
+							 
+
+							<div class="button_row btm">
 								<a href="javascript:void(0)" class="cart_button"
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
 									To Cart</a> <a href="${pageContext.request.contextPath}/viewcart"

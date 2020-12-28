@@ -510,11 +510,11 @@ public class HomeController {
 	public String showBecmVendrFr(Locale locale, Model model) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			CityData[] city = mapper.readValue(new File(Constants.CITY_JSON_FILES_PATH),
-					CityData[].class);
-			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+//			CityData[] city = mapper.readValue(new File(Constants.CITY_JSON_FILES_PATH),
+//					CityData[].class);
+//			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 
-			model.addAttribute("cityList", cityList);
+		//	model.addAttribute("cityList", cityList);
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
