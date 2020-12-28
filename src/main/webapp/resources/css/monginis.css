@@ -393,7 +393,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .purity_icn{position: absolute; left: 10px; top: 10px;}
 
 .cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
-.cake_prc i{font-size: 16px;}
+.cake_prc i{font-size: 16px; margin: 7px 3px 0 0;}
 .cake_prc a{color: #FFF; text-decoration: none;}
 .off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex; vertical-align: middle;}
 .off_prc i{font-size: 14px; margin: 5px 2px 0 0;}
@@ -638,12 +638,13 @@ box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.50); -webkit-transition: all ease 0
 .detail_content{background: #FFF; padding: 10px;}
 .stock_row{display: inline-block; width: 100%;}
 .stock_l{float: left; }
-.product_nm{color: #222222; font-size: 20px; font-family: 'Hind-Medium'; line-height: 24px;}
+.product_nm{color: #222222; font-size: 20px; font-family: 'Hind-Medium'; 
+line-height: 24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .product_nm span{display: block; color: #1cc97e; font-size: 14px; text-transform: uppercase; font-family: 'Hind-Regular';}
 .stock_review{display: inline-block; color: #ec268f; font-size: 14px; line-height: 17px; margin: 7px 0 0 0;}
 .stock_review img{margin: 0 3px; display: inline-block;}
 .stock_review span{color: #666666; font-size: 14px;}
-.stock_r{float: right;}
+.stock_r{float: right; width: 49%;}
 .stock_prc{color: #333333; font-size: 36px; font-family: 'Hind-Medium';
 display: inline-block;}
 .act_prc{color: #878787; font-size: 16px; font-family: 'Hind-Regular'; display: inline-block; vertical-align: middle; margin: 0 10px; text-decoration: line-through;}
@@ -1031,7 +1032,7 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 
 /*End of code  Mohsin Sir 13-11-2020  */
 /*Sachin 18-11-2020*/
-.cake_prc_detail_iclass{float: left;margin: 7px 2px 0px 0px;}
+.cake_prc_detail_iclass{float: left;margin: 0px 3px 0px 0px;}
 .cake_prc_detail_pclass{float: left; margin-right: 10px;}
 /*End of code 18-11-2020*/
 
@@ -1085,11 +1086,153 @@ img.xzoom{width: 100%; height:389px; object-fit:cover;}
 .detail_price_tp{color: #ec268f; font-size: 16px; margin:2px 0 0 0; font-family:'Hind-Medium'; vertical-align: middle;}
 .radio_1.gender{display: inline-block; width: 100%;}
 .detail_price_tp span{float: left; margin: 2px 10px 0 0; color: #333;}
-.off_prc.aaa,.prc_off1.aaa,.act_prc.aaa,.save.aaa
+.off_prc.aaa,.prc_off1.aaa,.act_prc.aaa
 {float: left; margin: 12px 15px 0 0;}
-.inclusive_txt.aaa{float: left; margin: 14px 15px 0 0;}
+.save.aaa{margin:0 15px 0 0;}
+.inclusive_txt.aaa{ margin: 0;}
 .cake_prc_detail_iclass.aprice{font-size: 17px; margin:6px 5px 0 0;}
-.button_row.btm{margin:-10px 0 10px 0;}
+.button_row.btm{margin:20px 0;}
+
+.stock_prc{display: inline-block; width: 100%; margin: 0; text-align:right; line-height: 34px;}
+.stock_off_prc{display: inline-block; width: 100%; text-align: right; margin-top: -15px;} 
+.actual_prc{display: inline-block; font-size:36px; font-family:'Hind-Medium'; margin: 0 15px 0 0;}
+.actual_prc p{display: inline-block;}
+.actual_prc i{font-size:28px; margin: 15px 2px 0 0; display: inline-block;}
+.actual_off_prc{display: inline-block; color: #878787; font-size: 18px; text-decoration: line-through; vertical-align: middle;}
+#prodCount{font-size: 18px; font-family: 'Hind-Medium'; letter-spacing: 0.5px; line-height: 24px; margin: 0;}
+
+
+.radio_menu {
+  display: block;
+  position: relative;
+  padding-left: 22px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radio_menu input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #FFF; border:1px solid #CCC;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio_menu:hover input ~ .checkmark {
+  background-color: #FFF; border:1px solid #CCC;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio_menu input:checked ~ .checkmark {
+  background-color: #ec268f; border:1px solid #ec268f;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio_menu input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio_menu .checkmark:after {
+ 	top: 2px;
+	left: 2px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/*check box css*/
+
+/* The container */
+.check_menu {
+  display: block;
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.check_menu input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark_check {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color: #FFF; border: 1px solid #CCC;
+} 
+
+/* On mouse-over, add a grey background color */
+.check_menu:hover input ~ .checkmark_check {
+  background-color: #FFF; border: 1px solid #CCC;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check_menu input:checked ~ .checkmark_check {
+  background-color: #ec268f; border:1px solid #ec268f; 
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark_check:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check_menu input:checked ~ .checkmark_check:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check_menu .checkmark_check:after {
+  left: 4px;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 
 /*25-12-2020*/
 
@@ -1213,6 +1356,13 @@ img.xzoom{width: 100%; height:389px; object-fit:cover;}
     .prod_filt{width: 120%;}
     .tweets_r{font-size:22px;}
     .landing_button{width: 50%;}
+    
+    .stock_l {width: 39%;}
+    .stock_r {width: 59%;}
+    .actual_prc{font-size: 32px;}
+    .actual_prc i {font-size: 24px; margin: 15px 0 0 0;}
+	.cake_pic img{height: 215px;}
+	.circle_tag img{width: 100%; height: 100%;}
 }
 @media screen and (max-width:900px){
 	.prod_filt {width: 150%;}
@@ -1298,6 +1448,8 @@ img.xzoom{width: 100%; height:389px; object-fit:cover;}
     .tweets_r{padding: 0 20px;}
     .tweets_r {font-size: 20px;}
     .landing_button {width: 60%; font-size: 20px;}
+    
+    
     
 }
 
@@ -1470,6 +1622,17 @@ img.xzoom{width: 100%; height:389px; object-fit:cover;}
     .landing_button {width: 90%; font-size: 17px; line-height: 24px;}
     .landing_button a{font-size: 16px;}
     .well_landing{width: 96%;}
+    
+    .stock_l{float: none; width: 100%;}
+    .stock_prc,.stock_off_prc{text-align: left;}
+    .actual_prc {font-size: 26px;}
+    .actual_prc i {font-size: 20px; margin: 0px;}
+    .actual_off_prc{font-size: 16px;}
+    .cake_prc_detail_pclass{font-size: 18px;}
+    .cake_prc i {font-size: 15px; margin: 6px 3px 0 0;}
+    
+    .cake_pic img {height: 150px;}
+    .circle_tag img{width: 100%; height: 100%;}
 }
 @media screen and (max-width:640px){
     /*location page css*/

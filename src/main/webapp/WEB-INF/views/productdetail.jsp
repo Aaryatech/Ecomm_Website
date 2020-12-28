@@ -76,28 +76,44 @@
 									</div>
 								</div>
 								<div class="stock_r">
-									<img
+									<%-- <img
 										src="${pageContext.request.contextPath}/resources/images/protection.png"
-										alt="">
+										alt=""> --%>
+										<div class="stock_prc">
+											<div class="actual_prc">
+												<i class="fa fa-inr" aria-hidden="true"></i>
+												<p id="cake_prc1">${prodHeader.defaultPrice}</p>
+											</div>
+											<div class="actual_off_prc">
+												<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>${prodHeader.defaultPrice}
+											</div>
+										</div>
+										<div class="stock_off_prc">
+											<span class="save aaa"> 20% off (Save 150) </span> 
+											<span class="inclusive_txt aaa">Inclusive of all taxes</span>
+										</div>
+										<div class="clr"></div>
+										
+										
+										
 								</div>
 								<div class="clr"></div>
 							</div>
 							<!--product price row-->
-							<div class="stock_prc">
+							<%-- <div class="stock_prc">
 								<i class="fa fa-inr cake_prc_detail_iclass aaa" aria-hidden="true"></i>
-								<p class="cake_prc_detail_pclass aaa" id="cake_prc1">${prodHeader.defaultPrice}</p>
-								<span class="off_prc aaa" id="off_prc1"></span> 
-								<span id="prc_off1 aaa" class="prc_off"></span> 
+											<p class="cake_prc_detail_pclass aaa" id="cake_prc1">${prodHeader.defaultPrice}</p>
+								 
 								<span class="act_prc aaa"><i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>${prodHeader.defaultPrice}</span>
 								<span class="save aaa"> 20% off (Save 150) </span> 
 								<span class="inclusive_txt aaa">Inclusive of all taxes</span>
-							</div>
+							</div> --%>
 							<!--product txt row-->
-							<div class="prod_txt">${prodHeader.productDesc}<!-- Thisclassic
+							<!--<div class="prod_txt">${prodHeader.productDesc} Thisclassic
 								round Black Forest cake makes a highly tempting gift. It weighs
 								half kg, and is stuffed with whipped cream and studded with
 								cherries. Its eggless version is also available. You can give
-								this gift on any joyous occasion -->. Key attributes :</div>
+								this gift on any joyous occasion . Key attributes :</div>-->
 
 
 
@@ -467,6 +483,7 @@
 							<li>
 								<div class="cake_one product_padd">
 									<div class="cake_pic">
+									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 											class="mobile_fit transition">
 										<div class="circle_tag">
@@ -484,6 +501,7 @@
 												class="fa fa-inr" aria-hidden="true"></i></span> <span
 												class="prc_off" id="prc_off"></span>
 										</div>
+										</a>
 									</div>
 
 									<div class="cake_container">
