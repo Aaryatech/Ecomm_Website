@@ -7,7 +7,7 @@
 <title>Payment Info</title>
 </head>
 <body >
-<button id="rzp-button1" style="display:inline;">Pay ${sessionScope.userName}</button>
+<button id="rzp-button1" style="display:none;">Pay ${sessionScope.userName}</button>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {

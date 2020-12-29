@@ -65,7 +65,7 @@ public class PaymentController {
 		* System.err.println("goToPay Page " + randomString);*/
 		HttpSession session = request.getSession();
 		OrderSaveData orderSaveData=(OrderSaveData) session.getAttribute("orderSaveData");
-		try {
+		//try {
 			  
 			//  String sign=Signature.calculateRFC2104HMAC(data, secret);
 				
@@ -75,20 +75,20 @@ public class PaymentController {
 			    orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt()*100);
 			    orderRequest.put("currency", "INR");
 			    orderRequest.put("receipt", "Okaa");
-				RazorpayClient razorpay = new RazorpayClient("rzp_test_1eXaKykckwM8kP", "V03Z05bFj27PTZEs8G4RJQJB");
+				//RazorpayClient razorpay = new RazorpayClient("rzp_test_1eXaKykckwM8kP", "V03Z05bFj27PTZEs8G4RJQJB");
 
-			  Order order = razorpay.Orders.create(orderRequest);
-			  System.err.println("Order " +order.get("id"));
+			 // Order order = razorpay.Orders.create(orderRequest);
+			  //System.err.println("Order " +order.get("id"));
 				/*
 				 * model.addAttribute("orderId", order.get("id")); model.addAttribute("amount",
 				 * order.get("amount"));
 				 */
 			
 			  model.addAttribute("landMark",session.getAttribute("landMark"));
-			} catch (RazorpayException e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
+			/*
+			 * } catch (RazorpayException e) { System.out.println(e.getMessage());
+			 * e.printStackTrace(); }
+			 */
 		
 		
 		//22-12-2020
@@ -98,7 +98,8 @@ public class PaymentController {
 		//httpHeaders.set("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-		String plainCreds = "rzp_test_1eXaKykckwM8kP:V03Z05bFj27PTZEs8G4RJQJB";
+		//String plainCreds = "rzp_test_1eXaKykckwM8kP:V03Z05bFj27PTZEs8G4RJQJB";
+		String plainCreds = "rzp_live_1xwIfbV7BUaBxt:95FT7Or1sftfjQEweSpB3Gaq";
 		byte[] plainCredsBytes = plainCreds.getBytes();
 		byte[] base64CredsBytes = Base64.getEncoder().encode(plainCredsBytes);
 		String base64Creds = new String(base64CredsBytes);
@@ -108,7 +109,9 @@ public class PaymentController {
 		
 		GenOrder order=new GenOrder();
 		
-		order.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+		//order.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+		order.setAmount(100);
+
 		order.setCurrency("INR");
 		
 		Transfer transfer=new  Transfer();
@@ -116,13 +119,19 @@ public class PaymentController {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 		
 		map.add("frId", request.getSession().getAttribute("frId"));
-		
+		try {
 		Franchise frData = Constants.getRestTemplate().postForObject(Constants.url + "getFranchiseById", map,
 				Franchise.class);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		//transfer.setAccount("acc_GG4Qoe8oK4muer");//Sumit HDFC/Sachin Uni
-		transfer.setAccount(frData.getPaymentGetwayLink());
-		transfer.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+		//transfer.setAccount(frData.getPaymentGetwayLink());
+		transfer.setAccount("acc_GG4Qoe8oK4muer");
+		
+		//transfer.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+		transfer.setAmount(100);
 		transfer.setCurrency("INR");
 			/*
 			 * transfer.setOnHold(1); transfer.setOnHoldUntil(1);
@@ -236,6 +245,6 @@ public class PaymentController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/home";
+		return "redirect:/orderhistory";
 	}
 }
