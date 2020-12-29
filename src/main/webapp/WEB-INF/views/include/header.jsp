@@ -11,14 +11,20 @@
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
 							href="${pageContext.request.contextPath}/home">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
-						<span><a href="${pageContext.request.contextPath}/showVistStorePage">Visit Stores</a></span>
+						<span><a
+							href="${pageContext.request.contextPath}/showVistStorePage">Visit
+								Stores</a></span>
 
 						<ul class="drop_menu">
 							<li><a href="#">Partner with us <i
 									class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
-									<li><a href="${pageContext.request.contextPath}/showBecmVendrFr"> Become A Vendor </a></li>
-									<li><a href="${pageContext.request.contextPath}/showBecmVendrFr"> Become A Franchisee </a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/showBecmVendrFr">
+											Become A Vendor </a></li>
+									<li><a
+										href="${pageContext.request.contextPath}/showBecmVendrFr">
+											Become A Franchisee </a></li>
 									<li><a href="#"> Corporate Gifts </a></li>
 								</ul></li>
 						</ul>
@@ -75,9 +81,9 @@
 
 						<!--like product-->
 						<div class="product_like">
-							<a href="${pageContext.request.contextPath}/likeproducts"> 
-							<i class="fa fa-heart" aria-hidden="true"></i>
-							<span class="cart_item_count" id="">0</span>	
+							<a href="${pageContext.request.contextPath}/likeproducts"> <i
+								class="fa fa-heart" aria-hidden="true"></i> 
+								<span class="cart_item_count" id="">0</span>
 							</a>
 						</div>
 
@@ -197,10 +203,10 @@
 						<div class="user_login">
 							<ul class="login_menu">
 								<li><a href="${pageContext.request.contextPath}/profile"><img
-										class="lazy" width="25"
-										height="25" data-src="${sessionScope.profileImg}"
-										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'" alt="">
-										${sessionScope.userName}<!-- <i class="fa fa-angle-down"
+										class="lazy" width="25" height="25"
+										data-src="${sessionScope.profileImg}"
+										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
+										alt=""> ${sessionScope.userName}<!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<%-- <ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
@@ -280,7 +286,10 @@
 						prodName = table[i].exVar1;
 					} else {
 
-						if (table[i].exInt2 != 0 || table[i].flvName=="undefined" || table[i].flvName=="" || table[i].flvName=="NA" ) {
+						if (table[i].exInt2 != 0
+								|| table[i].flvName == "undefined"
+								|| table[i].flvName == ""
+								|| table[i].flvName == "NA") {
 							prodName = table[i].exVar1 + " Flavour - "
 									+ table[i].flvName + " Weight - "
 									+ table[i].weight;
@@ -295,7 +304,9 @@
 
 					$("#item_cart_list")
 							.append(
-									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('+table[i].uniqueId+')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
+									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('
+											+ table[i].uniqueId
+											+ ')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
 											+ '<div class="like_pic">'
 											+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
 				'data-src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
@@ -333,7 +344,6 @@
 											+ '<div class="clr"></div>'
 											+ '</div>')
 
-											
 				}//IF
 			}//End of For loop 2
 		}//End of loop 1
@@ -502,9 +512,9 @@
 
 		sessionStorage.setItem("priceFilterMin", "0");
 		sessionStorage.setItem("priceFilterMax", "0");
-		
+
 		sessionStorage.setItem("findCatId", catId);
-		
+
 		var table = [];
 		sessionStorage.setItem("selTags", JSON.stringify(table));
 
@@ -527,9 +537,9 @@
 		}
 		return "";
 	}
-	
-	function deleteItemFromCart(uniqueId){
-		
+
+	function deleteItemFromCart(uniqueId) {
+
 		if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
 			sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -549,9 +559,8 @@
 		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 
 		appendCartData();
-		
+
 	}
-	
 </script>
 
 

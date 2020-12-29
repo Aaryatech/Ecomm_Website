@@ -201,7 +201,7 @@
 													<div class="table_detail">
 
 														<div class="table_detail_l">
-															<img src="${imgPath}${orderDetail.itemPic}">
+															<img src="${imgPath}${orderDetail.itemPic}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
 															<%-- ${pageContext.request.contextPath}/resources/images/cake_open.jpg --%>
 														</div>
 														<div class="table_detail_r">

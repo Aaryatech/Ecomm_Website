@@ -30,7 +30,6 @@ html {
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
 
-
 	<div class="head_marg with_menu">
 		<section class="product_category">
 			<div class="wrapper">
@@ -50,15 +49,20 @@ html {
 								</c:forEach>
 
 
+
 								<c:if test="${subCat.catId == catId && count==1}">
+
+
 									<li>
 										<div class="product_filter_one">
 											<a href="#${subCat.subCatId}"
 												onclick="setDivPadding(${subCat.subCatId})"><img
-												src="${subCatImgUrl}${subCat.imageName}" alt=""> <c:out
-													value="${subCat.subCatName}"></c:out> </a>
+												src="${subCatImgUrl}${subCat.imageName}" alt=""
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
+												<c:out value="${subCat.subCatName}"></c:out> </a>
 										</div>
 									</li>
+
 								</c:if>
 							</c:forEach>
 
@@ -119,39 +123,39 @@ html {
 									<li>
 										<div class="cake_one product_padd">
 											<div class="cake_pic">
-												<a
-														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-												<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+												<%-- <a
+													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"> --%>
+													<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 													class="mobile_fit transition">
 
-												<div class="circle_tag active"
-													onclick="setLike(${product.productId})">
+													<div class="circle_tag active"
+														onclick="setLike(${product.productId})">
 
-													<c:choose>
+														<c:choose>
 
-														<c:when test="${product.isLike==0}">
-															<img src="#" class="lazy" id="like${product.productId}"
-																data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-																alt="">
-														</c:when>
-														<c:when test="${product.isLike==1}">
-															<img src="#" class="lazy" id="like${product.productId}"
-																data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-																alt="">
-														</c:when>
+															<c:when test="${product.isLike==0}">
+																<img src="#" class="lazy" id="like${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+																	alt="">
+															</c:when>
+															<c:when test="${product.isLike==1}">
+																<img src="#" class="lazy" id="like${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+																	alt="">
+															</c:when>
 
-													</c:choose>
+														</c:choose>
 
 
-												</div>
+													</div>
 
-												<div class="cake_prc">
-													<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
-													<span class="off_prc"><i class="fa fa-inr"
-														aria-hidden="true"></i>${product.defaultPrice}</span> <span
-														class="prc_off">(23% Off)</span>
-												</div>
-											</a>
+													<div class="cake_prc">
+														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+														<span class="off_prc"><i class="fa fa-inr"
+															aria-hidden="true"></i>${product.defaultPrice}</span> <span
+															class="prc_off">(23% Off)</span>
+													</div>
+												<!-- </a> -->
 											</div>
 
 											<div class="cake_container">
