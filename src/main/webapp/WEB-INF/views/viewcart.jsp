@@ -1108,7 +1108,7 @@ function setOfferDiscAmt(){
 								+
 
 								'<td><div class="cart_option">'
-								+ '<img src="${pageContext.request.contextPath}/resources/images/user_pic.jpg" alt=""> <span>Message in the cake</span>'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg" alt=""> <span>Message in the cake</span>'
 								+ '</div></td>'
 								+
 
@@ -1570,7 +1570,7 @@ function setOfferDiscAmt(){
 										var url = '${pageContext.request.contextPath}/goToPay';
 										window.location = url;
 						        	}else{
-										var url = '${pageContext.request.contextPath}/home';
+										var url = '${pageContext.request.contextPath}/orderhistory';
 										window.location = url;
 						        	} 
 						        					        	

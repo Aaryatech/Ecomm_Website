@@ -474,7 +474,7 @@ System.err.println("charges " +charges);
 			float deliveryCharges = 0;
 			float discAmt = 0;
 			float applyWalletAmt = 0;
-
+			float km = (float) request.getSession().getAttribute("frKm");
 			
 			
 			Customer cust = new Customer();
@@ -564,9 +564,9 @@ System.err.println("charges " +charges);
 			order.setCityId(txtCity);
 			order.setAreaId(0);
 			order.setAddressId(1);
-			order.setAddress(txtDelvFlat+" "+ txtDelvArea +" "+txtDelvLandmark +" "+txtDelvPincode);
+			order.setAddress(txtDelvFlat+", "+ txtDelvArea +", "+txtDelvLandmark +", "+txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
-			order.setLandmark(txtDelvLandmark);
+			order.setLandmark("-"+session.getAttribute("landMark"));
 			order.setDeliveryDate(DateConvertor.convertToDMY(deliveryDate));
 			order.setDeliveryTime(deliveryDateTime[1]);
 			order.setProductionDate(sf.format(ct));
@@ -575,7 +575,7 @@ System.err.println("charges " +charges);
 			order.setInsertUserId(custId);
 			order.setOrderPlatform(1);
 			order.setBillingName(txtBillName);
-			order.setBillingAddress(txtBillingFlat + " " + txtBillingArea + " " + txtBillingLandmark + " " + txtBillingPincode
+			order.setBillingAddress(txtBillingFlat + ", " + txtBillingArea + ", " + txtBillingLandmark + ", " + txtBillingPincode
 );
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
@@ -587,7 +587,7 @@ System.err.println("charges " +charges);
 			order.setExVar1(txtGst);
 			order.setExVar2(promoCode);
 			order.setOfferId(0);
-			order.setDeliveryKm(0);
+			order.setDeliveryKm(km);
 
 			if (addCustAgent > 0) {
 				order.setIsAgent(1);

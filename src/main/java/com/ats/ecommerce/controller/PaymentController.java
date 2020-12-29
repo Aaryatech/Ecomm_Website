@@ -152,6 +152,7 @@ public class PaymentController {
 		 
 		 ResponseEntity<OrderRes> response1= restTemplate.exchange("https://api.razorpay.com/v1/orders/", HttpMethod.POST, httpEntity, OrderRes.class);
 		 makeOrderResp = response1.getBody();
+
 		  
 	/*	}catch (RestClientException httpClientExce) {
 			System.err.println("httpClientExce " +httpClientExce.toString());
@@ -198,6 +199,8 @@ public class PaymentController {
 			map.add("paidStatus", 1);
 			map.add("payRemark", request.getParameter("razorpay_order_id"));
 			map.add("orderStatus", -100);
+			session.setAttribute("successMsg", "Payment Successful");
+
 			
 		}else {
 			System.err.println("razorpay_payment_id  null");
@@ -208,15 +211,21 @@ public class PaymentController {
 				 * orderSaveData.getOrderHeader().setPaidStatus(0);
 				 * orderSaveData.getOrderHeader().setOrderStatus(9);
 				 */
+			session.setAttribute("successMsg", "Payment Failed");
 			map.add("uniqNo", "na");
 			map.add("paidStatus", 0);
 			map.add("payRemark", request.getParameter("razorpay_order_id"));
 			map.add("orderStatus", 9);
 		}
 		//updateOrderFrontEnd
-		
+		try {
 		Info info = Constants.getRestTemplate().postForObject(Constants.url + "updateOrderFrontEnd", map,
 				Info.class);
+		}catch (Exception e) {
+			session.setAttribute("successMsg", "Payment Successful");
+		}
+		
+
 		try {
 		session.removeAttribute("orderSaveData");
 		session.removeAttribute("orderId");
