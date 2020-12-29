@@ -554,9 +554,9 @@ System.err.println("charges " +charges);
 			order.setCustId(custId);
 			int status = 2;
 			if (paymentMethod == 2 && status == 1) {
-				order.setOrderStatus(9);
+				order.setOrderStatus(1);
 			} else {
-				order.setOrderStatus(status);
+				order.setOrderStatus(1);
 			}
 
 			order.setPaidStatus(0);
