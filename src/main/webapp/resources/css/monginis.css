@@ -1128,6 +1128,9 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
 .find_store.btm_space,.testimonial_bx.btm_space{padding: 40px 0 10px 0;}
 .radio_1.promo ul li{width: 50%;}
 .del_inst{font-size: 14px; color: #373991; font-family: 'Hind-Medium'; line-height: 20px; text-align: left;}
+
+.pop_lab_fld{display: inlin-block; width: 100%; margin: 0 0 5px 0; font-size: 14px; color: #333; font-family:'Hind-Medium';}
+.gender_r.full{width: 80%;}
 /*25-12-2020*/
 
 
@@ -1234,7 +1237,7 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     
     .well_palace{width: 70%;}
     .gender_r{width: 70%;}
-    .radio_1.gender ul li{width: 35%;}
+    .radio_1.gender ul li{width: 31% /* 35% */;}
     .well_palace.login_pop{width: 35%;}
     
     /*profile page css*/

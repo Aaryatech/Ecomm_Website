@@ -761,7 +761,7 @@ function setOfferDiscAmt(){
 							</div>
 							<div class="place_row_r">
 								<div class="gender_l">Gender</div>
-								<div class="gender_r">
+								<div class="gender_r full">
 									<div class="radio_1 gender">
 										<ul>
 											<li><input type="radio" id="a-option" name="gender"
@@ -1040,7 +1040,7 @@ function setOfferDiscAmt(){
 						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 								.toFixed(2);
 						
-						//alert(table[i].taxAmt)
+						//alert(JSON.stringify(table[i].spInst));
 						
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
@@ -1067,7 +1067,7 @@ function setOfferDiscAmt(){
 								+ allItemArr[j].flavorNames
 								+ ' </div>'
 								+ '</div>'
-								+ '</div><p class="del_inst">delivery instruction : user put here special delivery instruction regarding to your Cake.</p></td>'
+								+ '</div><p class="del_inst">special instruction : '+table[i].spInst+'.</p></td>'
 								+
 
 								'<td>'
@@ -1320,7 +1320,7 @@ function setOfferDiscAmt(){
 		function showDetail(id) {
 
 			// $("aTagShowDetail"+id).hide();
-			//$("detail"+id).show();
+			//$("detail"+id).show();exec
 			document.getElementById("aTagShowDetail" + id).style.display = "none";
 			document.getElementById("detail" + id).style.display = "block";
 
