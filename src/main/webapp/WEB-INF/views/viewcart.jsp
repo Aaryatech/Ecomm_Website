@@ -1543,7 +1543,7 @@ function setOfferDiscAmt(){
 							fd.append('txtDelvArea', $("#txtDelvArea").val());
 							fd.append('txtDelvLandmark', $("#txtDelvLandmark").val())
 							fd.append('txtDelvPincode',$("#txtDelvPincode").val());
-
+ 
 							fd.append('txtBillingFlat', $("#txtBillingFlat").val());
 							fd.append('txtBillingArea',  $("#txtBillingArea").val());
 							fd.append('txtBillingLandmark', $("#txtBillingLandmark").val());
