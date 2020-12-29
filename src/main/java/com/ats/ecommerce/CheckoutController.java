@@ -17,6 +17,7 @@ import java.util.UUID;
 import java.util.Base64.Decoder;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.DateConvertor;
+import com.ats.ecommerce.common.EncodeDecode;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.FEDataTraveller;
@@ -459,13 +461,12 @@ System.err.println("charges " +charges);
 			String txtDelvArea = request.getParameter("txtDelvArea");
 			String txtDelvLandmark = request.getParameter("txtDelvLandmark");
 			String txtDelvPincode = request.getParameter("txtDelvPincode");
-
+			
 //			Billing Address
 			String txtBillingFlat = request.getParameter("txtBillingFlat");
 			String txtBillingArea = request.getParameter("txtBillingArea");
 			String txtBillingLandmark = request.getParameter("txtBillingLandmark");
 			String txtBillingPincode = request.getParameter("txtBillingPincode");
-
 			String itemData = request.getParameter("itemData");
 
 			int addCustAgent = 0;
@@ -474,6 +475,60 @@ System.err.println("charges " +charges);
 			float discAmt = 0;
 			float applyWalletAmt = 0;
 
+			
+			
+			Customer cust = new Customer();
+
+			int defaultCustAddrs = 0;
+			try {
+				defaultCustAddrs = Integer.parseInt(request.getParameter("defltAddressId"));
+			} catch (Exception e) {
+				defaultCustAddrs = 0;
+			}
+			cust.setCityId(txtCity);
+			cust.setCustAddPlatform(2);
+			cust.setCustGender(Integer.parseInt(request.getParameter("gender")));
+			cust.setCustId(custId);
+			cust.setCustMobileNo(txtMobile);
+			cust.setCustName(txtBillName);
+			cust.setDateOfBirth(txtDob);
+			cust.setEmailId(txtEmail);
+			cust.setIsPrimiunmCust(0);
+			cust.setProfilePic("na");
+			cust.setCompanyId(1);
+			cust.setIsActive(1);
+			cust.setDelStatus(1);
+			cust.setExInt1(defaultCustAddrs);
+			cust.setExInt2(0);
+			cust.setExInt3(0);
+			cust.setExVar1("NA");
+			cust.setExVar2(txtGst);
+			cust.setExVar3("na");				
+			cust.setUpdtDttime(dttime.format(ct));
+			cust.setInsertDttime(dttime.format(ct));
+			cust.setAgeRange(2);
+			cust.setMakerUserId(0);
+			cust.setLanguageId(1);
+
+			System.err.println(cust.toString());
+			
+			Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
+					Customer.class);
+			if (res.getCustId() > 0) {
+				session.setAttribute("successMsg", "New customer added successfully");
+				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
+				custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+				response.addCookie(custIdCookie);
+				
+				
+				session.setAttribute("custId", res.getCustId());
+				session.setAttribute("userName", cust.getCustName());
+				session.setAttribute("userMobile", cust.getCustMobileNo());
+				session.setAttribute("userEmail", cust.getEmailId());
+				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+				
+			}
+			custId=res.getCustId();
 			ObjectMapper objectMapper = new ObjectMapper();
 
 			// convert json string to object
@@ -487,8 +542,6 @@ System.err.println("charges " +charges);
 			float finalIgstAmt = 0;
 			float finalDiscAmt=0;
 			float finalAddCharges=0;
-			
-			
 
 			String uuid = UUID.randomUUID().toString();
 
@@ -511,7 +564,7 @@ System.err.println("charges " +charges);
 			order.setCityId(txtCity);
 			order.setAreaId(0);
 			order.setAddressId(1);
-			order.setAddress(txtDelvFlat);
+			order.setAddress(txtDelvFlat+" "+ txtDelvArea +" "+txtDelvLandmark +" "+txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
 			order.setLandmark(txtDelvLandmark);
 			order.setDeliveryDate(DateConvertor.convertToDMY(deliveryDate));
@@ -522,7 +575,8 @@ System.err.println("charges " +charges);
 			order.setInsertUserId(custId);
 			order.setOrderPlatform(1);
 			order.setBillingName(txtBillName);
-			order.setBillingAddress(txtDelvFlat);
+			order.setBillingAddress(txtBillingFlat + " " + txtBillingArea + " " + txtBillingLandmark + " " + txtBillingPincode
+);
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
 			order.setDeliveryInstText(delvrInst);
@@ -689,16 +743,16 @@ System.err.println("charges " +charges);
 			orderSaveData.setOrderTrail(orderTrail);
 
 			session.setAttribute("orderSaveData", orderSaveData);
-			 System.err.println("Order Save Method is commented will not be saved in Db");
+			 //System.err.println("Order Save Method is commented will not be saved in Db");
 
-		//	info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
-			//		Info.class);
+			info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
+					Info.class);
 			if (!info.getMsg().equalsIgnoreCase(null)) {
 				// Order saved successfully.
 				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
 				if (orderSaveData.getOrderHeader().getPaymentMethod() == 2) {
 					// ie paid by elecronic way
-
+					
 					info.setMsg("epay");
 					info.setResponseObject1("");
 

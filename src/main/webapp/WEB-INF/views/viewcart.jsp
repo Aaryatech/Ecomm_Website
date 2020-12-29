@@ -370,18 +370,19 @@
 								<!--apply now pop up-->
 								<script type="text/javascript">
 								function checkCustSession(){
-									var sessCustId ='${sessionScope.custId}';
-										if (parseInt(sessCustId) > 0) {
+									//var sessCustId ='${sessionScope.custId}';
+										//if (parseInt(sessCustId) > 0) {
 											$(document).ready(function() {
 												$('#place').popup();
 											});
-										} else {
+										//}
+										/* else {
 											var r = confirm("Please give your details");
 											if (r == true) {
 												var url = '${pageContext.request.contextPath}/addNewCustomer';
 												window.location = url;
 											}
-										}
+										} */
 									}//End of function checkCustSession()
 								</script>
 <script type="text/javascript">
@@ -397,6 +398,7 @@
 			}, function(data) {
 				//alert(JSON.stringify(data));
 				 document.getElementById("loaderimg").style.display = "none";
+
 				 var fd = new FormData();
 					fd.append('frId', 0);
 				 $.ajax({
@@ -657,11 +659,11 @@ function setOfferDiscAmt(){
 						</div>
 					</div>
 					<!--related-product-box-->
-					<div class="cart_r">
+					<%-- <div class="cart_r">
 						<h3 class="sidebar_title">Related Item</h3>
 						<div class="related_container">
 							<!--related-product-1-->
-						<%-- <c:forEach items="${relateItemList}" var="relatedItem">
+						<c:forEach items="${relateItemList}" var="relatedItem">
 						<c:forEach items="${prodHeaderList}" var="product"
 								varStatus="prodCount">
 								<c:choose>
@@ -685,10 +687,10 @@ function setOfferDiscAmt(){
 								
 								</c:choose>
 								</c:forEach>
-						</c:forEach> --%>
+						</c:forEach>
 							
 						</div>
-					</div>
+					</div> --%>
 					<div class="clr"></div>
 				</div>
 				<!-- PLACE ORDER POPUP -->
@@ -727,7 +729,7 @@ function setOfferDiscAmt(){
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Billing Name</span>
 								<input type="text" class="input_place" id="txtBillName"
-									readonly="readonly" name="txtBillName"
+									 name="txtBillName"
 									placeholder="Billing Name" value="${cust.custName}"
 									autocomplete="off" /> <label class="form-label-hint-error"
 									id="errorBillName" style="display: none;">please enter
@@ -737,7 +739,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">Mobile Number</span>
 								<input type="text" class="input_place" id="txtMobile"
 									value="${cust.custMobileNo}" maxlength="10" name="txtMobile"
-									placeholder="Mobile Number" readonly="readonly"
+									placeholder="Mobile Number"  
 									autocomplete="off" /> <label class="form-label-hint-error"
 									id="errorMobile" style="display: none;">please enter
 									mobile number</label> <label class="form-label-hint-error"
@@ -751,7 +753,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">Email Address</span>
 								<input type="text" class="input_place" id="txtEmail"
 									value="${cust.emailId}" name="txtEmail" placeholder="Email ID"
-									autocomplete="off" readonly="readonly" /> <label
+									autocomplete="off"  /> <label
 									class="form-label-hint-error" id="errorEmail"
 									style="display: none;">please enter email id</label> <label
 									class="form-label-hint-error" id="errorEmailInvalid"
@@ -787,11 +789,11 @@ function setOfferDiscAmt(){
 
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Dateof Birth</span>
+								<span class="pop_lab_fld">Date of Birth</span>
 								<input type="text" class="input_place" id="txtDob"
 									value="${cust.dateOfBirth}" name="txtDob"
 									placeholder="Date of Birth" autocomplete="off"
-									readonly="readonly" /> <label class="form-label-hint-error"
+									/> <label class="form-label-hint-error"
 									id="errorDob" style="display: none;">please enter date
 									of birth</label>
 							</div>
@@ -799,7 +801,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">GST Number</span>
 								<input type="text" class="input_place" id="txtGst"
 									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
-									autocomplete="off" readonly="readonly" /> <span
+									autocomplete="off" /> <span
 									class="form-label-hint-error" id="errorGst"
 									style="display: none;">invalid GST number</span>
 							</div>
@@ -872,7 +874,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Select Area</span>
+								<span class="pop_lab_fld">Area</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingFlat" name="txtBillingFlat"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -882,7 +884,7 @@ function setOfferDiscAmt(){
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Select Colony</span>
+								<span class="pop_lab_fld">Colony</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingArea" name="txtBillingArea"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -894,7 +896,7 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Select Landmark</span>
+								<span class="pop_lab_fld">Landmark</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingLandmark" name="txtBillingLandmark"
 									placeholder="Landmark" /> <label class="form-label-hint-error"
@@ -902,12 +904,12 @@ function setOfferDiscAmt(){
 									enter landmark</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Pincode</span>
+								<span class="pop_lab_fld">Pin code</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingPincode" name="txtBillingPincode"
 									placeholder="Billing Pincode" /> <label
 									class="form-label-hint-error" id="errorBillingPincode"
-									style="display: none;">please enter pincode</label>
+									style="display: none;">please enter pin code</label>
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -1324,118 +1326,7 @@ function setOfferDiscAmt(){
 
 		}
 	</script>
-
-	<!--cart-sidepanel-->
-	<script type="text/javascript">
-		function openNav2() {
-			document.getElementById("mySidepanel2").style.width = "300px";
-		}
-		function closeNav2() {
-			document.getElementById("mySidepanel2").style.width = "0";
-		}
-	</script>
-
-	<!--main-menu-js-->
-	<script>
-		function openNav1() {
-			document.getElementById("myNav").style.height = "100%";
-		}
-
-		function closeNav1() {
-			document.getElementById("myNav").style.height = "0%";
-		}
-	</script>
-
-
-
-
-	<!--menuzord -->
-	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			jQuery("#menuzord").menuzord({
-				align : "left"
-			});
-		});
-	</script>
-	<!--menuzord-->
-
-	<script type="text/javascript">
-		jQuery(document)
-				.ready(
-						function() {
-							// This button will increment the value
-							$('.qtyplus')
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If is not undefined
-												if (!isNaN(currentVal)) {
-													// Increment
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal + 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-							// This button will decrement the value till 0
-							$(".qtyminus")
-									.click(
-											function(e) {
-												// Stop acting like a button
-												e.preventDefault();
-												// Get the field name
-												fieldName = $(this).attr(
-														'field');
-												// Get its current value
-												var currentVal = parseInt($(
-														'input[name='
-																+ fieldName
-																+ ']').val());
-												// If it isn't undefined or its greater than 0
-												if (!isNaN(currentVal)
-														&& currentVal > 0) {
-													// Decrement one
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															currentVal - 1);
-												} else {
-													// Otherwise put a 0 there
-													$(
-															'input[name='
-																	+ fieldName
-																	+ ']').val(
-															0);
-												}
-											});
-						});
-	</script>
-
-
 	<!--slick slider-->
-	
-
-	
-
-
 	<script type="text/javascript">
 		function validateForm() {
 
@@ -1620,6 +1511,9 @@ function setOfferDiscAmt(){
 
 			var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
+				
+					document.getElementById("loaderimg").style.display = "block";
+					$("#place").hide();
 				var fd = new FormData();
 							var itemTotal=document.getElementById("lbl_ItemTotal").innerHTML;
 							
@@ -1667,7 +1561,7 @@ function setOfferDiscAmt(){
 						        	//alert(JSON.stringify(resData));
 						        	var table = [];
 						        	//un comment it-Sachin
-									/* tc 26-12 sessionStorage.setItem("cartValue", JSON
+									sessionStorage.setItem("cartValue", JSON
 											.stringify(table));
 									sessionStorage.setItem("prodImageList", JSON
 											.stringify(table));
@@ -1678,7 +1572,7 @@ function setOfferDiscAmt(){
 						        	}else{
 										var url = '${pageContext.request.contextPath}/home';
 										window.location = url;
-						        	} */
+						        	} 
 						        					        	
 						        }, 
 						        error: function(jqXHR, textStatus, errorThrown)
@@ -1896,6 +1790,111 @@ function setOfferDiscAmt(){
 							$(this).attr('id'));
 				});
 	</script>
+	
+	<script type="text/javascript">
+		jQuery(document)
+				.ready(
+						function() {
+							// This button will increment the value
+							$('.qtyplus')
+									.click(
+											function(e) {
+												// Stop acting like a button
+												e.preventDefault();
+												// Get the field name
+												fieldName = $(this).attr(
+														'field');
+												// Get its current value
+												var currentVal = parseInt($(
+														'input[name='
+																+ fieldName
+																+ ']').val());
+												// If is not undefined
+												if (!isNaN(currentVal)) {
+													// Increment
+													$(
+															'input[name='
+																	+ fieldName
+																	+ ']').val(
+															currentVal + 1);
+												} else {
+													// Otherwise put a 0 there
+													$(
+															'input[name='
+																	+ fieldName
+																	+ ']').val(
+															0);
+												}
+											});
+							// This button will decrement the value till 0
+							$(".qtyminus")
+									.click(
+											function(e) {
+												// Stop acting like a button
+												e.preventDefault();
+												// Get the field name
+												fieldName = $(this).attr(
+														'field');
+												// Get its current value
+												var currentVal = parseInt($(
+														'input[name='
+																+ fieldName
+																+ ']').val());
+												// If it isn't undefined or its greater than 0
+												if (!isNaN(currentVal)
+														&& currentVal > 0) {
+													// Decrement one
+													$(
+															'input[name='
+																	+ fieldName
+																	+ ']').val(
+															currentVal - 1);
+												} else {
+													// Otherwise put a 0 there
+													$(
+															'input[name='
+																	+ fieldName
+																	+ ']').val(
+															0);
+												}
+											});
+						});
+	</script>
+	
+	<!--cart-sidepanel-->
+	<script type="text/javascript">
+		function openNav2() {
+			document.getElementById("mySidepanel2").style.width = "300px";
+		}
+		function closeNav2() {
+			document.getElementById("mySidepanel2").style.width = "0";
+		}
+	</script>
+
+	<!--main-menu-js-->
+	<script>
+		function openNav1() {
+			document.getElementById("myNav").style.height = "100%";
+		}
+
+		function closeNav1() {
+			document.getElementById("myNav").style.height = "0%";
+		}
+	</script>
+
+
+
+
+	<!--menuzord -->
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery("#menuzord").menuzord({
+				align : "left"
+			});
+		});
+	</script>
+	<!--menuzord-->
+	
 </body>
 
 </html>
