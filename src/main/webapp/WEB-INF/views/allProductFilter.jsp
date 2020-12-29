@@ -29,7 +29,6 @@
 		<div class="wrapper">
 
 			<div id="menuzord" class="menuzord red menuzord-responsive">
-				<div class="showhide32"></div>
 				<ul
 					class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
 
@@ -68,35 +67,35 @@
 
 											<li>
 											<label class="radio_menu">Under 499
-											  <input type="radio" id="radioPrice" value="0-499" checked="checked" name="radioPrice">
+											  <input type="radio" id="radioPrice" value="0-499" checked="checked" name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">500 to 599
-											  <input type="radio" id="radioPrice" value="500-599" checked="checked" name="radioPrice">
+											  <input type="radio" id="radioPrice" value="500-599" checked="checked" name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">600 to 999
-											  <input type="radio" id="radioPrice" value="600-999" checked="checked" name="radioPrice">
+											  <input type="radio" id="radioPrice" value="600-999" checked="checked" name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">1000 to 1999
-											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice">
+											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">Above 2000
-											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice">
+											  <input type="radio" id="radioPrice" value="2000-10000" checked="checked" name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
@@ -128,7 +127,7 @@
 
 																		<li>
 																		<label class="check_menu">
-																		  <input type="checkbox" value="${filter.adminName}">
+																		  <input type="checkbox" value="${filter.adminName}" class="menuFilter">
 																		  <span class="checkmark_check"></span>
 																		  ${filter.adminName}
 																		</label>
