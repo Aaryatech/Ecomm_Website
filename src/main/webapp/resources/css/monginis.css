@@ -1132,8 +1132,18 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
 .pop_lab_fld{display: inlin-block; width: 100%; margin: 0 0 5px 0; font-size: 14px; color: #333; font-family:'Hind-Medium';}
 .gender_r.full{width: 80%;}
 /*25-12-2020*/
+/* Mohsin 30-12-2020*/
+/*small pop up css*/
+.well.small{width: 35%; background: #FFF;}
+.small_cont{text-align: left; width: 100%;}
+.small_row_one{display: inline-block; width: 100%; padding-bottom: 6px; margin-bottom: 0; border-bottom: 1px dashed #CCC;}
+.small_l{float: left; width: 50%; font-size: 15px; color: #333; font-family: 'Hind-Regular'; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
+.small_l span,.small_r span{font-family: 'Hind-Medium';}
+.small_r{float: left; width: 50%; font-size: 15px; color: #333; font-family: 'Hind-Regular'; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 
-
+.show_hide_div{display: block; width: 100%; font-size: 13px; font-family:'Hind-Medium'; color: #333; margin: 10px 0 0 0; }
+.show_hide_div p{float: left; width: 33.333%; }
+.show_hide_div p#offer_terms{float: none; width: 100%; margin: 0 0 3px 0; font-size:13px; text-transform:uppercase; color: #ec268f;}
 
 
 
@@ -1260,6 +1270,8 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     .actual_prc i {font-size: 24px; margin: 15px 0 0 0;}
 	.cake_pic img{height: 215px;}
 	.circle_tag img{width: 100%; height: 100%;}
+	    .well.small{width: 42%;}
+	
 }
 @media screen and (max-width:900px){
 	.prod_filt {width: 150%;}
@@ -1345,6 +1357,7 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     .tweets_r{padding: 0 20px;}
     .tweets_r {font-size: 20px;}
     .landing_button {width: 60%; font-size: 20px;}
+      .well.small {width: 55%;}
     
     
     
@@ -1530,6 +1543,8 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     
     .cake_pic img {height: 150px;}
     .circle_tag img{width: 100%; height: 100%;}
+    .well.small {width: 90%;}
+    
 }
 @media screen and (max-width:640px){
     /*location page css*/
@@ -1612,7 +1627,7 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     .prod_cat_1{float: none; width: 100%; margin: 0 0 10px 0;}
     .cakes_cat_1{height: auto; min-height: auto;}
     .cakes_cat_1 img{height: 250px; object-fit: cover; width: 100%;}
-    .prod_cat_2{float: none; width: 100%; padding: 0;}
+    .prod_cat_2{float: nondive; width: 100%; padding: 0;}
     .prod_cat_3{float: none; width: 100%;}
     .lst_tow{float: left; width: 50%;}
     
@@ -1689,6 +1704,11 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
     
     /* .prod_filt ul li {width: 50%;} */
     .product_filter_one img{height: 180px;}
+    
+     .well.small {width: 96%;}
+    .small_row_one{margin-bottom: 6px;}
+    .small_l{float: none; width: 100%; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px dashed #CCC;}
+    .small_r{float: none; width: 100%;}
     
 }
 

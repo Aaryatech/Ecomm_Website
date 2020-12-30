@@ -56,7 +56,7 @@ public class ProductDisplayController {
 			Gson gson = new Gson();
 			data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
 
-			System.err.println("SESSION ------------ " + data);
+			//System.err.println("SESSION ------------ " + data);
 
 			// data =
 			// mapper.readValue(session.getAttribute("allDataJson"),FEDataTraveller.class);

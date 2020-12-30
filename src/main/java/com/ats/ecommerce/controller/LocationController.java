@@ -75,7 +75,20 @@ public class LocationController {
 					// TODO: handle exception
 				}
 			}
-
+			if (cookieArray != null) {
+				try {
+					for (int a = 0; a < cookieArray.length; a++) {
+						if (cookieArray[a].getName().equalsIgnoreCase("landMarkCookie")) {
+							session.setAttribute("landMark",
+								EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+							break;
+						}
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			
 			if (isCookieFound == 0) {
 				System.err.println("In Else part of / Mapping ");
 				ObjectMapper mapper = new ObjectMapper();
@@ -85,7 +98,7 @@ public class LocationController {
 				String frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
 						.next();
 				
-				System.err.println("FR --------------> "+frData);
+				//System.err.println("FR --------------> "+frData);
 
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);

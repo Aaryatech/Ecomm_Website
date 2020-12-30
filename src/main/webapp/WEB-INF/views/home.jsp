@@ -1001,9 +1001,10 @@
 									exFloat4 : 1,
 									weight : selectWt,
 									veg : selectVegNon,
-									spInst : 'na spi',
+									spInst : "na spi",
 									msgonCake : 'na msgcake'
 								});
+								//alert(JSON.stringify(table.spInst));
 								sessionStorage.setItem("cartValue", JSON
 										.stringify(table));
 								appendCartData();
@@ -1776,7 +1777,9 @@
 						rateSettingType : type,
 						flvName : flvName,
 						imgFile : imgFile,
-						imgName : imgName
+						imgName : imgName,
+						spInst : "NA",
+						msgonCake : 'NA'
 						
 					}
 				

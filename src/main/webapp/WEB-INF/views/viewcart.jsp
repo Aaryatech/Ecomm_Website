@@ -245,7 +245,8 @@
 									Items subtotal <span>Rs. <label id="lbl_ItemTotal">0.00</label></span>
 								</div>
 								<div class="total_one pink">
-									Delivery & Additional Rs <span id="del_adc_rs"></span>
+									Delivery & Additional Rs <span id="del_adc_rs"></span>&nbsp;
+									<a href="#new_pop" class="initialism new_pop_open"><i class="fa fa-info" aria-hidden="true"></i></a>
 								</div>
 								
 								<!-- <div class="total_one">
@@ -308,6 +309,13 @@
 									</div>
 								</div>
 								<div class="clr"></div>
+								<!--  Div to show Offer details -->
+								<div class="show_hide_div" id="show_hide_div" style="display: none;">
+									<p id="offer_terms"></p>
+									<p id="off_disc_per"></p>
+									<p id="max_offer_amt"></p>
+									<p id="min_order_amt"></p>
+								</div>			
 								</div>	
 									
 								<div class="chkout_divide">
@@ -412,16 +420,27 @@
 				        success: function(resData, textStatus, jqXHR)
 				        {
 				        	//alert(data.amt1)
-				        	var addCh=resData;//document.getElementById("addCh").value;
+				        	//var addCh=resData;//document.getElementById("addCh").value;
+				        	 document.getElementById("sfee").innerHTML=''+resData.surchargeFee;
+				        	 document.getElementById("pfee").innerHTML=''+resData.packingChg;
+				        	 document.getElementById("hfee").innerHTML=''+resData.handlingChg;
+				        	 document.getElementById("efee").innerHTML=''+resData.extraChg;
+				        	 document.getElementById("rfee").innerHTML=''+resData.roundOffAmt;
+				        	var addCh=(parseFloat(resData.surchargeFee)+parseFloat(resData.packingChg)+parseFloat(resData.handlingChg)+parseFloat(resData.extraChg)+parseFloat(resData.roundOffAmt));
 				        	var billTotal=document.getElementById("lbl_ItemTotal").innerHTML;
 							if(parseFloat(billTotal).toFixed(2) >= data.minAmt && parseFloat(billTotal).toFixed(2) <= data.freeDelvLimit){
+					        	 document.getElementById("kmfee").innerHTML=''+data.amt1;
+
 								document.getElementById("deliveryCharges").value=data.amt1+parseFloat(addCh);
 								//document.getElementById("minOrderMsgDiv").style.display="none";
 							}else if(parseFloat(billTotal).toFixed(2) >= data.freeDelvLimit){
+								document.getElementById("kmfee").innerHTML=''+data.amt2;
 								document.getElementById("deliveryCharges").value=data.amt2+parseFloat(addCh);
 								//document.getElementById("minOrderMsgDiv").style.display="none";
 							}else{
 								document.getElementById("deliveryCharges").value=0+parseFloat(addCh);
+								document.getElementById("kmfee").innerHTML=0;
+
 								//$('#placeBtn').hide();
 								//$('#parkBtn').hide();
 								//document.getElementById("minOrderMsgDiv").style.display="block";
@@ -486,7 +505,7 @@ function checkValidOffer(){
 			//appendTableList();
 		}else{
 			document.getElementById("loaderimg").style.display = "block";
-			$.ajaxSetup({'async':false})
+			$.ajaxSetup({async:false});
 			$.getJSON('${checkIsValidOffer}', {
 				offerId : offerId,
 				coupon : coupon,
@@ -514,12 +533,16 @@ function checkValidOffer(){
 					document.getElementById("disc").value=discPer;
 					var discMinAmt=document.getElementById("tempDiscMinAmt").value;
 					document.getElementById("discMin").value=discMinAmt;
+					
+					
 					applyOffer();
 					//appendTableList();
 					//$("#error_offercoupon").hide();
 				}
 			});
 		}
+	}else{
+		document.getElementById("show_hide_div").style.display = "none";
 	}
 }//End of function checkValidOffer()
 
@@ -550,6 +573,7 @@ function applyOffer(){
 function setOfferList(type){
 	var custId='${sessionScope.custId}';
 	//alert(custId)
+	document.getElementById("show_hide_div").style.display = "none";
 	if(type == 1){
 		$.getJSON('${getCouponOfferListAjax}', {
 			ajax : 'true'
@@ -583,11 +607,21 @@ function setOfferList(type){
 	document.getElementById("offerCoupon").value="";
 	document.getElementById("disc").value=0;
 	document.getElementById("discMin").value=0; 
+	$("#discAmt").html("0");
 	//appendTableList();
 }//end of function setOfferList(type)
 
 function getOfferDetails(id){
 	//checkSession();
+	if(parseInt(id)<1){
+	document.getElementById("show_hide_div").style.display = "none";
+		$("#offer_terms").html("");
+		$("#min_order_amt").html("");
+		$("#max_offer_amt").html("");
+		$("#off_disc_per").html("");
+	}else{
+		document.getElementById("show_hide_div").style.display = "block";
+	}
 	$.getJSON('${getOfferHeaderListAjax}', {
 		ajax : 'true'
 	}, function(data) {
@@ -617,6 +651,13 @@ function getOfferDetails(id){
 		document.getElementById("offerCoupon").value="";
 		document.getElementById('offerCoupon').focus();
 		
+		$("#offer_terms").html("Offer Terms:");
+		$("#min_order_amt").html("Minimum Order Value " +offerLimit);
+		$("#max_offer_amt").html("Maximum Discount Value " +discMinAmt);
+		$("#off_disc_per").html("Discount % " +discPer);
+		//$("#del_adc_rs").html("0");
+		$("#discAmt").html("0");
+
 	});
 		$.getJSON('${getOfferDetailListAjax}', {
 			ajax : 'true'
@@ -651,6 +692,9 @@ function setOfferDiscAmt(){
 	}else{
 		alert("To use offer bill should be greater than "+offerLimit+"/-");
 		document.getElementById('offerCoupon').value = '';
+		//$("#del_adc_rs").html("0");
+		//$("#del_adc_rs").html("0");
+		$("#discAmt").html("0");
 	}
 }//End of function setOfferDiscAmt()
 </script>
@@ -659,38 +703,7 @@ function setOfferDiscAmt(){
 						</div>
 					</div>
 					<!--related-product-box-->
-					<%-- <div class="cart_r">
-						<h3 class="sidebar_title">Related Item</h3>
-						<div class="related_container">
-							<!--related-product-1-->
-						<c:forEach items="${relateItemList}" var="relatedItem">
-						<c:forEach items="${prodHeaderList}" var="product"
-								varStatus="prodCount">
-								<c:choose>
-								<c:when test="${relatedItem==product.productId}">
-								
-								<div class="related_one">
-								<a href="#"><img
-									src="${prodImgUrl}${product.prodImagePrimary}"
-									data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-									alt=""></a> <a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
-								<div class="related_prc">
-									${product.defaultPrice}<span>${product.defaultPrice}</span>
-								</div>
-								<!-- <div class="related_deliver">
-									Earlist Delivery : <span>Today</span>
-								</div> -->
-								<!-- <a href="#" class="related_cart">Add To Cart</a> -->
-							</div>
-								
-								</c:when>
-								
-								</c:choose>
-								</c:forEach>
-						</c:forEach>
-							
-						</div>
-					</div> --%>
+					
 					<div class="clr"></div>
 				</div>
 				<!-- PLACE ORDER POPUP -->
@@ -979,13 +992,38 @@ function setOfferDiscAmt(){
 
 						});
 	</script>
-
+<div class="a">
+    <!--apply now pop up-->
+    <div id="new_pop" class="well small">
+      <div class="mongi_title">Delivery and Additional Charges Details<div class="new_pop_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></div>
+        <div class="mongi_cont">
+            <div class="small_cont">
+                <div class="small_row_one">
+                    <div class="small_l"><span>Surcharge :</span> <b id="sfee"></b></div>
+                    <div class="small_r"><span>Packing Charges :</span> <b id="pfee"></b></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="small_row_one">
+                    <div class="small_l"><span>Handling Charges :</span> <b id="hfee"></b></div>
+                    <div class="small_r"><span>Extra Charges :</span> <b id="efee"></b></div>
+                    <div class="clr"></div>
+                </div>
+                <div class="small_row_one">
+                    <div class="small_l"><span>RoundOff Amt :</span> <b id="rfee"></b></div>
+                    <div class="small_r"><span>Delivery Charges:</span> <b id="kmfee"></b></div>
+                    <div class="clr"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
 	<script>
 		function getItemList() {
 
 			//document.getElementById("loaderimg").style.display = "block";
 			var fd = new FormData();
+			
 			$.ajax({
 				url : '${pageContext.request.contextPath}/getAllFrWiseData',
 				type : 'post',
@@ -1007,6 +1045,7 @@ function setOfferDiscAmt(){
 		}
 
 		function setCartData() {
+			
 
 			if (sessionStorage.getItem("allItemList") == null) {
 				var table = [];
@@ -1136,7 +1175,9 @@ function setOfferDiscAmt(){
 			document.getElementById("lbl_FinalTotal").innerHTML = finaltotal;
 
 			document.getElementById("cart_item_count").innerHTML = ""+table.length;
+			setOfferDiscAmt();
 			checkValidOffer();
+			
 			//applyOffer();
 		}
 
@@ -1508,7 +1549,9 @@ function setOfferDiscAmt(){
 			
 			var imgCartValue = sessionStorage.getItem("prodImageList");
 			var imgTable = $.parseJSON(imgCartValue);
-
+			checkValidOffer();
+			var isError=validateForm();
+			if(isError)
 			var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
 				
@@ -1526,7 +1569,9 @@ function setOfferDiscAmt(){
 							fd.append('imageData', JSON.stringify(imgTable));
 							fd.append('itemData', JSON.stringify(table));
 
-							fd.append('promoCode', $("#promoCode").val());
+							//fd.append('promoCode', $("#promoCode").val());
+							fd.append('promoCode', $("#offerCoupon").val());
+							fd.append('offerId', $("#offer").val());
 							fd.append('paymentMode', $("#paymentMode").val());
 							fd.append('delvrInst' , $("#delvrInst").val());
 							fd.append('delvrDateTime', $("#delvrDateTime").val());
@@ -1555,7 +1600,7 @@ function setOfferDiscAmt(){
 						        dataType: 'json',
 						        processData: false, 
 						        contentType: false, 
-						        async:true,
+						        async:false,
 						        success: function(resData, textStatus, jqXHR)
 						        {
 						        	//alert(JSON.stringify(resData));
@@ -1608,7 +1653,12 @@ function setOfferDiscAmt(){
 		$("#respMsg").show().delay(5000).fadeOut();
 		$("#successMsg").show().delay(5000).fadeOut();
 	</script>
-
+<!-- Mohsin 30-12-2020  -->
+<script type="text/javascript">
+    $(document).ready(function () {
+      $('#new_pop').popup();
+    });
+    </script> 
 
 <script type="text/javascript">
 		document

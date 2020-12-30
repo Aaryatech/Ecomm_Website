@@ -40,6 +40,7 @@ import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.offer.CkDeliveryCharges;
+import com.ats.ecommerce.model.offer.FrCharges;
 import com.ats.ecommerce.model.offer.OfferDetail;
 import com.ats.ecommerce.model.offer.OfferList;
 import com.ats.ecommerce.model.offer.OrderCheckoutData;
@@ -48,6 +49,7 @@ import com.ats.ecommerce.model.order.OrderHeader;
 import com.ats.ecommerce.model.order.OrderSaveData;
 import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @Controller
 @Scope("session")
@@ -387,9 +389,9 @@ System.err.println("charges " +charges);
 	
 	@RequestMapping(value = "/getFrExCharges", method = RequestMethod.POST)
 	@ResponseBody
-	public Float getFrExCharges(HttpServletRequest request, HttpServletResponse response) {
+	public FrCharges getFrExCharges(HttpServletRequest request, HttpServletResponse response) {
 
-		Float frExCharges = 0.0f;
+		FrCharges frExCharges =new FrCharges();
 		
 		try {
 			
@@ -398,7 +400,7 @@ System.err.println("charges " +charges);
 			map.add("frId", request.getSession().getAttribute("frId"));
 			
 			frExCharges = Constants.getRestTemplate().postForObject(Constants.url + "getFrExCharges", map,
-					Float.class);
+					FrCharges.class);
 			
 			System.err.println("frExCharges " +frExCharges);
 			
@@ -427,7 +429,12 @@ System.err.println("charges " +charges);
 			int compId = (Integer) session.getAttribute("companyId");
 
 			String promoCode = request.getParameter("promoCode");
-
+			int offerId=0;
+			try {
+				offerId=Integer.parseInt(request.getParameter("offerId"));
+			}catch (Exception e) {
+				offerId=0;
+			}
 			int paymentMethod = 0;
 			try {
 				paymentMethod = Integer.parseInt(request.getParameter("paymentMode"));
@@ -503,7 +510,8 @@ System.err.println("charges " +charges);
 			cust.setExInt3(0);
 			cust.setExVar1("NA");
 			cust.setExVar2(txtGst);
-			cust.setExVar3("na");				
+			cust.setExVar3(txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode
+);				
 			cust.setUpdtDttime(dttime.format(ct));
 			cust.setInsertDttime(dttime.format(ct));
 			cust.setAgeRange(2);
@@ -575,7 +583,7 @@ System.err.println("charges " +charges);
 			order.setInsertUserId(custId);
 			order.setOrderPlatform(1);
 			order.setBillingName(txtBillName);
-			order.setBillingAddress(txtBillingFlat + ", " + txtBillingArea + ", " + txtBillingLandmark + ", " + txtBillingPincode
+			order.setBillingAddress(txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode
 );
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
@@ -585,8 +593,8 @@ System.err.println("charges " +charges);
 			
 			order.setExInt1(compId);
 			order.setExVar1(txtGst);
-			order.setExVar2(promoCode);
-			order.setOfferId(0);
+			order.setExVar2(promoCode);//ie offercode
+			order.setOfferId(offerId);
 			order.setDeliveryKm(km);
 
 			if (addCustAgent > 0) {

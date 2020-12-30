@@ -123,7 +123,7 @@
 								<img
 									alt=""
 									src="${sessionScope.profileImg}"
-									onerror="${pageContext.request.contextPath}/resources/images/no_img_folder/profile-nopic.jpg">
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/profile-nopic.jpg'">
 								<!-- src="${pageContext.request.contextPath}${profileImg}" -->
 							</div>
 

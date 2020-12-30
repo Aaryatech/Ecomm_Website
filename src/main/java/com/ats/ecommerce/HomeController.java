@@ -207,6 +207,10 @@ public class HomeController {
 				String landMark = request.getParameter("txtPlaces");
 				session.setAttribute("landMark", landMark);
 				System.err.println("landMark " + landMark);
+				Cookie landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+				landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(landMarkCookie);
+				
 			} catch (Exception em) {
 				System.err.println("In Landmark Catch");
 			}
@@ -253,7 +257,7 @@ public class HomeController {
 			model.addAttribute("prodHeader", prodHeader);
 
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
-
+ 
 			try {
 				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
 					if (tag.getFilterTypeId() == 7) {
