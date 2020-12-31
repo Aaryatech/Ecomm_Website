@@ -400,7 +400,7 @@ System.err.println("charges " +charges);
 			map.add("frId", request.getSession().getAttribute("frId"));
 			
 			frExCharges = Constants.getRestTemplate().postForObject(Constants.url + "getFrExCharges", map,
-					FrCharges.class);
+					FrCharges.class); 
 			
 			System.err.println("frExCharges " +frExCharges);
 			
@@ -425,8 +425,11 @@ System.err.println("charges " +charges);
 
 			int frId = (int) session.getAttribute("frId");
 			//int userId = (int) session.getAttribute("userId");
-			int custId = (Integer) session.getAttribute("custId");
-			int compId = (Integer) session.getAttribute("companyId");
+			int custId=0;
+			try { custId = (int) session.getAttribute("custId");}catch (Exception e) {
+				custId=0;
+			}
+			int compId = (int) session.getAttribute("companyId");
 
 			String promoCode = request.getParameter("promoCode");
 			int offerId=0;
@@ -481,9 +484,9 @@ System.err.println("charges " +charges);
 			float deliveryCharges = 0;
 			float discAmt = 0;
 			float applyWalletAmt = 0;
-			float km = (float) request.getSession().getAttribute("frKm");
+			String strFrKm = (String) request.getSession().getAttribute("frKm");
 			
-			
+			float km = Float.parseFloat(strFrKm);
 			Customer cust = new Customer();
 
 			int defaultCustAddrs = 0;
@@ -610,7 +613,7 @@ System.err.println("charges " +charges);
 			
 
 			String imgData = request.getParameter("imageData");
-			TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
+			//TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
 			
 			float grandItemTotal=Float.parseFloat(request.getParameter("itemTotal"));
 			float grandDiscAmt=Float.parseFloat(request.getParameter("discAmt"));
@@ -622,19 +625,16 @@ System.err.println("charges " +charges);
 				order.setExFloat1(roundHalfUp(grandItemTotal,2));//Item total Amt excluding disc and addCharges
 			for (int i = 0; i < itemJsonImportData.length; i++) {
 				OrderDetail orderDetail = new OrderDetail();
-				try {
-					if (imageJsonArray.length > 0)
-						for (int j = 0; j < imageJsonArray.length; j++) {
-							if (imageJsonArray[j].getItemId() == itemJsonImportData[i].getItemId()) {
-								decodeToImageAndUpload(imageJsonArray[j].getImgFile(), imageJsonArray[j].getImgName());
-								orderDetail.setExVar4(imageJsonArray[j].getImgName());
-								
-								break;
-							}
-						}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				/*
+				 * try { if (imageJsonArray.length > 0) for (int j = 0; j <
+				 * imageJsonArray.length; j++) { if (imageJsonArray[j].getItemId() ==
+				 * itemJsonImportData[i].getItemId()) {
+				 * decodeToImageAndUpload(imageJsonArray[j].getImgFile(),
+				 * imageJsonArray[j].getImgName());
+				 * orderDetail.setExVar4(imageJsonArray[j].getImgName());
+				 * 
+				 * break; } } } catch (Exception e) { // TODO: handle exception }
+				 */
 				
 				float divFact=0;
 				float taxableAmt=0;
@@ -644,6 +644,8 @@ System.err.println("charges " +charges);
 				float sgstAmt=0;
 				float cgstAmt=0;
 				float igstAmt=0;
+				decodeToImageAndUpload(itemJsonImportData[i].getImgFile(), itemJsonImportData[i].getImgName());
+				orderDetail.setExVar4(itemJsonImportData[i].getImgName());
 				
 				try {
 					if(grandItemTotal>0)
@@ -786,12 +788,19 @@ System.err.println("charges " +charges);
 			imageByte = decoder.decode(imageString);
 			bis = new ByteArrayInputStream(imageByte);
 			image = ImageIO.read(bis);
-
-			System.err.println("original width" + image.getWidth() + "height " + image.getHeight());
-
-			int height = (int) ((image.getHeight()) - (image.getHeight() * 0.25));
-			int width = (int) ((image.getWidth()) - (image.getWidth() * 0.25));
-			System.err.println("width" + width + "height " + height);
+			int height=0,width=0;
+			//System.err.println("original width" + image.getWidth() + "height " + image.getHeight());
+			try {	
+			 height = (int) ((image.getHeight()) - (image.getHeight() * 0.25));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+			 width = (int) ((image.getWidth()) - (image.getWidth() * 0.25));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			//System.err.println("width" + width + "height " + height);
 			ImageUploadController.saveImgWithByteArray(imageByte, imgName, width, height);
 			bis.close();
 		} catch (Exception e) {

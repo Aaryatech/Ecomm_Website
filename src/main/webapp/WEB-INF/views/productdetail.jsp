@@ -75,10 +75,10 @@
 											alt=""> <span>32 Review</span>
 									</div>
 								</div>
-								<div class="stock_r">
-									<%-- <img
+								<%-- <div class="stock_r">
+									<img
 										src="${pageContext.request.contextPath}/resources/images/protection.png"
-										alt=""> --%>
+										alt="">
 										<div class="stock_prc">
 											<div class="actual_prc">
 												<i class="fa fa-inr" aria-hidden="true"></i>
@@ -96,7 +96,7 @@
 										
 										
 										
-								</div>
+								</div> --%>
 								<div class="clr"></div>
 							</div>
 							<!--product price row-->
@@ -335,7 +335,8 @@
 											<h4 class="delivery_title">Delivery Details</h4>
 											<div class="delivery_frm">
 												<form action="" method="post">
-													<c:if test="${prodHeader.allowBasePhotoUpload==1}">
+												<c:choose>
+													<c:when test="${prodHeader.allowBasePhotoUpload==1}">
 														<div class="delivery_frm_l">
 															<img alt="" id="del_image" style="size: portrait;"
 																name="del_image" />
@@ -349,15 +350,22 @@
 																</label>
 															</div>
 														</div>
-													</c:if>
+													</c:when>
+													<c:otherwise>
+													 <input style="display: none" type="file" accept="image/*"
+																	name="img_input_btn" id="img_input_btn"
+																	accept=".jpg,.png,.gif,.jpeg,.bmp"
+																	onchange="loadFile(event)">
+													</c:otherwise>
+													</c:choose>
 
 													<div class="delivery_frm_r">
 														<c:if test="${prodHeader.allowSpecialInstruction==1}">
 
-															<div class="delivery_txtarea">
-																<textarea name="" cols="" id="sp_inst" , name="sp_inst"
+															<div class="delivery_txtarea" style="display: none">
+																<textarea name="" cols="" id="sp_inst" name="sp_inst"
 																	rows="3" class="input_txt"
-																	placeholder="Special Instructon"></textarea>
+																	placeholder="Special Instructon">NA</textarea>
 															</div>
 
 
@@ -1478,6 +1486,8 @@ function moveCursor(){
 					calRate=actualRate;
 				}
 				
+				var spInst=document.getElementById("sp_inst").value;
+				var msgonCake =document.getElementById("msg_on_cake").value;
 				
 				if (sessionStorage.getItem("cartValue") == null) {
 					var table = [];
@@ -1488,11 +1498,11 @@ function moveCursor(){
 				var cartArray = $.parseJSON(cartValue);
 				
 				
-				 if (sessionStorage.getItem("prodImageList") == null) {
+				  if (sessionStorage.getItem("prodImageList") == null) {
 						var table = [];
 						sessionStorage.setItem("prodImageList", JSON
 								.stringify(table));
-					}
+					} 
 			   		
 				var imgValue = sessionStorage .getItem("prodImageList");
 				var imgObj = $.parseJSON(imgValue);
@@ -1503,9 +1513,43 @@ function moveCursor(){
 					imgFile=imgObj.imgFile;
 					imgName=imgObj.imgName;
 				}
-				var spInst=document.getElementById("sp_inst").value;
-				var msgonCake =document.getElementById("msg_on_cake").value;
-			
+				
+				var index=0,itemFound=0;
+				
+				for(var i=0; i<cartArray.length;i++){
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					/* if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						break;
+					} */
+					/* else if(configDetailId==cartArray[i].exInt1){
+						index=i;
+						itemFound=1;
+						break;
+					} */
+				}
+				
 				var obj={
 						uniqueId : uniq,
 						orderDetailId : 0,
@@ -1549,36 +1593,17 @@ function moveCursor(){
 						msgonCake : msgonCake
 					}
 				
-				var index=0,itemFound=0;
 				
-				
-				
-				for(var i=0; i<cartArray.length;i++){
-					
-					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
-					
-					if(configDetailId==cartArray[i].exInt1 && type==0){
-						index=i;
-						itemFound=1;
-						break;
-					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
-						//alert("asasas")
-						index=i;
-						itemFound=1;
-						break;
-					}
-					/* else if(configDetailId==cartArray[i].exInt1){
-						index=i;
-						itemFound=1;
-						break;
-					} */
-				}
 				
 				if(itemFound==1){
 					table[index]=obj;
 				}else{
 					table.push(obj);	
 				}
+				
+				var tableClear = [];
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(tableClear));
 				
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
@@ -1590,7 +1615,7 @@ function moveCursor(){
 		
 		function changeWeight(){
 			document.getElementById("img_input_btn").value = "";
-			document.getElementById('del_image').style="display:none";
+			//document.getElementById('del_image').style="display:none";
 		}
 		
 		

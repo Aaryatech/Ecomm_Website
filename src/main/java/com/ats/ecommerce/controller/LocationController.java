@@ -81,11 +81,16 @@ public class LocationController {
 						if (cookieArray[a].getName().equalsIgnoreCase("landMarkCookie")) {
 							session.setAttribute("landMark",
 								EncodeDecode.DecodeKey(cookieArray[a].getValue()));
-							break;
+							
+						}
+						
+						if (cookieArray[a].getName().equalsIgnoreCase("frKmCookie")) {
+							session.setAttribute("frKm",
+								EncodeDecode.DecodeKey(cookieArray[a].getValue()));
 						}
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			

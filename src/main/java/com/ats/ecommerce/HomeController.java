@@ -203,6 +203,9 @@ public class HomeController {
 			System.err.println("FrId " + frId +" frKm " +frKm);
 			session.setAttribute("frId", frId);
 			session.setAttribute("frKm", frKm);
+			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt(""+frKm));
+			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(frKmCookie);
 			try {
 				String landMark = request.getParameter("txtPlaces");
 				session.setAttribute("landMark", landMark);

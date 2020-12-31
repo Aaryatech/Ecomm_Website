@@ -9,6 +9,7 @@
 .xdsoft_datetimepicker {
 	z-index: 999999 !important;
 }
+.form-label-hint-error{color: red;}
 </style>
 
 <body onload="getDeliveryCharges()">
@@ -347,12 +348,15 @@
 								<div class="payment_one">
 									<div class="select-style">
 										<select name="paymentMode" id="paymentMode">
-											<option value="">Select Payment Type</option>
+											<option value="">Select Payment Option</option>
 											<option value="1">Cash on Delivery (COD)</option>
 											<!-- <option value="2">Card</option> -->
 											<option value="2">Online Payment</option>
 										</select>
+											
 									</div>
+									<label class="form-label-hint-error" id="errorpaymentMode"
+									style="display: none;">Please select payment option</label>
 								</div>
 								<div>
 									<div class="payment_two left">
@@ -364,6 +368,8 @@
 											<input type="text" name="delvrDateTime" id="delvrDateTime"
 												class="input_two" placeholder="Delivery Date or Time" />
 										</div>
+										<label class="form-label-hint-error" id="errordelvrDateTime"
+									style="display: none;">Please select delivery time</label>
 									</div>
 								</div>
 								<div class="payment_click">
@@ -381,6 +387,23 @@
 									//var sessCustId ='${sessionScope.custId}';
 										//if (parseInt(sessCustId) > 0) {
 											$(document).ready(function() {
+												payMode=true;
+												if (!$("#paymentMode").val().trim()) {
+													payMode = false;
+													$("#errorpaymentMode").show();
+												} else {
+													$("#errorpaymentMode").hide();
+												}
+												delTime=true;
+												if (!$("#delvrDateTime").val().trim()) {
+													delTime = false;
+													$("#errordelvrDateTime").show();
+												} else {
+													$("#errordelvrDateTime").hide();
+												}
+												
+												//alert("payMode" +payMode +"delTime " +delTime);
+												if(payMode==true&&delTime==true)
 												$('#place').popup();
 											});
 										//}
@@ -490,12 +513,14 @@
 			});
 			applyOffer();
 		}
-//Sachin 23-12-2020
+		</script>
+<!-- //Sachin 23-12-2020
+ --><script type="text/javascript">
 function checkValidOffer(){
-	//alert("In elseee checkValidOffer");
+	//alert("In  checkValidOffer");
 	var offerId=document.getElementById("offer").value;
 	var coupon=document.getElementById("offerCoupon").value;
-	var custId=${sessionScope.custId};
+	var custId='${sessionScope.custId}';
 	if(offerId!=0){
 		if(coupon==0){
 			alert("Please select coupon/promo code");
@@ -533,8 +558,6 @@ function checkValidOffer(){
 					document.getElementById("disc").value=discPer;
 					var discMinAmt=document.getElementById("tempDiscMinAmt").value;
 					document.getElementById("discMin").value=discMinAmt;
-					
-					
 					applyOffer();
 					//appendTableList();
 					//$("#error_offercoupon").hide();
@@ -545,7 +568,8 @@ function checkValidOffer(){
 		document.getElementById("show_hide_div").style.display = "none";
 	}
 }//End of function checkValidOffer()
-
+</script>
+<script type="text/javascript">
 function applyOffer(){
 	
 	var finaltotal=document.getElementById("lbl_ItemTotal").innerHTML;
@@ -718,10 +742,10 @@ function setOfferDiscAmt(){
 						<%-- <form action="${pageContext.request.contextPath}/viewcart"
 							method="post" onsubmit="return validateForm()"> --%>
 						<div class="place_row">
-							<div class="place_row_l">
+							<div class="place_row_l" style="display: none">
 								<span class="pop_lab_fld">Select City</span>
 								<div class="select-style">
-									<select id="txtCity" name=txtCity>
+									<select id="txtCity"  name=txtCity>
 										<c:forEach items="${cityList}" var="city">
 											<option value="${city.cityId}"
 												${city.cityId==cust.cityId ? 'selected' : ''}>${city.cityName}</option>
@@ -729,12 +753,10 @@ function setOfferDiscAmt(){
 									</select>
 								</div>
 								<label class="form-label-hint-error" id="errorCity"
-									style="display: none;">please enter city</label>
+									style="display: none;">Please enter city</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Landmark</span>
-								<input type="text" value="${sessionScope.landMark}" class="input_place" readonly="readonly"
-									placeholder="City Related Landmark" />
+								
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -745,7 +767,7 @@ function setOfferDiscAmt(){
 									 name="txtBillName"
 									placeholder="Billing Name" value="${cust.custName}"
 									autocomplete="off" /> <label class="form-label-hint-error"
-									id="errorBillName" style="display: none;">please enter
+									id="errorBillName" style="display: none;">Please enter
 									billing name</label>
 							</div>
 							<div class="place_row_r">
@@ -754,9 +776,9 @@ function setOfferDiscAmt(){
 									value="${cust.custMobileNo}" maxlength="10" name="txtMobile"
 									placeholder="Mobile Number"  
 									autocomplete="off" /> <label class="form-label-hint-error"
-									id="errorMobile" style="display: none;">please enter
+									id="errorMobile" style="display: none;">Please enter
 									mobile number</label> <label class="form-label-hint-error"
-									id="errorMobileInvalid" style="display: none;">invalid
+									id="errorMobileInvalid" style="display: none;">Invalid
 									mobile number</label>
 							</div>
 							<div class="clr"></div>
@@ -768,9 +790,9 @@ function setOfferDiscAmt(){
 									value="${cust.emailId}" name="txtEmail" placeholder="Email ID"
 									autocomplete="off"  /> <label
 									class="form-label-hint-error" id="errorEmail"
-									style="display: none;">please enter email id</label> <label
+									style="display: none;">Please enter email id</label> <label
 									class="form-label-hint-error" id="errorEmailInvalid"
-									style="display: none;">invalid email id</label>
+									style="display: none;">Invalid email id</label>
 							</div>
 							<div class="place_row_r">
 								<div class="gender_l">Gender</div>
@@ -807,7 +829,7 @@ function setOfferDiscAmt(){
 									value="${cust.dateOfBirth}" name="txtDob"
 									placeholder="Date of Birth" autocomplete="off"
 									/> <label class="form-label-hint-error"
-									id="errorDob" style="display: none;">please enter date
+									id="errorDob" style="display: none;">Please enter date
 									of birth</label>
 							</div>
 							<div class="place_row_r">
@@ -816,7 +838,7 @@ function setOfferDiscAmt(){
 									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
 									autocomplete="off" /> <span
 									class="form-label-hint-error" id="errorGst"
-									style="display: none;">invalid GST number</span>
+									style="display: none;">Invalid GST number</span>
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -830,43 +852,48 @@ function setOfferDiscAmt(){
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Your Address</span>
+								<span class="pop_lab_fld">Your Address (flat, house no.,
+									building, company, apartment)</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvFlat" name="txtDelvFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
 
 								<label class="form-label-hint-error" id="errorDelvFlat"
-									style="display: none;">please enter flat, house no.,
+									style="display: none;">Please enter flat, house no.,
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Your Area</span>
+								<span class="pop_lab_fld">Your Area (area,colony,
+									street,sector,village)</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvArea" name="txtDelvArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
 									class="form-label-hint-error" id="errorDelvArea"
-									style="display: none;">please enter area, colony,
+									style="display: none;">Please enter area, colony,
 									street, sector, village</label>
 							</div>
 							<div class="clr"></div>
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Your Landmark</span>
+								<%-- <span class="pop_lab_fld">Your Landmark</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtDelvLandmark" name="txtDelvLandmark"
 									value="${getLandmark}" placeholder="Landmark" /> <label
 									class="form-label-hint-error" id="errorDelvLandmark"
-									style="display: none;">please enter landmark</label>
-
+									style="display: none;">Please enter landmark</label>
+ --%>
+ <span class="pop_lab_fld">Landmark</span>
+								<input type="text" id="txtDelvLandmark" name="txtDelvLandmark" value="${sessionScope.landMark}" class="input_place" readonly="readonly"
+									placeholder="City Related Landmark" />
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Pincode</span>
+								<span class="pop_lab_fld">Pin code</span>
 								<input type="text" class="input_place" autocomplete="off"
 									value="${getPin}" id="txtDelvPincode" name="txtDelvPincode"
 									maxlength="6" placeholder="Shipping Pincode" /> <label
 									class="form-label-hint-error" id="errorDelvPincode"
-									style="display: none;">please enter pincode</label>
+									style="display: none;">Please enter pin code</label>
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -876,15 +903,18 @@ function setOfferDiscAmt(){
 						<div class="place_row">
 							<div class="place_row_l">
 								<h3 class="payment_title">Billing Address</h3>
-							</div>
-							<div class="place_row_r">
 								<input type="checkbox" id="chkbox" name="chkbox"
 									onchange="setBillingDataByCheckbox()" class="payment_title"
 									value="chkbox"> <label for="chkbox"> Same as
 									delivery address</label>
 							</div>
+							</div>
+							<!-- <div class="place_row">
+							<div class="place_row_l">
+								
+							</div>
 							<div class="clr"></div>
-						</div>
+						</div> -->
 						<div class="place_row">
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Area</span>
@@ -893,7 +923,7 @@ function setOfferDiscAmt(){
 									placeholder="Flat, House no., Building, Company, Apartment" />
 
 								<label class="form-label-hint-error" id="errorBillingFlat"
-									style="display: none;">please enter flat, house no.,
+									style="display: none;">Please enter flat, house no.,
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
@@ -902,27 +932,27 @@ function setOfferDiscAmt(){
 									id="txtBillingArea" name="txtBillingArea"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
 									class="form-label-hint-error" id="errorBillingArea"
-									style="display: none;">please enter area, colony,
+									style="display: none;">Please enter area, colony,
 									street, sector, village</label>
 							</div>
 							<div class="clr"></div>
 						</div>
 						<div class="place_row">
-							<div class="place_row_l">
+							<div class="place_row_r" style="display: none">
 								<span class="pop_lab_fld">Landmark</span>
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtBillingLandmark" name="txtBillingLandmark"
+									id="txtBillingLandmark" name="txtBillingLandmark" value="NA"
 									placeholder="Landmark" /> <label class="form-label-hint-error"
-									id="errorBillingLandmark" style="display: none;">please
+									id="errorBillingLandmark" style="display: none;">Please
 									enter landmark</label>
 							</div>
-							<div class="place_row_r">
+							<div class="place_row_l">
 								<span class="pop_lab_fld">Pin code</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingPincode" name="txtBillingPincode"
 									placeholder="Billing Pincode" /> <label
 									class="form-label-hint-error" id="errorBillingPincode"
-									style="display: none;">please enter pin code</label>
+									style="display: none;">Please enter pin code</label>
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -995,7 +1025,7 @@ function setOfferDiscAmt(){
 <div class="a">
     <!--apply now pop up-->
     <div id="new_pop" class="well small">
-      <div class="mongi_title">Delivery and Additional Charges Details<div class="new_pop_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></div>
+      <div class="mongi_title">Delivery and Additional Charges Detail<div class="new_pop_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></div>
         <div class="mongi_cont">
             <div class="small_cont">
                 <div class="small_row_one">
@@ -1080,7 +1110,7 @@ function setOfferDiscAmt(){
 								.toFixed(2);
 						
 						//alert(JSON.stringify(table[i].spInst));
-						
+						 
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
 								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt=""> <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn"></div>'
@@ -1088,9 +1118,9 @@ function setOfferDiscAmt(){
 								+ '<h3 class="cart_cake">'
 								+ table[i].exVar1
 								+ '</h3>'
-								+ '<h3 class="cart_prc"> &#8377;'
+								+ '<h6 class="cart_det"> &#8377;'
 								+ table[i].mrp+' / '+allItemArr[j].uomShowName
-								+ '</h3>'
+								+ '</h6>'
 								+ '<div class="cart_show" ><a style="display:none;" href="javascript:void(0)" onclick="showDetail('
 								+ table[i].itemId
 								+ ')" id="aTagShowDetail'
@@ -1106,7 +1136,7 @@ function setOfferDiscAmt(){
 								+ allItemArr[j].flavorNames
 								+ ' </div>'
 								+ '</div>'
-								+ '</div><p class="del_inst">special instruction : '+table[i].spInst+'.</p></td>'
+								+ '</div><p  style="display:none;" class="del_inst">Special Instruction : '+table[i].spInst+'.</p></td>'
 								+
 
 								'<td>'
@@ -1138,16 +1168,17 @@ function setOfferDiscAmt(){
 								+ table[i].itemId
 								+ ','
 								+ table[i].qty
-								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
+								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'Pineapple Heart
+
 
 								+ '<span class="cart_remove"><a href="javascript:void(0)" onclick="removeQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ')">Remove</a></span>'
 								+ '</td>'
 								+
 
 								'<td><div class="cart_option">'
-								+ '<img src="${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg" alt=""> <span>Message in the cake</span>'
+								+ '<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span class="msg_on_cake">'+table[i].msgonCake+'</span>'
 								+ '</div></td>'
 								+
 
@@ -1157,7 +1188,7 @@ function setOfferDiscAmt(){
 								+
 
 								'<td><div class="cart_delete"><a href="javascript:void(0)" onclick="removeQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ')"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div></td>'
 								+
 
@@ -1295,7 +1326,7 @@ function setOfferDiscAmt(){
 			var newCartVal = [];
 
 			for (var i = 0; i < table.length; i++) {
-				if (id != table[i].itemId) {
+				if (id != table[i].uniqueId) {
 					newCartVal.push(table[i]);
 				}
 			}
@@ -1412,8 +1443,10 @@ function setOfferDiscAmt(){
 			} else {
 				$("#errorDob").hide();
 			}
-
-			if ($("#txtGst").val().trim()) {
+			if($("#txtGst").val()==null|| $("#txtGst").val()==""){
+			$("#errorGst").hide();
+			}
+			else if ($("#txtGst").val().trim()) {
 
 				if (checkGST($("#txtGst").val().trim()) == false) {
 					gst = false;
@@ -1549,12 +1582,14 @@ function setOfferDiscAmt(){
 			
 			var imgCartValue = sessionStorage.getItem("prodImageList");
 			var imgTable = $.parseJSON(imgCartValue);
+			
 			checkValidOffer();
 			var isError=validateForm();
 			if(isError)
 			var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
 				
+					document.getElementById("place_orderBtn").disabled = true;
 					document.getElementById("loaderimg").style.display = "block";
 					$("#place").hide();
 				var fd = new FormData();
@@ -1575,7 +1610,7 @@ function setOfferDiscAmt(){
 							fd.append('paymentMode', $("#paymentMode").val());
 							fd.append('delvrInst' , $("#delvrInst").val());
 							fd.append('delvrDateTime', $("#delvrDateTime").val());
-
+							
 							fd.append('txtCity', $("#txtCity").val());
 							fd.append('txtBillName', $("#txtBillName").val());
 							fd.append('txtMobile',$("#txtMobile").val());
