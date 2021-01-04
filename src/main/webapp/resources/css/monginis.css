@@ -359,7 +359,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 
 
 .top_address{float: right; color: #636363; font-size: 15px; font-family: 'Hind-medium';
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 50%;}
+    /* white-space: nowrap; overflow: hidden; text-overflow: ellipsis; */ width: 50%;}
     .top_address i{margin: 0 0 0 5px; font-size: 13px;}
 .top_address span{color: #ec268f;}
 .top_address span p{display: inline-block; margin: 0; padding: 0;}
@@ -1144,7 +1144,7 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
 .show_hide_div{display: block; width: 100%; font-size: 13px; font-family:'Hind-Medium'; color: #333; margin: 10px 0 0 0; }
 .show_hide_div p{float: left; width: 33.333%; }
 .show_hide_div p#offer_terms{float: none; width: 100%; margin: 0 0 3px 0; font-size:13px; text-transform:uppercase; color: #ec268f;}
-
+ul.login_menu.edit ul li{padding: 0; text-align: left; width: 100%;}
 
 
 

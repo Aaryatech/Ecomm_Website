@@ -24,17 +24,20 @@
 											Become A Vendor </a></li>
 									<li><a
 										href="${pageContext.request.contextPath}/showBecmVendrFr">
-											Become A Franchisee </a></li>
+											Become A Franchise </a></li>
 									<li><a href="#"> Corporate Gifts </a></li>
 								</ul></li>
 						</ul>
 
 					</div>
 				</div>
+				
+				
+				
 				<div class="top_address">
 					<span><p>Delivery</p> Location :</span> ${landMark}.
 					<ul class="login_menu edit">
-						<li><a href="#"><i class="fa fa-pencil"
+						<li><a href="javascript:void(0)"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/"> Add
@@ -44,7 +47,7 @@
 										Existing address</a></li>
 							</ul></li>
 					</ul>
-				</div>
+				</div> 
 				<div class="clr"></div>
 			</div>
 		</div>
