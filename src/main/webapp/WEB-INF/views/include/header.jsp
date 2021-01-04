@@ -9,7 +9,7 @@
 					<div class="top_menu">
 						<span><a href="#"><i class="fa fa-phone"
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
-							href="${pageContext.request.contextPath}/home">Home</a></span>
+							href="${pageContext.request.contextPath}/" onclick="setData()">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
 						<span><a
 							href="${pageContext.request.contextPath}/showVistStorePage">Visit
@@ -40,7 +40,7 @@
 						<li><a href="javascript:void(0)"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/"> Add
+								<li><a href="${pageContext.request.contextPath}/ShowAddNewAdd"> Add
 										New Address </a></li>
 								<li><a
 									href="${pageContext.request.contextPath}/addresslist"> Use
@@ -249,6 +249,15 @@
 		alt=""> <!--<i class="fa fa-bars" aria-hidden="true"></i>--></span>
 
 </header>
+<script type="text/javascript">
+function setData(){
+	var table = [];
+	sessionStorage.setItem("cartValue", JSON
+			.stringify(table));
+	sessionStorage.setItem("prodImageList", JSON
+			.stringify(table));
+}
+</script>
 <script>
 	function appendCartData() {
 

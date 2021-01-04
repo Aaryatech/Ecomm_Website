@@ -47,6 +47,7 @@ public class MasterController {
 			HttpSession session = request.getSession();
 
 			int custId = (int) session.getAttribute("custId");
+			System.err.println("custId " +custId);
 			int compId = (int) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -399,7 +400,7 @@ public class MasterController {
 		try {
 			HttpSession session = request.getSession();
 
-			int custId = (Integer) session.getAttribute("custId");
+			int custId = (int) session.getAttribute("custId");
 			int companyId = (int) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();

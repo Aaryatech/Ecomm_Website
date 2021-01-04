@@ -855,7 +855,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">Your Address (flat, house no.,
 									building, company, apartment)</span>
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvFlat" name="txtDelvFlat" value="${getFlat}"
+									id="txtDelvFlat" name="txtDelvFlat" value="${getFlatD}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
 
 								<label class="form-label-hint-error" id="errorDelvFlat"
@@ -866,7 +866,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">Your Area (area,colony,
 									street,sector,village)</span>
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtDelvArea" name="txtDelvArea" value="${getArea}"
+									id="txtDelvArea" name="txtDelvArea" value="${getAreaD}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
 									class="form-label-hint-error" id="errorDelvArea"
 									style="display: none;">Please enter area, colony,
@@ -890,7 +890,7 @@ function setOfferDiscAmt(){
 							<div class="place_row_r">
 								<span class="pop_lab_fld">Pin code</span>
 								<input type="text" class="input_place" autocomplete="off"
-									value="${getPin}" id="txtDelvPincode" name="txtDelvPincode"
+									value="${getPinD}" id="txtDelvPincode" name="txtDelvPincode"
 									maxlength="6" placeholder="Shipping Pincode" /> <label
 									class="form-label-hint-error" id="errorDelvPincode"
 									style="display: none;">Please enter pin code</label>
@@ -1168,7 +1168,7 @@ function setOfferDiscAmt(){
 								+ table[i].itemId
 								+ ','
 								+ table[i].qty
-								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'Pineapple Heart
+								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
 
 
 								+ '<span class="cart_remove"><a href="javascript:void(0)" onclick="removeQty('

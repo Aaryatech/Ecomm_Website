@@ -36,6 +36,7 @@ import com.ats.ecommerce.common.DateConvertor;
 import com.ats.ecommerce.common.EncodeDecode;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
+import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
@@ -90,6 +91,7 @@ public class CheckoutController {
 
 				map = new LinkedMultiValueMap<>();
 				int custId = (int) session.getAttribute("custId");
+				int companyId = (int) session.getAttribute("companyId");
 				map.add("custId", custId);
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 						Customer.class);
@@ -100,6 +102,47 @@ public class CheckoutController {
 				model.addAttribute("getArea", billAddress[1]);
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
+				
+				//04-01-2021
+				int delAddId=0;
+				try {
+					
+					//String delAddIdStr=(String) session.getAttribute("delAddId");
+					delAddId=(int) session.getAttribute("delAddId");//Integer.parseInt(delAddIdStr);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				System.err.println("delAddId " +delAddId);
+
+				map = new LinkedMultiValueMap<>();
+				map.add("custId", custId);
+				map.add("compId", companyId);
+				CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
+				List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+				CustomerAddDetail addDetail=new CustomerAddDetail();
+				if(delAddId>0) {
+				if(custAddList.size()>0) {
+					
+					if(custAddList.size()==1) {
+						addDetail=custAddList.get(0);
+					}
+					else {
+						for(int i=0;i<custAddList.size();i++) {
+							if(custAddList.get(i).getCustDetailId()==delAddId) {
+								addDetail=custAddList.get(i);
+								break;
+							}
+						}
+					}
+					
+					model.addAttribute("getFlatD", addDetail.getAddress());
+					model.addAttribute("getAreaD", addDetail.getExVar1());
+					//model.addAttribute("getLandmarkD", billAddress[2]);
+					model.addAttribute("getPinD", addDetail.getExVar2());
+					session.setAttribute("delAddId", addDetail.getCustDetailId());
+				}
+				}
 
 				// 23-12-2020
 
@@ -191,6 +234,7 @@ public class CheckoutController {
 
 				map = new LinkedMultiValueMap<>();
 				int custId = (int) session.getAttribute("custId");
+				System.err.println(" custId  place ord" +custId);
 				map.add("custId", custId);
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 						Customer.class);
@@ -202,12 +246,57 @@ public class CheckoutController {
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
 				}catch (Exception e) {
-					
+					e.printStackTrace();
 				}
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			
+			//04-01-2021
+			int delAddId=0;
+			try {
+				
+				//String delAddIdStr= (String) session.getAttribute("delAddId");
+				delAddId=(int) session.getAttribute("delAddId");
+				//delAddId=Integer.parseInt(delAddIdStr);
+				System.err.println("delAddId " +delAddId);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(delAddId>0) {
+			int custId = (int) session.getAttribute("custId");
+			int companyId = (int) session.getAttribute("companyId");
+			map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			map.add("compId", companyId);
+			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
+			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+			CustomerAddDetail addDetail=new CustomerAddDetail();
+			if(custAddList.size()>0) {
+				
+				if(custAddList.size()==1) {
+					addDetail=custAddList.get(0);
+				}
+				else {
+					for(int i=0;i<custAddList.size();i++) {
+						if(custAddList.get(i).getCustDetailId()==delAddId) {
+							addDetail=custAddList.get(i);
+							break;
+						}
+					}
+				}
+				
+				model.addAttribute("getFlatD", addDetail.getAddress());
+				model.addAttribute("getAreaD", addDetail.getExVar1());
+				//model.addAttribute("getLandmarkD", billAddress[2]);
+				model.addAttribute("getPinD", addDetail.getExVar2());
+				session.setAttribute("delAddId", addDetail.getCustDetailId());
+			}
+			}
+			
 //23-12-2020
 
 			float km = 0;
@@ -484,9 +573,9 @@ System.err.println("charges " +charges);
 			float deliveryCharges = 0;
 			float discAmt = 0;
 			float applyWalletAmt = 0;
-			String strFrKm = (String) request.getSession().getAttribute("frKm");
+			//String strFrKm = (String) request.getSession().getAttribute("frKm");
 			
-			float km = Float.parseFloat(strFrKm);
+			float km =(float) request.getSession().getAttribute("frKm");// Float.parseFloat(strFrKm);
 			Customer cust = new Customer();
 
 			int defaultCustAddrs = 0;
@@ -525,6 +614,50 @@ System.err.println("charges " +charges);
 			
 			Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
 					Customer.class);
+			//04-01-2021
+			int delAddId=0;
+			try {
+				//String delAddIdStr=(String) session.getAttribute("delAddId");
+				delAddId=(int) session.getAttribute("delAddId");//Integer.parseInt(delAddIdStr);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.err.println("delAddId " +delAddId);
+			if(delAddId<1) {
+			
+				CustomerAddDetail custDet = new CustomerAddDetail();
+
+			custDet.setAddress(txtBillingFlat);
+			custDet.setAreaId(0);
+			custDet.setCaption("NA");
+			custDet.setCityId(0);
+			custDet.setCustDetailId(0);
+			custDet.setCustId(res.getCustId());
+			custDet.setLandmark(txtBillingLandmark);
+			custDet.setLatitude("NA");
+			custDet.setLongitude("NA");
+			custDet.setIsActive(1);
+			custDet.setDelStatus(1);
+			custDet.setExInt1(0);
+			custDet.setExInt2(0);
+			custDet.setExInt3(frId);//Used to store frId
+			custDet.setExVar1(txtBillingArea);
+			custDet.setExVar2(txtBillingPincode);
+			custDet.setExVar3("NA");
+			custDet.setMakerUserId(res.getCustId());
+			custDet.setInsertDttime(dttime.format(ct));
+			custDet.setUpdtDttime(dttime.format(ct));
+			
+				CustomerAddDetail saveCustAdd = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomerDet",
+					custDet, CustomerAddDetail.class);
+				session.setAttribute("delAddId", saveCustAdd.getCustDetailId());
+				
+				Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + saveCustAdd.getCustDetailId()));
+				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(delAddIdCookie);
+				
+			}
+			//04-01-2021 end
 			if (res.getCustId() > 0) {
 				session.setAttribute("successMsg", "New customer added successfully");
 				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 

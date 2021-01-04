@@ -108,7 +108,11 @@ public class HomeController {
 				String jsonStr = mapper.writeValueAsString(data);
 				session.setAttribute("allDataJson", jsonStr);
 			}
-			
+			try {
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
 
 			try {
 				if (frId > 0)
@@ -144,7 +148,7 @@ public class HomeController {
 		}
 		try {
 			int custId = (int) session.getAttribute("custId");
-			System.err.println("custId " + custId);
+			System.err.println("custId dsdsdsd" + custId);
 
 			if (custId > 0) {
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -193,7 +197,13 @@ public class HomeController {
 	public String preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in Pre Home");
 		HttpSession session = request.getSession();
-		session.setAttribute("custId", 0);
+		int custId=0;
+		try {
+			custId=(int) session.getAttribute("custId");
+		}catch (Exception e) {
+			session.setAttribute("custId", custId);
+		}
+		
 		int frId = 0;
 		float frKm=0;
 		try {
@@ -219,13 +229,7 @@ public class HomeController {
 			}
 		} catch (Exception e) {
 			System.err.println("In Catch " + frId);
-			try {
-				System.err.println("Inner Try " + frId);
-				// session.setAttribute("frId", session.getAttribute("frId"));
-			} catch (Exception ex) {
-				System.err.println("Inner Catch ");
-				// session.setAttribute("frId",0);
-			}
+			
 		}
 
 		Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
@@ -237,7 +241,12 @@ public class HomeController {
 		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frKmCookie);
 		
-
+		//4-01-2021
+		Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
+		delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(delAddIdCookie);
+		session.setAttribute("delAddId", 0);
+		
 		session.setAttribute("userId", 0);
 		return "redirect:/home";
 	}

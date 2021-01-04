@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
@@ -33,7 +34,43 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class LocationController {
 
 	FEDataTraveller data = new FEDataTraveller();
+	@RequestMapping(value = "/ShowAddNewAdd", method = RequestMethod.GET)
+	public String addNewAdd(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String returnPage = "landing";
+		
+		try {
 
+			System.err.println("In Else part of / Mapping ");
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+					CityData[].class);
+			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+			String frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+					.next();
+			
+			//System.err.println("FR --------------> "+frData);
+
+			model.addAttribute("cityList", cityList);
+			model.addAttribute("frData", frData);
+
+			CategoryList[] catArray = mapper.readValue(
+					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
+			List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+			model.addAttribute("catList", catList);
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+
+			CompanyTestomonials[] testMonArray = mapper.readValue(
+					new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), CompanyTestomonials[].class);
+			List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+			model.addAttribute("testMonialList", testMonialList);
+			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+		
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnPage;
+		
+	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "landing";
@@ -88,6 +125,12 @@ public class LocationController {
 							session.setAttribute("frKm",
 								EncodeDecode.DecodeKey(cookieArray[a].getValue()));
 						}
+						
+						if (cookieArray[a].getName().equalsIgnoreCase("delAddIdCookie")) {
+							session.setAttribute("delAddId",
+									Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+						}
+						
 					}
 				} catch (Exception e) {
 					
@@ -197,4 +240,40 @@ public class LocationController {
 		return returnPage;
 	}
 
+	//Sachin 04-01-2021
+	
+	
+	
+	@RequestMapping(value = "/setAddressDetail", method = RequestMethod.POST)
+	public @ResponseBody Object setAddressDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
+		String returnPage = "productlist";
+		try {
+			HttpSession session = request.getSession();
+			int adDetailId= Integer.parseInt(request.getParameter("custDetailId"));
+			int frId = Integer.parseInt(request.getParameter("frId"));
+			
+			session.setAttribute("frId",frId);
+			session.setAttribute("delAddId",adDetailId);
+			
+			Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+			frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(frIdCookie);
+			
+			//24-12-2020
+			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + 0));
+			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(frKmCookie);
+			
+			//4-01-2021
+			Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
+			delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(delAddIdCookie);
+			
+System.err.println("In setAddressDetail");
+		}catch (Exception e) {
+			System.err.println("In setAddressDetail exc " +e.getMessage());
+
+		}
+		return 1;
+}
 }

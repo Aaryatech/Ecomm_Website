@@ -22,7 +22,7 @@
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</div>
 		</div>
-		<div class="mongi_cont">
+		<!-- <div class="mongi_cont">
 			<ul class="ks-cboxtags">
 				<li><input type="checkbox" id="checkboxOne"><label
 					for="checkboxOne">Chocolate Cakes</label></li>
@@ -95,7 +95,7 @@
 
 		<div class="proceend_bnt">
 			<a href="product.html" class="proceed_btn">Proceed</a>
-		</div>
+		</div> -->
 
 	</div>
 	<script type="text/javascript">
@@ -142,8 +142,8 @@
 												<i class="fa fa-user user_icn" aria-hidden="true"></i>
 												${addressList.custName}<span><i
 													class="fa fa-map-marker" aria-hidden="true"></i>
-													${addressList.address}, ${addressList.exVar2},
-													<br> MAHARASHTRA, India.</span>
+													${addressList.address},${addressList.exVar1} ${addressList.exVar2},
+													<!-- <br> MAHARASHTRA, India. --></span>
 												<span>Landmark : ${addressList.landmark}</span> <span><i
 													class="fa fa-phone" aria-hidden="true"></i> +91
 													${addressList.custMobileNo}</span>
@@ -152,8 +152,11 @@
 											</h3>
 
 											<div class="deliver_add">
-												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
-											</div>
+<%-- 												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
+ --%><a href="javascript:void(0)" onclick="setAddDetail('${addressList.custDetailId}','${addressList.exInt3}')">Deliver to this address</a>
+ 
+ 
+ 											</div>
 
 											<div class="dropdown border_one frdiv" id="frdiv${cnt.index+1}" style="display: none;">
 												<div class="select">
@@ -317,7 +320,37 @@
 		}
 	</script>
 
-
+<script type="text/javascript">
+function setAddDetail(addDetailId,frId){
+	var fd = new FormData();
+	fd.append('frId', frId);
+	fd.append('custDetailId', addDetailId);
+	$.ajax({
+        url: '${pageContext.request.contextPath}/setAddressDetail',
+        type: 'POST',
+        data: fd,
+        dataType: 'json',
+        processData: false, 
+        contentType: false, 
+        async:false,
+        success: function(resData, textStatus, jqXHR)
+        {
+        	
+        	var table = [];
+			sessionStorage.setItem("cartValue", JSON
+					.stringify(table));
+			sessionStorage.setItem("prodImageList", JSON
+					.stringify(table));
+			var url = '${pageContext.request.contextPath}/addresslist';
+			window.location = url;
+        }, 
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+            console.log('ERRORS: ' + textStatus);
+        }
+	    });
+}
+</script>
 
 
 	<!--menuzord -->
