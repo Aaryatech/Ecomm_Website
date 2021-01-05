@@ -20,6 +20,8 @@
 .pac-container {
 	z-index: 999999 !important;
 }
+.form-label-hint-error-l{
+color: red;}
 </style>
 <jsp:include page="/WEB-INF/views/include/customjscss.jsp"></jsp:include>
 
@@ -38,8 +40,8 @@
 			style="background: url(${pageContext.request.contextPath}/resources/images/franchisee_banner.jpg) no-repeat center bottom; background-size: cover;">
 			<div class="landing_cont">
 				<div class="landing_button">
-					If user login first time or we didn't get any info of user from
-					browser cache then user land here <a href="javascript:void(0)"
+					<!-- If user login first time or we didn't get any info of user from
+					browser cache then user land here --> <a href="javascript:void(0)"
 						class="landingpop_open">Book your online order</a> <input
 						type="button" id="openLocPopup" class="landingpop_open"
 						value="aaaa" style="display: none;">
@@ -361,9 +363,11 @@
 
 					<div class="search_one">
 						<div class="search_one_l">
-							<input name="txtPlaces" value="Pune Univeristy Building" required
+							<input name="txtPlaces" value=""
 								type="text" class="input_search" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
+								<span class="form-label-hint-error-l" id="error_txtPlaces"
+												style="display: none;">This field is required.</span>
 						</div>
 
 						<input name="hideLat" value="0" required type="hidden"
@@ -395,17 +399,19 @@
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select required onchange="getKM(this)" id="selectShop" name="selectShop"
+							<select onchange="getKM(this)" id="selectShop" name="selectShop"
 								style="background-color: #FFF; border-radius: 3px; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
-								<option selected value="27">FR ID 27</option>
 							</select>
+							
+							<span class="form-label-hint-error-l" id="error_selectShop"
+												style="display: none;">This field is required.</span>
 						</div>
 					</div>
 
 				</div>
 
-				<!--                 <div class="place_login">If you are existing user Login</div>
- -->
+				                
+
 
 				<!--apply now pop up-->
 
@@ -416,18 +422,137 @@
 						location.</span>
 				</div>
 
-				<div class="proceed_btn_1">
-					<a href="#"><input name="" type="submit" value="Proceed"
-						class="proceed" /></a>
-				</div>
+<div class="search_one">
+						<div class="search_one_l">
+							<input name="mobNo" value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" 
+								type="text" class="input_search numbersOnly" placeholder="Enter Mobile No"
+								id="mobNo" /> <i class="fa fa-mobile" aria-hidden="true"></i>
+								<a href="#" onclick="sendOTP()"><i class="fa fa-refresh refresh" title="GET OTP" aria-hidden="true"></i></a>
+								<label class="form-label-hint-error-l"
+									id="errorMobNo" style="display: none;">Please enter
+									Mobile No</label>
+						</div>
+						<div class="search_one_r">
+							<input name="otp" value="" maxlength="8" 
+								type="text" class="input_search numbersOnly" placeholder="Enter OTP"
+								id="otp" /> <i class="fa fa-key" onclick="checkValidOTP()" aria-hidden="true"></i>
+								<label class="form-label-hint-error-l"
+									id="errorotp" style="display: none;">Please enter
+									OTP</label>
+						</div>
+						
+						<div class="clr"></div>
+				
 
 			</div>
+			
+			<div class="proceed_btn_1">
+					<a href="#"><input name="" id="submtbtn" type="submit" value="Proceed"
+						class="proceed" /></a>
+				</div>
 			<input type="hidden" id="frKm" name="frKm" value="0"/>
+			</div>
 		</form>
 
 	</div>
 
 	<script type="text/javascript">
+	jQuery('.numbersOnly').keyup(function() {
+		this.value = this.value.replace(/[^0-9\.]/g, '');
+		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+	});
+	var enteredOTP="";
+	var currentOTP="";
+	function sendOTP(){
+		var mobNo=document.getElementById("mobNo").value;
+		mobNo=mobNo.trim();
+		$("#errorMobNo").hide();
+		if(mobNo.length==10){
+		var fd = new FormData();
+		fd.append('mobNo', mobNo);
+		$.ajax({
+	        url: '${pageContext.request.contextPath}/sendOTP',
+	        type: 'POST',
+	        data: fd,
+	        dataType: 'json',
+	        processData: false, 
+	        contentType: false, 
+	        async:false,
+	        success: function(resData, textStatus, jqXHR)
+	        {
+	        	currentOTP=resData.msg;
+	        	 console.log('rrr: ' + resData.msg);
+	        }, 
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	            console.log('ERRORS: ' + textStatus);
+	        }
+		    });
+		}else{
+			$("#errorMobNo").show();
+		}
+	}
+	function checkValidOTP(){
+		//alert("checkValidOTP");
+		$("#errorotp").hide();
+		$("#errorMobNo").hide();
+		var mobNo=document.getElementById("mobNo").value;
+		mobNo=mobNo.trim();
+		if(mobNo.length<10){
+			$("#errorMobNo").show();
+		}else{
+			$("#errorMobNo").hide();
+		}
+		
+		var otp=document.getElementById("otp").value;
+		otp=otp.trim();
+		if(parseInt(otp)==parseInt(currentOTP)){
+			$("#errorotp").hide();
+			return false;
+		}else{
+			$("#errorotp").show();
+			return true;
+		}
+		return true;
+	}
+	$("#validation-form").submit(function(e) {
+		var isError = false;
+		var errMsg = "";
+		sendOTP();
+		var isOtpMached= checkValidOTP();
+		if(isOtpMached==false){
+			isError=false;
+		}else{
+			isError =true;
+		}
+		
+		 if (!$("#selectShop").val()) {
+			isError = true;
+			$("#error_selectShop").show()
+		}else  if ($("#selectShop").val()<1) {
+			isError = true;
+			$("#error_selectShop").show();
+		} else  {
+			$("#error_selectShop").hide()
+		}
+		
+		if (!$("#txtPlaces").val()) {
+			isError = true;
+			$("#error_txtPlaces").show()
+		} else {
+			$("#error_txtPlaces").hide()
+		}	 
+		
+		if (!isError) {
+			var x = true;
+			if (x == true) {
+				document.getElementById("submtbtn").disabled = true;
+				return true;
+			}
+		}
+		return false;
+	});
+	
 	function getKM(thisobj){
 	/* 	var plant = document.getElementById('selectShop');
 		var fruitCount = plant.getAttribute('data-km'); // fruitCount = '12'
