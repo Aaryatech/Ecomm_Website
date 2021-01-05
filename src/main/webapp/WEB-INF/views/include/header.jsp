@@ -501,6 +501,7 @@ function setData(){
 	function openNav() {
 		appendCartData();
 		document.getElementById("mySidepanel").style.width = "300px";
+		setTimeout(function(){ closeNav(); }, 10000);
 	}
 
 	function closeNav() {

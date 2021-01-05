@@ -246,30 +246,47 @@ public class LocationController {
 	
 	@RequestMapping(value = "/setAddressDetail", method = RequestMethod.POST)
 	public @ResponseBody Object setAddressDetail(Model model, HttpServletRequest request, HttpServletResponse response) {
-		String returnPage = "productlist";
 		try {
 			HttpSession session = request.getSession();
-			int adDetailId= Integer.parseInt(request.getParameter("custDetailId"));
+			
+			//#1
 			int frId = Integer.parseInt(request.getParameter("frId"));
 			
 			session.setAttribute("frId",frId);
-			session.setAttribute("delAddId",adDetailId);
-			
+
 			Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
 			frIdCookie.setMaxAge(60 * 60 * 24 * 15);
 			response.addCookie(frIdCookie);
 			
-			//24-12-2020
-			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + 0));
+			//#2
+			String landMark=request.getParameter("landMark");
+			
+			session.setAttribute("landMark", landMark);
+			
+			Cookie landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+			landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(landMarkCookie);
+			
+			//#3
+			float frKm = Float.parseFloat(request.getParameter("frKm"));
+			
+			session.setAttribute("frKm",frKm);
+			
+			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
 			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 			response.addCookie(frKmCookie);
 			
-			//4-01-2021
-			Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
+			//#4
+			int adDetailId= Integer.parseInt(request.getParameter("custDetailId"));
+			
+			session.setAttribute("delAddId",adDetailId);
+			
+			Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" +adDetailId));
 			delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 			response.addCookie(delAddIdCookie);
 			
-System.err.println("In setAddressDetail");
+			
+			System.err.println("In setAddressDetail");
 		}catch (Exception e) {
 			System.err.println("In setAddressDetail exc " +e.getMessage());
 

@@ -119,7 +119,7 @@
 						<h2 class="address_title">
 							Shipping Address <span>Is the address you'd like to use
 								displayed below? If so, click the corresponding "Deliver to this
-								address" button. <a href="location.html">Add Address</a>
+								address" button. <a href="${pageContext.request.contextPath}/ShowAddNewAdd">Add Address</a>
 							</span>
 						</h2>
 
@@ -153,7 +153,8 @@
 
 											<div class="deliver_add">
 <%-- 												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
- --%><a href="javascript:void(0)" onclick="setAddDetail('${addressList.custDetailId}','${addressList.exInt3}')">Deliver to this address</a>
+ --%><a href="javascript:void(0)" onclick="setAddDetail('${addressList.custDetailId}','${addressList.exInt3}'
+ ,'${addressList.exVar3}','${addressList.landmark}' )">Deliver to this address [${addressList.longitude}]</a>
  
  
  											</div>
@@ -321,10 +322,14 @@
 	</script>
 
 <script type="text/javascript">
-function setAddDetail(addDetailId,frId){
+function setAddDetail(addDetailId,frId,frKm,landMark){
 	var fd = new FormData();
 	fd.append('frId', frId);
+	fd.append('frKm', frKm);
+	fd.append('landMark', landMark);
+	
 	fd.append('custDetailId', addDetailId);
+	
 	$.ajax({
         url: '${pageContext.request.contextPath}/setAddressDetail',
         type: 'POST',

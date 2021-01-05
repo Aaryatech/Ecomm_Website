@@ -1418,7 +1418,7 @@
 
 			sessionStorage.setItem("selTags", JSON.stringify(selTags));
 
-			alert(tagIds)
+			//alert(tagIds)
 			window.open("${pageContext.request.contextPath}/products/0",
 					"_self");
 
@@ -1792,9 +1792,10 @@
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
 				appendCartData();
- 
-			
-			
+				
+					openNav();
+				  	setTimeout(function(){ closeNav(); }, 4000);
+				 
 		} 
 		
 		

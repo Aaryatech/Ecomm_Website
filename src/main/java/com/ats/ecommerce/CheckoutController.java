@@ -610,7 +610,7 @@ System.err.println("charges " +charges);
 			cust.setMakerUserId(0);
 			cust.setLanguageId(1);
 
-			System.err.println(cust.toString());
+			//System.err.println(cust.toString());
 			
 			Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
 					Customer.class);
@@ -633,7 +633,7 @@ System.err.println("charges " +charges);
 			custDet.setCityId(0);
 			custDet.setCustDetailId(0);
 			custDet.setCustId(res.getCustId());
-			custDet.setLandmark(txtBillingLandmark);
+			custDet.setLandmark(txtDelvLandmark);
 			custDet.setLatitude("NA");
 			custDet.setLongitude("NA");
 			custDet.setIsActive(1);
@@ -643,7 +643,7 @@ System.err.println("charges " +charges);
 			custDet.setExInt3(frId);//Used to store frId
 			custDet.setExVar1(txtBillingArea);
 			custDet.setExVar2(txtBillingPincode);
-			custDet.setExVar3("NA");
+			custDet.setExVar3(""+km);//No of KM from Franchise
 			custDet.setMakerUserId(res.getCustId());
 			custDet.setInsertDttime(dttime.format(ct));
 			custDet.setUpdtDttime(dttime.format(ct));
