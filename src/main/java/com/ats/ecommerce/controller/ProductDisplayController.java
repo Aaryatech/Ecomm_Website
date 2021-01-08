@@ -179,6 +179,28 @@ public class ProductDisplayController {
 			model.addAttribute("catId", catId);
 
 			model.addAttribute("subCatImgUrl", Constants.CAT_IMG_VIEW_URL);
+			
+			
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
 
 		} catch (Exception e) {
 			return returnPage;

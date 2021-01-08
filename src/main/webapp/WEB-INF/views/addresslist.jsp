@@ -346,7 +346,7 @@ function setAddDetail(addDetailId,frId,frKm,landMark){
 					.stringify(table));
 			sessionStorage.setItem("prodImageList", JSON
 					.stringify(table));
-			var url = '${pageContext.request.contextPath}/addresslist';
+			var url = '${pageContext.request.contextPath}/home';
 			window.location = url;
         }, 
         error: function(jqXHR, textStatus, errorThrown)

@@ -267,13 +267,13 @@
 													<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition"></a>
+														class="mobile_fit transition" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 													<div class="cake_prc">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 															class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+															class="prc_off"></span>
 													</div>
 												</div>
 												<div class="cake_container">
@@ -731,13 +731,13 @@
 						if (allItemArr[i].appliTagNames === selTags[t]) {
 
 							//alert(allItemArr[i]);
-
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 							divStr = divStr
 									+ '<li>'
 									+ ' <div class="item_div"> '
 									+ ' <div class="cake_one product_padd"> '
-									+ ' <div class="cake_pic"> '
-									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+									+ ' <div class="cake_pic"> '+detail
+									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice
 									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -757,13 +757,13 @@
 					}
 
 				} else {
-
+					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 					divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_pic"> '+detail
+							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -881,13 +881,13 @@
 				var divStr="";
 				var count=0;
 				for (var i = 0; i < tempArr.length; i++) {
-					
+						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
 						divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
 								+ ' <div class="cake_one product_padd"> '
-								+ ' <div class="cake_pic"> '
-								+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+								+ ' <div class="cake_pic"> '+detail
+								+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ tempArr[i].defaultPrice
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -917,6 +917,9 @@
 		
 		function loadData() {
 
+			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"'
+
+			
 			if (sessionStorage.getItem("selTags") == null) {
 				var table = [];
 				sessionStorage.setItem("selTags", JSON.stringify(table));
@@ -1124,22 +1127,21 @@
 							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 							+ '</div>';
 						}
-						
+						//var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 						divStr = divStr
 						+ '<li>'
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
 						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
-						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+						+ '</span> <span class="prc_off"></span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
-						+ ' </a> '
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
@@ -1168,13 +1170,13 @@
 								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
-							
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_pic"> '+detail
+							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
@@ -1207,13 +1209,13 @@
 								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
-							
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_pic"> '+detail
+							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
@@ -1243,7 +1245,6 @@
 			}else{
 				
 			
-				
 				for (var i = 0; i < allItemArr.length; i++) {
 					
 					if(catId == 0){
@@ -1257,7 +1258,7 @@
 						if(isLike ==1){
 						
 							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-							+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+							+ '<img id="like'+allItemArr[i].productId+'"   src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
 							+ '</div>';
 						}else{
 							
@@ -1266,14 +1267,14 @@
 							+ '</div>';
 						}
 						
-						
+						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 						divStr = divStr
 						+ '<li>'
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
-						+ ' <div class="cake_pic"> '
+						+ ' <div class="cake_pic"> '+detail
 						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 						+ like
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
@@ -1466,13 +1467,13 @@
 									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 									+ '</div>';
 								}
-								
+								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 								divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
 								+ ' <div class="cake_one product_padd"> '
-								+ ' <div class="cake_pic"> '
-								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+								+ ' <div class="cake_pic"> '+detail
+								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 								+ like
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
@@ -1510,13 +1511,13 @@
 								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
-							
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
  							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_pic"> '+detail
+							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
@@ -1596,7 +1597,7 @@
 						var data1=JSON.parse(data.statusText);
 						
 						sessionStorage.setItem("allItemList", JSON.stringify(data1.feProductHeadList));
-						
+						setLikeCount(data.statusText);
 						
 					});
 			

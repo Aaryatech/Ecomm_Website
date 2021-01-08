@@ -401,7 +401,13 @@ public class MasterController {
 			HttpSession session = request.getSession();
 
 			int custId = (int) session.getAttribute("custId");
-			int companyId = (int) session.getAttribute("companyId");
+			
+			int companyId =0;
+			try {
+			companyId=(int) session.getAttribute("companyId");
+			}catch (Exception e) {
+				companyId =0;
+			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("custId", custId);

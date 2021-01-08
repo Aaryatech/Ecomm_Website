@@ -9,7 +9,7 @@
 					<div class="top_menu">
 						<span><a href="#"><i class="fa fa-phone"
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
-							href="${pageContext.request.contextPath}/" onclick="setData()">Home</a></span>
+							href="${pageContext.request.contextPath}/home/" onclick="setData()">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
 						<span><a
 							href="${pageContext.request.contextPath}/showVistStorePage">Visit
@@ -86,7 +86,7 @@
 						<div class="product_like">
 							<a href="${pageContext.request.contextPath}/likeproducts"> <i
 								class="fa fa-heart" aria-hidden="true"></i> 
-								<span class="cart_item_count" id="">0</span>
+								<span class="cart_item_count" id="like_item_count">0</span>
 							</a>
 						</div>
 
@@ -257,10 +257,36 @@ function setData(){
 	sessionStorage.setItem("prodImageList", JSON
 			.stringify(table));
 }
+function setLikeCount(statusText){
+	//alert("OK H")
+	var data1=JSON.parse(statusText);
+	var likeCount=0;
+	$.each(data1.feProductHeadList,
+							function(key, product) {
+		if(product.isLike ==1){
+			likeCount=likeCount+1;
+		}
+	});
+	 $("#like_item_count").html(''+likeCount);
+}
+function setLike(id) {
+	$.getJSON(
+			'${setLikeOrDislike}',
+			{
+				prodId : id,
+				ajax : 'true'
+			},
+			function(data) {
+				//alert(JSON.stringify(data));
+				setLikeCount(data.statusText);
+			});
+	
+}
 </script>
 <script>
 	function appendCartData() {
-
+		//alert("Ok")
+		setLike(0);
 		if (sessionStorage.getItem("allItemList") == null) {
 			var table = [];
 			sessionStorage.setItem("allItemList", JSON.stringify(table));

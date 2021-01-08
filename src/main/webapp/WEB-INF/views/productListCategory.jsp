@@ -23,7 +23,7 @@ html {
 
 
 	<!-- TAGS -->
-	<%-- <jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include> --%>
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 	<!-- TAGS End -->
 
 	<!-- Header -->
@@ -123,10 +123,10 @@ html {
 									<li>
 										<div class="cake_one product_padd">
 											<div class="cake_pic">
-												<%-- <a
-													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"> --%>
-													<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-													class="mobile_fit transition">
+												<a
+													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+													<img src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" alt=""
+													class="mobile_fit transition"></a>
 
 													<div class="circle_tag active"
 														onclick="setLike(${product.productId})">
@@ -153,7 +153,7 @@ html {
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
 														<span class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+															class="prc_off"></span>
 													</div>
 												<!-- </a> -->
 											</div>
@@ -527,7 +527,7 @@ html {
 						document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
 						
 					}
-					
+					setLikeCount(data.statusText);	
 				});
 
 		

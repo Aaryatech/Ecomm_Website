@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.servlet.http.Cookie;
@@ -22,11 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
+import com.ats.ecommerce.common.SMSUtility;
 import com.ats.ecommerce.model.CategoryList;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.CompanyTestomonials;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FETestimonial;
+import com.ats.ecommerce.model.Info;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -74,6 +77,7 @@ public class LocationController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String location(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		String returnPage = "landing";
+		System.err.println("In landing");
 		try {
 
 			HttpSession session = request.getSession();
@@ -100,7 +104,7 @@ public class LocationController {
 							ObjectMapper mapper = new ObjectMapper();
 							data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"),
 									FEDataTraveller.class);
-							System.err.println("data " + data.toString());
+							//System.err.println("data " + data.toString());
 
 							String dataList = new Scanner(new File(Constants.JSON_FILES_PATH + frId + "_.json"))
 									.useDelimiter("\\Z").next();
@@ -293,4 +297,25 @@ public class LocationController {
 		}
 		return 1;
 }
+	//sendOTP Sachin 05-01-2020
+	@RequestMapping(value = "/sendOTP", method = RequestMethod.POST)
+	public @ResponseBody Info sendOTP(Model model, HttpServletRequest request, HttpServletResponse response) {
+		String otp="";
+		Info info=new Info();
+		try {
+			HttpSession session = request.getSession();
+			String mobNo=request.getParameter("mobNo");
+			System.err.println("Mob no  " +mobNo);
+			Random random = new Random();
+
+			otp= String.format("%05d", random.nextInt(100003));
+			System.err.println("Mob no  " +mobNo +"otp  " + otp);
+			info=SMSUtility.sendSMS(mobNo, "Your OTP for Monginis Login is " +otp);
+			info.setMsg(otp);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return info;
+	}
+	
 }

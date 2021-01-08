@@ -35,9 +35,9 @@
 								<li>
 									<div class="cake_one product_padd">
 										<div class="cake_pic">
-											<%-- <a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"> --%>
+											<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 											<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-												class="mobile_fit transition">
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" class="mobile_fit transition"></a>
 
 											<div class="circle_tag active"
 												onclick="setLike(${product.productId})">
@@ -64,7 +64,7 @@
 												<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
 												<span class="off_prc"><i class="fa fa-inr"
 													aria-hidden="true"></i>${product.defaultPrice}</span> <span
-													class="prc_off">(23% Off)</span>
+													class="prc_off"></span>
 											</div>
 
 											<!-- </a> -->
@@ -476,28 +476,29 @@
 					
 					var data1=JSON.parse(data.statusText);
 					
-					
+					var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"'
+
 					$.each(data1.feProductHeadList,
 											function(key, product) {
 						
 						if(product.isLike ==1){
-							
+						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'">'
 							var like='<div class="circle_tag active" onclick="setLike('+product.productId+')">'
-							+ '<img  id="like'+product.productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
+							+ '<img  id="like'+product.productId+'"  src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
 							+ '</div>';
 							
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
 							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '
-							+ ' <img src="${prodImgUrl}'+product.prodImagePrimary+'" data-src="${prodImgUrl}'+product.prodImagePrimary+'" alt="" class="mobile_fit transition"> '
+							+ ' <div class="cake_pic"> '+detail
+							+ ' <img src="${prodImgUrl}'+product.prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+product.prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ '</span> <span class="prc_off"></span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+product.appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
@@ -515,7 +516,7 @@
 						}
 						
 					
-						
+						setLikeCount(data.statusText);	
 					});
 					
 					document.getElementById("itemListUl").innerHTML = divStr;

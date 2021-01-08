@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,11 +36,13 @@ import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
+import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FEProductHeader;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
+import com.ats.ecommerce.model.offer.SiteVisitor;
 import com.ats.ecommerce.model.order.OrderDetail;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -58,14 +61,14 @@ public class HomeController {
 	// Modific Date -03-11-2020
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
-		// System.err.println("Data home " +data.toString());
+		System.err.println("In  home ");
 		HttpSession session = request.getSession();
 		String strFrId = "0";
 		int frId = 0;
 		try {
 			frId = (int) session.getAttribute("frId");
 
-			System.err.println("Fr Id " + strFrId);
+			System.err.println("Fr Id " + frId);
 		} catch (Exception e) {
 			System.err.println("In Home catch");
 		}
@@ -151,6 +154,7 @@ public class HomeController {
 			System.err.println("custId dsdsdsd" + custId);
 
 			if (custId > 0) {
+				System.err.println("custId >0 " + custId);
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 				map.add("custId", custId);
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
@@ -160,6 +164,13 @@ public class HomeController {
 				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+			}else {
+				System.err.println("custId <1 " + custId);
+				session.removeAttribute("userName");
+				session.removeAttribute("userEmail");
+				session.removeAttribute("userMobile");
+				session.removeAttribute("userAddress");
+				session.removeAttribute("profileImg");
 			}
 		} catch (Exception e) {
 			System.err.println("In Home catch");
@@ -187,14 +198,18 @@ public class HomeController {
 
 		model.addAttribute("tagsJson", jsonStr);
 
-		if (frId > 0)
+		if (frId > 0) {
+			System.err.println("A");
 			return "home";
-		else
+		}
+		else {
+			System.err.println("B");
 			return "redirect:/";
+		}
 	}
-
-	@RequestMapping(value = "/preHome", method = RequestMethod.POST)
-	public String preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+//preHome preHomeOld Mapping
+	@RequestMapping(value = "/preHomeOld", method = RequestMethod.POST)
+	public String preHomeOld(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in Pre Home");
 		HttpSession session = request.getSession();
 		int custId=0;
@@ -228,7 +243,9 @@ public class HomeController {
 				System.err.println("In Landmark Catch");
 			}
 		} catch (Exception e) {
-			System.err.println("In Catch " + frId);
+			e.printStackTrace();
+			System.err.println("In Catch frId " + frId);
+			
 			
 		}
 
@@ -251,6 +268,144 @@ public class HomeController {
 		return "redirect:/home";
 	}
 
+	
+	@RequestMapping(value = "/preHome", method = RequestMethod.POST)
+	public @ResponseBody Object preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("in Pre Home");
+		int retPage=0;
+		HttpSession session = request.getSession();
+		int custId=0;
+		try {
+			custId=(int) session.getAttribute("custId");
+		}catch (Exception e) {
+			session.setAttribute("custId", custId);
+		}
+		String landMark = null;
+		Cookie landMarkCookie,frIdCookie,frKmCookie,delAddIdCookie;
+		int frId = 0;
+		float frKm=0;
+	
+			try {
+			frId = Integer.parseInt(request.getParameter("selectShop"));
+			session.setAttribute("frId", frId);
+			
+			frKm=Float.parseFloat(request.getParameter("frKm"));
+			session.setAttribute("frKm", frKm);
+			
+			 landMark = request.getParameter("txtPlaces");
+			session.setAttribute("landMark", landMark);
+			System.err.println("frId " +frId + " frKm " +frKm+ "landMark " +landMark );
+			 landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+			landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(landMarkCookie);
+		
+		 frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+		frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(frIdCookie);
+		
+		//24-12-2020
+		 frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(frKmCookie);
+		
+		//4-01-2021
+		 delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
+		delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(delAddIdCookie);
+		session.setAttribute("delAddId", 0);
+		
+		session.setAttribute("userId", 0);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		//06-01-2020
+			try {
+		String mobNo = request.getParameter("mobNo");
+		String otp = request.getParameter("otp");
+		int userType = Integer.parseInt(request.getParameter("userType"));
+		
+		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+		//getCustomerByMobNo
+		map = new LinkedMultiValueMap<>();
+		map.add("mobNo", mobNo);
+		CustomerAddDetail custAddDetail = Constants.getRestTemplate().postForObject(Constants.url + "getCustomerByMobNo", map,
+				CustomerAddDetail.class);
+		if(custAddDetail==null) {
+			//Its new cust
+			//System.err.println("In ");
+		}else {
+			//Its existing cust
+			//System.err.println("OUT ");
+		}
+		
+		if(userType==1 && custAddDetail==null) {
+			//Save to Db and goto home
+			System.err.println("Ok If 1 and null ");
+			SiteVisitor visitor=new SiteVisitor();
+			visitor.setFrId(frId);
+			visitor.setLandMark(landMark);
+			visitor.setMobNo(mobNo);
+			visitor.setVisitDttime(CommonUtility.getCurrentYMDDateTime());
+			
+			SiteVisitor siteVisitorSaveRes = Constants.getRestTemplate().postForObject(Constants.url + "saveSiteVisitor", visitor,
+					SiteVisitor.class);
+			System.err.println("siteVisitorSaveRes " +siteVisitorSaveRes);
+			session.setAttribute("custId", 0);
+			retPage=1;
+		}
+			/*
+			 * else if(userType==2 && custAddDetail!=null) {
+			 * System.err.println("Ok userType==2 && custAddDetail!=null "); }
+			 */
+		else if(custAddDetail!=null){
+			//goto home
+			System.err.println("Ok else if custAddDetail!=null "+ custAddDetail);
+			
+			session.setAttribute("custId", custAddDetail.getCustId());
+				//frId = Integer.parseInt(request.getParameter("selectShop"));
+				frId=custAddDetail.getExInt3();
+				session.setAttribute("frId", frId);
+				try {
+				frKm=Float.parseFloat(custAddDetail.getExVar3());
+				}catch (Exception e) {
+					frKm=0;
+				}
+				session.setAttribute("frKm", frKm);
+				
+				landMark = custAddDetail.getLandmark();
+				session.setAttribute("landMark", landMark);
+				landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+				landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(landMarkCookie);
+			
+			frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+			frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(frIdCookie);
+			
+			//24-12-2020
+			frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(frKmCookie);
+			
+			//4-01-2021
+			 delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" +custAddDetail.getCustDetailId() ));
+			delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+			response.addCookie(delAddIdCookie);
+			session.setAttribute("delAddId", custAddDetail.getCustDetailId());
+			
+			session.setAttribute("userId", 0);
+			retPage=2;
+			
+			}
+		System.err.println("frId Here " +frId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("In Catch here  " + frId);
+		}
+		
+		return retPage;
+	}
+	
 	// Modified By -Sachin
 	// Modific Date -11-11-2020
 	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)

@@ -1425,14 +1425,21 @@ function setOfferDiscAmt(){
 				$("#errorMobileInvalid").hide();
 			}
 
-			if (!$("#txtEmail").val().trim()) {
-				email = false;
-				$("#errorEmail").show();
-			} else if (!ValidateEmail($("#txtEmail").val().trim())) {
+			if($("#txtEmail").val()==null|| $("#txtEmail").val()==""){
+				$("#errorEmail").hide();
+				}
+			else if ($("#txtEmail").val().trim()) {
+				//email = false;
+				//$("#errorEmail").show();
+			  if (!ValidateEmail($("#txtEmail").val().trim())) {
 				email = false;
 				$("#errorEmailInvalid").show();
 				$("#errorEmail").hide();
 			} else {
+				$("#errorEmailInvalid").hide();
+				$("#errorEmail").hide();
+			}
+			}else{
 				$("#errorEmailInvalid").hide();
 				$("#errorEmail").hide();
 			}

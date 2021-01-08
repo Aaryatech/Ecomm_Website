@@ -37,19 +37,20 @@
 							<div class="xzoom-container">
 								<img class="xzoom" id="xzoom-default"
 									src="${prodImgUrl}${prodHeader.prodImagePrimary}"
-									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}" />
+									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}"
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" />
 								<div class="mobile_Scrl">
 									<div class="xzoom-thumbs">
 										<a href="${prodImgUrl}${prodHeader.prodImagePrimary}"><img
 											class="xzoom-gallery" width="80"
 											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
-											title="${prodHeader.productDesc}"></a>
+											title="${prodHeader.productDesc}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
 										<c:forEach items="${prodHeader.productImages}"
 											var="prod_image">
 											<a href="${prodImgUrl}${prod_image}"><img
 												class="xzoom-gallery" width="80"
-												src="${prodImgUrl}${prod_image}"
+												src="${prodImgUrl}${prod_image}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 												title="${prodHeader.productDesc}"></a>
 										</c:forEach>
 									</div>
@@ -1608,8 +1609,8 @@ function moveCursor(){
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
 				appendCartData();
-		
-			
+				openNav();
+			  	setTimeout(function(){ closeNav(); }, 4000);
 			
 		} 
 		

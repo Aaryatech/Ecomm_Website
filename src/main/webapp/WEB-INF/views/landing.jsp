@@ -282,7 +282,7 @@ color: red;}
 		<h2 class="location_title">
 			Select your Delivery Location
 			<div class="landingpop_close close_pop">
-				<i class="fa fa-times" aria-hidden="true"></i>
+				<i class="fa fa-times" aria-hidden="true" id="main_close"></i>
 			</div>
 		</h2>
 		<form id="validation-form"
@@ -422,7 +422,7 @@ color: red;}
 						location.</span>
 				</div>
 
-<div class="search_one">
+				<!-- <div class="search_one">
 						<div class="search_one_l">
 							<input name="mobNo" value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" 
 								type="text" class="input_search numbersOnly" placeholder="Enter Mobile No"
@@ -444,11 +444,15 @@ color: red;}
 						<div class="clr"></div>
 				
 
-			</div>
+			</div> -->
 			
 			<div class="proceed_btn_1">
-					<a href="#"><input name="" id="submtbtn" type="submit" value="Proceed"
-						class="proceed" /></a>
+					<a href="#"><input name="" id="submtbtn" type="button" value="Proceed New User"
+						class="landingpop-mobno_open proceed" /></a>
+						
+							<a href="#"> OR <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
+						class="landingpop-mobno_open proceed" /></a>
+						
 				</div>
 			<input type="hidden" id="frKm" name="frKm" value="0"/>
 			</div>
@@ -456,6 +460,58 @@ color: red;}
 
 	</div>
 
+<!--   New Popup -->
+<div id="landingpop-mobno" class="well_landing">
+		<h2 class="location_title">
+			Enter Your Details
+			<div class="landingpop-mobno_close close_pop">
+				<i class="fa fa-times" id="sub_close" aria-hidden="true"></i>
+			</div>
+		</h2>
+		
+		<form>
+			<div class="location_padd extra">
+				<div class="search_one">
+						<div class="search_one_l">
+							<span class="pop_spn">Mobile Number</span>
+							<input name="mobNo" value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" 
+								type="text" class="input_search numbersOnly" autocomplete="off" placeholder="Enter Mobile No"
+								id="mobNo" /> <i class="fa fa-mobile" aria-hidden="true"></i>
+								<!-- <a href="#" onclick="sendOTP()"><i class="fa fa-refresh refresh" title="GET OTP" aria-hidden="true"></i></a> -->
+								<label class="form-label-hint-error-l"
+									id="errorMobNo" style="display: none;">Please enter
+									Mobile No</label>
+						</div>
+						<div class="search_one_r">
+							<input name="" type="button" value="Send OTP" onclick="sendOTP()" class="proceed last" />
+						</div>
+						<div class="clr"></div>
+			</div>
+			<div id="otp_div" style="display: none;">
+			<div class="search_one new_marg">
+						<div class="search_one_l">
+							<span class="pop_spn">Enter OTP</span>
+							<input name="otp" value="" maxlength="8" 
+								type="text" class="input_search numbersOnly" autocomplete="off" placeholder="Enter OTP"
+								id="otp" /> <i class="fa fa-key" onclick="checkValidOTP()" aria-hidden="true"></i>
+								<label class="form-label-hint-error-l"
+									id="errorotp" style="display: none;">Please enter valid
+									OTP</label>
+						</div>
+						 <div class="search_one_r">
+							<input name="" type="button" value="Resend otp" onclick="sendOTP()" class="proceed last" />
+						</div> 
+						<div class="clr"></div>
+			</div>
+			</div>
+			<div class="search-one twobtn">
+				<input name="" id="main_submit" type="button" value="Submit" class="proceed" />
+			</div>
+			</div>
+			<input type="hidden" id="user_type" name="user_type" value="0">
+		</form>
+	</div>
+	
 	<script type="text/javascript">
 	jQuery('.numbersOnly').keyup(function() {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
@@ -464,8 +520,11 @@ color: red;}
 	var enteredOTP="";
 	var currentOTP="";
 	function sendOTP(){
+		document.getElementById("mobNo").readOnly = false; 
+		document.getElementById("otp_div").style="display:none";
 		var mobNo=document.getElementById("mobNo").value;
 		mobNo=mobNo.trim();
+		enteredOTP="";
 		$("#errorMobNo").hide();
 		if(mobNo.length==10){
 		var fd = new FormData();
@@ -481,7 +540,9 @@ color: red;}
 	        success: function(resData, textStatus, jqXHR)
 	        {
 	        	currentOTP=resData.msg;
-	        	 console.log('rrr: ' + resData.msg);
+	        	 //console.log('rrr: ' + JSON.stringify(jqXHR));
+	        	 document.getElementById("mobNo").readOnly = true; 
+	        	 document.getElementById("otp_div").style="display:block";
 	        }, 
 	        error: function(jqXHR, textStatus, errorThrown)
 	        {
@@ -515,18 +576,13 @@ color: red;}
 		}
 		return true;
 	}
-	$("#validation-form").submit(function(e) {
+	
+	//New User Proceed
+	$("#submtbtn").click(function(e) {
 		var isError = false;
 		var errMsg = "";
-		sendOTP();
-		var isOtpMached= checkValidOTP();
-		if(isOtpMached==false){
-			isError=false;
-		}else{
-			isError =true;
-		}
-		
-		 if (!$("#selectShop").val()) {
+	
+		if (!$("#selectShop").val()) {
 			isError = true;
 			$("#error_selectShop").show()
 		}else  if ($("#selectShop").val()<1) {
@@ -542,17 +598,132 @@ color: red;}
 		} else {
 			$("#error_txtPlaces").hide()
 		}	 
-		
-		if (!isError) {
-			var x = true;
-			if (x == true) {
-				document.getElementById("submtbtn").disabled = true;
-				return true;
-			}
+		//alert(isError);
+		if(isError==false){
+			document.getElementById("mobNo").value="";
+			document.getElementById("otp").value="";
+		$('#landingpop-mobno').popup();
+		document.getElementById("main_close").click();
+		document.getElementById("user_type").value=1;
+		}else{
+			//$('#landingpop-mobno').style="display:block";
+			//document.getElementById("sub_close").click();
 		}
-		return false;
+		//$('#landingpop').hide();
 	});
 	
+	//Existing user login
+	$("#submtbtn_ex_use").click(function(e) {
+		document.getElementById("user_type").value=2;
+		document.getElementById("mobNo").value="";
+		document.getElementById("otp").value="";
+		$('#landingpop-mobno').popup();
+		document.getElementById("main_close").click();
+	});
+	
+	$("#main_submit").click(function(e) {
+		var allError=false;
+		var isError = false;
+		var isError1 = false;
+		
+		var otpError=false;
+		var dataError=false;
+		
+		var userType=document.getElementById("user_type").value;
+		//alert("userType" +userType);
+		var isOtpMached= checkValidOTP();
+		//alert("isOtpMached "+isOtpMached);
+		if(isOtpMached==false){
+			isError=false;
+			isError1 = false;
+			otpError=false;
+		}else{
+			otpError=true;
+			isError =true;
+			isError1=true;
+		}
+		
+		if(parseInt(userType)==1){
+			dataError=false;
+		var errMsg = "";
+		if (!$("#selectShop").val()) {
+			isError1 = true;
+			dataError=true;
+			$("#error_selectShop").show()
+		}else  if ($("#selectShop").val()<1) {
+			isError1 = true;
+			dataError=true;
+			$("#error_selectShop").show();
+		} else  {
+			$("#error_selectShop").hide()
+		}
+		
+		if (!$("#txtPlaces").val()) {
+			isError1 = true;
+			dataError=true;
+			$("#error_txtPlaces").show()
+		} else {
+			$("#error_txtPlaces").hide()
+		}	 
+	}//end of if user Type==1
+		//alert("A" +isError)
+		if(otpError==false){
+			//alert("Error False 663");
+		}else{
+			//alert("I am  here665")
+			$('#landingpop-mobno').popup();
+		}
+		//alert("isError1" +isError1)
+			if(isError1==false){
+				allError=false;
+				document.getElementById("sub_close").click();
+			}else{
+				//alert("final")
+				allError=true;
+				//
+			}
+			//alert("allError" +allError)
+			if(otpError==false && dataError==false){
+				//alert("In x 680")
+				document.getElementById("sub_close").click();
+		var fd = new FormData();
+		fd.append('selectShop', $("#selectShop").val());
+		fd.append('txtPlaces', $("#txtPlaces").val());
+		fd.append('frKm', $("#frKm").val());
+		fd.append('selectShop', $("#selectShop").val());
+		fd.append('userType', userType);
+		fd.append('mobNo', $("#mobNo").val());
+		fd.append('otp', $("#otp").val());
+		//console.log("fd ",JSON.stringify(fd));
+		$.ajax({
+	        url: '${pageContext.request.contextPath}/preHome',
+	        type: 'POST',
+	        data: fd,
+	        dataType: 'json',
+	        processData: false, 
+	        contentType: false, 
+	        async:false,
+	        success: function(resData, textStatus, jqXHR)
+	        {
+	        	var url="";
+	        	if(parseInt(resData)==1){
+	        	 url = '${pageContext.request.contextPath}/home';
+	        	}else{
+	        	url = '${pageContext.request.contextPath}/addresslist';
+	        	}
+				window.location = url;
+	        }, 
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	           
+	        }
+		    });
+			}else{
+				//alert("final else")
+				
+			}
+		
+	});
 	function getKM(thisobj){
 	/* 	var plant = document.getElementById('selectShop');
 		var fruitCount = plant.getAttribute('data-km'); // fruitCount = '12'

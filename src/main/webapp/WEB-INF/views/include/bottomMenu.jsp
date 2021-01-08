@@ -25,8 +25,8 @@
 								Privacy Policy</a></li>
 						<li><a href="${pageContext.request.contextPath}/showT&CPage"><i class="fa fa-check" aria-hidden="true"></i>
 								Terms &amp; Condition</a></li>
-						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
-								Meet Our Team</a></li>
+						<!-- <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
+								Meet Our Team</a></li> -->
 						<li><a href="${pageContext.request.contextPath}/showContactUsPage"><i class="fa fa-check" aria-hidden="true"></i>
 								Contact Us</a></li>
 

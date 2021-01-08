@@ -899,7 +899,7 @@ ul.drop_mainmenu li a:hover{color: #ec268f; text-decoration: none; }
 
 
 /*landing page css start here*/
-.main_banner.land{height: 400px;}
+.main_banner.land{height: 400px; display: table;}
 .landing_cont{display: table-cell; vertical-align: middle; text-align: center;}
 .landing_button{ background: rgba(255,255,255, 0.8); padding: 25px; border-radius: 10px; width: 40%; margin: 0 auto; font-size: 22px; font-family: 'Hind-Medium'; line-height: 30px; color: #373991;}
 .landing_button a{display: table; margin: 15px auto 0 auto ; background: #ec268f; padding: 10px 20px; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; border-radius: 5px; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
@@ -1145,7 +1145,23 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
 .show_hide_div p{float: left; width: 33.333%; }
 .show_hide_div p#offer_terms{float: none; width: 100%; margin: 0 0 3px 0; font-size:13px; text-transform:uppercase; color: #ec268f;}
 ul.login_menu.edit ul li{padding: 0; text-align: left; width: 100%;}
+.search_one_l,.search_one_r{position: relative;}
 
+/*----------05-Jan-2021 ----------*/
+.search_one i.refresh {
+    position: absolute;
+    right: 12px; left:auto;
+    top: 12px;
+    color: #a6a5a5;
+    z-index: 999999;
+    font-size: 16px;
+}
+
+.location_padd.extra{padding:35px 20px 15px 20px;}
+span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; font-family: 'Hind-Medium'; position: absolute; top: -25px;}
+.search-one.twobtn{text-align: center;}
+.proceed.last{padding: 10px 0; width: 100%;}
+.search_one.new_marg{margin: 35px 0 15px 0;}
 
 
 

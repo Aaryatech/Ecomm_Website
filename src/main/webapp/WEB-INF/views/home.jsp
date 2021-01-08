@@ -1400,7 +1400,7 @@
 
 			var allTagList = sessionStorage.getItem("allTagList");
 			var allTags = $.parseJSON(allTagList);
-			alert(allTags)
+			//alert(allTags)
 
 			var idArray = tagIds.split(",");
 
@@ -1818,10 +1818,8 @@
 							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
 							
 						}
-						
+						setLikeCount(data.statusText);
 					});
-
-			
 			
 		}
 		

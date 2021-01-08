@@ -455,9 +455,10 @@
 													<li>
 														<div class="cake_one product_padd">
 															<div class="cake_pic">
-																<img src="${prodImgUrl}${product.prodImagePrimary}"
+																<a
+																		href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}<img src="${prodImgUrl}${product.prodImagePrimary}"
 																	data-src="${prodImgUrl}${product.prodImagePrimary}"
-																	alt="" class="mobile_fit transition">
+																	alt="" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" class="mobile_fit transition"></a>
 																<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 																<div class="cake_prc">
 																	<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
