@@ -145,32 +145,39 @@ text-transform: uppercase; line-height: 103px;  white-space: nowrap;
 .search_city{background: url(../images/city_bg.jpg) no-repeat center bottom; background-size: cover; width: 100%; height: 100vh; display: table;}
 .search_container{display: table-cell; vertical-align: middle;}
 .search_wrapper{background: rgba(18, 19, 95, 0.7); width: 610px; margin: 0 auto; border-radius: 5px;}
-.location_title{color: #FFF; text-align: center; padding: 15px; border-bottom: 1px solid #babacf; font-size: 20px; font-family: 'Hind-SemiBold'; text-transform: uppercase;}
+.location_title{color: #FFF; text-align: center; padding:5px 15px /* 10px 15px */; border-bottom: 1px solid #babacf; font-size: 18px /* 20px */;
+ font-family: 'Hind-SemiBold'; text-transform: uppercase;}
 .location_padd{padding: 15px 20px; display: block;}
-.current_location{text-align: center; width: 70%; margin:10px auto 20px  auto;}
+.current_location{text-align: center; width: 70%; margin:0 auto 10px  auto /* 10px auto 20px  auto */;}
 .current_location img{margin: 0 5px 0 0;}
 .current_location a{background: #ed258f; color: #FFF; border-radius: 5px; padding: 10px; display: block; text-transform: uppercase; font-size: 16px; font-family: 'Hind-Medium';}
 .current_location a:hover{background: rgba(237, 37, 143, 0.9);}
 
-.location_or{position: relative; color: #babac3; text-align: center; padding: 0 10px; text-transform: uppercase; font-family: 'Hind-Medium';}
+.location_or{position: relative; color: #babac3; text-align: center; padding: 0 10px; /* text-transform: uppercase; */ font-family: 'Hind-Medium';}
 .location_or:after{content: ''; position: absolute; left: 0; top: 10px; width: 45%; height: 1px; background: #b9b9ce;}
 .location_or:before{content: ''; position: absolute; right: 0; top: 10px; width: 45%; height: 1px; background: #b9b9ce;}
-.location_city{margin: 20px 0; text-align: center;}
-.serv_city{text-align: center; color: #FFF; font-size: 26px; font-family: 'Hind-Medium'; margin: 0 0 20px 0;}
+.location_or.extra_txt:after,.location_or.extra_txt:before{width: 27%;}
+
+.location_city{margin: 0px 0 10px 0 /* 20px 0 */; text-align: center;}
+.serv_city{text-align: center; color: #FFF; font-size: 22px /* 26px */; font-family: 'Hind-Medium'; margin:0 0 5px 0 /* 0 0 20px 0 */;}
 .location_city ul{margin: 0px; padding: 0;}
 .location_city ul li{list-style-type: none; display: inline-block; text-align: center; margin: 0 12px; font-size: 16px; font-family: 'Hind-Medium';}
 .location_city ul li img{display: block; text-align: center; margin: 0 0 10px 0;}
 .location_city ul li a{color: #FFF;}
 
+.citysel{border-radius: 3px; background: #FFF; padding:7px 10px /* 10px */; font-size: 16px; color: #a6a6a6; width: 100%;}
+
 .place_search_row{display: inline-block; width: 100%;}
 .search_one{margin: 0 0 15px 0; position: relative;}
 .input_search{background: #FFF; border-radius: 3px; padding: 10px 10px 10px 35px; width: 100%; border: none; color: #a6a6a6; font-size: 16px; font-family: 'Hind-Regular';}
+.input_search.landing{padding: 8px 10px 8px 35px;}
 .input_search::-webkit-input-placeholder {color: #a6a6a6 !important;opacity: 1 !important;}
 .input_search:-moz-placeholder { color: #a6a6a6 !important;opacity: 1 !important;}
 .input_search::-moz-placeholder {color: #a6a6a6!important;opacity: 1 !important;}
 .search_one i{position: absolute; left: 12px; top: 12px; color: #a6a5a5; z-index:999999; font-size: 16px;}
 
 /*Styling Selectbox*/
+
 .dropdown {width: 100%; background:url(../images/ddarow.png) no-repeat right top; background-position:97% 19px; display: inline-block; background-color: #FFF; border-bottom:none; transition: all .5s ease; position: relative; font-size: 16px; color: #a6a6a6; height: 100%; text-align: left; border-radius: 3px;}
 .dropdown .select {cursor: pointer; display: block; padding: 10px}
 .dropdown .select > i {font-size: 13px; color: #888; cursor: pointer; transition: all .3s ease-in-out; float: right; line-height: 20px}
@@ -187,15 +194,16 @@ text-transform: uppercase; line-height: 103px;  white-space: nowrap;
 .select_location{position: relative; background: url(../images/location_bg.jpg) no-repeat center bottom;border-radius: 5px; padding: 10px; margin: 0 0 15px 0;}
 .select_location:after{content: ''; position: absolute; left:0; top: 0; background: rgba(237, 37, 143, 0.8); width: 100%; height: 100%; border-radius: 5px;}
 
-.search_one_l{float: left; width: 75%;}
-.search_one_r{float: right; width: 23%;}
-.search_one_r a{background: #373991; color: #FFF; width: 100%; border-radius: 3px; padding: 11px 0; text-align: center; font-size: 14px; display: block; font-family: 'Hind-Medium'; text-transform: uppercase; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+.search_one_l{float: left; width: 70%;}
+.search_one_r{float: right; width: 28%;}
+.search_one_r a{background: #373991; color: #FFF; width: 100%; border-radius: 3px; padding:9px 0 /* 11px 0 */; text-align: center; font-size: 14px; display: block; font-family: 'Hind-Medium'; text-transform: uppercase; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .search_one_r a:hover{background: #ec268f; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
 .select_location span{position: relative; z-index: 1; line-height: 39px; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; padding: 0 0 0 50px;}
 .select_location span img{position: absolute; left: 0; top: -6px}
 .proceed_btn_1{text-align: center;}
-.proceed{background: #ed258f; border-radius: 5px; color: #FFF; font-size: 16px; font-family: 'Hind-Bold'; border: 0; text-transform: uppercase; padding: 10px 45px; letter-spacing: 0.3px;}
+.proceed{background: #ed258f; border-radius: 5px; color: #FFF; font-size: 15px; font-family: 'Hind-Medium'; border: 0; 
+text-transform: uppercase; padding: 8px 45px; letter-spacing: 0.3px;}
 .proceed:hover{background: rgba(237, 37, 143, 0.9);}
 
 
@@ -558,7 +566,7 @@ table.cart td {text-align: center; padding: 15px 8px; border-bottom: 1px solid #
 .cart_option img{margin: 0 0 5px 0; width: 80px; height: 80px; object-fit:cover;}
 .cart_option span{display: block; color: #ec268f; font-size: 13px; font-family: 'Hind-Medium';}
 .cart_prc_1{text-align: center; color: #666666; font-size: 15px;}
-.cart_delete{text-align: center;}
+.cart_delete{text-align: right /* center */;}
 .cart_delete a{color: #babcbf;}
 .cart_delete a:hover{color: #333;}
 
@@ -750,7 +758,7 @@ ul.highlist_list li i{position: absolute; left: 0; top: 0; color: #dfe1e4; font-
 .address_title span a:hover{color: #ec268f; text-decoration: none; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .address_row{display: inline-block; width: 100%;}
 .address_row ul{margin: 0px; padding: 0px;}
-.address_row ul li{list-style-type: none; float: left; width: 33.333%; padding: 10px;}
+.address_row ul li{list-style-type: none; float: left; width: 25% /* 33.333% */; padding: 10px;}
 .address_one{background: #FFF; padding: 10px;}
 .deliver_add{display: inline-block; width: 100%; margin: 5px 0 10px 0;}
 .deliver_add a{background: #ec268f; padding: 7px; color: #FFF; font-size: 14px; text-align: center; font-family: 'Hind-Medium'; display: block; border-radius: 3px; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
@@ -929,7 +937,7 @@ ul.drop_mainmenu li a:hover{color: #ec268f; text-decoration: none; }
 .tweets_r i{display: block; text-align: center; margin: 0 0 5px 0; font-size: 80px; color: #e21586;}
 
 .well_landing{background: rgba(18, 19, 95, 0.7); width: 610px; margin: 0 auto; top: 0; vertical-align: top; position: relative;}
-
+.well_landing.mobile{width: 400px;}
 
 /*terms and conditions page css start here*/
 .testimonial_bx.with_bread {padding-top: 20px;}
@@ -1173,12 +1181,14 @@ ul.login_menu.edit ul li{padding: 0; text-align: left; width: 100%;}
 .location_padd.extra{padding:35px 20px 15px 20px;}
 span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; font-family: 'Hind-Medium'; position: absolute; top: -25px;}
 .search-one.twobtn{text-align: center;}
-.proceed.last{padding: 10px 0; width: 100%;}
+.proceed.last{padding: 9px 0; width: 100%;}
 .search_one.new_marg{margin: 35px 0 15px 0;}
 
 .login_menu li span{display: inline-block; vertical-align: middle; width: 70px; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;}
-
+  
+.location_if{color: #FFF; font-size: 15px; display: block; text-align: center; margin: 0 0 5px 0;}
+.location_or.spc{margin: 7px 0 0 0;}
 
 
 @media screen and (max-width:1280px){
@@ -1208,7 +1218,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 	.logo_row{padding: 10px 0;}
 	.main_menu{height: 55px; line-height: 55px; padding:20px 15px 15px 15px;}
     /*location page css*/
-    .location_title{padding: 18px; font-size: 18px;}
+    .location_title{/* padding: 18px; font-size: 18px; */ padding: 12px; font-size: 16px;}
     .serv_city{font-size: 22px; margin: 0 0 15px 0;}
     .select_location span{font-size: 16px;}
     
@@ -1589,7 +1599,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .tweets_r{display: block; width: 100%;}
     .landing_button {width: 90%; font-size: 17px; line-height: 24px;}
     .landing_button a{font-size: 16px;}
-    .well_landing{width: 96%;}
+    .well_landing,.well_landing.mobile{width: 96%;}
     
     .stock_l{float: none; width: 100%;}
     .stock_prc,.stock_off_prc{text-align: left;}
@@ -1729,6 +1739,8 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 }
 
 @media screen and (max-width:480px){
+	.detail_drop ul li{font-size: 14px;}
+	.cake_prc_detail_iclass.aprice {font-size: 15px; margin: 7px 5px 0 0;}
 	.plus_minus_one{width: 50%;}
     .lst_tow{float: none; width:100%;}
     .search_one_l{float: none; width: 100%; margin: 0 0 10px 0;}
