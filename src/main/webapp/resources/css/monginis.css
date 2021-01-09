@@ -1197,11 +1197,14 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .stock_prc{font-size: 32px;}
 }
 @media screen and (max-width:1100px){
+	.cake_prc_detail_pclass{font-size: 18px;}
+	.cake_prc_detail_iclass{font-size: 15px;}
 	.qtyminus.slide, .qtyplus.slide{width: 20px; font-size: 11px; height: 20px; line-height: 20px;}
+	.prod_kgs{font-size:13px; line-height: 24px;}
 	
 	.qty.slide {padding: 4px 0; width: 30px; height: 20px; line-height: 19px; margin: 3px -5px 0 -5px;}
 	.plus_minus_one{margin: 0 2px 0 0;}
-	.prod_kgs{font-size:13px;}
+	
 	.logo_row{padding: 10px 0;}
 	.main_menu{height: 55px; line-height: 55px; padding:20px 15px 15px 15px;}
     /*location page css*/
@@ -1491,6 +1494,10 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 
 
 @media screen and (max-width:700px){
+	.qty.slide{width: 50%;}
+	.plus_minus_one{width: 50%;}
+	.prod_kgs{line-height: 24px;}
+	
 	.product_like{font-size: 20px; margin:4px 12px;}
 	.product_cart{margin: -1px 12px 4px 0;}
 	.openbtn.count span{right:5px;}
@@ -1658,6 +1665,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 }
 
 @media screen and (max-width:568px /*480px*/){
+	.plus_minus_one{width: 70%;}
     /*home page css*/
     .top_address {font-size: 12px;}
     .main_logo{width: 120px; top: -45px;}
@@ -1721,6 +1729,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 }
 
 @media screen and (max-width:480px){
+	.plus_minus_one{width: 50%;}
     .lst_tow{float: none; width:100%;}
     .search_one_l{float: none; width: 100%; margin: 0 0 10px 0;}
     .search_one_r{float: none; width: 100%;}
@@ -1826,6 +1835,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .cart_cont.width_inc {width: 62%;}
     
     .product_cart {margin: -1px 10px 4px 0;}
+      .qty.slide {width: 42%;}
 }
 
 /* new code on 03-11-2020-*/
