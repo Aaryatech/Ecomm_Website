@@ -35,7 +35,7 @@
 				
 				
 				<div class="top_address">
-					<span><p>Delivery</p> Location :</span> ${landMark}.
+					<span><p>Delivery</p> Location :</span> <span class="address_land">${landMark}.</span>
 					<ul class="login_menu edit">
 						<li><a href="javascript:void(0)"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>

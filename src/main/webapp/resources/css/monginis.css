@@ -362,6 +362,8 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
     /* white-space: nowrap; overflow: hidden; text-overflow: ellipsis; */ width: 50%;}
     .top_address i{margin: 0 0 0 5px; font-size: 13px;}
 .top_address span{color: #ec268f;}
+.top_address span.address_land{display: inline-block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+ width: 50%; vertical-align: middle; color: #636363; font-size: 15px;}
 .top_address span p{display: inline-block; margin: 0; padding: 0;}
 .top_address a{color: #636363; text-decoration: none; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .top_address a:hover{color: #ec268f; text-decoration: none; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
