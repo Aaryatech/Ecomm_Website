@@ -1150,7 +1150,7 @@ position: absolute; text-align: center; line-height: 20px; right: -15px; top: -6
 .small_l span,.small_r span{font-family: 'Hind-Medium';}
 .small_r{float: left; width: 50%; font-size: 15px; color: #333; font-family: 'Hind-Regular'; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 
-.show_hide_div{display: block; width: 100%; font-size: 13px; font-family:'Hind-Medium'; color: #333; margin: 10px 0 0 0; }
+.show_hide_div{display: block; width: 100%; font-size: 13px;  font-family:'Hind-Medium'; color: #333; margin: 10px 0 0 0; }
 .show_hide_div p{float: left; width: 33.333%; }
 .show_hide_div p#offer_terms{float: none; width: 100%; margin: 0 0 3px 0; font-size:13px; text-transform:uppercase; color: #ec268f;}
 ul.login_menu.edit ul li{padding: 0; text-align: left; width: 100%;}
