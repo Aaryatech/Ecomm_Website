@@ -33,9 +33,9 @@ html {
 	<div class="head_marg with_menu">
 		<section class="product_category">
 			<div class="wrapper">
-				
+
 				<!-- new slider 9-1-2021 -->
-				<div class="regular-filter slider">
+				<!-- <div class="regular-filter slider">
             <div>
             	<div class="filter_slide_bx">
                 <div class="product_filter_one">
@@ -113,10 +113,51 @@ html {
             
             
             
-          </div>
-			
-			
-				<div class="mobile_scroll">
+          </div> -->
+
+
+				<div class="regular-filter slider">
+
+
+
+
+					<c:forEach items="${allData.frSubCatList}" var="subCat">
+
+						<c:set value="0" var="count"></c:set>
+
+						<c:forEach items="${allData.feProductHeadList}" var="product">
+							<c:if test="${product.prodSubCatId == subCat.subCatId}">
+								<c:set value="1" var="count"></c:set>
+							</c:if>
+						</c:forEach>
+
+
+
+						<c:if test="${subCat.catId == catId && count==1}">
+
+							<div>
+								<div class="filter_slide_bx">
+									<div class="product_filter_one">
+										<a href="#${subCat.subCatId}"
+											onclick="setDivPadding(${subCat.subCatId})"> <img
+											src="${subCatImgUrl}${subCat.imageName}" alt=""
+											onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
+											<span><c:out value="${subCat.subCatName}"></c:out></span>
+										</a>
+									</div>
+								</div>
+							</div>
+
+						</c:if>
+					</c:forEach>
+
+
+				</div>
+
+
+
+
+				<%-- <div class="mobile_scroll">
 					<div class="prod_filt">
 						<ul>
 
@@ -151,7 +192,7 @@ html {
 						</ul>
 					</div>
 
-				</div>
+				</div> --%>
 
 
 			</div>
@@ -207,36 +248,38 @@ html {
 											<div class="cake_pic">
 												<a
 													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-													<img src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" alt=""
-													class="mobile_fit transition"></a>
+													<img src="${prodImgUrl}${product.prodImagePrimary}"
+													onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
+													alt="" class="mobile_fit transition">
+												</a>
 
-													<div class="circle_tag active"
-														onclick="setLike(${product.productId})">
+												<div class="circle_tag active"
+													onclick="setLike(${product.productId})">
 
-														<c:choose>
+													<c:choose>
 
-															<c:when test="${product.isLike==0}">
-																<img src="#" class="lazy" id="like${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-																	alt="">
-															</c:when>
-															<c:when test="${product.isLike==1}">
-																<img src="#" class="lazy" id="like${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-																	alt="">
-															</c:when>
+														<c:when test="${product.isLike==0}">
+															<img src="#" class="lazy" id="like${product.productId}"
+																data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+																alt="">
+														</c:when>
+														<c:when test="${product.isLike==1}">
+															<img src="#" class="lazy" id="like${product.productId}"
+																data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+																alt="">
+														</c:when>
 
-														</c:choose>
+													</c:choose>
 
 
-													</div>
+												</div>
 
-													<div class="cake_prc">
-														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
-														<span class="off_prc"><i class="fa fa-inr"
-															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off"></span>
-													</div>
+												<div class="cake_prc">
+													<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+													<span class="off_prc"><i class="fa fa-inr"
+														aria-hidden="true"></i>${product.defaultPrice}</span> <span
+														class="prc_off"></span>
+												</div>
 												<!-- </a> -->
 											</div>
 
@@ -466,16 +509,24 @@ html {
 						infinite : true,
 						dots : true
 					}
-				}, {
-					breakpoint : 768,
+				},
+				 {
+					breakpoint : 1100,
 					settings : {
-						slidesToShow : 2,
+						slidesToShow : 5,
+						slidesToScroll : 1
+					}
+				},
+				{
+					breakpoint : 800,
+					settings : {
+						slidesToShow : 4,
 						slidesToScroll : 1
 					}
 				}, {
 					breakpoint : 480,
 					settings : {
-						slidesToShow : 1,
+						slidesToShow : 2,
 						slidesToScroll : 1
 					}
 				}
