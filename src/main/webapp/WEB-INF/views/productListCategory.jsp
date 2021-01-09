@@ -33,8 +33,90 @@ html {
 	<div class="head_marg with_menu">
 		<section class="product_category">
 			<div class="wrapper">
+				
+				<!-- new slider 9-1-2021 -->
+				<div class="regular-filter slider">
+            <div>
+            	<div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            
+            <div>
+                <div class="filter_slide_bx">
+                <div class="product_filter_one">
+					<a href="#41" onclick="setDivPadding(41)">
+					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
+						<span>Inspiration</span> </a>
+					</div>
+					</div>
+            </div>
+            
+            
+            
+            
+          </div>
+			
+			
 				<div class="mobile_scroll">
-
 					<div class="prod_filt">
 						<ul>
 
@@ -369,8 +451,43 @@ html {
 				// instead of a settings object
 				]
 			});
+			
+			$(".regular-filter").slick({
+				dots : true,
+				infinite : true,
+				slidesToShow : 6,
+				slidesToScroll : 1,
+				autoplay : true,
+				responsive : [ {
+					breakpoint : 1024,
+					settings : {
+						slidesToShow : 3,
+						slidesToScroll : 1,
+						infinite : true,
+						dots : true
+					}
+				}, {
+					breakpoint : 768,
+					settings : {
+						slidesToShow : 2,
+						slidesToScroll : 1
+					}
+				}, {
+					breakpoint : 480,
+					settings : {
+						slidesToShow : 1,
+						slidesToScroll : 1
+					}
+				}
+				// You can unslick at a given breakpoint now by adding:
+				// settings: "unslick"
+				// instead of a settings object
+				]
+			});
 
 		});
+		
+		
 	</script>
 
 
