@@ -105,7 +105,8 @@ header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 1
 .cakes_cat_1.new{min-height:auto;}
 .cakes_cat_1.new img{width: 100%;height: 250px;}
 .prod_cat_cap{position: absolute; bottom: 0; left: 0; background: url(../images/offer_caption.png) repeat-x left bottom; width: 100%; min-height: 126px; text-align: center; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; text-transform: uppercase; line-height: 103px;}
-.prod_cat_cap span{vertical-align: bottom; line-height: 20px; }
+.prod_cat_cap span{vertical-align: bottom; line-height: 20px; 
+ white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 20px;}
 .img_cap{position: relative; overflow: hidden; /*transition: transform .5s, filter 1s ease-in-out;*/}
 /*.img_cap:hover{transform: scale(1.1);}*/
 
@@ -122,8 +123,12 @@ header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 1
 .single_prod{background: #FFF; padding: 5px; min-height: 190px; -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -ms-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20);}
 .single_pic{position: relative; width: 100%; overflow: hidden}
 .single_pic img{width: 100%;}
-.prod_cat_cap1{position: absolute; bottom: 0; left: 0; background: url(../images/offer_small_caption.png) repeat-x left bottom; width: 100%; min-height: 126px; text-align: center; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; text-transform: uppercase; line-height: 103px;}
-.prod_cat_cap1 span{vertical-align: bottom; line-height: 0px;}
+.prod_cat_cap1{position: absolute; bottom: 0; left: 0; background: url(../images/offer_small_caption.png) repeat-x left bottom; 
+width: 100%; min-height: 126px; text-align: center; color: #FFF; font-size: 18px; font-family: 'Hind-Medium'; 
+text-transform: uppercase; line-height: 103px;  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;}
+.prod_cat_cap1 span{vertical-align: bottom; line-height: 0px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 10px;}
 
 .single_pic img{overflow: hidden;-o-background-size:cover!important;-moz-background-size:cover!important;-webkit-background-size:cover!important;background-size:cover!important; background-position: center top; -moz-transition: all 0.5s;
   -webkit-transition: all 0.5s; transition: all 0.5s;}
@@ -1035,8 +1040,9 @@ appearance: none; background-image:url(../images/cake_arrow.png); background-rep
 
 
 /*End of code  Mohsin Sir 13-11-2020  */
+
 /*Sachin 18-11-2020*/
-.cake_prc_detail_iclass{float: left;margin: 0px 3px 0px 0px;}
+.cake_prc_detail_iclass{float: left;margin: 7px 3px 0px 0px /* 0px 3px 0px 0px */;}
 .cake_prc_detail_pclass{float: left; margin-right: 10px;}
 /*End of code 18-11-2020*/
 
@@ -1062,7 +1068,7 @@ line-height: 28px; margin: 0; width: 25px; height: 28px; text-align: center;}
 .qty.slide{background: #f1f3f6;border-radius: 0;color: #333;font-size: 15px;padding: 4px 10px; width: 50px; 
 height: 28px;line-height: 28px; border:1px solid #f1f3f6; margin: 0 -5px;}
 .plus_minus_one{float: left; width: 70%; margin: 0 10px 0 0; }
-.cake_prc_detail_iclass{font-size: 13px; }
+.cake_prc_detail_iclass{/* font-size: 13px; */ }
 
 .cake_prc_detail_iclass.aaa{font-size: 28px; margin: 12px 5px 0 0; vertical-align: middle;}
 .cake_prc_detail_pclass.aaa{font-size: 36px;}
@@ -1187,6 +1193,11 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .stock_prc{font-size: 32px;}
 }
 @media screen and (max-width:1100px){
+	.qtyminus.slide, .qtyplus.slide{width: 20px; font-size: 11px; height: 20px; line-height: 20px;}
+	
+	.qty.slide {padding: 4px 0; width: 30px; height: 20px; line-height: 19px; margin: 3px -5px 0 -5px;}
+	.plus_minus_one{margin: 0 2px 0 0;}
+	.prod_kgs{font-size:13px;}
 	.logo_row{padding: 10px 0;}
 	.main_menu{height: 55px; line-height: 55px; padding:20px 15px 15px 15px;}
     /*location page css*/
