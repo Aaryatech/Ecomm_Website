@@ -759,10 +759,10 @@ color: red;}
 	        	else{
 	        	url = '${pageContext.request.contextPath}/addresslist';
 	        	}
-	        	/* if(isReload){
-	        		alert("Okkk")
+	        	if(isReload){
+	        		//alert("Okkk")
 	        		window.location = url;
-	        	} */
+	        	}
 	        	
 				
 	        }, 

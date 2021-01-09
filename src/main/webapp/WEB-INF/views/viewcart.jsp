@@ -773,7 +773,7 @@ function setOfferDiscAmt(){
 							<div class="place_row_r">
 								<span class="pop_lab_fld">Mobile Number</span>
 								<input type="text" class="input_place" id="txtMobile"
-									value="${cust.custMobileNo}" maxlength="10" name="txtMobile"
+									value="${sessionScope.mobNo}" maxlength="10" name="txtMobile"
 									placeholder="Mobile Number"  
 									autocomplete="off" /> <label class="form-label-hint-error"
 									id="errorMobile" style="display: none;">Please enter
