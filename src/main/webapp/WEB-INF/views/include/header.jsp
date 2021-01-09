@@ -209,7 +209,7 @@
 										class="lazy" width="25" height="25"
 										data-src="${sessionScope.profileImg}"
 										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
-										alt=""> ${sessionScope.userName}<!-- <i class="fa fa-angle-down"
+										alt=""><span> ${sessionScope.userName} </span> <!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<%-- <ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
