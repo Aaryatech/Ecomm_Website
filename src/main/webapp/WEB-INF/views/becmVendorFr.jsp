@@ -4,65 +4,15 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <jsp:include page="/WEB-INF/views/include/othercssjs.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 </head>
 <body>
   
 
-<!--mongi help-popup-->    
-<div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/otherresources/images/mongi_help.png" alt=""></a></div> 
-    
-<!--apply now pop up-->
-    <div id="mongi" class="well">
-      <div class="mongi_title"><span><a href="#"> Clear</a></span>   Select Our Best Filter <div class="mongi_close close_pop"><i class="fa fa-times" aria-hidden="true"></i></div></div>
-        <div class="mongi_cont">
-            <ul class="ks-cboxtags">
-    <li><input type="checkbox" id="checkboxOne" ><label for="checkboxOne">Chocolate Cakes</label></li>
-    <li><input type="checkbox" id="checkboxtwo" ><label for="checkboxtwo">Exotic Cakes</label></li>
-    <li><input type="checkbox" id="checkboxthree" ><label for="checkboxthree">Black Forest Cakes</label></li>
-    <li><input type="checkbox" id="checkboxfour" ><label for="checkboxfour">Designer Cakes</label></li>
-    <li><input type="checkbox" id="checkboxfive"><label for="checkboxfive">Derpy Hooves</label></li>
-    <li><input type="checkbox" id="checkboxsix" ><label for="checkboxsix">Party Celebration Cakes</label></li>
-    <li><input type="checkbox" id="checkboxseven" ><label for="checkboxseven">Wedding Cakes</label></li>
-    <li><input type="checkbox" id="checkboxeight" ><label for="checkboxeight">Photo Cakes</label></li>
-    <li><input type="checkbox" id="checkboxnine" ><label for="checkboxnine">Cakes For Kids</label></li>
-    <li><input type="checkbox" id="checkboxten"><label for="checkboxten">Medley</label></li>
-    <li><input type="checkbox" id="checkboxeleven" ><label for="checkboxeleven">Party Celebration Cakes</label></li>
-        
-    <li><input type="checkbox" id="checkboxtwel" ><label for="checkboxtwel">Pizza</label></li>
-    <li><input type="checkbox" id="checkboxthirteen" checked><label for="checkboxthirteen">Sandwich</label></li>
-    <li><input type="checkbox" id="checkboxfourteen"><label for="checkboxfourteen">Fish</label></li>
-    <li><input type="checkbox" id="checkboxfifteen"><label for="checkboxfifteen">Desert</label></li>
-    <li><input type="checkbox" id="checkboxsixteen" ><label for="checkboxsixteen">Salad</label></li>
-    <li><input type="checkbox" id="checkboxseventeen"><label for="checkboxseventeen">Italian</label></li>
-    <li><input type="checkbox" id="checkboxeighteen"><label for="checkboxeighteen">Indian</label></li>
-    <li><input type="checkbox" id="checkboxninteen"><label for="checkboxninteen">Derpy Hooves</label></li>
-    <li><input type="checkbox" id="checkboxtwenteen"><label for="checkboxtwenteen">Princess Celestia</label></li>
-    <li><input type="checkbox" id="checkboxtwenone"><label for="checkboxtwenone">Gusty</label></li>
-    <li ><input type="checkbox" id="checkboxtwentwo"><label for="checkboxtwentwo">Discord</label></li>
-    <li><input type="checkbox" id="checkboxtewnthree"><label for="checkboxtewnthree">Clover</label></li>
-    <li><input type="checkbox" id="checkboxTwenfour"><label for="checkboxTwenfour">Baby Moondancer</label></li>
-    <li><input type="checkbox" id="checkboxtwenfive"><label for="checkboxtwenfive">Medley</label></li>
-    <li><input type="checkbox" id="checkboxtwensix"><label for="checkboxtwensix">Firefly</label></li>
-    <li><input type="checkbox" id="checkboxtwenseven"><label for="checkboxtwenseven">Princess Celestia</label></li>
-    <li><input type="checkbox" id="checkboxtweneight"><label for="checkboxtweneight">Gusty</label></li>
-    <li ><input type="checkbox" id="checkboxtwennine"><label for="checkboxtwennine">Discord</label></li>
-    <li><input type="checkbox" id="checkboxthirtee"><label for="checkboxthirtee">Clover</label></li>
-    <li><input type="checkbox" id="checkboxthirteeone"><label for="checkboxthirteeone">Baby Moondancer</label></li>            
-  </ul>
-            
-            
-            
-        </div>
-        
-        <div class="proceend_bnt"> <a href="product.html" class="proceed_btn">Proceed</a></div>
-        
-    </div>
-    <script type="text/javascript">
-    $(document).ready(function () {
-      $('#mongi').popup();
-    });
-    </script>    
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+
+       
+ <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include> 
+
 <div class="head_marg">  
     
 <!--product listing-->    

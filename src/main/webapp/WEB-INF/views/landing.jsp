@@ -293,7 +293,7 @@ color: red;}
 						src="${pageContext.request.contextPath}/resources/images/location_icn.png"
 						alt=""> use Current Location </a>
 				</div>
-				<div class="location_or">Or</div>
+				<div class="location_or extra_txt">OR Select Your Delivery Location</div>
 
 				<div class="location_city">
 					<h2 class="serv_city">Serving Cities</h2>
@@ -338,8 +338,7 @@ color: red;}
                                 </ul>
                               </div> -->
 						<div>
-							<select id="citySel" name="citySel"
-								style="border-radius: 3px; background: #FFF; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;"
+							<select id="citySel" name="citySel" class="citysel"
 								onchange="getCityName(this.value)">
 								<option value="0" id="city0" data-cityname="">select</option>
 								<c:forEach items="${cityList}" var="cityList">
@@ -351,7 +350,7 @@ color: red;}
 					</div>
 					<div class="search_one" style="display: none;">
 						<div class="search_one_l">
-							<input name="" type="text" class="input_search1"
+							<input name="" type="text" class="input_search landing"
 								placeholder="Search your Area" /> <i class="fa fa-search"
 								aria-hidden="true"></i>
 						</div>
@@ -364,7 +363,7 @@ color: red;}
 					<div class="search_one">
 						<div class="search_one_l">
 							<input name="txtPlaces" value=""
-								type="text" class="input_search" placeholder="Search your Area"
+								type="text" class="input_search landing" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
 								<span class="form-label-hint-error-l" id="error_txtPlaces"
 												style="display: none;">This field is required.</span>
@@ -399,15 +398,15 @@ color: red;}
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select onchange="getKM(this)" id="selectShop" name="selectShop"
-								style="background-color: #FFF; border-radius: 3px; padding: 10px; font-size: 16px; color: #a6a6a6; width: 100%;">
+							<select onchange="getKM(this)" id="selectShop" name="selectShop" class="citysel"
+								<!-- style="background-color: #FFF; border-radius: 3px; padding: 7px; font-size: 16px; color: #a6a6a6; width: 100%;"> -->
 							</select>
 							
 							<span class="form-label-hint-error-l" id="error_selectShop"
 												style="display: none;">This field is required.</span>
 						</div>
 					</div>
-
+				<div class="clr"></div>
 				</div>
 
 				                
@@ -450,10 +449,20 @@ color: red;}
 					<input name="" id="submtbtn" type="button" value="Proceed New User"
 						class="landingpop-mobno_open proceed" />
 						
-							  OR <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
-						class="landingpop-mobno_open proceed" /> 
+							 
 						
 				</div>
+			
+			<div class="location_or spc">OR </div>
+			<div class="location_if">If you are exisiting user</div>
+			
+			<div><center>
+				 <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
+						class="landingpop-mobno_open proceed" />
+						</center>
+			</div>	
+				
+				
 			<input type="hidden" id="frKm" name="frKm" value="0"/>
 			</div>
 		</form>
@@ -461,7 +470,7 @@ color: red;}
 	</div>
 
 <!--   New Popup -->
-<div id="landingpop-mobno" class="well_landing">
+<div id="landingpop-mobno" class="well_landing mobile">
 		<h2 class="location_title">
 			Enter Your Details
 			<div class="landingpop-mobno_close close_pop">
@@ -476,7 +485,7 @@ color: red;}
 						<div class="search_one_l">
 							<span class="pop_spn">Mobile Number</span>
 							<input name="mobNo" value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" 
-								type="text" class="input_search numbersOnly" autocomplete="off" placeholder="Enter Mobile No"
+								type="text" class="input_search landing numbersOnly" autocomplete="off" placeholder="Enter Mobile No"
 								id="mobNo" /> <i class="fa fa-mobile" aria-hidden="true"></i>
 								<!-- <a href="#" onclick="sendOTP()"><i class="fa fa-refresh refresh" title="GET OTP" aria-hidden="true"></i></a> -->
 								<label class="form-label-hint-error-l"
@@ -493,7 +502,7 @@ color: red;}
 						<div class="search_one_l">
 							<span class="pop_spn">Enter OTP</span>
 							<input name="otp" value="" maxlength="8" 
-								type="text" class="input_search numbersOnly" autocomplete="off" placeholder="Enter OTP"
+								type="text" class="input_search landing numbersOnly" autocomplete="off" placeholder="Enter OTP"
 								id="otp" /> <i class="fa fa-key" onclick="checkValidOTP()" aria-hidden="true"></i>
 								<label class="form-label-hint-error-l"
 									id="errorotp" style="display: none;">Please enter valid
