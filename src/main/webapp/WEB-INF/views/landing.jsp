@@ -398,7 +398,7 @@ color: red;}
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select onchange="getKM(this)" id="selectShop" name="selectShop" class="citysel"
+							<select onchange="getKM(this)" id="selectShop" name="selectShop" class="citysel">
 								<!-- style="background-color: #FFF; border-radius: 3px; padding: 7px; font-size: 16px; color: #a6a6a6; width: 100%;"> -->
 							</select>
 							
