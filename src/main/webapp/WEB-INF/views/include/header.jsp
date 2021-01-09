@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <header>
 	<div class="top_row">
 		<div class="wrapper">
@@ -35,16 +37,28 @@
 				
 				
 				<div class="top_address">
-					<span><p>Delivery</p> Location :</span> <span class="address_land">${landMark}.</span>
+					<span><p>Delivery</p> Location :</span> <span title="${landMark}" class="address_land">${landMark}.</span>
 					<ul class="login_menu edit">
 						<li><a href="javascript:void(0)"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>
 							<ul>
 								<li><a href="${pageContext.request.contextPath}/ShowAddNewAdd"> Add
 										New Address </a></li>
-								<li><a
+								<li>
+								<c:choose>
+								<c:when test="${sessionScope.custId>0}">
+								<a
 									href="${pageContext.request.contextPath}/addresslist"> Use
-										Existing address</a></li>
+										Existing address</a>
+										</c:when>
+										<c:otherwise>
+										<a
+									href="#"> Use
+										Existing address</a>
+										</c:otherwise>
+										</c:choose>
+										</li>
+									
 							</ul></li>
 					</ul>
 				</div> 
@@ -205,12 +219,32 @@
 						<!--user-dropdown-->
 						<div class="user_login">
 							<ul class="login_menu">
-								<li><a href="${pageContext.request.contextPath}/profile"><img
+								<li>
+								<c:choose>
+								<c:when test="${sessionScope.custId>0}">
+								<a href="${pageContext.request.contextPath}/profile"><img
 										class="lazy" width="25" height="25"
 										data-src="${sessionScope.profileImg}"
 										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
 										alt=""><span> ${sessionScope.userName} </span> <!-- <i class="fa fa-angle-down"
-										aria-hidden="true"></i> --></a> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
+										aria-hidden="true"></i> --></a> 
+								</c:when>
+								<c:otherwise>
+								<a href="#"><img
+										class="lazy" width="25" height="25"
+										data-src="${sessionScope.profileImg}"
+										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
+										alt=""><span> ${sessionScope.userName} </span> <!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a> 
+								</c:otherwise>
+								</c:choose>
+								
+										
+										
+										
+										
+										
+										<!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<%-- <ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
@@ -281,6 +315,10 @@ function setLike(id) {
 				setLikeCount(data.statusText);
 			});
 	
+}
+function setLandmark(landMark){
+	
+	//document.getElementsByClassName("address_land").innerHTML=""+landMark;
 }
 </script>
 <script>

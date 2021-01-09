@@ -346,6 +346,7 @@
 								<h3 class="payment_title">Payment Method</h3>
 								<!-- <form action="" method="get"> -->
 								<div class="payment_one">
+									<div class="payment_two left">
 									<div class="select-style">
 										<select name="paymentMode" id="paymentMode">
 											<option value="">Select Payment Option</option>
@@ -355,8 +356,23 @@
 										</select>
 											
 									</div>
+									
 									<label class="form-label-hint-error" id="errorpaymentMode"
 									style="display: none;">Please select payment option</label>
+									</div>
+									
+									<div class="payment_two right">
+										<div class="select-style">
+										<select name="del_time_slot" id="del_time_slot">
+											<c:forEach items="${delSlotList}" var="delSlot" >
+											<option value="${delSlot.fromTime}-${delSlot.toTime}">${delSlot.deliverySlotName}(${delSlot.fromTime}-${delSlot.toTime})</option>
+											</c:forEach>
+										</select>
+											
+									</div>
+									</div>
+									
+									<div class="clr"></div>
 								</div>
 								<div>
 									<div class="payment_two left">
@@ -1617,6 +1633,7 @@ function setOfferDiscAmt(){
 							fd.append('paymentMode', $("#paymentMode").val());
 							fd.append('delvrInst' , $("#delvrInst").val());
 							fd.append('delvrDateTime', $("#delvrDateTime").val());
+							fd.append('del_time_slot', $("#del_time_slot").val());
 							
 							fd.append('txtCity', $("#txtCity").val());
 							fd.append('txtBillName', $("#txtBillName").val());

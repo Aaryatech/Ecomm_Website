@@ -45,6 +45,7 @@ import com.ats.ecommerce.model.offer.FrCharges;
 import com.ats.ecommerce.model.offer.OfferDetail;
 import com.ats.ecommerce.model.offer.OfferList;
 import com.ats.ecommerce.model.offer.OrderCheckoutData;
+import com.ats.ecommerce.model.order.DeliverySlots;
 import com.ats.ecommerce.model.order.OrderDetail;
 import com.ats.ecommerce.model.order.OrderHeader;
 import com.ats.ecommerce.model.order.OrderSaveData;
@@ -328,6 +329,15 @@ public class CheckoutController {
 				model.addAttribute("addCh", addCh);
 			}
 
+			try {
+				DeliverySlots[] delSlotArray=Constants.getRestTemplate()
+						.getForObject(Constants.url + "getAllDeliverySlots", DeliverySlots[].class);
+				List<DeliverySlots> delSlotList = new ArrayList<DeliverySlots>(Arrays.asList(delSlotArray));
+				model.addAttribute("delSlotList", delSlotList);
+
+			}catch (Exception e) {
+				System.err.println("exce in getAllDeliverySlots Checkout controll");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
@@ -537,7 +547,8 @@ System.err.println("charges " +charges);
 			String delvrInst = request.getParameter("delvrInst");
 			String delvrDateTime = request.getParameter("delvrDateTime");
 			String[] deliveryDateTime = delvrDateTime.split(" ");
-
+			
+			String delTimeSlot = request.getParameter("del_time_slot");
 			String deliveryDate = deliveryDateTime[0].replace("/", "-");
 
 //			Order Other Details
@@ -732,7 +743,7 @@ System.err.println("charges " +charges);
 			order.setExVar2(promoCode);//ie offercode
 			order.setOfferId(offerId);
 			order.setDeliveryKm(km);
-
+			order.setExVar3(delTimeSlot);//09-1-2021
 			if (addCustAgent > 0) {
 				order.setIsAgent(1);
 				order.setOrderDeliveredBy(deliveryBoy);
