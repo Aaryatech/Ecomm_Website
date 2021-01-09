@@ -164,6 +164,7 @@ public class HomeController {
 				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+				session.setAttribute("mobNo", cust.getCustMobileNo());
 			}else {
 				System.err.println("custId <1 " + custId);
 				session.removeAttribute("userName");
@@ -171,6 +172,7 @@ public class HomeController {
 				session.removeAttribute("userMobile");
 				session.removeAttribute("userAddress");
 				session.removeAttribute("profileImg");
+				session.removeAttribute("mobNo");
 			}
 		} catch (Exception e) {
 			System.err.println("In Home catch");
@@ -271,7 +273,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/preHome", method = RequestMethod.POST)
 	public @ResponseBody Object preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
-		System.err.println("in Pre Home");
+		System.err.println("in Pre Home new");
 		int retPage=0;
 		HttpSession session = request.getSession();
 		int custId=0;
@@ -324,6 +326,7 @@ public class HomeController {
 		String otp = request.getParameter("otp");
 		int userType = Integer.parseInt(request.getParameter("userType"));
 		
+
 		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		//getCustomerByMobNo
 		map = new LinkedMultiValueMap<>();
@@ -352,12 +355,11 @@ public class HomeController {
 			System.err.println("siteVisitorSaveRes " +siteVisitorSaveRes);
 			session.setAttribute("custId", 0);
 			retPage=1;
-		}
-			/*
-			 * else if(userType==2 && custAddDetail!=null) {
-			 * System.err.println("Ok userType==2 && custAddDetail!=null "); }
-			 */
-		else if(custAddDetail!=null){
+		} else if(userType==2 && custAddDetail==null) {
+			  System.err.println("Ok userType==2 && custAddDetail=null "); 
+			  retPage=0;
+			  }
+			 else if(custAddDetail!=null){
 			//goto home
 			System.err.println("Ok else if custAddDetail!=null "+ custAddDetail);
 			
@@ -392,11 +394,11 @@ public class HomeController {
 			delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 			response.addCookie(delAddIdCookie);
 			session.setAttribute("delAddId", custAddDetail.getCustDetailId());
-			
 			session.setAttribute("userId", 0);
 			retPage=2;
 			
 			}
+		session.setAttribute("mobNo", mobNo);
 		System.err.println("frId Here " +frId);
 		} catch (Exception e) {
 			e.printStackTrace();

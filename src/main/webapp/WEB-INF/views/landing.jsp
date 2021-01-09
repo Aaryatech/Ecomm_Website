@@ -447,11 +447,11 @@ color: red;}
 			</div> -->
 			
 			<div class="proceed_btn_1">
-					<a href="#"><input name="" id="submtbtn" type="button" value="Proceed New User"
-						class="landingpop-mobno_open proceed" /></a>
+					<input name="" id="submtbtn" type="button" value="Proceed New User"
+						class="landingpop-mobno_open proceed" />
 						
-							<a href="#"> OR <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
-						class="landingpop-mobno_open proceed" /></a>
+							  OR <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
+						class="landingpop-mobno_open proceed" /> 
 						
 				</div>
 			<input type="hidden" id="frKm" name="frKm" value="0"/>
@@ -467,6 +467,7 @@ color: red;}
 			<div class="landingpop-mobno_close close_pop">
 				<i class="fa fa-times" id="sub_close" aria-hidden="true"></i>
 			</div>
+			<h3 style="color: red; display: none" id="no_user_exist">Mobile number not found in system please proceed as new user!!</h3>
 		</h2>
 		
 		<form>
@@ -505,7 +506,7 @@ color: red;}
 			</div>
 			</div>
 			<div class="search-one twobtn">
-				<input name="" id="main_submit" type="button" value="Submit" class="proceed" />
+				<input name="" id="main_submit" style="display: none;" type="button" value="Submit" class="proceed" />
 			</div>
 			</div>
 			<input type="hidden" id="user_type" name="user_type" value="0">
@@ -513,6 +514,10 @@ color: red;}
 	</div>
 	
 	<script type="text/javascript">
+	 $(document).ready(function () {
+	     //$('#landingpop-mobno').hide();
+	 });
+	 
 	jQuery('.numbersOnly').keyup(function() {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
 		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
@@ -520,6 +525,8 @@ color: red;}
 	var enteredOTP="";
 	var currentOTP="";
 	function sendOTP(){
+		$("#main_submit").show();
+		$('#no_user_exist').hide();
 		document.getElementById("mobNo").readOnly = false; 
 		document.getElementById("otp_div").style="display:none";
 		var mobNo=document.getElementById("mobNo").value;
@@ -579,9 +586,26 @@ color: red;}
 	
 	//New User Proceed
 	$("#submtbtn").click(function(e) {
+		////$('#landingpop-mobno').popup();	
+		$('#landingpop-mobno').hide();
+		
+		// document.getElementById('landingpop-mobno').style.display = 'none';
+		// $('#landingpop-mobno').hide()
+		 // var popup = $("#landingpop-mobno");
+		// popup.hide();
 		var isError = false;
 		var errMsg = "";
-	
+		enteredOTP="";
+		currentOTP="";
+		$("#errorMobNo").hide();
+		$("#errorotp").hide();
+		$("#error_selectShop").hide();
+		$("#error_txtPlaces").hide();
+		$("#main_submit").hide();
+		$('#no_user_exist').hide();
+		document.getElementById("mobNo").readOnly = false; 
+		
+		document.getElementById("otp_div").style="display:none";
 		if (!$("#selectShop").val()) {
 			isError = true;
 			$("#error_selectShop").show()
@@ -602,22 +626,36 @@ color: red;}
 		if(isError==false){
 			document.getElementById("mobNo").value="";
 			document.getElementById("otp").value="";
+			$('#landingpop-mobno').show();
 		$('#landingpop-mobno').popup();
+		//$('#landingpop-mobno').show();
 		document.getElementById("main_close").click();
 		document.getElementById("user_type").value=1;
 		}else{
 			//$('#landingpop-mobno').style="display:block";
 			//document.getElementById("sub_close").click();
+			//alert("else Ki")
 		}
 		//$('#landingpop').hide();
 	});
 	
 	//Existing user login
 	$("#submtbtn_ex_use").click(function(e) {
+		enteredOTP="";
+		currentOTP="";
+		$("#errorMobNo").hide();
+		$("#errorotp").hide();
+		$("#main_submit").hide();
+		document.getElementById("mobNo").readOnly = false; 
+		$('#no_user_exist').hide();
+		
+		document.getElementById("otp_div").style="display:none";
 		document.getElementById("user_type").value=2;
 		document.getElementById("mobNo").value="";
 		document.getElementById("otp").value="";
+		$('#landingpop-mobno').show();
 		$('#landingpop-mobno').popup();
+		// $('#landingpop-mobno').show();
 		document.getElementById("main_close").click();
 	});
 	
@@ -628,7 +666,7 @@ color: red;}
 		
 		var otpError=false;
 		var dataError=false;
-		
+		$('#no_user_exist').hide();
 		var userType=document.getElementById("user_type").value;
 		//alert("userType" +userType);
 		var isOtpMached= checkValidOTP();
@@ -642,7 +680,7 @@ color: red;}
 			isError =true;
 			isError1=true;
 		}
-		
+		document.getElementById("mobNo").readOnly = false; 
 		if(parseInt(userType)==1){
 			dataError=false;
 		var errMsg = "";
@@ -670,13 +708,14 @@ color: red;}
 		if(otpError==false){
 			//alert("Error False 663");
 		}else{
-			//alert("I am  here665")
+			//alert("I am  709")
 			$('#landingpop-mobno').popup();
 		}
 		//alert("isError1" +isError1)
 			if(isError1==false){
 				allError=false;
-				document.getElementById("sub_close").click();
+				//alert("LL715")
+				//document.getElementById("sub_close").click();
 			}else{
 				//alert("final")
 				allError=true;
@@ -685,7 +724,7 @@ color: red;}
 			//alert("allError" +allError)
 			if(otpError==false && dataError==false){
 				//alert("In x 680")
-				document.getElementById("sub_close").click();
+				//document.getElementById("sub_close").click();
 		var fd = new FormData();
 		fd.append('selectShop', $("#selectShop").val());
 		fd.append('txtPlaces', $("#txtPlaces").val());
@@ -705,22 +744,38 @@ color: red;}
 	        async:false,
 	        success: function(resData, textStatus, jqXHR)
 	        {
+	        	//alert(resData);
+	        	isReload=true;
 	        	var url="";
 	        	if(parseInt(resData)==1){
 	        	 url = '${pageContext.request.contextPath}/home';
-	        	}else{
+	        	}else if(parseInt(resData)==0){
+	        	//alert("Ok Here 731")
+	        	$('#landingpop-mobno').show();
+	        	$('#landingpop-mobno').popup();
+	        	$('#no_user_exist').show();
+	        	isReload=false;
+	        	}
+	        	else{
 	        	url = '${pageContext.request.contextPath}/addresslist';
 	        	}
-				window.location = url;
+	        	/* if(isReload){
+	        		alert("Okkk")
+	        		window.location = url;
+	        	} */
+	        	
+				
 	        }, 
 	        error: function(jqXHR, textStatus, errorThrown)
 	        {
-	           
+	        	//alert("JJJ")
+	         console.log('km',jqXHR);
 	        }
 		    });
 			}else{
 				//alert("final else")
-				
+				//$('#landingpop-mobno').popup();
+				$('#landingpop-mobno').show();
 			}
 		
 	});
