@@ -803,8 +803,7 @@ function moveCursor(){
 	$('html,body').animate({
 	        scrollTop: $(".prod_disc").offset().top},
 	        'slow'); 
-		//var elmnt = document.getElementById("prod_disc");
-	  //elmnt.scrollIntoView();
+	document.getElementById("prod_disc").style.paddingTop = "135px";
 }
 	var loadFile = function(event) {
 	 document.getElementById('del_image').style.display="none";
