@@ -1113,8 +1113,27 @@
 						
 						displayListArr.push(hiddenProductListArr[i]);
 						
-						var isLike=allItemArr[i].isLike;
+						var isLike=allItemArr[i].isLike;						
 						var like = '';
+						
+						var isVegType = '';
+						var isVegItem = allItemArr[i].vegNonvegName;
+						
+						if(isVegItem=='VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else if(isVegItem=='NON-VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else{
+							isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div><div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+						}
 						
 						if(isLike ==1){
 						
@@ -1136,6 +1155,7 @@
 						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
+						+ isVegType						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1159,6 +1179,25 @@
 							var isLike=allItemArr[i].isLike;
 							var like = '';
 							
+							var isVegType = '';
+							var isVegItem = allItemArr[i].vegNonvegName;
+							
+							if(isVegItem=='VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else if(isVegItem=='NON-VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else{
+								isVegType = '<div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+									+ '</div><div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+									+ '</div>';
+							}
+							
 							if(isLike ==1){
 							
 								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
@@ -1177,7 +1216,8 @@
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
-							+ like
+							+ isVegType
+							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1198,6 +1238,25 @@
 							var isLike=allItemArr[i].isLike;
 							var like = '';
 							
+							var isVegType = '';
+							var isVegItem = allItemArr[i].vegNonvegName;
+							
+							if(isVegItem=='VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else if(isVegItem=='NON-VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else{
+								isVegType = '<div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+									+ '</div><div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+									+ '</div>';
+							}
+							
 							if(isLike ==1){
 							
 								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
@@ -1216,7 +1275,8 @@
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
-							+ like
+							+ isVegType
+							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1255,6 +1315,25 @@
 						var isLike=allItemArr[i].isLike;
 						var like = '';
 						
+						var isVegType = '';
+						var isVegItem = allItemArr[i].vegNonvegName;
+						
+						if(isVegItem=='VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else if(isVegItem=='NON-VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else{
+							isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div><div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+						}						
+						
 						if(isLike ==1){
 						
 							like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
@@ -1275,7 +1354,8 @@
 						+ ' <div class="cake_pic"> '+detail
 						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
-						+ like
+						+ isVegType
+						+ like						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1456,6 +1536,25 @@
 								var isLike=allItemArr[i].isLike;
 								var like = '';
 								
+								var isVegType = '';
+								var isVegItem = allItemArr[i].vegNonvegName;
+								
+								if(isVegItem=='VEG'){
+									isVegType = '<div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+									+ '</div>';
+								}else if(isVegItem=='NON-VEG'){
+									isVegType = '<div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+									+ '</div>';
+								}else{
+									isVegType = '<div class="purity_icn">'
+										+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+										+ '</div><div class="purity_icn">'
+										+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+										+ '</div>';
+								}	
+								
 								if(isLike ==1){
 								
 									like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
@@ -1474,7 +1573,8 @@
 								+ ' <div class="cake_one product_padd"> '
 								+ ' <div class="cake_pic"> '+detail
 								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
-								+ like
+								+ isVegType
+								+ like								
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
@@ -1500,6 +1600,25 @@
 							var isLike=allItemArr[i].isLike;
 							var like = '';
 							
+							var isVegType = '';
+							var isVegItem = allItemArr[i].vegNonvegName;
+							
+							if(isVegItem=='VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else if(isVegItem=='NON-VEG'){
+								isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+							}else{
+								isVegType = '<div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+									+ '</div><div class="purity_icn">'
+									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+									+ '</div>';
+							}	
+							
 							if(isLike ==1){
 							
 								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
@@ -1518,6 +1637,7 @@
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
+							+ isVegType
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice

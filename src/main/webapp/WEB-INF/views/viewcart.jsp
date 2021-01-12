@@ -1108,7 +1108,7 @@ function setOfferDiscAmt(){
 
 			var allItemList = sessionStorage.getItem("allItemList");
 			var allItemArr = $.parseJSON(allItemList);
-
+		
 			var cartValue = sessionStorage.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
 			$('#mobile_table-div').html('');
@@ -1119,6 +1119,7 @@ function setOfferDiscAmt(){
 			var finaltotal = 0;
 			var discPer = 0;
 			var discAmt = 0;
+			var isVegItem = '';
 
 			for (var j = 0; j < allItemArr.length; j++) {
 
@@ -1130,10 +1131,18 @@ function setOfferDiscAmt(){
 								.toFixed(2);
 						
 						//alert(JSON.stringify(table[i].spInst));
+						if(allItemArr[j].vegNonvegName=='VEG'){
+							isVegItem='<img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">';
+						}else if(allItemArr[j].vegNonvegName=='NON-VEG'){
+							isVegItem='<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">';
+						}else{
+							isVegItem='<img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">'
+							+'<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
+						}
 						 
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
-								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt=""> <img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn"></div>'
+								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt="">'+isVegItem+'</div>'
 								+ '<div class="cart_cont">'
 								+ '<h3 class="cart_cake">'
 								+ table[i].exVar1

@@ -380,7 +380,6 @@
 							${statusFilter.filterName} <span>${statusFilter.filterName}</span>
 						</center>
 					</h2>
-
 					<div class="wrapper">
 						<section class="regular-cake slider">
 
@@ -398,15 +397,35 @@
 														data-src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 														class="mobile_fit transition lazy"></a>
 
-													<%-- <div class="circle_tag active">
-														<img src="#" class="lazy"
-															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-															alt=""> <img src="#" class="lazy"
-															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-															alt="">
-													</div> --%>
-													
-													
+													<div class="purity_icn">
+														<c:choose>
+															<c:when test="${product.vegNonvegName eq 'VEG'}">
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:otherwise>
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:otherwise>
+														</c:choose>
+													</div>
+
+
+
+
+
 													<div class="circle_tag active"
 														onclick="setLike(${product.productId})">
 														

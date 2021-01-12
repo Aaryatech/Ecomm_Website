@@ -35,10 +35,37 @@
 							<!-- <div id="el"></div> -->
 
 							<div class="xzoom-container">
+								<div class="purity_icn">
+									<c:choose>
+										<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
+											<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												alt="">
+										</c:when>
+										<c:when test="${prodHeader.vegNonvegName eq 'NON-VEG'}">
+											<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												alt="">
+										</c:when>
+										<c:otherwise>
+											<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												alt="">
+											<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												alt="">
+										</c:otherwise>
+									</c:choose>
+									<!-- <img src="/ecommerce/resources/images/veg_icn.jpg"
+										class="slick-initialized slick-slider"
+										data-src="/ecommerce/resources/images/veg_icn.jpg" alt=""> -->
+								</div>
+
 								<img class="xzoom" id="xzoom-default"
 									src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" />
+								
 								<div class="mobile_Scrl">
 									<div class="xzoom-thumbs">
 										<a href="${prodImgUrl}${prodHeader.prodImagePrimary}"><img
@@ -68,7 +95,31 @@
 									<input type="hidden" id="prodId"
 										value="${prodHeader.productId}" />
 									<h2 class="product_nm">
-										<span>In Stock</span>${prodHeader.productName}
+										<span>In Stock</span>
+										
+														<c:choose>
+															<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:when test="${prodHeader.vegNonvegName eq 'NON-VEG'}">
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:otherwise>
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:otherwise>
+														</c:choose>
+														
+										
+										${prodHeader.productName}
 									</h2>
 									<div class="stock_review">
 										4.8 <img
@@ -495,6 +546,30 @@
 									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 											class="mobile_fit transition">
+											<div class="purity_icn">
+														<c:choose>
+															<c:when test="${product.vegNonvegName eq 'VEG'}">
+																<img src="#" class="lazy" id="veg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:otherwise>
+																<img src="#" class="lazy" id="veg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:otherwise>
+														</c:choose>
+													</div>
 										<div class="circle_tag">
 											<img
 												src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
