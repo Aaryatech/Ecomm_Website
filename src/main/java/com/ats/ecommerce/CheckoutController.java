@@ -342,6 +342,7 @@ public class CheckoutController {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
 		}
+		System.err.println("session.setAttribute(\"mobNo\", mobNo);" +session.getAttribute("mobNo"));
 		return "viewcart";
 	}
 

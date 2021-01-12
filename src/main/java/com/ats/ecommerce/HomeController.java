@@ -3,6 +3,7 @@ package com.ats.ecommerce;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +35,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
+import com.ats.ecommerce.model.CategoryList;
 import com.ats.ecommerce.model.CityData;
+import com.ats.ecommerce.model.CompanyTestomonials;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
@@ -44,6 +47,8 @@ import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.offer.SiteVisitor;
 import com.ats.ecommerce.model.order.OrderDetail;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
@@ -164,7 +169,7 @@ public class HomeController {
 				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
-				session.setAttribute("mobNo", cust.getCustMobileNo());
+				//session.setAttribute("mobNo", cust.getCustMobileNo());
 			} else {
 				System.err.println("custId <1 " + custId);
 				session.removeAttribute("userName");
@@ -172,7 +177,7 @@ public class HomeController {
 				session.removeAttribute("userMobile");
 				session.removeAttribute("userAddress");
 				session.removeAttribute("profileImg");
-				session.removeAttribute("mobNo");
+				//session.removeAttribute("mobNo");
 			}
 		} catch (Exception e) {
 			System.err.println("In Home catch");
@@ -287,29 +292,32 @@ public class HomeController {
 		float frKm = 0;
 		System.err.println("Here " +request.getParameter("user_type"));
 		int userType = Integer.parseInt(request.getParameter("user_type"));
+		
+		frId = Integer.parseInt(request.getParameter("selectShop"));
+		session.setAttribute("frId", frId);
+
+		frKm = Float.parseFloat(request.getParameter("frKm"));
+		session.setAttribute("frKm", frKm);
+
+		landMark = request.getParameter("txtPlaces");
+		session.setAttribute("landMark", landMark);
+		System.err.println("frId " + frId + " frKm " + frKm + "landMark " + landMark);
+		landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+		landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(landMarkCookie);
+
+		frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+		frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(frIdCookie);
+
+		// 24-12-2020
+		frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+		response.addCookie(frKmCookie);
+		
 		if (userType == 3) {
 			try {
-				frId = Integer.parseInt(request.getParameter("selectShop"));
-				session.setAttribute("frId", frId);
-
-				frKm = Float.parseFloat(request.getParameter("frKm"));
-				session.setAttribute("frKm", frKm);
-
-				landMark = request.getParameter("txtPlaces");
-				session.setAttribute("landMark", landMark);
-				System.err.println("frId " + frId + " frKm " + frKm + "landMark " + landMark);
-				landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
-				landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
-				response.addCookie(landMarkCookie);
-
-				frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
-				frIdCookie.setMaxAge(60 * 60 * 24 * 15);
-				response.addCookie(frIdCookie);
-
-				// 24-12-2020
-				frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
-				frKmCookie.setMaxAge(60 * 60 * 24 * 15);
-				response.addCookie(frKmCookie);
+				
 
 				// 4-01-2021
 				delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
@@ -372,6 +380,11 @@ public class HomeController {
 					landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
 					landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
 					response.addCookie(landMarkCookie);
+					
+					Cookie custIdCookie=new Cookie("custIdCookie", EncodeDecode.Encrypt(""+custId));
+					custIdCookie.setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(custIdCookie);
+					
 
 					frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
 					frIdCookie.setMaxAge(60 * 60 * 24 * 15);
@@ -392,6 +405,7 @@ public class HomeController {
 					retPage = 2;
 
 				}
+				System.err.println("Mob No Here " + mobNo);
 				session.setAttribute("mobNo", mobNo);
 				System.err.println("frId Here " + frId);
 			} catch (Exception e) {
@@ -401,7 +415,85 @@ public class HomeController {
 		}
 		return retPage;
 	}
+	
+	//Sachin 12-01-2021
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpServletResponse response,Model model) {
+		String returnPage="";
+		ObjectMapper mapper = new ObjectMapper();
+		CityData[] city = null;
+		try {
+			city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+					CityData[].class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+		String frData = null;
+		try {
+			frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+					.next();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("cityList", cityList);
+		model.addAttribute("frData", frData);
 
+		CategoryList[] catArray = null;
+		try {
+			catArray = mapper.readValue(
+					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+		model.addAttribute("catList", catList);
+		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+
+		CompanyTestomonials[] testMonArray = null;
+		try {
+			testMonArray = mapper.readValue(
+					new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), CompanyTestomonials[].class);
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+		
+		model.addAttribute("testMonialList", testMonialList);
+		model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+		model.addAttribute("isAddNewAdd", 0);
+		
+		HttpSession session=request.getSession();
+		
+		session.removeAttribute("userName");
+		session.removeAttribute("userEmail");
+		session.removeAttribute("userMobile");
+		session.removeAttribute("userAddress");
+		session.removeAttribute("profileImg");
+		session.removeAttribute("mobNo");
+		session.removeAttribute("frId");
+		session.removeAttribute("custId");
+		session.removeAttribute("landMark");
+		session.removeAttribute("frKm");
+		returnPage = "landing";
+		
+		return returnPage;
+	}
+	
 	// Modified By -Sachin
 	// Modific Date -11-11-2020
 	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
@@ -685,4 +777,6 @@ public class HomeController {
 
 		return "becmVendorFr";
 	}
+	
+	
 }

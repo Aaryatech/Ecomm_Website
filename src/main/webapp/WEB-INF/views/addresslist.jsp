@@ -323,6 +323,7 @@
 
 <script type="text/javascript">
 function setAddDetail(addDetailId,frId,frKm,landMark){
+	
 	var fd = new FormData();
 	fd.append('frId', frId);
 	fd.append('frKm', frKm);

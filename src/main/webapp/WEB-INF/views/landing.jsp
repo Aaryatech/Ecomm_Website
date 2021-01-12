@@ -448,7 +448,7 @@ color: red;}
 			</div> -->
 			<div id="addNewAddDiv" style="display: none;">
 			<div class="proceed_btn_1">
-					<input name="" id="addNewAddDiv_btn" type="submit" value="Proceed with Address"
+					<input name="" id="addNewAddDiv_btn" type="button" value="Proceed with Address"
 						class="proceed"/>
 				</div>
 				</div>
@@ -687,35 +687,26 @@ color: red;}
 	});
 	
 	//after coming from as Add New Address
-	$("#main_submit_type3").click(function(e) {
-		var allError=false;
-		var isError = false;
-		var isError1 = false;
-		
-		if(parseInt(userType)==1){
-			dataError=false;
-		var errMsg = "";
+	$("#addNewAddDiv_btn").click(function(e) {
+		var dataError=false;
 		if (!$("#selectShop").val()) {
-			isError1 = true;
 			dataError=true;
 			$("#error_selectShop").show()
 		}else  if ($("#selectShop").val()<1) {
-			isError1 = true;
 			dataError=true;
 			$("#error_selectShop").show();
 		} else  {
 			$("#error_selectShop").hide()
 		}
-		
 		if (!$("#txtPlaces").val()) {
-			isError1 = true;
 			dataError=true;
 			$("#error_txtPlaces").show()
 		} else {
 			$("#error_txtPlaces").hide()
 		}	 
-	}//end of if user Type==1
-	
+		if(dataError==false){
+			var userType=document.getElementById("user_type").value;
+
 		var fd = new FormData();
 		fd.append('selectShop', $("#selectShop").val());
 		fd.append('txtPlaces', $("#txtPlaces").val());
@@ -723,7 +714,41 @@ color: red;}
 		fd.append('selectShop', $("#selectShop").val());
 		fd.append('user_type', userType);
 		
-	}//end of function
+		$.ajax({
+	        url: '${pageContext.request.contextPath}/preHome',
+	        type: 'POST',
+	        data: fd,
+	        dataType: 'json',
+	        processData: false, 
+	        contentType: false, 
+	        async:false,
+	        success: function(resData, textStatus, jqXHR)
+	        {
+	        	isReload=true;
+	        	var url="";
+	        	if(parseInt(resData)==1||parseInt(resData)==3){
+	        	 url = '${pageContext.request.contextPath}/home';
+	        	}else if(parseInt(resData)==0){
+	        	//alert("Ok Here 731")
+	        	$('#landingpop-mobno').show();
+	        	$('#landingpop-mobno').popup();
+	        	$('#no_user_exist').show();
+	        	isReload=false;
+	        	}
+	        	else{
+	        	url = '${pageContext.request.contextPath}/addresslist';
+	        	}
+	        	if(isReload){
+	        		window.location = url;
+	        	}
+	        }, 
+	        error: function(jqXHR, textStatus, errorThrown)
+	        {
+	         console.log('km',jqXHR);
+	        }
+		    });
+		}
+	});//end of function
 	//old
 	$("#main_submit").click(function(e) {
 		var allError=false;

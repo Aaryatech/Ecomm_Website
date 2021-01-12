@@ -11,7 +11,7 @@
 					<div class="top_menu">
 						<span><a href="#"><i class="fa fa-phone"
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
-							href="${pageContext.request.contextPath}/home/" onclick="setData()">Home</a></span>
+							href="${pageContext.request.contextPath}/home">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
 						<span><a
 							href="${pageContext.request.contextPath}/showVistStorePage">Visit
@@ -58,6 +58,10 @@
 										</c:otherwise>
 										</c:choose>
 										</li>
+										
+										<li><a onclick="setData()" href="${pageContext.request.contextPath}/logout">
+										Logout </a></li>
+								<li>
 									
 							</ul></li>
 					</ul>
@@ -271,7 +275,7 @@
 				Order </a> <a href="${pageContext.request.contextPath}/addresslist">
 				My Address Book </a> <a
 				href="${pageContext.request.contextPath}/profile"> Profile </a> <a
-				href="#">Help</a> <a href="location.html">Logout</a>
+				href="#">Help</a> <a onclick="setData()" href="${pageContext.request.contextPath}/logout">Logout</a>
 
 			<!-- <a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> -->
 		</div>

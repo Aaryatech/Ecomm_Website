@@ -112,7 +112,9 @@
 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
-
+<%
+					request.getSession().removeAttribute("successMsg");
+				%>
 
 	<div class="head_marg">
 		<!--product listing-->
