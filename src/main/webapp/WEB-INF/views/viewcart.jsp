@@ -1413,7 +1413,7 @@ $('#mobile_table-div').append(mobDiv);
 		}
 
 		function removeQty(id) {
-alert("Ok")
+		//alert("Ok")
 			if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));

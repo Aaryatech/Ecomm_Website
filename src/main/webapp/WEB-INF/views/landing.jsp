@@ -504,7 +504,7 @@ color: red;}
 									Mobile No</label>
 						</div>
 						<div class="search_one_r">
-							<input name="" type="button" value="Send OTP" onclick="sendOTP()" class="proceed last" />
+							<input name="" id="sendOtpBtn" type="button" value="Send OTP" onclick="sendOTP()" class="proceed last" />
 						</div>
 						<div class="clr"></div>
 			</div>
@@ -552,6 +552,8 @@ color: red;}
 	var enteredOTP="";
 	var currentOTP="";
 	function sendOTP(){
+		 document.getElementById("sendOtpBtn").style="display:block";
+    	//document.getElementById("sendOtpBtn").style="display:none";
 		$("#main_submit").show();
 		$('#no_user_exist').hide();
 		document.getElementById("mobNo").readOnly = false; 
@@ -576,6 +578,8 @@ color: red;}
 	        	currentOTP=resData.msg;
 	        	 //console.log('rrr: ' + JSON.stringify(jqXHR));
 	        	 document.getElementById("mobNo").readOnly = true; 
+	        	 //document.getElementById("sendOtpBtn").style="display:block";
+	        	document.getElementById("sendOtpBtn").style="display:none";
 	        	 document.getElementById("otp_div").style="display:block";
 	        }, 
 	        error: function(jqXHR, textStatus, errorThrown)
@@ -615,7 +619,7 @@ color: red;}
 	$("#submtbtn").click(function(e) {
 		////$('#landingpop-mobno').popup();	
 		$('#landingpop-mobno').hide();
-		
+		 document.getElementById("sendOtpBtn").style="display:block";
 		// document.getElementById('landingpop-mobno').style.display = 'none';
 		// $('#landingpop-mobno').hide()
 		 // var popup = $("#landingpop-mobno");
@@ -674,6 +678,8 @@ color: red;}
 		$("#errorotp").hide();
 		$("#main_submit").hide();
 		document.getElementById("mobNo").readOnly = false; 
+		 document.getElementById("sendOtpBtn").style="display:block";
+
 		$('#no_user_exist').hide();
 		
 		document.getElementById("otp_div").style="display:none";
@@ -763,6 +769,7 @@ color: red;}
 		var isOtpMached= checkValidOTP();
 		//alert("isOtpMached "+isOtpMached);
 		if(isOtpMached==false){
+
 			isError=false;
 			isError1 = false;
 			otpError=false;

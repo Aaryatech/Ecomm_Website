@@ -432,7 +432,12 @@ public class HomeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+		List<CityData> cityList = null;
+		try {
+		  cityList = new ArrayList<>(Arrays.asList(city));
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		String frData = null;
 		try {
 			frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
@@ -455,7 +460,12 @@ public class HomeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+		List<CategoryList> catList=null;
+		try {
+		 catList = new ArrayList<>(Arrays.asList(catArray));
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 		model.addAttribute("catList", catList);
 		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
 
@@ -470,9 +480,12 @@ public class HomeController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
-		
+		List<CompanyTestomonials> testMonialList =null;
+		try {
+		 testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+		}catch (Exception e) {
+			
+		}
 		model.addAttribute("testMonialList", testMonialList);
 		model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 		model.addAttribute("isAddNewAdd", 0);

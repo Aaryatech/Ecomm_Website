@@ -306,8 +306,9 @@ function setLikeCount(statusText){
 		}
 	});
 	 $("#like_item_count").html(''+likeCount);
-}
-function setLike(id) {
+} 
+/* function setLike(id) {
+	alert("OKKK he")
 	$.getJSON(
 			'${setLikeOrDislike}',
 			{
@@ -318,8 +319,7 @@ function setLike(id) {
 				//alert(JSON.stringify(data));
 				setLikeCount(data.statusText);
 			});
-	
-}
+} */
 function setLandmark(landMark){
 	
 	//document.getElementsByClassName("address_land").innerHTML=""+landMark;

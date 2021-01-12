@@ -9,6 +9,7 @@
 
 
 <body>
+<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
 
 	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
@@ -24,9 +25,6 @@
 					<a href="#">Home</a> <i class="fa fa-angle-right"
 						aria-hidden="true"></i> <a href="#">${prodHeader.subCatName}</a> <i
 						class="fa fa-angle-right" aria-hidden="true"></i>${prodHeader.productName}
-
-
-
 				</div>
 
 				<div class="detail_row">
@@ -34,7 +32,10 @@
 						<div class="detail_slide">
 							<!-- <div id="el"></div> -->
 
+
 							<div class="xzoom-container">
+							
+							
 								<div class="purity_icn">
 									<c:choose>
 										<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
@@ -451,7 +452,7 @@
 							<div class="button_row btm">
 								<a href="javascript:void(0)" class="cart_button"
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
-									To Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+									To Cart</a> <a onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})" href="${pageContext.request.contextPath}/checkout"
 									class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
@@ -460,7 +461,7 @@
 							<div class="mobile_button">
 								<a href="javascript:void(0)" class="mobile_cart"
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
-									To Cart</a> <a href="${pageContext.request.contextPath}/viewcart"
+									To Cart</a> <a onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})" href="${pageContext.request.contextPath}/checkout"
 									class="mobile_buy">Buy Now</a>
 							</div>
 						</div>
@@ -500,6 +501,14 @@
 									<li><i class="fa fa-circle" aria-hidden="true"></i>
 										Toppings: ${prodHeader.toppingCreamNames}</li>
 								</c:if>
+								
+								<c:if test="${prodHeader.defaultShapeId!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i>
+										Shapes: ${prodHeader.shapeNames}</li>
+								</c:if>
+								
+								
+								
 							</ul>
 						</div>
 
@@ -545,8 +554,17 @@
 									<div class="cake_pic">
 									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-											class="mobile_fit transition">
-											<div class="purity_icn">
+											class="mobile_fit transition"></a>
+											
+										<%-- <div class="circle_tag">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+												alt=""> <img
+												src="${pageContext.request.contextPath}/resources/images/heart.svg"
+												alt="">
+										</div> --%>
+										
+										<div class="purity_icn">
 														<c:choose>
 															<c:when test="${product.vegNonvegName eq 'VEG'}">
 																<img src="#" class="lazy" id="veg${product.productId}"
@@ -570,13 +588,28 @@
 															</c:otherwise>
 														</c:choose>
 													</div>
-										<div class="circle_tag">
-											<img
-												src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-												alt=""> <img
-												src="${pageContext.request.contextPath}/resources/images/heart.svg"
-												alt="">
-										</div>
+													
+										<div class="circle_tag active"
+														onclick="setLike(${product.productId})">
+														<c:choose>
+														
+														<c:when test="${product.isLike==0}">
+														 <img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+															alt="">
+															
+														</c:when>
+														<c:when test="${product.isLike==1}">
+														<img src="#" class="lazy" id="like${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+															alt="">
+														</c:when>
+														
+														</c:choose>
+														
+														
+													</div>
+													
 										<div class="cake_prc">
 											<i class="fa fa-inr cake_prc_detail_iclass"
 												aria-hidden="true"></i>
@@ -585,12 +618,12 @@
 												class="fa fa-inr" aria-hidden="true"></i></span> <span
 												class="prc_off" id="prc_off"></span>
 										</div>
-										</a>
+										
 									</div>
 
 									<div class="cake_container">
 										<h4 class="cake_nm single_row">
-											<a
+											<a 
 												href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
 											<input type="hidden" id="prodIdText"
 												value="${product.productId}" />
@@ -609,7 +642,7 @@
 	</div>
 
 	<!--testimonial-box-->
-	<div class="testimonial_bx">
+	<%-- <div class="testimonial_bx">
 		<h2 class="sec_title">
 			<center>
 				Our Testimonials <span>Customer Reviews regarding to our Shop</span>
@@ -642,7 +675,7 @@
 			</section>
 		</div>
 		<canvas id="canvas-element"></canvas>
-	</div>
+	</div> --%>
 
 
 
@@ -650,9 +683,30 @@
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-
+<script type="text/javascript">
+function setLike(id) {
+ 	$.getJSON(
+			'${setLikeOrDislike}',
+			{
+				prodId : id,
+				ajax : 'true'
+			},
+			function(data) {
+				//alert(JSON.stringify(data));
+				
+				if(data.msg ==1){
+					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+					
+				}else{
+					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+					
+				}
+				setLikeCount(data.statusText);
+			}); 
+	
+}
+</script>
 	<script type="text/javascript">
-
 function addToCartClick(productId){
 	//alert("In addToCartClick " +productId);
 	

@@ -236,6 +236,7 @@ int likeCount=0;
 						}else {
 							prod.setIsLike(0);
 							status=0;
+							if(likeCount>0)
 							likeCount=likeCount-1;
 						}
 						break;
