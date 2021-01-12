@@ -70,14 +70,14 @@
 								<div class="mobile_Scrl">
 									<div class="xzoom-thumbs">
 										<a href="${prodImgUrl}${prodHeader.prodImagePrimary}"><img
-											class="xzoom-gallery" width="80"
+											class="xzoom-gallery" width="70" height="70"
 											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											title="${prodHeader.productDesc}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
 										<c:forEach items="${prodHeader.productImages}"
 											var="prod_image">
 											<a href="${prodImgUrl}${prod_image}"><img
-												class="xzoom-gallery" width="80"
+												class="xzoom-gallery" width="70" height="70"
 												src="${prodImgUrl}${prod_image}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 												title="${prodHeader.productDesc}"></a>
 										</c:forEach>

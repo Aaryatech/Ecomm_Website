@@ -42,7 +42,7 @@ public class LocationController {
 		String returnPage = "landing";
 		
 		try {
-			
+			model.addAttribute("isAddNewAdd", 1);
 			System.err.println("In  returnPage = landing ShowAddNewAdd ");
 			ObjectMapper mapper = new ObjectMapper();
 			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
@@ -68,7 +68,7 @@ public class LocationController {
 			List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 			model.addAttribute("testMonialList", testMonialList);
 			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
-			model.addAttribute("isAddNewAdd", 1);
+		
 		
 		}catch (Exception e) {
 			e.printStackTrace();
