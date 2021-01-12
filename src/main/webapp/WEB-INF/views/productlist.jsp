@@ -63,7 +63,7 @@
 
 
 	<!-- mega menu -->
-	<div class="mega_menu_row">
+	<!-- <div class="mega_menu_row">
 
 		<div class="wrapper">
 
@@ -75,12 +75,12 @@
 
 					<li><a href="#" class="same_day">Same Day Delivery </a></li>
 
-					<!--four colum dropdown-->
+					four colum dropdown
 					<li><a href="#">Cakes <span><i
-								class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--cake dropdown-->
+								class="fa fa-angle-down" aria-hidden="true"></i></span></a> cake dropdown
 						<ul class="megamenu four-row">
 							<div class="four_row_dropdown">
-								<!--row-1-->
+								row-1
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>By Price</li>
@@ -94,7 +94,7 @@
 
 
 
-								<!--row-2-->
+								row-2
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Flavour</li>
@@ -106,7 +106,7 @@
 									</ul>
 								</div>
 
-								<!--row-3-->
+								row-3
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Shape</li>
@@ -118,7 +118,7 @@
 									</ul>
 								</div>
 
-								<!--row-4-->
+								row-4
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Type</li>
@@ -132,12 +132,12 @@
 							</div>
 						</ul></li>
 
-					<!--three-colum dropdown-->
+					three-colum dropdown
 					<li><a href="#">Pastries <span><i
 								class="fa fa-angle-down" aria-hidden="true"></i></span></a>
 						<ul class="megamenu three-row">
 							<div class="four_row_dropdown">
-								<!--1-->
+								1
 								<div class="three_one">
 									<ul class="drop_mainmenu">
 										<li>By Price</li>
@@ -149,7 +149,7 @@
 									</ul>
 								</div>
 
-								<!--2-->
+								2
 								<div class="three_one">
 									<ul class="drop_mainmenu">
 										<li>By Type</li>
@@ -161,7 +161,7 @@
 									</ul>
 								</div>
 
-								<!--1-->
+								1
 								<div class="three_one">
 									<ul class="drop_mainmenu">
 										<li>By Color</li>
@@ -176,10 +176,10 @@
 						</ul></li>
 
 					<li><a href="#">Savories <span><i
-								class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--combos dropdown-->
+								class="fa fa-angle-down" aria-hidden="true"></i></span></a> combos dropdown
 						<ul class="megamenu four-row">
 							<div class="four_row_dropdown">
-								<!--row-1-->
+								row-1
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>By Price</li>
@@ -193,7 +193,7 @@
 
 
 
-								<!--row-2-->
+								row-2
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Flavour</li>
@@ -205,7 +205,7 @@
 									</ul>
 								</div>
 
-								<!--row-3-->
+								row-3
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Shape</li>
@@ -217,7 +217,7 @@
 									</ul>
 								</div>
 
-								<!--row-4-->
+								row-4
 								<div class="row_one">
 									<ul class="drop_mainmenu">
 										<li>Cakes By Type</li>
@@ -231,10 +231,10 @@
 							</div>
 						</ul></li>
 					<li><a href="#">Packaged Cakes <span><i
-								class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--chocolates dropdown-->
+								class="fa fa-angle-down" aria-hidden="true"></i></span></a> chocolates dropdown
 						<ul class="megamenu two-row">
 							<div class="four_row_dropdown">
-								<!--row-1-->
+								row-1
 								<div class="two_one">
 									<ul class="drop_mainmenu">
 										<li>By Price</li>
@@ -248,7 +248,7 @@
 
 
 
-								<!--row-2-->
+								row-2
 								<div class="two_one">
 									<ul class="drop_mainmenu">
 										<li>By Type</li>
@@ -263,12 +263,12 @@
 
 							</div>
 						</ul></li>
-					<!--full-row dropdown-->
+					full-row dropdown
 					<li><a href="#">Chocolates <span><i
-								class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--chocolates dropdown-->
+								class="fa fa-angle-down" aria-hidden="true"></i></span></a> chocolates dropdown
 						<ul class="megamenu full-row">
 							<div class="four_row_dropdown">
-								<!--row-1-->
+								row-1
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>By Price</li>
@@ -283,7 +283,7 @@
 									</ul>
 								</div>
 
-								<!--row-2-->
+								row-2
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>By Recipient</li>
@@ -298,7 +298,7 @@
 									</ul>
 								</div>
 
-								<!--row-3-->
+								row-3
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>By Recipient</li>
@@ -313,7 +313,7 @@
 									</ul>
 								</div>
 
-								<!--row-4-->
+								row-4
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>By Type</li>
@@ -328,7 +328,7 @@
 									</ul>
 								</div>
 
-								<!--row-5-->
+								row-5
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>By Type</li>
@@ -343,7 +343,7 @@
 									</ul>
 								</div>
 
-								<!--row-6-->
+								row-6
 								<div class="full_divid">
 									<ul class="drop_mainmenu">
 										<li>Personalised Gifts</li>
@@ -363,7 +363,7 @@
 						</ul></li>
 
 					<li><a href="#">Bakersware <span><i
-								class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--anniversary-dropdown-->
+								class="fa fa-angle-down" aria-hidden="true"></i></span></a> anniversary-dropdown
 						<ul class="dropdown">
 							<li><a href="#"> Anniversary Gifts </a></li>
 							<li><a href="#"> Anniversary Cakes </a></li>
@@ -390,7 +390,7 @@
 						aria-hidden="true"></i></a></li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="head_marg with_menu">
 		<section class="product_category">
@@ -456,7 +456,7 @@
 														<div class="cake_one product_padd">
 															<div class="cake_pic">
 																<a
-																		href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}<img src="${prodImgUrl}${product.prodImagePrimary}"
+																		href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}"><img src="${prodImgUrl}${product.prodImagePrimary}"
 																	data-src="${prodImgUrl}${product.prodImagePrimary}"
 																	alt="" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" class="mobile_fit transition"></a>
 																<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
@@ -501,15 +501,17 @@
 										<div class="item_div">
 											<div class="cake_one product_padd">
 												<div class="cake_pic">
+												<a
+															href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition">
+														class="mobile_fit transition"> </a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 													<div class="cake_prc">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 															class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+															class="prc_off"> </span>
 													</div>
 
 													<input type="hidden" class="tagNameHide"
@@ -566,16 +568,16 @@
 									<c:when test="${product.productId==prodId}">
 										<li>
 											<div class="cake_one product_padd">
-												<div class="cake_pic">
-													<img src="${prodImgUrl}${product.prodImagePrimary}"
+												<div class="cake_pic"><a
+															href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">								<img src="${prodImgUrl}${product.prodImagePrimary}"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition">
+														class="mobile_fit transition"></a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 													<div class="cake_prc">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 															class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off">(23% Off)</span>
+															class="prc_off"> </span>
 													</div>
 												</div>
 												<div class="cake_container">

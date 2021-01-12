@@ -107,13 +107,13 @@ public class MasterController {
 
 			String email = request.getParameter("txtEmail");
 			String mobNo = request.getParameter("txtMobile");
-
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("email", email);
-			map.add("custId", custId);
-			Customer chkEmail = Constants.getRestTemplate().postForObject(Constants.url + "getCustByEmailId", map,
-					Customer.class);
-		
+			/*
+			 * map = new LinkedMultiValueMap<>();
+			 * map.add("email", email); map.add("custId", custId); Customer chkEmail =
+			 * Constants.getRestTemplate().postForObject(Constants.url + "getCustByEmailId",
+			 * map, Customer.class);
+			 */
 			
 			map = new LinkedMultiValueMap<>();
 			map.add("mobNo", mobNo);
@@ -121,11 +121,11 @@ public class MasterController {
 			Customer chkMob = Constants.getRestTemplate().postForObject(Constants.url + "getCustByMobNo", map,
 					Customer.class);
 			
-			if (chkEmail != null) {
+			/*if (chkEmail != null) {
 				session.setAttribute("respMsg", "Email Id already exist");
 				redirect = "redirect:/profile";
-			} 
-			else if (chkMob != null) {
+			} */
+			 if (chkMob != null) {
 				session.setAttribute("respMsg", "Mobile No. already exist");
 				redirect = "redirect:/profile";
 			} else {
@@ -141,10 +141,8 @@ public class MasterController {
 						info = ImageUploadController.saveImgFiles(doc, Constants.imageFileExtensions, profileImage);
 					} catch (Exception e) {
 					}
-
 				} else {
 					profileImage = request.getParameter("editImg");
-
 				}
 
 				String billFlat = request.getParameter("txtFlat");
@@ -154,38 +152,38 @@ public class MasterController {
 
 				String billAddress = billFlat + "~" + billArea + "~" + billLandmark + "~" + billPincode;
 
-				Customer cust = new Customer();
+				//Customer cust = new Customer();
 
-				if (custId > 0) {
+			
 					map = new LinkedMultiValueMap<>();
 					map.add("custId", custId);
-					Customer cust1 = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 							Customer.class);
-
-					cust.setUpdtDttime(curDateTime);
-					cust.setInsertDttime(cust1.getInsertDttime());
-					cust.setAgeRange(cust1.getAgeRange());
-					cust.setMakerUserId(cust1.getMakerUserId());
-					cust.setLanguageId(cust1.getLanguageId());
-				}
-
-				cust.setCityId(Integer.parseInt(request.getParameter("city")));
-				cust.setCustAddPlatform(2);
+				/*
+				 * cust.setInsertDttime(cust1.getInsertDttime());
+				 * cust.setAgeRange(cust1.getAgeRange());
+				 * cust.setMakerUserId(cust1.getMakerUserId());
+				 * cust.setLanguageId(cust1.getLanguageId());
+				 */
+			
+				cust.setUpdtDttime(curDateTime);
+				//cust.setCityId(Integer.parseInt(request.getParameter("city")));
+				//cust.setCustAddPlatform(2);
 				cust.setCustGender(Integer.parseInt(request.getParameter("gender")));
-				cust.setCustId(custId);
+				//cust.setCustId(custId);
 				cust.setCustMobileNo(mobNo);
 				cust.setCustName(request.getParameter("txtBillName"));
 				cust.setDateOfBirth(request.getParameter("txtDob"));
 				cust.setEmailId(email);
-				cust.setIsPrimiunmCust(0);
+				//cust.setIsPrimiunmCust(0);
 				cust.setProfilePic(profileImage);
 				cust.setCompanyId(companyId);
-				cust.setIsActive(1);
-				cust.setDelStatus(1);
-				cust.setExInt1(Integer.parseInt(request.getParameter("defltAddressId")));
-				cust.setExInt2(0);
-				cust.setExInt3(0);
-				cust.setExVar1("NA");
+				//cust.setIsActive(1);
+				//cust.setDelStatus(1);
+				//cust.setExInt1(Integer.parseInt(request.getParameter("defltAddressId")));
+				//cust.setExInt2(0);
+				//cust.setExInt3(0);
+				//cust.setExVar1("NA");
 				cust.setExVar2(request.getParameter("txtGst"));
 				cust.setExVar3(billAddress);
 

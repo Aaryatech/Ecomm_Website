@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
-
+<style>
+.form-label-hint-error{color: red;}
+</style>
 <body>
 	<c:url value="/validateCustEmail" var="validateCustEmail"></c:url>
 	<c:url value="/validateCustMob" var="validateCustMob"></c:url>
@@ -25,7 +27,7 @@
 			</div>
 		</div>
 		<div class="mongi_cont">
-			<ul class="ks-cboxtags">
+			<!-- <ul class="ks-cboxtags">
 				<li><input type="checkbox" id="checkboxOne"><label
 					for="checkboxOne">Chocolate Cakes</label></li>
 				<li><input type="checkbox" id="checkboxtwo"><label
@@ -89,7 +91,7 @@
 					for="checkboxthirtee">Clover</label></li>
 				<li><input type="checkbox" id="checkboxthirteeone"><label
 					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul>
+			</ul> -->
 
 
 
@@ -120,11 +122,10 @@
 					<div class="profile_bx">
 						<div class="profile_l">
 							<div class="profile_picture">
-								<img
+								<img id="prof_image" name="prof_image"
 									alt=""
 									src="${sessionScope.profileImg}"
-									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/profile-nopic.jpg'">
-								<!-- src="${pageContext.request.contextPath}${profileImg}" -->
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/profile-nopic.jpg'"/>
 							</div>
 
 							<div class="upload-btn-wrapper">
@@ -136,7 +137,7 @@
 							</div>
 
 							<div class="register_date">
-								Registerd Date <span>01 . Oct . 2020</span>
+								<!-- Registerd Date --> <span><!-- 01 . Oct . 2020 --></span>
 							</div>
 
 						</div>
@@ -153,7 +154,7 @@
 						%>
 							<div class="profile_cont">
 
-								<div class="place_row">
+								<%-- <div class="place_row">
 									<div class="place_row_l">
 										<label class="form-label-hint">Enter Your City</label>
 										<div class="select-style">
@@ -185,7 +186,7 @@
 										<!--choose your default address- dropdown-->
 									</div>
 									<div class="clr"></div>
-								</div>
+								</div> --%>
 
 								<div class="place_row">
 									<!--input_place-->
@@ -204,9 +205,9 @@
 											oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"
 											name="txtMobile" placeholder="Mobile Number" /> <label
 											class="form-label-hint-error" id="errorMobile"
-											style="display: none;">please enter mobile number</label> <label
+											style="display: none;">Please enter mobile number</label> <label
 											class="form-label-hint-error" id="errorMobileInvalid"
-											style="display: none;">invalid mobile number</label> <label
+											style="display: none;">Invalid mobile number</label> <label
 											class="form-label-hint-error" id="unq_mob"
 											style="display: none;">This mobile No. is already
 											exist</label>
@@ -220,9 +221,9 @@
 											value="${cust.emailId}" type="text" class="input_two"
 											id="txtEmail" name="txtEmail" placeholder="Email ID" /> <label
 											class="form-label-hint-error" id="errorEmail"
-											style="display: none;">please enter email id</label> <label
+											style="display: none;">Please enter email id</label> <label
 											class="form-label-hint-error" id="errorEmailInvalid"
-											style="display: none;">invalid email id</label> <label
+											style="display: none;">Invalid email id</label> <label
 											class="form-label-hint-error" id="unq_email"
 											style="display: none;">This email id is already exist</label>
 
@@ -261,10 +262,10 @@
 								<div class="place_row">
 									<div class="place_row_l">
 										<label class="form-label-hint">Date of Birth</label> <input
-											type="text" class="input_two" id="txtDob" name="txtDob"
+											type="text" class="input_two" id="txtDob" name="txtDob" readonly
 											value="${cust.dateOfBirth}" placeholder="Date of Birth" /> <label
 											class="form-label-hint-error" id="errorDob"
-											style="display: none;">please enter date of birth</label>
+											style="display: none;">Please enter date of birth</label>
 									</div>
 									<div class="place_row_r">
 										<label class="form-label-hint">GST Number</label> <input
@@ -272,7 +273,7 @@
 											class="input_two" id="txtGst" name="txtGst" maxlength="15"
 											placeholder="GST Number" value="${cust.exVar2}" /> <label
 											class="form-label-hint-error" id="errorGst"
-											style="display: none;">invalid GST number</label>
+											style="display: none;">Invalid GST number</label>
 									</div>
 									<div class="clr"></div>
 								</div>
@@ -290,12 +291,12 @@
 
 										<label class="form-label-hint">Flat, House no.,
 											Building, Company, Apartment</label> <input type="text"
-											class="input_two" id="txtFlat" name="txtFlat"
+											class="input_two" id="txtFlat" name="txtFlat" maxlength="60"
 											value="${getFlat}"
 											placeholder="Flat, House no., Building, Company, Apartment" />
 
 										<label class="form-label-hint-error" id="errorFlat"
-											style="display: none;">please enter Flat, House No.</label>
+											style="display: none;">Please enter Flat, House No.</label>
 
 									</div>
 									<div class="place_row_r">
@@ -303,10 +304,10 @@
 
 										<label class="form-label-hint">Area, Colony, Street,
 											Sector, Village</label> <input type="text" class="input_two"
-											id="txtArea" name="txtArea" value="${getArea}"
+											id="txtArea" name="txtArea" value="${getArea}" maxlength="80"
 											placeholder="Area, Colony, Street, Sector, Village" /> <label
 											class="form-label-hint-error" id="errorArea"
-											style="display: none;">please enter area</label>
+											style="display: none;">Please enter area</label>
 
 
 									</div>
@@ -323,18 +324,18 @@
 											value="${getLandmark}" name="txtLandmark"
 											placeholder="Landmark" /> <label
 											class="form-label-hint-error" id="errorLandmark"
-											style="display: none;">please enter landmark</label>
+											style="display: none;">Please enter landmark</label>
 
 
 									</div>
 									<div class="place_row_r">
 
 
-										<label class="form-label-hint">Pincode</label> <input
-											type="text" class="input_two" id="txtPincode"
+										<label class="form-label-hint">Pin code</label> <input
+											type="text" class="input_two numbersOnly" id="txtPincode" maxlength="6"
 											value="${getPin}" name="txtPincode" placeholder="Pincode" />
 										<label class="form-label-hint-error" id="errorPincode"
-											style="display: none;">please enter pincode</label>
+											style="display: none;">Please enter pin code</label>
 
 									</div>
 									<div class="clr"></div>
@@ -393,7 +394,19 @@
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+<script type="text/javascript">
 
+var loadFile = function(event) {
+	document.getElementById('prof_image').style.display="none";
+	 try {
+		var image = document.getElementById('prof_image');
+		image.src = URL.createObjectURL(event.target.files[0]);
+		document.getElementById('prof_image').style="display:block"
+	 } catch(err) {
+		 console.log("img apply error",err);
+		} 
+	}
+</script>
 
 	<!--cart-sidepanel-->
 	<script type="text/javascript">
@@ -520,7 +533,6 @@
 		$(document)
 				.ready(
 						function($) {
-
 							$("#submitInsert")
 									.submit(
 											function(e) {
@@ -552,34 +564,38 @@
 													$("#errorMobileInvalid")
 															.hide();
 												}
-
-												if (!$("#txtEmail").val()
-														.trim()) {
+												
+												if($("#txtEmail").val()==null|| $("#txtEmail").val()==""){
+													$("#errorEmail").hide();
+													}
+												else if ($("#txtEmail").val().trim()) {
+													
+												  if (!ValidateEmail($("#txtEmail").val().trim())) {
+													//email = false;
 													isError = true;
-													$("#errorEmail").show();
-													$("#unq_email").hide();
-												} else if (!ValidateEmail($(
-														"#txtEmail").val()
-														.trim())) {
-													isError = true;
-													$("#errorEmailInvalid")
-															.show();
+													$("#errorEmailInvalid").show();
 													$("#errorEmail").hide();
 												} else {
-													$("#errorEmailInvalid")
-															.hide();
+													$("#errorEmailInvalid").hide();
 													$("#errorEmail").hide();
 												}
-												
-												
-												if (!$("#txtGst").val().trim()
-														|| checkGST($("#txtGst")
-																.val().trim()) == false) {
-													isError = true;
-													$("#errorGst").show();
-												} else {
+												  }else{
+													$("#errorEmailInvalid").hide();
+													$("#errorEmail").hide();
+												}
+												if($("#txtGst").val()==null|| $("#txtGst").val()==""){
 													$("#errorGst").hide();
-												}
+													}
+													else if ($("#txtGst").val().trim()) {
+														if (checkGST($("#txtGst").val().trim()) == false) {
+															isError = true;
+															$("#errorGst").show();
+														} else {
+															$("#errorGst").hide();
+														}
+													} else {
+														$("#errorGst").hide();
+													}
 
 												if (!$("#txtFlat").val().trim()) {
 													isError = true;
@@ -594,7 +610,6 @@
 												} else {
 													$("#errorArea").hide();
 												}
-
 												if (!$("#txtLandmark").val()
 														.trim()) {
 													isError = true;
@@ -602,7 +617,6 @@
 												} else {
 													$("#errorLandmark").hide();
 												}
-
 												if (!$("#txtPincode").val()
 														.trim()) {
 													isError = true;
@@ -610,46 +624,16 @@
 												} else {
 													$("#errorPincode").hide();
 												}
-
 												if (!isError) {
-
 													var r = confirm("Are you sure you want to Submit?");
 													if (r == true) {
 														form.submit();
 													} else {
-
 													}
-													/* bootbox
-															.confirm({
-																title : 'Confirm ',
-																message : 'Are you sure you want to Submit?',
-																buttons : {
-																	confirm : {
-																		label : 'Yes',
-																		className : 'btn-success'
-																	},
-																	cancel : {
-																		label : 'Cancel',
-																		className : 'btn-danger'
-																	}
-																},
-																callback : function(
-																		result) {
-																	if (result) {
-																		$(".btn").attr("disabled", true);
-																		var form = document
-																				.getElementById("submitInsert")
-																		form
-																				.submit();
-																	}
-																}
-															}); */
 													//end ajax send this to php page
 													return false;
 												}//end of if !isError
-
 												return false;
-
 											});
 						});
 
@@ -683,25 +667,13 @@
 		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
 
-		var loadFile = function(event) {
-			document.getElementById('output').style.display = "none";
-			try {
-				var image = document.getElementById('output');
-				image.src = URL.createObjectURL(event.target.files[0]);
-				document.getElementById('output').style = "display:block"
-			} catch (err) {
-				console.log(err);
-			}
-		};
-
-		/* $('.maxlength-badge-position').maxlength({
-		    alwaysShow: true,
-		    placement: 'top'
-		}); */
-
 		$("#txtMobile").change(function() {
+			$("#errorEmailInvalid").hide();
+			$("#errorEmail").hide();
+			
 			var mobNo = $("#txtMobile").val();
 			//alert(mobNo)
+			if(mobNo.length>9){
 			$.getJSON('${validateCustMob}', {
 				mobNo : mobNo,
 				ajax : 'true',
@@ -715,12 +687,15 @@
 					$("#unq_mob").hide();
 				}
 			});
+			}else{
+				$("#txtMobile").val('');
+			}
 		});
 
 		$("#txtEmail").change(function() {
 			var email = $("#txtEmail").val();
 			//alert(email)
-
+if(ValidateEmail($("#txtEmail").val().trim())&&email.length>5){
 			$.getJSON('${validateCustEmail}', {
 				email : email,
 				ajax : 'true',
@@ -734,10 +709,18 @@
 					$("#unq_email").hide();
 				}
 			});
+}else if(email.length>6){
+	$("#txtEmail").val('');
+}
 		});
 		
 		$("#respMsg").show().delay(5000).fadeOut();
 		$("#successMsg").show().delay(5000).fadeOut();
+		
+		jQuery('.numbersOnly').keyup(function() {
+			this.value = this.value.replace(/[^0-9\.]/g, '');
+			  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+		});
 	</script>
 
 

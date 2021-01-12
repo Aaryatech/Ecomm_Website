@@ -208,7 +208,7 @@ public class ProductDisplayController {
 
 		return returnPage;
 	}
-
+int likeCount=0;
 	@RequestMapping(value = "/setLikeOrDislike", method = RequestMethod.GET)
 	public @ResponseBody Info setLikeOrDislike(HttpServletRequest request, HttpServletResponse response) {
 
@@ -232,9 +232,11 @@ public class ProductDisplayController {
 						if(prod.getIsLike()==0) {
 							prod.setIsLike(1);
 							status=1;
+							likeCount=likeCount+1;
 						}else {
 							prod.setIsLike(0);
 							status=0;
+							likeCount=likeCount-1;
 						}
 						break;
 						
@@ -251,7 +253,7 @@ public class ProductDisplayController {
 			info.setError(false);
 			info.setMsg(""+status);
 			info.setStatusText(jsonStr);
-
+			session.setAttribute("likeCount", likeCount);
 		} catch (Exception e) {
 			info.setError(true);
 			info.setMsg("0");

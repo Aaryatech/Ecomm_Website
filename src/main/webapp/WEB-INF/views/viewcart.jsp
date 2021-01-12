@@ -91,9 +91,12 @@
 
 
 						<!-- mobile-table-->
-						<div class="mobile_table">
+						<div class="mobile_table" id="mobile_table-div">
 							<!--mobile-row-1-->
-							<div class="row_1">
+							<!-- <div id="mobile_table-div">
+							
+							</div> -->
+							<%-- <div class="row_1">
 								<div class="mob_prod">
 									<div class="mob_prod_title">Product Name</div>
 									<div class="cart_pic_row mobile_width">
@@ -161,10 +164,10 @@
 									</div>
 									<div class="clr"></div>
 								</div>
-							</div>
+							</div> --%>
 
 							<!--mobile-row-2-->
-							<div class="row_1">
+							<%-- <div class="row_1">
 								<div class="mob_prod">
 									<div class="mob_prod_title">Product Name</div>
 									<div class="cart_pic_row mobile_width">
@@ -234,7 +237,7 @@
 									</div>
 									<div class="clr"></div>
 								</div>
-							</div>
+							</div> --%>
 						</div>
 
 
@@ -1108,6 +1111,7 @@ function setOfferDiscAmt(){
 
 			var cartValue = sessionStorage.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
+			$('#mobile_table-div').html('');
 
 			$("#cartTable tbody").empty();
 			var subtotal = 0;
@@ -1209,7 +1213,77 @@ function setOfferDiscAmt(){
 								+
 
 								'</tr>';
-
+								
+								
+		var mobDiv='<div class="row_1">'+
+			'<div class="mob_prod">'+
+		'<div class="mob_prod_title">Product Name</div>'+
+		'<div class="cart_pic_row mobile_width">'+
+			'<div class="cart_pic">'+
+				'<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
+					'alt="">'+
+			'</div>'+
+			'<div class="cart_cont width_inc">'+
+				'<h3 class="cart_cake">'+table[i].exVar1+'</h3>'+
+				'<h3 class="cart_prc">'+table[i].mrp+'/'+allItemArr[j].uomShowName+'</h3>'+
+				'<div class="cart_det">'+
+					'Weight - '+table[i].weight+' '+allItemArr[j].uomShowName+''+table[i].veg+'<br>Flavors '+allItemArr[j].flavorNames+''+
+				'</div>'+
+			'</div>'+
+		'</div>'+
+	'</div>'+
+	'<div class="mob_quan">'+
+		'<div class="mob_quan_l">Quantity</div>'+
+		'<div class="mob_quan_r">'+
+			'<form id="myform" method="POST" action="#">'+
+				'<button id="btnMin'+table[i].itemId+'" name="btnMin'+table[i].itemId+'" type="button" value="" onclick="minusQty('
+				+ table[i].itemId
+				+ ','
+				+ table[i].qty
+				+ ')" field="quantity"'+
+					'class="qtyminus cart">'+
+					'<i class="fa fa-minus" aria-hidden="true"></i>'+
+				'</button>'+
+				'<input type="text" id="quantity'+table[i].itemId+'" value="'+table[i].qty+'" class="qty cart">'+
+				'<button type="button" id="btnPlus'+table[i].itemId+'" value="" field="quantity"'+
+					'class="qtyplus cart" onclick="plusQty('
+								+ table[i].itemId
+								+ ','
+								+ table[i].qty
+								+ ')">'+
+					'<i class="fa fa-plus" aria-hidden="true"></i>'+
+				'</button>'+
+			'</form>'+
+		'</div>'+
+		'<div class="clr"></div>'+
+	'</div>'+
+	'<div class="mob_quan">'+
+		'<div class="mob_quan_l">Delivery option</div>'+
+		'<div class="mob_quan_r">'+
+			'<div class="cart_option">'+
+				'<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span>'+table[i].msgonCake+'</span>'+
+			'</div>'+
+		'</div>'+
+		'<div class="clr"></div>'+
+	'</div>'+
+	'<div class="mob_quan">'+
+		'<div class="mob_quan_l">Sub Total</div>'+
+		'<div class="mob_quan_r">'+table[i].totalAmt+'</div>'+
+		'<div class="clr"></div>'+
+	'</div>'+
+	'<div class="mob_quan">'+
+		'<div class="mob_quan_l">Action</div>'+
+		'<div class="mob_quan_r">'+
+			'<div class="cart_delete">'+
+				'<a href="#"><i class="fa fa-trash-o"  onclick="removeQty('
+								+ table[i].uniqueId
+								+ ')" aria-hidden="true"></i></a>'+
+			'</div>'+
+		'</div>'+
+		'<div class="clr"></div>'+
+	'</div>'+
+'</div>'
+$('#mobile_table-div').append(mobDiv);
 						$('#cartTable').append(tbl_data);
 
 					}
@@ -1330,7 +1404,7 @@ function setOfferDiscAmt(){
 		}
 
 		function removeQty(id) {
-
+alert("Ok")
 			if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));

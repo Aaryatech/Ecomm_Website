@@ -100,7 +100,7 @@
 						<div class="product_like">
 							<a href="${pageContext.request.contextPath}/likeproducts"> <i
 								class="fa fa-heart" aria-hidden="true"></i> 
-								<span class="cart_item_count" id="like_item_count">0</span>
+								<span class="cart_item_count" id="like_item_count">${sessionScope.likeCount}</span>
 							</a>
 						</div>
 

@@ -77,7 +77,7 @@ public class HomeController {
 		try {
 			if (frId > 0)
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-			//System.err.println("data " + data.toString());
+			// System.err.println("data " + data.toString());
 
 			try {
 
@@ -103,7 +103,7 @@ public class HomeController {
 					}
 
 				}
-				
+
 				String jsonStr = mapper.writeValueAsString(data);
 				session.setAttribute("allDataJson", jsonStr);
 
@@ -112,8 +112,8 @@ public class HomeController {
 				session.setAttribute("allDataJson", jsonStr);
 			}
 			try {
-				
-			}catch (Exception e) {
+
+			} catch (Exception e) {
 				// TODO: handle exception
 			}
 
@@ -165,7 +165,7 @@ public class HomeController {
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				session.setAttribute("mobNo", cust.getCustMobileNo());
-			}else {
+			} else {
 				System.err.println("custId <1 " + custId);
 				session.removeAttribute("userName");
 				session.removeAttribute("userEmail");
@@ -203,34 +203,34 @@ public class HomeController {
 		if (frId > 0) {
 			System.err.println("A");
 			return "home";
-		}
-		else {
+		} else {
 			System.err.println("B");
 			return "redirect:/";
 		}
 	}
+
 //preHome preHomeOld Mapping
 	@RequestMapping(value = "/preHomeOld", method = RequestMethod.POST)
 	public String preHomeOld(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("in Pre Home");
 		HttpSession session = request.getSession();
-		int custId=0;
+		int custId = 0;
 		try {
-			custId=(int) session.getAttribute("custId");
-		}catch (Exception e) {
+			custId = (int) session.getAttribute("custId");
+		} catch (Exception e) {
 			session.setAttribute("custId", custId);
 		}
-		
+
 		int frId = 0;
-		float frKm=0;
+		float frKm = 0;
 		try {
 			frId = Integer.parseInt(request.getParameter("selectShop"));
-			frKm=Float.parseFloat(request.getParameter("frKm"));
-			
-			System.err.println("FrId " + frId +" frKm " +frKm);
+			frKm = Float.parseFloat(request.getParameter("frKm"));
+
+			System.err.println("FrId " + frId + " frKm " + frKm);
 			session.setAttribute("frId", frId);
 			session.setAttribute("frKm", frKm);
-			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt(""+frKm));
+			Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
 			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 			response.addCookie(frKmCookie);
 			try {
@@ -240,174 +240,168 @@ public class HomeController {
 				Cookie landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
 				landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(landMarkCookie);
-				
+
 			} catch (Exception em) {
 				System.err.println("In Landmark Catch");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("In Catch frId " + frId);
-			
-			
+
 		}
 
 		Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
 		frIdCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frIdCookie);
-		
-		//24-12-2020
+
+		// 24-12-2020
 		Cookie frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
 		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frKmCookie);
-		
-		//4-01-2021
+
+		// 4-01-2021
 		Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
 		delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(delAddIdCookie);
 		session.setAttribute("delAddId", 0);
-		
+
 		session.setAttribute("userId", 0);
 		return "redirect:/home";
 	}
 
-	
 	@RequestMapping(value = "/preHome", method = RequestMethod.POST)
-	public @ResponseBody Object preHome(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Object preHome(Locale locale, Model model, HttpServletRequest request,
+			HttpServletResponse response) {
 		System.err.println("in Pre Home new");
-		int retPage=0;
+		int retPage = 0;
 		HttpSession session = request.getSession();
-		int custId=0;
+		int custId = 0;
 		try {
-			custId=(int) session.getAttribute("custId");
-		}catch (Exception e) {
+			custId = (int) session.getAttribute("custId");
+		} catch (Exception e) {
 			session.setAttribute("custId", custId);
 		}
 		String landMark = null;
-		Cookie landMarkCookie,frIdCookie,frKmCookie,delAddIdCookie;
+		Cookie landMarkCookie, frIdCookie, frKmCookie, delAddIdCookie;
 		int frId = 0;
-		float frKm=0;
-	
+		float frKm = 0;
+		System.err.println("Here " +request.getParameter("user_type"));
+		int userType = Integer.parseInt(request.getParameter("user_type"));
+		if (userType == 3) {
 			try {
-			frId = Integer.parseInt(request.getParameter("selectShop"));
-			session.setAttribute("frId", frId);
-			
-			frKm=Float.parseFloat(request.getParameter("frKm"));
-			session.setAttribute("frKm", frKm);
-			
-			 landMark = request.getParameter("txtPlaces");
-			session.setAttribute("landMark", landMark);
-			System.err.println("frId " +frId + " frKm " +frKm+ "landMark " +landMark );
-			 landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
-			landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
-			response.addCookie(landMarkCookie);
-		
-		 frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
-		frIdCookie.setMaxAge(60 * 60 * 24 * 15);
-		response.addCookie(frIdCookie);
-		
-		//24-12-2020
-		 frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
-		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
-		response.addCookie(frKmCookie);
-		
-		//4-01-2021
-		 delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
-		delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
-		response.addCookie(delAddIdCookie);
-		session.setAttribute("delAddId", 0);
-		
-		session.setAttribute("userId", 0);
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		//06-01-2020
-			try {
-		String mobNo = request.getParameter("mobNo");
-		String otp = request.getParameter("otp");
-		int userType = Integer.parseInt(request.getParameter("userType"));
-		
-
-		LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-		//getCustomerByMobNo
-		map = new LinkedMultiValueMap<>();
-		map.add("mobNo", mobNo);
-		CustomerAddDetail custAddDetail = Constants.getRestTemplate().postForObject(Constants.url + "getCustomerByMobNo", map,
-				CustomerAddDetail.class);
-		if(custAddDetail==null) {
-			//Its new cust
-			//System.err.println("In ");
-		}else {
-			//Its existing cust
-			//System.err.println("OUT ");
-		}
-		
-		if(userType==1 && custAddDetail==null) {
-			//Save to Db and goto home
-			System.err.println("Ok If 1 and null ");
-			SiteVisitor visitor=new SiteVisitor();
-			visitor.setFrId(frId);
-			visitor.setLandMark(landMark);
-			visitor.setMobNo(mobNo);
-			visitor.setVisitDttime(CommonUtility.getCurrentYMDDateTime());
-			
-			SiteVisitor siteVisitorSaveRes = Constants.getRestTemplate().postForObject(Constants.url + "saveSiteVisitor", visitor,
-					SiteVisitor.class);
-			System.err.println("siteVisitorSaveRes " +siteVisitorSaveRes);
-			session.setAttribute("custId", 0);
-			retPage=1;
-		} else if(userType==2 && custAddDetail==null) {
-			  System.err.println("Ok userType==2 && custAddDetail=null "); 
-			  retPage=0;
-			  }
-			 else if(custAddDetail!=null){
-			//goto home
-			System.err.println("Ok else if custAddDetail!=null "+ custAddDetail);
-			
-			session.setAttribute("custId", custAddDetail.getCustId());
-				//frId = Integer.parseInt(request.getParameter("selectShop"));
-				frId=custAddDetail.getExInt3();
+				frId = Integer.parseInt(request.getParameter("selectShop"));
 				session.setAttribute("frId", frId);
-				try {
-				frKm=Float.parseFloat(custAddDetail.getExVar3());
-				}catch (Exception e) {
-					frKm=0;
-				}
+
+				frKm = Float.parseFloat(request.getParameter("frKm"));
 				session.setAttribute("frKm", frKm);
-				
-				landMark = custAddDetail.getLandmark();
+
+				landMark = request.getParameter("txtPlaces");
 				session.setAttribute("landMark", landMark);
+				System.err.println("frId " + frId + " frKm " + frKm + "landMark " + landMark);
 				landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
 				landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(landMarkCookie);
-			
-			frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
-			frIdCookie.setMaxAge(60 * 60 * 24 * 15);
-			response.addCookie(frIdCookie);
-			
-			//24-12-2020
-			frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
-			frKmCookie.setMaxAge(60 * 60 * 24 * 15);
-			response.addCookie(frKmCookie);
-			
-			//4-01-2021
-			 delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" +custAddDetail.getCustDetailId() ));
-			delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
-			response.addCookie(delAddIdCookie);
-			session.setAttribute("delAddId", custAddDetail.getCustDetailId());
-			session.setAttribute("userId", 0);
-			retPage=2;
-			
+
+				frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+				frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(frIdCookie);
+
+				// 24-12-2020
+				frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+				frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(frKmCookie);
+
+				// 4-01-2021
+				delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
+				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(delAddIdCookie);
+				session.setAttribute("delAddId", 0);
+				
+				session.setAttribute("userId", 0);
+				retPage = 3;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		session.setAttribute("mobNo", mobNo);
-		System.err.println("frId Here " +frId);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println("In Catch here  " + frId);
+		} else {
+			// 06-01-2020
+			try {
+				String mobNo = request.getParameter("mobNo");
+				String otp = request.getParameter("otp");
+
+				LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
+				// getCustomerByMobNo
+				map = new LinkedMultiValueMap<>();
+				map.add("mobNo", mobNo);
+				CustomerAddDetail custAddDetail = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getCustomerByMobNo", map, CustomerAddDetail.class);
+
+				if (userType == 1 && custAddDetail == null) {
+					// Save to Db and goto home
+					System.err.println("Ok If 1 and null ");
+					SiteVisitor visitor = new SiteVisitor();
+					visitor.setFrId(frId);
+					visitor.setLandMark(landMark);
+					visitor.setMobNo(mobNo);
+					visitor.setVisitDttime(CommonUtility.getCurrentYMDDateTime());
+
+					SiteVisitor siteVisitorSaveRes = Constants.getRestTemplate()
+							.postForObject(Constants.url + "saveSiteVisitor", visitor, SiteVisitor.class);
+					System.err.println("siteVisitorSaveRes " + siteVisitorSaveRes);
+					session.setAttribute("custId", 0);
+					retPage = 1;
+				} else if (userType == 2 && custAddDetail == null) {
+					System.err.println("Ok userType==2 && custAddDetail=null ");
+					retPage = 0;
+				} else if (custAddDetail != null) {
+					// goto home
+					System.err.println("Ok else if custAddDetail!=null " + custAddDetail);
+
+					session.setAttribute("custId", custAddDetail.getCustId());
+					// frId = Integer.parseInt(request.getParameter("selectShop"));
+					frId = custAddDetail.getExInt3();
+					session.setAttribute("frId", frId);
+					try {
+						frKm = Float.parseFloat(custAddDetail.getExVar3());
+					} catch (Exception e) {
+						frKm = 0;
+					}
+					session.setAttribute("frKm", frKm);
+
+					landMark = custAddDetail.getLandmark();
+					session.setAttribute("landMark", landMark);
+					landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
+					landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(landMarkCookie);
+
+					frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
+					frIdCookie.setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(frIdCookie);
+
+					// 24-12-2020
+					frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
+					frKmCookie.setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(frKmCookie);
+
+					// 4-01-2021
+					delAddIdCookie = new Cookie("delAddIdCookie",
+							EncodeDecode.Encrypt("" + custAddDetail.getCustDetailId()));
+					delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
+					response.addCookie(delAddIdCookie);
+					session.setAttribute("delAddId", custAddDetail.getCustDetailId());
+					session.setAttribute("userId", 0);
+					retPage = 2;
+
+				}
+				session.setAttribute("mobNo", mobNo);
+				System.err.println("frId Here " + frId);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.err.println("In Catch here  " + frId);
+			}
 		}
-		
 		return retPage;
 	}
-	
+
 	// Modified By -Sachin
 	// Modific Date -11-11-2020
 	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
@@ -426,7 +420,7 @@ public class HomeController {
 			model.addAttribute("prodHeader", prodHeader);
 
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
- 
+
 			try {
 				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
 					if (tag.getFilterTypeId() == 7) {
@@ -508,12 +502,12 @@ public class HomeController {
 	@RequestMapping(value = "/getAllFrWiseData", method = RequestMethod.POST)
 	@ResponseBody
 	public FEDataTraveller getAllFrWiseData(HttpServletRequest request, HttpServletResponse response, Model model) {
-		
+
 		HttpSession session = request.getSession();
 
 		Gson gson = new Gson();
 		FEDataTraveller data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
-		
+
 		return data;
 	}
 
@@ -573,8 +567,6 @@ public class HomeController {
 	public String viewCart(Locale locale, Model model) {
 		return "viewcart";
 	}
-
-	
 
 	@RequestMapping(value = "/viewmap", method = RequestMethod.GET)
 	public String viewMap(Locale locale, Model model) {
@@ -657,28 +649,27 @@ public class HomeController {
 		return image;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/showAboutUsPage", method = RequestMethod.GET)
 	public String showAboutUsPage(Locale locale, Model model) {
 		return "about-us";
 	}
-	
+
 	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
 	public String showContactUsPage(Locale locale, Model model) {
 		return "contact-us";
 	}
-	
+
 	@RequestMapping(value = "/showT&CPage", method = RequestMethod.GET)
 	public String showT(Locale locale, Model model) {
 		return "terms-condition";
 	}
-	
+
 	@RequestMapping(value = "/showVistStorePage", method = RequestMethod.GET)
 	public String showVistStorePage(Locale locale, Model model) {
 		return "visit-stores";
 	}
-	
+
 	@RequestMapping(value = "/showBecmVendrFr", method = RequestMethod.GET)
 	public String showBecmVendrFr(Locale locale, Model model) {
 		try {
@@ -687,11 +678,11 @@ public class HomeController {
 //					CityData[].class);
 //			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 
-		//	model.addAttribute("cityList", cityList);
-		}catch (Exception e) {
+			// model.addAttribute("cityList", cityList);
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return "becmVendorFr";
 	}
 }

@@ -287,6 +287,8 @@ color: red;}
 		</h2>
 		<form id="validation-form"
 			action="${pageContext.request.contextPath}/preHome" method="post">
+		
+			<input type="hidden" id="user_type" name="user_type" value="${userType}"/>
 			<div class="location_padd">
 				<div class="current_location">
 					<a href="javascript:void(0)" onclick="goToMap()"><img
@@ -363,7 +365,7 @@ color: red;}
 					<div class="search_one">
 						<div class="search_one_l">
 							<input name="txtPlaces" value=""
-								type="text" class="input_search landing" placeholder="Search your Area"
+								type="text" required class="input_search landing" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
 								<span class="form-label-hint-error-l" id="error_txtPlaces"
 												style="display: none;">This field is required.</span>
@@ -398,7 +400,7 @@ color: red;}
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select onchange="getKM(this)" id="selectShop" name="selectShop" class="citysel">
+							<select onchange="getKM(this)" required id="selectShop" name="selectShop" class="citysel">
 								<!-- style="background-color: #FFF; border-radius: 3px; padding: 7px; font-size: 16px; color: #a6a6a6; width: 100%;"> -->
 							</select>
 							
@@ -444,7 +446,15 @@ color: red;}
 				
 
 			</div> -->
+			<div id="addNewAddDiv" style="display: none;">
+			<div class="proceed_btn_1">
+					<input name="" id="addNewAddDiv_btn" type="submit" value="Proceed with Address"
+						class="proceed"/>
+				</div>
+				</div>
 			
+			
+			<div id="addAddDiv" style="display: none;">
 			<div class="proceed_btn_1">
 					<input name="" id="submtbtn" type="button" value="Proceed New User"
 						class="landingpop-mobno_open proceed" />
@@ -464,6 +474,7 @@ color: red;}
 				
 				
 			<input type="hidden" id="frKm" name="frKm" value="0"/>
+			</div>
 			</div>
 		</form>
 
@@ -518,13 +529,20 @@ color: red;}
 				<input name="" id="main_submit" style="display: none;" type="button" value="Submit" class="proceed" />
 			</div>
 			</div>
-			<input type="hidden" id="user_type" name="user_type" value="0">
 		</form>
 	</div>
 	
 	<script type="text/javascript">
 	 $(document).ready(function () {
 	     //$('#landingpop-mobno').hide();
+	     var isAddNewAdd='${isAddNewAdd}';
+	     if(parseInt(isAddNewAdd)==1){
+	    	 document.getElementById("addAddDiv").style="display:none";
+	    	 document.getElementById("addNewAddDiv").style="display:block";
+	     }else{
+	    	 document.getElementById("addAddDiv").style="display:block";
+	    	 document.getElementById("addNewAddDiv").style="display:none";
+	     }
 	 });
 	 
 	jQuery('.numbersOnly').keyup(function() {
@@ -668,6 +686,45 @@ color: red;}
 		document.getElementById("main_close").click();
 	});
 	
+	//after coming from as Add New Address
+	$("#main_submit_type3").click(function(e) {
+		var allError=false;
+		var isError = false;
+		var isError1 = false;
+		
+		if(parseInt(userType)==1){
+			dataError=false;
+		var errMsg = "";
+		if (!$("#selectShop").val()) {
+			isError1 = true;
+			dataError=true;
+			$("#error_selectShop").show()
+		}else  if ($("#selectShop").val()<1) {
+			isError1 = true;
+			dataError=true;
+			$("#error_selectShop").show();
+		} else  {
+			$("#error_selectShop").hide()
+		}
+		
+		if (!$("#txtPlaces").val()) {
+			isError1 = true;
+			dataError=true;
+			$("#error_txtPlaces").show()
+		} else {
+			$("#error_txtPlaces").hide()
+		}	 
+	}//end of if user Type==1
+	
+		var fd = new FormData();
+		fd.append('selectShop', $("#selectShop").val());
+		fd.append('txtPlaces', $("#txtPlaces").val());
+		fd.append('frKm', $("#frKm").val());
+		fd.append('selectShop', $("#selectShop").val());
+		fd.append('user_type', userType);
+		
+	}//end of function
+	//old
 	$("#main_submit").click(function(e) {
 		var allError=false;
 		var isError = false;
@@ -739,7 +796,7 @@ color: red;}
 		fd.append('txtPlaces', $("#txtPlaces").val());
 		fd.append('frKm', $("#frKm").val());
 		fd.append('selectShop', $("#selectShop").val());
-		fd.append('userType', userType);
+		fd.append('user_type', userType);
 		fd.append('mobNo', $("#mobNo").val());
 		fd.append('otp', $("#otp").val());
 		//console.log("fd ",JSON.stringify(fd));
@@ -756,7 +813,7 @@ color: red;}
 	        	//alert(resData);
 	        	isReload=true;
 	        	var url="";
-	        	if(parseInt(resData)==1){
+	        	if(parseInt(resData)==1||parseInt(resData)==3){
 	        	 url = '${pageContext.request.contextPath}/home';
 	        	}else if(parseInt(resData)==0){
 	        	//alert("Ok Here 731")
