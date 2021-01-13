@@ -173,9 +173,9 @@ color: red;}
 		<div class="wrapper">
 			<div class="tweets_row">
 				<div class="tweets_l">
-					<img
-						src="${pageContext.request.contextPath}/resources/images/tweets.jpg"
-						alt="">
+				<div style="height: 400px; overflow-y:scroll;">
+				<a class="twitter-timeline" href="https://twitter.com/AtsInfosoft?ref_src=twsrc%5Etfw">Tweets by AtsInfosoft</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+					
 				</div>
 				<div class="tweets_r">
 					<i class="fa fa-user-circle" aria-hidden="true"></i> New user as a
@@ -481,7 +481,7 @@ color: red;}
 	</div>
 
 <!--   New Popup -->
-<div id="landingpop-mobno" class="well_landing mobile">
+<div id="landingpop-mobno" class="well_landing mobile" style="display: none;">
 		<h2 class="location_title">
 			Enter Your Details
 			<div class="landingpop-mobno_close close_pop">
