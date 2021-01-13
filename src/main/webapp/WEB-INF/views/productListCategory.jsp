@@ -31,172 +31,94 @@ html {
 	<!-- Header End -->
 
 	<div class="head_marg with_menu">
-		<section class="product_category">
-			<div class="wrapper">
+		<c:forEach items="${allData.frSubCatList}" var="subCat">
 
-				<!-- new slider 9-1-2021 -->
-				<!-- <div class="regular-filter slider">
-            <div>
-            	<div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            
-            <div>
-                <div class="filter_slide_bx">
-                <div class="product_filter_one">
-					<a href="#41" onclick="setDivPadding(41)">
-					<img src="/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg" alt="" onerror="this.src='/ecommerce/resources/images/no_img_folder/product-filter-noimg.jpg'">
-						<span>Inspiration</span> </a>
-					</div>
-					</div>
-            </div>
-            
-            
-            
-            
-          </div> -->
+			<c:set value="0" var="count"></c:set>
 
-
-				<div class="regular-filter slider">
+			<c:forEach items="${allData.feProductHeadList}" var="product">
+				<c:if test="${product.prodSubCatId == subCat.subCatId}">
+					<c:set value="1" var="count"></c:set>
+				</c:if>
+			</c:forEach>
 
 
 
+			<c:if test="${subCat.catId == catId && count==1}">
 
-					<c:forEach items="${allData.frSubCatList}" var="subCat">
+				<c:set var="totSubCnt" value="${totSubCnt+1}"></c:set>
 
-						<c:set value="0" var="count"></c:set>
 
-						<c:forEach items="${allData.feProductHeadList}" var="product">
-							<c:if test="${product.prodSubCatId == subCat.subCatId}">
-								<c:set value="1" var="count"></c:set>
+			</c:if>
+		</c:forEach>
+		<c:choose>
+		<c:when test="${totSubCnt>1}">
+			<section class="product_category">
+				<div class="wrapper">
+
+					<div class="regular-filter slider">
+					
+						<c:forEach items="${allData.frSubCatList}" var="subCat">
+
+							<c:set value="0" var="count"></c:set>
+
+							<c:forEach items="${allData.feProductHeadList}" var="product">
+								<c:if test="${product.prodSubCatId == subCat.subCatId}">
+									<c:set value="1" var="count"></c:set>
+								</c:if>
+							</c:forEach>
+
+
+
+							<c:if test="${subCat.catId == catId && count==1}">
+
+								
+								<div>
+									<div class="filter_slide_bx">
+										<div class="product_filter_one">
+											<a href="#${subCat.subCatId}"
+												onclick="setDivPadding(${subCat.subCatId})"> <img
+												src="${subCatImgUrl}${subCat.imageName}" alt=""
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
+												<span><c:out value="${subCat.subCatName}"></c:out></span>
+											</a>
+										</div>
+									</div>
+								</div>
+
 							</c:if>
 						</c:forEach>
 
 
 
-						<c:if test="${subCat.catId == catId && count==1}">
-
-							<div>
-								<div class="filter_slide_bx">
-									<div class="product_filter_one">
-										<a href="#${subCat.subCatId}"
-											onclick="setDivPadding(${subCat.subCatId})"> <img
-											src="${subCatImgUrl}${subCat.imageName}" alt=""
-											onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
-											<span><c:out value="${subCat.subCatName}"></c:out></span>
-										</a>
-									</div>
-								</div>
-							</div>
-
-						</c:if>
-					</c:forEach>
-
-
-				</div>
-
-
-
-
-				<div class="mobile_scroll">
-					<div class="prod_filt">
-						<ul>
-
-							<c:forEach items="${allData.frSubCatList}" var="subCat">
-
-								<c:set value="0" var="count"></c:set>
-
-								<c:forEach items="${allData.feProductHeadList}" var="product">
-									<c:if test="${product.prodSubCatId == subCat.subCatId}">
-										<c:set value="1" var="count"></c:set>
-									</c:if>
-								</c:forEach>
-
-
-
-								<c:if test="${subCat.catId == catId && count==1}">
-
-
-									<li>
-										<div class="product_filter_one">
-											<a href="#${subCat.subCatId}"
-												onclick="setDivPadding(${subCat.subCatId})"><img
-												src="${subCatImgUrl}${subCat.imageName}" alt=""
-												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
-												<c:out value="${subCat.subCatName}"></c:out> </a>
-										</div>
-									</li>
-
-								</c:if>
-							</c:forEach>
-
-						</ul>
 					</div>
 
+
 				</div>
+			</section>
+		</c:when>
+		<c:otherwise>
+		<section class="product_category">
+				<div class="wrapper">
+				<h2 class="sec_title">
+					<center>Sorry No Products Found!!!
+					</center>
+				</h2>
+				
+				</div>
+			</section>
+		
+		</c:otherwise>
+		
+		
+		</c:choose>
+		
+		
+		
+		
+		
+		
+		
 
-
-			</div>
-		</section>
 
 
 
