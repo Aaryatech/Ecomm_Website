@@ -83,10 +83,10 @@
 
 					<div class="logo_form">
 						<!--main search-->
-						<form action="" method="get">
+						<!-- <form action="" method="get"> -->
 							<div class="input_one">
 								<input name="glbSearch" id="glbSearch" type="text"
-									onchange="globalSearch(0)" list="glbTemplates"
+									onchange="globalSearch(0)" list="glbTemplates" 
 									class="search_input" autocomplete="on" placeholder="Search..." />
 								<datalist id="glbTemplates"></datalist>
 								<button class="search_btn" id="btnGlbSearch"
@@ -94,7 +94,7 @@
 									<i class="fa fa-search" aria-hidden="true"></i>
 								</button>
 							</div>
-						</form>
+						<!-- </form> -->
 					</div>
 
 					<div class="logo_right">
@@ -584,14 +584,6 @@ function setLandmark(landMark){
 		document.getElementById("mySidepanel").style.width = "0";
 	}
 
-	var input = document.getElementById("glbSearch");
-	input.addEventListener("keyup", function(event) {
-		if (event.keyCode === 13) {
-			event.preventDefault();
-			document.getElementById("btnGlbSearch").click();
-		}
-	});
-
 	function globalSearch(catId) {
 
 		//alert(document.getElementById("glbSearch").value);
@@ -650,6 +642,15 @@ function setLandmark(landMark){
 		appendCartData();
 
 	}
+	
+	
+	function search(ele) {
+	    if(event.key === 'Enter') {
+	        alert(ele.value);        
+	    }
+	}
+	
+	
 </script>
 
 

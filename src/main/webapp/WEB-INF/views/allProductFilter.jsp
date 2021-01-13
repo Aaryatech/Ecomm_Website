@@ -67,35 +67,35 @@
 
 											<li>
 											<label class="radio_menu">Under 499
-											  <input type="radio" id="radioPrice" value="0-499" checked="checked" name="radioPrice" class="menuPrice">
+											  <input type="radio" id="radioPrice" value="0-499"  name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">500 to 599
-											  <input type="radio" id="radioPrice" value="500-599" checked="checked" name="radioPrice" class="menuPrice">
+											  <input type="radio" id="radioPrice" value="500-599"  name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">600 to 999
-											  <input type="radio" id="radioPrice" value="600-999" checked="checked" name="radioPrice" class="menuPrice">
+											  <input type="radio" id="radioPrice" value="600-999"  name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">1000 to 1999
-											  <input type="radio" id="radioPrice" value="1000-1999" checked="checked" name="radioPrice" class="menuPrice">
+											  <input type="radio" id="radioPrice" value="1000-1999"  name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
 
 											<li>
 											<label class="radio_menu">Above 2000
-											  <input type="radio" id="radioPrice" value="2000-10000" checked="checked" name="radioPrice" class="menuPrice">
+											  <input type="radio" id="radioPrice" value="2000-10000"  name="radioPrice" class="menuPrice">
 											  <span class="checkmark"></span>
 											</label>
 											</li>
@@ -860,6 +860,9 @@
 			//alert(tempArr)
 			
 			
+			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
+
+			
 			
 			if(tempArr.length>0){
 				
@@ -917,7 +920,7 @@
 		
 		function loadData() {
 
-			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"'
+			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
 
 			
 			if (sessionStorage.getItem("selTags") == null) {
@@ -1055,7 +1058,11 @@
 									
 									if(tempFilterArr.length>0){
 										
+										//alert("tempFilterArr  :  "+tempFilterArr+"           filterArr[f] : "+filterArr[f]+"    prodCatId : "+allItemArr[i].prodCatId+"          CAT ID : "+catId);
+										
 										if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].prodCatId == catId) {
+											
+											
 											
 											var isFound=0;
 											for(var y=0; y<hiddenProductListArr.length; y++){
@@ -1065,6 +1072,7 @@
 											}
 											
 											if(isFound == 0){
+												//alert("MATCH ---- "+allItemArr[i])
 												hiddenProductListArr.push(allItemArr[i]);
 											}
 											
@@ -1172,6 +1180,10 @@
 						
 					}else{
 						
+						//alert("hi")
+						
+						alert("cat - "+hiddenProductListArr[i].prodCatId+"                "+catId);
+						
 						if(max > 0 && hiddenProductListArr[i].defaultPrice >= min && hiddenProductListArr[i].defaultPrice <= max && hiddenProductListArr[i].prodCatId == catId){
 							
 							displayListArr.push(hiddenProductListArr[i]);
@@ -1233,6 +1245,9 @@
 							count++;
 							
 						}else if(max == 0  && hiddenProductListArr[i].prodCatId == catId){
+							
+							alert("aaaaaaaaa")
+							
 							displayListArr.push(hiddenProductListArr[i]);
 							
 							var isLike=allItemArr[i].isLike;
@@ -1290,6 +1305,8 @@
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
+						}else{
+							alert("pppppppppp")
 						}
 						
 					}
@@ -1529,7 +1546,7 @@
 						
 						if(max > 0){
 							
-							if(allItemArr[i].defaultPrice >= min && allItemArr[i].defaultPrice <= max){
+							if(allItemArr[i].defaultPrice >= min && allItemArr[i].defaultPrice <= max && allItemArr[i].prodCatId==catId){
 								
 								displayListArr.push(allItemArr[i]);
 								
@@ -1592,6 +1609,8 @@
 							}
 							
 						} else{
+							
+							//alert("asdasdasdasdasdas")
 							
 							displayListArr.push(allItemArr[i]);
 							

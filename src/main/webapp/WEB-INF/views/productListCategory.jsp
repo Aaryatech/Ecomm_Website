@@ -157,7 +157,7 @@ html {
 
 
 
-				<%-- <div class="mobile_scroll">
+				<div class="mobile_scroll">
 					<div class="prod_filt">
 						<ul>
 
@@ -192,7 +192,7 @@ html {
 						</ul>
 					</div>
 
-				</div> --%>
+				</div>
 
 
 			</div>
