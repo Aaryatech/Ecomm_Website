@@ -74,7 +74,7 @@
 		<div class="wrapper">
 			<div class="menu_cont">
 				<div class="main_logo">
-					<a href="${pageContext.request.contextPath}/home"><img src="#"
+					<a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/resources/images/main_logo.png"
 						class="lazy"
 						data-src="${pageContext.request.contextPath}/resources/images/main_logo.png"
 						alt=""></a>
@@ -228,17 +228,17 @@
 								<c:when test="${sessionScope.custId>0}">
 								<a href="${pageContext.request.contextPath}/profile"><img
 										class="lazy" width="25" height="25"
-										data-src="${sessionScope.profileImg}"
+										src="${sessionScope.profileImg}"
 										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
-										alt=""><span> ${sessionScope.userName} </span> <!-- <i class="fa fa-angle-down"
+										alt="">  <!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> 
 								</c:when>
 								<c:otherwise>
 								<a href="#"><img
 										class="lazy" width="25" height="25"
-										data-src="${sessionScope.profileImg}"
+										src="${sessionScope.profileImg}"
 										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
-										alt=""><span> ${sessionScope.userName} </span> <!-- <i class="fa fa-angle-down"
+										alt="">  <!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> 
 								</c:otherwise>
 								</c:choose>
@@ -257,7 +257,16 @@
 										<li></li>
 										<li></li>
 										<li class="lgn_out"></li>
+										
 									</ul> --%></li>
+									<li>
+								 <span class="user_lgn_nm" title="${sessionScope.userName}"> ${sessionScope.userName} </span>
+						 		
+										
+										
+										 
+									 </li>
+									
 							</ul>
 						</div>
 					</div>
@@ -281,9 +290,8 @@
 		</div>
 	</div>
 
-	<span onclick="openNav1()" class="main_menu"><img src="#"
-		class="lazy"
-		data-src="${pageContext.request.contextPath}/resources/images/hamburger_icn.png"
+	<span onclick="openNav1()" class="main_menu"><img
+		src="${pageContext.request.contextPath}/resources/images/hamburger_icn.png"
 		alt=""> <!--<i class="fa fa-bars" aria-hidden="true"></i>--></span>
 
 </header>

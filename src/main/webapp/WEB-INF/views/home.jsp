@@ -392,7 +392,7 @@
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
-												<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
+												<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 													<img src="#"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 														class="mobile_fit transition lazy"></a>
@@ -464,7 +464,7 @@
 												<div class="cake_container">
 													<h4 class="cake_nm">
 														<a
-															href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">

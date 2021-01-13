@@ -605,7 +605,7 @@ public class HomeController {
 			map.add("itemIds", id);
 			Integer[] relateItemArray = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRelateProductByProductIds", map, Integer[].class);
-			System.err.println("relateItemArray " +relateItemArray[0]);
+			System.err.println("relateItemArray " +relateItemArray.length);
 			model.addAttribute("relateItemArray", relateItemArray);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,7 +4,10 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <jsp:include page="/WEB-INF/views/include/othercssjs.jsp"></jsp:include>
-</head>
+
+<%--   <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+ --%> 
+ </head>
 <body>
   
 

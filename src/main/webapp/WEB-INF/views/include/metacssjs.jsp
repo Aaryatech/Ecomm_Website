@@ -48,5 +48,18 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js"></script>
 	
+<!-- today -->
 
+<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/otherresources/css/monginis.css" type="text/css"/>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/otherresources/images/fevicon.png" type="images/png" sizes="32x32">
+
+<!--commanJS-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/otherresources/js/jquery-1.10.2.min.js"></script>
+<!--commanJS-->
+<!-- jQuery Popup Overlay -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/otherresources/js/jquery.popupoverlay.js"></script>    
+
+
+ <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   --%>
 </head>

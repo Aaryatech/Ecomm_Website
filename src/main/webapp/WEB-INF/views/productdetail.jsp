@@ -570,10 +570,18 @@
 						<!--product-row-1-->
 						<c:forEach items="${prodHeaderList}" var="product"
 							varStatus="prodCount">
+							<c:set value="0" var="is_related"></c:set>
 							<li>
+							<c:forEach items="${relateItemArray}" var="relProdId"
+							varStatus="prodCount">
+							<c:if test="${relProdId==product.productId}">
+							<c:set value="1" var="is_related"></c:set>
+							</c:if>
+							</c:forEach>
+							<c:if test="${is_related==1}">
 								<div class="cake_one product_padd">
 									<div class="cake_pic">
-									<a href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">
+									<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
 											class="mobile_fit transition"></a>
 											
@@ -651,6 +659,7 @@
 										</h4>
 									</div>
 								</div>
+								</c:if>
 							</li>
 						</c:forEach>
 					</ul>

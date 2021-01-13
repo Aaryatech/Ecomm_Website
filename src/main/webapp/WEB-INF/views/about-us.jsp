@@ -4,7 +4,8 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <jsp:include page="/WEB-INF/views/include/othercssjs.jsp"></jsp:include>
-</head>
+<%--  <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+ --%> </head>
 <body> 
 <!--mongi help-popup-->    
 <div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/otherresources/images/mongi_help.png" alt=""></a></div> 

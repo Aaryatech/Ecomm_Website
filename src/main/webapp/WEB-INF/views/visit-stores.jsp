@@ -4,8 +4,12 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <jsp:include page="/WEB-INF/views/include/othercssjs.jsp"></jsp:include>
-</head>
+
+ <%-- <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
+  --%>
+ </head>
 <body>
+  <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
   
 
 <!--mongi help-popup-->    
@@ -62,7 +66,6 @@
       $('#mongi').popup();
     });
     </script>    
-<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 <div class="head_marg">  
     
 <!--product listing-->    
