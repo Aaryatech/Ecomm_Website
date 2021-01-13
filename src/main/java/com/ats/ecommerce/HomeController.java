@@ -45,6 +45,7 @@ import com.ats.ecommerce.model.FEProductHeader;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.TempImageHolder;
+import com.ats.ecommerce.model.cms.ContactUs;
 import com.ats.ecommerce.model.offer.SiteVisitor;
 import com.ats.ecommerce.model.order.OrderDetail;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -770,7 +771,44 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
-	public String showContactUsPage(Locale locale, Model model) {
+	public String showContactUsPage(Locale locale, Model model) throws JsonParseException, JsonMappingException, IOException {
+		int compId = data.getFranchiseCatList().get(0).getCompanyId();
+		System.out.println("Compan Id : "+compId);
+		
+		ContactUs cus = new ContactUs();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ContactUs[] cusArr = null;
+		
+		cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"),
+					ContactUs[].class);
+			
+		List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
+		for (int i = 0; i < cusList.size(); i++) {
+			if(cusList.get(i).getCompanyId()==compId) {
+				
+				cus.setCompanyId(compId);
+				
+				cus.setEmailText(cusList.get(i).getEmailText());
+				cus.setEmail1(cusList.get(i).getEmail2());
+				cus.setEmail2(cusList.get(i).getEmail1());			
+
+				cus.setManufacAddressTxt(cusList.get(i).getManufacAddressTxt());
+				cus.setManufacAddress(cusList.get(i).getManufacAddress());
+				
+				cus.setOfficeText(cusList.get(i).getManufacAddressTxt());
+				cus.setOfficeAddress(cusList.get(i).getManufacAddress());			
+				
+				cus.setPageHead(cusList.get(i).getPageHead());
+				cus.setSubHeading(cusList.get(i).getSubHeading());
+				
+				cus.setPhoneText(cusList.get(i).getPhoneText());
+				cus.setPhone1(cusList.get(i).getPhone1());
+				cus.setPhone2(cusList.get(i).getPhone2());
+			}
+		}
+		
+		model.addAttribute("cus", cus);			
 		return "contact-us";
 	}
 
@@ -800,5 +838,38 @@ public class HomeController {
 		return "becmVendorFr";
 	}
 	
-	
+	@RequestMapping(value = "/getFooterData", method = RequestMethod.GET)
+	@ResponseBody
+	public ContactUs getFooterData(HttpServletRequest request, HttpServletResponse response, Model model) throws JsonParseException, JsonMappingException, IOException {
+
+		HttpSession session = request.getSession();
+		ContactUs cus = new ContactUs();
+		try {		
+		ObjectMapper mapper = new ObjectMapper();
+		ContactUs[] cusArr = null;
+		
+		cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"),
+					ContactUs[].class);
+			
+		List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
+		for (int i = 0; i < cusList.size(); i++) {
+			if(cusList.get(i).getCompanyId()==1) {				
+				
+				cus.setFacebookLink(cusList.get(i).getFacebookLink());
+				cus.setTwitterLink(cusList.get(i).getTwitterLink());
+				cus.setLinkedInLink(cusList.get(i).getLinkedInLink());
+				cus.setGoogleAcLink(cusList.get(i).getGoogleAcLink());
+				
+				cus.setFooterAddress(cusList.get(i).getFooterAddress());
+				cus.setFooterEmail1(cusList.get(i).getFooterEmail1());			
+				cus.setFooterEmail2(cusList.get(i).getFooterEmail2());
+				cus.setFooterPhone1(cusList.get(i).getFooterPhone1());
+				cus.setFooterPhone2(cusList.get(i).getFooterPhone2());
+			}
+		}
+		}catch (Exception e) {
+			e.getMessage();
+		}
+		return cus;
+	}
 }

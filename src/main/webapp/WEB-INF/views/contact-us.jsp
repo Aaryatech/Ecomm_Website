@@ -77,38 +77,40 @@
             
             
             <h2 class="sec_title">
-                <center>Get in Touch
-                <span>Here's How You Can Reach Us</span></center> 
-            </h2>
-            
+                <center>${cus.pageHead}
+                <span>${cus.subHeading}</span></center> 
+            </h2><!-- Get in Touch -->
+            <!-- Here's How You Can Reach Us -->
             <div class="contact_row">
                 
                 <div class="contact_add">
                     
                     <div class="call_r">                    
                         <i class="fa fa-phone" aria-hidden="true"></i>
-                        <h2 class="off_address">Phone Number</h2>
-                        Mobile : +91 1234 567 890 <br>
-                        Landline: +91 1234 567 890
+                        <h2 class="off_address">${cus.phoneText}</h2><!-- PHONE NUMBER -->
+                        Mobile : +91 ${cus.phone1} <br>
+                        Landline: +91 ${cus.phone2}
                     </div> 
                     
                     <div class="call_r">                    
                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <h2 class="off_address">Email Address</h2>
-                        <a href="mailto:customercare@monginis.net">customercare@monginis.net</a>
-                        <a href="mailto:info@monginis.net">info@monginis.net</a>
+                        <h2 class="off_address">${cus.emailText}</h2><!-- EMAIL ADDRESS -->
+                        <a href="${cus.email1}">${cus.email1}</a>/
+                        <a href="${cus.email2}">${cus.email2}</a>
                     </div> 
                     
                     <div class="call_r">                    
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <h2 class="off_address">Corporate Office</h2>
-                        Shop 57, Near Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Mashik, Maharashtra 422003.
+                        <h2 class="off_address">${cus.officeText}</h2><!-- Corporate Office -->
+                        ${cus.officeAddress}
+                        <!-- Shop 57, Near Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Mashik, Maharashtra 422003. -->
                     </div>
                     
                     <div class="call_r">                    
                         <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <h2 class="off_address">Manufacture Address</h2>
-                        Shop 57, Near Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Mashik, Maharashtra 422003.
+                        <h2 class="off_address">${cus.manufacAddressTxt}</h2><!-- Manufacture Address -->
+                        ${cus.manufacAddress}
+                        <!-- Shop 57, Near Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Mashik, Maharashtra 422003. -->
                     </div>
                 </div>
                 
