@@ -447,7 +447,6 @@
 				ajax : 'true'
 			}, function(data) {
 				//alert(JSON.stringify(data));
-				 document.getElementById("loaderimg").style.display = "none";
 
 				 var fd = new FormData();
 					fd.append('frId', 0);
@@ -531,6 +530,8 @@
 				} */
 			});
 			applyOffer();
+			 document.getElementById("loaderimg").style.display = "none";
+
 		}
 		</script>
 <!-- //Sachin 23-12-2020
@@ -557,7 +558,6 @@ function checkValidOffer(){
 				ajax : 'true'
 			}, function(data) {
 				//alert(JSON.stringify(data));
-				document.getElementById("loaderimg").style.display = "none";
 				if (data.error == true) {
 					res = true;
 					alert("Coupon/Promo code expires!");
@@ -571,6 +571,8 @@ function checkValidOffer(){
 					document.getElementById("discMin").value=0;
 					document.getElementById("offerCoupon").value="";
 					document.getElementById('offerCoupon').focus();
+					document.getElementById("loaderimg").style.display = "none";
+
 				}else{
 					//alert("In elseee checkValidOffer")
 					var discPer=document.getElementById("tempDiscPer").value;
@@ -578,6 +580,8 @@ function checkValidOffer(){
 					var discMinAmt=document.getElementById("tempDiscMinAmt").value;
 					document.getElementById("discMin").value=discMinAmt;
 					applyOffer();
+					document.getElementById("loaderimg").style.display = "none";
+
 					//appendTableList();
 					//$("#error_offercoupon").hide();
 				}
@@ -586,6 +590,7 @@ function checkValidOffer(){
 	}else{
 		document.getElementById("show_hide_div").style.display = "none";
 	}
+	document.getElementById("loaderimg").style.display = "none";
 }//End of function checkValidOffer()
 </script>
 <script type="text/javascript">
@@ -1671,6 +1676,15 @@ $('#mobile_table-div').append(mobDiv);
 		}
 
 		$('#txtDob').datetimepicker({
+			//yearOffset:222,
+			lang : 'en',
+			timepicker : false,
+			format : 'd-m-Y',
+			formatDate : 'Y-m-d',
+		//minDate:'-1970/01/02', // yesterday is minimum date
+		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+		});
+		$('#delvrDateTime').datetimepicker({
 			//yearOffset:222,
 			lang : 'en',
 			timepicker : false,

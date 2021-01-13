@@ -278,7 +278,21 @@ header{display: block;}
 .mobile_search{display: none;}
 
 /*full menu*/
-.main_menu{position: absolute; right: 0; top: 42px; background: #cf0f75; color: #FFF; text-align: center; padding:24px 20px 16px 20px; cursor:pointer;}
+.main_menu{/* position: absolute; right: 0; top: 42px; background: #cf0f75; color: #FFF; 
+text-align: center; padding:23px 20px 16px 20px; cursor:pointer; */
+    position: absolute;
+    right: 0;
+    top: 42px;
+    background: #cf0f75;
+    color: #FFF;
+    text-align: center;
+    padding: 24px 20px;
+    cursor: pointer; display: block; height: 65px; line-height: 65px;}
+    .user_lgn_nm{display: block;
+    color: #FFF;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'Hind-medium';}
 .overlay {height: 0%; width: 100%; position: fixed; z-index:999999  /*1*/; top: 0; left: 0; background-color: rgb(0,0,0); background-color: rgba(0,0,0, 0.9); overflow-y: hidden; transition: 0.5s;}
 .overlay-content {position: relative; top: 25%; width: 100%; text-align: center; margin-top: 30px;}
 .overlay a {padding: 8px; text-decoration: none; font-size: 36px; color: #818181; display: block; transition: 0.3s;}
@@ -384,11 +398,11 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 
 .main_banner{display: inline-block; width: 100%; text-align: center; vertical-align: middle;}
 .rotate-banner{display: table; height: 540px; vertical-align: middle; width: 100%;}
-.banner_caption{display: table-cell; vertical-align: middle; text-align: center;}
+.banner_caption{display: table-cell; vertical-align: middle; text-align: center; color: #373991; }
 .banner_title{color: #bd0064; font-size: 36px; font-family: 'Hind-Bold'; line-height: 45px;}
 .banner_title span{display: block; color: #000; font-family: 'Hind-medium'; font-style: italic; font-size: 28px;}
 .banner_txt{color: #000000; font-size: 30px; text-transform: uppercase; font-family: 'Hind-SemiBold';}
-.send_now_btn{display: inline-block; background: #373991; color: #FFF; padding: 8px 40px; text-transform: uppercase; font-size: 20px; font-family: 'Hind-SemiBold'; margin: 15px 0 0 0; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+.send_now_btn{display: inline-block; background: #373991; color: #FFF; padding:0 /* 8px 40px */; text-transform: uppercase; font-size: 20px; font-family: 'Hind-SemiBold'; margin: 15px 0 0 0; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .send_now_btn:hover{background: #bd0064; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
 /*festival offer*/
@@ -1189,6 +1203,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
   
 .location_if{color: #FFF; font-size: 15px; display: block; text-align: center; margin: 0 0 5px 0;}
 .location_or.spc{margin: 7px 0 0 0;}
+.detail_like{position: relative;}
 
 
 @media screen and (max-width:1280px){

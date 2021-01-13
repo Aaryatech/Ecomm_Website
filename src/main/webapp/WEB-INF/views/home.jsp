@@ -130,7 +130,9 @@
 		<section class="lazy slider" data-sizes="50vw">
 
 			<c:forEach items="${bannerList}" var="banner">
-
+				<a href="javascript:void(0)"
+								onclick="openProductListPageByTags('${banner.tagIds}')"
+								class="send_now_btn">
 				<div class="main_banner"
 					style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>'),
 					url('${pageContext.request.contextPath}/resources/images/no_img_folder/no-banner-image.jpg')
@@ -141,13 +143,11 @@
 							<h3 class="banner_title">
 								${banner.bannerEventName} <span>${banner.captionOnproductPage}</span>
 							</h3>
-							<a href="javascript:void(0)"
-								onclick="openProductListPageByTags('${banner.tagIds}')"
-								class="send_now_btn">Send Now</a>
+							Send Now
 						</div>
 					</div>
 				</div>
-
+		</a>
 			</c:forEach>
 
 
@@ -914,7 +914,7 @@
 
 		}//end of Function changeWtFlavor
 	</script>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function addToCartClick(productId) {
 			alert("In addToCartClick " + productId);
 			var selectWt = document.getElementById("wt" + productId).value;
@@ -1043,7 +1043,9 @@
 			}//end of For prodDetailList pd
 
 		}//end of Function addToCartClick
-
+		</script> -->
+		<script type="text/javascript">
+		
 		function appendCartData() {
 
 			if (sessionStorage.getItem("allItemList") == null) {
@@ -1143,6 +1145,9 @@
 									+ ' to Checkout</a>' + '</div>')
 
 		}
+		</script>
+		<script type="text/javascript">
+		
 		function setQty(productId, position, curQty, buttonType) {
 			//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
 			//prod_quantity+productId;
@@ -1409,7 +1414,8 @@
 										lazyload);
 							}
 						})
-
+</script>
+	<script type="text/javascript">
 		function openProductListPageByTags(tagIds) {
 
 			if (sessionStorage.getItem("allTagList") == null) {
@@ -1442,7 +1448,9 @@
 					"_self");
 
 		}
-
+		</script>
+		<script type="text/javascript">
+		
 		function setQtyText(id, type) {
 
 			/* type  :  0 - minus,  1 - plus */
@@ -1496,6 +1504,8 @@
 
 		}
 		
+		</script>
+		<script type="text/javascript">
 		
 		function setPriceByWtAndFlavour(id,type) {
 			
@@ -1552,8 +1562,8 @@
 			
 		}
 		
-		
-	 	
+		</script>
+		<script type="text/javascript">
 		function addCart(id,type) {
 			
 			
@@ -1818,31 +1828,34 @@
 		} 
 		
 		
-		function setLike(id) {
-			
-			
-			$.getJSON(
-					'${setLikeOrDislike}',
-					{
-						prodId : id,
-						ajax : 'true'
-					},
-					function(data) {
-						//alert(JSON.stringify(data));
+		
+		
+		
+	</script>
+	<script type="text/javascript">
+	function setLike(id) {
+		
+		
+		$.getJSON(
+				'${setLikeOrDislike}',
+				{
+					prodId : id,
+					ajax : 'true'
+				},
+				function(data) {
+					//alert(JSON.stringify(data));
+					
+					if(data.msg ==1){
+						document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
 						
-						if(data.msg ==1){
-							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
-							
-						}else{
-							document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
-							
-						}
-						setLikeCount(data.statusText);
-					});
-			
-		}
+					}else{
+						document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+						
+					}
+					setLikeCount(data.statusText);
+				});
 		
-		
+	}
 	</script>
 
 

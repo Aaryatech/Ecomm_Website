@@ -597,7 +597,16 @@ public class HomeController {
 			}
 
 			model.addAttribute("tagsJson", jsonStr);
+			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 
+			map = new LinkedMultiValueMap<>();
+			int companyId = (int) request.getSession().getAttribute("companyId");
+			map.add("compId", companyId);
+			map.add("itemIds", id);
+			Integer[] relateItemArray = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getRelateProductByProductIds", map, Integer[].class);
+			System.err.println("relateItemArray " +relateItemArray[0]);
+			model.addAttribute("relateItemArray", relateItemArray);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

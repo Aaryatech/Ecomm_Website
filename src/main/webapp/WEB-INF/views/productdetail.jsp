@@ -169,7 +169,28 @@
 								this gift on any joyous occasion . Key attributes :</div>-->
 
 
-
+<div class="stock_r">
+								<div class="detail_like">
+									<div class="circle_tag active" onclick="setLike(${prodHeader.productId})">
+														
+										<c:choose>
+										
+										<c:when test="${prodHeader.isLike==0}">
+										<img src="#" class="lazy" id="like${prodHeader.productId}"
+											data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+											alt="">
+										</c:when>
+										<c:when test="${prodHeader.isLike==1}">
+										<img src="#" class="lazy" id="like${prodHeader.productId}"
+											data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+											alt="">
+										</c:when>
+										
+										</c:choose>
+										
+										
+									</div>
+								</div> </div>
 							<div class="delivery_row">
 								<div class="delivery_l">
 									<div class="a">
