@@ -89,10 +89,12 @@ public class CheckoutController {
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
 			try {
-
-				map = new LinkedMultiValueMap<>();
 				int custId = (int) session.getAttribute("custId");
 				int companyId = (int) session.getAttribute("companyId");
+				
+				if(custId>0) {
+				map = new LinkedMultiValueMap<>();
+				
 				map.add("custId", custId);
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 						Customer.class);
@@ -103,7 +105,9 @@ public class CheckoutController {
 				model.addAttribute("getArea", billAddress[1]);
 				model.addAttribute("getLandmark", billAddress[2]);
 				model.addAttribute("getPin", billAddress[3]);
-				
+				}else {
+					System.err.println("Cust Id zero");
+				}
 				//04-01-2021
 				int delAddId=0;
 				try {
@@ -218,13 +222,14 @@ public class CheckoutController {
 			model.addAttribute("prodHeaderList", data.getFeProductHeadList());
 
 			try {
-				map = new LinkedMultiValueMap<>();
-				int companyId = (int) session.getAttribute("companyId");
-				map.add("compId", companyId);
-				map.add("itemIds", prodIdStr);
-				List[] relateItemArray = Constants.getRestTemplate()
-						.postForObject(Constants.url + "getRelateProductByProductIds", map, List[].class);
-				// System.err.println("relateItemArray " +relateItemArray[0]);
+				/*
+				 * map = new LinkedMultiValueMap<>(); int companyId = (int)
+				 * session.getAttribute("companyId"); map.add("compId", companyId);
+				 * map.add("itemIds", prodIdStr); Integer[] relateItemArray =
+				 * Constants.getRestTemplate() .postForObject(Constants.url +
+				 * "getRelateProductByProductIds", map, Integer[].class);
+				 * System.err.println("relateItemArray " +relateItemArray[0]);
+				 */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -233,8 +238,10 @@ public class CheckoutController {
 
 			try {
 
-				map = new LinkedMultiValueMap<>();
 				int custId = (int) session.getAttribute("custId");
+				if(custId>0) {
+				map = new LinkedMultiValueMap<>();
+				
 				System.err.println(" custId  place ord" +custId);
 				map.add("custId", custId);
 				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
@@ -249,7 +256,7 @@ public class CheckoutController {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-
+				}//end of if custId>0
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

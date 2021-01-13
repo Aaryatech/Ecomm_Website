@@ -385,7 +385,7 @@
 									<div class="payment_two right">
 										<div id="filters">
 											<input type="text" name="delvrDateTime" id="delvrDateTime"
-												class="input_two" placeholder="Delivery Date or Time" />
+												class="input_two delvrDateTime" placeholder="Delivery Date or Time" />
 										</div>
 										<label class="form-label-hint-error" id="errordelvrDateTime"
 									style="display: none;">Please select delivery time</label>
@@ -1684,16 +1684,47 @@ $('#mobile_table-div').append(mobDiv);
 		//minDate:'-1970/01/02', // yesterday is minimum date
 		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
 		});
-		$('#delvrDateTime').datetimepicker({
+		
+		 /*  $('.delvrDateTime').datetimepicker({
 			//yearOffset:222,
 			lang : 'en',
 			timepicker : false,
 			format : 'd-m-Y',
 			formatDate : 'Y-m-d',
-		//minDate:'-1970/01/02', // yesterday is minimum date
-		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
-		});
+		});  */
+		
+		
 	</script>
+	
+	<script type="text/javascript">
+	function setLike(id) {
+		
+		
+		$.getJSON(
+				'${setLikeOrDislike}',
+				{
+					prodId : id,
+					ajax : 'true'
+				},
+				function(data) {
+					//alert(JSON.stringify(data));
+					try{
+					if(data.msg ==1){
+						document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+						
+					}else{
+						document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+						
+					}
+					}catch (e) {
+						console.log("setLikeOrDislike error", e)
+					}
+					setLikeCount(data.statusText);
+				});
+		
+	}
+	</script>
+	
 	<!------------------------------------------------------- Place Order--------------------------------------------------- -->
 	<script type="text/javascript">
 		function placeOrder() {

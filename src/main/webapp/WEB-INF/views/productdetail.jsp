@@ -128,6 +128,29 @@
 											alt=""> <span>32 Review</span>
 									</div>
 								</div>
+								
+								<div class="stock_r">
+								<div class="detail_like">
+									<div class="circle_tag active" onclick="setLike(${prodHeader.productId})">
+														
+										<c:choose>
+										
+										<c:when test="${prodHeader.isLike==0}">
+										<img src="#" class="lazy" id="like${prodHeader.productId}"
+											data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+											alt="">
+										</c:when>
+										<c:when test="${prodHeader.isLike==1}">
+										<img src="#" class="lazy" id="like${prodHeader.productId}"
+											data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+											alt="">
+										</c:when>
+										
+										</c:choose>
+										
+										
+									</div>
+								</div> </div>
 								<%-- <div class="stock_r">
 									<img
 										src="${pageContext.request.contextPath}/resources/images/protection.png"
@@ -169,28 +192,7 @@
 								this gift on any joyous occasion . Key attributes :</div>-->
 
 
-<div class="stock_r">
-								<div class="detail_like">
-									<div class="circle_tag active" onclick="setLike(${prodHeader.productId})">
-														
-										<c:choose>
-										
-										<c:when test="${prodHeader.isLike==0}">
-										<img src="#" class="lazy" id="like${prodHeader.productId}"
-											data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt="">
-										</c:when>
-										<c:when test="${prodHeader.isLike==1}">
-										<img src="#" class="lazy" id="like${prodHeader.productId}"
-											data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
-										</c:when>
-										
-										</c:choose>
-										
-										
-									</div>
-								</div> </div>
+
 							<div class="delivery_row">
 								<div class="delivery_l">
 									<div class="a">
@@ -1425,11 +1427,7 @@ function moveCursor(){
 							}
 						})
 	</script>
-
-
 	<script type="text/javascript">
-	
-	
 	function setPriceByWtAndFlavour(id,type) {
 		
 		//alert(id+"      "+type)
@@ -1485,9 +1483,8 @@ function moveCursor(){
 		
 	}
 	
-	
-	
-
+	</script>
+	<script type="text/javascript">
 		function addCart(id,type) {
 			
 			var selectFlav = 0;
@@ -1769,16 +1766,16 @@ function moveCursor(){
 				appendCartData();
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
-			
+			  	
 		} 
-		
+		</script>
+		<script type="text/javascript">
 		function changeWeight(){
 			document.getElementById("img_input_btn").value = "";
 			//document.getElementById('del_image').style="display:none";
 		}
-		
-		
-		
+		</script>
+		<script type="text/javascript">
 		function setQtyText(id, type) {
 
 			/* type  :  0 - minus,  1 - plus */
