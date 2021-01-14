@@ -163,6 +163,9 @@
 					infinite : true
 				});
 			});
+			$(window).load(function() {
+			    $(".loader-Parent").fadeOut("slow");
+			})
 		</script>
 
 
