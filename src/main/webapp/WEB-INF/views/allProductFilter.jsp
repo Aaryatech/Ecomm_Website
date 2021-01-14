@@ -1182,7 +1182,7 @@
 						
 						//alert("hi")
 						
-						alert("cat - "+hiddenProductListArr[i].prodCatId+"                "+catId);
+						//alert("cat - "+hiddenProductListArr[i].prodCatId+"                "+catId);
 						
 						if(max > 0 && hiddenProductListArr[i].defaultPrice >= min && hiddenProductListArr[i].defaultPrice <= max && hiddenProductListArr[i].prodCatId == catId){
 							
@@ -1246,7 +1246,7 @@
 							
 						}else if(max == 0  && hiddenProductListArr[i].prodCatId == catId){
 							
-							alert("aaaaaaaaa")
+							//alert("aaaaaaaaa")
 							
 							displayListArr.push(hiddenProductListArr[i]);
 							
@@ -1306,7 +1306,7 @@
 
 							count++;
 						}else{
-							alert("pppppppppp")
+							//alert("pppppppppp")
 						}
 						
 					}

@@ -16,6 +16,7 @@
 
 <body>
 
+	<jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
 
 	<!-- TAGS -->
 	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
@@ -165,10 +166,22 @@
 			});
 			
 			//Akhilesh
-			$(window).load(function() {
-				alert("On Load")
+			/* $(window).load(function() {
+				//alert("On Load")
 			    $(".loader-Parent").fadeOut("slow");
-			})
+			}) */
+			
+			$(window).on('load', function(){
+				//alert("Ok")
+  setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+});
+function removeLoader(){
+    $( "#loadingDiv").fadeOut(500, function() {
+      // fadeOut complete. Remove the loading div
+      $( "#loadingDiv").remove(); //makes page more lightweight 
+  });  
+}
+
 		</script>
 
 
@@ -846,7 +859,6 @@
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/loader.html"></jsp:include>
 
 
 	<script type="text/javascript">
