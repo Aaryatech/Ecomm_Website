@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #000;
+    background-color: #FFF;
     overflow: hidden;
     position: relative;
     z-index: 999999;
@@ -33,7 +33,7 @@
     border-top: 0.3em solid #ec268f ;/*hotpink*/
     border-radius: 50%;
     position: relative;
-    animation: rotating 250s ease-in-out infinite;
+    animation: rotating 10s ease-in-out infinite;
     --direction: 1;
 }
 
@@ -76,7 +76,7 @@
 
 @keyframes rotating {
    from { transform: rotate(0deg);}
-	to   { transform: rotate(50000deg);}
+	to   { transform: rotate(360deg);}
 }
 
 </style>
