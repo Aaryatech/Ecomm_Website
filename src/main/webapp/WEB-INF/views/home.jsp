@@ -163,7 +163,10 @@
 					infinite : true
 				});
 			});
+			
+			//Akhilesh
 			$(window).load(function() {
+				alert("On Load")
 			    $(".loader-Parent").fadeOut("slow");
 			})
 		</script>
@@ -843,8 +846,7 @@
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-
-
+	<jsp:include page="/WEB-INF/views/loader.html"></jsp:include>
 
 
 	<script type="text/javascript">
