@@ -396,8 +396,12 @@
 										and Conditions.</a>
 								</div>
 								<div>
+									<label class="form-label-hint-error"  id="errorCartEmpty"
+									style="display: none; float: right; padding-right: 185px;">Please add something in cart</label>
 									<input name="" type="button" class="place_btn place_open"
 										value="Place Order" onclick="checkCustSession()" />
+										
+									
 								</div>
 								<!--mongi help-popup-->
 								<!--apply now pop up-->
@@ -420,9 +424,16 @@
 												} else {
 													$("#errordelvrDateTime").hide();
 												}
-												
+												var cartValue = sessionStorage.getItem("cartValue");
+												var table = $.parseJSON(cartValue);
+												if(table.length<1){
+													$("#errorCartEmpty").show();
+												}else{
+													$("#errorCartEmpty").hide();
+												}
+												//alert(table.length)
 												//alert("payMode" +payMode +"delTime " +delTime);
-												if(payMode==true&&delTime==true)
+												if(payMode==true&&delTime==true&&table.length>0)
 												$('#place').popup();
 											});
 										//}
@@ -824,7 +835,7 @@ function setOfferDiscAmt(){
 									<div class="radio_1 gender">
 										<ul>
 											<li><input type="radio" id="a-option" name="gender"
-												value="1" ${cust.custGender==1 ? 'checked' : ''}> <label
+												value="1" ${cust.custGender==1||sessionScope.custId==0 ? 'checked' : ''}> <label
 												for="a-option">Male</label>
 												<div class="check"></div></li>
 											<li><input type="radio" id="b-option" name="gender"
