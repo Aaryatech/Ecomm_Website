@@ -14,9 +14,10 @@
 
 <body onload="getDeliveryCharges()">
 <div class="loader" style="text-align: center; width: 100%; vertical-align: middle; top:45%; left: 3%; position: absolute;" id="loaderimg" style="display: none;">
-		<img
+		<%-- <img
 			src="${pageContext.request.contextPath}/resources/images/loader.svg"
-			alt="">
+			alt=""> --%>
+			<img src="${pageContext.request.contextPath}/resources/images/loading_logo.png" alt="" />
 	</div> 
 	<c:url var="placeOrder" value="/placeOrder" />
 <c:url var="getDeliveryChargesByKm" value="/getDeliveryChargesByKm"></c:url>
