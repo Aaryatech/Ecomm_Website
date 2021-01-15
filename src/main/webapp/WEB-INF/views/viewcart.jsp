@@ -385,8 +385,8 @@
 									</div>
 									<div class="payment_two right">
 										<div id="filters">
-											<input type="text" name="delvrDateTime" id="delvrDateTime"
-												class="input_two delvrDateTime" placeholder="Delivery Date or Time" />
+											<input type="text" name="delvrDateTime" id="delvrDateTime" readonly
+												class="input_two " placeholder="Delivery Date" />
 										</div>
 										<label class="form-label-hint-error" id="errordelvrDateTime"
 									style="display: none;">Please select delivery time</label>
@@ -1048,9 +1048,9 @@ function setOfferDiscAmt(){
 				.ready(
 						function() {
 							'use strict';
-							jQuery(
-									'#delvrDateTime, #search-from-date, #search-to-date')
-									.datetimepicker();
+// 							jQuery(
+// 									'#delvrDateTime, #search-from-date, #search-to-date')
+// 									.datetimepicker();
 
 							// SET CART DATA
 
@@ -1686,25 +1686,26 @@ $('#mobile_table-div').append(mobDiv);
 			}
 
 		}
-
+		var d=new Date();
+		d.setFullYear(d.getFullYear()-20);
+		
 		$('#txtDob').datetimepicker({
 			//yearOffset:222,
+			maxDate: 0, //cant select tomorrow date
 			lang : 'en',
 			timepicker : false,
 			format : 'd-m-Y',
 			formatDate : 'Y-m-d',
-		//minDate:'-1970/01/02', // yesterday is minimum date
-		//maxDate:'+1970/01/02' // and tommorow is maximum date calendar
+			defaultDate:d,
 		});
 		
-		 /*  $('.delvrDateTime').datetimepicker({
-			//yearOffset:222,
+		  $('#delvrDateTime').datetimepicker({
+			minDate: 0,//cant select previous date
 			lang : 'en',
 			timepicker : false,
 			format : 'd-m-Y',
 			formatDate : 'Y-m-d',
-		});  */
-		
+		});   
 		
 	</script>
 	
