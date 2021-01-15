@@ -1708,7 +1708,7 @@ $('#mobile_table-div').append(mobDiv);
 	</script>
 	
 	<script type="text/javascript">
-	function setLike(id) {
+	function setLike(id,isLike) {
 		
 		
 		$.getJSON(

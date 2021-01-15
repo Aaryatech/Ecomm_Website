@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <header>
 <!-- Akhilesh Loader Jsp --> 
-<%--  <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include> --%>
+ <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
 	<div class="top_row">
 		<div class="wrapper">
 			<div class="top_content">
@@ -299,16 +299,16 @@
 </header>
 <script type="text/javascript">
 /*********************Akhil For Loader On Each Page**************  */
-/* 			$(window).on('load', function(){
+			$(window).on('load', function(){
 				//alert("Ok")
-  setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+  setTimeout(removeLoader, 1000); //wait for page load PLUS two seconds.
 });
 function removeLoader(){
     $( "#loadingDiv").fadeOut(500, function() {
       // fadeOut complete. Remove the loading div
       $( "#loadingDiv").remove(); //makes page more lightweight 
   });  
-} */
+}
 /************************************************************/
 
 

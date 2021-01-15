@@ -91,7 +91,7 @@ ol,ul,li{margin: 0px;padding: 0px;list-style-type: none;}
 
 
 header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 10;}
-.head_marg{margin: 108px 0 0 0;}
+.head_marg{margin:82px 0 0 0 /* 108px 0 0 0 */;}
 
 
 

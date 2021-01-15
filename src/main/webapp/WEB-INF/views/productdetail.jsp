@@ -621,7 +621,7 @@
 													</div>
 													
 										<div class="circle_tag active"
-														onclick="setLike(${product.productId})">
+														onclick="setLike(${product.productId},${product.isLike})">
 														<c:choose>
 														
 														<c:when test="${product.isLike==0}">
@@ -716,8 +716,14 @@
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 <script type="text/javascript">
-function setLike(id) {
- 	$.getJSON(
+function setLike(id,isLike) {
+	
+	if(parseInt(isLike)==0){
+		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+	}else{
+		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+	} 	
+	$.getJSON(
 			'${setLikeOrDislike}',
 			{
 				prodId : id,

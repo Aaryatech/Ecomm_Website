@@ -33,7 +33,7 @@
     border-top: 0.3em solid #ec268f ;/*hotpink*/
     border-radius: 50%;
     position: relative;
-    animation: rotating 10s ease-in-out infinite;
+    animation: rotating 5s ease-in-out infinite;
     --direction: 1;
 }
 
@@ -68,7 +68,7 @@
 	animation:none;
 	transform:none;
     /*font-family: sans-serif;
-    animation: rotating 2s linear infinite;
+    animation: rotating 5s linear infinite;
 	color: white;
     --direction: -1;*/
 }

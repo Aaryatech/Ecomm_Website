@@ -446,7 +446,7 @@ function removeLoader(){
 
 
 													<div class="circle_tag active"
-														onclick="setLike(${product.productId})">
+														onclick="setLike(${product.productId},${product.isLike})">
 														
 														<c:choose>
 														
@@ -1850,8 +1850,13 @@ function removeLoader(){
 		
 	</script>
 	<script type="text/javascript">
-	function setLike(id) {
+	function setLike(id,isLike) {
 		
+		if(parseInt(isLike)==0){
+			document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+		}else{
+			document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+		}
 		
 		$.getJSON(
 				'${setLikeOrDislike}',
