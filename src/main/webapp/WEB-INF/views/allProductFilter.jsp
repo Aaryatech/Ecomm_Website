@@ -39,23 +39,18 @@
 
 						<li><a href="#">${menuCat.exVar2} <span><i
 									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--cake dropdown-->
-							
-								<c:if test="${menuCat.exInt2==1}">
-							<c:set value="dropdown" var="row_class"></c:set>
-							</c:if>
-							
-							<c:if test="${menuCat.exInt2==2}">
-							<c:set value="megamenu two-row" var="row_class"></c:set>
-							</c:if>
-							<c:if test="${menuCat.exInt2==3}">
-							<c:set value="megamenu three-row" var="row_class"></c:set>
-							
-							</c:if>
-							<c:if test="${menuCat.exInt2==4}">
-							<c:set value="megamenu four-row" var="row_class"></c:set>
-							</c:if>
-							<c:if test="${menuCat.exInt2>4}">
-							<c:set value="megamenu full-row" var="row_class"></c:set>
+
+							<c:if test="${menuCat.exInt2==1}">
+								<c:set value="dropdown" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2==2}">
+								<c:set value="megamenu two-row" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2==3}">
+								<c:set value="megamenu three-row" var="row_class"></c:set>
+
+							</c:if> <c:if test="${menuCat.exInt2==4}">
+								<c:set value="megamenu four-row" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2>4}">
+								<c:set value="megamenu full-row" var="row_class"></c:set>
 							</c:if>
 							<ul class="${row_class}">
 								<div class="four_row_dropdown">
@@ -65,40 +60,35 @@
 
 											<li>By Price</li>
 
-											<li>
-											<label class="radio_menu">Under 499
-											  <input type="radio" id="radioPrice" value="0-499"  name="radioPrice" class="menuPrice">
-											  <span class="checkmark"></span>
-											</label>
-											</li>
+											<li><label class="radio_menu">Under 499 <input
+													type="radio" id="radioPrice" value="0-499"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
 
-											<li>
-											<label class="radio_menu">500 to 599
-											  <input type="radio" id="radioPrice" value="500-599"  name="radioPrice" class="menuPrice">
-											  <span class="checkmark"></span>
-											</label>
-											</li>
+											<li><label class="radio_menu">500 to 599 <input
+													type="radio" id="radioPrice" value="500-599"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
 
-											<li>
-											<label class="radio_menu">600 to 999
-											  <input type="radio" id="radioPrice" value="600-999"  name="radioPrice" class="menuPrice">
-											  <span class="checkmark"></span>
-											</label>
-											</li>
+											<li><label class="radio_menu">600 to 999 <input
+													type="radio" id="radioPrice" value="600-999"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
 
-											<li>
-											<label class="radio_menu">1000 to 1999
-											  <input type="radio" id="radioPrice" value="1000-1999"  name="radioPrice" class="menuPrice">
-											  <span class="checkmark"></span>
-											</label>
-											</li>
+											<li><label class="radio_menu">1000 to 1999 <input
+													type="radio" id="radioPrice" value="1000-1999"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
 
-											<li>
-											<label class="radio_menu">Above 2000
-											  <input type="radio" id="radioPrice" value="2000-10000"  name="radioPrice" class="menuPrice">
-											  <span class="checkmark"></span>
-											</label>
-											</li>
+											<li><label class="radio_menu">Above 2000 <input
+													type="radio" id="radioPrice" value="2000-10000"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
 
 										</ul>
 									</div>
@@ -125,14 +115,12 @@
 																	<c:when
 																		test="${filterType.filterTypeId == filter.filterTypeId}">
 
-																		<li>
-																		<label class="check_menu">
-																		  <input type="checkbox" value="${filter.adminName}" class="menuFilter">
-																		  <span class="checkmark_check"></span>
-																		  ${filter.adminName}
-																		</label>
-																		
-																		<%-- <input type="checkbox" class="menuFilter"
+																		<li><label class="check_menu"> <input
+																				type="checkbox"
+																				value="${filter.adminName}~${filter.filterTypeId}"
+																				class="menuFilter"> <span
+																				class="checkmark_check"></span> ${filter.adminName}
+																		</label> <%-- <input type="checkbox" class="menuFilter"
 																			value="${filter.adminName}"><span>${filter.adminName}</span> --%></li>
 
 																	</c:when>
@@ -189,7 +177,7 @@
 			<div class="wrapper">
 
 				<div class="product_boxes">
-				
+
 					<div id="hiddenProductList" style="display: none;"></div>
 
 					<div class="find_store">
@@ -264,10 +252,13 @@
 										<li>
 											<div class="cake_one product_padd">
 												<div class="cake_pic">
-													<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-													<img src="${prodImgUrl}${product.prodImagePrimary}"
+													<a
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+														<img src="${prodImgUrl}${product.prodImagePrimary}"
 														data-src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-														class="mobile_fit transition" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
+														class="mobile_fit transition"
+														onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'">
+													</a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 													<div class="cake_prc">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
@@ -799,6 +790,7 @@
 			sessionStorage.setItem("selTags", JSON.stringify(table));
 			
 			sessionStorage.setItem("findCatId", catId);
+			sessionStorage.setItem("filterMenu", 1);
 
 			var priceListTemp = [];
 
@@ -881,11 +873,16 @@
 			
 				//alert(JSON.stringify(tempArr))
 				
+				
+				var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
+
+				
+				
 				var divStr="";
 				var count=0;
 				for (var i = 0; i < tempArr.length; i++) {
-						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
-						divStr = divStr
+						//var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+						/* divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
 								+ ' <div class="cake_one product_padd"> '
@@ -902,6 +899,68 @@
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
 								+ tempArr[i].productName + '</a> </h4>'
 								+ ' </div> </div> </div> </li> '
+								 */
+								
+								
+								
+						var isLike=tempArr[i].isLike;						
+						var like = '';
+						
+						var isVegType = '';
+						var isVegItem = tempArr[i].vegNonvegName;
+						
+						if(isVegItem=='VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else if(isVegItem=='NON-VEG'){
+							isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+							+ '</div>';
+						}else{
+							isVegType = '<div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+								+ '</div><div class="purity_icn">'
+								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+								+ '</div>';
+						}
+						
+						if(isLike ==1){
+						
+							like = '<div class="circle_tag active" onclick="setLike('+tempArr[i].productId+')">'
+							+ '<img id="like'+tempArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+							+ '</div>';
+						}else{
+							
+							like = '<div class="circle_tag active" onclick="setLike('+tempArr[i].productId+')">'
+							+ '<img id="like'+tempArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+							+ '</div>';
+						}
+						//var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+						divStr = divStr
+						+ '<li>'
+						+ ' <div class="item_div"> '
+						+ ' <div class="cake_one product_padd"> '
+						+ ' <div class="cake_pic"> '
+						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+						+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
+						+ like
+						+ isVegType						
+						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ tempArr[i].defaultPrice
+						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ tempArr[i].defaultPrice
+						+ '</span> <span class="prc_off"></span> </div> '
+						+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
+						+ ' </div> '
+						+ ' <div class="cake_container"> '
+						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+						+ tempArr[i].productName + '</a> </h4>'
+						+ ' </div> </div> </div> </li> ';
+
+								
+								
+								
 
 						count++;
 
@@ -944,6 +1003,8 @@
 			if (sessionStorage.getItem("menuFilterName") == null) {
 				sessionStorage.setItem("menuFilterName", "");
 			}
+			
+			
 
 			var filterArr = [];
 			var menuFilter=sessionStorage.getItem("menuFilterName");
@@ -961,6 +1022,7 @@
 			var selTags = $.parseJSON(tags);
 			
 			var catId=sessionStorage.getItem("findCatId");
+			var isFilterMenu=sessionStorage.getItem("filterMenu");
 			
 			/* var flvTagStatusList=parseJSON(document.getElementById("hideFlvList").innerHTML);
 			var flvTagStatusList=${allData};
@@ -972,142 +1034,350 @@
 			
 			var hiddenProductListArr = [];
 			var displayListArr = [];
-
-			for (var i = 0; i < allItemArr.length; i++) {
-
-				if (selTags.length > 0) {
+			
+			
+			if(isFilterMenu == 1){
+				
+				//Search from filter menu
+				
+				var tempFilterIdArr=[];
+				var tempFilterRes=[];
+				var finalFilterRes=[];
+				var filteredList=[];
+				
+				var tempFilterNameForCount1=[];
+				
+				var checkForCount2=0;
+				
+				
+				for (var f = 0; f < filterArr.length; f++) {
+				
+					if(!tempFilterIdArr.includes(filterArr[f].split("~")[1])){
+						tempFilterIdArr.push(filterArr[f].split("~")[1]);
+					}
 					
-					for (var t = 0; t < selTags.length; t++) {
-
-						if (allItemArr[i].appliTagNames.toLowerCase().indexOf(selTags[t].toLowerCase())>=0) {
-							
-							var isFound=0;
-							for(var y=0; y<hiddenProductListArr.length; y++){
-								if(allItemArr[i].productId==hiddenProductListArr[y].productId){
-									isFound=1;
-								}
-							}
-							
-							if(isFound == 0){
-								hiddenProductListArr.push(allItemArr[i]);
-							}
-							
-							break;
-							
+				}
+				
+				//alert(tempFilterIdArr+"          "+tempFilterIdArr.length+"                  "+filterArr.length)
+				
+				
+				//for count=1
+				for (var t = 0; t < tempFilterIdArr.length; t++) {
+				
+					var tempCount=0;
+					for (var f = 0; f < filterArr.length; f++) {
+						if(tempFilterIdArr[t] == filterArr[f].split("~")[1]){
+							tempCount = tempCount+1;
 						}
 					}
-
-				} else {
 					
-					//alert("filterArr  = "+filterArr.length);
+					//alert(tempFilterIdArr[t]+" -----------> "+tempCount);
 					
-						if(filterArr.length>0){
+					if(tempCount==1){
+						checkForCount2 = 1;
+						//alert("count 1")
+						
+						for (var f = 0; f < filterArr.length; f++) {
+							if (tempFilterIdArr[t] == filterArr[f].split("~")[1]){
+								tempFilterNameForCount1.push(filterArr[f].split("~")[0]);
+							}
+						}
+						
+					}
+					
+				}
+				
+				//alert(tempFilterNameForCount1)
+				
+				
+				for (var i = 0; i < allItemArr.length; i++) {
+					
+					var isPresent=0;
+					
+					for (var f = 0; f < tempFilterNameForCount1.length; f++) {
+						
+						var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+						
+						if(tempFilterArr.length>0){
 							
-							for (var f = 0; f < filterArr.length; f++) {
+							if( tempFilterArr.includes(tempFilterNameForCount1[f]) && allItemArr[i].prodCatId == catId ){
+								isPresent=1;
+							}else{
+								isPresent=0;
+								break;
+							}
+							
+						}
+					
+					}
+					
+					//alert(allItemArr[i].productName+" ------------> "+isPresent)
+					
+					if(isPresent==1){
+						finalFilterRes.push(allItemArr[i]);
+						filteredList.push(allItemArr[i]);
+					}
+				
+				}
+				
+				
+				//alert("-------------------------  "+finalFilterRes)
+				
+				//alert("check 2 ------------ "+checkForCount2)
+				
+				
+				//---------------------------------------------------
+				
+				//for count 2
+			 	for (var t = 0; t < tempFilterIdArr.length; t++) {
+				
+					var tempCount=0;
+					for (var f = 0; f < filterArr.length; f++) {
+						if(tempFilterIdArr[t] == filterArr[f].split("~")[1]){
+							tempCount = tempCount+1;
+						}
+					}
+					
+					//alert(tempFilterIdArr[t]+" -----------> "+tempCount);
+					
+					if(tempCount>1){
+						//alert("count 2")
+						
+						if(checkForCount2 == 1){
+							
+							if(finalFilterRes.length>0){
 								
-								
-								if(catId == 0){
+								for (var i = 0; i < finalFilterRes.length; i++) {
 									
+									for (var f = 0; f < filterArr.length; f++) {
+										
+										var tempFilterArr=finalFilterRes[i].allFilterNames.split(",");
+										
+										if(tempFilterArr.length>0){
+											
+											if( tempFilterArr.includes(filterArr[f].split("~")[0])){
+												var prodIsPresent=0;
 
+												for (var k = 0; k < filteredList.length; k++) {
+													if(filteredList[k].productId==finalFilterRes[i].productId){
+														prodIsPresent=1;
+														break;
+													}
+												}
+												
+												if(prodIsPresent==0){
+													filteredList.push(finalFilterRes[i]);
+												}
+												
+											}
+											
+										}
+									
+									}
+								
+								}
+								
+							}
+							
+						}else{
+							
+							for (var i = 0; i < allItemArr.length; i++) {
+								
+								for (var f = 0; f < filterArr.length; f++) {
+									
 									var tempFilterArr=allItemArr[i].allFilterNames.split(",");
 									
 									if(tempFilterArr.length>0){
 										
-										if (tempFilterArr.includes(filterArr[f])) {
+										if( tempFilterArr.includes(filterArr[f].split("~")[0])){
 											
-											
-											var isFound=0;
-											for(var y=0; y<hiddenProductListArr.length; y++){
-												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
-													isFound=1;
+											var prodIsPresent=0;
+											for (var k = 0; k < filteredList.length; k++) {
+												if(filteredList[k].productId==allItemArr[i].productId){
+													prodIsPresent=1;
+													break;
 												}
 											}
 											
-											if(isFound == 0){
-												hiddenProductListArr.push(allItemArr[i]);
+											if(prodIsPresent==0){
+												filteredList.push(allItemArr[i]);
 											}
-											
-											break;
-											
-										}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0 || allItemArr[i].allFilterNames.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0){
-											
-											var isFound=0;
-											for(var y=0; y<hiddenProductListArr.length; y++){
-												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
-													isFound=1;
-												}
-											}
-											
-											if(isFound == 0){
-												hiddenProductListArr.push(allItemArr[i]);
-											}
-											
-											break;
-										
 											
 										}
 										
 									}
-									
-								}else{
-									
-									//alert("catId - "+catId)
-									
-
-									var tempFilterArr=allItemArr[i].allFilterNames.split(",");
-									
-									if(tempFilterArr.length>0){
-										
-										//alert("tempFilterArr  :  "+tempFilterArr+"           filterArr[f] : "+filterArr[f]+"    prodCatId : "+allItemArr[i].prodCatId+"          CAT ID : "+catId);
-										
-										if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].prodCatId == catId) {
-											
-											
-											
-											var isFound=0;
-											for(var y=0; y<hiddenProductListArr.length; y++){
-												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
-													isFound=1;
-												}
-											}
-											
-											if(isFound == 0){
-												//alert("MATCH ---- "+allItemArr[i])
-												hiddenProductListArr.push(allItemArr[i]);
-											}
-											
-											break;
-											
-										}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0   && allItemArr[i].prodCatId == catId){
-											
-											var isFound=0;
-											for(var y=0; y<hiddenProductListArr.length; y++){
-												if(allItemArr[i].productId==hiddenProductListArr[y].productId){
-													isFound=1;
-												}
-											}
-											
-											if(isFound == 0){
-												hiddenProductListArr.push(allItemArr[i]);
-											}
-											
-											break;
-										
-										}
-										
-									}
-								}//else catId not zero
 								
-								
-								
+								}
+							
 							}
 							
 						}
 						
+						
+					}
+				}
+				
+			 	for (var i = 0; i < filteredList.length; i++) {
+			 		hiddenProductListArr.push(filteredList[i]);
+			 	}
+				
+			 	
+			
+				//end isFilterMenu--------------------------------------
+			}else{
+				
+				
+				for (var i = 0; i < allItemArr.length; i++) {
 
-				}//tags else
+					if (selTags.length > 0) {
+						
+						for (var t = 0; t < selTags.length; t++) {
 
-			}//all item list for end
+							if (allItemArr[i].appliTagNames.toLowerCase().indexOf(selTags[t].toLowerCase())>=0) {
+								
+								var isFound=0;
+								for(var y=0; y<hiddenProductListArr.length; y++){
+									if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+										isFound=1;
+									}
+								}
+								
+								if(isFound == 0){
+									hiddenProductListArr.push(allItemArr[i]);
+								}
+								
+								break;
+								
+							}
+						}
+
+					} else {
+						
+						//alert("filterArr  = "+filterArr.length);
+						
+							if(filterArr.length>0){
+								
+								
+								if(isFilterMenu==1){
+									
+								}else{
+									
+									for (var f = 0; f < filterArr.length; f++) {
+										
+										if(catId == 0){
+											
+
+											var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+											
+											if(tempFilterArr.length>0){
+												
+												if (tempFilterArr.includes(filterArr[f])) {
+													
+													
+													var isFound=0;
+													for(var y=0; y<hiddenProductListArr.length; y++){
+														if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+															isFound=1;
+														}
+													}
+													
+													if(isFound == 0){
+														hiddenProductListArr.push(allItemArr[i]);
+													}
+													
+													break;
+													
+												}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0 || allItemArr[i].allFilterNames.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0){
+													
+													var isFound=0;
+													for(var y=0; y<hiddenProductListArr.length; y++){
+														if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+															isFound=1;
+														}
+													}
+													
+													if(isFound == 0){
+														hiddenProductListArr.push(allItemArr[i]);
+													}
+													
+													break;
+												
+													
+												}
+												
+											}
+											
+										}else{
+											
+											//alert("catId - "+catId)
+											
+
+											var tempFilterArr=allItemArr[i].allFilterNames.split(",");
+											
+											if(tempFilterArr.length>0){
+												
+												//alert("tempFilterArr  :  "+tempFilterArr+"           filterArr[f] : "+filterArr[f]+"    prodCatId : "+allItemArr[i].prodCatId+"          CAT ID : "+catId);
+												
+												if (tempFilterArr.includes(filterArr[f]) && allItemArr[i].prodCatId == catId) {
+													
+													
+													
+													var isFound=0;
+													for(var y=0; y<hiddenProductListArr.length; y++){
+														if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+															isFound=1;
+														}
+													}
+													
+													if(isFound == 0){
+														//alert("MATCH ---- "+allItemArr[i])
+														hiddenProductListArr.push(allItemArr[i]);
+													}
+													
+													break;
+													
+												}else if(allItemArr[i].productName.toLowerCase().indexOf(filterArr[f].toLowerCase())>=0   && allItemArr[i].prodCatId == catId){
+													
+													var isFound=0;
+													for(var y=0; y<hiddenProductListArr.length; y++){
+														if(allItemArr[i].productId==hiddenProductListArr[y].productId){
+															isFound=1;
+														}
+													}
+													
+													if(isFound == 0){
+														hiddenProductListArr.push(allItemArr[i]);
+													}
+													
+													break;
+												
+												}
+												
+											}
+										}//else catId not zero
+										
+										
+										
+									}
+									
+								}
+								
+								
+								
+								
+							}
+							
+
+					}//tags else
+
+				}//all item list for end
+				
+			}
+			
+			
+			
+
+		
 			
 			//alert(hiddenProductListArr.length)
 			
@@ -1386,163 +1656,12 @@
 						+ allItemArr[i].productName + '</a> </h4>'
 						+ ' </div> </div> </div> </li> ';
 
-						//count++;
-						
-						/* var price=allItemArr[i].defaultPrice;
-						var defaultWt=1;
-						
-						var rateSetting='';
-						var rateSettingType=allItemArr[i].rateSettingType;
-						
-						
-						
-						if(allItemArr[i].rateSettingType == 0){
-							
-							rateSetting='<button type="button" value="" field="quantity" class="qtyminus cart" onclick="setQtyText('+allItemArr[i].productId+',0,'+allItemArr[i].prodDetailList+')"><i class="fa fa-minus" aria-hidden="true"></i></button>'
-							+ '<input type="text" id="txtWt'+allItemArr[i].productId+'" value="1" style="text-align: center;" class="qty cart">'
-							+ '<button type="button" value="" field="quantity" onclick="setQtyText('+allItemArr[i].productId+',1,'+allItemArr[i].prodDetailList+')" class="qtyplus cart"><i class="fa fa-plus" aria-hidden="true"></i></button>';	
-
-						
-						}else if(allItemArr[i].rateSettingType == 1){
-							
-							rateSetting ='<select class="select-css" id="wt'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')">';
-							var options='';
-							var wtStr=allItemArr[i].availInWeights.split(",");
-							
-							if(wtStr.length>0){
-								for(var w=0; w<wtStr.length; w++){
-									options = options+'<option value="'+wtStr[w]+'">'+wtStr[w]+'</option>';
-								}
-								defaultWt=parseFloat(wtStr[0]);
-								price = parseFloat(price) * defaultWt;
-							}
-									
-							rateSetting = rateSetting + options + '</select>';
-							
-						} 
-						
-						else if(allItemArr[i].rateSettingType == 2){
-							
-							rateSetting ='<select class="select-css" id="wt'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')">';
-							var options='';
-							var wtStr=allItemArr[i].availInWeights.split(",");
-							
-							if(wtStr.length>0){
-								for(var w=0; w<wtStr.length; w++){
-									options = options+'<option value="'+wtStr[w]+'">'+wtStr[w]+'</option>';
-								}
-								
-								defaultWt=parseFloat(wtStr[0]);
-							}
-							
-							if(allItemArr[i].prodDetailList.length > 0){
-								for(var p=0; p < allItemArr[i].prodDetailList.length; p++){
-									if(allItemArr[i].prodDetailList[p].flavorId == allItemArr[i].defaultFlavorId && allItemArr[i].prodDetailList[p].qty == defaultWt){
-										price = allItemArr[i].prodDetailList[p].actualRate;
-										break;
-									}
-										
-								}
-							}
-							
-							rateSetting = rateSetting + options + '</select>';
-							
-						}
-						
-						var flvDiv='';
-						
-						//var flvTagStatusList=${allData.flavorTagStatusList};
-						
-						
-						if(allItemArr[i].flavourIds !=0 ){
-							flvDiv = '<select class="select-css" id="flav'+allItemArr[i].productId+'" onchange="setPriceByWtAndFlavour('+allItemArr[i].productId+','+rateSettingType+')">';
-						
-							var options='';
-							
-							var flvStr=allItemArr[i].flavourIds.split(",");
-							
-						 	if(flvStr.length>0){
-								for(var w=0; w < flvStr.length; w++){
-									
-									for( var t=0 ; t < flvTagStatusList.length; t++){
-										
-										if(flvTagStatusList.filterTypeId == 4 && flvStr[w] == flvTagStatusList.filterId && flvStr[w] == allItemArr[i].defaultFlavorId){
-											options=options + '<option value="'+flvStr[w]+'" selected>'+flvTagStatusList.adminName+'</option>';
-										}else{
-											options=options + '<option value="'+flvStr[w]+'">'+flvTagStatusList.adminName+'</option>';
-										}
-										
-									}
-									
-								}
-							} 
-							
-							flvDiv = flvDiv + options + '</select>';
-							
-						
-						}
-						
-					
-						
-						
-						divStr = divStr
-						+ '<div class="cake_one">'
-						+ '<div class="cake_pic">'
-						+ '<img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition lazy">'
-						+ '<div class="circle_tag active">'
-						+ '<img src="#" class="lazy" data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">'
-						+ '<img src="#" class="lazy" data-src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
-						+ '</div>'
-						+ '<div class="cake_prc">'
-						+ '<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>'
-						+ '<p class="cake_prc_detail_pclass" id="cake_prc'+allItemArr[i].productId+'">'+allItemArr[i].defaultPrice+'</p>'
-						+ '<span class="off_prc" id="off_prc'+allItemArr[i].productId+'"></span>'
-						+ '<span id="prc_off'+allItemArr[i].productId+'" class="prc_off"></span>'
-						+ '</div>'
-						+ '</div>'
-						
-						+ '<div class="cake_container">'
-						+ '<h4 class="cake_nm">'
-						+ '<a href="${pageContext.request.contextPath}/showProdDetail/0">'+allItemArr[i].productName+'</a>'
-						+ '</h4>'
-						+ '</div>'
-						
-						+ '<div class="cake_dropdown">'
-						+ '<div class="cake_dropdown_l">'
-						+ rateSetting 
-						+ '<span>'+allItemArr[i].uomShowName+'</span>'
-						+ '</div>'
- 						+ '<div class="cake_dropdown_r">'
-						+ '<div>'
-						+ '<i class="fa fa-inr cake_prc_detail_iclass" aria-hidden="true"></i>'
-						+ '<p class="cake_prc_detail_pclass" id="newPrice'+allItemArr[i].productId+'">'+price+'</p>'
-						+ '</div>'
-						+ '</div>'
-						+ '<div class="clr"></div>'
-						+ '</div>'
-						
-						+ '<div class="cake_radio_row">'
-						+ '<div class="radio_l">'
-						+ '<div class="radio_1">'
-						+ '<ul>'
-						+ flvDiv
-						+ '</ul>'
-						+ '</div>'
-						+ '</div>'
-						+ '<div class="radio_r">'
-						+ '<a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+rateSettingType+')" class="cart_btn">Add to Cart</a>'
-						+ '</div>'
-						+ '<div class="clr"></div>'
-						+ '</div>'
-						
-						
-						+ '</div>';
- */
-						
-
+			
 						count++;
 						
-					}else{
+					}
+					
+					 else{
 						
 						if(max > 0){
 							
@@ -1674,7 +1793,7 @@
 							
 						}
 						
-					}
+					} 
 					
 					
 					
@@ -1702,10 +1821,19 @@
 			sessionStorage.setItem("priceFilterMax", "0");
 			sessionStorage.setItem("menuFilterName", "");
 			sessionStorage.setItem("findCatId", "0");
+			sessionStorage.setItem("filterMenu", "0");
+			
+			
+			var filterName=menuFilter.split(",");
+			var names="";
+			for (var t = 0; t < filterName.length; t++) {
+				names=names+", "+filterName[t].split("~")[0];
+			}
+			names=names.slice(1);
 			
 			var prodCountTxt="";
 			if(menuFilter!=""){
-				prodCountTxt=count+' results found for '+'"'+menuFilter+'"';
+				prodCountTxt=count+' results found for '+'"'+names+'"';
 			}else{
 				prodCountTxt=count+" results found";
 			}
