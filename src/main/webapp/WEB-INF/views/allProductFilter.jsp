@@ -22,7 +22,6 @@
 	<!-- Header End -->
 
 
-
 	<!-- mega menu -->
 	<div class="mega_menu_row">
 
@@ -33,7 +32,8 @@
 					class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
 
 
-					<li><a href="#" class="same_day">Same Day Delivery</a></li>
+					<li><a href="javascript:void(0)" class="same_day">Same Day
+							Delivery</a></li>
 
 					<c:forEach items="${allData.catFilterConfig}" var="menuCat">
 
@@ -55,6 +55,9 @@
 							<ul class="${row_class}">
 								<div class="four_row_dropdown">
 									<!--row-1-->
+
+
+
 									<div class="row_one">
 										<ul class="drop_mainmenu">
 
@@ -62,31 +65,32 @@
 
 											<li><label class="radio_menu">Under 499 <input
 													type="radio" id="radioPrice" value="0-499"
-													name="radioPrice" class="menuPrice"> <span
+													name="radioPrice" class="menuPrice"
+													onclick="checkPriceFilter(${menuCat.cateId})"> <span
 													class="checkmark"></span>
 											</label></li>
 
 											<li><label class="radio_menu">500 to 599 <input
 													type="radio" id="radioPrice" value="500-599"
-													name="radioPrice" class="menuPrice"> <span
+													name="radioPrice" class="menuPrice" onclick="checkPriceFilter(${menuCat.cateId})"> <span
 													class="checkmark"></span>
 											</label></li>
 
 											<li><label class="radio_menu">600 to 999 <input
 													type="radio" id="radioPrice" value="600-999"
-													name="radioPrice" class="menuPrice"> <span
+													name="radioPrice" class="menuPrice" onclick="checkPriceFilter(${menuCat.cateId})"> <span
 													class="checkmark"></span>
 											</label></li>
 
 											<li><label class="radio_menu">1000 to 1999 <input
 													type="radio" id="radioPrice" value="1000-1999"
-													name="radioPrice" class="menuPrice"> <span
+													name="radioPrice" class="menuPrice" onclick="checkPriceFilter(${menuCat.cateId})"> <span
 													class="checkmark"></span>
 											</label></li>
 
 											<li><label class="radio_menu">Above 2000 <input
 													type="radio" id="radioPrice" value="2000-10000"
-													name="radioPrice" class="menuPrice"> <span
+													name="radioPrice" class="menuPrice" onclick="checkPriceFilter(${menuCat.cateId})"> <span
 													class="checkmark"></span>
 											</label></li>
 
@@ -102,7 +106,41 @@
 
 											<c:choose>
 
-												<c:when test="${menuTypeList == filterType.filterTypeId}">
+
+												<c:when
+													test="${menuTypeList == filterType.filterTypeId and menuTypeList==16}">
+
+													<div class="row_one">
+														<ul class="drop_mainmenu">
+															<li>${filterType.filterTypeName}</li>
+
+															<c:forEach items="${allFilterList}" var="filter">
+
+																<c:choose>
+
+																	<c:when
+																		test="${filterType.filterTypeId == filter.filterTypeId}">
+
+																		<li><label class="radio_menu">
+																				${filter.adminName} <input type="radio"
+																				id="radioPrice" value=" ${filter.filterDesc}"
+																				name="radioPrice" class="menuPrice"> <span
+																				class="checkmark"></span>
+																		</label></li>
+
+																	</c:when>
+
+																</c:choose>
+
+															</c:forEach>
+
+														</ul>
+													</div>
+
+												</c:when>
+
+												<c:when
+													test="${menuTypeList == filterType.filterTypeId and menuTypeList != 16}">
 
 													<div class="row_one">
 														<ul class="drop_mainmenu">
@@ -116,12 +154,13 @@
 																		test="${filterType.filterTypeId == filter.filterTypeId}">
 
 																		<li><label class="check_menu"> <input
-																				type="checkbox"
+																				type="checkbox" id="menuFilter${filter.filterId}"
 																				value="${filter.adminName}~${filter.filterTypeId}"
-																				class="menuFilter"> <span
-																				class="checkmark_check"></span> ${filter.adminName}
-																		</label> <%-- <input type="checkbox" class="menuFilter"
-																			value="${filter.adminName}"><span>${filter.adminName}</span> --%></li>
+																				class="menuFilter"
+																				onclick="checkFilter(${menuCat.cateId},${filter.filterId})">
+																				<span class="checkmark_check"></span>
+																				${filter.adminName}
+																		</label></li>
 
 																	</c:when>
 
@@ -129,16 +168,12 @@
 
 															</c:forEach>
 
-															<!-- <li><a href="#"> Chocolate Cakes </a></li>
-															<li><a href="#"> Red Velvet Cakes </a></li>
-															<li><a href="#"> Black Forest Cakes </a></li>
-															<li><a href="#"> Butter Scotch Cakes </a></li>
-															<li><a href="#"> Strawberry Cakes </a></li>  -->
 
 														</ul>
 													</div>
 
 												</c:when>
+
 											</c:choose>
 
 										</c:forEach>
@@ -652,6 +687,65 @@
 			//setFlavourData();
 			loadData();
 		});
+		
+		function checkFilter(catId,id) {
+			
+			//alert(catId)
+			
+			var cId=sessionStorage.getItem("tempCatId");
+			sessionStorage.setItem("tempCatId", catId);
+			
+			if(catId!=cId){
+				
+				resetPriceRadio();
+				resetFilterCheckbox();
+				
+				//document.getElementsById("menuFilter"+id).checked=true;
+
+			}
+			
+		}
+		
+		function checkPriceFilter(catId) {
+			
+			var cId=sessionStorage.getItem("tempCatId");
+			sessionStorage.setItem("tempCatId", catId);
+			
+			if(catId!=cId){
+				
+				resetPriceRadio();
+				resetFilterCheckbox();
+				
+				//document.getElementsById("menuFilter"+id).checked=true;
+
+			}
+		}
+		
+		
+		function resetPriceRadio() {
+			$(".menuPrice")
+			.each(
+					function(counter) {
+						document.getElementsByClassName("menuPrice")[counter].checked=false;
+					});
+		}
+		
+		function resetFilterCheckbox() {
+			/* $(".menuFilter")
+			.each(
+					function(counter) {
+						document.getElementsByClassName("menuFilter")[counter].checked=false;
+					}); */
+			
+			
+			  var inputs = document.querySelectorAll('.menuFilter');
+			  for (var i = 0; i < inputs.length; i++) {
+			    inputs[i].checked = false;
+			  }
+			  
+			  
+		}
+		
 
 		function resetAllTags() {
 
@@ -1145,6 +1239,8 @@
 						
 						if(checkForCount2 == 1){
 							
+							alert(checkForCount2)
+							
 							if(finalFilterRes.length>0){
 								
 								for (var i = 0; i < finalFilterRes.length; i++) {
@@ -1214,6 +1310,8 @@
 						}
 						
 						
+					}else{
+						//alert("naaaa   "+filteredList.length)
 					}
 				}
 				
@@ -1222,7 +1320,7 @@
 			 	}
 				
 			 	
-			
+			//********************************************************************************************
 				//end isFilterMenu--------------------------------------
 			}else{
 				
@@ -1597,7 +1695,7 @@
 					if(catId == 0){
 						
 						
-						displayListArr.push(allItemArr[i]);
+						/* displayListArr.push(allItemArr[i]);
 						
 						var isLike=allItemArr[i].isLike;
 						var like = '';
@@ -1657,11 +1755,11 @@
 						+ ' </div> </div> </div> </li> ';
 
 			
-						count++;
+						count++; */
 						
-					}
-					
-					 else{
+					} else{
+						 
+						// alert("hi")
 						
 						if(max > 0){
 							
@@ -1729,68 +1827,71 @@
 							
 						} else{
 							
-							//alert("asdasdasdasdasdas")
-							
-							displayListArr.push(allItemArr[i]);
-							
-							//alert("hi")
-							
-							var isLike=allItemArr[i].isLike;
-							var like = '';
-							
-							var isVegType = '';
-							var isVegItem = allItemArr[i].vegNonvegName;
-							
-							if(isVegItem=='VEG'){
-								isVegType = '<div class="purity_icn">'
-								+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
-								+ '</div>';
-							}else if(isVegItem=='NON-VEG'){
-								isVegType = '<div class="purity_icn">'
-								+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
-								+ '</div>';
-							}else{
-								isVegType = '<div class="purity_icn">'
+							if(allItemArr[i].prodCatId==catId){
+								
+								//alert("asdasdasdasdasdas")
+								
+								displayListArr.push(allItemArr[i]);
+								
+								//alert("hi")
+								
+								var isLike=allItemArr[i].isLike;
+								var like = '';
+								
+								var isVegType = '';
+								var isVegItem = allItemArr[i].vegNonvegName;
+								
+								if(isVegItem=='VEG'){
+									isVegType = '<div class="purity_icn">'
 									+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
-									+ '</div><div class="purity_icn">'
+									+ '</div>';
+								}else if(isVegItem=='NON-VEG'){
+									isVegType = '<div class="purity_icn">'
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
 									+ '</div>';
-							}	
-							
-							if(isLike ==1){
-							
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
-								+ '</div>';
-							}else{
+								}else{
+									isVegType = '<div class="purity_icn">'
+										+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+										+ '</div><div class="purity_icn">'
+										+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+										+ '</div>';
+								}	
 								
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
-								+ '</div>';
-							}
-							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
- 							divStr = divStr
-							+ '<li>'
-							+ ' <div class="item_div"> '
-							+ ' <div class="cake_one product_padd"> '
-							+ ' <div class="cake_pic"> '+detail
-							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
-							+ isVegType
-							+ like
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
-							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
-							+ ' </div> '
-							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-							+ allItemArr[i].productName + '</a> </h4>'
-							+ ' </div> </div> </div> </li> ';
- 
-							count++;
+								if(isLike ==1){
+								
+									like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+									+ '</div>';
+								}else{
+									
+									like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
+									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+									+ '</div>';
+								}
+								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+	 							divStr = divStr
+								+ '<li>'
+								+ ' <div class="item_div"> '
+								+ ' <div class="cake_one product_padd"> '
+								+ ' <div class="cake_pic"> '+detail
+								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
+								+ isVegType
+								+ like
+								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+								+ allItemArr[i].defaultPrice
+								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+								+ allItemArr[i].defaultPrice
+								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
+								+ ' </div> '
+								+ ' <div class="cake_container"> '
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								+ allItemArr[i].productName + '</a> </h4>'
+								+ ' </div> </div> </div> </li> ';
+	 
+								count++;
 							
+							}
 						}
 						
 					} 
