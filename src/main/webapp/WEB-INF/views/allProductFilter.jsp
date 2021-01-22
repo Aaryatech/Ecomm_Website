@@ -1566,7 +1566,7 @@
 							var like = '';
 							
 							var isVegType = '';
-							var isVegItem = allItemArr[i].vegNonvegName;
+							var isVegItem = hiddenProductListArr[i].vegNonvegName;
 							
 							if(isVegItem=='VEG'){
 								isVegType = '<div class="purity_icn">'
@@ -1586,13 +1586,13 @@
 							
 							if(isLike ==1){
 							
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+								like = '<div class="circle_tag active" onclick="setLike('+hiddenProductListArr[i].productId+')">'
+								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
 								+ '</div>';
 							}else{
 								
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+								like = '<div class="circle_tag active" onclick="setLike('+hiddenProductListArr[i].productId+')">'
+								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
 							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
@@ -1628,7 +1628,7 @@
 							var like = '';
 							
 							var isVegType = '';
-							var isVegItem = allItemArr[i].vegNonvegName;
+							var isVegItem = hiddenProductListArr[i].vegNonvegName;
 							
 							if(isVegItem=='VEG'){
 								isVegType = '<div class="purity_icn">'
@@ -1648,13 +1648,13 @@
 							
 							if(isLike ==1){
 							
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+								like = '<div class="circle_tag active" onclick="setLike('+hiddenProductListArr[i].productId+')">'
+								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
 								+ '</div>';
 							}else{
 								
-								like = '<div class="circle_tag active" onclick="setLike('+allItemArr[i].productId+')">'
-								+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+								like = '<div class="circle_tag active" onclick="setLike('+hiddenProductListArr[i].productId+')">'
+								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
 							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
