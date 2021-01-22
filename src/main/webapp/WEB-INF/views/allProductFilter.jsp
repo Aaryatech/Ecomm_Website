@@ -1316,6 +1316,10 @@
 				}
 				
 			 	for (var i = 0; i < filteredList.length; i++) {
+			 		
+			 		/* if(filteredList[i].isLike==1){
+			 			alert(filteredList[i])
+			 		} */
 			 		hiddenProductListArr.push(filteredList[i]);
 			 	}
 				
@@ -1484,7 +1488,7 @@
 				//alert("Anmol")
 				
 				for(var i=0; i<hiddenProductListArr.length; i++){
-					/* if(hiddenProductListArr[i].isLike==1){
+					 /* if(hiddenProductListArr[i].isLike==1){
 						alert("Ok 1488"+hiddenProductListArr[i].productName)
 					} */
 					if(catId==0){
@@ -1558,7 +1562,7 @@
 							
 							displayListArr.push(hiddenProductListArr[i]);
 							
-							var isLike=allItemArr[i].isLike;
+							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
 							var isVegType = '';
@@ -1620,7 +1624,7 @@
 							
 							displayListArr.push(hiddenProductListArr[i]);
 							
-							var isLike=allItemArr[i].isLike;
+							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
 							var isVegType = '';

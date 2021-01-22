@@ -1465,6 +1465,9 @@ function moveCursor(){
 	<script type="text/javascript">
 		function addCart(id,type) {
 			
+			//alert("--------------- "+document.getElementById("txtWt").value)
+		
+			 
 			var selectFlav = 0;
 			
 			var selectWt = 0;
@@ -1502,9 +1505,6 @@ function moveCursor(){
 				var allItemList = sessionStorage.getItem("allItemList");
 				var prodHead = $.parseJSON(allItemList);
 				
-				//alert("dfdfd "+prodHead )
-				
-				
 				for (var h = 0; h < prodHead.length; h++) {
 					if (parseInt(id) == parseInt(prodHead[h].productId)) {
 						prodMaster = prodHead[h];
@@ -1512,8 +1512,11 @@ function moveCursor(){
 					}
 				}
 				
+				//alert(JSON.stringify(prodMaster))
+				
+				
+				
 				var prodDetail = prodMaster.prodDetailList;
-				//alert(prodDetail)
 				
 				var actualRate=0;
 				var calRate=0;
@@ -1527,9 +1530,8 @@ function moveCursor(){
 				var qty = 1;
 				
 				var uniq = (new Date()).getTime();
-				//alert(uniq)
-						
-				 for (var d = 0; d < prodDetail.length; d++) {
+
+				for (var d = 0; d < prodDetail.length; d++) {
 					
 					if(type == 0){
 						
@@ -1587,8 +1589,6 @@ function moveCursor(){
 				}
 				 
 				
-				
-				
 				var priceDiff = parseFloat(displayRate)
 						- parseFloat(actualRate);
 				
@@ -1620,9 +1620,19 @@ function moveCursor(){
 					calRate=actualRate;
 				}
 				
-				var spInst=document.getElementById("sp_inst").value;
-				var msgonCake =document.getElementById("msg_on_cake").value;
+				var spInst;
+				var msgonCake;
 				
+			 	if(prodMaster.allowSpecialInstruction==1){
+					spInst=document.getElementById("sp_inst").value;
+				}
+
+				if(prodMaster.allowMsgOnCake==1){
+					msgonCake =document.getElementById("msg_on_cake").value;
+				} 
+				
+				
+
 				if (sessionStorage.getItem("cartValue") == null) {
 					var table = [];
 					sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -1667,21 +1677,7 @@ function moveCursor(){
 					}
 					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
 					
-					/* if(configDetailId==cartArray[i].exInt1 && type==0){
-						index=i;
-						itemFound=1;
-						break;
-					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
-						//alert("asasas")
-						index=i;
-						itemFound=1;
-						break;
-					} */
-					/* else if(configDetailId==cartArray[i].exInt1){
-						index=i;
-						itemFound=1;
-						break;
-					} */
+					
 				}
 				
 				var obj={
@@ -1744,9 +1740,14 @@ function moveCursor(){
 				appendCartData();
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
-			  	
+			  	  
+		
 		} 
 		</script>
+		
+		
+		
+		
 		<script type="text/javascript">
 		function changeWeight(){
 			document.getElementById("img_input_btn").value = "";
