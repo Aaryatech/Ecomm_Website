@@ -211,7 +211,7 @@ public class ProductDisplayController {
 int likeCount=0;
 	@RequestMapping(value = "/setLikeOrDislike", method = RequestMethod.GET)
 	public @ResponseBody Info setLikeOrDislike(HttpServletRequest request, HttpServletResponse response) {
-
+System.err.println("Like count in  " +likeCount);
 		Info info = new Info();
 		HttpSession session = request.getSession();
 		try {
@@ -259,6 +259,7 @@ int likeCount=0;
 			info.setError(true);
 			info.setMsg("0");
 		}
+		System.err.println("Like count out  " +likeCount);
 
 		return info;
 	}

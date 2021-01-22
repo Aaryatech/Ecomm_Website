@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="mongi_cont">
-			<ul class="ks-cboxtags">
+			<!-- <ul class="ks-cboxtags">
 				<li><input type="checkbox" id="checkboxOne"><label
 					for="checkboxOne">Chocolate Cakes</label></li>
 				<li><input type="checkbox" id="checkboxtwo"><label
@@ -93,7 +93,7 @@
 					for="checkboxthirtee">Clover</label></li>
 				<li><input type="checkbox" id="checkboxthirteeone"><label
 					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul>
+			</ul> -->
 
 
 

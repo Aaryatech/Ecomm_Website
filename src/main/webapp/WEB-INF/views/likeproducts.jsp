@@ -30,7 +30,7 @@
 
 						<c:forEach items="${allData.feProductHeadList}" var="product">
 
-							<c:if test="${product.isLike ==1}">
+							<c:if test="${product.isLike==1}">
 
 								<li>
 									<div class="cake_one product_padd">
