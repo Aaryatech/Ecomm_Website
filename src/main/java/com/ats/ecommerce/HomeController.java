@@ -35,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.EncodeDecode;
+import com.ats.ecommerce.model.CateFilterConfig;
 import com.ats.ecommerce.model.CategoryList;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.CompanyTestomonials;
@@ -42,8 +43,10 @@ import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FEProductHeader;
+import com.ats.ecommerce.model.FilterTypes;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
+import com.ats.ecommerce.model.MFilter;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.cms.ContactUs;
 import com.ats.ecommerce.model.offer.SiteVisitor;
@@ -55,6 +58,8 @@ import com.google.gson.Gson;
 
 import java.util.Base64;
 import java.util.Base64.Decoder;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @Scope("session")
@@ -203,7 +208,14 @@ public class HomeController {
 			jsonStr = Obj.writeValueAsString(tagList);
 		} catch (Exception e) {
 		}
-
+		try {
+		
+			int likeCount= (int) session.getAttribute("likeCount");
+			
+		}catch (Exception e) {
+			System.err.println("In catch");
+			session.setAttribute("likeCount",0);
+		}
 		model.addAttribute("tagsJson", jsonStr);
 
 		if (frId > 0) {
@@ -503,6 +515,10 @@ public class HomeController {
 		session.removeAttribute("custId");
 		session.removeAttribute("landMark");
 		session.removeAttribute("frKm");
+		
+		session.removeAttribute("allDataJson");
+		session.removeAttribute("likeCount");
+		
 		returnPage = "landing";
 		
 		return returnPage;
@@ -640,6 +656,71 @@ public class HomeController {
 			model.addAttribute("festiveEvent", data.getFestEventList().get(index));
 
 			System.err.println("INDEX - " + index + "    -------> " + data.getFestEventList().get(index));
+			
+
+			
+			// ALL MENU CATEGORY LIST
+						try {
+
+							List<CateFilterConfig> catMenuList = new ArrayList<>();
+
+							for (CateFilterConfig cat : data.getCatFilterConfig()) {
+
+								List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
+										.collect(Collectors.toList());
+
+								// List<Integer> typeIdList = new ArrayList<>();
+								// typeIdList.add(4);
+								// typeIdList.add(12);
+
+								cat.setTypeIdList(typeIdList);
+								cat.setExInt2(typeIdList.size()+1);
+								catMenuList.add(cat);
+							}
+
+							data.setCatFilterConfig(catMenuList);
+
+						} catch (Exception e) {
+						}
+
+						// ALL FILTER LIST
+						List<MFilter> allFilterList = new ArrayList<>();
+						try {
+
+							int compId = (Integer) request.getSession().getAttribute("companyId");
+
+							MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+							map.add("compId", compId);
+
+							MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
+									MFilter[].class);
+							allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
+
+						} catch (Exception e) {
+						}
+
+						// ALL FILTER TYPE LIST
+						List<FilterTypes> allFilterTypeList = new ArrayList<>();
+						try {
+
+							int compId = (Integer) request.getSession().getAttribute("companyId");
+
+							MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+							map.add("compId", compId);
+
+							FilterTypes[] filterArr = Constants.getRestTemplate()
+									.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
+							allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						model.addAttribute("allListFilter", 1);
+						model.addAttribute("allData", data);
+						model.addAttribute("allFilterList", allFilterList);
+						model.addAttribute("allFilterTypeList", allFilterTypeList);
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

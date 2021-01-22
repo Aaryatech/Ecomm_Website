@@ -11,6 +11,7 @@
 <body>
 
 
+
 	<%-- <!--mongi help-popup-->
 	<div class="mongi_help">
 		<a href="#mongi" class="initialism mongi_open"><img
@@ -60,7 +61,151 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
 
+<div class="mega_menu_row">
 
+		<div class="wrapper">
+
+			<div id="menuzord" class="menuzord red menuzord-responsive">
+				<ul
+					class="menuzord-menu me#menusnuzord-right menuzord-indented scrollable">
+
+
+					<li><a href="#" class="same_day">Same Day Delivery</a></li>
+
+					<c:forEach items="${allData.catFilterConfig}" var="menuCat">
+
+						<li><a href="#">${menuCat.exVar2} <span><i
+									class="fa fa-angle-down" aria-hidden="true"></i></span></a> <!--cake dropdown-->
+
+							<c:if test="${menuCat.exInt2==1}">
+								<c:set value="dropdown" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2==2}">
+								<c:set value="megamenu two-row" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2==3}">
+								<c:set value="megamenu three-row" var="row_class"></c:set>
+
+							</c:if> <c:if test="${menuCat.exInt2==4}">
+								<c:set value="megamenu four-row" var="row_class"></c:set>
+							</c:if> <c:if test="${menuCat.exInt2>4}">
+								<c:set value="megamenu full-row" var="row_class"></c:set>
+							</c:if>
+							<ul class="${row_class}">
+								<div class="four_row_dropdown">
+									<!--row-1-->
+									<div class="row_one">
+										<ul class="drop_mainmenu">
+
+											<li>By Price</li>
+
+											<li><label class="radio_menu">Under 499 <input
+													type="radio" id="radioPrice" value="0-499"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
+
+											<li><label class="radio_menu">500 to 599 <input
+													type="radio" id="radioPrice" value="500-599"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
+
+											<li><label class="radio_menu">600 to 999 <input
+													type="radio" id="radioPrice" value="600-999"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
+
+											<li><label class="radio_menu">1000 to 1999 <input
+													type="radio" id="radioPrice" value="1000-1999"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
+
+											<li><label class="radio_menu">Above 2000 <input
+													type="radio" id="radioPrice" value="2000-10000"
+													name="radioPrice" class="menuPrice"> <span
+													class="checkmark"></span>
+											</label></li>
+
+										</ul>
+									</div>
+
+									<%-- ${menuCat.typeIdList} --%>
+									<%-- ${allFilterTypeList} --%>
+
+									<c:forEach items="${menuCat.typeIdList}" var="menuTypeList">
+
+										<c:forEach items="${allFilterTypeList}" var="filterType">
+
+											<c:choose>
+
+												<c:when test="${menuTypeList == filterType.filterTypeId}">
+
+													<div class="row_one">
+														<ul class="drop_mainmenu">
+															<li>${filterType.filterTypeName}</li>
+
+															<c:forEach items="${allFilterList}" var="filter">
+
+																<c:choose>
+
+																	<c:when
+																		test="${filterType.filterTypeId == filter.filterTypeId}">
+
+																		<li><label class="check_menu"> <input
+																				type="checkbox"
+																				value="${filter.adminName}~${filter.filterTypeId}"
+																				class="menuFilter"> <span
+																				class="checkmark_check"></span> ${filter.adminName}
+																		</label> <%-- <input type="checkbox" class="menuFilter"
+																			value="${filter.adminName}"><span>${filter.adminName}</span> --%></li>
+
+																	</c:when>
+
+																</c:choose>
+
+															</c:forEach>
+
+															<!-- <li><a href="#"> Chocolate Cakes </a></li>
+															<li><a href="#"> Red Velvet Cakes </a></li>
+															<li><a href="#"> Black Forest Cakes </a></li>
+															<li><a href="#"> Butter Scotch Cakes </a></li>
+															<li><a href="#"> Strawberry Cakes </a></li>  -->
+
+														</ul>
+													</div>
+
+												</c:when>
+											</c:choose>
+
+										</c:forEach>
+
+									</c:forEach>
+
+									<!-- proceed_btn -->
+									<a href="javascript:void(0)" class="drop_search"
+										onclick="searchMenu(${menuCat.cateId})">Search</a>
+
+								</div>
+							</ul></li>
+
+					</c:forEach>
+
+				</ul>
+			</div>
+
+		</div>
+
+
+		<div class="arrow_right">
+			<ul>
+				<li><a href="javascript:void(0)" onclick="priceSort(1)"><i
+						class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+				<li><a href="javascript:void(0)" onclick="priceSort(0)"><i
+						class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</div>
 
 	<!-- mega menu -->
 	<!-- <div class="mega_menu_row">
@@ -393,7 +538,7 @@
 	</div> -->
 
 	<div class="head_marg with_menu">
-		<section class="product_category">
+		<%-- <section class="product_category">
 			<div class="wrapper">
 				<div class="mobile_scroll">
 
@@ -417,9 +562,10 @@
 
 
 			</div>
-		</section>
+		</section> --%>
 
 
+<c:if test="${isEvent==0}">
 
 		<!--product listing-->
 		<div class="find_store">
@@ -436,8 +582,8 @@
 								<c:if test="${statusFilter.filterId==statusId}">
 									<h2 class="sec_title">
 										<center>
-											Shop by ${statusFilter.filterName} <span>3 Hour
-												Delivery &amp; Free Shipping in India</span>
+											<!-- Shop by --> ${statusFilter.filterName} <!-- <span>3 Hour
+												Delivery &amp; Free Shipping in India</span> -->
 										</center>
 									</h2>
 
@@ -464,7 +610,7 @@
 																	<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 																		class="off_prc"><i class="fa fa-inr"
 																		aria-hidden="true"></i>${product.defaultPrice}</span> <span
-																		class="prc_off">(23% Off)</span>
+																		class="prc_off"></span>
 																</div>
 															</div>
 															<div class="cake_container">
@@ -511,7 +657,7 @@
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
 															class="off_prc"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off"> </span>
+															class="prc_off">Sai  </span>
 													</div>
 
 													<input type="hidden" class="tagNameHide"
@@ -543,15 +689,15 @@
 				<!--product-row-3-->
 			</div>
 		</div>
-
+</c:if>
 
 		<!-- Prod Filter For Evenr Based Cakes -->
 		<div class="testimonial_bx">
 			<div class="wrapper">
 				<h2 class="sec_title">
 					<center>
-						Shop by ${festiveEvent.eventName} <span>3 Hour Delivery
-							&amp; Free Shipping in India</span>
+						<!-- Shop by --> ${festiveEvent.eventName} <span><!-- 3 Hour Delivery
+							&amp; Free Shipping in India --></span>
 					</center>
 				</h2>
 
@@ -1044,6 +1190,71 @@
 							}); */
 
 		}
+	</script>
+	<script type="text/javascript">
+	
+	function searchMenu(catId) {
+		
+		//alert(catId)
+		
+		var table = [];
+		sessionStorage.setItem("selTags", JSON.stringify(table));
+		
+		sessionStorage.setItem("findCatId", catId);
+		sessionStorage.setItem("filterMenu", 1);
+
+		var priceListTemp = [];
+
+		$(".menuPrice")
+				.each(
+						function(counter) {
+							if (document
+									.getElementsByClassName("menuPrice")[counter].checked) {
+
+								priceListTemp
+										.push(document
+												.getElementsByClassName("menuPrice")[counter].value);
+							}
+						});
+
+		if (priceListTemp.length > 0) {
+
+			for (var i = 0; i < priceListTemp.length; i++) {
+				//alert()
+				var temp = priceListTemp[i].split("-");
+				if (temp.length > 0) {
+					sessionStorage.setItem("priceFilterMin", temp[0]);
+					sessionStorage.setItem("priceFilterMax", temp[1]);
+				}
+			}
+
+		} else {
+			sessionStorage.setItem("priceFilterMin", "0");
+			sessionStorage.setItem("priceFilterMax", "0");
+		}
+
+		var nameFilter = [];
+
+		$(".menuFilter")
+				.each(
+						function(counter) {
+							if (document
+									.getElementsByClassName("menuFilter")[counter].checked) {
+
+								nameFilter
+										.push(document
+												.getElementsByClassName("menuFilter")[counter].value);
+							}
+						});
+
+		/* alert(JSON.stringify(nameFilter)); */
+		
+		sessionStorage.setItem("menuFilterName", nameFilter);
+
+		window.open('${pageContext.request.contextPath}/products/0',
+				'_self');
+
+	}
 	</script>
 
 </body>

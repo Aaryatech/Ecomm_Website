@@ -91,9 +91,11 @@ ol,ul,li{margin: 0px;padding: 0px;list-style-type: none;}
 
 
 header{position: fixed; width: 100%; left: 0; top: 0; display: block; z-index: 10;}
-.head_marg{margin:82px 0 0 0 /* 108px 0 0 0 */;}
+.head_marg{margin:108px 0 0 0 /*82px 0 0 0*/   ;}
 
-
+/* bottom to top css */
+#gotoTop {position: fixed; bottom: 30%; right: 15px; z-index: 9; font-size: 16px; border: none; outline: none; background-color: #373991; color: white; cursor: pointer; padding: 10px; border-radius: 50%; border: 2px solid #2e308a; -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -ms-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+#gotoTop:hover {background-color: #ec268f; border: 2px solid #e31c85; -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -ms-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.20); -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s; transition: all ease 0.5s;}
 
 /*product categories box css*/
 .prod_cat_bx{display: block;}
@@ -438,7 +440,7 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .cake_nm,.cake_nm a{color: #333; font-size: 15px; margin: 0 0 10px 0; font-family: 'Hind-Medium';text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 .cake_one:hover .cake_nm a{color: #ec2c92;}
 
-.cake_dropdown{margin: 0 0 10px 0; position: relative; z-index: 99;}
+.cake_dropdown{margin: 0 0 10px 0; /*position: relative;  z-index: 99; */}
 .cake_dropdown_l{float: left; width: 49%;}
 .cake_dropdown_r{float: right; width: 49%;}
 
@@ -773,7 +775,7 @@ ul.highlist_list li i{position: absolute; left: 0; top: 0; color: #dfe1e4; font-
 .address_row{display: inline-block; width: 100%;}
 .address_row ul{margin: 0px; padding: 0px;}
 .address_row ul li{list-style-type: none; float: left; width: 25% /* 33.333% */; padding: 10px;}
-.address_one{background: #FFF; padding: 10px;}
+.address_one{background: #FFF; padding: 10px; height: 237px;}
 .deliver_add{display: inline-block; width: 100%; margin: 5px 0 10px 0;}
 .deliver_add a{background: #ec268f; padding: 7px; color: #FFF; font-size: 14px; text-align: center; font-family: 'Hind-Medium'; display: block; border-radius: 3px; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .deliver_add a:hover{background: #373991; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
@@ -792,6 +794,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f7fc', end
 .address_txt i{color: #989898; font-size: 14px; position: absolute; left: 0; }
 .address_txt i.user_icn{top: 3px;}
 .address_txt span{display: block; color: #636363; font-family: 'Hind-Regular'; line-height: 22px; font-size: 14px; margin: 5px 0 0 0;}
+
+.address_txt span.land_mark_css{height: 65px; overflow: hidden;}
+
 .dropdown.border_one{border: 1px solid #CCC; margin: 0 0 10px 0; background-position: 97% 13px;}
 .dropdown.border_one .select{padding: 5px 20px 5px 10px; font-size: 14px; text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 .dropdown.border_one .dropdown-menu li{padding: 5px 10px; font-size: 14px;}

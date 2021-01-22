@@ -421,6 +421,12 @@ public class MasterController {
 			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
 
 			model.addAttribute("custAddList", custAddList);
+			
+			session.setAttribute("userName", cust.getCustName());
+			session.setAttribute("userEmail", cust.getEmailId());
+			session.setAttribute("userMobile", cust.getCustMobileNo());
+			session.setAttribute("userAddress", cust.getExVar3());
+			session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 
 		} catch (Exception e) {
 			System.out.println("Exception in /addresslist : " + e.getMessage());

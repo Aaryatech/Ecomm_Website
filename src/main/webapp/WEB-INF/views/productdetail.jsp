@@ -715,35 +715,7 @@
 
 	<!-- bottom -->
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-<script type="text/javascript">
-function setLike(id,isLike) {
-	
-	if(parseInt(isLike)==0){
-		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
-	}else{
-		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
-	} 	
-	$.getJSON(
-			'${setLikeOrDislike}',
-			{
-				prodId : id,
-				ajax : 'true'
-			},
-			function(data) {
-				//alert(JSON.stringify(data));
-				
-				if(data.msg ==1){
-					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
-					
-				}else{
-					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
-					
-				}
-				setLikeCount(data.statusText);
-			}); 
-	
-}
-</script>
+
 	<script type="text/javascript">
 function addToCartClick(productId){
 	//alert("In addToCartClick " +productId);
@@ -1838,7 +1810,35 @@ function moveCursor(){
 
 	</script>
 
-
+<script type="text/javascript">
+function setLike(id,isLike) {
+	
+	if(parseInt(isLike)==0){
+		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+	}else{
+		document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+	} 	
+	$.getJSON(
+			'${setLikeOrDislike}',
+			{
+				prodId : id,
+				ajax : 'true'
+			},
+			function(data) {
+				//alert(JSON.stringify(data));
+				
+				if(data.msg ==1){
+					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart.svg";
+					
+				}else{
+					document.getElementById("like"+id).src = "${pageContext.request.contextPath}/resources/images/heart-1.svg";
+					
+				}
+				setLikeCount(data.statusText);
+			}); 
+	
+}
+</script>
 
 
 </body>

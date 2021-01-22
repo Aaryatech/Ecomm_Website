@@ -870,7 +870,7 @@ function setOfferDiscAmt(){
 							</div>
 							<div class="place_row_r">
 								<span class="pop_lab_fld">GST Number</span>
-								<input type="text" class="input_place" id="txtGst"
+								<input type="text" class="input_place" id="txtGst" maxlength="15"
 									value="${cust.exVar2}" name="txtGst" placeholder="GST Number"
 									autocomplete="off" /> <span
 									class="form-label-hint-error" id="errorGst"
@@ -955,7 +955,7 @@ function setOfferDiscAmt(){
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Area</span>
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtBillingFlat" name="txtBillingFlat"
+									id="txtBillingFlat" name="txtBillingFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
 
 								<label class="form-label-hint-error" id="errorBillingFlat"
@@ -965,7 +965,7 @@ function setOfferDiscAmt(){
 							<div class="place_row_r">
 								<span class="pop_lab_fld">Colony</span>
 								<input type="text" class="input_place" autocomplete="off"
-									id="txtBillingArea" name="txtBillingArea"
+									id="txtBillingArea" name="txtBillingArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
 									class="form-label-hint-error" id="errorBillingArea"
 									style="display: none;">Please enter area, colony,
@@ -976,7 +976,7 @@ function setOfferDiscAmt(){
 						<div class="place_row">
 							<div class="place_row_r" style="display: none">
 								<span class="pop_lab_fld">Landmark</span>
-								<input type="text" class="input_place" autocomplete="off"
+								<input type="text" class="input_place" autocomplete="off" 
 									id="txtBillingLandmark" name="txtBillingLandmark" value="NA"
 									placeholder="Landmark" /> <label class="form-label-hint-error"
 									id="errorBillingLandmark" style="display: none;">Please
@@ -986,7 +986,7 @@ function setOfferDiscAmt(){
 								<span class="pop_lab_fld">Pin code</span>
 								<input type="text" class="input_place" autocomplete="off"
 									id="txtBillingPincode" name="txtBillingPincode"
-									placeholder="Billing Pincode" /> <label
+									placeholder="Billing Pincode" value="${getPin}"/> <label
 									class="form-label-hint-error" id="errorBillingPincode"
 									style="display: none;">Please enter pin code</label>
 							</div>
@@ -1112,7 +1112,7 @@ function setOfferDiscAmt(){
 
 		function setCartData() {
 			
-
+			document.getElementById("loaderimg").style.display = "block";
 			if (sessionStorage.getItem("allItemList") == null) {
 				var table = [];
 				sessionStorage.setItem("allItemList", JSON.stringify(table));
@@ -1324,7 +1324,7 @@ $('#mobile_table-div').append(mobDiv);
 			document.getElementById("cart_item_count").innerHTML = ""+table.length;
 			setOfferDiscAmt();
 			checkValidOffer();
-			
+			 document.getElementById("loaderimg").style.display = "none";
 			//applyOffer();
 		}
 

@@ -4,7 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <header>
+<style>
+</style>
+
 <!-- Akhilesh Loader Jsp --> 
+
  <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
 	<div class="top_row">
 		<div class="wrapper">
@@ -54,15 +58,16 @@
 										Existing address</a>
 										</c:when>
 										<c:otherwise>
-										<a
+										<!-- <a
 									href="#"> Use
-										Existing address</a>
+										Existing address</a> -->
 										</c:otherwise>
 										</c:choose>
 										</li>
-										
+											<c:if test="${sessionScope.custId>0}">
 										<li><a onclick="setData()" href="${pageContext.request.contextPath}/logout">
 										Logout </a></li>
+										</c:if>
 								<li>
 									
 							</ul></li>
@@ -229,8 +234,8 @@
 								<c:choose>
 								<c:when test="${sessionScope.custId>0}">
 								<a href="${pageContext.request.contextPath}/profile"><img
-										class="lazy" width="25" height="25"
-										src="${sessionScope.profileImg}"
+										width="25" height="25"
+										src="${sessionScope.profileImg}" title="Mohsin"
 										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
 										alt="">  <!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a> 
@@ -297,6 +302,7 @@
 		alt=""> <!--<i class="fa fa-bars" aria-hidden="true"></i>--></span>
 
 </header>
+
 <script type="text/javascript">
 /*********************Akhil For Loader On Each Page**************  */
 			$(window).on('load', function(){
@@ -319,18 +325,7 @@ function setData(){
 	sessionStorage.setItem("prodImageList", JSON
 			.stringify(table));
 }
-function setLikeCount(statusText){
-	//alert("OK H")
-	var data1=JSON.parse(statusText);
-	var likeCount=0;
-	$.each(data1.feProductHeadList,
-							function(key, product) {
-		if(product.isLike ==1){
-			likeCount=likeCount+1;
-		}
-	});
-	 $("#like_item_count").html(''+likeCount);
-} 
+
 /* function setLike(id) {
 	alert("OKKK he")
 	$.getJSON(
@@ -352,7 +347,11 @@ function setLandmark(landMark){
 <script>
 	function appendCartData() {
 		//alert("Ok")
+		try{
 		setLike(0);
+		}catch (e) {
+			console.log("in header jsp appendCartData()")
+		}
 		if (sessionStorage.getItem("allItemList") == null) {
 			var table = [];
 			sessionStorage.setItem("allItemList", JSON.stringify(table));
@@ -665,7 +664,18 @@ function setLandmark(landMark){
 	        alert(ele.value);        
 	    }
 	}
-	
+	function setLikeCount(statusText){
+		//alert("OK H")
+		var data1=JSON.parse(statusText);
+		var likeCount=0;
+		$.each(data1.feProductHeadList,
+								function(key, product) {
+			if(product.isLike ==1){
+				likeCount=likeCount+1;
+			}
+		});
+		 $('#like_item_count').html(''+likeCount);
+	} 
 	
 </script>
 

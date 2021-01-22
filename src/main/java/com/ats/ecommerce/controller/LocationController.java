@@ -239,7 +239,9 @@ public class LocationController {
 			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
 
 			model.addAttribute("statusId", statusId);
-
+			model.addAttribute("isEvent", 0);
+			model.addAttribute("allListFilter", 0);
+			
 		} catch (Exception e) {
 			return returnPage;
 		}

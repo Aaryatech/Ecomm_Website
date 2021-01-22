@@ -83,6 +83,24 @@
 	<div class="copyright">&copy; Copyright 2019-20. All Right
 		Reserv. Aarya Tech Solutions</div>
 </footer>
+<button onclick="topFunction()" id="gotoTop" title="Go to top">Top</button>
+<script type="text/javascript">
+document.getElementById("gotoTop").style.display = "none";   
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+   
+	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("gotoTop").style.display = "block";
+    } else {
+        document.getElementById("gotoTop").style.display = "none";
+    }
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() { 
+     $('html, body').animate({scrollTop:0}, 'slow');
+}
+</script>
 <script type="text/javascript">
 getFooteDtl();
 function getFooteDtl() {

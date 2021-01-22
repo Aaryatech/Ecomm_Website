@@ -144,7 +144,7 @@
 													class="fa fa-map-marker" aria-hidden="true"></i>
 													${addressList.address},${addressList.exVar1} ${addressList.exVar2},
 													<!-- <br> MAHARASHTRA, India. --></span>
-												<span>Landmark : ${addressList.landmark}</span> <span><i
+												<span class="land_mark_css" title="${addressList.landmark}">Landmark : ${addressList.landmark}</span> <span><i
 													class="fa fa-phone" aria-hidden="true"></i> +91
 													${addressList.custMobileNo}</span>
 
