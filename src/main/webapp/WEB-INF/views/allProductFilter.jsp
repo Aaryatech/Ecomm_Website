@@ -1835,7 +1835,7 @@
 							
 						} else{
 							
-							if(allItemArr[i].prodCatId==catId){
+							if(allItemArr[i].prodCatId==catId && isFilterMenu==0){
 								
 								//alert("1832")
 								
