@@ -58,7 +58,7 @@
 
 
 
-									<div class="row_one">
+									<%-- <div class="row_one">
 										<ul class="drop_mainmenu">
 
 											<li>By Price</li>
@@ -95,7 +95,7 @@
 											</label></li>
 
 										</ul>
-									</div>
+									</div> --%>
 
 									<%-- ${menuCat.typeIdList} --%>
 									<%-- ${allFilterTypeList} --%>
@@ -1239,7 +1239,7 @@
 						
 						if(checkForCount2 == 1){
 							
-							alert(checkForCount2)
+							//alert(checkForCount2)
 							
 							if(finalFilterRes.length>0){
 								
@@ -1410,6 +1410,8 @@
 											}
 											
 										}else{
+											
+											//NOT USED CURRENTLY*************************************************
 											
 											//alert("catId - "+catId)
 											
@@ -1679,8 +1681,6 @@
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
-						}else{
-							//alert("pppppppppp")
 						}
 						
 					}
@@ -1837,7 +1837,7 @@
 							
 							if(allItemArr[i].prodCatId==catId){
 								
-								alert("1832")
+								//alert("1832")
 								
 								displayListArr.push(allItemArr[i]);
 								
