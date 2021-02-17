@@ -1347,7 +1347,7 @@
 										
 										if(catId == 0){
 											
-
+			
 											var tempFilterArr=allItemArr[i].allFilterNames.split(",");
 											
 											if(tempFilterArr.length>0){
@@ -1473,10 +1473,10 @@
 						alert("Ok 1488"+hiddenProductListArr[i].productName)
 					} */
 					if(catId==0){
-						
+						//alert("Ok")
 						displayListArr.push(hiddenProductListArr[i]);
-						
-						var isLike=hiddenProductListArr[i].isLike;						
+						//setProductData(hiddenProductListArr[i]);
+						 var isLike=hiddenProductListArr[i].isLike;						
 						var like = '';
 						
 						var isVegType = '';
@@ -1661,26 +1661,14 @@
 
 							count++;
 						}
-						
 					}
-					
-					
-					
-					
-					
-					
-					
 				}
 				
 			}else{
 				
-			
 				for (var i = 0; i < allItemArr.length; i++) {
 					
 					if(catId == 0){
-						
-						//alert("this")
-						
 						
 						displayListArr.push(allItemArr[i]);
 						
@@ -1816,7 +1804,7 @@
 							
 							if(allItemArr[i].prodCatId==catId && isFilterMenu==0){
 								
-								//alert("1832")
+								//alert("1819")
 								
 								displayListArr.push(allItemArr[i]);
 								
@@ -1901,7 +1889,8 @@
 			}
 			
 			
-			
+			var table = [];
+			sessionStorage.setItem("selTags", JSON.stringify(table));
 			document.getElementById("itemListUl").innerHTML = divStr;
 			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(displayListArr);
 			
@@ -1929,8 +1918,69 @@
 			document.getElementById("prodCount").innerHTML = prodCountTxt;
 
 		}
-		
-		
+//Sachin 27-01-2021	For Setting data after search/filter/applying tag search.
+var divStr='';
+function setProductData(productObj){
+			//alert("ll")
+			var isLike=productObj.isLike;
+			var like = '';
+			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
+
+			var isVegType = '';
+			var isVegItem = productObj.vegNonvegName;
+			
+			if(isVegItem=='VEG'){
+				isVegType = '<div class="purity_icn">'
+				+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+				+ '</div>';
+			}else if(isVegItem=='NON-VEG'){
+				isVegType = '<div class="purity_icn">'
+				+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+				+ '</div>';
+			}else{
+				isVegType = '<div class="purity_icn">'
+					+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+					+ '</div><div class="purity_icn">'
+					+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+					+ '</div>';
+			}	
+			
+			if(isLike ==1){
+			
+				like = '<div class="circle_tag active" onclick="setLike('+productObj.productId+')">'
+				+ '<img id="like'+productObj.productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+				+ '</div>';
+			}else{
+				
+				like = '<div class="circle_tag active" onclick="setLike('+productObj.productId+')">'
+				+ '<img id="like'+productObj.productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+				+ '</div>';
+			}
+			var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'">'
+			
+			 divStr =divStr
+			 +'<li>'
+			+ ' <div class="item_div"> '
+			+ ' <div class="cake_one product_padd"> '
+			+ ' <div class="cake_pic"> '+detail
+			+ ' <img src="${prodImgUrl}'+productObj.prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+productObj.prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
+			+ isVegType
+			+ like
+			+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+			+ productObj.defaultPrice
+			+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+			+ productObj.defaultPrice
+			+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+			+ ' <input type="hidden" class="tagNameHide" value="'+productObj.appliTagNames+'"> '
+			+ ' </div> '
+			+ ' <div class="cake_container"> '
+			+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'">'
+			+ productObj.productName + '</a> </h4>'
+			+ ' </div> </div> </div> </li> ';
+			//alert("end")
+			$("#itemListUl").append(divStr);
+					
+		}//End of Functin setProductData
 		function setLike(id) {
 			
 			$.getJSON(

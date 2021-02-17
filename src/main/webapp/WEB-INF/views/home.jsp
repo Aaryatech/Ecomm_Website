@@ -392,7 +392,7 @@ function removeLoader(){
 	<c:forEach items="${flavTagStatusList}" var="statusFilter"
 		varStatus="count">
 		<c:choose>
-			<c:when test="${statusFilter.filterTypeId==5}">
+			<c:when test="${statusFilter.filterTypeId==5 &&statusFilter.costAffect==1}">
 				<div class="find_store">
 					<h2 class="sec_title">
 						<center>

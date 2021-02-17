@@ -175,7 +175,7 @@ public class HomeController {
 				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
-				//session.setAttribute("mobNo", cust.getCustMobileNo());
+				session.setAttribute("mobNo", cust.getCustMobileNo());
 			} else {
 				System.err.println("custId <1 " + custId);
 				session.removeAttribute("userName");

@@ -1187,31 +1187,31 @@ function setOfferDiscAmt(){
 
 								'<td>'
 								+ '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ '"  name="btnMin'
 								+ table[i].itemId
 								+ '" onclick="minusQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ','
 								+ table[i].qty
 								+ ')"> <i class="fa fa-minus" aria-hidden="true"></i> </button>'
 
-								+ '<input type="text" id="quantity'
-								+ table[i].itemId
+								+ '<input type="text" readonly id="quantity'
+								+ table[i].uniqueId
 								+ '" name="quantity'
 								+ table[i].itemId
 								+ '" value="'
 								+ table[i].qty
 								+ '" class="qty cart" onblur="typeQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ')"> '
 
 								+ '<button type="button" value="" field="quantity" class="qtyplus cart" id="btnPlus'
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ '"  name="btnPlus'
 								+ table[i].itemId
 								+ '" onclick="plusQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ','
 								+ table[i].qty
 								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
@@ -1262,18 +1262,18 @@ function setOfferDiscAmt(){
 		'<div class="mob_quan_l">Quantity</div>'+
 		'<div class="mob_quan_r">'+
 			'<form id="myform" method="POST" action="#">'+
-				'<button id="btnMin'+table[i].itemId+'" name="btnMin'+table[i].itemId+'" type="button" value="" onclick="minusQty('
-				+ table[i].itemId
+				'<button id="btnMin'+table[i].uniqueId+'" name="btnMin'+table[i].uniqueId+'" type="button" value="" onclick="minusQty('
+				+ table[i].uniqueId
 				+ ','
 				+ table[i].qty
 				+ ')" field="quantity"'+
 					'class="qtyminus cart">'+
 					'<i class="fa fa-minus" aria-hidden="true"></i>'+
 				'</button>'+
-				'<input type="text" id="quantity'+table[i].itemId+'" value="'+table[i].qty+'" class="qty cart">'+
-				'<button type="button" id="btnPlus'+table[i].itemId+'" value="" field="quantity"'+
+				'<input type="text" readonly id="quantity'+table[i].uniqueId+'" value="'+table[i].qty+'" class="qty cart">'+
+				'<button type="button" id="btnPlus'+table[i].uniqueId+'" value="" field="quantity"'+
 					'class="qtyplus cart" onclick="plusQty('
-								+ table[i].itemId
+								+ table[i].uniqueId
 								+ ','
 								+ table[i].qty
 								+ ')">'+
@@ -1325,7 +1325,7 @@ $('#mobile_table-div').append(mobDiv);
 			setOfferDiscAmt();
 			checkValidOffer();
 			 document.getElementById("loaderimg").style.display = "none";
-			//applyOffer();
+			 applyOffer();
 		}
 
 		function minusQty(id, curQty) {
@@ -1343,7 +1343,7 @@ $('#mobile_table-div').append(mobDiv);
 			if (curQty == 1) {
 
 				for (var i = 0; i < table.length; i++) {
-					if (id != table[i].itemId && curQty == 1) {
+					if (id != table[i].uniqueId && curQty == 1) {
 						newCartVal.push(table[i]);
 					}
 				}
@@ -1353,7 +1353,7 @@ $('#mobile_table-div').append(mobDiv);
 				for (var i = 0; i < table.length; i++) {
 					var qty = curQty - 1;
 
-					if (id == table[i].itemId) {
+					if (id == table[i].uniqueId) {
 						table[i].qty = qty;
 
 						var taxableAmt = parseFloat(table[i].rate)
@@ -1401,7 +1401,7 @@ $('#mobile_table-div').append(mobDiv);
 			for (var i = 0; i < table.length; i++) {
 				var qty = curQty + 1;
 
-				if (id == table[i].itemId) {
+				if (id == table[i].uniqueId) {
 					table[i].qty = qty;
 
 					var taxableAmt = parseFloat(table[i].rate)
@@ -1453,7 +1453,6 @@ $('#mobile_table-div').append(mobDiv);
 		}
 
 		function typeQty(id) {
-
 			var qty = document.getElementById("quantity" + id).value;
 
 			if (qty > 0) {
@@ -1470,7 +1469,7 @@ $('#mobile_table-div').append(mobDiv);
 
 				for (var i = 0; i < table.length; i++) {
 
-					if (id == table[i].itemId) {
+					if (id == table[i].uniqueId) {
 						table[i].qty = qty;
 
 						var taxableAmt = parseFloat(table[i].rate)

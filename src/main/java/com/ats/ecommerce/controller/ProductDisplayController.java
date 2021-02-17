@@ -208,10 +208,8 @@ public class ProductDisplayController {
 
 		return returnPage;
 	}
-int likeCount=0;
 	@RequestMapping(value = "/setLikeOrDislike", method = RequestMethod.GET)
 	public @ResponseBody Info setLikeOrDislike(HttpServletRequest request, HttpServletResponse response) {
-System.err.println("Like count in  " +likeCount);
 		Info info = new Info();
 		HttpSession session = request.getSession();
 		try {
@@ -222,7 +220,12 @@ System.err.println("Like count in  " +likeCount);
 			data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
 
 			int status=0;
-			
+			int likeCount=0; 
+			try {
+				likeCount=(int) session.getAttribute("likeCount");
+			}catch (Exception e) {
+				likeCount=0;
+			}
 			if (data != null) {
 
 				for (FEProductHeader prod : data.getFeProductHeadList()) {
@@ -259,7 +262,6 @@ System.err.println("Like count in  " +likeCount);
 			info.setError(true);
 			info.setMsg("0");
 		}
-		System.err.println("Like count out  " +likeCount);
 
 		return info;
 	}

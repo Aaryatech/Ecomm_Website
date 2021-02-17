@@ -276,13 +276,13 @@ header{display: block;}
 }
 
 .logo_right{float: right;}
-.product_like{float: left; font-size: 22px;}
+.product_like{float: left; font-size: 22px; margin:4px 10px 0 0;}
 .product_like a{color: #FFF;}
 .openbtn.heart{padding: 0; font-size: 24px; margin: 6px 0 0 0;}
 
 
 
-.product_cart{float: left;}
+.product_cart{float: left;margin: 0 10px 0 0;}
 .sidepanel {width: 0; position: fixed; z-index: 1; height: 300px; top: 0; right: 0; background-color: #FFF; overflow-x: hidden; transition: 0.5s; height:100vh; -webkit-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.45); -moz-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.45); -ms-box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.45); box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.45);}
 .sidepanel a{padding: 0; text-decoration: none; font-size: 25px; color: #FFF; display: block; transition: 0.3s;}
 .sidepanel a:hover{/*color: #f1f1f1;*/}
