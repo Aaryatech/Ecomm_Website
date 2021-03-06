@@ -297,7 +297,7 @@ public class HomeController {
 		int custId = 0;
 		try {
 			custId = (int) session.getAttribute("custId");
-			
+
 		} catch (Exception e) {
 			session.setAttribute("custId", custId);
 		}
@@ -374,14 +374,14 @@ public class HomeController {
 				} else if (userType == 2 && custAddDetail == null) {
 					System.err.println("Ok userType==2 && custAddDetail=null ");
 					try {
-						if(custId>0) {
+						if (custId > 0) {
 							System.err.println("If1");
 							session.setAttribute("isAddressPopup", 0);
-						}else {
+						} else {
 							System.err.println("Else2");
 							session.setAttribute("isAddressPopup", 1);
 						}
-					}catch (Exception e) {
+					} catch (Exception e) {
 						session.setAttribute("isAddressPopup", 1);
 					}
 					retPage = 0;
@@ -530,6 +530,10 @@ public class HomeController {
 			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 			model.addAttribute("isAddNewAdd", 0);
 
+			Cookie rmCustIdCookie = new Cookie("custIdCookie", "0");
+			rmCustIdCookie.setMaxAge(0);
+			response.addCookie(rmCustIdCookie);
+
 			returnPage = "landing";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -548,9 +552,9 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return returnPage;
-		
+
 	}
 
 	// Modified By -Sachin
@@ -975,7 +979,8 @@ public class HomeController {
 				}
 			}
 		} catch (Exception e) {
-			e.getMessage();
+			e.printStackTrace();
+
 		}
 		return cus;
 	}

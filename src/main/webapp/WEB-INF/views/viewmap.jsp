@@ -114,6 +114,7 @@ html, body {
 				    map,
 				    title: "You are here!",
 				    animation: google.maps.Animation.DROP,
+				    zIndex: 100,
 				    icon: "${pageContext.request.contextPath}/resources/images/marker1.gif",
 				  });
 			 
@@ -122,17 +123,26 @@ html, body {
 			 var infowindow = new google.maps.InfoWindow();
 			 
 			 geocodeLatLng(geocoder, latVal,lngVal, infowindow);
-			 
-			 map
+			/*  map.addListener('center_changed', () => {
+				  marker.setPosition(map.getCenter())
+				}) */
+				
+				google.maps.event.addListener(map, 'center_changed', function() {
+				    marker.setPosition(map.getCenter()); 
+				    var NewMapCenter = map.getCenter();
+			           var lat = NewMapCenter.lat();
+						var lng = NewMapCenter.lng();
+			             
+						$("#latVal").val(lat);
+						$("#lngVal").val(lng);
+						  
+						coordinates_to_address(geocoder,lat,lng);
+				} );
+			 /* map
 				.addListener(
 						'click',
 						function(mapsMouseEvent) {
-							
-							//position : mapsMouseEvent.latLng;
-							
-							//console.log("CLICKED : "+JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2));
-							//console.log("LAT : "+JSON.stringify(mapsMouseEvent.latLng.toJSON().lat));
-							
+							 
 							var lat=JSON.stringify(mapsMouseEvent.latLng.toJSON().lat);
 							var lng=JSON.stringify(mapsMouseEvent.latLng.toJSON().lng);
 							
@@ -141,24 +151,12 @@ html, body {
 							
 							$("#latVal").val(lat);
 							$("#lngVal").val(lng);
-							
-							
-							
-							/* geocoder.geocode({
-							    'latLng': mapsMouseEvent.latLng
-							  }, function(results, status) {
-							    if (status == google.maps.GeocoderStatus.OK) {
-							      if (results[0]) {
-							        alert(results[0].formatted_address);
-							      }
-							    }
-							  }); */
-							  
+							 
 							  
 							geocodeLatLng(geocoder, lat,lng, infowindow);
 							  
 							
-						});
+						}); */
 			 
 			 
 			 
@@ -185,13 +183,34 @@ html, body {
 			        document.getElementById("addr").value="";
 			      }
 			    } else {
-			      alert("Geocoder failed due to: " + status);
+			     // alert("Geocoder failed due to: " + status);
 			        document.getElementById("addr").value="";
 
 			    }
 			  });
 			}
 		
+		
+		function coordinates_to_address(geocoder,lat, lng) {
+		    var latlng = new google.maps.LatLng(lat, lng);
+
+		    geocoder.geocode({'latLng': latlng}, function(results, status) {
+		        if(status == google.maps.GeocoderStatus.OK) {
+		            if(results[0]) {
+		                
+		                document.getElementById("addr").value=results[0].formatted_address;
+		            } else {
+		                alert('No results found');
+		            }
+		        } else {
+		            var error = {
+		                'ZERO_RESULTS': 'Kunde inte hitta adress'
+		            }
+ 
+		        }
+		       // console.log("location -------> " + lat + "     " + lng);
+		    });
+		}
 		
 		function setLocation(){
 			

@@ -359,10 +359,10 @@
 									<div class="payment_two left">
 										<div class="select-style">
 											<select name="paymentMode" id="paymentMode">
-												<option value="">Select Payment Option</option>
+												<option value="2" selected>Online Payment</option>
 												<option value="1">Cash on Delivery (COD)</option>
 												<!-- <option value="2">Card</option> -->
-												<option value="2">Online Payment</option>
+
 											</select>
 
 										</div>
@@ -386,7 +386,7 @@
 								</div>
 								<div>
 									<div class="payment_two left">
-										<input name="delvrInst" id="delvrInst" type="text"
+										<input name="delvrInst" id="delvrInst" type="hidden"
 											class="input_two" placeholder="Delivery Instruction" />
 									</div>
 									<div class="payment_two right">
@@ -1552,7 +1552,7 @@
 								+ '<div class="mob_quan_r">'
 								+ '<div class="cart_option">'
 								+ '<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span>'
-								+ table[i].msgonCake
+								+ msgName
 								+ '</span>'
 								+ '</div>'
 								+ '</div>'
