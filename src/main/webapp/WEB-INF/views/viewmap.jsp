@@ -23,6 +23,24 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+
+#map .centerMarker {
+	position: absolute;
+	/*url of the marker*/
+	background: url('${pageContext.request.contextPath}/resources/images/marker1.gif')
+		no-repeat;
+	/*center the marker*/
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	/*fix offset when needed*/
+	margin-left: -10px;
+	margin-top: -34px;
+	/*size of the image*/
+	height: 80px;
+	width: 51px;
+	cursor: pointer;
+}
 </style>
 
 <link rel="stylesheet"
@@ -113,8 +131,7 @@ html, body {
 				    position: myLatlng,
 				    map,
 				    title: "You are here!",
-				    animation: google.maps.Animation.DROP,
-				    zIndex: 100,
+				    animation: google.maps.Animation.DROP, 
 				    icon: "${pageContext.request.contextPath}/resources/images/marker1.gif",
 				  });
 			 
@@ -135,7 +152,7 @@ html, body {
 			             
 						$("#latVal").val(lat);
 						$("#lngVal").val(lng);
-						  
+						//$('<div/>').addClass('centerMarker').appendTo(map.getDiv())
 						coordinates_to_address(geocoder,lat,lng);
 				} );
 			 /* map
