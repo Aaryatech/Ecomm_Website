@@ -26,7 +26,7 @@
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
-
+	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 	<div class="head_marg">
 
 		<!--main banner -->
@@ -132,23 +132,23 @@
 
 			<c:forEach items="${bannerList}" var="banner">
 				<a href="javascript:void(0)"
-								onclick="openProductListPageByTags('${banner.tagIds}')"
-								class="send_now_btn">
-				<div class="main_banner"
-					style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>'),
+					onclick="openProductListPageByTags('${banner.tagIds}')"
+					class="send_now_btn">
+					<div class="main_banner"
+						style="background: url('${offerImgUrl}${banner.bannerImage}<%-- ${offerImgUrl}${banner.bannerImage} --%>'),
 					url('${pageContext.request.contextPath}/resources/images/no_img_folder/no-banner-image.jpg')
 					  no-repeat center top; background-size: cover;">
 
-					<div class="rotate-banner">
-						<div class="banner_caption">
-							<h3 class="banner_title">
-								${banner.bannerEventName} <span>${banner.captionOnproductPage}</span>
-							</h3>
-							Send Now
+						<div class="rotate-banner">
+							<div class="banner_caption">
+								<h3 class="banner_title">
+									${banner.bannerEventName} <span>${banner.captionOnproductPage}</span>
+								</h3>
+								Send Now
+							</div>
 						</div>
 					</div>
-				</div>
-		</a>
+				</a>
 			</c:forEach>
 
 
@@ -374,17 +374,19 @@ function removeLoader(){
 					%>
 					<c:set var="isShow" value="${show}"></c:set>
 					<c:forEach begin="1" end="10" step="1" varStatus="cn">
-					<c:if test="${isShow==1}">
-						<div>
-							<div class="festival_offer">
-								<a
-									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
-									title="${festEvent.description}">${festEvent.eventName} ${cn.index+1} <img
-									src="${festEventImgUrl}${festEvent.exVar2}" class="lazy"
-									data-src="${festEventImgUrl}${festEvent.exVar2}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-offer-image.jpg'"></a>
+						<c:if test="${isShow==1}">
+							<div>
+								<div class="festival_offer">
+									<a
+										href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
+										title="${festEvent.description}">${festEvent.eventName}
+										${cn.index+1} <img src="${festEventImgUrl}${festEvent.exVar2}"
+										class="lazy" data-src="${festEventImgUrl}${festEvent.exVar2}"
+										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-offer-image.jpg'">
+									</a>
+								</div>
 							</div>
-						</div>
-					</c:if>
+						</c:if>
 					</c:forEach>
 				</c:forEach>
 			</section>
@@ -396,7 +398,8 @@ function removeLoader(){
 	<c:forEach items="${flavTagStatusList}" var="statusFilter"
 		varStatus="count">
 		<c:choose>
-			<c:when test="${statusFilter.filterTypeId==5 &&statusFilter.costAffect==1}">
+			<c:when
+				test="${statusFilter.filterTypeId==5 &&statusFilter.costAffect==1}">
 				<div class="find_store">
 					<h2 class="sec_title">
 						<center>
@@ -415,10 +418,13 @@ function removeLoader(){
 										<div>
 											<div class="cake_one">
 												<div class="cake_pic">
-												<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-													<img src="#"
-														data-src="${prodImgUrl}${product.prodImagePrimary}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-														class="mobile_fit transition lazy"></a>
+													<a
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+														<img src="#"
+														data-src="${prodImgUrl}${product.prodImagePrimary}"
+														onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
+														class="mobile_fit transition lazy">
+													</a>
 
 													<div class="purity_icn">
 														<c:choose>
@@ -451,23 +457,23 @@ function removeLoader(){
 
 													<div class="circle_tag active"
 														onclick="setLike(${product.productId},${product.isLike})">
-														
+
 														<c:choose>
-														
-														<c:when test="${product.isLike==0}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-															alt="">
-														</c:when>
-														<c:when test="${product.isLike==1}">
-														<img src="#" class="lazy" id="like${product.productId}"
-															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-															alt="">
-														</c:when>
-														
+
+															<c:when test="${product.isLike==0}">
+																<img src="#" class="lazy" id="like${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+																	alt="">
+															</c:when>
+															<c:when test="${product.isLike==1}">
+																<img src="#" class="lazy" id="like${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+																	alt="">
+															</c:when>
+
 														</c:choose>
-														
-														
+
+
 													</div>
 
 
@@ -499,18 +505,19 @@ function removeLoader(){
 																	<!-- <input type="number" id="wt" value="1" max="2" min="0"
 																		limit="1" style="text-align: center;"> -->
 																	<div class="plus_minus_one">
-																	<button type="button" value="" field="quantity"
-																		class="qtyminus slide"
-																		onclick="setQtyText(${product.productId},0,'${product.prodDetailList}')">
-																		<i class="fa fa-minus" aria-hidden="true"></i>
-																	</button>
-																	<input type="text" id="txtWt${product.productId}"
-																		value="1" style="text-align: center;" class="qty slide">
-																	<button type="button" value="" field="quantity"
-																		onclick="setQtyText(${product.productId},1,'${product.prodDetailList}')"
-																		class="qtyplus slide">
-																		<i class="fa fa-plus" aria-hidden="true"></i>
-																	</button>
+																		<button type="button" value="" field="quantity"
+																			class="qtyminus slide"
+																			onclick="setQtyText(${product.productId},0,'${product.prodDetailList}')">
+																			<i class="fa fa-minus" aria-hidden="true"></i>
+																		</button>
+																		<input type="text" id="txtWt${product.productId}"
+																			value="1" style="text-align: center;"
+																			class="qty slide">
+																		<button type="button" value="" field="quantity"
+																			onclick="setQtyText(${product.productId},1,'${product.prodDetailList}')"
+																			class="qtyplus slide">
+																			<i class="fa fa-plus" aria-hidden="true"></i>
+																		</button>
 																	</div>
 																</c:when>
 
@@ -518,15 +525,15 @@ function removeLoader(){
 
 																	<!-- <div class="custom-select-new1"> -->
 																	<div class="small_field">
-																	<select class="select-css" id="wt${product.productId}"
-																		onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
-																		<!-- <option value="7">7</option> -->
-																		<c:forEach items="${product.availInWeights}"
-																			var="prodDetailwt">
-																			<option value="${prodDetailwt}">${prodDetailwt}</option>
-																		</c:forEach>
-																	</select>
-																	<!-- </div> -->
+																		<select class="select-css" id="wt${product.productId}"
+																			onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
+																			<!-- <option value="7">7</option> -->
+																			<c:forEach items="${product.availInWeights}"
+																				var="prodDetailwt">
+																				<option value="${prodDetailwt}">${prodDetailwt}</option>
+																			</c:forEach>
+																		</select>
+																		<!-- </div> -->
 																	</div>
 
 																</c:otherwise>
@@ -538,8 +545,8 @@ function removeLoader(){
 														</div>
 														<div class="cake_dropdown_r">
 
- 
-<div class="radio_1">
+
+															<div class="radio_1">
 																<ul>
 																	<c:set var="isVegFound" value="0"></c:set>
 																	<c:set var="isNonVegFound" value="0"></c:set>
@@ -646,7 +653,7 @@ function removeLoader(){
 
 
 
-															
+
 
 
 
@@ -686,7 +693,7 @@ function removeLoader(){
 														<div class="radio_l">
 
 															<!-- Flavor 25-12-2020 -->
-															
+
 															<div>
 																<i class="fa fa-inr cake_prc_detail_iclass"
 																	aria-hidden="true"></i>
@@ -735,8 +742,8 @@ function removeLoader(){
 																	id="newPrice${product.productId}">${price}</p>
 
 															</div>
-															
-															
+
+
 														</div>
 														<div class="radio_r">
 															<a href="javascript:void(0)"
@@ -795,7 +802,7 @@ function removeLoader(){
 
 							<div class="testimonial_nm">
 								<img src="${TestimonialImgUrl}${testmoni.images}"
-								onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-testimonial-picture.jpg'">
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-testimonial-picture.jpg'">
 								<h2 class="testimonial_date">
 									${testmoni.name} <span>${testmoni.designation}</span>
 									<!--  <span>Location: location</span> -->
@@ -1065,7 +1072,7 @@ function removeLoader(){
 
 		}//end of Function addToCartClick
 		</script> -->
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		function appendCartData() {
 
@@ -1167,7 +1174,7 @@ function removeLoader(){
 
 		}
 		</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		function setQty(productId, position, curQty, buttonType) {
 			//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
@@ -1471,7 +1478,7 @@ function removeLoader(){
 
 		}
 		</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		function setQtyText(id, type) {
 
@@ -1527,7 +1534,7 @@ function removeLoader(){
 		}
 		
 		</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		function setPriceByWtAndFlavour(id,type) {
 			
@@ -1585,7 +1592,7 @@ function removeLoader(){
 		}
 		
 		</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		function addCart(id,type) {
 			
 			

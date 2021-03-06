@@ -29,7 +29,7 @@ html {
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
-
+	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 	<div class="head_marg with_menu">
 		<c:forEach items="${allData.frSubCatList}" var="subCat">
 
@@ -51,73 +51,72 @@ html {
 			</c:if>
 		</c:forEach>
 		<c:choose>
-		<c:when test="${totSubCnt>1}">
-			<section class="product_category">
-				<div class="wrapper">
+			<c:when test="${totSubCnt>1}">
+				<section class="product_category">
+					<div class="wrapper">
 
-					<div class="regular-filter slider">
-					
-						<c:forEach items="${allData.frSubCatList}" var="subCat">
+						<div class="regular-filter slider">
 
-							<c:set value="0" var="count"></c:set>
+							<c:forEach items="${allData.frSubCatList}" var="subCat">
 
-							<c:forEach items="${allData.feProductHeadList}" var="product">
-								<c:if test="${product.prodSubCatId == subCat.subCatId}">
-									<c:set value="1" var="count"></c:set>
+								<c:set value="0" var="count"></c:set>
+
+								<c:forEach items="${allData.feProductHeadList}" var="product">
+									<c:if test="${product.prodSubCatId == subCat.subCatId}">
+										<c:set value="1" var="count"></c:set>
+									</c:if>
+								</c:forEach>
+
+
+
+								<c:if test="${subCat.catId == catId && count==1}">
+
+
+									<div>
+										<div class="filter_slide_bx">
+											<div class="product_filter_one">
+												<a href="#${subCat.subCatId}"
+													onclick="setDivPadding(${subCat.subCatId})"> <img
+													src="${subCatImgUrl}${subCat.imageName}" alt=""
+													onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
+													<span><c:out value="${subCat.subCatName}"></c:out></span>
+												</a>
+											</div>
+										</div>
+									</div>
+
 								</c:if>
 							</c:forEach>
 
 
 
-							<c:if test="${subCat.catId == catId && count==1}">
-
-								
-								<div>
-									<div class="filter_slide_bx">
-										<div class="product_filter_one">
-											<a href="#${subCat.subCatId}"
-												onclick="setDivPadding(${subCat.subCatId})"> <img
-												src="${subCatImgUrl}${subCat.imageName}" alt=""
-												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/product-filter-noimg.jpg'">
-												<span><c:out value="${subCat.subCatName}"></c:out></span>
-											</a>
-										</div>
-									</div>
-								</div>
-
-							</c:if>
-						</c:forEach>
-
+						</div>
 
 
 					</div>
+				</section>
+			</c:when>
+			<c:otherwise>
+				<section class="product_category">
+					<div class="wrapper">
+						<h2 class="sec_title">
+							<center>Sorry No Products Found!!!</center>
+						</h2>
+
+					</div>
+				</section>
+
+			</c:otherwise>
 
 
-				</div>
-			</section>
-		</c:when>
-		<c:otherwise>
-		<section class="product_category">
-				<div class="wrapper">
-				<h2 class="sec_title">
-					<center>Sorry No Products Found!!!
-					</center>
-				</h2>
-				
-				</div>
-			</section>
-		
-		</c:otherwise>
-		
-		
 		</c:choose>
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 
 
 

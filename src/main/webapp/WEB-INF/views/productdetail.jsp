@@ -9,11 +9,12 @@
 
 
 <body>
-<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
+	<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
 
 	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 
 	<div class="head_marg">
 
@@ -21,11 +22,6 @@
 		<div class="find_store with_bread">
 			<div class="wrapper">
 
-				<div class="breadcrums">
-					<a href="#">Home</a> <i class="fa fa-angle-right"
-						aria-hidden="true"></i> <a href="#">${prodHeader.subCatName}</a> <i
-						class="fa fa-angle-right" aria-hidden="true"></i>${prodHeader.productName}
-				</div>
 
 				<div class="detail_row">
 					<div class="detail_l">
@@ -34,25 +30,33 @@
 
 
 							<div class="xzoom-container">
-							
-							
+
+
 								<div class="purity_icn">
 									<c:choose>
 										<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
-											<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" class="slick-initialized slick-slider"
+											<img
+												src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												class="slick-initialized slick-slider"
 												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
 												alt="">
 										</c:when>
 										<c:when test="${prodHeader.vegNonvegName eq 'NON-VEG'}">
-											<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" class="slick-initialized slick-slider"
+											<img
+												src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												class="slick-initialized slick-slider"
 												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
 												alt="">
 										</c:when>
 										<c:otherwise>
-											<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" class="slick-initialized slick-slider"
+											<img
+												src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												class="slick-initialized slick-slider"
 												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
 												alt="">
-											<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" class="slick-initialized slick-slider"
+											<img
+												src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												class="slick-initialized slick-slider"
 												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
 												alt="">
 										</c:otherwise>
@@ -66,19 +70,21 @@
 									src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}"
 									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" />
-								
+
 								<div class="mobile_Scrl">
 									<div class="xzoom-thumbs">
 										<a href="${prodImgUrl}${prodHeader.prodImagePrimary}"><img
 											class="xzoom-gallery" width="70" height="70"
 											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
-											title="${prodHeader.productDesc}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
+											title="${prodHeader.productDesc}"
+											onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
 										<c:forEach items="${prodHeader.productImages}"
 											var="prod_image">
 											<a href="${prodImgUrl}${prod_image}"><img
 												class="xzoom-gallery" width="70" height="70"
-												src="${prodImgUrl}${prod_image}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
+												src="${prodImgUrl}${prod_image}"
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 												title="${prodHeader.productDesc}"></a>
 										</c:forEach>
 									</div>
@@ -97,29 +103,29 @@
 										value="${prodHeader.productId}" />
 									<h2 class="product_nm">
 										<span>In Stock</span>
-										
-														<c:choose>
-															<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
-																<img src="#" class="lazy"
-																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
-																	alt="">
-															</c:when>
-															<c:when test="${prodHeader.vegNonvegName eq 'NON-VEG'}">
-																<img src="#" class="lazy"
-																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
-																	alt="">
-															</c:when>
-															<c:otherwise>
-																<img src="#" class="lazy"
-																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
-																	alt="">
-																<img src="#" class="lazy"
-																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
-																	alt="">
-															</c:otherwise>
-														</c:choose>
-														
-										
+
+										<c:choose>
+											<c:when test="${prodHeader.vegNonvegName eq 'VEG'}">
+												<img src="#" class="lazy"
+													data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+													alt="">
+											</c:when>
+											<c:when test="${prodHeader.vegNonvegName eq 'NON-VEG'}">
+												<img src="#" class="lazy"
+													data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+													alt="">
+											</c:when>
+											<c:otherwise>
+												<img src="#" class="lazy"
+													data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+													alt="">
+												<img src="#" class="lazy"
+													data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+													alt="">
+											</c:otherwise>
+										</c:choose>
+
+
 										${prodHeader.productName}
 									</h2>
 									<div class="stock_review">
@@ -128,29 +134,31 @@
 											alt=""> <span>32 Review</span>
 									</div>
 								</div>
-								
+
 								<div class="stock_r">
-								<div class="detail_like">
-									<div class="circle_tag active" onclick="setLike(${prodHeader.productId})">
-														
-										<c:choose>
-										
-										<c:when test="${prodHeader.isLike==0}">
-										<img src="#" class="lazy" id="like${prodHeader.productId}"
-											data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
-											alt="">
-										</c:when>
-										<c:when test="${prodHeader.isLike==1}">
-										<img src="#" class="lazy" id="like${prodHeader.productId}"
-											data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
-											alt="">
-										</c:when>
-										
-										</c:choose>
-										
-										
+									<div class="detail_like">
+										<div class="circle_tag active"
+											onclick="setLike(${prodHeader.productId})">
+
+											<c:choose>
+
+												<c:when test="${prodHeader.isLike==0}">
+													<img src="#" class="lazy" id="like${prodHeader.productId}"
+														data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
+														alt="">
+												</c:when>
+												<c:when test="${prodHeader.isLike==1}">
+													<img src="#" class="lazy" id="like${prodHeader.productId}"
+														data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
+														alt="">
+												</c:when>
+
+											</c:choose>
+
+
+										</div>
 									</div>
-								</div> </div>
+								</div>
 								<%-- <div class="stock_r">
 									<img
 										src="${pageContext.request.contextPath}/resources/images/protection.png"
@@ -269,137 +277,137 @@
 										<div class="clr"></div>
 									</div> --%>
 									<!--cake-kgs-->
-									
+
 									<div class="detail_drop">
-								<ul>
-
-									<c:choose>
-
-										<c:when test="${prodHeader.rateSettingType==0}">
-
-											<li>
-												<button type="button" value="" field="quantity"
-													class="qtyminus cart"
-													onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
-													<i class="fa fa-minus" aria-hidden="true"></i>
-												</button> <input type="text" id="txtWt" value="1"
-												style="text-align: center;" class="qty cart">
-												<button type="button" value="" field="quantity"
-													onclick="setQtyText(${prodHeader.productId},1,'${prodHeader.prodDetailList}')"
-													class="qtyplus cart">
-													<i class="fa fa-plus" aria-hidden="true"></i>
-												</button>
-
-											</li>
-
-										</c:when>
-
-										<c:otherwise>
-
-											<c:if test="${prodHeader.defaultFlavorId!=0}">
-
-												<li>Flavor <select class="select-css" name="flavor"
-													id="flavor"
-													onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
-														<c:forEach items="${prodHeader.flavourIds}"
-															var="prodDetail">
-															<c:forEach items="${flavTagStatusList}"
-																var="flavorFilter" varStatus="flavorFilterCount">
-
-																<c:if test="${flavorFilter.filterTypeId==4}">
-
-																	<c:choose>
-																		<c:when test="${prodDetail==flavorFilter.filterId}">
-																			<c:choose>
-																				<c:when
-																					test="${prodDetail==prodHeader.defaultFlavorId}">
-																					<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																				</c:when>
-																				<c:otherwise>
-																					<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																				</c:otherwise>
-																			</c:choose>
-																		</c:when>
-																		<c:otherwise>
-
-																		</c:otherwise>
-																	</c:choose>
-																</c:if>
-															</c:forEach>
-														</c:forEach>
-												</select></li>
-											</c:if>
-
-											<li>Weight<select class="select-css" id="weight"
-												onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
-													<c:forEach items="${prodHeader.availInWeights}"
-														var="prodDetailwt">
-														<option value="${prodDetailwt}">${prodDetailwt}</option>
-													</c:forEach>
-											</select></li>
-
-										</c:otherwise>
-
-									</c:choose>
-
-								</ul>
-
-								<ul> 
-									<li>
-										<div class="detail_price_tp">
-										    <span>Price :</span>
-											<i class="fa fa-inr cake_prc_detail_iclass aprice"
-												aria-hidden="true"></i>
-
-											<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
-											<c:set value="1" var="defaultWt"></c:set>
+										<ul>
 
 											<c:choose>
 
-												<c:when test="${prodHeader.rateSettingType == 1}">
+												<c:when test="${prodHeader.rateSettingType==0}">
 
-													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
-														varStatus="loop" begin="0" end="0">
-														<c:set value="${proWt}" var="defaultWt"></c:set>
-													</c:forEach>
+													<li>
+														<button type="button" value="" field="quantity"
+															class="qtyminus cart"
+															onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
+															<i class="fa fa-minus" aria-hidden="true"></i>
+														</button> <input type="text" id="txtWt" value="1"
+														style="text-align: center;" class="qty cart">
+														<button type="button" value="" field="quantity"
+															onclick="setQtyText(${prodHeader.productId},1,'${prodHeader.prodDetailList}')"
+															class="qtyplus cart">
+															<i class="fa fa-plus" aria-hidden="true"></i>
+														</button>
 
-													<c:set value="${prodHeader.defaultPrice * defaultWt}"
-														var="price"></c:set>
-
-												</c:when>
-
-												<c:when test="${prodHeader.rateSettingType == 2}">
-
-													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
-														varStatus="loop" begin="0" end="0">
-														<c:set value="${proWt}" var="defaultWt"></c:set>
-													</c:forEach>
-
-													<c:forEach items="${prodHeader.prodDetailList}"
-														var="proDetail">
-
-														<c:choose>
-															<c:when
-																test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
-																<c:set value="${proDetail.actualRate}" var="price"></c:set>
-															</c:when>
-														</c:choose>
-													</c:forEach>
+													</li>
 
 												</c:when>
+
+												<c:otherwise>
+
+													<c:if test="${prodHeader.defaultFlavorId!=0}">
+
+														<li>Flavor <select class="select-css" name="flavor"
+															id="flavor"
+															onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+																<c:forEach items="${prodHeader.flavourIds}"
+																	var="prodDetail">
+																	<c:forEach items="${flavTagStatusList}"
+																		var="flavorFilter" varStatus="flavorFilterCount">
+
+																		<c:if test="${flavorFilter.filterTypeId==4}">
+
+																			<c:choose>
+																				<c:when test="${prodDetail==flavorFilter.filterId}">
+																					<c:choose>
+																						<c:when
+																							test="${prodDetail==prodHeader.defaultFlavorId}">
+																							<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																						</c:when>
+																						<c:otherwise>
+																							<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																						</c:otherwise>
+																					</c:choose>
+																				</c:when>
+																				<c:otherwise>
+
+																				</c:otherwise>
+																			</c:choose>
+																		</c:if>
+																	</c:forEach>
+																</c:forEach>
+														</select></li>
+													</c:if>
+
+													<li>Weight<select class="select-css" id="weight"
+														onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+															<c:forEach items="${prodHeader.availInWeights}"
+																var="prodDetailwt">
+																<option value="${prodDetailwt}">${prodDetailwt}</option>
+															</c:forEach>
+													</select></li>
+
+												</c:otherwise>
 
 											</c:choose>
 
+										</ul>
+
+										<ul>
+											<li>
+												<div class="detail_price_tp">
+													<span>Price :</span> <i
+														class="fa fa-inr cake_prc_detail_iclass aprice"
+														aria-hidden="true"></i>
+
+													<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
+													<c:set value="1" var="defaultWt"></c:set>
+
+													<c:choose>
+
+														<c:when test="${prodHeader.rateSettingType == 1}">
+
+															<c:forEach items="${prodHeader.availInWeights}"
+																var="proWt" varStatus="loop" begin="0" end="0">
+																<c:set value="${proWt}" var="defaultWt"></c:set>
+															</c:forEach>
+
+															<c:set value="${prodHeader.defaultPrice * defaultWt}"
+																var="price"></c:set>
+
+														</c:when>
+
+														<c:when test="${prodHeader.rateSettingType == 2}">
+
+															<c:forEach items="${prodHeader.availInWeights}"
+																var="proWt" varStatus="loop" begin="0" end="0">
+																<c:set value="${proWt}" var="defaultWt"></c:set>
+															</c:forEach>
+
+															<c:forEach items="${prodHeader.prodDetailList}"
+																var="proDetail">
+
+																<c:choose>
+																	<c:when
+																		test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																		<c:set value="${proDetail.actualRate}" var="price"></c:set>
+																	</c:when>
+																</c:choose>
+															</c:forEach>
+
+														</c:when>
+
+													</c:choose>
 
 
-											<p class="cake_prc_detail_pclass"
-												id="newPrice${prodHeader.productId}">${price}</p>
-										</div>
-									</li>
-								</ul>
-							</div>
-									
-									
+
+													<p class="cake_prc_detail_pclass"
+														id="newPrice${prodHeader.productId}">${price}</p>
+												</div>
+											</li>
+										</ul>
+									</div>
+
+
 								</div>
 
 
@@ -411,28 +419,30 @@
 											<h4 class="delivery_title">Message On Cake</h4>
 											<div class="delivery_frm">
 												<form action="" method="post">
-												<c:choose>
-													<c:when test="${prodHeader.allowBasePhotoUpload==1}">
-														<div class="delivery_frm_l">
-															<img alt="" id="del_image" style="size: portrait;"
-																name="del_image" />
-															<div class="inputbrowsebtn">
-																<label for="img_input_btn"> <span class="fg" title="only jpg,png,jpeg file format with max size 600 KB">Upload
-																		Image </span> <input type="file" accept="image/*"
-																	name="img_input_btn" id="img_input_btn"
-																	accept=".jpg,.png,.jpeg,.bmp" title="only jpg,png,jpeg file format with max size 600 KB"
-																	onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
+													<c:choose>
+														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
+															<div class="delivery_frm_l">
+																<img alt="" id="del_image" style="size: portrait;"
+																	name="del_image" />
+																<div class="inputbrowsebtn">
+																	<label for="img_input_btn"> <span class="fg"
+																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
+																			Image </span> <input type="file" accept="image/*"
+																		name="img_input_btn" id="img_input_btn"
+																		accept=".jpg,.png,.jpeg,.bmp"
+																		title="only jpg,png,jpeg file format with max size 600 KB"
+																		onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
 
-																</label>
+																	</label>
+																</div>
 															</div>
-														</div>
-													</c:when>
-													<c:otherwise>
-													 <input style="display: none" type="file" accept="image/*"
-																	name="img_input_btn" id="img_input_btn"
-																	accept=".jpg,.png,.gif,.jpeg,.bmp"
-																	onchange="loadFile(event)">
-													</c:otherwise>
+														</c:when>
+														<c:otherwise>
+															<input style="display: none" type="file" accept="image/*"
+																name="img_input_btn" id="img_input_btn"
+																accept=".jpg,.png,.gif,.jpeg,.bmp"
+																onchange="loadFile(event)">
+														</c:otherwise>
 													</c:choose>
 
 													<div class="delivery_frm_r">
@@ -470,12 +480,14 @@
 								<div class="clr"></div>
 							</div>
 
-							 
+
 
 							<div class="button_row btm">
 								<a href="javascript:void(0)" class="cart_button"
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
-									To Cart</a> <a onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})" href="${pageContext.request.contextPath}/checkout"
+									To Cart</a> <a
+									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})"
+									href="${pageContext.request.contextPath}/checkout"
 									class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
@@ -484,7 +496,9 @@
 							<div class="mobile_button">
 								<a href="javascript:void(0)" class="mobile_cart"
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
-									To Cart</a> <a onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})" href="${pageContext.request.contextPath}/checkout"
+									To Cart</a> <a
+									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})"
+									href="${pageContext.request.contextPath}/checkout"
 									class="mobile_buy">Buy Now</a>
 							</div>
 						</div>
@@ -524,14 +538,14 @@
 									<li><i class="fa fa-circle" aria-hidden="true"></i>
 										Toppings: ${prodHeader.toppingCreamNames}</li>
 								</c:if>
-								
+
 								<c:if test="${prodHeader.defaultShapeId!=0}">
 									<li><i class="fa fa-circle" aria-hidden="true"></i>
 										Shapes: ${prodHeader.shapeNames}</li>
 								</c:if>
-								
-								
-								
+
+
+
 							</ul>
 						</div>
 
@@ -563,8 +577,7 @@
 				<div class="product_boxes">
 					<h5 class="sec_title">
 						<center>
-							Related Products <span>
-								</span>
+							Related Products <span> </span>
 						</center>
 					</h5>
 
@@ -573,96 +586,93 @@
 						<c:forEach items="${prodHeaderList}" var="product"
 							varStatus="prodCount">
 							<c:set value="0" var="is_related"></c:set>
-							<li>
-							<c:forEach items="${relateItemArray}" var="relProdId"
-							varStatus="prodCount">
-							<c:if test="${relProdId==product.productId}">
-							<c:set value="1" var="is_related"></c:set>
-							</c:if>
-							</c:forEach>
-							<c:if test="${is_related==1}">
-								<div class="cake_one product_padd">
-									<div class="cake_pic">
-									<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-										<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-											class="mobile_fit transition"></a>
-											
-										<%-- <div class="circle_tag">
+							<li><c:forEach items="${relateItemArray}" var="relProdId"
+									varStatus="prodCount">
+									<c:if test="${relProdId==product.productId}">
+										<c:set value="1" var="is_related"></c:set>
+									</c:if>
+								</c:forEach> <c:if test="${is_related==1}">
+									<div class="cake_one product_padd">
+										<div class="cake_pic">
+											<a
+												href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+												<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+												class="mobile_fit transition">
+											</a>
+
+											<%-- <div class="circle_tag">
 											<img
 												src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
 												alt=""> <img
 												src="${pageContext.request.contextPath}/resources/images/heart.svg"
 												alt="">
 										</div> --%>
-										
-										<div class="purity_icn">
-														<c:choose>
-															<c:when test="${product.vegNonvegName eq 'VEG'}">
-																<img src="#" class="lazy" id="veg${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
-																	alt="">
-															</c:when>
-															<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
-																<img src="#" class="lazy"
-																	id="nonveg${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
-																	alt="">
-															</c:when>
-															<c:otherwise>
-																<img src="#" class="lazy" id="veg${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
-																	alt="">
-																<img src="#" class="lazy"
-																	id="nonveg${product.productId}"
-																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
-																	alt="">
-															</c:otherwise>
-														</c:choose>
-													</div>
-													
-										<div class="circle_tag active"
-														onclick="setLike(${product.productId},${product.isLike})">
-														<c:choose>
-														
-														<c:when test="${product.isLike==0}">
-														 <img src="#" class="lazy" id="like${product.productId}"
+
+											<div class="purity_icn">
+												<c:choose>
+													<c:when test="${product.vegNonvegName eq 'VEG'}">
+														<img src="#" class="lazy" id="veg${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+															alt="">
+													</c:when>
+													<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
+														<img src="#" class="lazy" id="nonveg${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+															alt="">
+													</c:when>
+													<c:otherwise>
+														<img src="#" class="lazy" id="veg${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+															alt="">
+														<img src="#" class="lazy" id="nonveg${product.productId}"
+															data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+															alt="">
+													</c:otherwise>
+												</c:choose>
+											</div>
+
+											<div class="circle_tag active"
+												onclick="setLike(${product.productId},${product.isLike})">
+												<c:choose>
+
+													<c:when test="${product.isLike==0}">
+														<img src="#" class="lazy" id="like${product.productId}"
 															data-src="${pageContext.request.contextPath}/resources/images/heart-1.svg"
 															alt="">
-															
-														</c:when>
-														<c:when test="${product.isLike==1}">
+
+													</c:when>
+													<c:when test="${product.isLike==1}">
 														<img src="#" class="lazy" id="like${product.productId}"
 															data-src="${pageContext.request.contextPath}/resources/images/heart.svg"
 															alt="">
-														</c:when>
-														
-														</c:choose>
-														
-														
-													</div>
-													
-										<div class="cake_prc">
-											<i class="fa fa-inr cake_prc_detail_iclass"
-												aria-hidden="true"></i>
-											<p class="cake_prc_detail_pclass" id="cake_prc">${product.defaultPrice}</p>
-											<span class="off_prc" id="off_prc"><i
-												class="fa fa-inr" aria-hidden="true"></i></span> <span
-												class="prc_off" id="prc_off"></span>
-										</div>
-										
-									</div>
+													</c:when>
 
-									<div class="cake_container">
-										<h4 class="cake_nm single_row">
-											<a 
-												href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
-											<input type="hidden" id="prodIdText"
-												value="${product.productId}" />
-										</h4>
+												</c:choose>
+
+
+											</div>
+
+											<div class="cake_prc">
+												<i class="fa fa-inr cake_prc_detail_iclass"
+													aria-hidden="true"></i>
+												<p class="cake_prc_detail_pclass" id="cake_prc">${product.defaultPrice}</p>
+												<span class="off_prc" id="off_prc"><i
+													class="fa fa-inr" aria-hidden="true"></i></span> <span
+													class="prc_off" id="prc_off"></span>
+											</div>
+
+										</div>
+
+										<div class="cake_container">
+											<h4 class="cake_nm single_row">
+												<a
+													href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+												<input type="hidden" id="prodIdText"
+													value="${product.productId}" />
+											</h4>
+										</div>
 									</div>
-								</div>
-								</c:if>
-							</li>
+								</c:if></li>
 						</c:forEach>
 					</ul>
 					<div class="more_product" style="display: none;">
@@ -1744,17 +1754,17 @@ function moveCursor(){
 		
 		} 
 		</script>
-		
-		
-		
-		
-		<script type="text/javascript">
+
+
+
+
+	<script type="text/javascript">
 		function changeWeight(){
 			document.getElementById("img_input_btn").value = "";
 			//document.getElementById('del_image').style="display:none";
 		}
 		</script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		function setQtyText(id, type) {
 
 			/* type  :  0 - minus,  1 - plus */
@@ -1811,7 +1821,7 @@ function moveCursor(){
 
 	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 function setLike(id,isLike) {
 	
 	if(parseInt(isLike)==0){
