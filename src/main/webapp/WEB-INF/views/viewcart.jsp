@@ -1396,7 +1396,8 @@
 						}
 
 						var msgName = "NA";
-						if (table[i].msgonCake != "") {
+						if (table[i].msgonCake != ""
+								&& table[i].msgonCake != null) {
 							msgName = table[i].msgonCake;
 						}
 						var tbl_data = '<tr>'
@@ -1721,6 +1722,7 @@
 			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 
 			setCartData();
+			appendCartData();
 		}
 
 		function typeQty(id) {

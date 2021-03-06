@@ -670,7 +670,7 @@
 		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 
 		appendCartData();
-
+		setCartData();
 	}
 
 	function search(ele) {
