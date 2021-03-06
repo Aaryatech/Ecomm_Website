@@ -116,65 +116,73 @@
 
 				<div class="cart_row">
 					<!-- <div class="cart_l"> -->
-						<h2 class="address_title">
-							Shipping Address <span>Is the address you'd like to use
-								displayed below? If so, click the corresponding "Deliver to this
-								address" button. <a href="${pageContext.request.contextPath}/ShowAddNewAdd">Add Address</a>
-							</span>
-						</h2>
+					<h2 class="address_title">
+						Shipping Address <span>Is the address you'd like to use
+							displayed below? If so, click the corresponding "Deliver to this
+							address" button. <a
+							href="${pageContext.request.contextPath}/ShowAddNewAdd">Add
+								Address</a>
+						</span>
+					</h2>
 
-						<h4 id="respMsg" style="text-align: center;" >${sessionScope.msg}</h4>
-						<%
-							request.getSession().removeAttribute("msg");
-						%>
-						<div class="address_row">
-							<ul>
-								<c:forEach items="${custAddList}" var="addressList" varStatus="cnt">
-									<li>
-										<div class="address_one">
-											<div class="cart_delete">
-												<a href="javascript:void(0)"
-													onclick="deltDeliveryAddress('${addressList.custDetailId}')"><i
-													class="fa fa-trash-o" aria-hidden="true"></i></a>
-											</div>
-
-											<h3 class="address_txt">
-												<i class="fa fa-user user_icn" aria-hidden="true"></i>
-												${addressList.custName}<span><i
-													class="fa fa-map-marker" aria-hidden="true"></i>
-													${addressList.address},${addressList.exVar1} ${addressList.exVar2},
-													<!-- <br> MAHARASHTRA, India. --></span>
-												<span class="land_mark_css" title="${addressList.landmark}">Landmark : ${addressList.landmark}</span> <span><i
-													class="fa fa-phone" aria-hidden="true"></i> +91
-													${addressList.custMobileNo}</span>
-
-
-											</h3>
-
-											<div class="deliver_add">
-<%-- 												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
- --%><a href="javascript:void(0)" onclick="setAddDetail('${addressList.custDetailId}','${addressList.exInt3}'
- ,'${addressList.exVar3}','${addressList.landmark}' )">Deliver to this address [${addressList.longitude}]</a>
- 
- 
- 											</div>
-
-											<div class="dropdown border_one frdiv" id="frdiv${cnt.index+1}" style="display: none;">
-												<div class="select">
-													<span>Select your nearest franchisee</span>
-												</div>
-												<input type="hidden" name="gender">
-												<ul class="dropdown-menu">
-													<li id="male">Pune</li>
-													<li id="female">Mumbai</li>
-													<li id="female">Nashik</li>
-												</ul>
-											</div>
+					<h4 id="respMsg" style="text-align: center;">${sessionScope.msg}</h4>
+					<%
+						request.getSession().removeAttribute("msg");
+					%>
+					<div class="address_row">
+						<ul>
+							<c:forEach items="${custAddList}" var="addressList"
+								varStatus="cnt">
+								<li>
+									<div class="address_one">
+										<div class="cart_delete">
+											<a href="javascript:void(0)"
+												onclick="deltDeliveryAddress('${addressList.custDetailId}')"><i
+												class="fa fa-trash-o" aria-hidden="true"></i></a>
 										</div>
-									</li>
-								</c:forEach>
-							</ul>
-						</div>
+
+										<h3 class="address_txt">
+											<i class="fa fa-user user_icn" aria-hidden="true"></i>
+											${addressList.custName}<span><i
+												class="fa fa-map-marker" aria-hidden="true"></i>
+												${addressList.address},${addressList.exVar1}
+												${addressList.exVar2}, <!-- <br> MAHARASHTRA, India. --></span> <span
+												class="land_mark_css" title="${addressList.landmark}">Landmark
+												: ${addressList.landmark}</span> <span><i
+												class="fa fa-phone" aria-hidden="true"></i> +91
+												${addressList.custMobileNo}</span>
+
+
+										</h3>
+
+										<div class="deliver_add">
+											<%-- 												<a href="javascript:void(0)" onclick="showFrDiv(${cnt.index+1})">Deliver to this address</a>
+ --%>
+											<a href="javascript:void(0)"
+												onclick="setAddDetail('${addressList.custDetailId}','${addressList.exInt3}'
+ ,'${addressList.exVar3}','${addressList.landmark}' )">Use
+												This Address</a>
+
+
+										</div>
+
+										<div class="dropdown border_one frdiv"
+											id="frdiv${cnt.index+1}" style="display: none;">
+											<div class="select">
+												<span>Select your nearest franchisee</span>
+											</div>
+											<input type="hidden" name="gender">
+											<ul class="dropdown-menu">
+												<li id="male">Pune</li>
+												<li id="female">Mumbai</li>
+												<li id="female">Nashik</li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
 					<!-- </div> -->
 
 
@@ -321,42 +329,39 @@
 		}
 	</script>
 
-<script type="text/javascript">
-function setAddDetail(addDetailId,frId,frKm,landMark){
-	
-	var fd = new FormData();
-	fd.append('frId', frId);
-	fd.append('frKm', frKm);
-	fd.append('landMark', landMark);
-	
-	fd.append('custDetailId', addDetailId);
-	
-	$.ajax({
-        url: '${pageContext.request.contextPath}/setAddressDetail',
-        type: 'POST',
-        data: fd,
-        dataType: 'json',
-        processData: false, 
-        contentType: false, 
-        async:false,
-        success: function(resData, textStatus, jqXHR)
-        {
-        	
-        	var table = [];
-			sessionStorage.setItem("cartValue", JSON
-					.stringify(table));
-			sessionStorage.setItem("prodImageList", JSON
-					.stringify(table));
-			var url = '${pageContext.request.contextPath}/home';
-			window.location = url;
-        }, 
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            console.log('ERRORS: ' + textStatus);
-        }
-	    });
-}
-</script>
+	<script type="text/javascript">
+		function setAddDetail(addDetailId, frId, frKm, landMark) {
+
+			var fd = new FormData();
+			fd.append('frId', frId);
+			fd.append('frKm', frKm);
+			fd.append('landMark', landMark);
+
+			fd.append('custDetailId', addDetailId);
+
+			$.ajax({
+				url : '${pageContext.request.contextPath}/setAddressDetail',
+				type : 'POST',
+				data : fd,
+				dataType : 'json',
+				processData : false,
+				contentType : false,
+				async : false,
+				success : function(resData, textStatus, jqXHR) {
+
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+					sessionStorage.setItem("prodImageList", JSON
+							.stringify(table));
+					var url = '${pageContext.request.contextPath}/home';
+					window.location = url;
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log('ERRORS: ' + textStatus);
+				}
+			});
+		}
+	</script>
 
 
 	<!--menuzord -->
@@ -635,21 +640,18 @@ function setAddDetail(addDetailId,frId,frKm,landMark){
 		}
 
 		$("#respMsg").show().delay(5000).fadeOut();
-		
-		function showFrDiv(val){
+
+		function showFrDiv(val) {
 			$(".frdiv")
-			.each(
-					function(counter) {
-						//$('.frdiv')[counter].toggle("slide");
-						document.getElementsByClassName("frdiv")[counter].style.display='none';
-					});
-			
-			$('#frdiv'+val).toggle("slide");	
-			
+					.each(
+							function(counter) {
+								//$('.frdiv')[counter].toggle("slide");
+								document.getElementsByClassName("frdiv")[counter].style.display = 'none';
+							});
+
+			$('#frdiv' + val).toggle("slide");
+
 		}
-		
-		 
-		     
 	</script>
 
 

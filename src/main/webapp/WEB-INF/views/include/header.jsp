@@ -4,12 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <header>
-<style>
+	<style>
 </style>
 
-<!-- Akhilesh Loader Jsp --> 
+	<!-- Akhilesh Loader Jsp -->
 
- <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
 	<div class="top_row">
 		<div class="wrapper">
 			<div class="top_content">
@@ -39,49 +39,49 @@
 
 					</div>
 				</div>
-				
-				
-				
+
+
+
 				<div class="top_address">
-					<span><p>Delivery</p> Location :</span> <span title="${landMark}" class="address_land">${landMark}.</span>
+					<span><p>Delivery</p> Location :</span> <span title="${landMark}"
+						class="address_land">${landMark}.</span>
 					<ul class="login_menu edit">
 						<li><a href="javascript:void(0)"><i class="fa fa-pencil"
 								aria-hidden="true"></i></a>
 							<ul>
-								<li><a href="${pageContext.request.contextPath}/ShowAddNewAdd"> Add
-										New Address </a></li>
-								<li>
-								<c:choose>
-								<c:when test="${sessionScope.custId>0}">
-								<a
-									href="${pageContext.request.contextPath}/addresslist"> Use
-										Existing address</a>
+								<li><a
+									href="${pageContext.request.contextPath}/ShowAddNewAdd">
+										Add New Address </a></li>
+								<li><c:choose>
+										<c:when test="${sessionScope.custId>0}">
+											<a href="${pageContext.request.contextPath}/addresslist">
+												Use Existing address</a>
 										</c:when>
 										<c:otherwise>
-										<!-- <a
+											<!-- <a
 									href="#"> Use
 										Existing address</a> -->
 										</c:otherwise>
-										</c:choose>
-										</li>
-											<c:if test="${sessionScope.custId>0}">
-										<li><a onclick="setData()" href="${pageContext.request.contextPath}/logout">
-										Logout </a></li>
-										</c:if>
+									</c:choose></li>
+								<c:if test="${sessionScope.custId>0}">
+									<li><a onclick="setData()"
+										href="${pageContext.request.contextPath}/logout"> Logout </a></li>
+								</c:if>
 								<li>
-									
 							</ul></li>
 					</ul>
-				<c:if test="${sessionScope.isAddressPopup==1}">
-				<div class="drop_fix" id="add_poupu">
-					<h3>Have you selected the right location</h3>
-					<p>Your selected location seems to be a little far off from your device location</p>
-					<a href="#" onclick="resetAddressPopup()" class="left">Dismiss</a>
-					<a href="${pageContext.request.contextPath}/ShowAddNewAdd" class="right">Change Location</a>
+					<c:if test="${sessionScope.isAddressPopup==1}">
+						<div class="drop_fix" id="add_poupu">
+							<h3>Have you selected the right location</h3>
+							<p>Your selected location seems to be a little far off from
+								your device location</p>
+							<a href="#" onclick="resetAddressPopup()" class="left">Dismiss</a>
+							<a href="${pageContext.request.contextPath}/ShowAddNewAdd"
+								class="right">Change Location</a>
+						</div>
+					</c:if>
+
 				</div>
-				</c:if>
-				
-				</div> 
 				<div class="clr"></div>
 			</div>
 		</div>
@@ -90,7 +90,8 @@
 		<div class="wrapper">
 			<div class="menu_cont">
 				<div class="main_logo">
-					<a href="${pageContext.request.contextPath}/home"><img src="${pageContext.request.contextPath}/resources/images/main_logo.png"
+					<a href="${pageContext.request.contextPath}/home"><img
+						src="${pageContext.request.contextPath}/resources/images/main_logo.png"
 						class="lazy"
 						data-src="${pageContext.request.contextPath}/resources/images/main_logo.png"
 						alt=""></a>
@@ -100,16 +101,16 @@
 					<div class="logo_form">
 						<!--main search-->
 						<!-- <form action="" method="get"> -->
-							<div class="input_one">
-								<input name="glbSearch" id="glbSearch" type="text"
-									onchange="globalSearch(0)" list="glbTemplates" 
-									class="search_input" autocomplete="on" placeholder="Search..." />
-								<datalist id="glbTemplates"></datalist>
-								<button class="search_btn" id="btnGlbSearch"
-									onclick="globalSearch(0)">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
-							</div>
+						<div class="input_one">
+							<input name="glbSearch" id="glbSearch" type="text"
+								onchange="globalSearch(0)" list="glbTemplates"
+								class="search_input" autocomplete="on" placeholder="Search..." />
+							<datalist id="glbTemplates"></datalist>
+							<button class="search_btn" id="btnGlbSearch"
+								onclick="globalSearch(0)">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
 						<!-- </form> -->
 					</div>
 
@@ -119,8 +120,8 @@
 						<!--like product-->
 						<div class="product_like">
 							<a href="${pageContext.request.contextPath}/likeproducts"> <i
-								class="fa fa-heart" aria-hidden="true"></i> 
-								<span class="cart_item_count" id="like_item_count">${sessionScope.likeCount}</span>
+								class="fa fa-heart" aria-hidden="true"></i> <span
+								class="cart_item_count" id="like_item_count">${sessionScope.likeCount}</span>
 							</a>
 						</div>
 
@@ -239,32 +240,23 @@
 						<!--user-dropdown-->
 						<div class="user_login">
 							<ul class="login_menu">
-								<li>
-								<c:choose>
-								<c:when test="${sessionScope.custId>0}">
-								<a href="${pageContext.request.contextPath}/profile"><img
-										width="25" height="25"
-										src="${sessionScope.profileImg}" title="Mohsin"
-										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
-										alt="">  <!-- <i class="fa fa-angle-down"
-										aria-hidden="true"></i> --></a> 
-								</c:when>
-								<c:otherwise>
-								<a href="#"><img
-										class="lazy" width="25" height="25"
-										src="${sessionScope.profileImg}"
-										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
-										alt="">  <!-- <i class="fa fa-angle-down"
-										aria-hidden="true"></i> --></a> 
-								</c:otherwise>
-								</c:choose>
-								
-										
-										
-										
-										
-										
-										<!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
+								<li><c:choose>
+										<c:when test="${sessionScope.custId>0}">
+											<a href="${pageContext.request.contextPath}/profile"><img
+												width="25" height="25" src="${sessionScope.profileImg}"
+												title="Mohsin"
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
+												alt=""> <!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a>
+										</c:when>
+										<c:otherwise>
+											<a href="#"><img class="lazy" width="25" height="25"
+												src="${sessionScope.profileImg}"
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
+												alt=""> <!-- <i class="fa fa-angle-down"
+										aria-hidden="true"></i> --></a>
+										</c:otherwise>
+									</c:choose> <!-- ${pageContext.request.contextPath}/resources/images/user_pic.jpg -->
 									<%-- <ul>
 										<li class="lgn_nm">Hello <span>${sessionScope.userEmail}</span></li>
 										<!--<li><a href="#"> My Monginis </a></li>-->
@@ -275,14 +267,10 @@
 										<li class="lgn_out"></li>
 										
 									</ul> --%></li>
-									<li>
-								 <span class="user_lgn_nm" title="${sessionScope.userName}"> ${sessionScope.userName} </span>
-						 		
-										
-										
-										 
-									 </li>
-									
+								<li><span class="user_lgn_nm"
+									title="${sessionScope.userName}">
+										${sessionScope.userName} </span></li>
+
 							</ul>
 						</div>
 					</div>
@@ -300,7 +288,8 @@
 				Order </a> <a href="${pageContext.request.contextPath}/addresslist">
 				My Address Book </a> <a
 				href="${pageContext.request.contextPath}/profile"> Profile </a> <a
-				href="#">Help</a> <a onclick="setData()" href="${pageContext.request.contextPath}/logout">Logout</a>
+				href="#">Help</a> <a onclick="setData()"
+				href="${pageContext.request.contextPath}/logout">Logout</a>
 
 			<!-- <a href="#">About</a> <a href="#">Services</a> <a href="#">Clients</a> <a href="#">Contact</a> -->
 		</div>
@@ -313,68 +302,66 @@
 </header>
 
 <script type="text/javascript">
-/*********************Akhil For Loader On Each Page**************  */
-			$(window).on('load', function(){
-				//alert("Ok")
-  setTimeout(removeLoader, 1000); //wait for page load PLUS two seconds.
-});
-function removeLoader(){
-    $( "#loadingDiv").fadeOut(500, function() {
-      // fadeOut complete. Remove the loading div
-      $( "#loadingDiv").remove(); //makes page more lightweight 
-  });  
-}
-/************************************************************/
-//Sachin 18-02-2021
-function resetAddressPopup(){
-	document.getElementById("add_poupu").style.display="none";
-	var fd = new FormData();
-	fd.append("isPop",0)
-	$.ajax({
-		url : '${pageContext.request.contextPath}/resetAddressPopup',
-		type : 'post',
-		dataType : 'json',
-		data : fd,
-		contentType : false,
-		processData : false,
-		success : function(response) {
-	
-		},
+	/*********************Akhil For Loader On Each Page**************  */
+	$(window).on('load', function() {
+		//alert("Ok")
+		setTimeout(removeLoader, 1000); //wait for page load PLUS two seconds.
 	});
-}
+	function removeLoader() {
+		$("#loadingDiv").fadeOut(500, function() {
+			// fadeOut complete. Remove the loading div
+			$("#loadingDiv").remove(); //makes page more lightweight 
+		});
+	}
+	/************************************************************/
+	//Sachin 18-02-2021
+	function resetAddressPopup() {
+		document.getElementById("add_poupu").style.display = "none";
+		var fd = new FormData();
+		fd.append("isPop", 0)
+		$.ajax({
+			url : '${pageContext.request.contextPath}/resetAddressPopup',
+			type : 'post',
+			dataType : 'json',
+			data : fd,
+			contentType : false,
+			processData : false,
+			success : function(response) {
 
-function setData(){
-	var table = [];
-	sessionStorage.setItem("cartValue", JSON
-			.stringify(table));
-	sessionStorage.setItem("prodImageList", JSON
-			.stringify(table));
-}
-
-/* function setLike(id) {
-	alert("OKKK he")
-	$.getJSON(
-			'${setLikeOrDislike}',
-			{
-				prodId : id,
-				ajax : 'true'
 			},
-			function(data) {
-				//alert(JSON.stringify(data));
-				setLikeCount(data.statusText);
-			});
-} */
-function setLandmark(landMark){
-	
-	//document.getElementsByClassName("address_land").innerHTML=""+landMark;
-}
+		});
+	}
+
+	function setData() {
+		var table = [];
+		sessionStorage.setItem("cartValue", JSON.stringify(table));
+		sessionStorage.setItem("prodImageList", JSON.stringify(table));
+	}
+
+	/* function setLike(id) {
+	 alert("OKKK he")
+	 $.getJSON(
+	 '${setLikeOrDislike}',
+	 {
+	 prodId : id,
+	 ajax : 'true'
+	 },
+	 function(data) {
+	 //alert(JSON.stringify(data));
+	 setLikeCount(data.statusText);
+	 });
+	 } */
+	function setLandmark(landMark) {
+
+		//document.getElementsByClassName("address_land").innerHTML=""+landMark;
+	}
 </script>
 <script>
 	function appendCartData() {
 		//alert("Ok")
-		try{
-		setLike(0);
-		}catch (e) {
+		try {
+			setLike(0);
+		} catch (e) {
 			console.log("in header jsp appendCartData()")
 		}
 		if (sessionStorage.getItem("allItemList") == null) {
@@ -538,6 +525,7 @@ function setLandmark(landMark){
 			console.log(table);
 			sessionStorage.setItem("cartValue", JSON.stringify(table));
 			appendCartData();
+			setCartData();
 		}//end of If ischanged==1
 	}
 	function clearData() {
@@ -617,7 +605,9 @@ function setLandmark(landMark){
 	function openNav() {
 		appendCartData();
 		document.getElementById("mySidepanel").style.width = "300px";
-		setTimeout(function(){ closeNav(); }, 10000);
+		setTimeout(function() {
+			closeNav();
+		}, 10000);
 	}
 
 	function closeNav() {
@@ -682,26 +672,23 @@ function setLandmark(landMark){
 		appendCartData();
 
 	}
-	
-	
+
 	function search(ele) {
-	    if(event.key === 'Enter') {
-	        alert(ele.value);        
-	    }
+		if (event.key === 'Enter') {
+			alert(ele.value);
+		}
 	}
-	function setLikeCount(statusText){
+	function setLikeCount(statusText) {
 		//alert("OK H")
-		var data1=JSON.parse(statusText);
-		var likeCount=0;
-		$.each(data1.feProductHeadList,
-								function(key, product) {
-			if(product.isLike ==1){
-				likeCount=likeCount+1;
+		var data1 = JSON.parse(statusText);
+		var likeCount = 0;
+		$.each(data1.feProductHeadList, function(key, product) {
+			if (product.isLike == 1) {
+				likeCount = likeCount + 1;
 			}
 		});
-		 $('#like_item_count').html(''+likeCount);
-	} 
-	
+		$('#like_item_count').html('' + likeCount);
+	}
 </script>
 
 

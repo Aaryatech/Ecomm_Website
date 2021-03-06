@@ -20,8 +20,10 @@
 .pac-container {
 	z-index: 999999 !important;
 }
-.form-label-hint-error-l{
-color: red;}
+
+.form-label-hint-error-l {
+	color: red;
+}
 </style>
 <jsp:include page="/WEB-INF/views/include/customjscss.jsp"></jsp:include>
 
@@ -41,10 +43,10 @@ color: red;}
 			<div class="landing_cont">
 				<div class="landing_button">
 					<!-- If user login first time or we didn't get any info of user from
-					browser cache then user land here --> <a href="javascript:void(0)"
-						class="landingpop_open">Book your online order</a> <input
-						type="button" id="openLocPopup" class="landingpop_open"
-						value="aaaa" style="display: none;">
+					browser cache then user land here -->
+					<a href="javascript:void(0)" class="landingpop_open">Book your
+						online order</a> <input type="button" id="openLocPopup"
+						class="landingpop_open" value="aaaa" style="display: none;">
 				</div>
 			</div>
 		</div>
@@ -173,9 +175,14 @@ color: red;}
 		<div class="wrapper">
 			<div class="tweets_row">
 				<div class="tweets_l">
-				<div style="height: 400px; overflow-y:scroll;">
-				<a class="twitter-timeline" href="https://twitter.com/AtsInfosoft?ref_src=twsrc%5Etfw">Tweets by AtsInfosoft</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-					
+					<div style="height: 400px; overflow-y: scroll;">
+						<a class="twitter-timeline"
+							href="https://twitter.com/AtsInfosoft?ref_src=twsrc%5Etfw">Tweets
+							by AtsInfosoft</a>
+						<script async src="https://platform.twitter.com/widgets.js"
+							charset="utf-8"></script>
+					</div>
+
 				</div>
 				<div class="tweets_r">
 					<i class="fa fa-user-circle" aria-hidden="true"></i> New user as a
@@ -275,8 +282,7 @@ color: red;}
 		</div>
 	</div>
 	<!--footer start here-->
-	<jsp:include
-	page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 	<!--apply now pop up-->
 	<div id="landingpop" class="well_landing">
 		<h2 class="location_title">
@@ -287,43 +293,57 @@ color: red;}
 		</h2>
 		<form id="validation-form"
 			action="${pageContext.request.contextPath}/preHome" method="post">
-		
-			<input type="hidden" id="user_type" name="user_type" value="${userType}"/>
+
+			<input type="hidden" id="user_type" name="user_type"
+				value="${userType}" />
 			<div class="location_padd">
 				<div class="current_location">
 					<a href="javascript:void(0)" onclick="goToMap()"><img
 						src="${pageContext.request.contextPath}/resources/images/location_icn.png"
 						alt=""> use Current Location </a>
 				</div>
-				<div class="location_or extra_txt">OR Select Your Delivery Location</div>
+				<div class="location_or extra_txt">OR Select Your Delivery
+					Location</div>
 
 				<div class="location_city">
-					<h2 class="serv_city">Serving Cities</h2>
+					<h2 class="serv_city">Popular Serving Cities</h2>
 					<ul>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Mumbai')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_mumbai.png"
-								alt=""> Mumbai</a></li>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Delhi')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_delhi.png"
-								alt=""> Delhi</a></li>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Hyderabad')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_hydrabad.png"
-								alt=""> Hydrabad</a></li>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Agra')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_agra.png"
-								alt=""> Agra</a></li>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Nashik')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_nashik.png"
-								alt=""> Nasik</a></li>
-						<li><a href="javascript:void(0)"
-							onclick="setCityNameToInput('Goa')"><img
-								src="${pageContext.request.contextPath}/resources/images/city_goa.png"
-								alt=""> Goa</a></li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_mumbai.png"
+							alt=""> Mumbai<!-- </a> -->
+						</li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_delhi.png"
+							alt=""> Delhi<!-- </a> -->
+						</li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_hydrabad.png"
+							alt=""> Hydrabad<!-- </a> -->
+						</li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_agra.png"
+							alt=""> Agra<!-- </a> -->
+						</li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_nashik.png"
+							alt=""> Nasik<!-- </a> -->
+						</li>
+						<li>
+							<!-- <a href="javascript:void(0)"> -->
+							<img
+							src="${pageContext.request.contextPath}/resources/images/city_goa.png"
+							alt=""> Goa<!-- </a> -->
+						</li>
 					</ul>
 				</div>
 
@@ -364,11 +384,11 @@ color: red;}
 
 					<div class="search_one">
 						<div class="search_one_l">
-							<input name="txtPlaces" value=""
-								type="text" required class="input_search landing" placeholder="Search your Area"
+							<input name="txtPlaces" value="" type="text" required
+								class="input_search landing" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
-								<span class="form-label-hint-error-l" id="error_txtPlaces"
-												style="display: none;">This field is required.</span>
+							<span class="form-label-hint-error-l" id="error_txtPlaces"
+								style="display: none;">This field is required.</span>
 						</div>
 
 						<input name="hideLat" value="0" required type="hidden"
@@ -400,18 +420,17 @@ color: red;}
                         </div> -->
 					<div class="search_one">
 						<div style="width: 100%;">
-							<select onchange="getKM(this)" required id="selectShop" name="selectShop" class="citysel">
+							<select onchange="getKM(this)" required id="selectShop"
+								name="selectShop" class="citysel">
 								<!-- style="background-color: #FFF; border-radius: 3px; padding: 7px; font-size: 16px; color: #a6a6a6; width: 100%;"> -->
-							</select>
-							
-							<span class="form-label-hint-error-l" id="error_selectShop"
-												style="display: none;">This field is required.</span>
+							</select> <span class="form-label-hint-error-l" id="error_selectShop"
+								style="display: none;">This field is required.</span>
 						</div>
 					</div>
-				<div class="clr"></div>
+					<div class="clr"></div>
 				</div>
 
-				                
+
 
 
 				<!--apply now pop up-->
@@ -446,446 +465,466 @@ color: red;}
 				
 
 			</div> -->
-			<div id="addNewAddDiv" style="display: none;">
-			<div class="proceed_btn_1">
-					<input name="" id="addNewAddDiv_btn" type="button" value="Proceed with Address"
-						class="proceed"/>
+				<div id="addNewAddDiv" style="display: none;">
+					<div class="proceed_btn_1">
+						<input name="" id="addNewAddDiv_btn" type="button"
+							value="Proceed with Address" class="proceed" />
+					</div>
 				</div>
-				</div>
-			
-			
-			<div id="addAddDiv" style="display: none;">
-			<div class="proceed_btn_1">
-					<input name="" id="submtbtn" type="button" value="Proceed New User"
-						class="landingpop-mobno_open proceed" />
-						
-							 
-						
-				</div>
-			
-			<div class="location_or spc">OR </div>
-			<div class="location_if">If you are exisiting user</div>
-			
-			<div><center>
-				 <input name="" id="submtbtn_ex_use" type="button" value="Login Existing User"
-						class="landingpop-mobno_open proceed" />
+
+
+				<div id="addAddDiv" style="display: none;">
+					<div class="proceed_btn_1">
+						<input name="" id="submtbtn" type="button"
+							value="Proceed New User" class="landingpop-mobno_open proceed" />
+
+
+
+					</div>
+
+					<div class="location_or spc">OR</div>
+					<div class="location_if">If you are exisiting user</div>
+
+					<div>
+						<center>
+							<input name="" id="submtbtn_ex_use" type="button"
+								value="Login Existing User"
+								class="landingpop-mobno_open proceed" />
 						</center>
-			</div>	
-				
-				
-			<input type="hidden" id="frKm" name="frKm" value="0"/>
-			</div>
+					</div>
+
+
+					<input type="hidden" id="frKm" name="frKm" value="0" />
+				</div>
 			</div>
 		</form>
 
 	</div>
 
-<!--   New Popup -->
-<div id="landingpop-mobno" class="well_landing mobile" style="display: none;">
+	<!--   New Popup -->
+	<div id="landingpop-mobno" class="well_landing mobile"
+		style="display: none;">
 		<h2 class="location_title">
 			Enter Your Details
 			<div class="landingpop-mobno_close close_pop">
 				<i class="fa fa-times" id="sub_close" aria-hidden="true"></i>
 			</div>
-			<h3 style="color: red; display: none" id="no_user_exist">Mobile number not found in system please proceed as new user!!</h3>
+			<h3 style="color: red; display: none" id="no_user_exist">Mobile
+				number not found in system please proceed as new user!!</h3>
 		</h2>
-		
+
 		<form>
 			<div class="location_padd extra">
 				<div class="search_one">
+					<div class="search_one_l">
+						<span class="pop_spn">Mobile Number</span> <input name="mobNo"
+							value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" type="text"
+							class="input_search landing numbersOnly" autocomplete="off"
+							placeholder="Enter Mobile No" id="mobNo" /> <i
+							class="fa fa-mobile" aria-hidden="true"></i>
+						<!-- <a href="#" onclick="sendOTP()"><i class="fa fa-refresh refresh" title="GET OTP" aria-hidden="true"></i></a> -->
+						<label class="form-label-hint-error-l" id="errorMobNo"
+							style="display: none;">Please enter Mobile No</label>
+					</div>
+					<div class="search_one_r">
+						<input name="" id="sendOtpBtn" type="button" value="Send OTP"
+							onclick="sendOTP()" class="proceed last" />
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div id="otp_div" style="display: none;">
+					<div class="search_one new_marg">
 						<div class="search_one_l">
-							<span class="pop_spn">Mobile Number</span>
-							<input name="mobNo" value="" maxlength="10" pattern="[7-9]{1}[0-9]{9}" 
-								type="text" class="input_search landing numbersOnly" autocomplete="off" placeholder="Enter Mobile No"
-								id="mobNo" /> <i class="fa fa-mobile" aria-hidden="true"></i>
-								<!-- <a href="#" onclick="sendOTP()"><i class="fa fa-refresh refresh" title="GET OTP" aria-hidden="true"></i></a> -->
-								<label class="form-label-hint-error-l"
-									id="errorMobNo" style="display: none;">Please enter
-									Mobile No</label>
+							<span class="pop_spn">Enter OTP</span> <input name="otp" value=""
+								maxlength="8" type="text"
+								class="input_search landing numbersOnly" autocomplete="off"
+								placeholder="Enter OTP" id="otp" /> <i class="fa fa-key"
+								onclick="checkValidOTP()" aria-hidden="true"></i> <label
+								class="form-label-hint-error-l" id="errorotp"
+								style="display: none;">Please enter valid OTP</label>
 						</div>
 						<div class="search_one_r">
-							<input name="" id="sendOtpBtn" type="button" value="Send OTP" onclick="sendOTP()" class="proceed last" />
+							<input name="" type="button" value="Resend otp"
+								onclick="sendOTP()" class="proceed last" />
 						</div>
 						<div class="clr"></div>
-			</div>
-			<div id="otp_div" style="display: none;">
-			<div class="search_one new_marg">
-						<div class="search_one_l">
-							<span class="pop_spn">Enter OTP</span>
-							<input name="otp" value="" maxlength="8" 
-								type="text" class="input_search landing numbersOnly" autocomplete="off" placeholder="Enter OTP"
-								id="otp" /> <i class="fa fa-key" onclick="checkValidOTP()" aria-hidden="true"></i>
-								<label class="form-label-hint-error-l"
-									id="errorotp" style="display: none;">Please enter valid
-									OTP</label>
-						</div>
-						 <div class="search_one_r">
-							<input name="" type="button" value="Resend otp" onclick="sendOTP()" class="proceed last" />
-						</div> 
-						<div class="clr"></div>
-			</div>
-			</div>
-			<div class="search-one twobtn">
-				<input name="" id="main_submit" style="display: none;" type="button" value="Submit" class="proceed" />
-			</div>
+					</div>
+				</div>
+				<div class="search-one twobtn">
+					<input name="" id="main_submit" style="display: none;"
+						type="button" value="Submit" class="proceed" />
+				</div>
 			</div>
 		</form>
 	</div>
-	
+
 	<script type="text/javascript">
-	 $(document).ready(function () {
-	     //$('#landingpop-mobno').hide();
-	     var isAddNewAdd='${isAddNewAdd}';
-	     if(parseInt(isAddNewAdd)==1){
-	    	 document.getElementById("addAddDiv").style="display:none";
-	    	 document.getElementById("addNewAddDiv").style="display:block";
-	     }else{
-	    	 document.getElementById("addAddDiv").style="display:block";
-	    	 document.getElementById("addNewAddDiv").style="display:none";
-	     }
-	 });
-	 
-	jQuery('.numbersOnly').keyup(function() {
-		this.value = this.value.replace(/[^0-9\.]/g, '');
-		  this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
-	});
-	var enteredOTP="";
-	var currentOTP="";
-	function sendOTP(){
-		 document.getElementById("sendOtpBtn").style="display:block";
-    	//document.getElementById("sendOtpBtn").style="display:none";
-		$("#main_submit").show();
-		$('#no_user_exist').hide();
-		document.getElementById("mobNo").readOnly = false; 
-		document.getElementById("otp_div").style="display:none";
-		var mobNo=document.getElementById("mobNo").value;
-		mobNo=mobNo.trim();
-		enteredOTP="";
-		$("#errorMobNo").hide();
-		if(mobNo.length==10){
-		var fd = new FormData();
-		fd.append('mobNo', mobNo);
-		$.ajax({
-	        url: '${pageContext.request.contextPath}/sendOTP',
-	        type: 'POST',
-	        data: fd,
-	        dataType: 'json',
-	        processData: false, 
-	        contentType: false, 
-	        async:false,
-	        success: function(resData, textStatus, jqXHR)
-	        {
-	        	currentOTP=resData.msg;
-	        	 //console.log('rrr: ' + JSON.stringify(jqXHR));
-	        	 document.getElementById("mobNo").readOnly = true; 
-	        	 //document.getElementById("sendOtpBtn").style="display:block";
-	        	document.getElementById("sendOtpBtn").style="display:none";
-	        	 document.getElementById("otp_div").style="display:block";
-	        }, 
-	        error: function(jqXHR, textStatus, errorThrown)
-	        {
-	            console.log('ERRORS: ' + textStatus);
-	        }
-		    });
-		}else{
-			$("#errorMobNo").show();
-		}
-	}
-	function checkValidOTP(){
-		//alert("checkValidOTP");
-		$("#errorotp").hide();
-		$("#errorMobNo").hide();
-		var mobNo=document.getElementById("mobNo").value;
-		mobNo=mobNo.trim();
-		if(mobNo.length<10){
-			$("#errorMobNo").show();
-		}else{
+		$(document)
+				.ready(
+						function() {
+							//$('#landingpop-mobno').hide();
+							var isAddNewAdd = '${isAddNewAdd}';
+							if (parseInt(isAddNewAdd) == 1) {
+								document.getElementById("addAddDiv").style = "display:none";
+								document.getElementById("addNewAddDiv").style = "display:block";
+							} else {
+								document.getElementById("addAddDiv").style = "display:block";
+								document.getElementById("addNewAddDiv").style = "display:none";
+							}
+						});
+
+		jQuery('.numbersOnly').keyup(
+				function() {
+					this.value = this.value.replace(/[^0-9\.]/g, '');
+					this.value = this.value.replace(/[^0-9.]/g, '').replace(
+							/(\..*)\./g, '$1');
+				});
+		var enteredOTP = "";
+		var currentOTP = "";
+		function sendOTP() {
+			document.getElementById("sendOtpBtn").style = "display:block";
+			//document.getElementById("sendOtpBtn").style="display:none";
+			$("#main_submit").show();
+			$('#no_user_exist').hide();
+			document.getElementById("mobNo").readOnly = false;
+			document.getElementById("otp_div").style = "display:none";
+			var mobNo = document.getElementById("mobNo").value;
+			mobNo = mobNo.trim();
+			enteredOTP = "";
 			$("#errorMobNo").hide();
+			if (mobNo.length == 10) {
+				var fd = new FormData();
+				fd.append('mobNo', mobNo);
+				$
+						.ajax({
+							url : '${pageContext.request.contextPath}/sendOTP',
+							type : 'POST',
+							data : fd,
+							dataType : 'json',
+							processData : false,
+							contentType : false,
+							async : false,
+							success : function(resData, textStatus, jqXHR) {
+								currentOTP = resData.msg;
+								//console.log('rrr: ' + JSON.stringify(jqXHR));
+								document.getElementById("mobNo").readOnly = true;
+								//document.getElementById("sendOtpBtn").style="display:block";
+								document.getElementById("sendOtpBtn").style = "display:none";
+								document.getElementById("otp_div").style = "display:block";
+							},
+							error : function(jqXHR, textStatus, errorThrown) {
+								console.log('ERRORS: ' + textStatus);
+							}
+						});
+			} else {
+				$("#errorMobNo").show();
+			}
 		}
-		
-		var otp=document.getElementById("otp").value;
-		otp=otp.trim();
-		if(parseInt(otp)==parseInt(currentOTP)){
+		function checkValidOTP() {
+			//alert("checkValidOTP");
 			$("#errorotp").hide();
-			return false;
-		}else{
-			$("#errorotp").show();
+			$("#errorMobNo").hide();
+			var mobNo = document.getElementById("mobNo").value;
+			mobNo = mobNo.trim();
+			if (mobNo.length < 10) {
+				$("#errorMobNo").show();
+			} else {
+				$("#errorMobNo").hide();
+			}
+
+			var otp = document.getElementById("otp").value;
+			otp = otp.trim();
+			if (parseInt(otp) == parseInt(currentOTP)) {
+				$("#errorotp").hide();
+				return false;
+			} else {
+				$("#errorotp").show();
+				return true;
+			}
 			return true;
 		}
-		return true;
-	}
-	
-	//New User Proceed
-	$("#submtbtn").click(function(e) {
-		////$('#landingpop-mobno').popup();	
-		$('#landingpop-mobno').hide();
-		 document.getElementById("sendOtpBtn").style="display:block";
-		// document.getElementById('landingpop-mobno').style.display = 'none';
-		// $('#landingpop-mobno').hide()
-		 // var popup = $("#landingpop-mobno");
-		// popup.hide();
-		var isError = false;
-		var errMsg = "";
-		enteredOTP="";
-		currentOTP="";
-		$("#errorMobNo").hide();
-		$("#errorotp").hide();
-		$("#error_selectShop").hide();
-		$("#error_txtPlaces").hide();
-		$("#main_submit").hide();
-		$('#no_user_exist').hide();
-		document.getElementById("mobNo").readOnly = false; 
-		
-		document.getElementById("otp_div").style="display:none";
-		if (!$("#selectShop").val()) {
-			isError = true;
-			$("#error_selectShop").show()
-		}else  if ($("#selectShop").val()<1) {
-			isError = true;
-			$("#error_selectShop").show();
-		} else  {
-			$("#error_selectShop").hide()
-		}
-		
-		if (!$("#txtPlaces").val()) {
-			isError = true;
-			$("#error_txtPlaces").show()
-		} else {
-			$("#error_txtPlaces").hide()
-		}	 
-		//alert(isError);
-		if(isError==false){
-			document.getElementById("mobNo").value="";
-			document.getElementById("otp").value="";
-			$('#landingpop-mobno').show();
-		$('#landingpop-mobno').popup();
-		//$('#landingpop-mobno').show();
-		document.getElementById("main_close").click();
-		document.getElementById("user_type").value=1;
-		}else{
-			//$('#landingpop-mobno').style="display:block";
-			//document.getElementById("sub_close").click();
-			//alert("else Ki")
-		}
-		//$('#landingpop').hide();
-	});
-	
-	//Existing user login
-	$("#submtbtn_ex_use").click(function(e) {
-		enteredOTP="";
-		currentOTP="";
-		$("#errorMobNo").hide();
-		$("#errorotp").hide();
-		$("#main_submit").hide();
-		document.getElementById("mobNo").readOnly = false; 
-		 document.getElementById("sendOtpBtn").style="display:block";
 
-		$('#no_user_exist').hide();
-		
-		document.getElementById("otp_div").style="display:none";
-		document.getElementById("user_type").value=2;
-		document.getElementById("mobNo").value="";
-		document.getElementById("otp").value="";
-		$('#landingpop-mobno').show();
-		$('#landingpop-mobno').popup();
-		// $('#landingpop-mobno').show();
-		document.getElementById("main_close").click();
-	});
-	
-	//after coming from as Add New Address
-	$("#addNewAddDiv_btn").click(function(e) {
-		var dataError=false;
-		if (!$("#selectShop").val()) {
-			dataError=true;
-			$("#error_selectShop").show()
-		}else  if ($("#selectShop").val()<1) {
-			dataError=true;
-			$("#error_selectShop").show();
-		} else  {
-			$("#error_selectShop").hide()
-		}
-		if (!$("#txtPlaces").val()) {
-			dataError=true;
-			$("#error_txtPlaces").show()
-		} else {
-			$("#error_txtPlaces").hide()
-		}	 
-		if(dataError==false){
-			var userType=document.getElementById("user_type").value;
+		//New User Proceed
+		$("#submtbtn").click(function(e) {
+			////$('#landingpop-mobno').popup();	
+			$('#landingpop-mobno').hide();
+			document.getElementById("sendOtpBtn").style = "display:block";
+			// document.getElementById('landingpop-mobno').style.display = 'none';
+			// $('#landingpop-mobno').hide()
+			// var popup = $("#landingpop-mobno");
+			// popup.hide();
+			var isError = false;
+			var errMsg = "";
+			enteredOTP = "";
+			currentOTP = "";
+			$("#errorMobNo").hide();
+			$("#errorotp").hide();
+			$("#error_selectShop").hide();
+			$("#error_txtPlaces").hide();
+			$("#main_submit").hide();
+			$('#no_user_exist').hide();
+			document.getElementById("mobNo").readOnly = false;
 
-		var fd = new FormData();
-		fd.append('selectShop', $("#selectShop").val());
-		fd.append('txtPlaces', $("#txtPlaces").val());
-		fd.append('frKm', $("#frKm").val());
-		fd.append('selectShop', $("#selectShop").val());
-		fd.append('user_type', userType);
-		
-		$.ajax({
-	        url: '${pageContext.request.contextPath}/preHome',
-	        type: 'POST',
-	        data: fd,
-	        dataType: 'json',
-	        processData: false, 
-	        contentType: false, 
-	        async:false,
-	        success: function(resData, textStatus, jqXHR)
-	        {
-	        	isReload=true;
-	        	var url="";
-	        	if(parseInt(resData)==1||parseInt(resData)==3){
-	        	 url = '${pageContext.request.contextPath}/home';
-	        	}else if(parseInt(resData)==0){
-	        	//alert("Ok Here 731")
-	        	$('#landingpop-mobno').show();
-	        	$('#landingpop-mobno').popup();
-	        	$('#no_user_exist').show();
-	        	isReload=false;
-	        	}
-	        	else{
-	        	url = '${pageContext.request.contextPath}/addresslist';
-	        	}
-	        	if(isReload){
-	        		window.location = url;
-	        	}
-	        }, 
-	        error: function(jqXHR, textStatus, errorThrown)
-	        {
-	         console.log('km',jqXHR);
-	        }
-		    });
-		}
-	});//end of function
-	//old
-	$("#main_submit").click(function(e) {
-		var allError=false;
-		var isError = false;
-		var isError1 = false;
-		
-		var otpError=false;
-		var dataError=false;
-		$('#no_user_exist').hide();
-		var userType=document.getElementById("user_type").value;
-		//alert("userType" +userType);
-		var isOtpMached= checkValidOTP();
-		//alert("isOtpMached "+isOtpMached);
-		if(isOtpMached==false){
-
-			isError=false;
-			isError1 = false;
-			otpError=false;
-		}else{
-			otpError=true;
-			isError =true;
-			isError1=true;
-		}
-		document.getElementById("mobNo").readOnly = false; 
-		if(parseInt(userType)==1){
-			dataError=false;
-		var errMsg = "";
-		if (!$("#selectShop").val()) {
-			isError1 = true;
-			dataError=true;
-			$("#error_selectShop").show()
-		}else  if ($("#selectShop").val()<1) {
-			isError1 = true;
-			dataError=true;
-			$("#error_selectShop").show();
-		} else  {
-			$("#error_selectShop").hide()
-		}
-		
-		if (!$("#txtPlaces").val()) {
-			isError1 = true;
-			dataError=true;
-			$("#error_txtPlaces").show()
-		} else {
-			$("#error_txtPlaces").hide()
-		}	 
-	}//end of if user Type==1
-		//alert("A" +isError)
-		if(otpError==false){
-			//alert("Error False 663");
-		}else{
-			//alert("I am  709")
-			$('#landingpop-mobno').popup();
-		}
-		//alert("isError1" +isError1)
-			if(isError1==false){
-				allError=false;
-				//alert("LL715")
-				//document.getElementById("sub_close").click();
-			}else{
-				//alert("final")
-				allError=true;
-				//
+			document.getElementById("otp_div").style = "display:none";
+			if (!$("#selectShop").val()) {
+				isError = true;
+				$("#error_selectShop").show()
+			} else if ($("#selectShop").val() < 1) {
+				isError = true;
+				$("#error_selectShop").show();
+			} else {
+				$("#error_selectShop").hide()
 			}
-			//alert("allError" +allError)
-			if(otpError==false && dataError==false){
-				//alert("In x 680")
-				//document.getElementById("sub_close").click();
-		var fd = new FormData();
-		fd.append('selectShop', $("#selectShop").val());
-		fd.append('txtPlaces', $("#txtPlaces").val());
-		fd.append('frKm', $("#frKm").val());
-		fd.append('selectShop', $("#selectShop").val());
-		fd.append('user_type', userType);
-		fd.append('mobNo', $("#mobNo").val());
-		fd.append('otp', $("#otp").val());
-		//console.log("fd ",JSON.stringify(fd));
-		$.ajax({
-	        url: '${pageContext.request.contextPath}/preHome',
-	        type: 'POST',
-	        data: fd,
-	        dataType: 'json',
-	        processData: false, 
-	        contentType: false, 
-	        async:false,
-	        success: function(resData, textStatus, jqXHR)
-	        {
-	        	//alert(resData);
-	        	isReload=true;
-	        	var url="";
-	        	if(parseInt(resData)==1||parseInt(resData)==3){
-	        	 url = '${pageContext.request.contextPath}/home';
-	        	}else if(parseInt(resData)==0){
-	        	//alert("Ok Here 731")
-	        	$('#landingpop-mobno').show();
-	        	$('#landingpop-mobno').popup();
-	        	$('#no_user_exist').show();
-	        	isReload=false;
-	        	}
-	        	else{
-	        	url = '${pageContext.request.contextPath}/addresslist';
-	        	}
-	        	if(isReload){
-	        		//alert("Okkk")
-	        		window.location = url;
-	        	}
-	        	
-				
-	        }, 
-	        error: function(jqXHR, textStatus, errorThrown)
-	        {
-	        	//alert("JJJ")
-	         console.log('km',jqXHR);
-	        }
-		    });
-			}else{
-				//alert("final else")
-				//$('#landingpop-mobno').popup();
+
+			if (!$("#txtPlaces").val()) {
+				isError = true;
+				$("#error_txtPlaces").show()
+			} else {
+				$("#error_txtPlaces").hide()
+			}
+			//alert(isError);
+			if (isError == false) {
+				document.getElementById("mobNo").value = "";
+				document.getElementById("otp").value = "";
 				$('#landingpop-mobno').show();
+				$('#landingpop-mobno').popup();
+				//$('#landingpop-mobno').show();
+				document.getElementById("main_close").click();
+				document.getElementById("user_type").value = 1;
+			} else {
+				//$('#landingpop-mobno').style="display:block";
+				//document.getElementById("sub_close").click();
+				//alert("else Ki")
 			}
-		
-	});
-	function getKM(thisobj){
-	/* 	var plant = document.getElementById('selectShop');
-		var fruitCount = plant.getAttribute('data-km'); // fruitCount = '12'
-		alert(fruitCount); */
-		
-		var totalDistance = $(thisobj).find(':selected').attr('data-km');
-		//alert(totalDistance);
-		document.getElementById('frKm').value=totalDistance;
-	}
+			//$('#landingpop').hide();
+		});
+
+		//Existing user login
+		$("#submtbtn_ex_use").click(function(e) {
+			enteredOTP = "";
+			currentOTP = "";
+			$("#errorMobNo").hide();
+			$("#errorotp").hide();
+			$("#main_submit").hide();
+			document.getElementById("mobNo").readOnly = false;
+			document.getElementById("sendOtpBtn").style = "display:block";
+
+			$('#no_user_exist').hide();
+
+			document.getElementById("otp_div").style = "display:none";
+			document.getElementById("user_type").value = 2;
+			document.getElementById("mobNo").value = "";
+			document.getElementById("otp").value = "";
+			$('#landingpop-mobno').show();
+			$('#landingpop-mobno').popup();
+			// $('#landingpop-mobno').show();
+			document.getElementById("main_close").click();
+		});
+
+		//after coming from as Add New Address
+		$("#addNewAddDiv_btn")
+				.click(
+						function(e) {
+							var dataError = false;
+							if (!$("#selectShop").val()) {
+								dataError = true;
+								$("#error_selectShop").show()
+							} else if ($("#selectShop").val() < 1) {
+								dataError = true;
+								$("#error_selectShop").show();
+							} else {
+								$("#error_selectShop").hide()
+							}
+							if (!$("#txtPlaces").val()) {
+								dataError = true;
+								$("#error_txtPlaces").show()
+							} else {
+								$("#error_txtPlaces").hide()
+							}
+							if (dataError == false) {
+								var userType = document
+										.getElementById("user_type").value;
+
+								var fd = new FormData();
+								fd.append('selectShop', $("#selectShop").val());
+								fd.append('txtPlaces', $("#txtPlaces").val());
+								fd.append('frKm', $("#frKm").val());
+								fd.append('selectShop', $("#selectShop").val());
+								fd.append('user_type', userType);
+
+								$
+										.ajax({
+											url : '${pageContext.request.contextPath}/preHome',
+											type : 'POST',
+											data : fd,
+											dataType : 'json',
+											processData : false,
+											contentType : false,
+											async : false,
+											success : function(resData,
+													textStatus, jqXHR) {
+												isReload = true;
+												var url = "";
+												if (parseInt(resData) == 1
+														|| parseInt(resData) == 3) {
+													url = '${pageContext.request.contextPath}/home';
+												} else if (parseInt(resData) == 0) {
+													//alert("Ok Here 731")
+													$('#landingpop-mobno')
+															.show();
+													$('#landingpop-mobno')
+															.popup();
+													$('#no_user_exist').show();
+													isReload = false;
+												} else {
+													url = '${pageContext.request.contextPath}/addresslist';
+												}
+												if (isReload) {
+													window.location = url;
+												}
+											},
+											error : function(jqXHR, textStatus,
+													errorThrown) {
+												console.log('km', jqXHR);
+											}
+										});
+							}
+						});//end of function
+		//old
+		$("#main_submit")
+				.click(
+						function(e) {
+							var allError = false;
+							var isError = false;
+							var isError1 = false;
+
+							var otpError = false;
+							var dataError = false;
+							$('#no_user_exist').hide();
+							var userType = document.getElementById("user_type").value;
+							//alert("userType" +userType);
+							var isOtpMached = checkValidOTP();
+							//alert("isOtpMached "+isOtpMached);
+							if (isOtpMached == false) {
+
+								isError = false;
+								isError1 = false;
+								otpError = false;
+							} else {
+								otpError = true;
+								isError = true;
+								isError1 = true;
+							}
+							document.getElementById("mobNo").readOnly = false;
+							if (parseInt(userType) == 1) {
+								dataError = false;
+								var errMsg = "";
+								if (!$("#selectShop").val()) {
+									isError1 = true;
+									dataError = true;
+									$("#error_selectShop").show()
+								} else if ($("#selectShop").val() < 1) {
+									isError1 = true;
+									dataError = true;
+									$("#error_selectShop").show();
+								} else {
+									$("#error_selectShop").hide()
+								}
+
+								if (!$("#txtPlaces").val()) {
+									isError1 = true;
+									dataError = true;
+									$("#error_txtPlaces").show()
+								} else {
+									$("#error_txtPlaces").hide()
+								}
+							}//end of if user Type==1
+							//alert("A" +isError)
+							if (otpError == false) {
+								//alert("Error False 663");
+							} else {
+								//alert("I am  709")
+								$('#landingpop-mobno').popup();
+							}
+							//alert("isError1" +isError1)
+							if (isError1 == false) {
+								allError = false;
+								//alert("LL715")
+								//document.getElementById("sub_close").click();
+							} else {
+								//alert("final")
+								allError = true;
+								//
+							}
+							//alert("allError" +allError)
+							if (otpError == false && dataError == false) {
+								//alert("In x 680")
+								//document.getElementById("sub_close").click();
+								var fd = new FormData();
+								fd.append('selectShop', $("#selectShop").val());
+								fd.append('txtPlaces', $("#txtPlaces").val());
+								fd.append('frKm', $("#frKm").val());
+								fd.append('selectShop', $("#selectShop").val());
+								fd.append('user_type', userType);
+								fd.append('mobNo', $("#mobNo").val());
+								fd.append('otp', $("#otp").val());
+								//console.log("fd ",JSON.stringify(fd));
+								$
+										.ajax({
+											url : '${pageContext.request.contextPath}/preHome',
+											type : 'POST',
+											data : fd,
+											dataType : 'json',
+											processData : false,
+											contentType : false,
+											async : false,
+											success : function(resData,
+													textStatus, jqXHR) {
+												//alert(resData);
+												isReload = true;
+												var url = "";
+												if (parseInt(resData) == 1
+														|| parseInt(resData) == 3) {
+													url = '${pageContext.request.contextPath}/home';
+												} else if (parseInt(resData) == 0) {
+													//alert("Ok Here 731")
+													$('#landingpop-mobno')
+															.show();
+													$('#landingpop-mobno')
+															.popup();
+													$('#no_user_exist').show();
+													isReload = false;
+												} else {
+													url = '${pageContext.request.contextPath}/addresslist';
+												}
+												if (isReload) {
+													//alert("Okkk")
+													window.location = url;
+												}
+
+											},
+											error : function(jqXHR, textStatus,
+													errorThrown) {
+												//alert("JJJ")
+												console.log('km', jqXHR);
+											}
+										});
+							} else {
+								//alert("final else")
+								//$('#landingpop-mobno').popup();
+								$('#landingpop-mobno').show();
+							}
+
+						});
+		function getKM(thisobj) {
+			/* 	var plant = document.getElementById('selectShop');
+				var fruitCount = plant.getAttribute('data-km'); // fruitCount = '12'
+				alert(fruitCount); */
+
+			var totalDistance = $(thisobj).find(':selected').attr('data-km');
+			//alert(totalDistance);
+			document.getElementById('frKm').value = totalDistance;
+		}
 		$(document).ready(function() {
 
 			var frData = '${frData}';
@@ -898,10 +937,10 @@ color: red;}
 			var lat = sessionStorage.getItem("selLat");
 			var lng = sessionStorage.getItem("selLng");
 			var addr = sessionStorage.getItem("selAddr");
-	if(addr!=null || addr!=""){
-		document.getElementById("txtPlaces").setAttribute("readonly", true);
-		$('#citySel').prop('disabled', true);
-	}
+			if (addr != null || addr != "") {
+				//document.getElementById("txtPlaces").setAttribute("readonly", true);
+				//$('#citySel').prop('disabled', true);
+			}
 			document.getElementById("txtPlaces").value = addr;
 			sessionStorage.setItem("selLat", "");
 			sessionStorage.setItem("selLng", "");
@@ -1071,7 +1110,7 @@ color: red;}
 			document.getElementById("txtPlaces").removeAttribute("readonly");
 
 			$('#txtPlaces').val(cityname + " ");
-			
+
 			document.getElementById("txtPlaces").focus();
 		}
 		function calculateDistance(latitude, longitude, type) {
@@ -1180,13 +1219,7 @@ color: red;}
 										//alert(newFrList[j].exInt1)
 										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">'
 												+ newFrList[j].frName
-												+ ' ('
-												+ newFrList[j].frCode
-												+ ') - '
-												+ newFrList[j].frAddress
-												+ ' - '
-												+ newFrList[j].exInt1
-												+ ' KM</option>';
+												+ '  </option>';
 
 									}
 
