@@ -408,7 +408,7 @@
 									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
 									<div class="delivery_r">
 										<div class="delivery_bx">
-											<h4 class="delivery_title">Delivery Details</h4>
+											<h4 class="delivery_title">Message On Cake</h4>
 											<div class="delivery_frm">
 												<form action="" method="post">
 												<c:choose>
@@ -417,10 +417,10 @@
 															<img alt="" id="del_image" style="size: portrait;"
 																name="del_image" />
 															<div class="inputbrowsebtn">
-																<label for="img_input_btn"> <span class="fg">Upload
+																<label for="img_input_btn"> <span class="fg" title="only jpg,png,jpeg file format with max size 600 KB">Upload
 																		Image </span> <input type="file" accept="image/*"
 																	name="img_input_btn" id="img_input_btn"
-																	accept=".jpg,.png,.gif,.jpeg,.bmp"
+																	accept=".jpg,.png,.jpeg,.bmp" title="only jpg,png,jpeg file format with max size 600 KB"
 																	onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
 
 																</label>
@@ -561,12 +561,12 @@
 				</div>
 
 				<div class="product_boxes">
-					<h2 class="sec_title">
+					<h5 class="sec_title">
 						<center>
-							Shop by Best Seller Categories <span>3 Hour Delivery &amp;
-								Free Shipping in India</span>
+							Related Products <span>
+								</span>
 						</center>
-					</h2>
+					</h5>
 
 					<ul>
 						<!--product-row-1-->

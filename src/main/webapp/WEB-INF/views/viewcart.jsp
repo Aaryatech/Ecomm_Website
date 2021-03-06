@@ -1161,9 +1161,9 @@ function setOfferDiscAmt(){
 								+ '<td><div class="cart_pic_row">'
 								+ '<div class="cart_pic"><img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" alt="">'+isVegItem+'</div>'
 								+ '<div class="cart_cont">'
-								+ '<h3 class="cart_cake">'
+								+ '<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'"><h3 class="cart_cake">'
 								+ table[i].exVar1
-								+ '</h3>'
+								+ '</h3></a>'
 								+ '<h6 class="cart_det"> &#8377;'
 								+ table[i].mrp+' / '+allItemArr[j].uomShowName
 								+ '</h6>'
@@ -1250,7 +1250,7 @@ function setOfferDiscAmt(){
 					'alt="">'+
 			'</div>'+
 			'<div class="cart_cont width_inc">'+
-				'<h3 class="cart_cake">'+table[i].exVar1+'</h3>'+
+				'<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'"><h3 class="cart_cake">'+table[i].exVar1+'</h3></a>'+
 				'<h3 class="cart_prc">'+table[i].mrp+'/'+allItemArr[j].uomShowName+'</h3>'+
 				'<div class="cart_det">'+
 					'Weight - '+table[i].weight+' '+allItemArr[j].uomShowName+''+table[i].veg+'<br>Flavors '+allItemArr[j].flavorNames+''+

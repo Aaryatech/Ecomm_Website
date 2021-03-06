@@ -83,13 +83,30 @@ public class LocationController {
 		try {
 
 			HttpSession session = request.getSession();
+			try {
+				int custId=(int) session.getAttribute("custId");
+				System.err.println("custId In /" +custId);
+				if(custId>0) {
+					System.err.println("If");
+					session.setAttribute("isAddressPopup", 0);
+				}else {
+					System.err.println("Else");
+					session.setAttribute("isAddressPopup", 1);
+				}
+			}catch (Exception e) {
+				System.err.println("Catch");
+				session.setAttribute("isAddressPopup", 1);
+			}
 			Cookie[] cookieArray = request.getCookies();
 			int isCookieFound = 0;
 			if (cookieArray != null)
 				for (int a = 0; a < cookieArray.length; a++) {
 					if (cookieArray[a].getName().equalsIgnoreCase("custIdCookie")) {
+						System.out.println("custIdCookie " +cookieArray[a].getName());
 						session.setAttribute("custId",
 								Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+						int custId=(int) session.getAttribute("custId");
+						System.err.println("custId In cookie found and set /" +custId);
 						returnPage = "redirect:/home";
 						isCookieFound = 1;
 						break;
@@ -156,7 +173,7 @@ public class LocationController {
 
 				model.addAttribute("cityList", cityList);
 				model.addAttribute("frData", frData);
-
+ 
 				CategoryList[] catArray = mapper.readValue(
 						new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
 				List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
@@ -315,7 +332,7 @@ public class LocationController {
 
 			otp= String.format("%05d", random.nextInt(100003));
 			System.err.println("Mob no  " +mobNo +"otp  " + otp);
-			info=SMSUtility.sendSMS(mobNo, "Your OTP for Monginis Login is " +otp);
+			//info=SMSUtility.sendSMS(mobNo, "Your OTP for Monginis Login is " +otp);
 			info.setMsg(otp);
 		}catch (Exception e) {
 			e.printStackTrace();

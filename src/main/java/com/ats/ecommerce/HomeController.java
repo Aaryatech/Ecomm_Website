@@ -183,7 +183,8 @@ public class HomeController {
 				session.removeAttribute("userMobile");
 				session.removeAttribute("userAddress");
 				session.removeAttribute("profileImg");
-				//session.removeAttribute("mobNo");
+				// session.removeAttribute("mobNo");
+
 			}
 		} catch (Exception e) {
 			System.err.println("In Home catch");
@@ -209,12 +210,12 @@ public class HomeController {
 		} catch (Exception e) {
 		}
 		try {
-		
-			int likeCount= (int) session.getAttribute("likeCount");
-			
-		}catch (Exception e) {
+
+			int likeCount = (int) session.getAttribute("likeCount");
+
+		} catch (Exception e) {
 			System.err.println("In catch");
-			session.setAttribute("likeCount",0);
+			session.setAttribute("likeCount", 0);
 		}
 		model.addAttribute("tagsJson", jsonStr);
 
@@ -265,7 +266,7 @@ public class HomeController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("In Catch frId " + frId);
-		
+
 		}
 
 		Cookie frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
@@ -296,6 +297,7 @@ public class HomeController {
 		int custId = 0;
 		try {
 			custId = (int) session.getAttribute("custId");
+			
 		} catch (Exception e) {
 			session.setAttribute("custId", custId);
 		}
@@ -303,9 +305,9 @@ public class HomeController {
 		Cookie landMarkCookie, frIdCookie, frKmCookie, delAddIdCookie;
 		int frId = 0;
 		float frKm = 0;
-		System.err.println("Here " +request.getParameter("user_type"));
+		System.err.println("Here " + request.getParameter("user_type"));
 		int userType = Integer.parseInt(request.getParameter("user_type"));
-		
+
 		frId = Integer.parseInt(request.getParameter("selectShop"));
 		session.setAttribute("frId", frId);
 
@@ -327,17 +329,16 @@ public class HomeController {
 		frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
 		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frKmCookie);
-		
+
 		if (userType == 3) {
 			try {
-				
 
 				// 4-01-2021
 				delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + 0));
 				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(delAddIdCookie);
 				session.setAttribute("delAddId", 0);
-				
+
 				session.setAttribute("userId", 0);
 				retPage = 3;
 			} catch (Exception e) {
@@ -372,6 +373,17 @@ public class HomeController {
 					retPage = 1;
 				} else if (userType == 2 && custAddDetail == null) {
 					System.err.println("Ok userType==2 && custAddDetail=null ");
+					try {
+						if(custId>0) {
+							System.err.println("If1");
+							session.setAttribute("isAddressPopup", 0);
+						}else {
+							System.err.println("Else2");
+							session.setAttribute("isAddressPopup", 1);
+						}
+					}catch (Exception e) {
+						session.setAttribute("isAddressPopup", 1);
+					}
 					retPage = 0;
 				} else if (custAddDetail != null) {
 					// goto home
@@ -393,11 +405,10 @@ public class HomeController {
 					landMarkCookie = new Cookie("landMarkCookie", EncodeDecode.Encrypt(landMark));
 					landMarkCookie.setMaxAge(60 * 60 * 24 * 15);
 					response.addCookie(landMarkCookie);
-					
-					Cookie custIdCookie=new Cookie("custIdCookie", EncodeDecode.Encrypt(""+custId));
+
+					Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt("" + custId));
 					custIdCookie.setMaxAge(60 * 60 * 24 * 15);
 					response.addCookie(custIdCookie);
-					
 
 					frIdCookie = new Cookie("frIdCookie", EncodeDecode.Encrypt("" + frId));
 					frIdCookie.setMaxAge(60 * 60 * 24 * 15);
@@ -428,102 +439,120 @@ public class HomeController {
 		}
 		return retPage;
 	}
-	
-	//Sachin 12-01-2021
+
+	// Sachin 12-01-2021
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpServletResponse response,Model model) {
-		String returnPage="";
-		ObjectMapper mapper = new ObjectMapper();
-		CityData[] city = null;
+	public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String returnPage = "";
 		try {
-			city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
-					CityData[].class);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		List<CityData> cityList = null;
-		try {
-		  cityList = new ArrayList<>(Arrays.asList(city));
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		String frData = null;
-		try {
-			frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
-					.next();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		model.addAttribute("cityList", cityList);
-		model.addAttribute("frData", frData);
+			HttpSession session = request.getSession();
 
-		CategoryList[] catArray = null;
-		try {
-			catArray = mapper.readValue(
-					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		List<CategoryList> catList=null;
-		try {
-		 catList = new ArrayList<>(Arrays.asList(catArray));
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-		model.addAttribute("catList", catList);
-		model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+			session.removeAttribute("userName");
+			session.removeAttribute("userEmail");
+			session.removeAttribute("userMobile");
+			session.removeAttribute("userAddress");
+			session.removeAttribute("profileImg");
+			session.removeAttribute("mobNo");
+			session.removeAttribute("frId");
+			session.removeAttribute("custId");
+			session.removeAttribute("landMark");
+			session.removeAttribute("frKm");
 
-		CompanyTestomonials[] testMonArray = null;
-		try {
-			testMonArray = mapper.readValue(
-					new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), CompanyTestomonials[].class);
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+			session.removeAttribute("allDataJson");
+			session.removeAttribute("likeCount");
+
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = null;
+			try {
+				city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"), CityData[].class);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			List<CityData> cityList = null;
+			try {
+				cityList = new ArrayList<>(Arrays.asList(city));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			String frData = null;
+			try {
+				frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+						.next();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+
+			model.addAttribute("cityList", cityList);
+			model.addAttribute("frData", frData);
+
+			CategoryList[] catArray = null;
+			try {
+				catArray = mapper.readValue(new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"),
+						CategoryList[].class);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			List<CategoryList> catList = null;
+			try {
+				catList = new ArrayList<>(Arrays.asList(catArray));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			model.addAttribute("catList", catList);
+			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
+
+			CompanyTestomonials[] testMonArray = null;
+			try {
+				testMonArray = mapper.readValue(new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"),
+						CompanyTestomonials[].class);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			List<CompanyTestomonials> testMonialList = null;
+			try {
+				testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
+			} catch (Exception e) {
+
+			}
+			model.addAttribute("testMonialList", testMonialList);
+			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+			model.addAttribute("isAddNewAdd", 0);
+
+			returnPage = "landing";
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<CompanyTestomonials> testMonialList =null;
-		try {
-		 testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
-		}catch (Exception e) {
-			
-		}
-		model.addAttribute("testMonialList", testMonialList);
-		model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
-		model.addAttribute("isAddNewAdd", 0);
-		
-		HttpSession session=request.getSession();
-		
-		session.removeAttribute("userName");
-		session.removeAttribute("userEmail");
-		session.removeAttribute("userMobile");
-		session.removeAttribute("userAddress");
-		session.removeAttribute("profileImg");
-		session.removeAttribute("mobNo");
-		session.removeAttribute("frId");
-		session.removeAttribute("custId");
-		session.removeAttribute("landMark");
-		session.removeAttribute("frKm");
-		
-		session.removeAttribute("allDataJson");
-		session.removeAttribute("likeCount");
-		
-		returnPage = "landing";
-		
 		return returnPage;
 	}
-	
+
+	// Sachin 18-02-2021
+	@RequestMapping(value = "/resetAddressPopup", method = RequestMethod.POST)
+	public @ResponseBody Object resetAddressPopup(HttpServletRequest request, HttpServletResponse response,
+			Model model) {
+		String returnPage = "";
+		try {
+			HttpSession session = request.getSession();
+			session.removeAttribute("isAddressPopup");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return returnPage;
+		
+	}
+
 	// Modified By -Sachin
 	// Modific Date -11-11-2020
 	@RequestMapping(value = "/showProdDetail/{index}", method = RequestMethod.GET)
@@ -622,7 +651,7 @@ public class HomeController {
 			map.add("itemIds", id);
 			Integer[] relateItemArray = Constants.getRestTemplate()
 					.postForObject(Constants.url + "getRelateProductByProductIds", map, Integer[].class);
-			System.err.println("relateItemArray " +relateItemArray.length);
+			System.err.println("relateItemArray " + relateItemArray.length);
 			model.addAttribute("relateItemArray", relateItemArray);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -656,71 +685,68 @@ public class HomeController {
 			model.addAttribute("festiveEvent", data.getFestEventList().get(index));
 
 			System.err.println("INDEX - " + index + "    -------> " + data.getFestEventList().get(index));
-			
 
-			
 			// ALL MENU CATEGORY LIST
-						try {
+			try {
 
-							List<CateFilterConfig> catMenuList = new ArrayList<>();
+				List<CateFilterConfig> catMenuList = new ArrayList<>();
 
-							for (CateFilterConfig cat : data.getCatFilterConfig()) {
+				for (CateFilterConfig cat : data.getCatFilterConfig()) {
 
-								List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
-										.collect(Collectors.toList());
+					List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
+							.collect(Collectors.toList());
 
-								// List<Integer> typeIdList = new ArrayList<>();
-								// typeIdList.add(4);
-								// typeIdList.add(12);
+					// List<Integer> typeIdList = new ArrayList<>();
+					// typeIdList.add(4);
+					// typeIdList.add(12);
 
-								cat.setTypeIdList(typeIdList);
-								cat.setExInt2(typeIdList.size()+1);
-								catMenuList.add(cat);
-							}
+					cat.setTypeIdList(typeIdList);
+					cat.setExInt2(typeIdList.size() + 1);
+					catMenuList.add(cat);
+				}
 
-							data.setCatFilterConfig(catMenuList);
+				data.setCatFilterConfig(catMenuList);
 
-						} catch (Exception e) {
-						}
+			} catch (Exception e) {
+			}
 
-						// ALL FILTER LIST
-						List<MFilter> allFilterList = new ArrayList<>();
-						try {
+			// ALL FILTER LIST
+			List<MFilter> allFilterList = new ArrayList<>();
+			try {
 
-							int compId = (Integer) request.getSession().getAttribute("companyId");
+				int compId = (Integer) request.getSession().getAttribute("companyId");
 
-							MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-							map.add("compId", compId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("compId", compId);
 
-							MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
-									MFilter[].class);
-							allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
+				MFilter[] filterArr = Constants.getRestTemplate().postForObject(Constants.url + "getAllFilter", map,
+						MFilter[].class);
+				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
 
-						} catch (Exception e) {
-						}
+			} catch (Exception e) {
+			}
 
-						// ALL FILTER TYPE LIST
-						List<FilterTypes> allFilterTypeList = new ArrayList<>();
-						try {
+			// ALL FILTER TYPE LIST
+			List<FilterTypes> allFilterTypeList = new ArrayList<>();
+			try {
 
-							int compId = (Integer) request.getSession().getAttribute("companyId");
+				int compId = (Integer) request.getSession().getAttribute("companyId");
 
-							MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-							map.add("compId", compId);
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("compId", compId);
 
-							FilterTypes[] filterArr = Constants.getRestTemplate()
-									.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
-							allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
+				FilterTypes[] filterArr = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getActiveFilterTypes", map, FilterTypes[].class);
+				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
 
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-						model.addAttribute("allListFilter", 1);
-						model.addAttribute("allData", data);
-						model.addAttribute("allFilterList", allFilterList);
-						model.addAttribute("allFilterTypeList", allFilterTypeList);
-			
+			model.addAttribute("allListFilter", 1);
+			model.addAttribute("allData", data);
+			model.addAttribute("allFilterList", allFilterList);
+			model.addAttribute("allFilterTypeList", allFilterTypeList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -770,7 +796,7 @@ public class HomeController {
 		model.addAttribute("lat", lat);
 		model.addAttribute("lng", lng);
 
-		System.err.println(lat + "          " + lng);
+		// System.err.println(lat + " " + lng);
 
 		return "viewmap";
 	}
@@ -852,44 +878,44 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
-	public String showContactUsPage(Locale locale, Model model) throws JsonParseException, JsonMappingException, IOException {
+	public String showContactUsPage(Locale locale, Model model)
+			throws JsonParseException, JsonMappingException, IOException {
 		int compId = data.getFranchiseCatList().get(0).getCompanyId();
-		System.out.println("Compan Id : "+compId);
-		
+		System.out.println("Compan Id : " + compId);
+
 		ContactUs cus = new ContactUs();
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		ContactUs[] cusArr = null;
-		
-		cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"),
-					ContactUs[].class);
-			
+
+		cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"), ContactUs[].class);
+
 		List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
 		for (int i = 0; i < cusList.size(); i++) {
-			if(cusList.get(i).getCompanyId()==compId) {
-				
+			if (cusList.get(i).getCompanyId() == compId) {
+
 				cus.setCompanyId(compId);
-				
+
 				cus.setEmailText(cusList.get(i).getEmailText());
 				cus.setEmail1(cusList.get(i).getEmail2());
-				cus.setEmail2(cusList.get(i).getEmail1());			
+				cus.setEmail2(cusList.get(i).getEmail1());
 
 				cus.setManufacAddressTxt(cusList.get(i).getManufacAddressTxt());
 				cus.setManufacAddress(cusList.get(i).getManufacAddress());
-				
+
 				cus.setOfficeText(cusList.get(i).getManufacAddressTxt());
-				cus.setOfficeAddress(cusList.get(i).getManufacAddress());			
-				
+				cus.setOfficeAddress(cusList.get(i).getManufacAddress());
+
 				cus.setPageHead(cusList.get(i).getPageHead());
 				cus.setSubHeading(cusList.get(i).getSubHeading());
-				
+
 				cus.setPhoneText(cusList.get(i).getPhoneText());
 				cus.setPhone1(cusList.get(i).getPhone1());
 				cus.setPhone2(cusList.get(i).getPhone2());
 			}
 		}
-		
-		model.addAttribute("cus", cus);			
+
+		model.addAttribute("cus", cus);
 		return "contact-us";
 	}
 
@@ -918,37 +944,37 @@ public class HomeController {
 
 		return "becmVendorFr";
 	}
-	
+
 	@RequestMapping(value = "/getFooterData", method = RequestMethod.GET)
 	@ResponseBody
-	public ContactUs getFooterData(HttpServletRequest request, HttpServletResponse response, Model model) throws JsonParseException, JsonMappingException, IOException {
+	public ContactUs getFooterData(HttpServletRequest request, HttpServletResponse response, Model model)
+			throws JsonParseException, JsonMappingException, IOException {
 
 		HttpSession session = request.getSession();
 		ContactUs cus = new ContactUs();
-		try {		
-		ObjectMapper mapper = new ObjectMapper();
-		ContactUs[] cusArr = null;
-		
-		cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"),
-					ContactUs[].class);
-			
-		List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
-		for (int i = 0; i < cusList.size(); i++) {
-			if(cusList.get(i).getCompanyId()==1) {				
-				
-				cus.setFacebookLink(cusList.get(i).getFacebookLink());
-				cus.setTwitterLink(cusList.get(i).getTwitterLink());
-				cus.setLinkedInLink(cusList.get(i).getLinkedInLink());
-				cus.setGoogleAcLink(cusList.get(i).getGoogleAcLink());
-				
-				cus.setFooterAddress(cusList.get(i).getFooterAddress());
-				cus.setFooterEmail1(cusList.get(i).getFooterEmail1());			
-				cus.setFooterEmail2(cusList.get(i).getFooterEmail2());
-				cus.setFooterPhone1(cusList.get(i).getFooterPhone1());
-				cus.setFooterPhone2(cusList.get(i).getFooterPhone2());
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			ContactUs[] cusArr = null;
+
+			cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"), ContactUs[].class);
+
+			List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
+			for (int i = 0; i < cusList.size(); i++) {
+				if (cusList.get(i).getCompanyId() == 1) {
+
+					cus.setFacebookLink(cusList.get(i).getFacebookLink());
+					cus.setTwitterLink(cusList.get(i).getTwitterLink());
+					cus.setLinkedInLink(cusList.get(i).getLinkedInLink());
+					cus.setGoogleAcLink(cusList.get(i).getGoogleAcLink());
+
+					cus.setFooterAddress(cusList.get(i).getFooterAddress());
+					cus.setFooterEmail1(cusList.get(i).getFooterEmail1());
+					cus.setFooterEmail2(cusList.get(i).getFooterEmail2());
+					cus.setFooterPhone1(cusList.get(i).getFooterPhone1());
+					cus.setFooterPhone2(cusList.get(i).getFooterPhone2());
+				}
 			}
-		}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 		return cus;

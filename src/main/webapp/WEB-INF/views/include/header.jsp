@@ -72,6 +72,15 @@
 									
 							</ul></li>
 					</ul>
+				<c:if test="${sessionScope.isAddressPopup==1}">
+				<div class="drop_fix" id="add_poupu">
+					<h3>Have you selected the right location</h3>
+					<p>Your selected location seems to be a little far off from your device location</p>
+					<a href="#" onclick="resetAddressPopup()" class="left">Dismiss</a>
+					<a href="${pageContext.request.contextPath}/ShowAddNewAdd" class="right">Change Location</a>
+				</div>
+				</c:if>
+				
 				</div> 
 				<div class="clr"></div>
 			</div>
@@ -316,7 +325,23 @@ function removeLoader(){
   });  
 }
 /************************************************************/
-
+//Sachin 18-02-2021
+function resetAddressPopup(){
+	document.getElementById("add_poupu").style.display="none";
+	var fd = new FormData();
+	fd.append("isPop",0)
+	$.ajax({
+		url : '${pageContext.request.contextPath}/resetAddressPopup',
+		type : 'post',
+		dataType : 'json',
+		data : fd,
+		contentType : false,
+		processData : false,
+		success : function(response) {
+	
+		},
+	});
+}
 
 function setData(){
 	var table = [];

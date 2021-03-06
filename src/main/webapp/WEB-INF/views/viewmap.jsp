@@ -42,7 +42,7 @@ html, body {
 
 	<div class="location_button">
 		<a href="javascript:void(0)" onclick="setLocation()"
-			class="mobile_location">Get Location</a>
+			class="mobile_location">Pin Point Your Delivery Location</a>
 	</div>
 
 	<div class="current_location" style="display: none;">

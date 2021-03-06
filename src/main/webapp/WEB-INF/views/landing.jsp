@@ -898,7 +898,10 @@ color: red;}
 			var lat = sessionStorage.getItem("selLat");
 			var lng = sessionStorage.getItem("selLng");
 			var addr = sessionStorage.getItem("selAddr");
-
+	if(addr!=null || addr!=""){
+		document.getElementById("txtPlaces").setAttribute("readonly", true);
+		$('#citySel').prop('disabled', true);
+	}
 			document.getElementById("txtPlaces").value = addr;
 			sessionStorage.setItem("selLat", "");
 			sessionStorage.setItem("selLng", "");
@@ -1059,11 +1062,16 @@ color: red;}
 			var cityname = $(this).data("cityname");
 			$('#txtPlaces').val(cityname + " ");
 			document.getElementById("txtPlaces").focus();
+			document.getElementById("txtPlaces").removeAttribute("readonly");
+			$('#citySel').prop('disabled', false);
 		});
 
 		function getCityName(val) {
 			var cityname = $("#city" + val).data("cityname");
+			document.getElementById("txtPlaces").removeAttribute("readonly");
+
 			$('#txtPlaces').val(cityname + " ");
+			
 			document.getElementById("txtPlaces").focus();
 		}
 		function calculateDistance(latitude, longitude, type) {
@@ -1306,6 +1314,8 @@ color: red;}
 		function setCityNameToInput(cityname) {
 			$('#txtPlaces').val(cityname + " ");
 			document.getElementById("txtPlaces").focus();
+			document.getElementById("txtPlaces").removeAttribute("readonly");
+			$('#citySel').prop('disabled', false);
 		}
 	</script>
 
