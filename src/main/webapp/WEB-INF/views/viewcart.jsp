@@ -353,10 +353,12 @@
 
 									</div>
 								</div>
-								<h3 class="payment_title">Payment Method</h3>
-								<!-- <form action="" method="get"> -->
+								
+								<div class="title_row_bx">
+									<div class="left_side"> <h3 class="payment_title">Payment Method</h3>
+									<!-- <form action="" method="get"> -->
 								<div class="payment_one">
-									<div class="payment_two left">
+									<div class="divide_marg"><!-- class="payment_two left" -->
 										<div class="select-style">
 											<select name="paymentMode" id="paymentMode">
 												<option value="2" selected>Online Payment</option>
@@ -371,7 +373,15 @@
 											style="display: none;">Please select payment option</label>
 									</div>
 
-									<div class="payment_two right">
+									
+
+									<div class="clr"></div>
+								</div>
+								
+								</div>
+								<div class="right_side">
+								<h3 class="payment_title">Payment Information</h3>
+									<div class="divide_marg"><!-- class="payment_two right" -->
 										<div class="select-style">
 											<select name="del_time_slot" id="del_time_slot">
 												<c:forEach items="${delSlotList}" var="delSlot">
@@ -381,15 +391,13 @@
 
 										</div>
 									</div>
-
-									<div class="clr"></div>
-								</div>
-								<div>
-									<div class="payment_two left">
+									
+									<div>
+									<div class="divide_marg"><!-- class="payment_two left" -->
 										<input name="delvrInst" id="delvrInst" type="hidden"
 											class="input_two" placeholder="Delivery Instruction" />
 									</div>
-									<div class="payment_two right">
+									<div class="divide_marg"><!-- class="payment_two right" -->
 										<div id="filters">
 											<input type="text" name="delvrDateTime" id="delvrDateTime"
 												readonly class="input_two " placeholder="Delivery Date" />
@@ -398,6 +406,12 @@
 											style="display: none;">Please select delivery time</label>
 									</div>
 								</div>
+								
+								</div>
+								</div>
+								
+								
+								
 								<div class="payment_click">
 									By Clicking the button, you agree to the <a target="_blank"
 										href="${pageContext.request.contextPath}/showT&CPage">Terms
