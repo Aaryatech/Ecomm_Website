@@ -16,7 +16,7 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 
-	<div class="head_marg">
+	<div class="head_marg with_menu">
 
 		<!--product listing-->
 		<div class="find_store with_bread">
@@ -419,33 +419,10 @@
 											<h4 class="delivery_title">Message On Cake</h4>
 											<div class="delivery_frm">
 												<form action="" method="post">
-													<c:choose>
-														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
-															<div class="delivery_frm_l">
-																<img alt="" id="del_image" style="size: portrait;"
-																	name="del_image" />
-																<div class="inputbrowsebtn">
-																	<label for="img_input_btn"> <span class="fg"
-																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
-																			Image </span> <input type="file" accept="image/*"
-																		name="img_input_btn" id="img_input_btn"
-																		accept=".jpg,.png,.jpeg,.bmp"
-																		title="only jpg,png,jpeg file format with max size 600 KB"
-																		onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
 
-																	</label>
-																</div>
-															</div>
-														</c:when>
-														<c:otherwise>
-															<input style="display: none" type="file" accept="image/*"
-																name="img_input_btn" id="img_input_btn"
-																accept=".jpg,.png,.gif,.jpeg,.bmp"
-																onchange="loadFile(event)">
-														</c:otherwise>
-													</c:choose>
 
-													<div class="delivery_frm_r">
+													<div>
+														<!-- class="delivery_frm_r" -->
 														<c:if test="${prodHeader.allowSpecialInstruction==1}">
 
 															<div class="delivery_txtarea" style="display: none">
@@ -468,7 +445,34 @@
 														</c:if>
 													</div>
 
+													<c:choose>
+														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
+															<div ><!-- class="delivery_frm_l" -->
+																<img alt="" id="del_image" style="size: portrait;"
+																	name="del_image" />
+																<div class="inputbrowsebtn">
+																	<label for="img_input_btn"> <span class="fg"
+																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
+																			Image </span> <input type="file" accept="image/*"
+																		name="img_input_btn" id="img_input_btn"
+																		accept=".jpg,.png,.jpeg,.bmp"
+																		title="only jpg,png,jpeg file format with max size 600 KB"
+																		onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
 
+																	</label>
+																</div>
+															</div> 
+															<div class="img_format">*image format allowed : jpg,jpeg,png.</div>
+														</c:when>
+														<c:otherwise>
+															<input style="display: none" type="file" accept="image/*"
+																name="img_input_btn" id="img_input_btn"
+																accept=".jpg,.png,.gif,.jpeg,.bmp"
+																onchange="loadFile(event)">
+														</c:otherwise>
+													</c:choose>
+
+													
 
 
 													<div class="clr"></div>

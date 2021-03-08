@@ -373,21 +373,21 @@ function removeLoader(){
 							}
 					%>
 					<c:set var="isShow" value="${show}"></c:set>
-					<c:forEach begin="1" end="10" step="1" varStatus="cn">
-						<c:if test="${isShow==1}">
-							<div>
-								<div class="festival_offer">
-									<a
-										href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
-										title="${festEvent.description}">${festEvent.eventName}
-										${cn.index+1} <img src="${festEventImgUrl}${festEvent.exVar2}"
-										class="lazy" data-src="${festEventImgUrl}${festEvent.exVar2}"
-										onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-offer-image.jpg'">
-									</a>
-								</div>
+					<%-- <c:forEach begin="1" end="10" step="1" varStatus="cn"> --%>
+					<c:if test="${isShow==1}">
+						<div>
+							<div class="festival_offer">
+								<a
+									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
+									title="${festEvent.description}">${festEvent.eventName} <img
+									src="${festEventImgUrl}${festEvent.exVar2}" class="lazy"
+									data-src="${festEventImgUrl}${festEvent.exVar2}"
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-offer-image.jpg'">
+								</a>
 							</div>
-						</c:if>
-					</c:forEach>
+						</div>
+					</c:if>
+					<%-- </c:forEach> --%>
 				</c:forEach>
 			</section>
 		</div>

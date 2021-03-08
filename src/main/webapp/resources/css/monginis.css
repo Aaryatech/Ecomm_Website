@@ -406,7 +406,8 @@ input.qtyminus {width: 20px; height: 20px; font-size: 22px; background: #ec268f;
 .banner_title{color: #bd0064; font-size: 36px; font-family: 'Hind-Bold'; line-height: 45px;}
 .banner_title span{display: block; color: #000; font-family: 'Hind-medium'; font-style: italic; font-size: 28px;}
 .banner_txt{color: #000000; font-size: 30px; text-transform: uppercase; font-family: 'Hind-SemiBold';}
-.send_now_btn{display: inline-block; background: #373991; color: #FFF; padding:0 /* 8px 40px */; text-transform: uppercase; font-size: 20px; font-family: 'Hind-SemiBold'; margin: 15px 0 0 0; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+.send_now_btn{display: inline-block; background: #373991; color: #FFF; padding:0 /* 8px 40px */; text-transform: uppercase; font-size: 20px; 
+font-family: 'Hind-SemiBold'; margin: /* 15px 0 0 */ 0; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .send_now_btn:hover{background: #bd0064; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
 /*festival offer*/
@@ -695,7 +696,7 @@ ul.shape_list li i{position: absolute; left: 0; top: 0; color: #dfe1e4; font-siz
 .delivery_l{float: left; width: 50%;}
 .more_highlight{text-decoration: underline; color: #ec268f; font-size: 14px; text-transform: uppercase;}
 
-.delivery_r{float: right; width: 50%; background: #f1f3f6; padding: 10px;}
+.delivery_r{float: right; width: 50%; background: #f1f3f6; padding: 1px;}
 .delivery_bx{background: #FFF;}
 .delivery_title{color: #434343; font-size: 15px; text-transform: uppercase; border-bottom: 1px solid #f1f3f6; padding: 15px 10px; font-family: 'Hind-SemiBold';}
 .delivery_frm{display: block; padding: 10px;}
@@ -1232,6 +1233,8 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 .left_side{float: left; width: 48%;}
 .right_side{float: right; width:48%;}
 .divide_marg{margin: 0 0 8px 0;}
+
+.img_format{color: #F00; font-size: 12px; margin: 7px 0 0 10px;}
 
 @media screen and (max-width:1280px){
     /*home page css*/
@@ -1823,7 +1826,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .profile_l{padding: 20px;}
     
     /* .prod_filt ul li {width: 50%;} */
-    .product_filter_one img{height: 180px;}
+    .product_filter_one img{height: 100px /* 180px */;}
     
      .well.small {width: 96%;}
     .small_row_one{margin-bottom: 6px;}
@@ -1876,7 +1879,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .login_menu li:hover ul {left: -20px; top: 34px}
     
     .cart_button, .buy_button{min-width: 135px;}
-    .product_filter_one img {height: 150px;}
+    /* .product_filter_one img {height: 150px;} */
     .prod_fit_txt ul li a{padding: 5px 15px;}
     
     .cart_cont {width: 140px; margin: 6px 0 0 0;}

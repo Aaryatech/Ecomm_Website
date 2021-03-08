@@ -309,38 +309,32 @@
 					<h2 class="serv_city">Popular Serving Cities</h2>
 					<ul>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_mumbai.png"
 							alt=""> Mumbai<!-- </a> -->
 						</li>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_delhi.png"
 							alt=""> Delhi<!-- </a> -->
 						</li>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_hydrabad.png"
 							alt=""> Hydrabad<!-- </a> -->
 						</li>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_agra.png"
 							alt=""> Agra<!-- </a> -->
 						</li>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_nashik.png"
 							alt=""> Nasik<!-- </a> -->
 						</li>
 						<li>
-							<!-- <a href="javascript:void(0)"> -->
-							<img
+							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_goa.png"
 							alt=""> Goa<!-- </a> -->
 						</li>
@@ -362,7 +356,8 @@
 						<div>
 							<select id="citySel" name="citySel" class="citysel"
 								onchange="getCityName(this.value)">
-								<option value="0" id="city0" data-cityname="">select</option>
+								<option value="0" id="city0" data-cityname="">Select
+									City</option>
 								<c:forEach items="${cityList}" var="cityList">
 									<option value="${cityList.cityId}" id="city${cityList.cityId}"
 										data-cityname="${cityList.cityName}">${cityList.cityName}</option>

@@ -61,7 +61,7 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 
-	<div class="head_marg">
+	<div class="head_marg with_menu">
 		<!--product listing-->
 		<div class="find_store">
 			<div class="wrapper">
@@ -353,65 +353,73 @@
 
 									</div>
 								</div>
-								
+
 								<div class="title_row_bx">
-									<div class="left_side"> <h3 class="payment_title">Payment Method</h3>
-									<!-- <form action="" method="get"> -->
-								<div class="payment_one">
-									<div class="divide_marg"><!-- class="payment_two left" -->
-										<div class="select-style">
-											<select name="paymentMode" id="paymentMode">
-												<option value="2" selected>Online Payment</option>
-												<option value="1">Cash on Delivery (COD)</option>
-												<!-- <option value="2">Card</option> -->
+									<div class="left_side">
+										<h3 class="payment_title">Payment Method</h3>
+										<!-- <form action="" method="get"> -->
+										<div class="payment_one">
+											<div class="divide_marg">
+												<!-- class="payment_two left" -->
+												<div class="select-style">
+													<select name="paymentMode" id="paymentMode">
+														<option value="2" selected>Online Payment</option>
+														<option value="1">Cash on Delivery (COD)</option>
+														<!-- <option value="2">Card</option> -->
 
-											</select>
+													</select>
 
+												</div>
+
+												<label class="form-label-hint-error" id="errorpaymentMode"
+													style="display: none;">Please select payment option</label>
+											</div>
+
+
+
+											<div class="clr"></div>
 										</div>
 
-										<label class="form-label-hint-error" id="errorpaymentMode"
-											style="display: none;">Please select payment option</label>
 									</div>
+									<div class="right_side">
+										<h3 class="payment_title">Payment Information</h3>
+										<div class="divide_marg">
+											<!-- class="payment_two right" -->
+											<div id="filters">
+												<input type="text" name="delvrDateTime" id="delvrDateTime"
+													readonly class="input_two " placeholder="Delivery Date" />
 
-									
 
-									<div class="clr"></div>
-								</div>
-								
-								</div>
-								<div class="right_side">
-								<h3 class="payment_title">Payment Information</h3>
-									<div class="divide_marg"><!-- class="payment_two right" -->
-										<div class="select-style">
-											<select name="del_time_slot" id="del_time_slot">
-												<c:forEach items="${delSlotList}" var="delSlot">
-													<option value="${delSlot.fromTime}-${delSlot.toTime}">${delSlot.deliverySlotName}(${delSlot.fromTime}-${delSlot.toTime})</option>
-												</c:forEach>
-											</select>
-
+											</div>
+											<label class="form-label-hint-error" id="errordelvrDateTime"
+												style="display: none;">Please select delivery time</label>
 										</div>
-									</div>
-									
-									<div>
-									<div class="divide_marg"><!-- class="payment_two left" -->
-										<input name="delvrInst" id="delvrInst" type="hidden"
-											class="input_two" placeholder="Delivery Instruction" />
-									</div>
-									<div class="divide_marg"><!-- class="payment_two right" -->
-										<div id="filters">
-											<input type="text" name="delvrDateTime" id="delvrDateTime"
-												readonly class="input_two " placeholder="Delivery Date" />
+
+										<div>
+											<div class="divide_marg">
+												<!-- class="payment_two left" -->
+												<input name="delvrInst" id="delvrInst" type="hidden"
+													class="input_two" placeholder="Delivery Instruction" />
+											</div>
+											<div class="divide_marg">
+												<!-- class="payment_two right" -->
+
+												<div class="select-style">
+													<select name="del_time_slot" id="del_time_slot">
+														<c:forEach items="${delSlotList}" var="delSlot">
+															<option value="${delSlot.fromTime}-${delSlot.toTime}">${delSlot.deliverySlotName}(${delSlot.fromTime}-${delSlot.toTime})</option>
+														</c:forEach>
+													</select>
+												</div>
+
+											</div>
 										</div>
-										<label class="form-label-hint-error" id="errordelvrDateTime"
-											style="display: none;">Please select delivery time</label>
+
 									</div>
 								</div>
-								
-								</div>
-								</div>
-								
-								
-								
+
+
+
 								<div class="payment_click">
 									By Clicking the button, you agree to the <a target="_blank"
 										href="${pageContext.request.contextPath}/showT&CPage">Terms
@@ -1011,7 +1019,7 @@
 				<!-- PLACE ORDER POPUP -->
 				<div id="place" class="well_palace" style="display: none;">
 					<div class="mongi_title">
-						Place Order Popup
+						Place Order
 						<div class="place_close close_pop">
 							<i class="fa fa-times" aria-hidden="true"></i>
 						</div>
@@ -1036,6 +1044,18 @@
 							<div class="place_row_r"></div>
 							<div class="clr"></div>
 						</div>
+						<%-- <div class="place_row">
+							<div class="place_row_l">
+								<span class="pop_lab_fld">Customer Name</span> <input
+									type="text" class="input_place" id="custName" name="custName"
+									placeholder="Customer Name" value="${cust.custName}"
+									autocomplete="off" /> <label class="form-label-hint-error"
+									id="error_custName" style="display: none;">Please enter
+									billing name</label>
+							</div>
+
+							<div class="clr"></div>
+						</div> --%>
 						<div class="place_row">
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Billing Name</span> <input type="text"

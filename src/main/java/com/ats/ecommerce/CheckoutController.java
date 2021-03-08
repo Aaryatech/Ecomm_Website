@@ -52,7 +52,6 @@ import com.ats.ecommerce.model.order.OrderSaveData;
 import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @Controller
 @Scope("session")
 
@@ -91,33 +90,33 @@ public class CheckoutController {
 			try {
 				int custId = (int) session.getAttribute("custId");
 				int companyId = (int) session.getAttribute("companyId");
-				
-				if(custId>0) {
-				map = new LinkedMultiValueMap<>();
-				
-				map.add("custId", custId);
-				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-						Customer.class);
-				model.addAttribute("cust", cust);
 
-				String[] billAddress = cust.getExVar3().split("~");
-				model.addAttribute("getFlat", billAddress[0]);
-				model.addAttribute("getArea", billAddress[1]);
-				model.addAttribute("getLandmark", billAddress[2]);
-				model.addAttribute("getPin", billAddress[3]);
-				}else {
+				if (custId > 0) {
+					map = new LinkedMultiValueMap<>();
+
+					map.add("custId", custId);
+					Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+							Customer.class);
+					model.addAttribute("cust", cust);
+
+					String[] billAddress = cust.getExVar3().split("~");
+					model.addAttribute("getFlat", billAddress[0]);
+					model.addAttribute("getArea", billAddress[1]);
+					model.addAttribute("getLandmark", billAddress[2]);
+					model.addAttribute("getPin", billAddress[3]);
+				} else {
 					System.err.println("Cust Id zero");
 				}
-				//04-01-2021
-				int delAddId=0;
+				// 04-01-2021
+				int delAddId = 0;
 				try {
-					
-					//String delAddIdStr=(String) session.getAttribute("delAddId");
-					delAddId=(int) session.getAttribute("delAddId");//Integer.parseInt(delAddIdStr);
-				}catch (Exception e) {
+
+					// String delAddIdStr=(String) session.getAttribute("delAddId");
+					delAddId = (int) session.getAttribute("delAddId");// Integer.parseInt(delAddIdStr);
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				System.err.println("delAddId " +delAddId);
+				System.err.println("delAddId " + delAddId);
 
 				map = new LinkedMultiValueMap<>();
 				map.add("custId", custId);
@@ -125,28 +124,27 @@ public class CheckoutController {
 				CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
 						.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
 				List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
-				CustomerAddDetail addDetail=new CustomerAddDetail();
-				if(delAddId>0) {
-				if(custAddList.size()>0) {
-					
-					if(custAddList.size()==1) {
-						addDetail=custAddList.get(0);
-					}
-					else {
-						for(int i=0;i<custAddList.size();i++) {
-							if(custAddList.get(i).getCustDetailId()==delAddId) {
-								addDetail=custAddList.get(i);
-								break;
+				CustomerAddDetail addDetail = new CustomerAddDetail();
+				if (delAddId > 0) {
+					if (custAddList.size() > 0) {
+
+						if (custAddList.size() == 1) {
+							addDetail = custAddList.get(0);
+						} else {
+							for (int i = 0; i < custAddList.size(); i++) {
+								if (custAddList.get(i).getCustDetailId() == delAddId) {
+									addDetail = custAddList.get(i);
+									break;
+								}
 							}
 						}
+
+						model.addAttribute("getFlatD", addDetail.getAddress());
+						model.addAttribute("getAreaD", addDetail.getExVar1());
+						// model.addAttribute("getLandmarkD", billAddress[2]);
+						model.addAttribute("getPinD", addDetail.getExVar2());
+						session.setAttribute("delAddId", addDetail.getCustDetailId());
 					}
-					
-					model.addAttribute("getFlatD", addDetail.getAddress());
-					model.addAttribute("getAreaD", addDetail.getExVar1());
-					//model.addAttribute("getLandmarkD", billAddress[2]);
-					model.addAttribute("getPinD", addDetail.getExVar2());
-					session.setAttribute("delAddId", addDetail.getCustDetailId());
-				}
 				}
 
 				// 23-12-2020
@@ -184,6 +182,15 @@ public class CheckoutController {
 				e.printStackTrace();
 			}
 
+			try {
+				DeliverySlots[] delSlotArray = Constants.getRestTemplate()
+						.getForObject(Constants.url + "getAllDeliverySlots", DeliverySlots[].class);
+				List<DeliverySlots> delSlotList = new ArrayList<DeliverySlots>(Arrays.asList(delSlotArray));
+				model.addAttribute("delSlotList", delSlotList);
+
+			} catch (Exception e) {
+				System.err.println("exce in getAllDeliverySlots Checkout controll");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
@@ -239,72 +246,70 @@ public class CheckoutController {
 			try {
 
 				int custId = (int) session.getAttribute("custId");
-				if(custId>0) {
-				map = new LinkedMultiValueMap<>();
-				
-				System.err.println(" custId  place ord" +custId);
-				map.add("custId", custId);
-				Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-						Customer.class);
-				model.addAttribute("cust", cust);
-				try {
-				String[] billAddress = cust.getExVar3().split("~");
-				model.addAttribute("getFlat", billAddress[0]);
-				model.addAttribute("getArea", billAddress[1]);
-				model.addAttribute("getLandmark", billAddress[2]);
-				model.addAttribute("getPin", billAddress[3]);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}
-				}//end of if custId>0
+				if (custId > 0) {
+					map = new LinkedMultiValueMap<>();
+
+					System.err.println(" custId  place ord" + custId);
+					map.add("custId", custId);
+					Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+							Customer.class);
+					model.addAttribute("cust", cust);
+					try {
+						String[] billAddress = cust.getExVar3().split("~");
+						model.addAttribute("getFlat", billAddress[0]);
+						model.addAttribute("getArea", billAddress[1]);
+						model.addAttribute("getLandmark", billAddress[2]);
+						model.addAttribute("getPin", billAddress[3]);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} // end of if custId>0
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
-			//04-01-2021
-			int delAddId=0;
+
+			// 04-01-2021
+			int delAddId = 0;
 			try {
-				
-				//String delAddIdStr= (String) session.getAttribute("delAddId");
-				delAddId=(int) session.getAttribute("delAddId");
-				//delAddId=Integer.parseInt(delAddIdStr);
-				System.err.println("delAddId " +delAddId);
-			}catch (Exception e) {
+
+				// String delAddIdStr= (String) session.getAttribute("delAddId");
+				delAddId = (int) session.getAttribute("delAddId");
+				// delAddId=Integer.parseInt(delAddIdStr);
+				System.err.println("delAddId " + delAddId);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(delAddId>0) {
-			int custId = (int) session.getAttribute("custId");
-			int companyId = (int) session.getAttribute("companyId");
-			map = new LinkedMultiValueMap<>();
-			map.add("custId", custId);
-			map.add("compId", companyId);
-			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
-					.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
-			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
-			CustomerAddDetail addDetail=new CustomerAddDetail();
-			if(custAddList.size()>0) {
-				
-				if(custAddList.size()==1) {
-					addDetail=custAddList.get(0);
-				}
-				else {
-					for(int i=0;i<custAddList.size();i++) {
-						if(custAddList.get(i).getCustDetailId()==delAddId) {
-							addDetail=custAddList.get(i);
-							break;
+			if (delAddId > 0) {
+				int custId = (int) session.getAttribute("custId");
+				int companyId = (int) session.getAttribute("companyId");
+				map = new LinkedMultiValueMap<>();
+				map.add("custId", custId);
+				map.add("compId", companyId);
+				CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
+				List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+				CustomerAddDetail addDetail = new CustomerAddDetail();
+				if (custAddList.size() > 0) {
+
+					if (custAddList.size() == 1) {
+						addDetail = custAddList.get(0);
+					} else {
+						for (int i = 0; i < custAddList.size(); i++) {
+							if (custAddList.get(i).getCustDetailId() == delAddId) {
+								addDetail = custAddList.get(i);
+								break;
+							}
 						}
 					}
+
+					model.addAttribute("getFlatD", addDetail.getAddress());
+					model.addAttribute("getAreaD", addDetail.getExVar1());
+					// model.addAttribute("getLandmarkD", billAddress[2]);
+					model.addAttribute("getPinD", addDetail.getExVar2());
+					session.setAttribute("delAddId", addDetail.getCustDetailId());
 				}
-				
-				model.addAttribute("getFlatD", addDetail.getAddress());
-				model.addAttribute("getAreaD", addDetail.getExVar1());
-				//model.addAttribute("getLandmarkD", billAddress[2]);
-				model.addAttribute("getPinD", addDetail.getExVar2());
-				session.setAttribute("delAddId", addDetail.getCustDetailId());
 			}
-			}
-			
+
 //23-12-2020
 
 			float km = 0;
@@ -337,19 +342,19 @@ public class CheckoutController {
 			}
 
 			try {
-				DeliverySlots[] delSlotArray=Constants.getRestTemplate()
+				DeliverySlots[] delSlotArray = Constants.getRestTemplate()
 						.getForObject(Constants.url + "getAllDeliverySlots", DeliverySlots[].class);
 				List<DeliverySlots> delSlotList = new ArrayList<DeliverySlots>(Arrays.asList(delSlotArray));
 				model.addAttribute("delSlotList", delSlotList);
 
-			}catch (Exception e) {
+			} catch (Exception e) {
 				System.err.println("exce in getAllDeliverySlots Checkout controll");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Exception in checkout : " + e.getMessage());
 		}
-		System.err.println("session.setAttribute(\"mobNo\", mobNo);" +session.getAttribute("mobNo"));
+		System.err.println("session.setAttribute(\"mobNo\", mobNo);" + session.getAttribute("mobNo"));
 		return "viewcart";
 	}
 
@@ -478,45 +483,46 @@ public class CheckoutController {
 				}
 
 			} catch (Exception e) {
-			}  System.err.println("KM - " + km);
+			}
+			System.err.println("KM - " + km);
 
 			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("km", km);
 
 			charges = Constants.getRestTemplate().postForObject(Constants.url + "getDeliveryCharges", map,
 					CkDeliveryCharges.class);
-System.err.println("charges " +charges);
+			System.err.println("charges " + charges);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return charges;
 	}
-	
-	//25-12-2020
-	
+
+	// 25-12-2020
+
 	@RequestMapping(value = "/getFrExCharges", method = RequestMethod.POST)
 	@ResponseBody
 	public FrCharges getFrExCharges(HttpServletRequest request, HttpServletResponse response) {
 
-		FrCharges frExCharges =new FrCharges();
-		
+		FrCharges frExCharges = new FrCharges();
+
 		try {
-			
+
 			LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-			
+
 			map.add("frId", request.getSession().getAttribute("frId"));
-			
+
 			frExCharges = Constants.getRestTemplate().postForObject(Constants.url + "getFrExCharges", map,
-					FrCharges.class); 
-			
-			System.err.println("frExCharges " +frExCharges);
-			
+					FrCharges.class);
+
+			System.err.println("frExCharges " + frExCharges);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return frExCharges;
-		
+
 	}
 
 	@RequestMapping(value = "/placeOrder", method = RequestMethod.POST)
@@ -531,19 +537,21 @@ System.err.println("charges " +charges);
 			SimpleDateFormat dttime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 			int frId = (int) session.getAttribute("frId");
-			//int userId = (int) session.getAttribute("userId");
-			int custId=0;
-			try { custId = (int) session.getAttribute("custId");}catch (Exception e) {
-				custId=0;
+			// int userId = (int) session.getAttribute("userId");
+			int custId = 0;
+			try {
+				custId = (int) session.getAttribute("custId");
+			} catch (Exception e) {
+				custId = 0;
 			}
 			int compId = (int) session.getAttribute("companyId");
 
 			String promoCode = request.getParameter("promoCode");
-			int offerId=0;
+			int offerId = 0;
 			try {
-				offerId=Integer.parseInt(request.getParameter("offerId"));
-			}catch (Exception e) {
-				offerId=0;
+				offerId = Integer.parseInt(request.getParameter("offerId"));
+			} catch (Exception e) {
+				offerId = 0;
 			}
 			int paymentMethod = 0;
 			try {
@@ -555,7 +563,7 @@ System.err.println("charges " +charges);
 			String delvrInst = request.getParameter("delvrInst");
 			String delvrDateTime = request.getParameter("delvrDateTime");
 			String[] deliveryDateTime = delvrDateTime.split(" ");
-			
+
 			String delTimeSlot = request.getParameter("del_time_slot");
 			String deliveryDate = deliveryDateTime[0].replace("/", "-");
 
@@ -579,7 +587,7 @@ System.err.println("charges " +charges);
 			String txtDelvArea = request.getParameter("txtDelvArea");
 			String txtDelvLandmark = request.getParameter("txtDelvLandmark");
 			String txtDelvPincode = request.getParameter("txtDelvPincode");
-			
+
 //			Billing Address
 			String txtBillingFlat = request.getParameter("txtBillingFlat");
 			String txtBillingArea = request.getParameter("txtBillingArea");
@@ -592,9 +600,9 @@ System.err.println("charges " +charges);
 			float deliveryCharges = 0;
 			float discAmt = 0;
 			float applyWalletAmt = 0;
-			//String strFrKm = (String) request.getSession().getAttribute("frKm");
-			
-			float km =(float) request.getSession().getAttribute("frKm");// Float.parseFloat(strFrKm);
+			// String strFrKm = (String) request.getSession().getAttribute("frKm");
+
+			float km = (float) request.getSession().getAttribute("frKm");// Float.parseFloat(strFrKm);
 			Customer cust = new Customer();
 
 			int defaultCustAddrs = 0;
@@ -621,77 +629,77 @@ System.err.println("charges " +charges);
 			cust.setExInt3(0);
 			cust.setExVar1("NA");
 			cust.setExVar2(txtGst);
-			cust.setExVar3(txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode
-);				
+			cust.setExVar3(
+					txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);
 			cust.setUpdtDttime(dttime.format(ct));
 			cust.setInsertDttime(dttime.format(ct));
 			cust.setAgeRange(2);
 			cust.setMakerUserId(0);
 			cust.setLanguageId(1);
 
-			//System.err.println(cust.toString());
-			
+			// System.err.println(cust.toString());
+
 			Customer res = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomer", cust,
 					Customer.class);
-			//04-01-2021
-			int delAddId=0;
+			// 04-01-2021
+			int delAddId = 0;
 			try {
-				//String delAddIdStr=(String) session.getAttribute("delAddId");
-				delAddId=(int) session.getAttribute("delAddId");//Integer.parseInt(delAddIdStr);
-			}catch (Exception e) {
+				// String delAddIdStr=(String) session.getAttribute("delAddId");
+				delAddId = (int) session.getAttribute("delAddId");// Integer.parseInt(delAddIdStr);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			System.err.println("delAddId " +delAddId);
-			if(delAddId<1) {
-			
+			System.err.println("delAddId " + delAddId);
+			if (delAddId < 1) {
+
 				CustomerAddDetail custDet = new CustomerAddDetail();
 
-			custDet.setAddress(txtBillingFlat);
-			custDet.setAreaId(0);
-			custDet.setCaption("NA");
-			custDet.setCityId(0);
-			custDet.setCustDetailId(0);
-			custDet.setCustId(res.getCustId());
-			custDet.setLandmark(txtDelvLandmark);
-			custDet.setLatitude("NA");
-			custDet.setLongitude("NA");
-			custDet.setIsActive(1);
-			custDet.setDelStatus(1);
-			custDet.setExInt1(0);
-			custDet.setExInt2(0);
-			custDet.setExInt3(frId);//Used to store frId
-			custDet.setExVar1(txtBillingArea);
-			custDet.setExVar2(txtBillingPincode);
-			custDet.setExVar3(""+km);//No of KM from Franchise
-			custDet.setMakerUserId(res.getCustId());
-			custDet.setInsertDttime(dttime.format(ct));
-			custDet.setUpdtDttime(dttime.format(ct));
-			
-				CustomerAddDetail saveCustAdd = Constants.getRestTemplate().postForObject(Constants.url + "saveCustomerDet",
-					custDet, CustomerAddDetail.class);
+				custDet.setAddress(txtBillingFlat);
+				custDet.setAreaId(0);
+				custDet.setCaption("NA");
+				custDet.setCityId(0);
+				custDet.setCustDetailId(0);
+				custDet.setCustId(res.getCustId());
+				custDet.setLandmark(txtDelvLandmark);
+				custDet.setLatitude("NA");
+				custDet.setLongitude("NA");
+				custDet.setIsActive(1);
+				custDet.setDelStatus(1);
+				custDet.setExInt1(0);
+				custDet.setExInt2(0);
+				custDet.setExInt3(frId);// Used to store frId
+				custDet.setExVar1(txtBillingArea);
+				custDet.setExVar2(txtBillingPincode);
+				custDet.setExVar3("" + km);// No of KM from Franchise
+				custDet.setMakerUserId(res.getCustId());
+				custDet.setInsertDttime(dttime.format(ct));
+				custDet.setUpdtDttime(dttime.format(ct));
+
+				CustomerAddDetail saveCustAdd = Constants.getRestTemplate()
+						.postForObject(Constants.url + "saveCustomerDet", custDet, CustomerAddDetail.class);
 				session.setAttribute("delAddId", saveCustAdd.getCustDetailId());
-				
-				Cookie delAddIdCookie = new Cookie("delAddIdCookie", EncodeDecode.Encrypt("" + saveCustAdd.getCustDetailId()));
+
+				Cookie delAddIdCookie = new Cookie("delAddIdCookie",
+						EncodeDecode.Encrypt("" + saveCustAdd.getCustDetailId()));
 				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(delAddIdCookie);
-				
+
 			}
-			//04-01-2021 end
+			// 04-01-2021 end
 			if (res.getCustId() > 0) {
 				session.setAttribute("successMsg", "New customer added successfully");
-				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt(""+res.getCustId())); 
-				custIdCookie.setMaxAge(60 *  60 * 24 * 15); 
+				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt("" + res.getCustId()));
+				custIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(custIdCookie);
-				
-				
+
 				session.setAttribute("custId", res.getCustId());
 				session.setAttribute("userName", cust.getCustName());
 				session.setAttribute("userMobile", cust.getCustMobileNo());
 				session.setAttribute("userEmail", cust.getEmailId());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
-				
+
 			}
-			custId=res.getCustId();
+			custId = res.getCustId();
 			ObjectMapper objectMapper = new ObjectMapper();
 
 			// convert json string to object
@@ -703,8 +711,8 @@ System.err.println("charges " +charges);
 			float finalCgstAmt = 0;
 			float finalSgstAmt = 0;
 			float finalIgstAmt = 0;
-			float finalDiscAmt=0;
-			float finalAddCharges=0;
+			float finalDiscAmt = 0;
+			float finalAddCharges = 0;
 
 			String uuid = UUID.randomUUID().toString();
 
@@ -727,12 +735,12 @@ System.err.println("charges " +charges);
 			order.setCityId(txtCity);
 			order.setAreaId(0);
 			order.setAddressId(1);
-			order.setAddress(txtDelvFlat+", "+ txtDelvArea +", "+txtDelvLandmark +", "+txtDelvPincode);
+			order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
-			order.setLandmark("-"+session.getAttribute("landMark"));
+			order.setLandmark("-" + session.getAttribute("landMark"));
 			order.setDeliveryDate(DateConvertor.convertToDMY(deliveryDate));
-			//order.setDeliveryTime(deliveryDateTime[1]);
-			System.err.println("delvrDateTime " +delvrDateTime);
+			// order.setDeliveryTime(deliveryDateTime[1]);
+			System.err.println("delvrDateTime " + delvrDateTime);
 			order.setDeliveryTime(DateConvertor.convertToYMD(delvrDateTime));
 			order.setProductionDate(sf.format(ct));
 			order.setProductionTime("00:00");
@@ -740,20 +748,20 @@ System.err.println("charges " +charges);
 			order.setInsertUserId(custId);
 			order.setOrderPlatform(1);
 			order.setBillingName(txtBillName);
-			order.setBillingAddress(txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode
-);
+			order.setBillingAddress(
+					txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
 			order.setDeliveryInstText(delvrInst);
 			order.setDelStatus(1);
 			order.setUuidNo(uuid);
-			
+
 			order.setExInt1(compId);
 			order.setExVar1(txtGst);
-			order.setExVar2(promoCode);//ie offercode
+			order.setExVar2(promoCode);// ie offercode
 			order.setOfferId(offerId);
 			order.setDeliveryKm(km);
-			order.setExVar3(delTimeSlot);//09-1-2021
+			order.setExVar3(delTimeSlot);// 09-1-2021
 			if (addCustAgent > 0) {
 				order.setIsAgent(1);
 				order.setOrderDeliveredBy(deliveryBoy);
@@ -764,19 +772,18 @@ System.err.println("charges " +charges);
 
 			List<OrderDetail> orderDetailList = new ArrayList<>();
 
-			
-
 			String imgData = request.getParameter("imageData");
-			//TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData, TempImageHolder[].class);
-			
-			float grandItemTotal=Float.parseFloat(request.getParameter("itemTotal"));
-			float grandDiscAmt=Float.parseFloat(request.getParameter("discAmt"));
-			float grandAddCharge=Float.parseFloat(request.getParameter("addCharge"));
-			
-				System.err.println("grandItemTotal" +grandItemTotal +"grandDiscAmt " +grandDiscAmt + " grandAddCharge " + grandAddCharge);
-			
-			
-				order.setExFloat1(roundHalfUp(grandItemTotal,2));//Item total Amt excluding disc and addCharges
+			// TempImageHolder[] imageJsonArray = objectMapper.readValue(imgData,
+			// TempImageHolder[].class);
+
+			float grandItemTotal = Float.parseFloat(request.getParameter("itemTotal"));
+			float grandDiscAmt = Float.parseFloat(request.getParameter("discAmt"));
+			float grandAddCharge = Float.parseFloat(request.getParameter("addCharge"));
+
+			System.err.println("grandItemTotal" + grandItemTotal + "grandDiscAmt " + grandDiscAmt + " grandAddCharge "
+					+ grandAddCharge);
+
+			order.setExFloat1(roundHalfUp(grandItemTotal, 2));// Item total Amt excluding disc and addCharges
 			for (int i = 0; i < itemJsonImportData.length; i++) {
 				OrderDetail orderDetail = new OrderDetail();
 				/*
@@ -789,73 +796,78 @@ System.err.println("charges " +charges);
 				 * 
 				 * break; } } } catch (Exception e) { // TODO: handle exception }
 				 */
-				
-				float divFact=0;
-				float taxableAmt=0;
-				float itemDisc=0;
-				float itemAddCharge=0;
-				
-				float sgstAmt=0;
-				float cgstAmt=0;
-				float igstAmt=0;
+
+				float divFact = 0;
+				float taxableAmt = 0;
+				float itemDisc = 0;
+				float itemAddCharge = 0;
+
+				float sgstAmt = 0;
+				float cgstAmt = 0;
+				float igstAmt = 0;
 				decodeToImageAndUpload(itemJsonImportData[i].getImgFile(), itemJsonImportData[i].getImgName());
 				orderDetail.setExVar4(itemJsonImportData[i].getImgName());
-				
+
 				try {
-					if(grandItemTotal>0)
-						//System.err.println("qty " +itemJsonImportData[i].getQty() + "rate " + itemJsonImportData[i].getRate()) ;
-						divFact=(itemJsonImportData[i].getQty()*itemJsonImportData[i].getRate()*100)/(grandItemTotal);
-					
-					System.err.println("Div factor " +divFact);
-					
-					itemDisc=(divFact*grandDiscAmt)/100;
-					finalDiscAmt=finalDiscAmt+itemDisc;
-					
-					itemAddCharge=(divFact*grandAddCharge)/100;
-					finalAddCharges=finalAddCharges+itemAddCharge;
-					
-					taxableAmt=((itemJsonImportData[i].getQty()*itemJsonImportData[i].getRate())-itemDisc+itemAddCharge)*100/(100+itemJsonImportData[i].getCgstPer()+itemJsonImportData[i].getSgstPer());
-					finalTaxableAmt=finalTaxableAmt+taxableAmt;
-					
-					System.err.println("Taxable Amt "+taxableAmt +"itemDisc " +itemDisc + " itemAddCharge" +itemAddCharge);
-					sgstAmt=(taxableAmt*itemJsonImportData[i].getSgstPer())/100;
-					finalSgstAmt=finalSgstAmt+sgstAmt;
-					cgstAmt=(taxableAmt*itemJsonImportData[i].getCgstPer())/100;
-					finalCgstAmt=finalCgstAmt+cgstAmt;
-					
-					System.err.println("sgstAmt "+sgstAmt +" cgstAmt " +cgstAmt);
-					
-					igstAmt=(taxableAmt*itemJsonImportData[i].getIgstPer())/100;
-					igstAmt=0;
-					finalIgstAmt=finalIgstAmt+igstAmt;
-					
-					float totAmt=taxableAmt+(sgstAmt+cgstAmt);
-					System.err.println("item totAmt" +totAmt);
-					
+					if (grandItemTotal > 0)
+						// System.err.println("qty " +itemJsonImportData[i].getQty() + "rate " +
+						// itemJsonImportData[i].getRate()) ;
+						divFact = (itemJsonImportData[i].getQty() * itemJsonImportData[i].getRate() * 100)
+								/ (grandItemTotal);
+
+					System.err.println("Div factor " + divFact);
+
+					itemDisc = (divFact * grandDiscAmt) / 100;
+					finalDiscAmt = finalDiscAmt + itemDisc;
+
+					itemAddCharge = (divFact * grandAddCharge) / 100;
+					finalAddCharges = finalAddCharges + itemAddCharge;
+
+					taxableAmt = ((itemJsonImportData[i].getQty() * itemJsonImportData[i].getRate()) - itemDisc
+							+ itemAddCharge) * 100
+							/ (100 + itemJsonImportData[i].getCgstPer() + itemJsonImportData[i].getSgstPer());
+					finalTaxableAmt = finalTaxableAmt + taxableAmt;
+
+					System.err.println(
+							"Taxable Amt " + taxableAmt + "itemDisc " + itemDisc + " itemAddCharge" + itemAddCharge);
+					sgstAmt = (taxableAmt * itemJsonImportData[i].getSgstPer()) / 100;
+					finalSgstAmt = finalSgstAmt + sgstAmt;
+					cgstAmt = (taxableAmt * itemJsonImportData[i].getCgstPer()) / 100;
+					finalCgstAmt = finalCgstAmt + cgstAmt;
+
+					System.err.println("sgstAmt " + sgstAmt + " cgstAmt " + cgstAmt);
+
+					igstAmt = (taxableAmt * itemJsonImportData[i].getIgstPer()) / 100;
+					igstAmt = 0;
+					finalIgstAmt = finalIgstAmt + igstAmt;
+
+					float totAmt = taxableAmt + (sgstAmt + cgstAmt);
+					System.err.println("item totAmt" + totAmt);
+
 					orderDetail.setRate(itemJsonImportData[i].getRate());
 					orderDetail.setExFloat3(Float.parseFloat(itemJsonImportData[i].getWeight()));
 					orderDetail.setExInt1(itemJsonImportData[i].getRateSettingType());
-					
-					orderDetail.setTaxAmt(roundHalfUp((sgstAmt+cgstAmt), 2));
-					
-					finalTaxAmt=finalTaxAmt+(sgstAmt+cgstAmt);
-					//finalTaxAmt=finalTaxAmt+(igstAmt);
-					
+
+					orderDetail.setTaxAmt(roundHalfUp((sgstAmt + cgstAmt), 2));
+
+					finalTaxAmt = finalTaxAmt + (sgstAmt + cgstAmt);
+					// finalTaxAmt=finalTaxAmt+(igstAmt);
+
 					orderDetail.setTaxableAmt(roundHalfUp(taxableAmt, 2));
 					orderDetail.setTotalAmt(roundHalfUp(totAmt, 2));
-					finalTotalAmt=finalTotalAmt+totAmt;
-					
-					orderDetail.setCgstAmt(roundHalfUp(cgstAmt,2));
-					orderDetail.setSgstAmt(roundHalfUp(sgstAmt,2));
-					orderDetail.setIgstAmt(roundHalfUp(igstAmt,2));
+					finalTotalAmt = finalTotalAmt + totAmt;
 
-					orderDetail.setDiscAmt(roundHalfUp(itemDisc,2));
-					orderDetail.setExFloat1(roundHalfUp(itemAddCharge,2));
-					
-				}catch (Exception e) {
+					orderDetail.setCgstAmt(roundHalfUp(cgstAmt, 2));
+					orderDetail.setSgstAmt(roundHalfUp(sgstAmt, 2));
+					orderDetail.setIgstAmt(roundHalfUp(igstAmt, 2));
+
+					orderDetail.setDiscAmt(roundHalfUp(itemDisc, 2));
+					orderDetail.setExFloat1(roundHalfUp(itemAddCharge, 2));
+
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				orderDetail.setItemId(itemJsonImportData[i].getItemId());
 				orderDetail.setQty(itemJsonImportData[i].getQty());
 				orderDetail.setRate(itemJsonImportData[i].getRate());
@@ -864,35 +876,34 @@ System.err.println("charges " +charges);
 				orderDetail.setIgstPer(itemJsonImportData[i].getIgstPer());
 				orderDetail.setSgstPer(itemJsonImportData[i].getSgstPer());
 				try {
-				orderDetail.setRemark(itemJsonImportData[i].getSpInst().trim());
-				}catch (Exception e) {
+					orderDetail.setRemark(itemJsonImportData[i].getSpInst().trim());
+				} catch (Exception e) {
 					// TODO: handle exception
 				}
 				try {
-				orderDetail.setExVar2(itemJsonImportData[i].getMsgonCake().trim());
-				}catch (Exception e) {
+					orderDetail.setExVar2(itemJsonImportData[i].getMsgonCake().trim());
+				} catch (Exception e) {
 					// TODO: handle exception
 				}
 				orderDetail.setDelStatus(1);
-				orderDetail.setExInt2(itemJsonImportData[i].getExInt1());//ie config detail Id
-				System.err.println("orderDetail " +orderDetail.toString());
+				orderDetail.setExInt2(itemJsonImportData[i].getExInt1());// ie config detail Id
+				System.err.println("orderDetail " + orderDetail.toString());
 				orderDetailList.add(orderDetail);
-				
-			}// End of loop itemJsonImportData
 
+			} // End of loop itemJsonImportData
 
-			order.setDiscAmt(roundHalfUp(finalDiscAmt,2));
-			order.setDeliveryCharges(roundHalfUp(finalAddCharges,2));// Delivery and additional charges
+			order.setDiscAmt(roundHalfUp(finalDiscAmt, 2));
+			order.setDeliveryCharges(roundHalfUp(finalAddCharges, 2));// Delivery and additional charges
 
-			order.setTaxableAmt(roundHalfUp(finalTaxableAmt,2));
-			order.setTaxAmt(roundHalfUp(finalTaxAmt,2));
-			order.setTotalAmt(roundHalfUp(finalTotalAmt,2));
-			order.setSgstAmt(roundHalfUp(finalSgstAmt,2));
-			order.setCgstAmt(roundHalfUp(finalCgstAmt,2));
-			order.setIgstAmt(roundHalfUp(finalIgstAmt,2));
-			
+			order.setTaxableAmt(roundHalfUp(finalTaxableAmt, 2));
+			order.setTaxAmt(roundHalfUp(finalTaxAmt, 2));
+			order.setTotalAmt(roundHalfUp(finalTotalAmt, 2));
+			order.setSgstAmt(roundHalfUp(finalSgstAmt, 2));
+			order.setCgstAmt(roundHalfUp(finalCgstAmt, 2));
+			order.setIgstAmt(roundHalfUp(finalIgstAmt, 2));
+
 			order.setRemark("");
-			System.err.println("order " +order.toString());
+			System.err.println("order " + order.toString());
 			OrderTrail orderTrail = new OrderTrail();
 			orderTrail.setActionByUserId(custId);
 			orderTrail.setActionDateTime(dttime.format(ct));
@@ -907,7 +918,7 @@ System.err.println("charges " +charges);
 			orderSaveData.setOrderTrail(orderTrail);
 
 			session.setAttribute("orderSaveData", orderSaveData);
-			 //System.err.println("Order Save Method is commented will not be saved in Db");
+			// System.err.println("Order Save Method is commented will not be saved in Db");
 
 			info = Constants.getRestTemplate().postForObject(Constants.url + "saveCloudOrder", orderSaveData,
 					Info.class);
@@ -916,7 +927,7 @@ System.err.println("charges " +charges);
 				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
 				if (orderSaveData.getOrderHeader().getPaymentMethod() == 2) {
 					// ie paid by elecronic way
-					
+
 					info.setMsg("epay");
 					info.setResponseObject1("");
 
@@ -942,19 +953,20 @@ System.err.println("charges " +charges);
 			imageByte = decoder.decode(imageString);
 			bis = new ByteArrayInputStream(imageByte);
 			image = ImageIO.read(bis);
-			int height=0,width=0;
-			//System.err.println("original width" + image.getWidth() + "height " + image.getHeight());
-			try {	
-			 height = (int) ((image.getHeight()) - (image.getHeight() * 0.25));
-			}catch (Exception e) {
+			int height = 0, width = 0;
+			// System.err.println("original width" + image.getWidth() + "height " +
+			// image.getHeight());
+			try {
+				height = (int) ((image.getHeight()) - (image.getHeight() * 0.25));
+			} catch (Exception e) {
 				// TODO: handle exception
 			}
 			try {
-			 width = (int) ((image.getWidth()) - (image.getWidth() * 0.25));
-			}catch (Exception e) {
+				width = (int) ((image.getWidth()) - (image.getWidth() * 0.25));
+			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			//System.err.println("width" + width + "height " + height);
+			// System.err.println("width" + width + "height " + height);
 			ImageUploadController.saveImgWithByteArray(imageByte, imgName, width, height);
 			bis.close();
 		} catch (Exception e) {
@@ -969,6 +981,7 @@ System.err.println("charges " +charges);
 		return image;
 
 	}
+
 	public static float roundHalfUp(float d, int scale) {
 		// return BigDecimal.valueOf(d).setScale(2,
 		// BigDecimal.ROUND_HALF_UP).floatValue();
@@ -979,7 +992,7 @@ System.err.println("charges " +charges);
 	 * showCategoryList
 	 * 
 	 * 
-	 * showAddSubCat showEditSubCat 
+	 * showAddSubCat showEditSubCat
 	 * 
 	 * configFranchise
 	 */

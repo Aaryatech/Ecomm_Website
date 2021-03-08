@@ -149,7 +149,7 @@
 	-moz-osx-font-smoothing: grayscale
 }
 .slick-prev {
-	left: -10px;
+	left: 5px /* -10px */;
 	width: 41px;
 	height: 41px;
 	background: url(../images/left-arow.png) no-repeat; z-index: 5 /*10*/;
@@ -166,7 +166,7 @@
 	content: ''
 }
 .slick-next {
-	right: -10px;
+	right: 5px /* -10px */;
 	width: 41px;
 	height: 41px;
 	background: url(../images/right-arow.png) no-repeat
@@ -262,3 +262,9 @@
 }
 
 .regular-filter .slick-list{height: 270px;}
+
+
+@media screen and (max-width:480px){
+	.regular-filter .slick-list{height: auto;}
+	
+}
