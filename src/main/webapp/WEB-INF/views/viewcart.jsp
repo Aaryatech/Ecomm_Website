@@ -253,26 +253,31 @@
 							<!--cart-right-->
 							<div class="total_row_r">
 								<div class="total_one">
-									Items subtotal <span>Rs. <label id="lbl_ItemTotal">0.00</label></span>
+									Items Subtotal <span style="text-align: right;"><label
+										id="lbl_ItemTotal">0.00</label></span>
 								</div>
 								<div class="total_one pink">
-									Delivery & Additional Rs <span id="del_adc_rs"></span>&nbsp; <a
-										href="#new_pop" class="initialism new_pop_open"><i
-										class="fa fa-info" aria-hidden="true"></i></a>
+									Delivery & Additional Rs <span id="del_adc_rs"
+										style="text-align: right;"></span>&nbsp; <a href="#new_pop"
+										class="initialism new_pop_open"><i class="fa fa-info"
+										aria-hidden="true"></i></a>
 								</div>
 
 								<!-- <div class="total_one">
 									Tip <span>Rs. <label id="lbl_Tip">0.00</label></span>
 								</div> -->
 								<div class="total_one">
-									Total <span>Rs. <label id="lbl_Total">0.00</label></span>
+									Total <span style="text-align: right;"><label
+										id="lbl_Total">0.00</label></span>
 								</div>
 								<div class="total_one">
-									Offer Discount <span>Rs. <label id="discAmt">0.00</label></span>
+									Offer Discount <span style="text-align: right;"> <label
+										id="discAmt">0.00</label></span>
 								</div>
 
 								<div class="total_row_btm">
-									Total <span><label id="lbl_FinalTotal">0.00</label></span>
+									Total <span style="text-align: right;"><label
+										id="lbl_FinalTotal">0.00</label></span>
 								</div>
 
 							</div>
@@ -766,12 +771,11 @@
 												parseFloat(discAmt).toFixed(2));
 										$("#lbl_Total")
 												.html(
-														parseFloat(finaltotal)
-																+ parseFloat(deliveryCharges));
-										$("#lbl_FinalTotal")
-												.html(
-														parseFloat(billTotal
-																.toFixed(2)));
+														(parseFloat(finaltotal) + parseFloat(deliveryCharges))
+																.toFixed(2));
+										$("#lbl_FinalTotal").html(
+												parseFloat(billTotal)
+														.toFixed(2));
 										$("#del_adc_rs").html(
 												parseFloat(deliveryCharges)
 														.toFixed(2));
@@ -1429,10 +1433,14 @@
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
 						}
 
-						var msgName = "NA";
-						if (table[i].msgonCake != ""
-								&& table[i].msgonCake != null) {
-							msgName = table[i].msgonCake;
+						var msgName = '<p  class="del_inst">message on cake : NA</p>';
+						if (table[i].msgonCake == "") {
+							msgName = '<p  class="del_inst">message on cake : NA</p>';
+						} else if (table[i].msgonCake == null) {
+							msgName = '';
+						} else {
+							msgName = '<p  class="del_inst">message on cake : '
+									+ table[i].msgonCake + '</p>';
 						}
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
@@ -1463,15 +1471,12 @@
 								+ allItemArr[j].flavorNames
 								+ ' </div>'
 								+ '</div>'
-								+ '</div><p  class="del_inst">message on cake : '
+								+ '</div>'
 								+ msgName
-								+ '</p>  '
 								+ '<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span class="msg_on_cake">'
 								+ '</span>'
 								+ ' </td>'
-								+
-
-								'<td>'
+								+ '<td>'
 								+ '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
 								+ table[i].uniqueId
 								+ '"  name="btnMin'
