@@ -1142,6 +1142,47 @@
 						<!-- ------------------------ -->
 						<div class="place_row">
 							<div class="place_row_l">
+								<div class="gender_l">Select Order</div>
+								<div class="gender_r full">
+									<div class="radio_1 gender">
+										<ul>
+											<li><input type="radio" id="ownOrder" name="orderType"
+												value="1" checked onclick="openGiftDiv(1)"> <label
+												for="ownOrder">Own Order</label>
+												<div class="check"></div></li>
+											<li><input type="radio" id="giftOrder" name="orderType"
+												value="2" onclick="openGiftDiv(2)"> <label
+												for="giftOrder">Gift Order</label>
+												<div class="check">
+													<div class="inside"></div>
+												</div></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="place_row_r"></div>
+							<div class="clr"></div>
+						</div>
+						<div class="place_row" id="giftOrderDiv" style="display: none;">
+							<div class="place_row_l">
+								<span class="pop_lab_fld">Person Name</span> <input type="text"
+									class="input_place" id="persnName" name="persnName"
+									placeholder="Person Name" autocomplete="off" /> <label
+									class="form-label-hint-error" id="errorPersnName"
+									style="display: none;">Please Person name</label>
+							</div>
+							<div class="place_row_r">
+								<span class="pop_lab_fld">Person Number</span> <input
+									type="text" class="input_place" id="personMobile"
+									maxlength="10" name="personMobile"
+									placeholder="Person Mobile Number" autocomplete="off" /> <label
+									class="form-label-hint-error" id="errorPersonMobile"
+									style="display: none;">Please enter mobile number</label>
+							</div>
+							<div class="clr"></div>
+						</div>
+						<div class="place_row">
+							<div class="place_row_l">
 								<h3 class="payment_title">Delivery Address</h3>
 							</div>
 							<div class="place_row_r"></div>
@@ -2438,6 +2479,15 @@
 
 		function closeNav1() {
 			document.getElementById("myNav").style.height = "0%";
+		}
+		function openGiftDiv(value) {
+
+			if (value == 1) {
+				$("#giftOrderDiv").hide();
+			} else {
+				$("#giftOrderDiv").show();
+			}
+
 		}
 	</script>
 
