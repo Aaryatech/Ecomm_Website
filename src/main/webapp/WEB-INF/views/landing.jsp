@@ -353,7 +353,7 @@
                                     <li id="female">Gandhi Nagar</li>
                                 </ul>
                               </div> -->
-						<div>
+						<div id="showCityDiv">
 							<select id="citySel" name="citySel" class="citysel"
 								onchange="getCityName(this.value)">
 								<option value="0" id="city0" data-cityname="">Select
@@ -413,7 +413,7 @@
                                 </ul>
                               </div>
                         </div> -->
-					<div class="search_one">
+					<div class="search_one" style="display: none;" id="showShopDiv">
 						<div style="width: 100%;">
 							<select onchange="getKM(this)" required id="selectShop"
 								name="selectShop" class="citysel">
@@ -473,6 +473,10 @@
 						<input name="" id="submtbtn" type="button"
 							value="Proceed New User" class="landingpop-mobno_open proceed" />
 
+						<span id="resetBtnDiv" style="display: none;"> <input
+							name="" id="resetbtn" type="button" value="RESET"
+							class="landingpop-mobno_open proceed" onclick="resetPage()" />
+						</span>
 
 
 					</div>
@@ -932,7 +936,12 @@
 			var lat = sessionStorage.getItem("selLat");
 			var lng = sessionStorage.getItem("selLng");
 			var addr = sessionStorage.getItem("selAddr");
-			if (addr != null || addr != "") {
+			if (addr != null && addr != "") {
+
+				$("#showCityDiv").hide();
+				$("#resetBtnDiv").show();
+				document.getElementById("txtPlaces").readOnly = true;
+
 				//document.getElementById("txtPlaces").setAttribute("readonly", true);
 				//$('#citySel').prop('disabled', true);
 			}
@@ -955,6 +964,10 @@
 			var form = document.getElementById("validation-form");
 			form.action = "home";
 			form.submit();
+		}
+		function resetPage() {
+
+			window.open('${pageContext.request.contextPath}/', '_self');
 		}
 	</script>
 
@@ -1176,6 +1189,11 @@
 								if (status !== 'OK') {
 									//alert('Error was: ' + status);
 								} else {
+
+									if (longitude != 0 && latitude != 0) {
+										$('#showShopDiv').show();
+									}
+
 									$('#selectShop').html('');
 									var html = '<option value="0" selected>Select Shop</option>';
 
