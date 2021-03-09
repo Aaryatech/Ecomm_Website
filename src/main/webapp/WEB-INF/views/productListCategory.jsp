@@ -10,8 +10,8 @@
 
 <style>
 html {
-	scroll-behavior: smooth;
-}
+	scroll-behavior: smooth;}
+	.per_kg{font-size:15px; display: inline-block; margin: 0px; padding: 0px;}
 </style>
 
 <c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
@@ -196,10 +196,15 @@ html {
 												</div>
 
 												<div class="cake_prc">
-													<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
-													<span class="off_prc"><i class="fa fa-inr"
-														aria-hidden="true"></i>${product.defaultPrice}</span> <span
-														class="prc_off"></span>
+													<i class="fa fa-inr" aria-hidden="true"></i>
+													<fmt:formatNumber type="number" groupingUsed="false"
+														value="${product.defaultPrice}" maxFractionDigits="0"
+														minFractionDigits="0" />
+													/- <p class="per_kg">per ${product.uomShowName}</p> <span class="off_prc"><i
+														class="fa fa-inr" aria-hidden="true"></i> <fmt:formatNumber
+															type="number" groupingUsed="false"
+															value="${product.defaultPrice}" maxFractionDigits="0"
+															minFractionDigits="0" /></span> <span class="prc_off"></span>
 												</div>
 												<!-- </a> -->
 											</div>

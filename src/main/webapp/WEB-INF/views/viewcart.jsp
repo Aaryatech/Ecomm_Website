@@ -2012,6 +2012,46 @@
 				$("#personMobile").val($("#txtMobile").val());
 			}
 
+			var selectedDt = $("#delvrDateTime").val();
+			var dtsplit = selectedDt.split("-");
+
+			var dt = new Date();
+			dt.setFullYear(dtsplit[2]);
+			dt.setMonth(parseInt(dtsplit[1]) - 1);
+			dt.setDate(dtsplit[0]);
+
+			var validDate = new Date();
+			validDate.setHours(21);
+			validDate.setMinutes(00);
+			validDate.setSeconds(00);
+
+			var currntDate = new Date();
+
+			//alert(validDate + " " + currntDate)
+
+			if (validDate.getTime() >= currntDate.getTime()) {
+
+				//alert("in if")
+				if (currntDate.getTime() > dt.getTime()) {
+					isError = false;
+					alert("Your cannot order on selected date")
+				}
+				//alert("cant order")
+				//isError = false;
+			} else {
+				//alert("in else")
+				currntDate.setTime(currntDate.getTime()
+						+ ((24 * 60 * 60 * 1000)));
+
+				//alert(dt + " " + currntDate)
+				if (dt.getTime() <= currntDate.getTime()) {
+					isError = false;
+					alert("Time up !! Now you cannot order on selected date. select next day.")
+				}
+
+				//isError = false;
+			}
+
 			return isError;
 
 		}
@@ -2066,13 +2106,32 @@
 			formatDate : 'Y-m-d',
 			defaultDate : d,
 		});
+		jQuery(document).ready(function() {
 
-		$('#delvrDateTime').datetimepicker({
-			minDate : 0,//cant select previous date
-			lang : 'en',
-			timepicker : false,
-			format : 'd-m-Y',
-			formatDate : 'Y-m-d',
+			var dt = new Date();
+			var x = 1;
+			var mydate = new Date();
+			mydate.setFullYear(dt.getFullYear());
+			mydate.setMonth(dt.getMonth());
+			mydate.setDate(dt.getDate());
+			mydate.setHours(21);
+			mydate.setMinutes(00);
+			mydate.setSeconds(00);
+			//	alert(dt.getTime() + " " + mydate.getTime());
+
+			if (dt.getTime() > mydate.getTime()) {
+				x = 2;
+			}
+
+			dt.setTime(dt.getTime() + ((24 * 60 * 60 * 1000) * x));
+
+			$('#delvrDateTime').datetimepicker({
+				minDate : dt,
+				lang : 'en',
+				timepicker : false,
+				format : 'd-m-Y',
+				formatDate : 'Y-m-d',
+			});
 		});
 	</script>
 
