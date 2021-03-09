@@ -595,6 +595,12 @@ public class CheckoutController {
 			String txtBillingPincode = request.getParameter("txtBillingPincode");
 			String itemData = request.getParameter("itemData");
 
+			String persnName = request.getParameter("persnName");
+			String personMobile = request.getParameter("personMobile");
+
+			System.out.println("persnName" + persnName);
+			System.out.println("personMobile" + personMobile);
+
 			int addCustAgent = 0;
 			int deliveryBoy = 0;
 			float deliveryCharges = 0;
@@ -627,7 +633,7 @@ public class CheckoutController {
 			cust.setExInt1(defaultCustAddrs);
 			cust.setExInt2(0);
 			cust.setExInt3(0);
-			cust.setExVar1("NA");
+			cust.setExVar1(persnName + " - " + personMobile);
 			cust.setExVar2(txtGst);
 			cust.setExVar3(
 					txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);

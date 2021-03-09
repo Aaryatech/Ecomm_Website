@@ -1994,6 +1994,24 @@
 				isError = false;
 			}
 
+			$("#errorPersnName").hide();
+			$("#errorPersonMobile").hide();
+			if (document.getElementById("giftOrder").checked == true) {
+
+				if (!$("#persnName").val()) {
+					$("#errorPersnName").show();
+					isError = false;
+				}
+				if (!$("#personMobile").val()) {
+					$("#errorPersonMobile").show();
+					isError = false;
+				}
+
+			} else {
+				$("#persnName").val($("#txtBillName").val());
+				$("#personMobile").val($("#txtMobile").val());
+			}
+
 			return isError;
 
 		}
@@ -2144,6 +2162,8 @@
 				fd.append('txtBillingArea', $("#txtBillingArea").val());
 				fd.append('txtBillingLandmark', $("#txtBillingLandmark").val());
 				fd.append('txtBillingPincode', $("#txtBillingPincode").val());
+				fd.append('persnName', $("#persnName").val());
+				fd.append('personMobile', $("#personMobile").val());
 				$
 						.ajax({
 							url : '${pageContext.request.contextPath}/placeOrder',
@@ -2485,6 +2505,9 @@
 			if (value == 1) {
 				$("#giftOrderDiv").hide();
 			} else {
+
+				$("#persnName").val('');
+				$("#personMobile").val('');
 				$("#giftOrderDiv").show();
 			}
 
