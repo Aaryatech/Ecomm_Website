@@ -306,7 +306,7 @@
 					Location</div>
 
 				<div class="location_city">
-					<h2 class="serv_city">Popular Serving Cities</h2>
+					<h2 class="serv_city">Popular Serving Locations</h2>
 					<ul>
 						<li>
 							<!-- <a href="javascript:void(0)"> --> <img

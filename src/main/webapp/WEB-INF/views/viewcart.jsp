@@ -387,7 +387,7 @@
 
 									</div>
 									<div class="right_side">
-										<h3 class="payment_title">Payment Information</h3>
+										<h3 class="payment_title">Delivery Information</h3>
 										<div class="divide_marg">
 											<!-- class="payment_two right" -->
 											<div id="filters">
@@ -1142,7 +1142,7 @@
 						<!-- ------------------------ -->
 						<div class="place_row">
 							<div class="place_row_l">
-								<div class="gender_l">Select Order</div>
+								<div class="gender_l">Order Type</div>
 								<div class="gender_r full">
 									<div class="radio_1 gender">
 										<ul>
@@ -1514,7 +1514,7 @@
 								+ '</div>'
 								+ '</div>'
 								+ msgName
-								+ '<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span class="msg_on_cake">'
+								+ '<div  style="width: 60px;height: 60px; margin: 10px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div> <span class="msg_on_cake">'
 								+ '</span>'
 								+ ' </td>'
 								+ '<td>'
@@ -1632,7 +1632,7 @@
 								+ '<div class="mob_quan_l">Delivery option</div>'
 								+ '<div class="mob_quan_r">'
 								+ '<div class="cart_option">'
-								+ '<img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"> <span>'
+								+ '<div  style="width: 60px;height: 60px; margin: 25px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div><span>'
 								+ msgName
 								+ '</span>'
 								+ '</div>'

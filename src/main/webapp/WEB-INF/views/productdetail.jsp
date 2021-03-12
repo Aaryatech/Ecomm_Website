@@ -447,9 +447,12 @@
 
 													<c:choose>
 														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
+															
+															<div  style="width: 60px;height: 60px; margin: 10px auto;display: table;"><img alt=""  id="del_image" 
+																	name="del_image" /></div>
 															<div ><!-- class="delivery_frm_l" -->
-																<img alt="" id="del_image" style="size: portrait;"
-																	name="del_image" />
+																															<div class="img_format">*image format allowed : jpg,jpeg,png. max size 600 KB</div>
+																
 																<div class="inputbrowsebtn">
 																	<label for="img_input_btn"> <span class="fg"
 																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
@@ -462,7 +465,6 @@
 																	</label>
 																</div>
 															</div> 
-															<div class="img_format">*image format allowed : jpg,jpeg,png.</div>
 														</c:when>
 														<c:otherwise>
 															<input style="display: none" type="file" accept="image/*"
@@ -963,6 +965,7 @@ function moveCursor(){
 	 try {
 		var image = document.getElementById('del_image');
 		image.src = URL.createObjectURL(event.target.files[0]);
+		var imgWidth = $("#del_image").size;
 		document.getElementById('del_image').style="display:block"
 			//postFilesData(event.target.files[0]);
 			var imgName=makeUniqueString(7);
@@ -970,6 +973,11 @@ function moveCursor(){
 			imgName=imgName+"_"+prodIdText;
 			//alert(imgName);
 			var imgFile = $('#img_input_btn')[0].files[0];
+			console.log("imgFile",imgFile.size/1000);
+			var fileSize=imgFile.size/1000;
+			if(parseFloat(fileSize)>600){
+				//alert("Size Exceed")
+			}else{
 				  var imgCanvas = document.getElementById('canvas-element'),
 		       		 imgContext = imgCanvas.getContext("2d");
 			
@@ -978,9 +986,15 @@ function moveCursor(){
 			    imgCanvas.height = (img.height/4);
 
 			    // Draw image into canvas element
+			  
 			    imgContext.drawImage(img, 0, 0, (img.width), (img.height));
+			    
+			    //imgContext.drawImage(img, 0, 0, (100), (80));
+				  
+			    
 			    // Get canvas contents as a data URL
 			    var imgAsDataURL = imgCanvas.toDataURL("image/png");
+			}
 			//postFilesData();
 	 } catch(err) {
 		 console.log(err);
