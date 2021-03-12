@@ -824,7 +824,7 @@
 									+ ' <div class="cake_pic"> '+detail
 									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice
+									+ allItemArr[i].defaultPrice +'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
 									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice
 									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -850,7 +850,7 @@
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice
+							+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1020,7 +1020,7 @@
 						+ like
 						+ isVegType						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ tempArr[i].defaultPrice
+						+ tempArr[i].defaultPrice+'/- <p class="per_kg">'+tempArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice
 						+ '</span> <span class="prc_off"></span> </div> '
@@ -1520,7 +1520,7 @@
 						+ like
 						+ isVegType						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ hiddenProductListArr[i].defaultPrice
+						+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ '</span> <span class="prc_off"></span> </div> '
@@ -1586,7 +1586,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice
+							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1648,7 +1648,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice
+							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1717,7 +1717,7 @@
 						+ isVegType
 						+ like						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ allItemArr[i].defaultPrice
+						+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
 						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1785,7 +1785,7 @@
 								+ isVegType
 								+ like								
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice
+								+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1853,7 +1853,7 @@
 								+ isVegType
 								+ like
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice
+								+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1967,7 +1967,7 @@ function setProductData(productObj){
 			+ isVegType
 			+ like
 			+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-			+ productObj.defaultPrice
+			+ productObj.defaultPrice+'/- <p class="per_kg">'+productObj.uomShowName+'</p>'
 			+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 			+ productObj.defaultPrice
 			+ '</span> <span class="prc_off">(23% Off)</span> </div> '

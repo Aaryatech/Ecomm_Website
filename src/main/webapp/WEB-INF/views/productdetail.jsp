@@ -1521,7 +1521,8 @@ function moveCursor(){
 				}
 			}
 			
-				
+			alert(selectWt)
+			 alert(selectFlav)
 				
 				var prodMaster;
 				

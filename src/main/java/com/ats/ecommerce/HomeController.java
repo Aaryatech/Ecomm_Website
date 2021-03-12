@@ -949,7 +949,7 @@ public class HomeController {
 		return "becmVendorFr";
 	}
 
-	@RequestMapping(value = "/getFooterData", method = RequestMethod.GET)
+	@RequestMapping(value = "/getFooterData", method = RequestMethod.POST)
 	@ResponseBody
 	public ContactUs getFooterData(HttpServletRequest request, HttpServletResponse response, Model model)
 			throws JsonParseException, JsonMappingException, IOException {
@@ -957,6 +957,8 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		ContactUs cus = new ContactUs();
 		try {
+			
+			System.out.println("INNNNNNNNNNNNNN");
 			ObjectMapper mapper = new ObjectMapper();
 			ContactUs[] cusArr = null;
 

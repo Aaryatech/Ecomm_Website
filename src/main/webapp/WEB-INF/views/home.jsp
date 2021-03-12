@@ -27,7 +27,7 @@
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
 	<%-- <jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include> --%>
-	<div class="head_marg with_menu">
+	<div class="head_marg">
 
 		<!--main banner -->
 		<%-- <div class="main_banner"

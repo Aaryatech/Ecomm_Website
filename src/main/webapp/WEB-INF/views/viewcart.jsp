@@ -1201,14 +1201,9 @@
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Your Area (area,colony,
-									street,sector,village)</span> <input type="text" class="input_place"
-									autocomplete="off" id="txtDelvArea" name="txtDelvArea"
-									value="${getAreaD}"
-									placeholder="Area, Colony, Street, Sector, Village" /> <label
-									class="form-label-hint-error" id="errorDelvArea"
-									style="display: none;">Please enter area, colony,
-									street, sector, village</label>
+								<span class="pop_lab_fld">Next to</span><br> <input
+									type="hidden" id="txtDelvLandmark" name="txtDelvLandmark"
+									value="${sessionScope.landMark}" /> ${sessionScope.landMark}
 							</div>
 							<div class="clr"></div>
 						</div>
@@ -1221,10 +1216,14 @@
 									class="form-label-hint-error" id="errorDelvLandmark"
 									style="display: none;">Please enter landmark</label>
  --%>
-								<span class="pop_lab_fld">Landmark</span> <input type="text"
-									id="txtDelvLandmark" name="txtDelvLandmark"
-									value="${sessionScope.landMark}" class="input_place"
-									readonly="readonly" placeholder="City Related Landmark" />
+								<span class="pop_lab_fld">Your Area (From pin point
+									location)</span> <input type="text" class="input_place"
+									autocomplete="off" id="txtDelvArea" name="txtDelvArea"
+									value="${getAreaD}"
+									placeholder="Area, Colony, Street, Sector, Village" /> <label
+									class="form-label-hint-error" id="errorDelvArea"
+									style="display: none;">Please enter area, colony,
+									street, sector, village</label>
 							</div>
 							<div class="place_row_r">
 								<span class="pop_lab_fld">Pin code</span> <input type="text"
@@ -1474,13 +1473,13 @@
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
 						}
 
-						var msgName = '<p  class="del_inst">message on cake : NA</p>';
+						var msgName = '<p  class="del_inst">Message on cake : NA</p>';
 						if (table[i].msgonCake == "") {
-							msgName = '<p  class="del_inst">message on cake : NA</p>';
+							msgName = '<p  class="del_inst">Message on cake : NA</p>';
 						} else if (table[i].msgonCake == null) {
 							msgName = '';
 						} else {
-							msgName = '<p  class="del_inst">message on cake : '
+							msgName = '<p  class="del_inst">Message on cake : '
 									+ table[i].msgonCake + '</p>';
 						}
 						var tbl_data = '<tr>'
@@ -1894,7 +1893,8 @@
 			}
 
 			if ($("#txtEmail").val() == null || $("#txtEmail").val() == "") {
-				$("#errorEmail").hide();
+				email = false;
+				$("#errorEmail").show();
 			} else if ($("#txtEmail").val().trim()) {
 				//email = false;
 				//$("#errorEmail").show();
@@ -1917,6 +1917,7 @@
 			} else {
 				$("#errorDob").hide();
 			}
+
 			if ($("#txtGst").val() == null || $("#txtGst").val() == "") {
 				$("#errorGst").hide();
 			} else if ($("#txtGst").val().trim()) {
@@ -1952,42 +1953,42 @@
 			} else {
 				$("#errorDelvLandmark").hide();
 			}
-
+			//alert("sdf")
 			if (!$("#txtDelvPincode").val().trim()) {
 				delvPin = false;
 				$("#errorDelvPincode").show();
 			} else {
 				$("#errorDelvPincode").hide();
 			}
-
+			//alert("sdf")
 			if (!$("#txtBillingFlat").val().trim()) {
 				billFlat = false;
 				$("#errorBillingFlat").show();
 			} else {
 				$("#errorBillingFlat").hide();
 			}
-
+			//alert("sdf")
 			if (!$("#txtBillingArea").val().trim()) {
 				billArea = false;
 				$("#errorBillingArea").show();
 			} else {
 				$("#errorBillingArea").hide();
 			}
-
+			//alert("sdf")
 			if (!$("#txtBillingLandmark").val().trim()) {
 				billLand = false;
 				$("#errorBillingLandmark").show();
 			} else {
 				$("#errorBillingLandmark").hide();
 			}
-
+			//alert("sdf")
 			if (!$("#txtBillingPincode").val().trim()) {
 				billPin = false;
 				$("#errorBillingPincode").show();
 			} else {
 				$("#errorBillingPincode").hide();
 			}
-
+			//alert("sdf")
 			if (!billName || !mobile || !email || !dob || !gst || !delvFlat
 					|| !delvArea || !delvLand || !delvPin || !billFlat
 					|| !billArea || !billLand || !billPin) {

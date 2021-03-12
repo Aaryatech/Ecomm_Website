@@ -10,8 +10,15 @@
 
 <style>
 html {
-	scroll-behavior: smooth;}
-	.per_kg{font-size:15px; display: inline-block; margin: 0px; padding: 0px;}
+	scroll-behavior: smooth;
+}
+
+.per_kg {
+	font-size: 12px;
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
 </style>
 
 <c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
@@ -200,11 +207,13 @@ html {
 													<fmt:formatNumber type="number" groupingUsed="false"
 														value="${product.defaultPrice}" maxFractionDigits="0"
 														minFractionDigits="0" />
-													/- <p class="per_kg">per ${product.uomShowName}</p> <span class="off_prc"><i
-														class="fa fa-inr" aria-hidden="true"></i> <fmt:formatNumber
-															type="number" groupingUsed="false"
-															value="${product.defaultPrice}" maxFractionDigits="0"
-															minFractionDigits="0" /></span> <span class="prc_off"></span>
+													/-
+													<p class="per_kg">${product.uomShowName}</p>
+													<span class="off_prc"><i class="fa fa-inr"
+														aria-hidden="true"></i> <fmt:formatNumber type="number"
+															groupingUsed="false" value="${product.defaultPrice}"
+															maxFractionDigits="0" minFractionDigits="0" /></span> <span
+														class="prc_off"></span>
 												</div>
 												<!-- </a> -->
 											</div>
@@ -213,8 +222,11 @@ html {
 												<h4 class="cake_nm single_row">
 													<a
 														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
-												</h4>
 
+												</h4>
+												<a href="javascript:void(0)"
+													onclick="addCart(${product.productId},${product.rateSettingType})">
+													add to cart</a>
 
 											</div>
 
@@ -636,7 +648,286 @@ function setLike(id,isLike) {
 	
 
 	</script>
+	<script type="text/javascript">
+		function addCart(id,type) {
+			
+			//alert("--------------- "+document.getElementById("txtWt").value)
+		
+			 var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
+		
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(type == 0){
+				selectWt = 1;	
+			}else if(type == 1 || type == 2){
+				
+				
+				try {
+					
+					var availablewt =prodMaster.availInWeights.split(",");
+					selectWt = availablewt[0];
+					
+					selectFlav = prodMaster.defaultFlavorId;
+					 
+					selFlvName = "sdfdsf";
+					
+				} catch (e) {
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			 
+				
+				var prodDetail = prodMaster.prodDetailList;
+				
+				
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				var uniq = (new Date()).getTime();
 
+				for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(type == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(type == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							//alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} else if(type == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} 
+		
+				}
+				 
+				
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+		
+				taxableAmt = calRate;
+		
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+		
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+		
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+		
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				if(type==0){
+					calRate=actualRate;
+				}
+				
+				var spInst;
+				var msgonCake;
+				
+			 	if(prodMaster.allowSpecialInstruction==1){
+					spInst="NA";
+				}
+
+				if(prodMaster.allowMsgOnCake==1){
+					msgonCake ="NA";
+				} 
+				
+				
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+		
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				
+				  if (sessionStorage.getItem("prodImageList") == null) {
+						var table = [];
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
+					} 
+			   		
+				var imgValue = sessionStorage .getItem("prodImageList");
+				var imgObj = $.parseJSON(imgValue);
+				
+				var imgFile="";
+				var imgName="";
+				if(id==imgObj.itemId){
+					imgFile=imgObj.imgFile;
+					imgName=imgObj.imgName;
+				}
+				
+				var index=0,itemFound=0;
+				
+				for(var i=0; i<cartArray.length;i++){
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					
+				}
+				
+				var obj={
+						uniqueId : uniq,
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName,
+						spInst : spInst,
+						msgonCake : msgonCake
+					}
+				
+				
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				var tableClear = [];
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(tableClear));
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+				openNav();
+			  	setTimeout(function(){ closeNav(); }, 4000);
+			  	  
+		
+		} 
+		</script>
 
 </body>
 

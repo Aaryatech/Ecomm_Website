@@ -72,7 +72,7 @@
 					</ul>
 					<c:if test="${sessionScope.isAddressPopup==1}">
 						<div class="drop_fix" id="add_poupu">
-							<h3>Have you selected the right location</h3>
+							<h3>Have you selected the right location ?</h3>
 							<p>Your selected location seems to be a little far off from
 								your device location</p>
 							<a href="#" onclick="resetAddressPopup()" class="left">Dismiss</a>

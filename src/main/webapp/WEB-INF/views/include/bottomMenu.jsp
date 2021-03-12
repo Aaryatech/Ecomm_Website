@@ -119,44 +119,49 @@
 	getFooteDtl();
 	function getFooteDtl() {
 
+		var fd = new FormData();
 		$
-				.getJSON(
-						'${getFooterData}',
-						{
-							ajax : 'true',
-						},
-						function(data) {
+				.ajax({
+					url : '${pageContext.request.contextPath}/getFooterData',
+					type : 'post',
+					dataType : 'json',
+					data : fd,
+					contentType : false,
+					processData : false,
+					success : function(data) {
+						const faclink = document.querySelector('#faceLink');
+						faclink.href = data.facebookLink;
 
-							const faclink = document.querySelector('#faceLink');
-							faclink.href = data.facebookLink;
+						const twtlink = document.querySelector('#twitLink');
+						twtlink.href = data.twitterLink;
 
-							const twtlink = document.querySelector('#twitLink');
-							twtlink.href = data.twitterLink;
+						const linkdlink = document.querySelector('#linkedLink');
+						linkdlink.href = data.linkedInLink;
 
-							const linkdlink = document
-									.querySelector('#linkedLink');
-							linkdlink.href = data.linkedInLink;
+						const gglelink = document.querySelector('#googleLink');
+						gglelink.href = data.googleAcLink;
 
-							const gglelink = document
-									.querySelector('#googleLink');
-							gglelink.href = data.googleAcLink;
+						document.getElementById("footeraddress").innerHTML = data.footerAddress;
 
-							document.getElementById("footeraddress").innerHTML = data.footerAddress;
+						document.getElementById("phone1").innerHTML = '(+91) '
+								+ data.footerPhone1;
+						document.getElementById("phone2").innerHTML = '(+91) '
+								+ data.footerPhone2;
 
-							document.getElementById("phone1").innerHTML = '(+91) '
-									+ data.footerPhone1;
-							document.getElementById("phone2").innerHTML = '(+91) '
-									+ data.footerPhone2;
+						document.getElementById("email1").innerHTML = data.footerEmail1;
+						const a = document.querySelector('#email1');
+						a.href = 'mailto:' + data.footerEmail1;
 
-							document.getElementById("email1").innerHTML = data.footerEmail1;
-							const a = document.querySelector('#email1');
-							a.href = 'mailto:' + data.footerEmail1;
+						document.getElementById("email2").innerHTML = data.footerEmail2;
+						const b = 'mailto:' + document.querySelector('#email2');
+						b.href = data.footerEmail2;
+					},
+				});
 
-							document.getElementById("email2").innerHTML = data.footerEmail2;
-							const b = 'mailto:'
-									+ document.querySelector('#email2');
-							b.href = data.footerEmail2;
+		/* $.getJSON('${getFooterData}', {
+			ajax : 'true',
+		}, function(data) {
 
-						});
+		}); */
 	}
 </script>

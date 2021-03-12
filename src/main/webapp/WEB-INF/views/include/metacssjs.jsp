@@ -34,8 +34,8 @@
 	rel="stylesheet">
 <!--font-family: 'Hind', sans-serif;-->
 
-<script type="text/javascript"
-	src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+<!-- <script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> -->
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/menuzord.js"></script>
