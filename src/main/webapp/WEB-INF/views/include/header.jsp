@@ -396,9 +396,26 @@
 							.toFixed(2);
 
 					var prodName = "";
+					var qtyBox = "";
 
 					if (table[i].rateSettingType == 0) {
 						prodName = table[i].exVar1;
+						qtyBox = '<div class="like_quant">'
+								+ '<span>Qty.</span>'
+								+ '<form id="myform" method="POST" action="#">'
+								+ '<input type="button" value="-" onclick="setQty('
+								+ table[i].itemId
+								+ ','
+								+ i
+								+ ','
+								+ table[i].qty
+								+ ',0)" class="qtyminus"'
+								+ 'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
+		'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('
+								+ table[i].itemId + ',' + i + ','
+								+ table[i].qty + ',1)" value="+"'
+								+ 'class="qtyplus" field="quantity"/> '
+								+ '</form>  ' + '</div>';
 					} else {
 
 						if (table[i].exInt2 != 0
@@ -434,27 +451,7 @@
 											+ '<p class="like_prc">Rs.'
 											+ table[i].totalAmt
 											+ '</p>'
-											+ '<div class="like_quant">'
-											+ '<span>Qty.</span>'
-											+ '<form id="myform" method="POST" action="#">'
-											+ '<input type="button" value="-" onclick="setQty('
-											+ table[i].itemId
-											+ ','
-											+ i
-											+ ','
-											+ table[i].qty
-											+ ',0)" class="qtyminus"'
-											+ 'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
-						'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('
-											+ table[i].itemId
-											+ ','
-											+ i
-											+ ','
-											+ table[i].qty
-											+ ',1)" value="+"'
-											+ 'class="qtyplus" field="quantity"/> '
-											+ '</form>  '
-											+ '</div>'
+											+ qtyBox
 											+ '</div>'
 											+ '<div class="clr"></div>'
 											+ '</div>')

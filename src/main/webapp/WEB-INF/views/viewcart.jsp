@@ -1399,9 +1399,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<!-- new popup -->
 	<div class="a">
 		<!--apply now pop up-->
@@ -1414,23 +1414,24 @@
 			</div>
 			<div class="mongi_cont">
 				<div class="small_cont">
-										
+
 					<div class="new_pop">
 						<div class="new_pop_l">Message</div>
 						<div class="new_pop_r">
-							<input name="" value="" type="text" required="" class="input_place" placeholder="Search your Area" >
+							<input name="" value="" type="text" required=""
+								class="input_place" placeholder="Search your Area">
 						</div>
 						<div class="clr"></div>
 					</div>
 					<div class="a">
-						<input name="" type="button" value="Ok" class="pop_place_btn" >
+						<input name="" type="button" value="Ok" class="pop_place_btn">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 
 	<script>
 		function getItemList() {
@@ -1505,7 +1506,7 @@
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
 						}
 
-						var msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">NA</a></p>';						
+						var msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">NA</a></p>';
 						if (table[i].msgonCake == "") {
 							msgName = '<p  class="del_inst">Message on cake : NA</p>';
 						} else if (table[i].msgonCake == null) {
@@ -1513,6 +1514,39 @@
 						} else {
 							msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">'
 									+ table[i].msgonCake + '</a></p>';
+						}
+						var qtyBox = table[i].qty;
+
+						if (table[i].rateSettingType == 0) {
+							qtyBox = '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
+									+ table[i].uniqueId
+									+ '"  name="btnMin'
+									+ table[i].itemId
+									+ '" onclick="minusQty('
+									+ table[i].uniqueId
+									+ ','
+									+ table[i].qty
+									+ ')"> <i class="fa fa-minus" aria-hidden="true"></i> </button>'
+
+									+ '<input type="text" readonly id="quantity'
+									+ table[i].uniqueId
+									+ '" name="quantity'
+									+ table[i].itemId
+									+ '" value="'
+									+ table[i].qty
+									+ '" class="qty cart" onblur="typeQty('
+									+ table[i].uniqueId
+									+ ')"> '
+
+									+ '<button type="button" value="" field="quantity" class="qtyplus cart" id="btnPlus'
+									+ table[i].uniqueId
+									+ '"  name="btnPlus'
+									+ table[i].itemId
+									+ '" onclick="plusQty('
+									+ table[i].uniqueId
+									+ ','
+									+ table[i].qty
+									+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
 						}
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
@@ -1549,36 +1583,7 @@
 								+ '</span>'
 								+ ' </td>'
 								+ '<td>'
-								+ '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
-								+ table[i].uniqueId
-								+ '"  name="btnMin'
-								+ table[i].itemId
-								+ '" onclick="minusQty('
-								+ table[i].uniqueId
-								+ ','
-								+ table[i].qty
-								+ ')"> <i class="fa fa-minus" aria-hidden="true"></i> </button>'
-
-								+ '<input type="text" readonly id="quantity'
-								+ table[i].uniqueId
-								+ '" name="quantity'
-								+ table[i].itemId
-								+ '" value="'
-								+ table[i].qty
-								+ '" class="qty cart" onblur="typeQty('
-								+ table[i].uniqueId
-								+ ')"> '
-
-								+ '<button type="button" value="" field="quantity" class="qtyplus cart" id="btnPlus'
-								+ table[i].uniqueId
-								+ '"  name="btnPlus'
-								+ table[i].itemId
-								+ '" onclick="plusQty('
-								+ table[i].uniqueId
-								+ ','
-								+ table[i].qty
-								+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
-
+								+ qtyBox
 								+ '<span class="cart_remove"><a href="javascript:void(0)" onclick="removeQty('
 								+ table[i].uniqueId
 								+ ')">Remove</a></span>'
@@ -2321,7 +2326,7 @@
 			$('#new_pop').popup();
 		});
 	</script>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#table_pop').popup();
