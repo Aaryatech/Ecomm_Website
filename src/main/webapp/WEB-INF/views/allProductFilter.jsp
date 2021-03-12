@@ -307,6 +307,12 @@
 														<a
 															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
 													</h4>
+
+													<div class="card_cart_btn">
+														<a href="javascript:void(0)"
+															onclick="addCart(${product.productId},${product.rateSettingType})"
+															class="cart_btn">Add to Cart</a>
+													</div>
 												</div>
 											</div>
 										</li>
@@ -824,7 +830,7 @@
 									+ ' <div class="cake_pic"> '+detail
 									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice +'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
+									+ allItemArr[i].defaultPrice +'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
 									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice
 									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -832,11 +838,11 @@
 									+ ' </div> '
 									+ ' <div class="cake_container"> '
 									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-									+ allItemArr[i].productName + '</a> </h4>'
+									+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 									+ ' </div> </div> </div> </li> '
 
 							count++;
-
+ 	
 						}
 
 					}
@@ -850,7 +856,7 @@
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
+							+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -858,7 +864,7 @@
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-							+ allItemArr[i].productName + '</a> </h4>'
+							+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 							+ ' </div> </div> </div> </li> '
 
 					count++;
@@ -1020,7 +1026,7 @@
 						+ like
 						+ isVegType						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ tempArr[i].defaultPrice+'/- <p class="per_kg">'+tempArr[i].uomShowName+'</p>'
+						+ tempArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+tempArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice
 						+ '</span> <span class="prc_off"></span> </div> '
@@ -1028,7 +1034,7 @@
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
-						+ tempArr[i].productName + '</a> </h4>'
+						+ tempArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+tempArr[i].productId+','+tempArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 								
@@ -1520,7 +1526,7 @@
 						+ like
 						+ isVegType						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
+						+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ '</span> <span class="prc_off"></span> </div> '
@@ -1528,7 +1534,7 @@
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-						+ hiddenProductListArr[i].productName + '</a> </h4>'
+						+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 						count++;
@@ -1586,7 +1592,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
+							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1594,7 +1600,7 @@
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-							+ hiddenProductListArr[i].productName + '</a> </h4>'
+							+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
@@ -1648,7 +1654,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg">'+hiddenProductListArr[i].uomShowName+'</p>'
+							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1656,7 +1662,7 @@
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-							+ hiddenProductListArr[i].productName + '</a> </h4>'
+							+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
@@ -1717,7 +1723,7 @@
 						+ isVegType
 						+ like						
 						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
+						+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
 						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
 						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1726,7 +1732,7 @@
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-						+ allItemArr[i].productName + '</a> </h4>'
+						+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 			
@@ -1785,7 +1791,7 @@
 								+ isVegType
 								+ like								
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
+								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1793,7 +1799,7 @@
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-								+ allItemArr[i].productName + '</a> </h4>'
+								+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 								+ ' </div> </div> </div> </li> ';
 
 								count++;
@@ -1853,7 +1859,7 @@
 								+ isVegType
 								+ like
 								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice+'/- <p class="per_kg">'+allItemArr[i].uomShowName+'</p>'
+								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1861,7 +1867,7 @@
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-								+ allItemArr[i].productName + '</a> </h4>'
+								+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 								+ ' </div> </div> </div> </li> ';
 	 
 								count++;
@@ -1967,7 +1973,7 @@ function setProductData(productObj){
 			+ isVegType
 			+ like
 			+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
-			+ productObj.defaultPrice+'/- <p class="per_kg">'+productObj.uomShowName+'</p>'
+			+ productObj.defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+productObj.uomShowName+'</p>'
 			+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 			+ productObj.defaultPrice
 			+ '</span> <span class="prc_off">(23% Off)</span> </div> '
@@ -1975,7 +1981,7 @@ function setProductData(productObj){
 			+ ' </div> '
 			+ ' <div class="cake_container"> '
 			+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'">'
-			+ productObj.productName + '</a> </h4>'
+			+ productObj.productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+productObj.productId+','+productObj.rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 			+ ' </div> </div> </div> </li> ';
 			//alert("end")
 			$("#itemListUl").append(divStr);
@@ -2009,7 +2015,286 @@ function setProductData(productObj){
 		}
 		
 	</script>
+	<script type="text/javascript">
+		function addCart(id,type) {
+			
+			//alert("--------------- "+document.getElementById("txtWt").value)
+		 
+			 var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
+		
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(type == 0){
+				selectWt = 1;	
+			}else if(type == 1 || type == 2){
+				
+				
+				try {
+					
+					var availablewt =prodMaster.availInWeights.split(",");
+					selectWt = availablewt[0];
+					
+					selectFlav = prodMaster.defaultFlavorId;
+					 
+					selFlvName = "akshay";
+					
+				} catch (e) {
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			 
+				
+				var prodDetail = prodMaster.prodDetailList;
+				
+				
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				var uniq = (new Date()).getTime();
 
+				for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(type == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(type == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							//alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} else if(type == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} 
+		
+				}
+				 
+				
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+		
+				taxableAmt = calRate;
+		
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+		
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+		
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+		
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				if(type==0){
+					calRate=actualRate;
+				}
+				
+				var spInst;
+				var msgonCake;
+				
+			 	if(prodMaster.allowSpecialInstruction==1){
+					spInst="NA";
+				}
+
+				if(prodMaster.allowMsgOnCake==1){
+					msgonCake ="NA";
+				} 
+				
+				
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+		
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				
+				  if (sessionStorage.getItem("prodImageList") == null) {
+						var table = [];
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
+					} 
+			   		
+				var imgValue = sessionStorage .getItem("prodImageList");
+				var imgObj = $.parseJSON(imgValue);
+				
+				var imgFile="";
+				var imgName="";
+				if(id==imgObj.itemId){
+					imgFile=imgObj.imgFile;
+					imgName=imgObj.imgName;
+				}
+				
+				var index=0,itemFound=0;
+				
+				for(var i=0; i<cartArray.length;i++){
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					
+				}
+				
+				var obj={
+						uniqueId : uniq,
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName,
+						spInst : spInst,
+						msgonCake : msgonCake
+					}
+				
+				
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				var tableClear = [];
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(tableClear));
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+				openNav();
+			  	setTimeout(function(){ closeNav(); }, 4000);
+			  	  
+		
+		} 
+		</script>
 </body>
 
 </html>

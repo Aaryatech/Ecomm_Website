@@ -86,9 +86,12 @@ public class HomeController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			if (frId > 0)
+			//System.out.println("akshayyy");
+			if (frId > 0) {
+				//System.out.println("akshayyy");
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-			// System.err.println("data " + data.toString());
+			}
+			//System.err.println("data " + data.getFeProductHeadList());
 
 			try {
 
@@ -140,6 +143,7 @@ public class HomeController {
 						.next();
 				session.setAttribute("dataList", dataList);
 
+				System.out.println("SCCCCCCCCCC");
 				model.addAttribute("frCatList", data.getFranchiseCatList());
 				model.addAttribute("bannerList", data.getCompanyBannerList());
 
@@ -957,7 +961,7 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		ContactUs cus = new ContactUs();
 		try {
-			
+
 			System.out.println("INNNNNNNNNNNNNN");
 			ObjectMapper mapper = new ObjectMapper();
 			ContactUs[] cusArr = null;

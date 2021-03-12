@@ -224,10 +224,12 @@ html {
 														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
 
 												</h4>
-												<a href="javascript:void(0)"
-													onclick="addCart(${product.productId},${product.rateSettingType})">
-													add to cart</a>
 
+												<div class="card_cart_btn">
+													<a href="javascript:void(0)"
+														onclick="addCart(${product.productId},${product.rateSettingType})"
+														class="cart_btn">Add to Cart</a>
+												</div>
 											</div>
 
 										</div>
@@ -652,7 +654,7 @@ function setLike(id,isLike) {
 		function addCart(id,type) {
 			
 			//alert("--------------- "+document.getElementById("txtWt").value)
-		
+		 
 			 var prodMaster;
 				
 				if (sessionStorage.getItem("allItemList") == null) {
@@ -688,7 +690,7 @@ function setLike(id,isLike) {
 					
 					selectFlav = prodMaster.defaultFlavorId;
 					 
-					selFlvName = "sdfdsf";
+					selFlvName = "akshay";
 					
 				} catch (e) {
 					selectFlav = 0;

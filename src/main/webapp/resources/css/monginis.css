@@ -439,7 +439,7 @@ font-family: 'Hind-SemiBold'; margin: /* 15px 0 0 */ 0; -webkit-transition: all 
 .circle_tag:hover img:first-child,.circle_tag.active img:first-child{display: none;}
 .circle_tag:hover img:last-child,.circle_tag.active img:last-child{display: inline-block;}
 
-.cake_container{display: block; text-align: left; padding: 10px 0 0 0; position: relative; overflow: inherit;}
+.cake_container{display: block; text-align: left; padding: 10px 0 0 0; position: relative; overflow:initial /* inherit */;}
 .cake_nm,.cake_nm a{color: #333; font-size: 15px; margin: 0 0 10px 0; font-family: 'Hind-Medium';text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 .cake_one:hover .cake_nm a{color: #ec2c92;}
 
@@ -1235,6 +1235,11 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 .divide_marg{margin: 0 0 8px 0;}
 
 .img_format{color: #F00; font-size: 12px; margin: 7px 0 0 10px;}
+.card_cart_btn{display: inline-block; width: 100%; margin: 5px 0;}
+
+.new_pop{display: inline-block; width: 100%; margin:0 0 10px 0;}
+.new_pop_l{float: left; width: 20%; margin: 9px ​0 0 ; font-size: 14px; color: #333; font-family: 'Hind-Medium';}
+.new_pop_r{float: right; width: 78%;}
 
 @media screen and (max-width:1280px){
     /*home page css*/

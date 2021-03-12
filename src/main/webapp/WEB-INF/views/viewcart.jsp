@@ -1399,6 +1399,38 @@
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	<!-- new popup -->
+	<div class="a">
+		<!--apply now pop up-->
+		<div id="table_pop" class="well small">
+			<div class="mongi_title">
+				Delivery and Additional Charges Detail
+				<div class="table_pop_close close_pop">
+					<i class="fa fa-times" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="mongi_cont">
+				<div class="small_cont">
+										
+					<div class="new_pop">
+						<div class="new_pop_l">Message</div>
+						<div class="new_pop_r">
+							<input name="" value="" type="text" required="" class="input_place" placeholder="Search your Area" >
+						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="a">
+						<input name="" type="button" value="Ok" class="pop_place_btn" >
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 
 	<script>
 		function getItemList() {
@@ -1473,14 +1505,14 @@
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
 						}
 
-						var msgName = '<p  class="del_inst">Message on cake : NA</p>';
+						var msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">NA</a></p>';						
 						if (table[i].msgonCake == "") {
 							msgName = '<p  class="del_inst">Message on cake : NA</p>';
 						} else if (table[i].msgonCake == null) {
 							msgName = '';
 						} else {
-							msgName = '<p  class="del_inst">Message on cake : '
-									+ table[i].msgonCake + '</p>';
+							msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">'
+									+ table[i].msgonCake + '</a></p>';
 						}
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
@@ -2287,6 +2319,12 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#new_pop').popup();
+		});
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#table_pop').popup();
 		});
 	</script>
 

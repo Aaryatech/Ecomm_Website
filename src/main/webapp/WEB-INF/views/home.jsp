@@ -399,7 +399,7 @@ function removeLoader(){
 		varStatus="count">
 		<c:choose>
 			<c:when
-				test="${statusFilter.filterTypeId==5 &&statusFilter.costAffect==1}">
+				test="${statusFilter.filterTypeId==5 && statusFilter.costAffect==1}">
 				<div class="find_store">
 					<h2 class="sec_title">
 						<center>
