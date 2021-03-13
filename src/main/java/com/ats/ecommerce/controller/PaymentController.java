@@ -245,7 +245,7 @@ public class PaymentController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/orderhistory";
+		return "redirect:/orderConfirmation";
 	}
 
 	@RequestMapping(value = "/orderConfirmation", method = RequestMethod.GET)

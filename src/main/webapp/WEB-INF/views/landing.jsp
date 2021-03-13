@@ -298,7 +298,7 @@
 				value="${userType}" />
 			<div class="location_padd">
 				<div class="current_location">
-					<a href="javascript:void(0)" onclick="goToMap()"><img
+					<a href="javascript:void(0)" onclick="goToMap(1)"><img
 						src="${pageContext.request.contextPath}/resources/images/location_icn.png"
 						alt=""> use Current Location </a>
 				</div>
@@ -321,7 +321,7 @@
 						<li>
 							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_hydrabad.png"
-							alt=""> Hydrabad<!-- </a> -->
+							alt=""> Hyderabad<!-- </a> -->
 						</li>
 						<li>
 							<!-- <a href="javascript:void(0)"> --> <img
@@ -331,7 +331,7 @@
 						<li>
 							<!-- <a href="javascript:void(0)"> --> <img
 							src="${pageContext.request.contextPath}/resources/images/city_nashik.png"
-							alt=""> Nasik<!-- </a> -->
+							alt=""> Nashik<!-- </a> -->
 						</li>
 						<li>
 							<!-- <a href="javascript:void(0)"> --> <img
@@ -378,7 +378,7 @@
 					</div>
 
 					<div class="search_one">
-						<div class="search_one_l">
+						<div class="search_one_l" id="textareaclass">
 							<input name="txtPlaces" value="" type="text" required
 								class="input_search landing" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
@@ -396,7 +396,8 @@
 								Location</a> --%>
 
 
-							<a href="javascript:void(0)" onclick="goToMap()">Get Location</a>
+							<a href="javascript:void(0)" onclick="goToMap(2)"
+								style="display: none;" id="goLocBtn">Get Location</a>
 						</div>
 						<div class="clr"></div>
 					</div>
@@ -924,42 +925,60 @@
 			//alert(totalDistance);
 			document.getElementById('frKm').value = totalDistance;
 		}
-		$(document).ready(function() {
+		$(document).ready(
+				function() {
 
-			var frData = '${frData}';
-			//alert(frData)
-			sessionStorage.setItem("frList", frData);
+					var frData = '${frData}';
+					//alert(frData)
+					sessionStorage.setItem("frList", frData);
 
-			$('#landingpop').popup();
-			document.getElementById("openLocPopup").click();
+					$('#landingpop').popup();
+					document.getElementById("openLocPopup").click();
 
-			var lat = sessionStorage.getItem("selLat");
-			var lng = sessionStorage.getItem("selLng");
-			var addr = sessionStorage.getItem("selAddr");
-			if (addr != null && addr != "") {
+					var lat = sessionStorage.getItem("selLat");
+					var lng = sessionStorage.getItem("selLng");
+					var addr = sessionStorage.getItem("selAddr");
+					var divertBtn = sessionStorage.getItem("divertBtn");
 
-				$("#showCityDiv").hide();
-				$("#resetBtnDiv").show();
-				document.getElementById("txtPlaces").readOnly = true;
+					if (divertBtn == null) {
+						sessionStorage.setItem("divertBtn", "0");
+					}
 
-				//document.getElementById("txtPlaces").setAttribute("readonly", true);
-				//$('#citySel').prop('disabled', true);
-			}
-			document.getElementById("txtPlaces").value = addr;
-			sessionStorage.setItem("selLat", "");
-			sessionStorage.setItem("selLng", "");
-			sessionStorage.setItem("selAddr", "");
+					divertBtn = sessionStorage.getItem("divertBtn");
 
-			if (lat == "") {
-				lat = 0;
-			}
-			if (lng == "") {
-				lng = 0;
-			}
+					if (divertBtn == 0) {
+						$("#goLocBtn").show();
+					} else {
+						$("#goLocBtn").hide();
+						document.getElementById("textareaclass").classList
+								.remove('search_one_l');
+					}
 
-			calculateDistance(parseFloat(lat), parseFloat(lng), 2);
+					if (addr != null && addr != "") {
 
-		});
+						$("#showCityDiv").hide();
+						$("#resetBtnDiv").show();
+						document.getElementById("txtPlaces").readOnly = true;
+
+						//document.getElementById("txtPlaces").setAttribute("readonly", true);
+						//$('#citySel').prop('disabled', true);
+					}
+					document.getElementById("txtPlaces").value = addr;
+					sessionStorage.setItem("selLat", "");
+					sessionStorage.setItem("selLng", "");
+					sessionStorage.setItem("selAddr", "");
+					sessionStorage.setItem("divertBtn", "0");
+
+					if (lat == "") {
+						lat = 0;
+					}
+					if (lng == "") {
+						lng = 0;
+					}
+
+					calculateDistance(parseFloat(lat), parseFloat(lng), 2);
+
+				});
 		function gotoHome() {
 			var form = document.getElementById("validation-form");
 			form.action = "home";
@@ -1230,9 +1249,9 @@
 									for (var j = 0; j < newFrList.length; j++) {
 
 										//alert(newFrList[j].exInt1)
-										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">'
-												+ newFrList[j].frName
-												+ '  </option>';
+										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">Monginis Cake Shop - '
+												+ newFrList[j].city
+												+ ' </option>';
 
 									}
 
@@ -1336,7 +1355,13 @@
 
 
 	<script type="text/javascript">
-		function goToMap() {
+		function goToMap(value) {
+
+			if (value == 1) {
+				sessionStorage.setItem("divertBtn", "1");
+			} else {
+				sessionStorage.setItem("divertBtn", "0");
+			}
 
 			var lat = document.getElementById("hideLat").value;
 			var lng = document.getElementById("hideLong").value;
