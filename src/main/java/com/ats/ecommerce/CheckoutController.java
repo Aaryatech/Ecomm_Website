@@ -26,6 +26,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,7 @@ import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.Info;
+import com.ats.ecommerce.model.OrderHeaderWithDetail;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.offer.CkDeliveryCharges;
 import com.ats.ecommerce.model.offer.FrCharges;
@@ -633,7 +635,7 @@ public class CheckoutController {
 			cust.setExInt1(defaultCustAddrs);
 			cust.setExInt2(0);
 			cust.setExInt3(0);
-			cust.setExVar1(persnName + " - " + personMobile);
+			cust.setExVar1("NA");
 			cust.setExVar2(txtGst);
 			cust.setExVar3(
 					txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);
@@ -744,7 +746,7 @@ public class CheckoutController {
 			order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
 			order.setLandmark("-" + session.getAttribute("landMark"));
-			order.setDeliveryDate(DateConvertor.convertToDMY(deliveryDate));
+			order.setDeliveryDate(delvrDateTime);
 			// order.setDeliveryTime(deliveryDateTime[1]);
 			System.err.println("delvrDateTime " + delvrDateTime);
 			order.setDeliveryTime(DateConvertor.convertToYMD(delvrDateTime));
@@ -869,6 +871,7 @@ public class CheckoutController {
 
 					orderDetail.setDiscAmt(roundHalfUp(itemDisc, 2));
 					orderDetail.setExFloat1(roundHalfUp(itemAddCharge, 2));
+					orderDetail.setExInt4(itemJsonImportData[i].getExInt2()); // set flavour id //akshay 2021-03-13
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -909,6 +912,8 @@ public class CheckoutController {
 			order.setIgstAmt(roundHalfUp(finalIgstAmt, 2));
 
 			order.setRemark("");
+			order.setExVar4(persnName + " - " + personMobile);
+
 			System.err.println("order " + order.toString());
 			OrderTrail orderTrail = new OrderTrail();
 			orderTrail.setActionByUserId(custId);
@@ -930,6 +935,13 @@ public class CheckoutController {
 					Info.class);
 			if (!info.getMsg().equalsIgnoreCase(null)) {
 				// Order saved successfully.
+
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+				map.add("orderId", Integer.parseInt(info.getMsg()));
+				OrderHeaderWithDetail orderHeaderWithDetail = Constants.getRestTemplate()
+						.postForObject(Constants.url + "getOrderHeaderAndDetailForConfirmationPage", map, OrderHeaderWithDetail.class);
+				session.setAttribute("orderHeaderWithDetail", orderHeaderWithDetail);
+
 				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));
 				if (orderSaveData.getOrderHeader().getPaymentMethod() == 2) {
 					// ie paid by elecronic way
