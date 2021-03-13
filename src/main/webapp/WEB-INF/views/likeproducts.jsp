@@ -35,9 +35,12 @@
 								<li>
 									<div class="cake_one product_padd">
 										<div class="cake_pic">
-											<a href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-											<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
-												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" class="mobile_fit transition"></a>
+											<a
+												href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+												<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
+												class="mobile_fit transition">
+											</a>
 
 											<div class="circle_tag active"
 												onclick="setLike(${product.productId},${product.isLike})">
@@ -61,9 +64,17 @@
 											</div>
 
 											<div class="cake_prc">
-												<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}
+												<i class="fa fa-inr" aria-hidden="true"></i>
+												<fmt:formatNumber type="number" groupingUsed="false"
+													value="${product.defaultPrice}" maxFractionDigits="0"
+													minFractionDigits="0" />
+												/-
+												<p class="per_kg"
+													style="font-size: 12px; vertical-align: middle; display: inline-block;">${product.uomShowName}</p>
 												<span class="off_prc"><i class="fa fa-inr"
-													aria-hidden="true"></i>${product.defaultPrice}</span> <span
+													aria-hidden="true"></i> <fmt:formatNumber type="number"
+														groupingUsed="false" value="${product.defaultPrice}"
+														maxFractionDigits="0" minFractionDigits="0" /></span> <span
 													class="prc_off"></span>
 											</div>
 
@@ -502,7 +513,7 @@ function setLike(id,isLike) {
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' /- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+product.uomShowName+'</p><span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
 							+ '</span> <span class="prc_off"></span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+product.appliTagNames+'"> '

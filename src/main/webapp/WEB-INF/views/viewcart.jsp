@@ -1407,7 +1407,7 @@
 		<!--apply now pop up-->
 		<div id="table_pop" class="well small">
 			<div class="mongi_title">
-				Delivery and Additional Charges Detail
+				Message on cake
 				<div class="table_pop_close close_pop">
 					<i class="fa fa-times" aria-hidden="true"></i>
 				</div>
@@ -1418,13 +1418,17 @@
 					<div class="new_pop">
 						<div class="new_pop_l">Message</div>
 						<div class="new_pop_r">
-							<input name="" value="" type="text" required=""
-								class="input_place" placeholder="Search your Area">
+							<input name="editMsgName" value="" type="text"
+								class="input_place" id="editMsgName" placeholder="Enter Message">
+							<input name="editMsgItemUUID" type="hidden" id="editMsgItemUUID">
+							<input name="editMsgItemId" type="hidden" id="editMsgItemId">
+
 						</div>
 						<div class="clr"></div>
 					</div>
 					<div class="a">
-						<input name="" type="button" value="Ok" class="pop_place_btn">
+						<input name="" type="button" value="Ok" class="pop_place_btn"
+							onclick="submitmsgname()">
 					</div>
 				</div>
 			</div>
@@ -1505,14 +1509,32 @@
 							isVegItem = '<img src="${pageContext.request.contextPath}/resources/images/icon_veg.png" alt="" class="veg_icn">'
 									+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="" class="veg_icn">'
 						}
-
-						var msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">NA</a></p>';
+						//#table_pop
+						var msgName = '<p  class="del_inst">Message on cake : <a   onclick="changeMsg('
+								+ table[i].uniqueId
+								+ ','
+								+ table[i].itemId
+								+ ',\''
+								+ table[i].msgonCake
+								+ '\')" class="initialism table_pop_open">NA</a></p>';
 						if (table[i].msgonCake == "") {
-							msgName = '<p  class="del_inst">Message on cake : NA</p>';
+							msgName = '<p  class="del_inst">Message on cake : <a onclick="changeMsg('
+									+ table[i].uniqueId
+									+ ','
+									+ table[i].itemId
+									+ ',\''
+									+ table[i].msgonCake
+									+ '\')" class="initialism table_pop_open">NA</a></p>';
 						} else if (table[i].msgonCake == null) {
 							msgName = '';
 						} else {
-							msgName = '<p  class="del_inst">Message on cake : <a href="#table_pop" class="initialism table_pop_open">'
+							msgName = '<p  class="del_inst">Message on cake : <a onclick="changeMsg('
+									+ table[i].uniqueId
+									+ ','
+									+ table[i].itemId
+									+ ',\''
+									+ table[i].msgonCake
+									+ '\')" class="initialism table_pop_open">'
 									+ table[i].msgonCake + '</a></p>';
 						}
 						var qtyBox = table[i].qty;
@@ -1839,6 +1861,45 @@
 
 			setCartData();
 			appendCartData();
+		}
+
+		function changeMsg(id, itemId, msg) {
+			$("#editMsgName").val(msg);
+			$("#editMsgItemUUID").val(id);
+			$("#editMsgItemId").val(itemId);
+			//alert(msg)
+		}
+		function submitmsgname() {
+
+			$('.close_pop').trigger('click');
+			var msg = $("#editMsgName").val();
+			var id = $("#editMsgItemUUID").val();
+			var editMsgItemId = $("#editMsgItemId").val();
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+			var cartValue = sessionStorage.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+
+			var newCartVal = [];
+
+			for (var i = 0; i < table.length; i++) {
+
+				if (id == table[i].uniqueId) {
+
+					table[i].msgonCake = msg;
+					break;
+				}
+
+				//newCartVal.push(table[i]);
+			}
+
+			sessionStorage.setItem("cartValue", JSON.stringify(table));
+
+			setCartData();
+			//alert(msg)
 		}
 
 		function typeQty(id) {
@@ -2283,7 +2344,7 @@
 									var url = '${pageContext.request.contextPath}/goToPay';
 									window.location = url;
 								} else {
-									var url = '${pageContext.request.contextPath}/orderhistory';
+									var url = '${pageContext.request.contextPath}/orderConfirmation';
 									window.location = url;
 								}
 

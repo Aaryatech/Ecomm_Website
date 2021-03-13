@@ -16,7 +16,7 @@
 
 <body>
 
-	<jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
+	<%-- <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include> --%>
 
 	<!-- TAGS -->
 	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>

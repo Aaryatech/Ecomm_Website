@@ -9,7 +9,7 @@
 
 	<!-- Akhilesh Loader Jsp -->
 
-	<jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include>
+	<%-- <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include> --%>
 	<div class="top_row">
 		<div class="wrapper">
 			<div class="top_content">

@@ -1521,8 +1521,8 @@ function moveCursor(){
 				}
 			}
 			
-			alert(selectWt)
-			 alert(selectFlav)
+			//alert(selectWt)
+			// alert(selectFlav)
 				
 				var prodMaster;
 				
