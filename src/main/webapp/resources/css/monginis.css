@@ -1241,6 +1241,9 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 .new_pop_l{float: left; width: 20%; margin: 9px ​0 0 ; font-size: 14px; color: #333; font-family: 'Hind-Medium';}
 .new_pop_r{float: right; width: 78%;}
 
+.detail_drop.four ul li{width: 25%;}
+.detail_price_tp.divide span{display: block; float: none;}
+
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}

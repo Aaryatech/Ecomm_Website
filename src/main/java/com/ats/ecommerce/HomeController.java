@@ -47,6 +47,7 @@ import com.ats.ecommerce.model.FilterTypes;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.MFilter;
+import com.ats.ecommerce.model.SimilarFalvrNameDetail;
 import com.ats.ecommerce.model.TempImageHolder;
 import com.ats.ecommerce.model.cms.ContactUs;
 import com.ats.ecommerce.model.offer.SiteVisitor;
@@ -86,12 +87,12 @@ public class HomeController {
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			//System.out.println("akshayyy");
+			// System.out.println("akshayyy");
 			if (frId > 0) {
-				//System.out.println("akshayyy");
+				// System.out.println("akshayyy");
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
 			}
-			//System.err.println("data " + data.getFeProductHeadList());
+			// System.err.println("data " + data.getFeProductHeadList());
 
 			try {
 
@@ -627,9 +628,61 @@ public class HomeController {
 					}
 				}
 			}
+			List<GetFlavorTagStatusList> flavorTagStatusList = data.getFlavorTagStatusList();
+
+			List<SimilarFalvrNameDetail> list = new ArrayList<SimilarFalvrNameDetail>();
+
+			try {
+				String[] smilarprdts = prodHeader.getSimilarProductIds().split(",");
+
+				if (data.getFeProductHeadList() != null) {
+
+					for (int j = 0; j < smilarprdts.length; j++) {
+						for (FEProductHeader prod : data.getFeProductHeadList()) {
+							if (smilarprdts[j].equals(String.valueOf(prod.getProductId()))) {
+								SimilarFalvrNameDetail similarFalvrNameDetail = new SimilarFalvrNameDetail();
+								similarFalvrNameDetail.setFilterId(prod.getDefaultShapeId());
+								similarFalvrNameDetail.setProductId(smilarprdts[j]);
+								list.add(similarFalvrNameDetail);
+								break;
+							}
+						}
+					}
+
+					for (int j = 0; j < list.size(); j++) {
+						for (int i = 0; i < flavorTagStatusList.size(); i++) {
+
+							if (list.get(j).getFilterId() == flavorTagStatusList.get(i).getFilterId()) {
+
+								list.get(j).setFlavorName(flavorTagStatusList.get(i).getFilterName());
+
+								break;
+							}
+
+						}
+					}
+				}
+
+			} catch (Exception e) {
+
+			}
+
+			/*
+			 * if (data.getFeProductHeadList() != null) {
+			 * 
+			 * for (FEProductHeader prod : data.getFeProductHeadList()) { for (int i = 0; i
+			 * < list.size(); i++) { if
+			 * (list.get(i).getProductId().equals(String.valueOf(prod.getProductId()))) {
+			 * prodHeader = prod; break; } }
+			 * 
+			 * } }
+			 */
 
 			// FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
+			model.addAttribute("list", list);
+
+			System.out.println("Similar Product " + prodHeader);
 
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
 

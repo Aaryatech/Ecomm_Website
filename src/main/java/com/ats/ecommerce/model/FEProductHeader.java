@@ -133,6 +133,8 @@ public class FEProductHeader {
 	private String allFilterNames;// Sachin 28-11-2020 new Add
 
 	private int isLike;
+	
+	private String similarProductIds; //akshay 16-03-2021
 
 	public String getDefaultVegNonvegName() {
 		return defaultVegNonvegName;
@@ -784,6 +786,14 @@ public class FEProductHeader {
 		this.isLike = isLike;
 	}
 
+	public String getSimilarProductIds() {
+		return similarProductIds;
+	}
+
+	public void setSimilarProductIds(String similarProductIds) {
+		this.similarProductIds = similarProductIds;
+	}
+
 	@Override
 	public String toString() {
 		return "FEProductHeader [prodUuid=" + prodUuid + ", productId=" + productId + ", productCode=" + productCode
@@ -815,8 +825,8 @@ public class FEProductHeader {
 				+ breadTypeName + ", vegNonvegName=" + vegNonvegName + ", defaultFlavorId=" + defaultFlavorId
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
 				+ ", defaultPrice=" + defaultPrice + ", defaultVegNonvegName=" + defaultVegNonvegName
-				+ ", allFilterNames=" + allFilterNames + ", isLike=" + isLike + ", prodDetailList=" + prodDetailList
-				+ "]";
+				+ ", allFilterNames=" + allFilterNames + ", isLike=" + isLike + ", similarProductIds="
+				+ similarProductIds + ", prodDetailList=" + prodDetailList + "]";
 	}
 
 }

@@ -278,14 +278,99 @@
 									</div> --%>
 									<!--cake-kgs-->
 
-									<div class="detail_drop">
+									
+
+								</div>
+
+
+								<!--right form-->
+								<c:if
+									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
+									<div class="delivery_r">
+										<div class="delivery_bx">
+											<h4 class="delivery_title">Message On Cake</h4>
+											<div class="delivery_frm">
+												<form action="" method="post">
+
+
+													<div>
+														<!-- class="delivery_frm_r" -->
+														<c:if test="${prodHeader.allowSpecialInstruction==1}">
+
+															<div class="delivery_txtarea" style="display: none">
+																<textarea name="" cols="" id="sp_inst" name="sp_inst"
+																	rows="3" class="input_txt"
+																	placeholder="Special Instructon">NA</textarea>
+															</div>
+
+
+														</c:if>
+
+														<c:if test="${prodHeader.allowMsgOnCake==1}">
+
+															<div class="a">
+																<input name="" type="text" id="msg_on_cake"
+																	name="msg_on_cake" class="input_txt"
+																	placeholder="Message / Name on the Cake" />
+															</div>
+
+														</c:if>
+													</div>
+
+													<c:choose>
+														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
+
+															<div
+																style="width: 60px; height: 60px; margin: 10px auto; display: table;">
+																<img alt="" id="del_image" name="del_image" />
+															</div>
+															<div>
+																<!-- class="delivery_frm_l" -->
+																<div class="img_format">*image format allowed :
+																	jpg,jpeg,png. max size 600 KB</div>
+
+																<div class="inputbrowsebtn">
+																	<label for="img_input_btn"> <span class="fg"
+																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
+																			Image </span> <input type="file" accept="image/*"
+																		name="img_input_btn" id="img_input_btn"
+																		accept=".jpg,.png,.jpeg,.bmp"
+																		title="only jpg,png,jpeg file format with max size 600 KB"
+																		onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
+
+																	</label>
+																</div>
+															</div>
+														</c:when>
+														<c:otherwise>
+															<input style="display: none" type="file" accept="image/*"
+																name="img_input_btn" id="img_input_btn"
+																accept=".jpg,.png,.gif,.jpeg,.bmp"
+																onchange="loadFile(event)">
+														</c:otherwise>
+													</c:choose>
+
+
+
+
+													<div class="clr"></div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</c:if>
+								<div class="clr"></div>
+							</div>
+							
+							
+							<div class="detail_drop four">
 										<ul>
 
 											<c:choose>
 
 												<c:when test="${prodHeader.rateSettingType==0}">
 
-													<li>
+													<li><div class="detail_price_tp divide"><span>Qty</span>
 														<button type="button" value="" field="quantity"
 															class="qtyminus cart"
 															onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
@@ -297,7 +382,7 @@
 															class="qtyplus cart">
 															<i class="fa fa-plus" aria-hidden="true"></i>
 														</button>
-
+														</div>  
 													</li>
 
 												</c:when>
@@ -346,6 +431,13 @@
 															</c:forEach>
 													</select></li>
 
+													<li>Shape<select class="select-css" id="shapeSimilar"
+														onchange="changeWeight();">
+															<c:forEach items="${list}" var="list">
+																<option value="${list.productId}">${list.flavorName}</option>
+															</c:forEach>
+													</select></li>
+
 												</c:otherwise>
 
 											</c:choose>
@@ -354,7 +446,7 @@
 
 										<ul>
 											<li>
-												<div class="detail_price_tp">
+												<div class="detail_price_tp divide">
 													<span>Price :</span> <i
 														class="fa fa-inr cake_prc_detail_iclass aprice"
 														aria-hidden="true"></i>
@@ -406,85 +498,7 @@
 											</li>
 										</ul>
 									</div>
-
-
-								</div>
-
-
-								<!--right form-->
-								<c:if
-									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
-									<div class="delivery_r">
-										<div class="delivery_bx">
-											<h4 class="delivery_title">Message On Cake</h4>
-											<div class="delivery_frm">
-												<form action="" method="post">
-
-
-													<div>
-														<!-- class="delivery_frm_r" -->
-														<c:if test="${prodHeader.allowSpecialInstruction==1}">
-
-															<div class="delivery_txtarea" style="display: none">
-																<textarea name="" cols="" id="sp_inst" name="sp_inst"
-																	rows="3" class="input_txt"
-																	placeholder="Special Instructon">NA</textarea>
-															</div>
-
-
-														</c:if>
-
-														<c:if test="${prodHeader.allowMsgOnCake==1}">
-
-															<div class="a">
-																<input name="" type="text" id="msg_on_cake"
-																	name="msg_on_cake" class="input_txt"
-																	placeholder="Message / Name on the Cake" />
-															</div>
-
-														</c:if>
-													</div>
-
-													<c:choose>
-														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
-															
-															<div  style="width: 60px;height: 60px; margin: 10px auto;display: table;"><img alt=""  id="del_image" 
-																	name="del_image" /></div>
-															<div ><!-- class="delivery_frm_l" -->
-																															<div class="img_format">*image format allowed : jpg,jpeg,png. max size 600 KB</div>
-																
-																<div class="inputbrowsebtn">
-																	<label for="img_input_btn"> <span class="fg"
-																		title="only jpg,png,jpeg file format with max size 600 KB">Upload
-																			Image </span> <input type="file" accept="image/*"
-																		name="img_input_btn" id="img_input_btn"
-																		accept=".jpg,.png,.jpeg,.bmp"
-																		title="only jpg,png,jpeg file format with max size 600 KB"
-																		onchange="loadFile(event)"> <!-- onchange="loadFile(event)" -->
-
-																	</label>
-																</div>
-															</div> 
-														</c:when>
-														<c:otherwise>
-															<input style="display: none" type="file" accept="image/*"
-																name="img_input_btn" id="img_input_btn"
-																accept=".jpg,.png,.gif,.jpeg,.bmp"
-																onchange="loadFile(event)">
-														</c:otherwise>
-													</c:choose>
-
-													
-
-
-													<div class="clr"></div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</c:if>
-								<div class="clr"></div>
-							</div>
+							
 
 
 
