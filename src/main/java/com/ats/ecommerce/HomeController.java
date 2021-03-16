@@ -1014,16 +1014,15 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		ContactUs cus = new ContactUs();
 		try {
-
-			System.out.println("INNNNNNNNNNNNNN");
+			
 			ObjectMapper mapper = new ObjectMapper();
 			ContactUs[] cusArr = null;
-
+			int compId = (Integer) session.getAttribute("companyId");
 			cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"), ContactUs[].class);
 
 			List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
 			for (int i = 0; i < cusList.size(); i++) {
-				if (cusList.get(i).getCompanyId() == 1) {
+				if (cusList.get(i).getCompanyId() == compId) {
 
 					cus.setFacebookLink(cusList.get(i).getFacebookLink());
 					cus.setTwitterLink(cusList.get(i).getTwitterLink());
@@ -1035,6 +1034,7 @@ public class HomeController {
 					cus.setFooterEmail2(cusList.get(i).getFooterEmail2());
 					cus.setFooterPhone1(cusList.get(i).getFooterPhone1());
 					cus.setFooterPhone2(cusList.get(i).getFooterPhone2());
+					cus.setFooterImage(Constants.PROD_IMG_VIEW_URL+cusList.get(i).getFooterImage());
 				}
 			}
 		} catch (Exception e) {

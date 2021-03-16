@@ -46,13 +46,13 @@
 					<div class="footer_social">
 						<ul>
 							<li>Connect with Us :</li>
-							<li><a href="" id="faceLink"><i class="fa fa-facebook"
+							<li><a href="" id="faceLink" target="_blank"><i class="fa fa-facebook"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="twitLink"><i class="fa fa-twitter"
+							<li><a href="" id="twitLink" target="_blank"><i class="fa fa-twitter"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="linkedLink"><i class="fa fa-linkedin"
+							<li><a href="" id="linkedLink" target="_blank"><i class="fa fa-linkedin"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="googleLink"><i
+							<li><a href="" id="googleLink" target="_blank"><i
 									class="fa fa-google-plus" aria-hidden="true"></i></a></li>
 						</ul>
 					</div>
