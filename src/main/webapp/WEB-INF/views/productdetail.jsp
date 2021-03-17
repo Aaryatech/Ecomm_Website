@@ -278,7 +278,7 @@
 									</div> --%>
 									<!--cake-kgs-->
 
-									
+
 
 								</div>
 
@@ -361,144 +361,148 @@
 								</c:if>
 								<div class="clr"></div>
 							</div>
-							
-							
+
+
 							<div class="detail_drop four">
-										<ul>
+								<ul>
+
+									<c:choose>
+
+										<c:when test="${prodHeader.rateSettingType==0}">
+
+											<li><div class="detail_price_tp divide">
+													<span>Qty</span>
+													<button type="button" value="" field="quantity"
+														class="qtyminus cart"
+														onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
+														<i class="fa fa-minus" aria-hidden="true"></i>
+													</button>
+													<input type="text" id="txtWt" value="1"
+														style="text-align: center;" class="qty cart">
+													<button type="button" value="" field="quantity"
+														onclick="setQtyText(${prodHeader.productId},1,'${prodHeader.prodDetailList}')"
+														class="qtyplus cart">
+														<i class="fa fa-plus" aria-hidden="true"></i>
+													</button>
+												</div></li>
+
+										</c:when>
+
+										<c:otherwise>
+
+											<c:if test="${prodHeader.defaultFlavorId!=0}">
+
+												<li>Flavor <select class="select-css" name="flavor"
+													id="flavor"
+													onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+														<c:forEach items="${prodHeader.flavourIds}"
+															var="prodDetail">
+															<c:forEach items="${flavTagStatusList}"
+																var="flavorFilter" varStatus="flavorFilterCount">
+
+																<c:if test="${flavorFilter.filterTypeId==4}">
+
+																	<c:choose>
+																		<c:when test="${prodDetail==flavorFilter.filterId}">
+																			<c:choose>
+																				<c:when
+																					test="${prodDetail==prodHeader.defaultFlavorId}">
+																					<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
+																				</c:when>
+																				<c:otherwise>
+																					<option value="${prodDetail}">${flavorFilter.adminName}</option>
+																				</c:otherwise>
+																			</c:choose>
+																		</c:when>
+																		<c:otherwise>
+
+																		</c:otherwise>
+																	</c:choose>
+																</c:if>
+															</c:forEach>
+														</c:forEach>
+												</select></li>
+											</c:if>
+
+											<li>Weight<select class="select-css" id="weight"
+												onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+													<c:forEach items="${prodHeader.availInWeights}"
+														var="prodDetailwt">
+														<option value="${prodDetailwt}">${prodDetailwt}</option>
+													</c:forEach>
+											</select></li>
+
+											<li>Shape<select class="select-css" id="shapeSimilar"
+												onchange="reloadProductPage(this.value);">
+
+													<option value="">Select Shape</option>
+													<c:forEach items="${list}" var="list">
+														<option value="${list.productId}">${list.flavorName}</option>
+													</c:forEach>
+
+											</select></li>
+
+										</c:otherwise>
+
+									</c:choose>
+
+								</ul>
+
+								<ul>
+									<li>
+										<div class="detail_price_tp divide">
+											<span>Price :</span> <i
+												class="fa fa-inr cake_prc_detail_iclass aprice"
+												aria-hidden="true"></i>
+
+											<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
+											<c:set value="1" var="defaultWt"></c:set>
 
 											<c:choose>
 
-												<c:when test="${prodHeader.rateSettingType==0}">
+												<c:when test="${prodHeader.rateSettingType == 1}">
 
-													<li><div class="detail_price_tp divide"><span>Qty</span>
-														<button type="button" value="" field="quantity"
-															class="qtyminus cart"
-															onclick="setQtyText(${prodHeader.productId},0,'${prodHeader.prodDetailList}')">
-															<i class="fa fa-minus" aria-hidden="true"></i>
-														</button> <input type="text" id="txtWt" value="1"
-														style="text-align: center;" class="qty cart">
-														<button type="button" value="" field="quantity"
-															onclick="setQtyText(${prodHeader.productId},1,'${prodHeader.prodDetailList}')"
-															class="qtyplus cart">
-															<i class="fa fa-plus" aria-hidden="true"></i>
-														</button>
-														</div>  
-													</li>
+													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
+														varStatus="loop" begin="0" end="0">
+														<c:set value="${proWt}" var="defaultWt"></c:set>
+													</c:forEach>
+
+													<c:set value="${prodHeader.defaultPrice * defaultWt}"
+														var="price"></c:set>
 
 												</c:when>
 
-												<c:otherwise>
+												<c:when test="${prodHeader.rateSettingType == 2}">
 
-													<c:if test="${prodHeader.defaultFlavorId!=0}">
+													<c:forEach items="${prodHeader.availInWeights}" var="proWt"
+														varStatus="loop" begin="0" end="0">
+														<c:set value="${proWt}" var="defaultWt"></c:set>
+													</c:forEach>
 
-														<li>Flavor <select class="select-css" name="flavor"
-															id="flavor"
-															onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
-																<c:forEach items="${prodHeader.flavourIds}"
-																	var="prodDetail">
-																	<c:forEach items="${flavTagStatusList}"
-																		var="flavorFilter" varStatus="flavorFilterCount">
+													<c:forEach items="${prodHeader.prodDetailList}"
+														var="proDetail">
 
-																		<c:if test="${flavorFilter.filterTypeId==4}">
+														<c:choose>
+															<c:when
+																test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																<c:set value="${proDetail.actualRate}" var="price"></c:set>
+															</c:when>
+														</c:choose>
+													</c:forEach>
 
-																			<c:choose>
-																				<c:when test="${prodDetail==flavorFilter.filterId}">
-																					<c:choose>
-																						<c:when
-																							test="${prodDetail==prodHeader.defaultFlavorId}">
-																							<option value="${prodDetail}" selected>${flavorFilter.adminName}</option>
-																						</c:when>
-																						<c:otherwise>
-																							<option value="${prodDetail}">${flavorFilter.adminName}</option>
-																						</c:otherwise>
-																					</c:choose>
-																				</c:when>
-																				<c:otherwise>
-
-																				</c:otherwise>
-																			</c:choose>
-																		</c:if>
-																	</c:forEach>
-																</c:forEach>
-														</select></li>
-													</c:if>
-
-													<li>Weight<select class="select-css" id="weight"
-														onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
-															<c:forEach items="${prodHeader.availInWeights}"
-																var="prodDetailwt">
-																<option value="${prodDetailwt}">${prodDetailwt}</option>
-															</c:forEach>
-													</select></li>
-
-													<li>Shape<select class="select-css" id="shapeSimilar"
-														onchange="changeWeight();">
-															<c:forEach items="${list}" var="list">
-																<option value="${list.productId}">${list.flavorName}</option>
-															</c:forEach>
-													</select></li>
-
-												</c:otherwise>
+												</c:when>
 
 											</c:choose>
 
-										</ul>
-
-										<ul>
-											<li>
-												<div class="detail_price_tp divide">
-													<span>Price :</span> <i
-														class="fa fa-inr cake_prc_detail_iclass aprice"
-														aria-hidden="true"></i>
-
-													<c:set value="${prodHeader.defaultPrice}" var="price"></c:set>
-													<c:set value="1" var="defaultWt"></c:set>
-
-													<c:choose>
-
-														<c:when test="${prodHeader.rateSettingType == 1}">
-
-															<c:forEach items="${prodHeader.availInWeights}"
-																var="proWt" varStatus="loop" begin="0" end="0">
-																<c:set value="${proWt}" var="defaultWt"></c:set>
-															</c:forEach>
-
-															<c:set value="${prodHeader.defaultPrice * defaultWt}"
-																var="price"></c:set>
-
-														</c:when>
-
-														<c:when test="${prodHeader.rateSettingType == 2}">
-
-															<c:forEach items="${prodHeader.availInWeights}"
-																var="proWt" varStatus="loop" begin="0" end="0">
-																<c:set value="${proWt}" var="defaultWt"></c:set>
-															</c:forEach>
-
-															<c:forEach items="${prodHeader.prodDetailList}"
-																var="proDetail">
-
-																<c:choose>
-																	<c:when
-																		test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
-																		<c:set value="${proDetail.actualRate}" var="price"></c:set>
-																	</c:when>
-																</c:choose>
-															</c:forEach>
-
-														</c:when>
-
-													</c:choose>
 
 
+											<p class="cake_prc_detail_pclass"
+												id="newPrice${prodHeader.productId}">${price}</p>
+										</div>
+									</li>
+								</ul>
+							</div>
 
-													<p class="cake_prc_detail_pclass"
-														id="newPrice${prodHeader.productId}">${price}</p>
-												</div>
-											</li>
-										</ul>
-									</div>
-							
 
 
 
@@ -1792,6 +1796,13 @@ function moveCursor(){
 
 
 	<script type="text/javascript">
+	
+	
+	function reloadProductPage(value){
+		
+		//alert(value) 
+		window.location = "${pageContext.request.contextPath}/showProductDetail/"+value;
+	}
 		function changeWeight(){
 			document.getElementById("img_input_btn").value = "";
 			//document.getElementById('del_image').style="display:none";
