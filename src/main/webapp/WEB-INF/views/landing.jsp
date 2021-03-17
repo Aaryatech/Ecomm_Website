@@ -939,9 +939,15 @@
 					var lng = sessionStorage.getItem("selLng");
 					var addr = sessionStorage.getItem("selAddr");
 					var divertBtn = sessionStorage.getItem("divertBtn");
+					var fromGetLocation = sessionStorage
+							.getItem("fromGetLocation");
 
 					if (divertBtn == null) {
 						sessionStorage.setItem("divertBtn", "0");
+					}
+
+					if (divertBtn == null) {
+						sessionStorage.setItem("fromGetLocation", "0");
 					}
 
 					divertBtn = sessionStorage.getItem("divertBtn");
@@ -985,7 +991,7 @@
 			form.submit();
 		}
 		function resetPage() {
-
+			sessionStorage.setItem("fromGetLocation", "0");
 			window.open('${pageContext.request.contextPath}/', '_self');
 		}
 	</script>
@@ -1209,7 +1215,12 @@
 									//alert('Error was: ' + status);
 								} else {
 
-									if (longitude != 0 && latitude != 0) {
+									var fromGetLocation = sessionStorage
+											.getItem("fromGetLocation");
+
+									//alert(fromGetLocation)
+									if (longitude != 0 && latitude != 0
+											&& fromGetLocation != 0) {
 										$('#showShopDiv').show();
 									}
 

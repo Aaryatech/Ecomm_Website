@@ -432,15 +432,18 @@
 													</c:forEach>
 											</select></li>
 
-											<li>Shape<select class="select-css" id="shapeSimilar"
-												onchange="reloadProductPage(this.value);">
+											<c:if test="${list.size()>0}">
+												<li>Shape<select class="select-css" id="shapeSimilar"
+													onchange="reloadProductPage(this.value);">
 
-													<option value="">Select Shape</option>
-													<c:forEach items="${list}" var="list">
-														<option value="${list.productId}">${list.flavorName}</option>
-													</c:forEach>
+														<option value="">Select Shape</option>
+														<c:forEach items="${list}" var="list">
+															<option value="${list.productId}">${list.flavorName}</option>
+														</c:forEach>
 
-											</select></li>
+												</select></li>
+											</c:if>
+
 
 										</c:otherwise>
 

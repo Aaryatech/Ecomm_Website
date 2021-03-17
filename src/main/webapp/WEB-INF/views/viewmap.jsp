@@ -223,7 +223,7 @@ html, body {
 			sessionStorage.setItem("selLat", lat);
 			sessionStorage.setItem("selLng", lng);
 			sessionStorage.setItem("selAddr", addr);
-			
+			sessionStorage.setItem("fromGetLocation", "1");
 			
 			 window
 			.open(
