@@ -173,13 +173,49 @@ html {
 
 									<li>
 										<div class="cake_one product_padd">
-											<div class="cake_pic">
+											<div class="cake_pic">											
 												<a
 													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
 													onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 													alt="" class="mobile_fit transition">
 												</a>
+												
+												<!--  -->
+											<div class="purity_icn">
+									<c:choose>
+										<c:when test="${product.vegNonvegName eq 'VEG'}">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												alt="">
+										</c:when>
+										<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												alt="">
+										</c:when>
+										<c:otherwise>
+											<img
+												src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+												alt="">
+											<img
+												src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												class="slick-initialized slick-slider"
+												data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+												alt="">
+										</c:otherwise>
+									</c:choose>
+									<!-- <img src="/ecommerce/resources/images/veg_icn.jpg"
+										class="slick-initialized slick-slider"
+										data-src="/ecommerce/resources/images/veg_icn.jpg" alt=""> -->
+								</div>
+											<!--  -->
 
 												<div class="circle_tag active"
 													onclick="setLike(${product.productId},${product.isLike})">
@@ -209,10 +245,10 @@ html {
 														minFractionDigits="0" />
 													/-
 													<p class="per_kg">${product.uomShowName}</p>
-													<span class="off_prc"><i class="fa fa-inr"
+													<%-- <span class="off_prc"><i class="fa fa-inr"
 														aria-hidden="true"></i> <fmt:formatNumber type="number"
 															groupingUsed="false" value="${product.defaultPrice}"
-															maxFractionDigits="0" minFractionDigits="0" /></span> <span
+															maxFractionDigits="0" minFractionDigits="0" /></span>  --%><span
 														class="prc_off"></span>
 												</div>
 												<!-- </a> -->
