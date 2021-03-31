@@ -57,8 +57,21 @@
 
 		for (CateFilterConfig cat : data.getCatFilterConfig()) {
 
-			List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
-					.collect(Collectors.toList());
+			/* List<Integer> typeIdList = Stream.of(cat.getFilterIds().split(",")).map(Integer::parseInt)
+					.collect(Collectors.toList()); */
+			List<Integer> typeIdList = new ArrayList<Integer>();
+
+			try {
+
+				String[] arr = cat.getFilterIds().split(",");
+
+				for (int i = 0; i < arr.length; i++) {
+					typeIdList.add(Integer.parseInt(arr[i]));
+				}
+
+			} catch (Exception e) {
+
+			}
 
 			// List<Integer> typeIdList = new ArrayList<>();
 			// typeIdList.add(4);

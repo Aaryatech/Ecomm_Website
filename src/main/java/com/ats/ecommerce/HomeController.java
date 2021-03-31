@@ -1017,7 +1017,12 @@ public class HomeController {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			ContactUs[] cusArr = null;
-			int compId = (Integer) session.getAttribute("companyId");
+			int compId = 0;//(Integer) session.getAttribute("companyId");
+			try {
+			compId = (Integer) session.getAttribute("companyId");
+			}catch (Exception e) {
+				compId = 1;
+			}
 			cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH + "1_ContactUS_.json"), ContactUs[].class);
 
 			List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));

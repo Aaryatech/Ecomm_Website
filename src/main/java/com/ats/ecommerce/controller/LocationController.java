@@ -147,6 +147,10 @@ public class LocationController {
 						if (cookieArray[a].getName().equalsIgnoreCase("frKmCookie")) {
 							session.setAttribute("frKm",
 								EncodeDecode.DecodeKey(cookieArray[a].getValue()));
+							
+							session.setAttribute("frKm",
+									Float.parseFloat(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+							
 						}
 						
 						if (cookieArray[a].getName().equalsIgnoreCase("delAddIdCookie")) {
@@ -330,7 +334,8 @@ public class LocationController {
 			System.err.println("Mob no  " +mobNo);
 			Random random = new Random();
 
-			otp= String.format("%05d", random.nextInt(100003));
+			//otp= String.format("%05d", random.nextInt(100003));
+			otp="1234"; //String.format("%05d", random.nextInt(100003));
 			System.err.println("Mob no  " +mobNo +"otp  " + otp);
 			//info=SMSUtility.sendSMS(mobNo, "Your OTP for Monginis Login is " +otp);
 			info.setMsg(otp);

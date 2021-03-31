@@ -57,8 +57,8 @@
 							aria-hidden="true"></i> Back to profile</a>
 					</div>
 
-					<h6 class="thanks_no">Hi ${orderSaveData.custName}, we
-						received your order and are working on it now. We'll email you an
+					<h6 class="thanks_no">Hi, ${orderSaveData.custName}, we
+						received your order and are working on it now. We'll notify you an
 						update as soos as your order is proceed.</h6>
 				</div>
 
@@ -112,7 +112,7 @@
 									<ul>
 										<li>Item Price : <span><fmt:formatNumber
 													type="number" groupingUsed="false"
-													value="${detailList.mrp}" maxFractionDigits="0"
+													value="${detailList.totalAmt}" maxFractionDigits="0"
 													minFractionDigits="0" /></span></li>
 										<c:choose>
 											<c:when test="${detailList.exInt1==0}">
@@ -121,7 +121,7 @@
 															maxFractionDigits="0" minFractionDigits="0" /></span></li>
 											</c:when>
 											<c:otherwise>
-												<li>Qty : <span>${detailList.exFloat3}</span></li>
+												<li>Weight : <span>${detailList.exFloat3}</span></li>
 											</c:otherwise>
 										</c:choose>
 
