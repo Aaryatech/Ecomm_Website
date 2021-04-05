@@ -175,6 +175,8 @@ public class ProductDisplayController {
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
 			model.addAttribute("allData", data);
+			
+			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
 
 			model.addAttribute("catId", catId);
 

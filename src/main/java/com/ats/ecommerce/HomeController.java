@@ -745,6 +745,8 @@ public class HomeController {
 
 			model.addAttribute("festiveEvent", data.getFestEventList().get(index));
 
+			model.addAttribute("flavTagStatusList", data.getFlavorTagStatusList());
+			
 			System.err.println("INDEX - " + index + "    -------> " + data.getFestEventList().get(index));
 
 			// ALL MENU CATEGORY LIST
