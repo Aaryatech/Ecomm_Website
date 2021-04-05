@@ -1473,7 +1473,7 @@
 			if(hiddenProductListArr.length > 0){
 				
 				//alert("Anmol")
-				
+				var val;
 				for(var i=0; i<hiddenProductListArr.length; i++){
 					 /* if(hiddenProductListArr[i].isLike==1){
 						alert("Ok 1488"+hiddenProductListArr[i].productName)
@@ -1482,6 +1482,43 @@
 						//alert("Ok")
 						displayListArr.push(hiddenProductListArr[i]);
 						//setProductData(hiddenProductListArr[i]);
+						
+						var drpDwn = '';
+						var cakeDrpDwn = '<div class="cake_dropdown">'
+							cakeDrpDwn += '<div class="cake_dropdown_l">'
+							/* 	if(hiddenProductListArr[i].rateSettingType==0){
+									cakeDrpDwn += '<div class="plus_minus_one">'
+									+'<button type="button" value="" field="quantity"'
+									+'class="qtyminus slide"'
+									+'onclick="setQtyText('+hiddenProductListArr[i].productId+',0,'+hiddenProductListArr[i].prodDetailList+')">'
+									+'	<i class="fa fa-minus" aria-hidden="true"></i>'
+									+'</button>'
+									+'<input type="text" id="txtWt'+hiddenProductListArr[i].productId+'"'
+									+'	value="1" style="text-align: center;"'
+									+'	class="qty slide">'
+									+'<button type="button" value="" field="quantity"'
+									+'	onclick="setQtyText('+hiddenProductListArr[i].productId+',1,'+hiddenProductListArr[i].prodDetailList+')"'
+									+'	class="qtyplus slide">'
+									+'	<i class="fa fa-plus" aria-hidden="true"></i>'
+									+'</button>'
+									+'</div>'
+								}else{									
+									
+									cakeDrpDwn += '<div class="small_field">'
+									+'	<select class="select-css" id="wt'+hiddenProductListArr[i].productId+'"'
+									+'	onchange="setPriceByWtAndFlavour('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')">'									
+										
+									
+									
+									+'	</select>'									
+									+'	</div>'
+								} */
+							
+							+'</div>'
+							+'</div>';
+							
+							
+						
 						 var isLike=hiddenProductListArr[i].isLike;						
 						var like = '';
 						
@@ -1534,7 +1571,7 @@
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-						+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+						+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 						count++;

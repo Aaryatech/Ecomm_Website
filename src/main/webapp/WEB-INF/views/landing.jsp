@@ -1260,7 +1260,7 @@
 									for (var j = 0; j < newFrList.length; j++) {
 
 										//alert(newFrList[j].exInt1)
-										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">Monginis Cake Shop - '
+										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">'+newFrList[j].frId+'Monginis Cake Shop - '
 												+ newFrList[j].city
 												+ ' </option>';
 

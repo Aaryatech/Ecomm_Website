@@ -399,7 +399,7 @@ function removeLoader(){
 		varStatus="count">
 		<c:choose>
 			<c:when
-				test="${statusFilter.filterTypeId==5 && statusFilter.costAffect==1}">
+				test="${statusFilter.filterTypeId==5 && statusFilter.costAffect==0}">
 				<div class="find_store">
 					<h2 class="sec_title">
 						<center>
@@ -479,15 +479,66 @@ function removeLoader(){
 
 
 													<div class="cake_prc">
-														<i class="fa fa-inr cake_prc_detail_iclass"
-															aria-hidden="true"></i>
-														<p class="cake_prc_detail_pclass"
-															id="cake_prc${product.productId}">${product.defaultPrice}</p>
-														<span class="off_prc" id="off_prc${product.productId}">
-															<!-- <i class="fa fa-inr" 
-															aria-hidden="true"></i> -->
-														</span> <span id="prc_off${product.productId}" class="prc_off"></span>
-													</div>
+												<div>
+																<i class="fa fa-inr cake_prc_detail_iclass"
+																	aria-hidden="true"></i>
+
+																<c:set value="${product.defaultPrice}" var="price"></c:set>
+																<c:set value="1" var="defaultWt"></c:set>
+
+																<c:choose>
+
+																	<c:when test="${product.rateSettingType == 1}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:set value="${product.defaultPrice * defaultWt}"
+																			var="price"></c:set>
+
+																	</c:when>
+
+																	<c:when test="${product.rateSettingType == 2}">
+
+																		<c:forEach items="${product.availInWeights}"
+																			var="proWt" varStatus="loop" begin="0" end="0">
+																			<c:set value="${proWt}" var="defaultWt"></c:set>
+																		</c:forEach>
+
+																		<c:forEach items="${product.prodDetailList}"
+																			var="proDetail">
+
+																			<c:choose>
+																				<c:when
+																					test="${proDetail.flavorId==product.defaultFlavorId and proDetail.qty==defaultWt}">
+																					<c:set value="${proDetail.actualRate}" var="price"></c:set>
+																				</c:when>
+																			</c:choose>
+																		</c:forEach>
+
+																	</c:when>
+
+
+																</c:choose>
+
+																<p class="cake_prc_detail_pclass"
+																	id="newPrice${product.productId}">${price} /-</p>
+
+															</div>
+													<%-- <i class="fa fa-inr" aria-hidden="true"></i>
+													<fmt:formatNumber type="number" groupingUsed="false"
+														value="${product.defaultPrice}" maxFractionDigits="0"
+														minFractionDigits="0" /> 													
+													<p class="per_kg">${product.uomShowName}</p>--%>
+													
+													<%-- <span class="off_prc"><i class="fa fa-inr"
+														aria-hidden="true"></i> <fmt:formatNumber type="number"
+															groupingUsed="false" value="${product.defaultPrice}"
+															maxFractionDigits="0" minFractionDigits="0" /></span>  --%><span
+														class="prc_off"></span>
+												</div>
 
 												</div>
 												<div class="cake_container">
@@ -599,6 +650,7 @@ function removeLoader(){
 																			</div></li>
 																	</c:if> --%>
 
+																	<div style="display: none;">
 																	<c:if test="${product.flavourIds!=0}">
 																		<select class="select-css"
 																			id="flav${product.productId}"
@@ -634,7 +686,7 @@ function removeLoader(){
 																			</c:forEach>
 																		</select>
 																	</c:if>
-
+																	</div>
 																</ul>
 																<!-- <ul>
 																	<li><input type="radio" id="a-option"
@@ -650,15 +702,11 @@ function removeLoader(){
 
 																</ul> -->
 															</div>
-
-
-
-
-
-
-
-
-
+														</div>
+														<div class="radio_r">
+															<a href="javascript:void(0)"
+																onclick="addCart('${product.productId}','${product.rateSettingType}')" title="Add To Cart">
+																<i class="fa fa-shopping-cart shop_cart"></i></a>
 														</div>
 														<div class="clr"></div>
 													</div>
@@ -689,7 +737,7 @@ function removeLoader(){
 													</div> -->
 
 
-													<div class="cake_radio_row">
+													<%-- <div class="cake_radio_row">
 														<div class="radio_l">
 
 															<!-- Flavor 25-12-2020 -->
@@ -751,7 +799,7 @@ function removeLoader(){
 																class="cart_btn">Add to Cart</a>
 														</div>
 														<div class="clr"></div>
-													</div>
+													</div> --%>
 
 												</div>
 

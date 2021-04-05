@@ -41,6 +41,32 @@
 												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
 												class="mobile_fit transition">
 											</a>
+												
+												
+											<div class="purity_icn">
+														<c:choose>
+															<c:when test="${product.vegNonvegName eq 'VEG'}">
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:when test="${product.vegNonvegName eq 'NON-VEG'}">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:when>
+															<c:otherwise>
+																<img src="#" class="lazy"
+																	data-src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg"
+																	alt="">
+																<img src="#" class="lazy"
+																	id="nonveg${product.productId}"
+																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
+																	alt="">
+															</c:otherwise>
+														</c:choose>
+													</div>
 
 											<div class="circle_tag active"
 												onclick="setLike(${product.productId},${product.isLike})">
@@ -71,11 +97,11 @@
 												/-
 												<p class="per_kg"
 													style="font-size: 12px; vertical-align: middle; display: inline-block;">${product.uomShowName}</p>
-												<span class="off_prc"><i class="fa fa-inr"
+												<%-- <span class="off_prc"><i class="fa fa-inr"
 													aria-hidden="true"></i> <fmt:formatNumber type="number"
 														groupingUsed="false" value="${product.defaultPrice}"
 														maxFractionDigits="0" minFractionDigits="0" /></span> <span
-													class="prc_off"></span>
+													class="prc_off"></span> --%>
 											</div>
 
 											<!-- </a> -->
