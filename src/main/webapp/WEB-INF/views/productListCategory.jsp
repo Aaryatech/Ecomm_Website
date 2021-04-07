@@ -937,7 +937,7 @@ function setLike(id,isLike) {
 	</script>
 	<script type="text/javascript">
 		function addCart(id,type) {
-			
+			//alert("Ok" +type);
 			//alert("--------------- "+document.getElementById("txtWt").value)
 		 
 			 var prodMaster;
@@ -963,10 +963,11 @@ function setLike(id,isLike) {
 			
 			var selFlvName ="";
 			
-			if(type == 0){
+			if(parseInt(type) == 0){
+				//alert("Its zero")
 				selectWt = 1;	
-			}else if(type == 1 || type == 2){
-				
+			}else if(parseInt(type) == 1 || parseInt(type) == 2){
+				//alert("Its 1 || 2")
 				
 				try {
 					
@@ -975,7 +976,9 @@ function setLike(id,isLike) {
 					
 					selectFlav = prodMaster.defaultFlavorId;
 					 
-					selFlvName = "akshay";
+					//selFlvName = "akshay";
+					var defFlvName =prodMaster.flavorNames.split(",");
+					selFlvName=defFlvName[0];
 					
 				} catch (e) {
 					selectFlav = 0;
@@ -984,8 +987,9 @@ function setLike(id,isLike) {
 					selectFlav = 0;
 				}
 			}
-			 
-				
+			//alert("type" +type);
+				var defFlvName =prodMaster.flavorNames.split(",");
+				selFlvName=defFlvName[0];
 				var prodDetail = prodMaster.prodDetailList;
 				
 				
@@ -1004,7 +1008,7 @@ function setLike(id,isLike) {
 
 				for (var d = 0; d < prodDetail.length; d++) {
 					
-					if(type == 0){
+					if(parseInt(type) == 0){
 						
 						qty=selectWt;
 						
@@ -1018,7 +1022,7 @@ function setLike(id,isLike) {
 						
 						break;
 							
-					}else if(type == 1){
+					}else if(parseInt(type) == 1){
 						
 						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
 							
@@ -1039,7 +1043,7 @@ function setLike(id,isLike) {
 		
 						}
 						
-					} else if(type == 2){
+					} else if(parseInt(type) == 2){
 						
 						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
 							
@@ -1058,8 +1062,8 @@ function setLike(id,isLike) {
 					} 
 		
 				}
-				 
 				
+				//alert("HEE"+calRate);
 				var priceDiff = parseFloat(displayRate)
 						- parseFloat(actualRate);
 				
@@ -1087,9 +1091,9 @@ function setLike(id,isLike) {
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
 				
-				if(type==0){
+				/* if(type==0){
 					calRate=actualRate;
-				}
+				} */
 				
 				var spInst;
 				var msgonCake;
@@ -1211,8 +1215,6 @@ function setLike(id,isLike) {
 				appendCartData();
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
-			  	  
-		
 		} 
 		</script>
 <script type="text/javascript">
@@ -1334,7 +1336,9 @@ function setLike(id,isLike) {
 		<script type="text/javascript">
 		function addCart(id,type) {
 			
-			
+			//alert("OKKKK" +type)
+			try{
+				
 			
 			var selectFlav = 0;
 			
@@ -1360,9 +1364,7 @@ function setLike(id,isLike) {
 					selectFlav = 0;
 				}
 			}
-			
-			
-				
+			//alert("selectFlav " +selectFlav);
 				
 				var prodMaster;
 				
@@ -1383,7 +1385,9 @@ function setLike(id,isLike) {
 						break;
 					}
 				}
-				
+				if(parseInt(selectFlav)==0){
+					selectFlav=prodMaster.defaultFlavorId;
+				}
 				var prodDetail = prodMaster.prodDetailList;
 				//alert(prodDetail)
 				
@@ -1403,7 +1407,7 @@ function setLike(id,isLike) {
 						
 				 for (var d = 0; d < prodDetail.length; d++) {
 					
-					if(type == 0){
+					if(parseInt(type) == 0){
 						
 						qty=selectWt;
 						
@@ -1417,8 +1421,8 @@ function setLike(id,isLike) {
 						
 						break;
 							
-					}else if(type == 1){
-						
+					}else if(parseInt(type) == 1){
+						//alert("prodDetail[d].flavorId" +prodDetail[d].flavorId)
 						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
 							
 							
@@ -1427,6 +1431,7 @@ function setLike(id,isLike) {
 							//alert("1  - "+prodDetail[d].configDetailId)
 							
 							calRate=prodDetail[d].actualRate*selectWt;
+							//alert("calRate AA" +calRate);
 							actualRate=prodDetail[d].actualRate;
 							displayRate=prodDetail[d].displayRate;
 							configDetailId=prodDetail[d].configDetailId;
@@ -1438,7 +1443,7 @@ function setLike(id,isLike) {
 
 						}
 						
-					} else if(type == 2){
+					} else if(parseInt(type) == 2){
 						
 						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
 							
@@ -1487,10 +1492,10 @@ function setLike(id,isLike) {
 				var cartValue = sessionStorage
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
-				
-				if(type==0){
+				//alert(type)
+			/* 	if(type==0){
 					calRate=actualRate;
-				}
+				} */
 				
 				
 				if (sessionStorage.getItem("cartValue") == null) {
@@ -1535,7 +1540,7 @@ function setLike(id,isLike) {
 					} */
 				}
 				
-				
+				//alert("calRate" +calRate);
 				var obj={
 						uniqueId : uniq,
 						orderDetailId : 0,
@@ -1579,7 +1584,7 @@ function setLike(id,isLike) {
 						msgonCake : 'NA'
 						
 					}
-				
+				//console.log("OBj ",obj);
 				if(itemFound==1){
 					table[index]=obj;
 				}else{
@@ -1592,7 +1597,10 @@ function setLike(id,isLike) {
 				
 					openNav();
 				  	setTimeout(function(){ closeNav(); }, 4000);
-				 
+			}catch(e) {
+				//alert(e.message);
+			}	
+			//alert("Ok End")
 		} 				
 	</script>
 </body>

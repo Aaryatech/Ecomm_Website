@@ -985,7 +985,11 @@ public class CheckoutController {
 				// TODO: handle exception
 			}
 			// System.err.println("width" + width + "height " + height);
+			try {
 			ImageUploadController.saveImgWithByteArray(imageByte, imgName, width, height);
+			}catch (Exception e) {
+				System.err.println("No Image to upload");
+			}
 			bis.close();
 		} catch (Exception e) {
 			try {

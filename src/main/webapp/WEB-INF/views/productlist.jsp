@@ -2450,7 +2450,11 @@
 					var docFlv = document.getElementById("flav" + id);
 					selFlvName = docFlv.options[docFlv.selectedIndex].text;
 					
+					
+					
+					
 				} catch (e) {
+					
 					selectFlav = 0;
 				}
 				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
@@ -2470,7 +2474,7 @@
 
 				var allItemList = sessionStorage.getItem("allItemList");
 				var prodHead = $.parseJSON(allItemList);
-				
+			
 				//alert("dfdfd "+prodHead )
 				
 				
@@ -2480,10 +2484,11 @@
 						break;
 					}
 				}
-				
+				var defFlvName =prodMaster.flavorNames.split(",");
+				selFlvName=defFlvName[0];
 				var prodDetail = prodMaster.prodDetailList;
 				//alert(prodDetail)
-				
+					selectFlav = prodMaster.defaultFlavorId;
 				var actualRate=0;
 				var calRate=0;
 				var displayRate=0;
@@ -2585,10 +2590,10 @@
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
 				
-				if(type==0){
+				/* if(type==0){
 					calRate=actualRate;
 				}
-				
+				 */
 				
 				if (sessionStorage.getItem("cartValue") == null) {
 					var table = [];

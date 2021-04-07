@@ -20,10 +20,11 @@
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 	<!-- Header End -->
+	<jsp:include page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
 
 
 	<!-- mega menu -->
-	<div class="mega_menu_row">
+	<%-- <div class="mega_menu_row">
 
 		<div class="wrapper">
 
@@ -58,7 +59,7 @@
 
 
 
-									<%-- <div class="row_one">
+									<div class="row_one">
 										<ul class="drop_mainmenu">
 
 											<li>By Price</li>
@@ -95,10 +96,10 @@
 											</label></li>
 
 										</ul>
-									</div> --%>
+									</div>
 
-									<%-- ${menuCat.typeIdList} --%>
-									<%-- ${allFilterTypeList} --%>
+									${menuCat.typeIdList}
+									${allFilterTypeList}
 
 									<c:forEach items="${menuCat.typeIdList}" var="menuTypeList">
 
@@ -203,7 +204,7 @@
 						class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 
 	<div class="head_marg with_menu">
 
@@ -295,11 +296,11 @@
 														onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'">
 													</a>
 													<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
-													<div class="cake_prc">
+													<div class="cake_prc" id="newPrice${product.productId}">
 														<i class="fa fa-inr" aria-hidden="true"></i>${product.defaultPrice}<span
-															class="off_prc"><i class="fa fa-inr"
+															class="off_prc" style="display:none;"><i class="fa fa-inr"
 															aria-hidden="true"></i>${product.defaultPrice}</span> <span
-															class="prc_off"></span>
+															class="prc_off" style="display:none;"></span>
 													</div>
 												</div>
 												<div class="cake_container">
@@ -829,11 +830,11 @@
 									+ ' <div class="cake_one product_padd"> '
 									+ ' <div class="cake_pic"> '+detail
 									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
-									+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+									+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice +'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
-									+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+									+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice
-									+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+									+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 									+ ' </div> '
 									+ ' <div class="cake_container"> '
@@ -855,11 +856,11 @@
 							+ ' <div class="cake_one product_padd"> '
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
@@ -1025,11 +1026,11 @@
 						+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
 						+ isVegType						
-						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+tempArr[i].uomShowName+'</p>'
-						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice
-						+ '</span> <span class="prc_off"></span> </div> '
+						+ '</span> <span style="display:none;"  class="prc_off"></span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
@@ -1479,45 +1480,53 @@
 						alert("Ok 1488"+hiddenProductListArr[i].productName)
 					} */
 					if(catId==0){
-						//alert("Ok")
+						//alert("OkAAAA 06-04-2021")
 						displayListArr.push(hiddenProductListArr[i]);
 						//setProductData(hiddenProductListArr[i]);
 						
 						var drpDwn = '';
-						var cakeDrpDwn = '<div class="cake_dropdown">'
-							cakeDrpDwn += '<div class="cake_dropdown_l">'
-							/* 	if(hiddenProductListArr[i].rateSettingType==0){
-									cakeDrpDwn += '<div class="plus_minus_one">'
-									+'<button type="button" value="" field="quantity"'
-									+'class="qtyminus slide"'
-									+'onclick="setQtyText('+hiddenProductListArr[i].productId+',0,'+hiddenProductListArr[i].prodDetailList+')">'
-									+'	<i class="fa fa-minus" aria-hidden="true"></i>'
-									+'</button>'
-									+'<input type="text" id="txtWt'+hiddenProductListArr[i].productId+'"'
-									+'	value="1" style="text-align: center;"'
-									+'	class="qty slide">'
-									+'<button type="button" value="" field="quantity"'
-									+'	onclick="setQtyText('+hiddenProductListArr[i].productId+',1,'+hiddenProductListArr[i].prodDetailList+')"'
-									+'	class="qtyplus slide">'
-									+'	<i class="fa fa-plus" aria-hidden="true"></i>'
-									+'</button>'
-									+'</div>'
-								}else{									
-									
-									cakeDrpDwn += '<div class="small_field">'
-									+'	<select class="select-css" id="wt'+hiddenProductListArr[i].productId+'"'
-									+'	onchange="setPriceByWtAndFlavour('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')">'									
-										
-									
-									
-									+'	</select>'									
-									+'	</div>'
-								} */
-							
-							+'</div>'
-							+'</div>';
-							
-							
+						/* var cakeDrpDwn = '<div class="cake_dropdown">'
+							cakeDrpDwn += '<div class="cake_dropdown_l">' */
+							//SACHIN CODE
+							//console.log("my data ",hiddenProductListArr[0]);
+								var cakeDrpDwn= null;
+									if(hiddenProductListArr[i].rateSettingType==0){
+									cakeDrpDwn =
+											'<div class="cake_dropdown_l"><div class="plus_minus_one">'+
+											'<button type="button" value="" field="quantity"class="qtyminus slide" '
+												+'onclick="setQtyText('+hiddenProductListArr[i].productId+',0)">'
+												+'<i class="fa fa-minus" aria-hidden="true"></i></button>'+
+											'<input type="text" id="txtWt'+hiddenProductListArr[i].productId+'"'
+												+'value="1" style="text-align: center;"'+
+												'class="qty slide">'+
+											'<button type="button" value="" field="quantity"'+
+												'onclick="setQtyText('+hiddenProductListArr[i].productId+',1)"'
+												+'class="qtyplus slide">'+
+												'<i class="fa fa-plus" aria-hidden="true"></i>'+
+											'</button></div>'
+										}
+										else{
+											var dataOption=''
+												var wtList=hiddenProductListArr[i].availInWeights.split(',');
+												//alert(wtList);
+										//	var dataOption='<option value="0">Select Weight</option>'
+											if(parseFloat(wtList[0])>0){
+											for(var d=0;d<wtList.length;d++){
+												dataOption+='<option value="'+wtList[d]+'">'+wtList[d]+'</option>'
+											}
+											}
+											//alert(dataOption)
+											
+											cakeDrpDwn =
+									'<div class="cake_dropdown_l"><div class="small_field">'+
+										'<select class="select-css" id="wt'+hiddenProductListArr[i].productId+'"'+
+											'onchange="setPriceByWtAndFlavour('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')">'+
+											dataOption+
+										'</select></div>'
+										}
+								cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr[i].uomShowName+'</span></div>'
+								//SACHIN CODE END
+								dataOption=null;
 						
 						 var isLike=hiddenProductListArr[i].isLike;						
 						var like = '';
@@ -1562,16 +1571,16 @@
 						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
 						+ isVegType						
-						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
-						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
-						+ '</span> <span class="prc_off"></span> </div> '
+						+ '</span> <span style="display:none;"  class="prc_off"></span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-						+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+						+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 						count++;
@@ -1585,7 +1594,8 @@
 						if(max > 0 && hiddenProductListArr[i].defaultPrice >= min && hiddenProductListArr[i].defaultPrice <= max && hiddenProductListArr[i].prodCatId == catId){
 							
 							displayListArr.push(hiddenProductListArr[i]);
-							
+							//SAC NEW
+							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
 							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
@@ -1628,16 +1638,16 @@
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 							+ isVegType
 							+ like							
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-							+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
@@ -1647,7 +1657,8 @@
 							//alert("aaaaaaaaa")
 							
 							displayListArr.push(hiddenProductListArr[i]);
-							
+							//SAC NEW
+							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
 							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
@@ -1690,16 +1701,16 @@
 							+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 							+ isVegType
 							+ like							
-							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
-							+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
-							+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
-							+ hiddenProductListArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
 
 							count++;
@@ -1714,7 +1725,8 @@
 					if(catId == 0){
 						
 						displayListArr.push(allItemArr[i]);
-						
+						//SAC NEW
+						var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 						var isLike=allItemArr[i].isLike;
 						var like = '';
 						
@@ -1759,17 +1771,17 @@
 						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 						+ isVegType
 						+ like						
-						+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
-						+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
-						+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+						+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 						+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 						+ ' </a>'
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-						+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+						+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"><a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
 			
@@ -1784,7 +1796,8 @@
 							if(allItemArr[i].defaultPrice >= min && allItemArr[i].defaultPrice <= max && allItemArr[i].prodCatId==catId){
 								
 								displayListArr.push(allItemArr[i]);
-								
+								//SAC NEW
+								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 								var isLike=allItemArr[i].isLike;
 								var like = '';
 								
@@ -1827,16 +1840,16 @@
 								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 								+ isVegType
 								+ like								
-								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+								+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
-								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+								+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
-								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-								+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
 
 								count++;
@@ -1850,7 +1863,8 @@
 								//alert("1819")
 								
 								displayListArr.push(allItemArr[i]);
-								
+								//SAC NEW
+								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 								//alert("hi")
 								
 								var isLike=allItemArr[i].isLike;
@@ -1895,16 +1909,16 @@
 								+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 								+ isVegType
 								+ like
-								+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+								+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
-								+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+								+ ' <span style="display:none;" class="off_prc" ><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
-								+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+								+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
 								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
-								+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
+								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
 	 
 								count++;
@@ -2009,11 +2023,11 @@ function setProductData(productObj){
 			+ ' <img src="${prodImgUrl}'+productObj.prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+productObj.prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 			+ isVegType
 			+ like
-			+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
+			+ ' <div class="cake_prc" id="newPrice'+productObj.productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 			+ productObj.defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+productObj.uomShowName+'</p>'
-			+ ' <span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+			+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 			+ productObj.defaultPrice
-			+ '</span> <span class="prc_off">(23% Off)</span> </div> '
+			+ '</span> <span style="display:none;" class="prc_off">(23% Off)</span> </div> '
 			+ ' <input type="hidden" class="tagNameHide" value="'+productObj.appliTagNames+'"> '
 			+ ' </div> '
 			+ ' <div class="cake_container"> '
@@ -2053,7 +2067,275 @@ function setProductData(productObj){
 		
 	</script>
 	<script type="text/javascript">
-		function addCart(id,type) {
+	
+	function addCart(id,type) {
+		
+		
+		
+		var selectFlav = 0;
+		
+		var selectWt = 0;
+		
+		var selFlvName ="";
+		
+		if(type == 0){
+			selectWt = document.getElementById("txtWt"+id).value;	
+		}else if(type == 1 || type == 2){
+			selectWt = document.getElementById("wt" + id).value;
+			
+			try {
+				selectFlav = document.getElementById("flav" + id).value;
+				
+				var docFlv = document.getElementById("flav" + id);
+				selFlvName = docFlv.options[docFlv.selectedIndex].text;
+				
+				
+				
+				
+			} catch (e) {
+				
+				selectFlav = 0;
+			}
+			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+				selectFlav = 0;
+			}
+		}
+		
+		
+			
+			
+			var prodMaster;
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var prodHead = $.parseJSON(allItemList);
+		
+			//alert("dfdfd "+prodHead )
+			
+			
+			for (var h = 0; h < prodHead.length; h++) {
+				if (parseInt(id) == parseInt(prodHead[h].productId)) {
+					prodMaster = prodHead[h];
+					break;
+				}
+			}
+			var defFlvName =prodMaster.flavorNames.split(",");
+			selFlvName=defFlvName[0];
+			var prodDetail = prodMaster.prodDetailList;
+			//alert(prodDetail)
+				selectFlav = prodMaster.defaultFlavorId;
+			var actualRate=0;
+			var calRate=0;
+			var displayRate=0;
+			var configDetailId=0;
+			var flvId=0;
+			var isVeg=0;
+			var shapeId=0;
+			var flvName=selFlvName;
+			
+			var qty = 1;
+			
+			var uniq = (new Date()).getTime();
+			//alert(uniq)
+					
+			 for (var d = 0; d < prodDetail.length; d++) {
+				
+				if(type == 0){
+					
+					qty=selectWt;
+					
+					calRate=prodDetail[d].actualRate*selectWt;
+					actualRate=prodDetail[d].actualRate;
+					displayRate=prodDetail[d].displayRate;
+					configDetailId=prodDetail[d].configDetailId;
+					flvId=prodDetail[d].flavorId;
+					isVeg=prodDetail[d].isVeg;
+					shapeId=prodDetail[d].shapeId;
+					
+					break;
+						
+				}else if(type == 1){
+					
+					if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+						
+						
+						//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+						
+						//alert("1  - "+prodDetail[d].configDetailId)
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+
+					}
+					
+				} else if(type == 2){
+					
+					if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+						
+						calRate=prodDetail[d].actualRate;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+
+					}
+					
+				} 
+
+			}
+			 
+			
+			
+			
+			var priceDiff = parseFloat(displayRate)
+					- parseFloat(actualRate);
+			
+			offPer = (parseFloat(priceDiff)
+					/ parseFloat(displayRate) * 100);
+
+			taxableAmt = calRate;
+
+			cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+			sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+			igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+
+			taxAmt = (cgstAmt + sgstAmt + igstAmt)
+					.toFixed(2);
+			
+			totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+			}
+
+			var cartValue = sessionStorage
+					.getItem("cartValue");
+			var table = $.parseJSON(cartValue);
+			
+			/* if(type==0){
+				calRate=actualRate;
+			}
+			 */
+			
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var cartValue = sessionStorage.getItem("cartValue");
+			var cartArray = $.parseJSON(cartValue);
+			
+			var imgFile="";
+			var imgName="";
+			
+		
+			
+			var index=0,itemFound=0;
+			
+		
+			
+			for(var i=0; i<cartArray.length;i++){
+				
+				//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+				
+				if(configDetailId==cartArray[i].exInt1 && type==0){
+					index=i;
+					itemFound=1;
+					imgFile : cartArray[i].imgFile;
+					imgName : cartArray[i].imgName;
+					break;
+				}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+					//alert("asasas")
+					index=i;
+					itemFound=1;
+					imgFile : cartArray[i].imgFile;
+					imgName : cartArray[i].imgName;
+					break;
+				}
+				/* else if(configDetailId==cartArray[i].exInt1){
+					index=i;
+					itemFound=1;
+					break;
+				} */
+			}
+			
+			
+			var obj={
+					uniqueId : uniq,
+					orderDetailId : 0,
+					orderId : 0,
+					itemId : prodMaster.productId,
+					hsnCode : prodMaster.hsnCode,
+					qty : qty,
+					mrp : displayRate,
+					rate : calRate,
+					taxableAmt : taxableAmt,
+					cgstPer : prodMaster.cgstPer,
+					sgstPer : prodMaster.sgstPer,
+					igstPer : prodMaster.igstPer,
+					cgstAmt : cgstAmt,
+					sgstAmt : sgstAmt,
+					igstAmt : igstAmt,
+					discAmt : 0,
+					taxAmt : taxAmt,
+					totalAmt : totalAmt,
+					delStatus : 1,
+					remark : '',
+					exInt1 : configDetailId,
+					exInt2 : flvId,
+					exInt3 : isVeg,
+					exInt4 : shapeId,
+					exVar1 : prodMaster.productName,
+					exVar2 : '',
+					exVar3 : '',
+					exVar4 : '',
+					exFloat1 : 1,
+					exFloat2 : 1,
+					exFloat3 : 1,
+					exFloat4 : 1,
+					weight : selectWt,
+					veg : "",
+					rateSettingType : type,
+					flvName : flvName,
+					imgFile : imgFile,
+					imgName : imgName,
+					spInst : "NA",
+					msgonCake : 'NA'
+					
+				}
+			
+			if(itemFound==1){
+				table[index]=obj;
+			}else{
+				table.push(obj);	
+			}
+			
+			sessionStorage.setItem("cartValue", JSON
+					.stringify(table));
+			appendCartData();
+			
+				openNav();
+			  	setTimeout(function(){ closeNav(); }, 4000);
+			 
+	} 		
+		function addCart_OLD(id,type) {
 			
 			//alert("--------------- "+document.getElementById("txtWt").value)
 		 
@@ -2105,7 +2387,11 @@ function setProductData(productObj){
 				
 				var prodDetail = prodMaster.prodDetailList;
 				
-				
+				selectFlav = prodMaster.defaultFlavorId;
+				 
+				//selFlvName = "akshay";
+				var defFlvName =prodMaster.flavorNames.split(",");
+				selFlvName=defFlvName[0];
 				var actualRate=0;
 				var calRate=0;
 				var displayRate=0;
@@ -2331,6 +2617,157 @@ function setProductData(productObj){
 			  	  
 		
 		} 
+		</script>
+		<script>
+		
+function setPriceByWtAndFlavour(id,type) {
+			
+			//alert(id+"      "+type)
+			
+			var selectWt = document.getElementById("wt" + id).value;
+			var selectFlav = 0;
+			try {
+				selectFlav = document.getElementById("flav" + id).value;
+			} catch (e) {
+				selectFlav = 0;
+			}
+			if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+				selectFlav = 0;
+			}
+			
+			//alert(selectWt+"          "+selectFlav)
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var rate=0;
+			
+			for(var i=0;i<allItemArr.length;i++){
+				if(allItemArr[i].productId==id){
+					rate=parseFloat(allItemArr[i].defaultPrice);
+				}
+			}
+			
+			for(var i=0;i<allItemArr.length;i++){
+				if(allItemArr[i].productId==id){
+					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
+						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}
+					}
+				}
+			}
+			
+			if(type==1){
+				rate=rate*parseFloat(selectWt);
+			}
+			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			
+		}
+		
+function setQtyText(id, type) {
+
+	/* type  :  0 - minus,  1 - plus */
+	
+	var wt=document.getElementById("txtWt"+id).value;
+//alert(id+"    "+type+ "     "+wt)
+
+//alert(detailList);
+	
+	if(type==0){
+	
+		var newWt=wt+1;
+		if(wt>1 && wt<=10){
+			wt=parseInt(wt)-1;
+		}
+		
+	}
+	
+	else if(type==1){
+		if(wt>=1 && wt<10){
+			wt=parseInt(wt)+1;
+		}
+	}
+	
+	document.getElementById("txtWt"+id).value=wt;
+	
+	
+	if (sessionStorage.getItem("allItemList") == null) {
+		var table = [];
+		sessionStorage.setItem("allItemList", JSON.stringify(table));
+	}
+
+	var allItemList = sessionStorage.getItem("allItemList");
+	var allItemArr = $.parseJSON(allItemList);
+
+	var rate=0;
+	
+	for(var i=0;i<allItemArr.length;i++){
+		
+		if(allItemArr[i].productId==id){
+	
+			rate=parseFloat(allItemArr[i].prodDetailList[0].actualRate);
+		}
+		
+	}
+	
+	rate=rate*wt;
+	
+	document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+	
+
+}
+
+		function setWeightOrQtyDropDown(hiddenProductListArr){
+		//SACHIN CODE
+			var dataOption=''
+				var wtList=hiddenProductListArr.availInWeights.split(',');
+				//alert(wtList);
+		//	var dataOption='<option value="0">Select Weight</option>'
+			if(parseFloat(wtList[0])>0){
+			for(var d=0;d<wtList.length;d++){
+				dataOption+='<option value="'+wtList[d]+'">'+wtList[d]+'</option>'
+			}
+			}
+										var cakeDrpDwn= null;
+											if(hiddenProductListArr.rateSettingType==0){
+											cakeDrpDwn =
+													'<div class="cake_dropdown_l"><div class="plus_minus_one">'+
+													'<button type="button" value="" field="quantity"class="qtyminus slide" '
+														+'onclick="setQtyText('+hiddenProductListArr.productId+',0)">'
+														+'<i class="fa fa-minus" aria-hidden="true"></i></button>'+
+													'<input type="text" id="txtWt'+hiddenProductListArr.productId+'"'
+														+'value="1" style="text-align: center;"'+
+														'class="qty slide">'+
+													'<button type="button" value="" field="quantity"'+
+														'onclick="setQtyText('+hiddenProductListArr.productId+',1)"'
+														+'class="qtyplus slide">'+
+														'<i class="fa fa-plus" aria-hidden="true"></i>'+
+													'</button></div>'
+												}
+												else{
+													cakeDrpDwn =
+											'<div class="cake_dropdown_l"><div class="small_field">'+
+												'<select class="select-css" id="wt'+hiddenProductListArr.productId+'"'+
+													'onchange="setPriceByWtAndFlavour('+hiddenProductListArr.productId+','+hiddenProductListArr.rateSettingType+')">'+
+													dataOption+
+												'</select></div>'
+												}
+										cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr.uomShowName+'</span></div>'
+										//SACHIN CODE END
+										return cakeDrpDwn;
+	
+		}
 		</script>
 </body>
 

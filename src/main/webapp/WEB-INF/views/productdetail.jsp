@@ -392,7 +392,7 @@
 
 											<c:if test="${prodHeader.defaultFlavorId!=0}">
 
-												<li>Flavor <select class="select-css" name="flavor"
+												<li>Flavor<select class="select-css" name="flavor"
 													id="flavor"
 													onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
 														<c:forEach items="${prodHeader.flavourIds}"
@@ -432,23 +432,25 @@
 													</c:forEach>
 											</select></li>
 
-											<c:if test="${list.size()>0}">
-												<li>Shape<select class="select-css" id="shapeSimilar"
-													onchange="reloadProductPage(this.value);">
-
-														<option value="">Select Shape</option>
-														<c:forEach items="${list}" var="list">
-															<option value="${list.productId}">${list.flavorName}</option>
-														</c:forEach>
-
-												</select></li>
-											</c:if>
+										
+												
+											
 
 
 										</c:otherwise>
 
 									</c:choose>
+										<c:if test="${shapeList.size()>0}">
+<li>Shape<select class="select-css" id="shapeSimilar"
+													onchange="reloadProductPage(this.value);">
 
+														<option value="">Select Shape</option>
+														<c:forEach items="${shapeList}" var="shapeData">
+															<option value="${shapeData.productId}">${shapeData.flavorName}</option>
+														</c:forEach>
+
+												</select></li>
+												</c:if>
 								</ul>
 
 								<ul>

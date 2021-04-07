@@ -607,9 +607,9 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/showProductDetail/{id}", method = RequestMethod.GET)
-	public String showProductDetail(@PathVariable int id, Model model, HttpServletRequest request,
-			HttpServletResponse response) {
-		System.err.println("In Show Product Detail");
+	public String showProductDetail(HttpServletRequest request,
+			HttpServletResponse response, Model model, @PathVariable String id) {
+		System.err.println("In Showdddd Product Detail" +id);
 		try {
 			model.addAttribute("frCatList", data.getFranchiseCatList());
 
@@ -622,7 +622,7 @@ public class HomeController {
 
 			if (data.getFeProductHeadList() != null) {
 				for (FEProductHeader prod : data.getFeProductHeadList()) {
-					if (prod.getProductId() == id) {
+					if (prod.getProductId() == Integer.parseInt((id))) {
 						prodHeader = prod;
 						break;
 					}
@@ -631,10 +631,10 @@ public class HomeController {
 			List<GetFlavorTagStatusList> flavorTagStatusList = data.getFlavorTagStatusList();
 
 			List<SimilarFalvrNameDetail> list = new ArrayList<SimilarFalvrNameDetail>();
-
+System.err.println("prodHeader " +prodHeader);
 			try {
 				String[] smilarprdts = prodHeader.getSimilarProductIds().split(",");
-
+System.err.println("smilarprdts " +smilarprdts[0]+" " +smilarprdts[1]);
 				if (data.getFeProductHeadList() != null) {
 
 					for (int j = 0; j < smilarprdts.length; j++) {
@@ -643,6 +643,7 @@ public class HomeController {
 								SimilarFalvrNameDetail similarFalvrNameDetail = new SimilarFalvrNameDetail();
 								similarFalvrNameDetail.setFilterId(prod.getDefaultShapeId());
 								similarFalvrNameDetail.setProductId(smilarprdts[j]);
+								//similarFalvrNameDetail.setFlavorName("ABC" +prod.getProductCode());
 								list.add(similarFalvrNameDetail);
 								break;
 							}
@@ -654,9 +655,12 @@ public class HomeController {
 
 							if (list.get(j).getFilterId() == flavorTagStatusList.get(i).getFilterId()) {
 
+								//list.get(j).setFlavorName(flavorTagStatusList.get(i).getAdminName());
 								list.get(j).setFlavorName(flavorTagStatusList.get(i).getFilterName());
-
+								System.err.println("Filter name "+flavorTagStatusList.get(i).getFilterName()+ " " +flavorTagStatusList.get(i).getAdminName());
 								break;
+							}else {
+								//System.err.println("No match found ");
 							}
 
 						}
@@ -664,7 +668,7 @@ public class HomeController {
 				}
 
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 
 			/*
@@ -680,8 +684,8 @@ public class HomeController {
 
 			// FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
-			model.addAttribute("list", list);
-
+			model.addAttribute("shapeList", list);
+			System.out.println("list list " + list);
 			System.out.println("Similar Product " + prodHeader);
 
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();

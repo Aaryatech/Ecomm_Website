@@ -1147,7 +1147,7 @@
 			document.getElementById("txtPlaces").focus();
 		}
 		function calculateDistance(latitude, longitude, type) {
-
+			try{
 			var frData = '${frData}';
 			sessionStorage.setItem("frList", frData);
 
@@ -1274,8 +1274,10 @@
 
 								}
 							});
-
+		}catch (e) {
+			// TODO: handle exception
 		}
+		}//End of function calc dist
 		google.maps.event.addDomListener(window, 'load', function() {
 			var places = new google.maps.places.Autocomplete(document
 					.getElementById('txtPlaces'), {

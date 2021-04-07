@@ -183,11 +183,14 @@ public class LocationController {
 				List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
 				model.addAttribute("catList", catList);
 				model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
-
+try {
 				CompanyTestomonials[] testMonArray = mapper.readValue(
 						new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"), CompanyTestomonials[].class);
 				List<CompanyTestomonials> testMonialList = new ArrayList<>(Arrays.asList(testMonArray));
 				model.addAttribute("testMonialList", testMonialList);
+}catch (Exception e) {
+	System.err.println("Testimonial not loaded successfully");
+}
 				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 				model.addAttribute("isAddNewAdd", 0);
 				returnPage = "landing";

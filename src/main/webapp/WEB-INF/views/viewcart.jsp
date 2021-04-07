@@ -1201,7 +1201,7 @@
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Next to</span><br> <input
+								<span class="pop_lab_fld"><!-- Next to -->Your Area (From pin point location)</span><br> <input
 									type="hidden" id="txtDelvLandmark" name="txtDelvLandmark"
 									value="${sessionScope.landMark}" /> ${sessionScope.landMark}
 							</div>
@@ -1216,8 +1216,8 @@
 									class="form-label-hint-error" id="errorDelvLandmark"
 									style="display: none;">Please enter landmark</label>
  --%>
-								<span class="pop_lab_fld">Your Area (From pin point
-									location)</span> <input type="text" class="input_place"
+								<span class="pop_lab_fld"><!-- Your Area (From pin point
+									location) -->Landmark (eg. Next to..., Opposite...)</span> <input type="text" class="input_place"
 									autocomplete="off" id="txtDelvArea" name="txtDelvArea"
 									value="${getAreaD}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -1255,7 +1255,7 @@
 						</div> -->
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Area</span> <input type="text"
+								<span class="pop_lab_fld"><!-- Area -->Address (flat, house no., building, company, apartment)</span> <input type="text"
 									class="input_place" autocomplete="off" id="txtBillingFlat"
 									name="txtBillingFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -1265,7 +1265,7 @@
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Colony</span> <input type="text"
+								<span class="pop_lab_fld"><!-- Colony -->Your Area</span> <input type="text"
 									class="input_place" autocomplete="off" id="txtBillingArea"
 									name="txtBillingArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -2179,7 +2179,7 @@
 			if (document.getElementById("chkbox").checked == true) {
 
 				$("#txtBillingFlat").val($("#txtDelvFlat").val());
-				$("#txtBillingArea").val($("#txtDelvArea").val());
+				$("#txtBillingArea").val($("#txtDelvLandmark").val());
 				$("#txtBillingLandmark").val($("#txtDelvLandmark").val());
 				$("#txtBillingPincode").val($("#txtDelvPincode").val());
 

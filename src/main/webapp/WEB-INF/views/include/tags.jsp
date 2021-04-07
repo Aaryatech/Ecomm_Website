@@ -46,17 +46,20 @@
 
 						if (sessionStorage.getItem("selTags") == null) {
 							var table = [];
-							sessionStorage.setItem("selTags", JSON
-									.stringify(table));
+							sessionStorage.setItem("selTags", JSON.stringify(table));
 						}
 
 						if (sessionStorage.getItem("allTagList") == null) {
 							var table = [];
-							sessionStorage.setItem("allTagList", JSON
-									.stringify(table));
+							sessionStorage.setItem("allTagList", JSON.stringify(table));
 						}
 
-						var allTagList = sessionStorage.getItem("allTagList");
+						var allTagList = null;
+						try{
+						allTagList = sessionStorage.getItem("allTagList");
+						}catch (e) {
+							
+						}
 						var allTags = $.parseJSON(allTagList);
 
 						var tags = sessionStorage.getItem("selTags");

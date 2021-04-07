@@ -399,7 +399,7 @@ function removeLoader(){
 		varStatus="count">
 		<c:choose>
 			<c:when
-				test="${statusFilter.filterTypeId==5 && statusFilter.costAffect==0}">
+				test="${statusFilter.filterTypeId==5 && statusFilter.costAffect==1}">
 				<div class="find_store">
 					<h2 class="sec_title">
 						<center>
@@ -922,6 +922,7 @@ function removeLoader(){
 
 	<script type="text/javascript">
 		function changeWtFlavor(productId) {
+			try{
 			var selectWt = document.getElementById("wt" + productId).value;
 			var selectFlav = 0;
 			try {
@@ -987,7 +988,9 @@ function removeLoader(){
 					continue;
 				}
 			}//end of For prodDetailList pd
-
+			}catch (e) {
+				
+			}
 		}//end of Function changeWtFlavor
 	</script>
 	<!-- <script type="text/javascript">
