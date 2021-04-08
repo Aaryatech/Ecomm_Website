@@ -67,7 +67,18 @@ public class OrderHeaderWithDetail {
 	// private String orderDeliveredByName;
 	private String custName;
 	private String frName;
+	
+	private String imgList;//Sac 08-04-2021
+	
  
+	public String getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(String imgList) {
+		this.imgList = imgList;
+	}
+
 	List<OrderDetailForConfirmation> detailList;
 
 	public String getId() {

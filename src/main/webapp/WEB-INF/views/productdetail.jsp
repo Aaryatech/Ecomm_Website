@@ -285,7 +285,7 @@
 
 								<!--right form-->
 								<c:if
-									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
+									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==0}">
 									<div class="delivery_r">
 										<div class="delivery_bx">
 											<h4 class="delivery_title">Message On Cake</h4>
@@ -318,7 +318,7 @@
 													</div>
 
 													<c:choose>
-														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
+														<c:when test="${prodHeader.allowBasePhotoUpload==0}">
 
 															<div
 																style="width: 60px; height: 60px; margin: 10px auto; display: table;">
@@ -695,7 +695,7 @@
 										<div class="cake_container">
 											<h4 class="cake_nm single_row">
 												<a
-													href="${pageContext.request.contextPath}/showProdDetail/${prodCount.index}">${product.productName}</a>
+													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
 												<input type="hidden" id="prodIdText"
 													value="${product.productId}" />
 											</h4>

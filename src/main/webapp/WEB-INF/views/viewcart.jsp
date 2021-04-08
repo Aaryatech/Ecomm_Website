@@ -1025,7 +1025,7 @@
 					<div class="mongi_title">
 						Place Order
 						<div class="place_close close_pop">
-							<i class="fa fa-times" aria-hidden="true"></i>
+							<i class="fa fa-times" id="close_btn" aria-hidden="true"></i>
 						</div>
 					</div>
 					<div class="mongi_cont">
@@ -1294,6 +1294,10 @@
 							<div class="clr"></div>
 						</div>
 						<!-- ------------------------ -->
+						
+						
+						
+						
 						<div class="place_row">
 							<input name="" type="button" value="Place Order"
 								id="place_orderBtn" class="pop_place_btn" onclick="placeOrder()" />
@@ -2268,7 +2272,7 @@
 		function placeOrder() {
 			var cartValue = sessionStorage.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
-
+			//document.getElementById("loaderimg2").hide()
 			var imgCartValue = sessionStorage.getItem("prodImageList");
 			var imgTable = $.parseJSON(imgCartValue);
 
@@ -2277,10 +2281,13 @@
 			if (isError)
 				var r = confirm("Are you sure you want to submit?");
 			if (r == true) {
-
+			    //document.getElementById("close_btn").click();
+				//$("#place").hide();
+								//document.getElementById("loaderimg2").show();
+								document.getElementById("place").style = "display:none";
+								document.getElementById("loaderimg").style.display = "block";
 				document.getElementById("place_orderBtn").disabled = true;
-				document.getElementById("loaderimg").style.display = "block";
-				$("#place").hide();
+				//$("#place").hide();
 				var fd = new FormData();
 				var itemTotal = document.getElementById("lbl_ItemTotal").innerHTML;
 
@@ -2330,7 +2337,7 @@
 							dataType : 'json',
 							processData : false,
 							contentType : false,
-							async : false,
+							async : true,
 							success : function(resData, textStatus, jqXHR) {
 								//alert(JSON.stringify(resData));
 								var table = [];

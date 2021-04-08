@@ -257,10 +257,12 @@ public class PaymentController {
 
 			OrderHeaderWithDetail orderSaveData = (OrderHeaderWithDetail) session.getAttribute("orderHeaderWithDetail");
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+			model.addAttribute("prodUplImgUrl", Constants.PROD_UPLOADED_IMG_VIEW_URL);
+			
 			model.addAttribute("orderSaveData", orderSaveData);
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 
 		return "orderConfirmation";

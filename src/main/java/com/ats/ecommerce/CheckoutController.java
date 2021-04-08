@@ -39,6 +39,7 @@ import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.CustomerAddDetail;
 import com.ats.ecommerce.model.FEDataTraveller;
+import com.ats.ecommerce.model.FEProductHeader;
 import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.OrderHeaderWithDetail;
 import com.ats.ecommerce.model.TempImageHolder;
@@ -53,6 +54,7 @@ import com.ats.ecommerce.model.order.OrderHeader;
 import com.ats.ecommerce.model.order.OrderSaveData;
 import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @Controller
 @Scope("session")
@@ -743,6 +745,7 @@ public class CheckoutController {
 			order.setCityId(txtCity);
 			order.setAreaId(0);
 			order.setAddressId(1);
+			txtDelvLandmark="";
 			order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
 			order.setLandmark("-" + session.getAttribute("landMark"));
@@ -792,7 +795,32 @@ public class CheckoutController {
 					+ grandAddCharge);
 
 			order.setExFloat1(roundHalfUp(grandItemTotal, 2));// Item total Amt excluding disc and addCharges
+			System.out.print("OK A");
+			//SAC 08-04-2021
+			
+			//FEDataTraveller data1 =(FEDataTraveller) session.getAttribute("allDataJson");
+			FEDataTraveller data=null;
+			List<FEProductHeader> prodHeadList=new ArrayList<FEProductHeader>();
+			Gson gson = new Gson();
+			try {
+			 data = gson.fromJson(session.getAttribute("allDataJson").toString(),
+					FEDataTraveller.class);
+			prodHeadList=data.getFeProductHeadList();
+			}catch (Exception e) {
+				System.err.println("in catch get allDataJson " +e.getMessage());
+				e.printStackTrace();
+			}
+			System.out.print("OK B");
+			String detailImgList="";
 			for (int i = 0; i < itemJsonImportData.length; i++) {
+				
+				for(int p=0;p<prodHeadList.size();p++) {
+					if(prodHeadList.get(p).getProductId()==itemJsonImportData[i].getItemId()) {
+						detailImgList=prodHeadList.get(p).getProdImagePrimary()+"~"+detailImgList;
+						break;
+					}
+				}
+				
 				OrderDetail orderDetail = new OrderDetail();
 				/*
 				 * try { if (imageJsonArray.length > 0) for (int j = 0; j <
@@ -920,14 +948,14 @@ public class CheckoutController {
 			orderTrail.setActionDateTime(dttime.format(ct));
 			orderTrail.setStatus(status);
 			orderTrail.setExInt1(1);
-			orderTrail.setExVar1("-");
+			orderTrail.setExVar1(""+detailImgList);
 
 			OrderSaveData orderSaveData = new OrderSaveData();
 
 			orderSaveData.setOrderDetailList(orderDetailList);
 			orderSaveData.setOrderHeader(order);
 			orderSaveData.setOrderTrail(orderTrail);
-
+			System.err.println("order trail " + orderSaveData.getOrderTrail());
 			session.setAttribute("orderSaveData", orderSaveData);
 			// System.err.println("Order Save Method is commented will not be saved in Db");
 
@@ -940,6 +968,7 @@ public class CheckoutController {
 				map.add("orderId", Integer.parseInt(info.getMsg()));
 				OrderHeaderWithDetail orderHeaderWithDetail = Constants.getRestTemplate()
 						.postForObject(Constants.url + "getOrderHeaderAndDetailForConfirmationPage", map, OrderHeaderWithDetail.class);
+				orderHeaderWithDetail.setImgList(detailImgList);
 				session.setAttribute("orderHeaderWithDetail", orderHeaderWithDetail);
 
 				session.setAttribute("orderId", Integer.parseInt(info.getMsg()));

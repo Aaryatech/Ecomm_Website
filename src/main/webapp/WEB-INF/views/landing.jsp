@@ -1165,8 +1165,20 @@
 
 			var waypts = [];
 
-			var frList = sessionStorage.getItem("frList");
-			var list = $.parseJSON(frList);
+			var s = sessionStorage.getItem("frList");
+			
+			s = s.replace(/\\n/g, "\\n")  
+            .replace(/\\'/g, "\\'")
+            .replace(/\\"/g, '\\"')
+            .replace(/\\&/g, "\\&")
+            .replace(/\\r/g, "\\r")
+            .replace(/\\t/g, "\\t")
+            .replace(/\\b/g, "\\b")
+            .replace(/\\f/g, "\\f");
+//remove non-printable and other non-valid JSON chars
+s = s.replace(/[\u0000-\u0019]+/g,""); 
+
+			var list = $.parseJSON(s);
 
 			//alert("fr count = "+list.length)
 
@@ -1256,11 +1268,13 @@
 										}
 
 									}
+									//alert(JSON.stringify(newFrList))
 									sortArray(newFrList, "exInt1");
+								
 									for (var j = 0; j < newFrList.length; j++) {
 
 										//alert(newFrList[j].exInt1)
-										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">'+newFrList[j].frId+'Monginis Cake Shop - '
+										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">Monginis Cake Shop - '
 												+ newFrList[j].city
 												+ ' </option>';
 
@@ -1275,7 +1289,7 @@
 								}
 							});
 		}catch (e) {
-			// TODO: handle exception
+			//alert(e)
 		}
 		}//End of function calc dist
 		google.maps.event.addDomListener(window, 'load', function() {

@@ -519,11 +519,11 @@ public class HomeController {
 				testMonArray = mapper.readValue(new File(Constants.JSON_FILES_PATH + "MasterTestimonialData_.json"),
 						CompanyTestomonials[].class);
 			} catch (JsonParseException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (JsonMappingException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 			List<CompanyTestomonials> testMonialList = null;
 			try {
@@ -631,10 +631,10 @@ public class HomeController {
 			List<GetFlavorTagStatusList> flavorTagStatusList = data.getFlavorTagStatusList();
 
 			List<SimilarFalvrNameDetail> list = new ArrayList<SimilarFalvrNameDetail>();
-System.err.println("prodHeader " +prodHeader);
+//System.err.println("prodHeader " +prodHeader);
 			try {
 				String[] smilarprdts = prodHeader.getSimilarProductIds().split(",");
-System.err.println("smilarprdts " +smilarprdts[0]+" " +smilarprdts[1]);
+System.err.println("smilarprdts 0,1" +smilarprdts[0]+" " +smilarprdts[1]);
 				if (data.getFeProductHeadList() != null) {
 
 					for (int j = 0; j < smilarprdts.length; j++) {
@@ -657,7 +657,7 @@ System.err.println("smilarprdts " +smilarprdts[0]+" " +smilarprdts[1]);
 
 								//list.get(j).setFlavorName(flavorTagStatusList.get(i).getAdminName());
 								list.get(j).setFlavorName(flavorTagStatusList.get(i).getFilterName());
-								System.err.println("Filter name "+flavorTagStatusList.get(i).getFilterName()+ " " +flavorTagStatusList.get(i).getAdminName());
+								//System.err.println("Filter name "+flavorTagStatusList.get(i).getFilterName()+ " " +flavorTagStatusList.get(i).getAdminName());
 								break;
 							}else {
 								//System.err.println("No match found ");
