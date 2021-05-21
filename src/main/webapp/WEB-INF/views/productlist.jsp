@@ -2361,7 +2361,7 @@
 			
 			rate=rate*wt;
 			
-			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 			
 
 		}
@@ -2590,10 +2590,10 @@
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
 				
-				/* if(type==0){
+				 if(type==0){
 					calRate=actualRate;
 				}
-				 */
+				
 				
 				if (sessionStorage.getItem("cartValue") == null) {
 					var table = [];

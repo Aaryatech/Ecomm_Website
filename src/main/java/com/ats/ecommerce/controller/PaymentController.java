@@ -49,8 +49,8 @@ import com.razorpay.RazorpayException;
 @Scope("session")
 public class PaymentController {
 
-	@RequestMapping(value = "/goToPay", method = RequestMethod.GET)
-	public String goToPay(Model model, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/goToPay1", method = RequestMethod.GET)
+	public String goToPay1(Model model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			System.err.println("goToPay ");
 			// Long orderRefId=RandomUtils.nextLong();
@@ -182,8 +182,221 @@ public class PaymentController {
 		return "init_pay";
 	}
 
+	
+	@RequestMapping(value = "/goToPay", method = RequestMethod.GET)
+	public String goToPay(Model model, HttpServletRequest request, HttpServletResponse response) {
+		
+			HttpSession session = request.getSession();
+			OrderSaveData orderSaveData = (OrderSaveData) session.getAttribute("orderSaveData");
+			
+			try {
+				RazorpayClient razorpay = new RazorpayClient("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
+
+				JSONObject orderRequest = new JSONObject();
+				orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt() * 100); // amount in the smallest currency unit
+				//orderRequest.put("amount", 1 * 100); // amount in the smallest currency unit
+
+				orderRequest.put("currency", "INR");
+				orderRequest.put("receipt", "order_rcptid_11");
+
+				Order order = razorpay.Orders.create(orderRequest);
+				model.addAttribute("orderId", order.get("id")); 
+				model.addAttribute("amount",  order.get("amount"));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			try {
+				System.err.println("goToPay ");
+			if(1==2) {
+				//Other M
+				
+			// try {
+
+			// String sign=Signature.calculateRFC2104HMAC(data, secret);
+
+			// amount in the smallest currency unit
+			JSONObject orderRequest = new JSONObject();
+			// orderRequest.put("amount", 100);
+			orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt() * 100);
+			orderRequest.put("currency", "INR");
+			orderRequest.put("receipt", "Okaa");
+			// RazorpayClient razorpay = new RazorpayClient("rzp_test_1eXaKykckwM8kP",
+			// "V03Z05bFj27PTZEs8G4RJQJB");
+
+			// Order order = razorpay.Orders.create(orderRequest);
+			// System.err.println("Order " +order.get("id"));
+			/*
+			 * model.addAttribute("orderId", order.get("id")); model.addAttribute("amount",
+			 * order.get("amount"));
+			 */
+
+			model.addAttribute("landMark", session.getAttribute("landMark"));
+			/*
+			 * } catch (RazorpayException e) { System.out.println(e.getMessage());
+			 * e.printStackTrace(); }
+			 */
+
+			// 22-12-2020
+
+			HttpHeaders httpHeaders = new HttpHeaders();
+			httpHeaders.set("Content-Type", "application/json");
+			// httpHeaders.set("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
+			httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+			// String plainCreds = "rzp_test_1eXaKykckwM8kP:V03Z05bFj27PTZEs8G4RJQJB";
+			String plainCreds = "rzp_live_1xwIfbV7BUaBxt:95FT7Or1sftfjQEweSpB3Gaq";
+			byte[] plainCredsBytes = plainCreds.getBytes();
+			byte[] base64CredsBytes = Base64.getEncoder().encode(plainCredsBytes);
+			String base64Creds = new String(base64CredsBytes);
+
+			httpHeaders.add("Authorization", "Basic " + base64Creds);
+
+			GenOrder order = new GenOrder();
+
+			// order.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+			order.setAmount(100);
+
+			order.setCurrency("INR");
+
+			Transfer transfer = new Transfer();
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map.add("frId", request.getSession().getAttribute("frId"));
+			try {
+				Franchise frData = Constants.getRestTemplate().postForObject(Constants.url + "getFranchiseById", map,
+						Franchise.class);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			// transfer.setAccount("acc_GG4Qoe8oK4muer");//Sumit HDFC/Sachin Uni
+			// transfer.setAccount(frData.getPaymentGetwayLink());
+			transfer.setAccount("acc_GG4Qoe8oK4muer");
+
+			// transfer.setAmount((int)orderSaveData.getOrderHeader().getTotalAmt()*100);
+			transfer.setAmount(100);
+			transfer.setCurrency("INR");
+			/*
+			 * transfer.setOnHold(1); transfer.setOnHoldUntil(1);
+			 */
+
+			List<Transfer> transfers = new ArrayList<Transfer>();
+
+			transfers.add(transfer);
+
+			order.setTransfers(transfers);
+
+			ObjectMapper mapper = new ObjectMapper();
+
+			String jsonInString = mapper.writeValueAsString(order);
+
+			System.out.println("All  Data" + jsonInString.toString());
+
+			HttpEntity<String> httpEntity = new HttpEntity<String>(jsonInString.toString(), httpHeaders);
+			OrderRes makeOrderResp = null;
+			RestTemplate restTemplate = new RestTemplate();
+			try {
+				/*
+				 * makeOrderResp =
+				 * restTemplate.postForObject("https://api.razorpay.com/v1/orders" , httpEntity,
+				 * OrderRes.class);
+				 */
+
+				ResponseEntity<OrderRes> response1 = restTemplate.exchange("https://api.razorpay.com/v1/orders/",
+						HttpMethod.POST, httpEntity, OrderRes.class);
+				makeOrderResp = response1.getBody();
+
+				/*
+				 * }catch (RestClientException httpClientExce) {
+				 * System.err.println("httpClientExce " +httpClientExce.toString()); }
+				 */
+			} catch (HttpClientErrorException httpClientExce) {
+				System.err.println("httpClientExce " + httpClientExce.getResponseBodyAsString());
+			}
+
+			System.err.println("makeOrderResp Id " + makeOrderResp.getId());
+			System.err.println("makeOrderResp " + makeOrderResp.toString());
+
+			model.addAttribute("orderId", makeOrderResp.getId());
+			model.addAttribute("amount", makeOrderResp.getAmount());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "init_pay";
+	}
+
+	
 	@RequestMapping(value = "/payResponse", method = RequestMethod.POST)
 	public String payResponse(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+
+		try {
+			System.err.println("payResponse razorpay_payment_id " + request.getParameter("razorpay_payment_id"));
+			System.err.println(" payResponse razorpay_order_id " + request.getParameter("razorpay_order_id"));
+			// System.err.println(" razorpay_signature " +
+			// request.getParameter("razorpay_signature"));
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+			map.add("orderId", session.getAttribute("orderId"));
+
+			if (!request.getParameter("razorpay_payment_id").equalsIgnoreCase(null)) {
+				// System.err.println("razorpay_payment_id not null");
+				/*
+				 * OrderSaveData orderSaveData=(OrderSaveData)
+				 * session.getAttribute("orderSaveData");
+				 * orderSaveData.getOrderHeader().setUuidNo(request.getParameter(
+				 * "razorpay_payment_id"));
+				 * orderSaveData.getOrderHeader().setPaymentRemark(request.getParameter(
+				 * "razorpay_order_id")); orderSaveData.getOrderHeader().setPaidStatus(1);
+				 */
+				map.add("uniqNo", request.getParameter("razorpay_payment_id"));
+				map.add("paidStatus", 1);
+				map.add("payRemark", request.getParameter("razorpay_order_id"));
+				map.add("orderStatus", -100);
+				session.setAttribute("successMsg", "Payment Successful");
+
+			} else {
+				System.err.println("razorpay_payment_id  null");
+				// OrderSaveData orderSaveData=(OrderSaveData)
+				// session.getAttribute("orderSaveData");
+				/*
+				 * orderSaveData.getOrderHeader().setPaymentRemark("Payment failed "
+				 * +request.getParameter("razorpay_order_id"));
+				 * orderSaveData.getOrderHeader().setPaidStatus(0);
+				 * orderSaveData.getOrderHeader().setOrderStatus(9);
+				 */
+				session.setAttribute("successMsg", "Payment Failed");
+				map.add("uniqNo", "na");
+				map.add("paidStatus", 0);
+				map.add("payRemark", request.getParameter("razorpay_order_id"));
+				map.add("orderStatus", 9);
+			}
+			// updateOrderFrontEnd
+			try {
+				Info info = Constants.getRestTemplate().postForObject(Constants.url + "updateOrderFrontEnd", map,
+						Info.class);
+			} catch (Exception e) {
+				session.setAttribute("successMsg", "Payment Successful");
+			}
+
+			try {
+				session.removeAttribute("orderSaveData");
+				session.removeAttribute("orderId");
+			} catch (Exception e) {
+				session.removeAttribute("orderId");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/orderConfirmation";
+	}
+
+	
+	@RequestMapping(value = "/payResponse_OLD", method = RequestMethod.POST)
+	public String payResponse_OLD(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 
 		try {

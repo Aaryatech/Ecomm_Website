@@ -170,7 +170,7 @@ public class ProductDisplayController {
 			Gson gson = new Gson();
 			data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
 			
-			//System.err.println("DATA ---------- "+data.getFrSubCatList());
+			System.err.println("DATA ---------- "+data.getFrSubCatList());
 
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
@@ -192,7 +192,7 @@ public class ProductDisplayController {
 					}
 				}
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 
 			ObjectMapper Obj = new ObjectMapper();
@@ -205,6 +205,7 @@ public class ProductDisplayController {
 			model.addAttribute("tagsJson", jsonStr);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return returnPage;
 		}
 

@@ -385,13 +385,15 @@
 		$("#cart_item_count").html('');
 		var subtotal = 0;
 		var prodIdStr = "";
-
+		var newCartVal = [];
 		for (var j = 0; j < allItemArr.length; j++) {
 			for (var i = 0; i < table.length; i++) {
-
+				
 				if (table[i].itemId == allItemArr[j].productId) {
 					prodIdStr = prodIdStr + "," + allItemArr[j].productId;
 					//alert(i);
+					table[i].exVar3=allItemArr[j].prodImagePrimary;
+					table[i].exVar4=allItemArr[j].uomShowName;
 					subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
 							.toFixed(2);
 
@@ -455,10 +457,12 @@
 											+ '</div>'
 											+ '<div class="clr"></div>'
 											+ '</div>')
-
+											newCartVal.push(table[i]);
 				}//IF
+				
 			}//End of For loop 2
 		}//End of loop 1
+		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 
 		document.getElementById("cart_item_count").innerHTML = ""
 				+ table.length;

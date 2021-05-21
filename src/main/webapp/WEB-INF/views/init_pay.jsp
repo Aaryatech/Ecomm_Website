@@ -18,7 +18,8 @@ var options = {
     "description": "Order Value from  ${sessionScope.userName}",
     "image": "${pageContext.request.contextPath}/resources/images/logo_monginis-trasPng.png",
     "order_id": "${orderId}",
-    "callback_url": "http://localhost:8989/ecommerce/payResponse",
+    "callback_url": "https://pecom.monginis.net/ecom/payResponse",
+   // "callback_url": "http://localhost:8080/ecommerce/payResponse",
     "prefill": {
         "name": "${sessionScope.userName}",
         "email": "${sessionScope.userEmail}",

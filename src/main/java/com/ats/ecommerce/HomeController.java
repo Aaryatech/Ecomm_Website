@@ -462,6 +462,7 @@ public class HomeController {
 			session.removeAttribute("custId");
 			session.removeAttribute("landMark");
 			session.removeAttribute("frKm");
+			session.removeAttribute("delAddId");
 
 			session.removeAttribute("allDataJson");
 			session.removeAttribute("likeCount");
@@ -535,10 +536,14 @@ public class HomeController {
 			model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
 			model.addAttribute("isAddNewAdd", 0);
 
+			Cookie delAddIdCookie = new Cookie("delAddIdCookie", "0");
+			delAddIdCookie.setMaxAge(0);
+			response.addCookie(delAddIdCookie);
+			
 			Cookie rmCustIdCookie = new Cookie("custIdCookie", "0");
 			rmCustIdCookie.setMaxAge(0);
 			response.addCookie(rmCustIdCookie);
-
+			
 			returnPage = "landing";
 		} catch (Exception e) {
 			e.printStackTrace();

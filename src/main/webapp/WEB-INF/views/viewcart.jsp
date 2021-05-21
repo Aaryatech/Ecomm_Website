@@ -1764,7 +1764,7 @@
 
 				for (var i = 0; i < table.length; i++) {
 					var qty = curQty - 1;
-
+					table[i].weight=qty
 					if (id == table[i].uniqueId) {
 						table[i].qty = qty;
 
@@ -1816,7 +1816,7 @@
 
 				if (id == table[i].uniqueId) {
 					table[i].qty = qty;
-
+					table[i].weight=qty;
 					var taxableAmt = parseFloat(table[i].rate)
 							* parseFloat(qty).toFixed(2);
 					var cgstAmt = (parseFloat(table[i].rate) * parseFloat(qty) * parseFloat(table[i].cgstPer)) / 100;
@@ -1925,7 +1925,7 @@
 
 					if (id == table[i].uniqueId) {
 						table[i].qty = qty;
-
+						table[i].weight=qty
 						var taxableAmt = parseFloat(table[i].rate)
 								* parseFloat(qty).toFixed(2);
 						var cgstAmt = (parseFloat(table[i].rate)
@@ -2329,6 +2329,16 @@
 				fd.append('txtBillingPincode', $("#txtBillingPincode").val());
 				fd.append('persnName', $("#persnName").val());
 				fd.append('personMobile', $("#personMobile").val());
+				
+				
+				try{
+					fd.append('myCityId', sessionStorage.getItem("myCityId"));
+					fd.append('myLat', sessionStorage.getItem("myLat"));
+					fd.append('myLong', sessionStorage.getItem("myLong"));
+				}catch (e) {
+					// TODO: handle exception
+				}
+				
 				$
 						.ajax({
 							url : '${pageContext.request.contextPath}/placeOrder',
@@ -2352,6 +2362,8 @@
 									window.location = url;
 								} else {
 									var url = '${pageContext.request.contextPath}/orderConfirmation';
+									//var url = '${pageContext.request.contextPath}/orderConfirmation';
+
 									window.location = url;
 								}
 

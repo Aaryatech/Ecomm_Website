@@ -1141,7 +1141,7 @@
 		function getCityName(val) {
 			var cityname = $("#city" + val).data("cityname");
 			document.getElementById("txtPlaces").removeAttribute("readonly");
-
+			sessionStorage.setItem("myCityId", val);
 			$('#txtPlaces').val(cityname + " ");
 
 			document.getElementById("txtPlaces").focus();
@@ -1150,7 +1150,8 @@
 			try{
 			var frData = '${frData}';
 			sessionStorage.setItem("frList", frData);
-
+			sessionStorage.setItem("myLat", latitude);
+			sessionStorage.setItem("myLong", longitude);
 			//alert(latitude)
 			//alert(longitude) 
 

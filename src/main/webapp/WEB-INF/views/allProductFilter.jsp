@@ -2229,10 +2229,10 @@ function setProductData(productObj){
 					.getItem("cartValue");
 			var table = $.parseJSON(cartValue);
 			
-			/* if(type==0){
+			 if(type==0){
 				calRate=actualRate;
 			}
-			 */
+			
 			
 			if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
@@ -2723,7 +2723,7 @@ function setQtyText(id, type) {
 	
 	rate=rate*wt;
 	
-	document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+	//27-04 document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 	
 
 }

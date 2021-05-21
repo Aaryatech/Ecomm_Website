@@ -603,8 +603,8 @@ html {
 
 
 	<!-- bottom -->
-	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
-
+<%-- 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+ --%>
 
 
 	<!--cart-sidepanel-->
@@ -1091,9 +1091,9 @@ function setLike(id,isLike) {
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
 				
-				/* if(type==0){
+				  if(type==0){
 					calRate=actualRate;
-				} */
+				}  
 				
 				var spInst;
 				var msgonCake;
@@ -1267,7 +1267,7 @@ function setLike(id,isLike) {
 			
 			rate=rate*wt;
 			
-			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 			
 
 		}
@@ -1493,9 +1493,9 @@ function setLike(id,isLike) {
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
 				//alert(type)
-			/* 	if(type==0){
+			 	if(type==0){
 					calRate=actualRate;
-				} */
+				} 
 				
 				
 				if (sessionStorage.getItem("cartValue") == null) {

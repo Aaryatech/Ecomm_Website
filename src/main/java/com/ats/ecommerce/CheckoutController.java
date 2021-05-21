@@ -564,6 +564,28 @@ public class CheckoutController {
 				// TODO: handle exception
 			}
 
+			//SAC 26-04-2021
+			
+			int cityId = 0;
+			try {
+				cityId = Integer.parseInt(request.getParameter("myCityId"));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			String myLat = "0";
+			try {
+				myLat =  request.getParameter("myLat");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			String myLong = "0";
+			try {
+				myLong =  request.getParameter("myLong");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			String delvrInst = request.getParameter("delvrInst");
 			String delvrDateTime = request.getParameter("delvrDateTime");
 			String[] deliveryDateTime = delvrDateTime.split(" ");
@@ -602,8 +624,6 @@ public class CheckoutController {
 			String persnName = request.getParameter("persnName");
 			String personMobile = request.getParameter("personMobile");
 
-			System.out.println("persnName" + persnName);
-			System.out.println("personMobile" + personMobile);
 
 			int addCustAgent = 0;
 			int deliveryBoy = 0;
@@ -621,7 +641,7 @@ public class CheckoutController {
 			} catch (Exception e) {
 				defaultCustAddrs = 0;
 			}
-			cust.setCityId(txtCity);
+			cust.setCityId(cityId);
 			cust.setCustAddPlatform(2);
 			cust.setCustGender(Integer.parseInt(request.getParameter("gender")));
 			cust.setCustId(custId);
@@ -631,7 +651,9 @@ public class CheckoutController {
 			cust.setEmailId(txtEmail);
 			cust.setIsPrimiunmCust(0);
 			cust.setProfilePic("na");
-			cust.setCompanyId(1);
+			//cust.setCompanyId(co);
+			//int compId=(int) session.getAttribute("companyId");
+			cust.setCompanyId(compId);	
 			cust.setIsActive(1);
 			cust.setDelStatus(1);
 			cust.setExInt1(defaultCustAddrs);
@@ -657,9 +679,11 @@ public class CheckoutController {
 				// String delAddIdStr=(String) session.getAttribute("delAddId");
 				delAddId = (int) session.getAttribute("delAddId");// Integer.parseInt(delAddIdStr);
 			} catch (Exception e) {
-				e.printStackTrace();
+				delAddId = 0;
 			}
 			System.err.println("delAddId " + delAddId);
+			OrderHeader order = new OrderHeader();
+
 			if (delAddId < 1) {
 
 				CustomerAddDetail custDet = new CustomerAddDetail();
@@ -667,12 +691,12 @@ public class CheckoutController {
 				custDet.setAddress(txtBillingFlat);
 				custDet.setAreaId(0);
 				custDet.setCaption("NA");
-				custDet.setCityId(0);
+				custDet.setCityId(cityId);
 				custDet.setCustDetailId(0);
 				custDet.setCustId(res.getCustId());
 				custDet.setLandmark(txtDelvLandmark);
-				custDet.setLatitude("NA");
-				custDet.setLongitude("NA");
+				custDet.setLatitude(""+myLat);
+				custDet.setLongitude(""+myLong);
 				custDet.setIsActive(1);
 				custDet.setDelStatus(1);
 				custDet.setExInt1(0);
@@ -693,11 +717,11 @@ public class CheckoutController {
 						EncodeDecode.Encrypt("" + saveCustAdd.getCustDetailId()));
 				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(delAddIdCookie);
-
+				order.setAddressId(saveCustAdd.getCustDetailId());
 			}
 			// 04-01-2021 end
 			if (res.getCustId() > 0) {
-				session.setAttribute("successMsg", "New customer added successfully");
+				//session.setAttribute("successMsg", "New customer added successfully");
 				Cookie custIdCookie = new Cookie("custIdCookie", EncodeDecode.Encrypt("" + res.getCustId()));
 				custIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(custIdCookie);
@@ -728,7 +752,6 @@ public class CheckoutController {
 
 			DecimalFormat df = new DecimalFormat("#.00");
 
-			OrderHeader order = new OrderHeader();
 			order.setOrderNo("0002");
 			order.setOrderDate(sfd.format(ct));
 			order.setFrId(frId);
@@ -744,14 +767,15 @@ public class CheckoutController {
 			order.setPaymentMethod(paymentMethod);
 			order.setCityId(txtCity);
 			order.setAreaId(0);
-			order.setAddressId(1);
-			txtDelvLandmark="";
+			/*
+			 * if (delAddId < 1) { txtDelvLandmark=""; }
+			 */
 			order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
 			order.setWhatsappNo(txtMobile);
 			order.setLandmark("-" + session.getAttribute("landMark"));
 			order.setDeliveryDate(delvrDateTime);
 			// order.setDeliveryTime(deliveryDateTime[1]);
-			System.err.println("delvrDateTime " + delvrDateTime);
+			//System.err.println("delvrDateTime " + delvrDateTime);
 			order.setDeliveryTime(DateConvertor.convertToYMD(delvrDateTime));
 			order.setProductionDate(sf.format(ct));
 			order.setProductionTime("00:00");
@@ -791,11 +815,11 @@ public class CheckoutController {
 			float grandDiscAmt = Float.parseFloat(request.getParameter("discAmt"));
 			float grandAddCharge = Float.parseFloat(request.getParameter("addCharge"));
 
-			System.err.println("grandItemTotal" + grandItemTotal + "grandDiscAmt " + grandDiscAmt + " grandAddCharge "
-					+ grandAddCharge);
+			//System.err.println("grandItemTotal" + grandItemTotal + "grandDiscAmt " + grandDiscAmt + " grandAddCharge "
+					//+ grandAddCharge);
 
 			order.setExFloat1(roundHalfUp(grandItemTotal, 2));// Item total Amt excluding disc and addCharges
-			System.out.print("OK A");
+		//	System.out.print("OK A");
 			//SAC 08-04-2021
 			
 			//FEDataTraveller data1 =(FEDataTraveller) session.getAttribute("allDataJson");
@@ -810,16 +834,16 @@ public class CheckoutController {
 				System.err.println("in catch get allDataJson " +e.getMessage());
 				e.printStackTrace();
 			}
-			System.out.print("OK B");
+			//System.out.print("OK B");
 			String detailImgList="";
 			for (int i = 0; i < itemJsonImportData.length; i++) {
-				
-				for(int p=0;p<prodHeadList.size();p++) {
-					if(prodHeadList.get(p).getProductId()==itemJsonImportData[i].getItemId()) {
-						detailImgList=prodHeadList.get(p).getProdImagePrimary()+"~"+detailImgList;
-						break;
-					}
-				}
+				System.err.println("itemJsonImportData " +itemJsonImportData[i].toString());
+				/*
+				 * for(int p=0;p<prodHeadList.size();p++) {
+				 * if(prodHeadList.get(p).getProductId()==itemJsonImportData[i].getItemId()) {
+				 * detailImgList=prodHeadList.get(p).getProdImagePrimary()+"~"+detailImgList;
+				 * break; } }
+				 */
 				
 				OrderDetail orderDetail = new OrderDetail();
 				/*
@@ -851,7 +875,7 @@ public class CheckoutController {
 						divFact = (itemJsonImportData[i].getQty() * itemJsonImportData[i].getRate() * 100)
 								/ (grandItemTotal);
 
-					System.err.println("Div factor " + divFact);
+					//System.err.println("Div factor " + divFact);
 
 					itemDisc = (divFact * grandDiscAmt) / 100;
 					finalDiscAmt = finalDiscAmt + itemDisc;
@@ -871,7 +895,7 @@ public class CheckoutController {
 					cgstAmt = (taxableAmt * itemJsonImportData[i].getCgstPer()) / 100;
 					finalCgstAmt = finalCgstAmt + cgstAmt;
 
-					System.err.println("sgstAmt " + sgstAmt + " cgstAmt " + cgstAmt);
+					//System.err.println("sgstAmt " + sgstAmt + " cgstAmt " + cgstAmt);
 
 					igstAmt = (taxableAmt * itemJsonImportData[i].getIgstPer()) / 100;
 					igstAmt = 0;
@@ -913,7 +937,7 @@ public class CheckoutController {
 				orderDetail.setIgstPer(itemJsonImportData[i].getIgstPer());
 				orderDetail.setSgstPer(itemJsonImportData[i].getSgstPer());
 				try {
-					orderDetail.setRemark(itemJsonImportData[i].getSpInst().trim());
+					orderDetail.setRemark(itemJsonImportData[i].getExVar3().trim());
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -924,7 +948,9 @@ public class CheckoutController {
 				}
 				orderDetail.setDelStatus(1);
 				orderDetail.setExInt2(itemJsonImportData[i].getExInt1());// ie config detail Id
-				System.err.println("orderDetail " + orderDetail.toString());
+				orderDetail.setExVar4(""+itemJsonImportData[i].getRateSettingType());
+				orderDetail.setHsnCode(itemJsonImportData[i].getHsnCode());
+				System.err.println("orderDetail--- " + orderDetail.toString());
 				orderDetailList.add(orderDetail);
 
 			} // End of loop itemJsonImportData
@@ -942,20 +968,20 @@ public class CheckoutController {
 			order.setRemark("");
 			order.setExVar4(persnName + " - " + personMobile);
 
-			System.err.println("order " + order.toString());
+			//System.err.println("order " + order.toString());
 			OrderTrail orderTrail = new OrderTrail();
 			orderTrail.setActionByUserId(custId);
 			orderTrail.setActionDateTime(dttime.format(ct));
 			orderTrail.setStatus(status);
 			orderTrail.setExInt1(1);
-			orderTrail.setExVar1(""+detailImgList);
-
+			//orderTrail.setExVar1(""+detailImgList);
+			orderTrail.setExVar1("");
 			OrderSaveData orderSaveData = new OrderSaveData();
 
 			orderSaveData.setOrderDetailList(orderDetailList);
 			orderSaveData.setOrderHeader(order);
 			orderSaveData.setOrderTrail(orderTrail);
-			System.err.println("order trail " + orderSaveData.getOrderTrail());
+			//System.err.println("order trail " + orderSaveData.getOrderTrail());
 			session.setAttribute("orderSaveData", orderSaveData);
 			// System.err.println("Order Save Method is commented will not be saved in Db");
 
@@ -983,7 +1009,7 @@ public class CheckoutController {
 					info.setResponseObject1("");
 				}
 			}
-			System.err.println("Info " + info.toString());
+			//System.err.println("Info " + info.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

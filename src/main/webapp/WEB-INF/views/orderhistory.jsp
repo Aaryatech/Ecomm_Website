@@ -130,6 +130,8 @@
 									<th>Sr. No.</th>
 									<th>Order Number</th>
 									<th>Order Date</th>
+										<th>Delivery Charges</th>
+											<th>Order Total</th>
 									<th>Total Amt.</th>
 									<th>Payment Mode</th>
 									<th>Status</th>
@@ -141,6 +143,8 @@
 										<td>${count.index+1}</td>
 										<td>${orders.orderNo}</td>
 										<td>${orders.orderDateDisplay}</td>
+											<td class="prc_amt">Rs. ${orders.deliveryCharges}</td>
+												<td class="prc_amt">Rs. ${orders.exFloat1}</td>
 										<td class="prc_amt">Rs. ${orders.totalAmt}</td>
 
 										<!-- Payment Mode -->
@@ -212,7 +216,7 @@
 															</div>
 															<div class="detail_one">
 																Product Amount <span class="tab_prx">Rs.
-																	${orderDetail.mrp}</span>
+																	${orderDetail.rate}</span>
 															</div>
 															<div class="detail_one">
 																Product Quantity <span class="tab_kg">
@@ -220,7 +224,7 @@
 															</div>
 															<div class="detail_one">
 																Total <span class="tab_amt">
-																	Rs.${orderDetail.totalAmt}</span>
+																	Rs.${orderDetail.rate*orderDetail.qty}</span>
 															</div>
 
 
@@ -231,6 +235,9 @@
 												</c:if>
 
 											</c:forEach> <!--table-->
+											<c:forEach items="${orders.orderTrailList}"
+															var="orderTrail">
+															<c:if test="${orderTrail.orderId==orders.orderId}">
 											<div class="cart_able_bx drop_tab">
 												<div class="table_title_one">Order Log</div>
 												<div class="table_bx">
@@ -242,9 +249,7 @@
 															<th>Remark</th>
 														</tr>
 														<!--cart-row-1-->
-														<c:forEach items="${orders.orderTrailList}"
-															var="orderTrail">
-															<c:if test="${orderTrail.orderId==orders.orderId}">
+														
 																<tr>
 																	<!-- Order Log Status -->
 																	<c:choose>
@@ -288,11 +293,14 @@
 																	<td>${orderTrail.trailDate}</td>
 																	<td>${orderTrail.exVar1}</td>
 																</tr>
-															</c:if>
-														</c:forEach>
+															
 													</table>
 												</div>
-											</div></td>
+											</div>
+											</c:if>
+														</c:forEach>
+											<!--  -->
+											</td>
 									</tr>
 								</c:forEach>
 							</tbody>

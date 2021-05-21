@@ -53,7 +53,7 @@ $(document).ready(function () {
 <body>
     <div class="initialism fade_open" href="#fade"><a href="#" id="auto_popup" style="display: none;">Order Confirmation</a></div>
 <div id="fade" class="well">
-        <div class="fade_close close_btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="fade_close close_btn" onclick="goHome()"><i class="fa fa-times"   aria-hidden="true"></i></div>
         <div class="back_button">
 						<a href="${pageContext.request.contextPath}/orderhistory"
 							class="profile_back"><i class="fa fa-chevron-left"
@@ -102,9 +102,17 @@ $(document).ready(function () {
                             Your order will be sent to:
                             <span>${orderSaveData.address}</span>
                         </div>    
-                        
                         <div class="delivery_one left_side">
+                                Delivery Charges :
+                                <span>${orderSaveData.deliveryCharges}</span>
+                            </div>
+                            
+                            <div class="delivery_one left_side">
                                 Order Total :
+                                <span>${orderSaveData.exFloat1}</span>
+                            </div>
+                        <div class="delivery_one left_side">
+                                 Total :
                                 <span>${orderSaveData.totalAmt}</span>
                             </div>
                     </div>
@@ -125,8 +133,10 @@ $(document).ready(function () {
                         <div class="order_pic_r"><img src="${prodUplImgUrl}${imagePart[detailCount.index]}" alt="" ></div>
                          --%>
                          
-                          <div class="order_pic"><img src="${prodImgUrl}${imagePart[detailCount.index]}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" width="102"></div>
-                        
+<%--                           <div class="order_pic"><img src="${prodImgUrl}${imagePart[detailCount.index]}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" width="102"></div>
+ --%>
+                           <div class="order_pic"><img src="${prodImgUrl}${detailList.remark}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" width="102"></div>
+                         
                         <div class="order_pic_r"><img src="${prodUplImgUrl}${detailList.exVar4}" onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" ></div>
                         
                         <div class="order_cont">
@@ -146,9 +156,14 @@ $(document).ready(function () {
 								</c:choose>
                             <div class="table_list">
                                 <ul>
-                                    <li>Item Price : <span><fmt:formatNumber
+                                    <%-- <li>Item Price : <span><fmt:formatNumber
 													type="number" groupingUsed="false"
 													value="${detailList.totalAmt}" maxFractionDigits="0"
+													minFractionDigits="0" /></span></li> --%>
+													
+													<li>Item Price : <span><fmt:formatNumber
+													type="number" groupingUsed="false"
+													value="${detailList.rate}" maxFractionDigits="0"
 													minFractionDigits="0" /></span></li>
                                     <c:choose>
 											<c:when test="${detailList.exInt1==0}">
@@ -161,7 +176,7 @@ $(document).ready(function () {
 											</c:otherwise>
 										</c:choose>
                                     <li>Total : <span><fmt:formatNumber type="number"
-													groupingUsed="false" value="${detailList.totalAmt}"
+													groupingUsed="false" value="${detailList.rate*detailList.qty}"
 													maxFractionDigits="0" minFractionDigits="0" /></span></li>
                                 </ul>
                             </div>
@@ -379,4 +394,9 @@ $(document).ready(function () {
 	</div> --%>
 
 </body>
+<script type="text/javascript">
+function goHome(){
+	var url = '${pageContext.request.contextPath}/home';
+	window.location = url;
+}</script>
 </html>

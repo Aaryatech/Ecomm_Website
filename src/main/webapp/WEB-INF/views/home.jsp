@@ -1124,8 +1124,8 @@ function removeLoader(){
 		}//end of Function addToCartClick
 		</script> -->
 	<script type="text/javascript">
-		
-		function appendCartData() {
+		//Not used here its from header.jsp
+		function appendCartData_OLD_NO_USE() {
 
 			if (sessionStorage.getItem("allItemList") == null) {
 				var table = [];
@@ -1579,7 +1579,7 @@ function removeLoader(){
 			
 			rate=rate*wt;
 			
-			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 			
 
 		}
@@ -1656,6 +1656,7 @@ function removeLoader(){
 			
 			if(type == 0){
 				selectWt = document.getElementById("txtWt"+id).value;	
+				//alert("selectWt" +selectWt)
 			}else if(type == 1 || type == 2){
 				selectWt = document.getElementById("wt" + id).value;
 				
@@ -1799,7 +1800,7 @@ function removeLoader(){
 				var cartValue = sessionStorage
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
-				
+				//alert("actualRate" +actualRate)
 				if(type==0){
 					calRate=actualRate;
 				}

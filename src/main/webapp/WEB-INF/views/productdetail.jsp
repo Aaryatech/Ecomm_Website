@@ -285,7 +285,7 @@
 
 								<!--right form-->
 								<c:if
-									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==0}">
+									test="${prodHeader.allowSpecialInstruction==1 or prodHeader.allowBasePhotoUpload==1}">
 									<div class="delivery_r">
 										<div class="delivery_bx">
 											<h4 class="delivery_title">Message On Cake</h4>
@@ -318,7 +318,7 @@
 													</div>
 
 													<c:choose>
-														<c:when test="${prodHeader.allowBasePhotoUpload==0}">
+														<c:when test="${prodHeader.allowBasePhotoUpload==1}">
 
 															<div
 																style="width: 60px; height: 60px; margin: 10px auto; display: table;">
@@ -1862,7 +1862,7 @@ function moveCursor(){
 			
 			rate=rate*wt;
 			
-			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			//27-04 document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 			
 
 		}
