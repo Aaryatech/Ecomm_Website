@@ -386,7 +386,7 @@ html {
 
 																	</c:forEach>
 																	<div style="display: none;">
-																	<c:if test="${product.flavourIds!=0}">
+																	<%-- <c:if test="${product.flavourIds!=0}">
 																		<select class="select-css"
 																			id="flav${product.productId}"
 																			onchange="setPriceByWtAndFlavour('${product.productId}','${product.rateSettingType}')">
@@ -420,7 +420,7 @@ html {
 																				</c:forEach>
 																			</c:forEach>
 																		</select>
-																	</c:if>
+																	</c:if> --%>
 																	</div>
 																</ul>																
 															</div>
