@@ -1741,7 +1741,12 @@
 		}
 
 		function minusQty(id, curQty) {
-
+			var maxValue=document.getElementById("maxValue").value;
+			//alert("sac"+maxValue)
+			if(parseInt(qty)>parseInt(maxValue)){
+				
+			}else
+				{
 			if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -1797,10 +1802,16 @@
 
 			setCartData();
 			appendCartData();
+				}
 		}
 
 		function plusQty(id, curQty) {
-
+			var maxValue=document.getElementById("maxValue").value;
+			//alert("sac"+maxValue)
+			if(parseInt(qty)>parseInt(maxValue)){
+				
+			}else
+				{
 			if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -1841,6 +1852,7 @@
 			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 			setCartData();
 			appendCartData();
+				}
 		}
 
 		function removeQty(id) {
@@ -1908,7 +1920,11 @@
 
 		function typeQty(id) {
 			var qty = document.getElementById("quantity" + id).value;
-
+			var maxValue=document.getElementById("maxValue").value;
+			//alert("sac"+maxValue)
+			if(parseInt(qty)>parseInt(maxValue)){
+				
+			}else
 			if (qty > 0) {
 
 				if (sessionStorage.getItem("cartValue") == null) {
@@ -2709,7 +2725,7 @@
 		});
 	</script>
 	<!--menuzord-->
-
+<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 
 </html>

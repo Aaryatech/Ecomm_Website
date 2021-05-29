@@ -1228,7 +1228,7 @@ function setLike(id,isLike) {
 		
 		//alert(detailList);
 			
-			if(type==0){
+			/* if(type==0){
 			
 				var newWt=wt+1;
 				if(wt>1 && wt<=10){
@@ -1239,6 +1239,19 @@ function setLike(id,isLike) {
 			
 			else if(type==1){
 				if(wt>=1 && wt<10){
+					wt=parseInt(wt)+1;
+				}
+			} */
+			
+			var maxValue=document.getElementById("maxValue").value;
+			if(type==0){
+				var newWt=wt+1;
+				if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
+					wt=parseInt(wt)-1;
+				}
+			}
+			else if(type==1){
+				if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
 					wt=parseInt(wt)+1;
 				}
 			}
@@ -1268,7 +1281,8 @@ function setLike(id,isLike) {
 			rate=rate*wt;
 			
 			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+
 
 		}
 		
@@ -1601,8 +1615,17 @@ function setLike(id,isLike) {
 				//alert(e.message);
 			}	
 			//alert("Ok End")
-		} 				
+		} 	
+		
+		$('.qty22').on('change', function() {
+			//alert("OK")
+			 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			});
+		
+		
 	</script>
+	<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
+	
 </body>
 
 </html>

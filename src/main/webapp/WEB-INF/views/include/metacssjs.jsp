@@ -46,7 +46,11 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/jquery.datetimepicker.css" />
 <script
-	src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js">
+	$('.qty').on('input', function() {
+		 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+		});
+	</script>
 	
 <!-- today -->
 

@@ -950,7 +950,7 @@
 		function priceSort(val){
 
 			var tempArr=$.parseJSON(document.getElementById("hiddenProductList").innerHTML);
-			//alert(tempArr)
+			
 			
 			
 			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
@@ -958,7 +958,7 @@
 			
 			
 			if(tempArr.length>0){
-				
+				//alert(tempArr)
 				if(val==1){
 					tempArr.sort(function(a, b){
 					    return parseFloat(b.defaultPrice)-parseFloat(a.defaultPrice)
@@ -982,7 +982,7 @@
 				var divStr="";
 				var count=0;
 				for (var i = 0; i < tempArr.length; i++) {
-								
+							/*try{
 						var isLike=tempArr[i].isLike;						
 						var like = '';
 						
@@ -1026,7 +1026,7 @@
 						+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
 						+ isVegType						
-						+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
+						+ ' <div class="cake_prc" id="newPrice'+tempArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+tempArr[i].uomShowName+'</p>'
 						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ tempArr[i].defaultPrice
@@ -1040,7 +1040,71 @@
 
 								
 								
-								
+							}catch (e) {
+								alert(e);
+							}	*/
+							
+					var cakeDrpDwn=setWeightOrQtyDropDown(tempArr[i]);
+					var wtList=tempArr[i].availInWeights.split(',');
+					if(wtList[0]<1){
+						tempArr[i].defaultPrice=tempArr[i].defaultPrice*wtList[0];
+					}
+					//alert("hi")
+					
+					var isLike=tempArr[i].isLike;
+					var like = '';
+					
+					var isVegType = '';
+					var isVegItem = tempArr[i].vegNonvegName;
+					
+					if(isVegItem=='VEG'){
+						isVegType = '<div class="purity_icn">'
+						+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+						+ '</div>';
+					}else if(isVegItem=='NON-VEG'){
+						isVegType = '<div class="purity_icn">'
+						+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+						+ '</div>';
+					}else{
+						isVegType = '<div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/veg_icn.jpg" alt="">' 
+							+ '</div><div class="purity_icn">'
+							+ '<img src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg" alt="">' 
+							+ '</div>';
+					}	
+					
+					if(isLike ==1){
+					
+						like = '<div class="circle_tag active" onclick="setLike('+tempArr[i].productId+')">'
+						+ '<img id="like'+tempArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">' 
+						+ '</div>';
+					}else{
+						
+						like = '<div class="circle_tag active" onclick="setLike('+tempArr[i].productId+')">'
+						+ '<img id="like'+tempArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
+						+ '</div>';
+					}
+					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+						divStr = divStr
+					+ '<li>'
+					+ ' <div class="item_div"> '
+					+ ' <div class="cake_one product_padd"> '
+					+ ' <div class="cake_pic"> '+detail
+					+ ' <img src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+tempArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
+					+ isVegType
+					+ like
+					+ ' <div class="cake_prc" id="newPrice'+tempArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
+					+ tempArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+tempArr[i].uomShowName+'</p>'
+					+ ' <span style="display:none;" class="off_prc" ><i class="fa fa-inr" aria-hidden="true"></i>'
+					+ tempArr[i].defaultPrice
+					+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
+					+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
+					+ ' </div> '
+					+ ' <div class="cake_container"> '
+					+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+					+ tempArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+tempArr[i].productId+','+tempArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
+					+ ' </div> </div> </div> </li> ';
+
 
 						count++;
 
@@ -1490,6 +1554,7 @@
 							//SACHIN CODE
 							//console.log("my data ",hiddenProductListArr[0]);
 								var cakeDrpDwn= null;
+								var isHalfKg=0;
 									if(hiddenProductListArr[i].rateSettingType==0){
 									cakeDrpDwn =
 											'<div class="cake_dropdown_l"><div class="plus_minus_one">'+
@@ -1497,7 +1562,7 @@
 												+'onclick="setQtyText('+hiddenProductListArr[i].productId+',0)">'
 												+'<i class="fa fa-minus" aria-hidden="true"></i></button>'+
 											'<input type="text" id="txtWt'+hiddenProductListArr[i].productId+'"'
-												+'value="1" style="text-align: center;"'+
+												+'value="1" readonly style="text-align: center;"'+
 												'class="qty slide">'+
 											'<button type="button" value="" field="quantity"'+
 												'onclick="setQtyText('+hiddenProductListArr[i].productId+',1)"'
@@ -1510,6 +1575,10 @@
 												var wtList=hiddenProductListArr[i].availInWeights.split(',');
 												//alert(wtList);
 										//	var dataOption='<option value="0">Select Weight</option>'
+										//var wtList=hiddenProductListArr[i].availInWeights.split(',');
+										if(wtList[0]<1){
+											hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
+										}
 											if(parseFloat(wtList[0])>0){
 											for(var d=0;d<wtList.length;d++){
 												dataOption+='<option value="'+wtList[d]+'">'+wtList[d]+'</option>'
@@ -1596,6 +1665,10 @@
 							displayListArr.push(hiddenProductListArr[i]);
 							//SAC NEW
 							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
+							var wtList=hiddenProductListArr[i].availInWeights.split(',');
+							if(wtList[0]<1){
+								hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
+							}
 							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
@@ -1659,6 +1732,10 @@
 							displayListArr.push(hiddenProductListArr[i]);
 							//SAC NEW
 							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
+							var wtList=hiddenProductListArr[i].availInWeights.split(',');
+							if(wtList[0]<1){
+								hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
+							}
 							var isLike=hiddenProductListArr[i].isLike;
 							var like = '';
 							
@@ -1727,6 +1804,10 @@
 						displayListArr.push(allItemArr[i]);
 						//SAC NEW
 						var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
+						var wtList=allItemArr[i].availInWeights.split(',');
+						if(wtList[0]<1){
+							allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
+						}
 						var isLike=allItemArr[i].isLike;
 						var like = '';
 						
@@ -1798,6 +1879,10 @@
 								displayListArr.push(allItemArr[i]);
 								//SAC NEW
 								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
+								var wtList=allItemArr[i].availInWeights.split(',');
+								if(wtList[0]<1){
+									allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
+								}
 								var isLike=allItemArr[i].isLike;
 								var like = '';
 								
@@ -1865,6 +1950,10 @@
 								displayListArr.push(allItemArr[i]);
 								//SAC NEW
 								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
+								var wtList=allItemArr[i].availInWeights.split(',');
+								if(wtList[0]<1){
+									allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
+								}
 								//alert("hi")
 								
 								var isLike=allItemArr[i].isLike;
@@ -2671,30 +2760,25 @@ function setPriceByWtAndFlavour(id,type) {
 				rate=rate*parseFloat(selectWt);
 			}
 			
-			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
 			
 		}
 		
 function setQtyText(id, type) {
 
 	/* type  :  0 - minus,  1 - plus */
-	
+	try{
 	var wt=document.getElementById("txtWt"+id).value;
-//alert(id+"    "+type+ "     "+wt)
 
-//alert(detailList);
-	
+	 var maxValue=document.getElementById("maxValue").value;
 	if(type==0){
-	
 		var newWt=wt+1;
-		if(wt>1 && wt<=10){
+		if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
 			wt=parseInt(wt)-1;
 		}
-		
 	}
-	
 	else if(type==1){
-		if(wt>=1 && wt<10){
+		if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
 			wt=parseInt(wt)+1;
 		}
 	}
@@ -2722,9 +2806,13 @@ function setQtyText(id, type) {
 	}
 	
 	rate=rate*wt;
-	
 	//27-04 document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-	
+   //document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+	document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
+
+	}catch (e) {
+		alert(e);
+	}
 
 }
 
@@ -2734,6 +2822,7 @@ function setQtyText(id, type) {
 				var wtList=hiddenProductListArr.availInWeights.split(',');
 				//alert(wtList);
 		//	var dataOption='<option value="0">Select Weight</option>'
+			
 			if(parseFloat(wtList[0])>0){
 			for(var d=0;d<wtList.length;d++){
 				dataOption+='<option value="'+wtList[d]+'">'+wtList[d]+'</option>'
@@ -2747,7 +2836,7 @@ function setQtyText(id, type) {
 														+'onclick="setQtyText('+hiddenProductListArr.productId+',0)">'
 														+'<i class="fa fa-minus" aria-hidden="true"></i></button>'+
 													'<input type="text" id="txtWt'+hiddenProductListArr.productId+'"'
-														+'value="1" style="text-align: center;"'+
+														+'value="1" readonly style="text-align: center;"'+
 														'class="qty slide">'+
 													'<button type="button" value="" field="quantity"'+
 														'onclick="setQtyText('+hiddenProductListArr.productId+',1)"'
@@ -2769,6 +2858,8 @@ function setQtyText(id, type) {
 	
 		}
 		</script>
+		
+		<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 
 </html>

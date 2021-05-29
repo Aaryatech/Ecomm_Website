@@ -1540,7 +1540,7 @@ function removeLoader(){
 		
 		//alert(detailList);
 			
-			if(type==0){
+			/* if(type==0){
 			
 				var newWt=wt+1;
 				if(wt>1 && wt<=10){
@@ -1553,8 +1553,20 @@ function removeLoader(){
 				if(wt>=1 && wt<10){
 					wt=parseInt(wt)+1;
 				}
+			} */
+			var maxValue=document.getElementById("maxValue").value;
+			if(type==0){
+				var newWt=wt+1;
+				if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
+					wt=parseInt(wt)-1;
+				}
 			}
-			
+			else if(type==1){
+				if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
+					wt=parseInt(wt)+1;
+				}
+			}
+
 			document.getElementById("txtWt"+id).value=wt;
 			
 			
@@ -1580,7 +1592,8 @@ function removeLoader(){
 			rate=rate*wt;
 			
 			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			
+			document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
+
 
 		}
 		
@@ -1948,6 +1961,6 @@ function removeLoader(){
 
 
 
-
+<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 </html>

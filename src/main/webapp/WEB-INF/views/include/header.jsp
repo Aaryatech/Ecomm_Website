@@ -478,14 +478,15 @@
 	function setQty(productId, position, curQty, buttonType) {
 		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
 		//prod_quantity+productId;
+var maxValue=document.getElementById("maxValue").value;
 
 		var ischanged = 0;
-		if (parseInt(buttonType) == 0 && parseInt(curQty) > 1) {
+		if (parseInt(buttonType) == 0 && parseInt(curQty) > 1&&parseInt(curQty)<=parseInt(maxValue)) {
 			//Its Minus call;
 			//alert("If")
 			curQty = parseInt(curQty) - 1;
 			ischanged = 1;
-		} else if (parseInt(buttonType) == 1) {
+		} else if (parseInt(buttonType) == 1 &&parseInt(curQty)<parseInt(maxValue)) {
 			//Its Plus;
 			//alert("Else")
 			curQty = parseInt(curQty) + 1;
@@ -602,7 +603,7 @@
 	function onlyUnique(value, index, self) {
 		return self.indexOf(value) === index;
 	}
-
+	
 	function openNav() {
 		appendCartData();
 		document.getElementById("mySidepanel").style.width = "300px";
@@ -690,6 +691,9 @@
 		});
 		$('#like_item_count').html('' + likeCount);
 	}
+	
+	//$("input.myClass:checkbox")
+
 </script>
 
 

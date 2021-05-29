@@ -15,16 +15,19 @@ public class Constants {
 	 * final String PROD_IMG_VIEW_URL="http://198.12.156.31:8080/PROD_IMG_UP/";
 	 */
 
-	// Sachin Local Path
 	
-	 private final static String
-	  BASEPATH_URL="/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/"; 
-	  private final static String IP_URL ="http://107.180.72.86:8080/uploads/ecomAdmin/";
+	public static final int defaultValue=1;
+	public static final int maxValue=25;
+
+	// Sachin Local Path
+//	 private final static String
+//	  BASEPATH_URL="/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/"; 
+//	  private final static String IP_URL ="http://107.180.72.86:8080/uploads/ecomAdmin/";
 	  //private final static String IP_URL ="http://localhost:8080/uploads/ecomAdmin/";
 
 	  //Sever 16GB Live
-//	  private final static String IP_URL ="https://pecom.monginis.net/uploads/ecomAdmin/";
-//	  private final static String BASEPATH_URL="/opt/cpanel/ea-tomcat85/webapps/uploads/ecomAdmin/";
+	  private final static String IP_URL ="https://pecom.monginis.net/uploads/ecomAdmin/";
+	  private final static String BASEPATH_URL="/opt/cpanel/ea-tomcat85/webapps/uploads/ecomAdmin/";
 //	
 	
 	/*
@@ -46,11 +49,12 @@ public class Constants {
 	public static final String FEST_IMG_VIEW_URL = IP_URL+"OFFER_IMG_UP/";
 
 	public static final String PROFILE_IMG_VIEW_URL = IP_URL+"IMG_UP/";
+	public static final  String PROD_UPLOADED_IMG_VIEW_URL =IP_URL+"IMG_UP/";
 
 	public static RestTemplate rest = new RestTemplate();
 
 	//public static String url="http://localhost:8094/";
-	 public static final String url ="http://107.180.72.86:8080/EcomAPI/";
+	public static final String url ="http://107.180.72.86:8080/EcomAPI/";
 	public static final Object OFFER_IMG_VIEW_URL = IP_URL+"OFFER_IMG_UP/";
 
 

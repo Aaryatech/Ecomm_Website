@@ -425,7 +425,7 @@
 											</c:if>
 
 											<li>Weight<select class="select-css" id="weight"
-												onchange="changeWeight(); setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
+												onchange="setPriceByWtAndFlavour(${prodHeader.productId},${prodHeader.rateSettingType})">
 													<c:forEach items="${prodHeader.availInWeights}"
 														var="prodDetailwt">
 														<option value="${prodDetailwt}">${prodDetailwt}</option>
@@ -456,7 +456,7 @@
 								<ul>
 									<li>
 										<div class="detail_price_tp divide">
-											<span>Price :</span> <i
+											<span>Price :</span> <i++++++
 												class="fa fa-inr cake_prc_detail_iclass aprice"
 												aria-hidden="true"></i>
 
@@ -1823,7 +1823,7 @@ function moveCursor(){
 		
 		//alert(detailList);
 			
-			if(type==0){
+			/* if(type==0){
 			
 				var newWt=wt+1;
 				if(wt>1 && wt<=10){
@@ -1834,6 +1834,19 @@ function moveCursor(){
 			
 			else if(type==1){
 				if(wt>=1 && wt<10){
+					wt=parseInt(wt)+1;
+				}
+			} */
+			
+			var maxValue=document.getElementById("maxValue").value;
+			if(type==0){
+				var newWt=wt+1;
+				if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
+					wt=parseInt(wt)-1;
+				}
+			}
+			else if(type==1){
+				if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
 					wt=parseInt(wt)+1;
 				}
 			}
@@ -1863,7 +1876,8 @@ function moveCursor(){
 			rate=rate*wt;
 			
 			//27-04 document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+
 
 		}
 
@@ -1900,7 +1914,7 @@ function setLike(id,isLike) {
 }
 </script>
 
-
+<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 
 </html>
