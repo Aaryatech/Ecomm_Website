@@ -215,13 +215,20 @@
 				<div class="product_boxes">
 
 					<div id="hiddenProductList" style="display: none;"></div>
-
+<div class="search_class">
 					<div class="find_store">
 						<h2 class="sec_title">
 							<center>
 								<p id="prodCount"></p>
 							</center>
 						</h2>
+					<div class="arrow_right">	<ul>
+			<li><a href="javascript:void(0)" onclick="priceSort(1)"><i
+					class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
+			<li><a href="javascript:void(0)" onclick="priceSort(0)"><i
+					class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
+		</ul></div>
+		</div>
 					</div>
 
 
@@ -815,13 +822,23 @@
 			var count = 0;
 
 			for (var i = 0; i < allItemArr.length; i++) {
-
+				if (allItemArr[i].appliTagNames === selTags[t]) {
+					
+					
+					var wtList=allItemArr[i].availInWeights.split(',');
+					//alert(tempArr[i].productName +"-"+tempArr[i].defaultPrice)
+if(allItemArr[i].rateSettingType==0){
+						
+					}
+					 else if(wtList[0]<=1){
+						 allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
+					}
 				if (selTags.length > 0) {
 
 					for (var t = 0; t < selTags.length; t++) {
 
-						if (allItemArr[i].appliTagNames === selTags[t]) {
-
+						console.log("A",1)
+							
 							//alert(allItemArr[i]);
 							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 							divStr = divStr
@@ -831,7 +848,7 @@
 									+ ' <div class="cake_pic"> '+detail
 									+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 									+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-									+ allItemArr[i].defaultPrice +'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
+									+ allItemArr[i].defaultPrice +'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+allItemArr[i].uomShowName+'</p>'
 									+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 									+ allItemArr[i].defaultPrice
 									+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -841,7 +858,7 @@
 									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 									+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 									+ ' </div> </div> </div> </li> '
-
+									console.log("CC",1)
 							count++;
  	
 						}
@@ -849,6 +866,7 @@
 					}
 
 				} else {
+					console.log("B",1)
 					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 					divStr = divStr
 							+ '<li>'
@@ -857,7 +875,7 @@
 							+ ' <div class="cake_pic"> '+detail
 							+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 							+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
+							+ allItemArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+allItemArr[i].uomShowName+'</p>'
 							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ allItemArr[i].defaultPrice
 							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -959,7 +977,7 @@
 			
 			if(tempArr.length>0){
 				//alert(tempArr)
-				if(val==1){
+				if(parseInt(val)==1){
 					tempArr.sort(function(a, b){
 					    return parseFloat(b.defaultPrice)-parseFloat(a.defaultPrice)
 					})
@@ -1043,14 +1061,19 @@
 							}catch (e) {
 								alert(e);
 							}	*/
-							
+							console.log("C",1)
 					var cakeDrpDwn=setWeightOrQtyDropDown(tempArr[i]);
 					var wtList=tempArr[i].availInWeights.split(',');
-					if(wtList[0]<1){
-						tempArr[i].defaultPrice=tempArr[i].defaultPrice*wtList[0];
+					//alert(tempArr[i].productName +"-"+tempArr[i].defaultPrice)
+					 
+/* if(tempArr[i].rateSettingType==0){
+						
 					}
+					 else if(wtList[0]<=1){
+						tempArr[i].defaultPrice=tempArr[i].defaultPrice*wtList[0];
+					} */
 					//alert("hi")
-					
+					//alert(tempArr[i].productName +"-"+tempArr[i].defaultPrice);
 					var isLike=tempArr[i].isLike;
 					var like = '';
 					
@@ -1094,7 +1117,7 @@
 					+ isVegType
 					+ like
 					+ ' <div class="cake_prc" id="newPrice'+tempArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-					+ tempArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+tempArr[i].uomShowName+'</p>'
+					+ tempArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+tempArr[i].uomShowName+'</p>'
 					+ ' <span style="display:none;" class="off_prc" ><i class="fa fa-inr" aria-hidden="true"></i>'
 					+ tempArr[i].defaultPrice
 					+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -1547,7 +1570,7 @@
 						//alert("OkAAAA 06-04-2021")
 						displayListArr.push(hiddenProductListArr[i]);
 						//setProductData(hiddenProductListArr[i]);
-						
+						console.log("Z",1)
 						var drpDwn = '';
 						/* var cakeDrpDwn = '<div class="cake_dropdown">'
 							cakeDrpDwn += '<div class="cake_dropdown_l">' */
@@ -1576,9 +1599,12 @@
 												//alert(wtList);
 										//	var dataOption='<option value="0">Select Weight</option>'
 										//var wtList=hiddenProductListArr[i].availInWeights.split(',');
-										if(wtList[0]<1){
-											hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
-										}
+											if(allItemArr[i].rateSettingType==0){
+												
+											}else if(wtList[0]<=1){
+												hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
+											}
+										
 											if(parseFloat(wtList[0])>0){
 											for(var d=0;d<wtList.length;d++){
 												dataOption+='<option value="'+wtList[d]+'">'+wtList[d]+'</option>'
@@ -1593,7 +1619,9 @@
 											dataOption+
 										'</select></div>'
 										}
-								cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr[i].uomShowName+'</span></div>'
+								//cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr[i].uomShowName+'</span></div>'
+																cakeDrpDwn +='<span class="prod_kgs"></span></div>'
+
 								//SACHIN CODE END
 								dataOption=null;
 						
@@ -1641,7 +1669,7 @@
 						+ like
 						+ isVegType						
 						+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
+						+ hiddenProductListArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+hiddenProductListArr[i].uomShowName+'</p>'
 						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ hiddenProductListArr[i].defaultPrice
 						+ '</span> <span style="display:none;"  class="prc_off"></span> </div> '
@@ -1653,7 +1681,7 @@
 						+ ' </div> </div> </div> </li> ';
 
 						count++;
-						
+						console.log("X",1)
 					}else{
 						
 						//alert("hi")
@@ -1661,12 +1689,14 @@
 						//alert("cat - "+hiddenProductListArr[i].prodCatId+"                "+catId);
 						
 						if(max > 0 && hiddenProductListArr[i].defaultPrice >= min && hiddenProductListArr[i].defaultPrice <= max && hiddenProductListArr[i].prodCatId == catId){
-							
+							console.log("UU",1)
 							displayListArr.push(hiddenProductListArr[i]);
 							//SAC NEW
 							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
 							var wtList=hiddenProductListArr[i].availInWeights.split(',');
-							if(wtList[0]<1){
+							if(allItemArr[i].rateSettingType==0){
+								
+							}else if(wtList[0]<=1){
 								hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
 							}
 							var isLike=hiddenProductListArr[i].isLike;
@@ -1712,7 +1742,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
+							+ hiddenProductListArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -1722,7 +1752,7 @@
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
-
+							console.log("UK",1)
 							count++;
 							
 						}else if(max == 0  && hiddenProductListArr[i].prodCatId == catId){
@@ -1733,7 +1763,10 @@
 							//SAC NEW
 							var cakeDrpDwn=setWeightOrQtyDropDown(hiddenProductListArr[i]);
 							var wtList=hiddenProductListArr[i].availInWeights.split(',');
-							if(wtList[0]<1){
+							//alert(allItemArr[i].rateSettingType+"wt "+wtList)
+							if(hiddenProductListArr[i].rateSettingType==0){
+								
+							}else if(wtList[0]<=1){
 								hiddenProductListArr[i].defaultPrice=hiddenProductListArr[i].defaultPrice*wtList[0];
 							}
 							var isLike=hiddenProductListArr[i].isLike;
@@ -1779,7 +1812,7 @@
 							+ isVegType
 							+ like							
 							+ ' <div class="cake_prc" id="newPrice'+hiddenProductListArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-							+ hiddenProductListArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+hiddenProductListArr[i].uomShowName+'</p>'
+							+ hiddenProductListArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+hiddenProductListArr[i].uomShowName+'</p>'
 							+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ hiddenProductListArr[i].defaultPrice
 							+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -1789,7 +1822,8 @@
 							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
 							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
-
+							console.log("SD",1)
+							
 							count++;
 						}
 					}
@@ -1805,7 +1839,9 @@
 						//SAC NEW
 						var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 						var wtList=allItemArr[i].availInWeights.split(',');
-						if(wtList[0]<1){
+						if(allItemArr[i].rateSettingType==0){
+							
+						}else if(wtList[0]<=1){
 							allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
 						}
 						var isLike=allItemArr[i].isLike;
@@ -1853,7 +1889,7 @@
 						+ isVegType
 						+ like						
 						+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-						+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
+						+ allItemArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+allItemArr[i].uomShowName+'</p>'
 						+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 						+ allItemArr[i].defaultPrice
 						+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -1864,8 +1900,8 @@
 						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 						+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"><a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 						+ ' </div> </div> </div> </li> ';
-
-			
+						
+						console.log("HJ",1)
 						count++;
 						
 					} else{
@@ -1880,7 +1916,9 @@
 								//SAC NEW
 								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 								var wtList=allItemArr[i].availInWeights.split(',');
-								if(wtList[0]<1){
+if(allItemArr[i].rateSettingType==0){
+									
+								}else if(wtList[0]<=1){
 									allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
 								}
 								var isLike=allItemArr[i].isLike;
@@ -1926,7 +1964,7 @@
 								+ isVegType
 								+ like								
 								+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
+								+ allItemArr[i].defaultPrice+'<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -1936,7 +1974,7 @@
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
-
+								console.log("KLL",1)
 								count++;
 								
 							}
@@ -1951,7 +1989,10 @@
 								//SAC NEW
 								var cakeDrpDwn=setWeightOrQtyDropDown(allItemArr[i]);
 								var wtList=allItemArr[i].availInWeights.split(',');
-								if(wtList[0]<1){
+								if(allItemArr[i].rateSettingType==0){
+									
+								}else
+								if(wtList[0]<=1){
 									allItemArr[i].defaultPrice=allItemArr[i].defaultPrice*wtList[0];
 								}
 								//alert("hi")
@@ -1999,7 +2040,7 @@
 								+ isVegType
 								+ like
 								+ ' <div class="cake_prc" id="newPrice'+allItemArr[i].productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-								+ allItemArr[i].defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+allItemArr[i].uomShowName+'</p>'
+								+ allItemArr[i].defaultPrice+' <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+allItemArr[i].uomShowName+'</p>'
 								+ ' <span style="display:none;" class="off_prc" ><i class="fa fa-inr" aria-hidden="true"></i>'
 								+ allItemArr[i].defaultPrice
 								+ '</span> <span style="display:none;"  class="prc_off">(23% Off)</span> </div> '
@@ -2009,7 +2050,7 @@
 								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
 								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
-	 
+								console.log("LOPP",1)
 								count++;
 							
 							}
@@ -2040,11 +2081,11 @@
 			document.getElementById("itemListUl").innerHTML = divStr;
 			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(displayListArr);
 			
-			sessionStorage.setItem("priceFilterMin", "0");
+			/* sessionStorage.setItem("priceFilterMin", "0");
 			sessionStorage.setItem("priceFilterMax", "0");
 			sessionStorage.setItem("menuFilterName", "");
 			sessionStorage.setItem("findCatId", "0");
-			sessionStorage.setItem("filterMenu", "0");
+			sessionStorage.setItem("filterMenu", "0"); */
 			
 			
 			var filterName=menuFilter.split(",");
@@ -2113,7 +2154,7 @@ function setProductData(productObj){
 			+ isVegType
 			+ like
 			+ ' <div class="cake_prc" id="newPrice'+productObj.productId+'"> <i class="fa fa-inr" aria-hidden="true"></i>'
-			+ productObj.defaultPrice+'/- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+productObj.uomShowName+'</p>'
+			+ productObj.defaultPrice+' <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: none;">'+productObj.uomShowName+'</p>'
 			+ ' <span style="display:none;" class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 			+ productObj.defaultPrice
 			+ '</span> <span style="display:none;" class="prc_off">(23% Off)</span> </div> '
@@ -2739,16 +2780,17 @@ function setPriceByWtAndFlavour(id,type) {
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					rate=parseFloat(allItemArr[i].defaultPrice);
+					break;
 				}
 			}
 			
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
-						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+						if(type==1){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
 							break;
-						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+						}else if(allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
 							break;
 						}
@@ -2852,13 +2894,30 @@ function setQtyText(id, type) {
 													dataOption+
 												'</select></div>'
 												}
-										cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr.uomShowName+'</span></div>'
+										//cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr.uomShowName+'</span></div>'
+																				cakeDrpDwn +='<span class="prod_kgs">'+hiddenProductListArr.uomShowName+'</span></div>'
+
 										//SACHIN CODE END
 										return cakeDrpDwn;
 	
 		}
 		</script>
+		<script type="text/javascript">
+    function refreshAndClose1() {
+    	
+		var tags = sessionStorage.getItem("selTags_SAC");
+		var tags2 = sessionStorage.getItem("selTags");
+
+		//alert(tags);alert(tags2);
+	//	var selTags = $.parseJSON(tags);
+		sessionStorage.setItem("menuFilterName", tags);
+
+		//window.open('${pageContext.request.contextPath}/products/0', '_target');
 		
+      //  window.opener.location.reload(true);
+    }
+    
+</script>
 		<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 

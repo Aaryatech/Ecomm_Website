@@ -1487,6 +1487,7 @@ function moveCursor(){
 		for(var i=0;i<allItemArr.length;i++){
 			if(allItemArr[i].productId==id){
 				rate=parseFloat(allItemArr[i].defaultPrice);
+				break;
 			}
 		}
 		
@@ -1518,7 +1519,7 @@ function moveCursor(){
 			
 			//alert("--------------- "+document.getElementById("txtWt").value)
 		
-			 
+			 try{
 			var selectFlav = 0;
 			
 			var selectWt = 0;
@@ -1639,7 +1640,7 @@ function moveCursor(){
 					} 
 		
 				}
-				 
+			
 				
 				var priceDiff = parseFloat(displayRate)
 						- parseFloat(actualRate);
@@ -1663,7 +1664,7 @@ function moveCursor(){
 					sessionStorage.setItem("cartValue", JSON
 							.stringify(table));
 				}
-		
+			
 				var cartValue = sessionStorage
 						.getItem("cartValue");
 				var table = $.parseJSON(cartValue);
@@ -1683,7 +1684,9 @@ function moveCursor(){
 					msgonCake =document.getElementById("msg_on_cake").value;
 				} 
 				
-				
+			 }catch (e) {
+					console.log("Sp Inst, msg on cake error",msgonCake);
+				}
 
 				if (sessionStorage.getItem("cartValue") == null) {
 					var table = [];
@@ -1793,7 +1796,7 @@ function moveCursor(){
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
 			  	  
-		
+			
 		} 
 		</script>
 

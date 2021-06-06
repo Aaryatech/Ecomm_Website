@@ -143,7 +143,7 @@
 																</c:choose>
 
 																<p class="cake_prc_detail_pclass"
-																	id="newPrice${product.productId}">${price} /-</p>
+																	id="newPrice${product.productId}">${price}</p>
 
 															</div>
 													<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -492,7 +492,7 @@
 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
 <script type="text/javascript">
-		function addCart(id,type) {
+		function addCart1(id,type) {
 			
 			
 			
@@ -504,7 +504,7 @@
 			
 			if(type == 0){
 				selectWt = document.getElementById("txtWt"+id).value;	
-				//alert("selectWt" +selectWt)
+				alert("selectWt" +selectWt)
 			}else if(type == 1 || type == 2){
 				selectWt = document.getElementById("wt" + id).value;
 				
@@ -761,75 +761,7 @@
 		
 		
 	</script>
-		<script type="text/javascript">
 		
-		function setQtyText(id, type) {
-
-			/* type  :  0 - minus,  1 - plus */
-			
-			var wt=document.getElementById("txtWt"+id).value;
-		//alert(id+"    "+type+ "     "+wt)
-		
-		//alert(detailList);
-			
-			/* if(type==0){
-			
-				var newWt=wt+1;
-				if(wt>1 && wt<=10){
-					wt=parseInt(wt)-1;
-				}
-				
-			}
-			
-			else if(type==1){
-				if(wt>=1 && wt<10){
-					wt=parseInt(wt)+1;
-				}
-			} */
-			var maxValue=document.getElementById("maxValue").value;
-			if(type==0){
-				var newWt=wt+1;
-				if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
-					wt=parseInt(wt)-1;
-				}
-			}
-			else if(type==1){
-				if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
-					wt=parseInt(wt)+1;
-				}
-			}
-
-			document.getElementById("txtWt"+id).value=wt;
-			
-			
-			if (sessionStorage.getItem("allItemList") == null) {
-				var table = [];
-				sessionStorage.setItem("allItemList", JSON.stringify(table));
-			}
-
-			var allItemList = sessionStorage.getItem("allItemList");
-			var allItemArr = $.parseJSON(allItemList);
-
-			var rate=0;
-			
-			for(var i=0;i<allItemArr.length;i++){
-				
-				if(allItemArr[i].productId==id){
-			
-					rate=parseFloat(allItemArr[i].prodDetailList[0].actualRate);
-				}
-				
-			}
-			
-			rate=rate*wt;
-			
-			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
-
-
-		}
-		
-		</script>
 	<script type="text/javascript">
 		
 		function setPriceByWtAndFlavour(id,type) {
@@ -862,16 +794,17 @@
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					rate=parseFloat(allItemArr[i].defaultPrice);
+					break;
 				}
 			}
 			
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
-						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+						if(type==1){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
 							break;
-						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+						}else if(allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
 							break;
 						}
@@ -1244,7 +1177,7 @@ function setLike(id,isLike) {
 							+ like
 							+ ' <div class="cake_prc"> <i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
-							+ ' /- <p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+product.uomShowName+'</p><span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
+							+ '<p class="per_kg" style="font-size: 12px; vertical-align: middle; display: inline-block;">'+product.uomShowName+'</p><span class="off_prc"><i class="fa fa-inr" aria-hidden="true"></i>'
 							+ product.defaultPrice
 							+ '</span> <span class="prc_off"></span> </div> '
 							+ ' <input type="hidden" class="tagNameHide" value="'+product.appliTagNames+'"> '
@@ -1279,6 +1212,363 @@ function setLike(id,isLike) {
 	
 	
 	</script>
+	
+	<script type="text/javascript">
+		function addCart(id,type) {
+			//alert("Ok" +type);
+			//alert("--------------- "+document.getElementById("txtWt").value)
+		 
+			 var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
+		
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(parseInt(type) == 0){
+				//alert("Its zero")
+				selectWt = 1;	
+					selectWt = document.getElementById("txtWt"+id).value;	
+				
+				
+			}else if(parseInt(type) == 1 || parseInt(type) == 2){
+				//alert("Its 1 || 2")
+				
+				try {
+					
+					var availablewt =prodMaster.availInWeights.split(",");
+					selectWt = availablewt[0];
+					
+					selectFlav = prodMaster.defaultFlavorId;
+					 
+					//selFlvName = "akshay";
+					var defFlvName =prodMaster.flavorNames.split(",");
+					selFlvName=defFlvName[0];
+					selectWt = document.getElementById("wt" + id).value;
+
+				} catch (e) {
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			//alert("type" +type);
+				var defFlvName =prodMaster.flavorNames.split(",");
+				selFlvName=defFlvName[0];
+				var prodDetail = prodMaster.prodDetailList;
+				
+				
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				var uniq = (new Date()).getTime();
+
+				for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(parseInt(type) == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(parseInt(type) == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							//alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} else if(parseInt(type) == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+		
+						}
+						
+					} 
+		
+				}
+				
+				//alert("HEE"+calRate);
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+		
+				taxableAmt = calRate;
+		
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+		
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+		
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+		
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				  if(type==0){
+					calRate=actualRate;
+				}  
+				
+				var spInst;
+				var msgonCake;
+				
+			 	if(prodMaster.allowSpecialInstruction==1){
+					spInst="NA";
+				}
+
+				if(prodMaster.allowMsgOnCake==1){
+					msgonCake ="NA";
+				} 
+				
+				
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+		
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				
+				  if (sessionStorage.getItem("prodImageList") == null) {
+						var table = [];
+						sessionStorage.setItem("prodImageList", JSON
+								.stringify(table));
+					} 
+			   		
+				var imgValue = sessionStorage .getItem("prodImageList");
+				var imgObj = $.parseJSON(imgValue);
+				
+				var imgFile="";
+				var imgName="";
+				if(id==imgObj.itemId){
+					imgFile=imgObj.imgFile;
+					imgName=imgObj.imgName;
+				}
+				
+				var index=0,itemFound=0;
+				
+				for(var i=0; i<cartArray.length;i++){
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					
+				}
+				
+				var obj={
+						uniqueId : uniq,
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName,
+						spInst : spInst,
+						msgonCake : msgonCake
+					}
+				
+				
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				var tableClear = [];
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(tableClear));
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+				openNav();
+			  	setTimeout(function(){ closeNav(); }, 4000);
+		} 
+		</script>
+		
+		<script type="text/javascript">
+		
+		function setQtyText(id, type) {
+
+			/* type  :  0 - minus,  1 - plus */
+			
+			var wt=document.getElementById("txtWt"+id).value;
+		//alert(id+"    "+type+ "     "+wt)
+		
+		//alert(detailList);
+			
+			/* if(type==0){
+			
+				var newWt=wt+1;
+				if(wt>1 && wt<=10){
+					wt=parseInt(wt)-1;
+				}
+				
+			}
+			
+			else if(type==1){
+				if(wt>=1 && wt<10){
+					wt=parseInt(wt)+1;
+				}
+			} */
+			var maxValue=document.getElementById("maxValue").value;
+			if(type==0){
+				var newWt=wt+1;
+				if(parseInt(wt)>1 && wt<=parseInt(maxValue)){
+					wt=parseInt(wt)-1;
+				}
+			}
+			else if(type==1){
+				if(parseInt(wt)>=1 && parseInt(wt)<parseInt(maxValue)){
+					wt=parseInt(wt)+1;
+				}
+			}
+
+			document.getElementById("txtWt"+id).value=wt;
+			
+			
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			var rate=0;
+			
+			for(var i=0;i<allItemArr.length;i++){
+				
+				if(allItemArr[i].productId==id){
+			
+					rate=parseFloat(allItemArr[i].prodDetailList[0].actualRate);
+				}
+				
+			}
+			
+			rate=rate*wt;
+			
+			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
+
+
+		}
+		
+		</script>
 <jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 

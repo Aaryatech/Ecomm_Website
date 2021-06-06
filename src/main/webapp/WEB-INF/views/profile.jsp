@@ -192,7 +192,7 @@
 									<!--input_place-->
 									<div class="place_row_l">
 										<label class="form-label-hint">Billing Name</label> <input
-											type="text" class="input_two" maxlength="180"
+											type="text" class="input_two txtOnly" maxlength="180"
 											id="txtBillName" value="${cust.custName}" name="txtBillName"
 											placeholder="Billing Name" /> <label
 											class="form-label-hint-error" id="errorBillName"
@@ -406,6 +406,10 @@ var loadFile = function(event) {
 		 console.log("img apply error",err);
 		} 
 	}
+$('.txtOnly').bind('keyup blur',function(){ 
+    var node = $(this);
+    node.val(node.val().replace(/[^a-zA-Z\s]/g,'') ); }
+);
 </script>
 
 	<!--cart-sidepanel-->
@@ -446,6 +450,10 @@ var loadFile = function(event) {
 				align : "left"
 			});
 		});
+		$('#txtMobile1').bind('keyup blur',function(){ 
+		    var node = $(this);
+		    node.val(node.val().replace(/[^0-9\s]/g,'') ); }
+		);
 	</script>
 	<!--menuzord-->
 

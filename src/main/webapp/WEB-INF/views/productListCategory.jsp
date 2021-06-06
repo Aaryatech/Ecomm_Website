@@ -284,7 +284,7 @@ html {
 														</c:choose>
 
 														<p class="cake_prc_detail_pclass"
-															id="newPrice${product.productId}">${price}/-</p>
+															id="newPrice${product.productId}">${price}</p>
 
 													</div>
 													<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -603,8 +603,8 @@ html {
 
 
 	<!-- bottom -->
-<%-- 	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
- --%>
+	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
+
 
 
 	<!--cart-sidepanel-->
@@ -965,7 +965,9 @@ function setLike(id,isLike) {
 			
 			if(parseInt(type) == 0){
 				//alert("Its zero")
-				selectWt = 1;	
+				selectWt = 1;
+				selectWt = document.getElementById("txtWt"+id).value;	
+
 			}else if(parseInt(type) == 1 || parseInt(type) == 2){
 				//alert("Its 1 || 2")
 				
@@ -973,6 +975,7 @@ function setLike(id,isLike) {
 					
 					var availablewt =prodMaster.availInWeights.split(",");
 					selectWt = availablewt[0];
+					selectWt = document.getElementById("wt" + id).value;
 					
 					selectFlav = prodMaster.defaultFlavorId;
 					 
@@ -1295,6 +1298,7 @@ function setLike(id,isLike) {
 			//alert(id+"      "+type)
 			
 			var selectWt = document.getElementById("wt" + id).value;
+			//alert(id+"      "+selectWt)
 			var selectFlav = 0;
 			try {
 				selectFlav = document.getElementById("flav" + id).value;
@@ -1320,23 +1324,26 @@ function setLike(id,isLike) {
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					rate=parseFloat(allItemArr[i].defaultPrice);
+					break;
 				}
 			}
-			
+			//alert("rate a "+rate);
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
-						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+						if(type==1){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							
 							break;
-						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+						}else if(allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							//alert("B");
 							break;
 						}
 					}
 				}
 			}
-			
+			//alert("rate H "+rate);
 			if(type==1){
 				rate=rate*parseFloat(selectWt);
 			}

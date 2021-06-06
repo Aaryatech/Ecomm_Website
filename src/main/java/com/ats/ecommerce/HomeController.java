@@ -353,6 +353,14 @@ public class HomeController {
 			// 06-01-2020
 			try {
 				String mobNo = request.getParameter("mobNo");
+				
+			Cookie	mobCookie = new Cookie("mobNoCookie",
+						EncodeDecode.Encrypt("" + mobNo));
+			mobCookie.setMaxAge(60 * 60 * 24 * 15);
+				response.addCookie(mobCookie);
+				session.setAttribute("mobNo", mobNo);
+
+				
 				String otp = request.getParameter("otp");
 
 				LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
@@ -639,7 +647,7 @@ public class HomeController {
 //System.err.println("prodHeader " +prodHeader);
 			try {
 				String[] smilarprdts = prodHeader.getSimilarProductIds().split(",");
-System.err.println("smilarprdts 0,1" +smilarprdts[0]+" " +smilarprdts[1]);
+//System.err.println("smilarprdts 0,1" +smilarprdts[0]+" " +smilarprdts[1]);
 				if (data.getFeProductHeadList() != null) {
 
 					for (int j = 0; j < smilarprdts.length; j++) {

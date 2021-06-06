@@ -249,7 +249,12 @@ public class CheckoutController {
 
 			try {
 
-				int custId = (int) session.getAttribute("custId");
+				int custId = 0;//(int) session.getAttribute("custId");
+				try {
+					 custId = (int) session.getAttribute("custId");
+				}catch (Exception e) {
+					custId = 0;
+				}
 				if (custId > 0) {
 					map = new LinkedMultiValueMap<>();
 
@@ -258,6 +263,7 @@ public class CheckoutController {
 					Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
 							Customer.class);
 					model.addAttribute("cust", cust);
+					session.setAttribute("mobNo",cust.getCustMobileNo());
 					try {
 						String[] billAddress = cust.getExVar3().split("~");
 						model.addAttribute("getFlat", billAddress[0]);
@@ -268,6 +274,22 @@ public class CheckoutController {
 						e.printStackTrace();
 					}
 				} // end of if custId>0
+				else {
+					//mobNo
+					
+					Cookie[] cookieArray = request.getCookies();
+					int isCookieFound = 0;
+					if (cookieArray != null)
+						for (int a = 0; a < cookieArray.length; a++) {
+							if (cookieArray[a].getName().equalsIgnoreCase("mobNoCookie")) {
+								System.out.println("mobNoCookie " +cookieArray[a].getName());
+								session.setAttribute("mobNo",
+										(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+								System.err.println("In From Cookie "+session.getAttribute("mobNo"));
+								break; 
+							}
+						}
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -281,7 +303,8 @@ public class CheckoutController {
 				// delAddId=Integer.parseInt(delAddIdStr);
 				System.err.println("delAddId " + delAddId);
 			} catch (Exception e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				delAddId=0;
 			}
 			if (delAddId > 0) {
 				int custId = (int) session.getAttribute("custId");

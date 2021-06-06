@@ -655,7 +655,7 @@
 																			</c:choose>
 
 																			<p class="cake_prc_detail_pclass"
-																				id="newPrice${product.productId}">${price}/-</p>
+																				id="newPrice${product.productId}">${price}</p>
 
 																		</div>
 																		<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -957,7 +957,7 @@
 																			</c:choose>
 
 																			<p class="cake_prc_detail_pclass"
-																				id="newPrice${product.productId}">${price}/-</p>
+																				id="newPrice${product.productId}">${price}</p>
 
 																		</div>
 																		<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -1282,7 +1282,7 @@
 																			</c:choose>
 
 																			<p class="cake_prc_detail_pclass"
-																				id="newPrice${product.productId}">${price}/-</p>
+																				id="newPrice${product.productId}">${price}</p>
 
 																		</div>
 																		<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -2414,10 +2414,11 @@
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					rate=parseFloat(allItemArr[i].defaultPrice);
+					break;
 				}
 			}
 			
-			for(var i=0;i<allItemArr.length;i++){
+			/* for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
 						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
@@ -2429,8 +2430,22 @@
 						}
 					}
 				}
-			}
+			} */
 			
+			//new 04-06-2021
+			for(var i=0;i<allItemArr.length;i++){
+				if(allItemArr[i].productId==id){
+					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
+						if(type==1){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}else if(allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							break;
+						}
+					}
+				}
+			}
 			if(type==1){
 				rate=rate*parseFloat(selectWt);
 			}

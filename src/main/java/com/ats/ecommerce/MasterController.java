@@ -528,6 +528,9 @@ public class MasterController {
 			if (res != null) {
 				info.setError(false);
 				info.setMsg("Customer Found");
+			}else if(mobNo.trim().equalsIgnoreCase(res.getCustMobileNo().trim())){
+				info.setError(true);
+				info.setMsg("Customer Not Found");
 			} else {
 				info.setError(true);
 				info.setMsg("Customer Not Found");

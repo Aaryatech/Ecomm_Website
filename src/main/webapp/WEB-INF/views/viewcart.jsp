@@ -1063,9 +1063,9 @@
 						<div class="place_row">
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Billing Name</span> <input type="text"
-									class="input_place" id="txtBillName" name="txtBillName"
+									class="input_place txtOnly" id="txtBillName" name="txtBillName"
 									placeholder="Billing Name" value="${cust.custName}"
-									autocomplete="off" /> <label class="form-label-hint-error"
+									autocomplete="off" maxlength="25" /> <label class="form-label-hint-error"
 									id="errorBillName" style="display: none;">Please enter
 									billing name</label>
 							</div>
@@ -1166,7 +1166,7 @@
 						<div class="place_row" id="giftOrderDiv" style="display: none;">
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Person Name</span> <input type="text"
-									class="input_place" id="persnName" name="persnName"
+									class="input_place txtOnly" id="persnName" name="persnName"
 									placeholder="Person Name" autocomplete="off" /> <label
 									class="form-label-hint-error" id="errorPersnName"
 									style="display: none;">Please Person name</label>
@@ -1284,7 +1284,7 @@
 									style="display: none;">Please enter landmark</label>
 							</div>
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Pin code</span> <input type="text"
+								<span class="pop_lab_fld">Pin code</span> <input type="text" maxlength="6"
 									class="input_place" autocomplete="off" id="txtBillingPincode"
 									name="txtBillingPincode" placeholder="Billing Pincode"
 									value="${getPin}" /> <label class="form-label-hint-error"
@@ -1347,6 +1347,14 @@
 	<!--date or time picker-->
 
 	<script>
+	$('.txtOnly').bind('keyup blur',function(){ 
+	    var node = $(this);
+	    node.val(node.val().replace(/[^a-zA-Z\s]/g,'') ); }
+	);
+	$('#personMobile').bind('keyup blur',function(){ 
+	    var node = $(this);
+	    node.val(node.val().replace(/[^0-9\s]/g,'') ); }
+	);
 		/*jslint browser:true*/
 		/*global jQuery, document*/
 		jQuery(document).ready(function() {
@@ -1743,7 +1751,7 @@
 		function minusQty(id, curQty) {
 			var maxValue=document.getElementById("maxValue").value;
 			//alert("sac"+maxValue)
-			if(parseInt(qty)>parseInt(maxValue)){
+			if(parseInt(curQty)>parseInt(maxValue)){
 				
 			}else
 				{
@@ -1808,7 +1816,7 @@
 		function plusQty(id, curQty) {
 			var maxValue=document.getElementById("maxValue").value;
 			//alert("sac"+maxValue)
-			if(parseInt(qty)>parseInt(maxValue)){
+			if(parseInt(curQty)>=parseInt(maxValue)){
 				
 			}else
 				{
@@ -2078,6 +2086,12 @@
 			} else {
 				$("#errorDelvPincode").hide();
 			}
+			if ($("#txtDelvPincode").val().length<6) {
+				delvPin = false;
+				$("#errorDelvPincode").show();
+			} else {
+				$("#errorDelvPincode").hide();
+			}
 			//alert("sdf")
 			if (!$("#txtBillingFlat").val().trim()) {
 				billFlat = false;
@@ -2101,6 +2115,13 @@
 			}
 			//alert("sdf")
 			if (!$("#txtBillingPincode").val().trim()) {
+				billPin = false;
+				$("#errorBillingPincode").show();
+			} else {
+				$("#errorBillingPincode").hide();
+			}
+			
+			if ($("#txtBillingPincode").val().length<6) {
 				billPin = false;
 				$("#errorBillingPincode").show();
 			} else {

@@ -484,8 +484,8 @@ function removeLoader(){
 																	aria-hidden="true"></i>
 
 																<c:set value="${product.defaultPrice}" var="price"></c:set>
-																<c:set value="1" var="defaultWt"></c:set>
-
+<%-- 																<c:set value="1" var="defaultWt"></c:set>
+ --%>
 																<c:choose>
 
 																	<c:when test="${product.rateSettingType == 1}">
@@ -507,7 +507,7 @@ function removeLoader(){
 																			<c:set value="${proWt}" var="defaultWt"></c:set>
 																		</c:forEach>
 
-																		<c:forEach items="${product.prodDetailList}"
+																		<%-- <c:forEach items="${product.prodDetailList}"
 																			var="proDetail">
 
 																			<c:choose>
@@ -516,7 +516,7 @@ function removeLoader(){
 																					<c:set value="${proDetail.actualRate}" var="price"></c:set>
 																				</c:when>
 																			</c:choose>
-																		</c:forEach>
+																		</c:forEach> --%>
 
 																	</c:when>
 
@@ -524,7 +524,7 @@ function removeLoader(){
 																</c:choose>
 
 																<p class="cake_prc_detail_pclass"
-																	id="newPrice${product.productId}">${price} /-</p>
+																	id="newPrice${product.productId}">${price}</p>
 
 															</div>
 													<%-- <i class="fa fa-inr" aria-hidden="true"></i>
@@ -1364,7 +1364,7 @@ function removeLoader(){
 				dots : true,
 				infinite : true,
 				slidesToShow : 4,
-				slidesToScroll : 1,
+				slidesToScroll : 4,
 				autoplay : true,
 				
 				responsive : [ {
@@ -1601,10 +1601,13 @@ function removeLoader(){
 	<script type="text/javascript">
 		
 		function setPriceByWtAndFlavour(id,type) {
-			
+			try{
 			//alert(id+"      "+type)
 			
-			var selectWt = document.getElementById("wt" + id).value;
+			var selectWt = document.getElementById('wt'+id).value;
+
+			//alert("Wt " +selectWt +"mywt "+mywt);
+			//selectWt=mywt;
 			var selectFlav = 0;
 			try {
 				selectFlav = document.getElementById("flav" + id).value;
@@ -1615,7 +1618,7 @@ function removeLoader(){
 				selectFlav = 0;
 			}
 			
-			//alert(selectWt+"          "+selectFlav)
+			//alert(selectWt+"          "+selectFlav);
 			
 			if (sessionStorage.getItem("allItemList") == null) {
 				var table = [];
@@ -1630,17 +1633,21 @@ function removeLoader(){
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					rate=parseFloat(allItemArr[i].defaultPrice);
+					//alert("A"+rate)
+					break;
 				}
 			}
 			
 			for(var i=0;i<allItemArr.length;i++){
 				if(allItemArr[i].productId==id){
 					for(var j=0;j<allItemArr[i].prodDetailList.length;j++){
-						if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && type==1){
+						if(type==1){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							//alert("B"+rate)
 							break;
-						}else if(allItemArr[i].prodDetailList[j].flavorId==selectFlav && allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
+						}else if(allItemArr[i].prodDetailList[j].qty==selectWt && type==2){
 							rate=parseFloat(allItemArr[i].prodDetailList[j].actualRate);
+							//alert("C"+rate)
 							break;
 						}
 					}
@@ -1650,14 +1657,16 @@ function removeLoader(){
 			if(type==1){
 				rate=rate*parseFloat(selectWt);
 			}
-			
+			//alert("D"+rate)
 			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			
+			}catch (e) {
+				alert(e);
+			}
 		}
 		
 		</script>
 	<script type="text/javascript">
-		function addCart(id,type) {
+		function addCart_OLD(id,type) {
 			
 			
 			
@@ -1957,7 +1966,276 @@ function removeLoader(){
 	}
 	</script>
 
+<script type="text/javascript">
+		function addCart(id,type) {
+			
+			
+			
+			var selectFlav = 0;
+			
+			var selectWt = 0;
+			
+			var selFlvName ="";
+			
+			if(type == 0){
+				selectWt = document.getElementById("txtWt"+id).value;	
+			}else if(type == 1 || type == 2){
+				selectWt = document.getElementById("wt" + id).value;
+				
+				try {
+					selectFlav = document.getElementById("flav" + id).value;
+					
+					var docFlv = document.getElementById("flav" + id);
+					selFlvName = docFlv.options[docFlv.selectedIndex].text;
+					
+					
+					
+					
+				} catch (e) {
+					
+					selectFlav = 0;
+				}
+				if (selectFlav == "" || isNaN(selectFlav) || selectFlav == null) {
+					selectFlav = 0;
+				}
+			}
+			
+			
+				
+				
+				var prodMaster;
+				
+				if (sessionStorage.getItem("allItemList") == null) {
+					var table = [];
+					sessionStorage.setItem("allItemList", JSON.stringify(table));
+				}
 
+				var allItemList = sessionStorage.getItem("allItemList");
+				var prodHead = $.parseJSON(allItemList);
+			
+				//alert("dfdfd "+prodHead )
+				
+				
+				for (var h = 0; h < prodHead.length; h++) {
+					if (parseInt(id) == parseInt(prodHead[h].productId)) {
+						prodMaster = prodHead[h];
+						break;
+					}
+				}
+				var defFlvName =prodMaster.flavorNames.split(",");
+				selFlvName=defFlvName[0];
+				var prodDetail = prodMaster.prodDetailList;
+				//alert(prodDetail)
+					selectFlav = prodMaster.defaultFlavorId;
+				var actualRate=0;
+				var calRate=0;
+				var displayRate=0;
+				var configDetailId=0;
+				var flvId=0;
+				var isVeg=0;
+				var shapeId=0;
+				var flvName=selFlvName;
+				
+				var qty = 1;
+				
+				var uniq = (new Date()).getTime();
+				//alert(uniq)
+						
+				 for (var d = 0; d < prodDetail.length; d++) {
+					
+					if(type == 0){
+						
+						qty=selectWt;
+						
+						calRate=prodDetail[d].actualRate*selectWt;
+						actualRate=prodDetail[d].actualRate;
+						displayRate=prodDetail[d].displayRate;
+						configDetailId=prodDetail[d].configDetailId;
+						flvId=prodDetail[d].flavorId;
+						isVeg=prodDetail[d].isVeg;
+						shapeId=prodDetail[d].shapeId;
+						
+						break;
+							
+					}else if(type == 1){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav)) {
+							
+							
+							//alert("Shape = "+parseInt(prodDetail[d].shapeId)+"             Flv = "+parseInt(selectFlav))
+							
+							//alert("1  - "+prodDetail[d].configDetailId)
+							
+							calRate=prodDetail[d].actualRate*selectWt;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+
+						}
+						
+					} else if(type == 2){
+						
+						if (parseInt(prodDetail[d].flavorId) == parseInt(selectFlav) && parseFloat(selectWt) == parseFloat(prodDetail[d].qty)) {
+							
+							calRate=prodDetail[d].actualRate;
+							actualRate=prodDetail[d].actualRate;
+							displayRate=prodDetail[d].displayRate;
+							configDetailId=prodDetail[d].configDetailId;
+							flvId=prodDetail[d].flavorId;
+							isVeg=prodDetail[d].isVeg;
+							shapeId=prodDetail[d].shapeId;
+							
+							break;
+
+						}
+						
+					} 
+
+				}
+				 
+				
+				
+				
+				var priceDiff = parseFloat(displayRate)
+						- parseFloat(actualRate);
+				
+				offPer = (parseFloat(priceDiff)
+						/ parseFloat(displayRate) * 100);
+
+				taxableAmt = calRate;
+
+				cgstAmt = ((calRate) * parseFloat(prodMaster.cgstPer)) / 100;
+				sgstAmt = ((calRate) * parseFloat(prodMaster.sgstPer)) / 100;
+				igstAmt = ((calRate) * parseFloat(prodMaster.igstPer)) / 100;
+
+				taxAmt = (cgstAmt + sgstAmt + igstAmt)
+						.toFixed(2);
+				
+				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
+
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON
+							.stringify(table));
+				}
+
+				var cartValue = sessionStorage
+						.getItem("cartValue");
+				var table = $.parseJSON(cartValue);
+				
+				 if(type==0){
+					calRate=actualRate;
+				}
+				
+				
+				if (sessionStorage.getItem("cartValue") == null) {
+					var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+				}
+
+				var cartValue = sessionStorage.getItem("cartValue");
+				var cartArray = $.parseJSON(cartValue);
+				
+				var imgFile="";
+				var imgName="";
+				
+			
+				
+				var index=0,itemFound=0;
+				
+			
+				
+				for(var i=0; i<cartArray.length;i++){
+					
+					//alert(selectWt+"      "+cartArray[i].qty+"         Type - "+type)
+					
+					if(configDetailId==cartArray[i].exInt1 && type==0){
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}else if(selectWt==cartArray[i].weight && configDetailId==cartArray[i].exInt1){
+						//alert("asasas")
+						index=i;
+						itemFound=1;
+						imgFile : cartArray[i].imgFile;
+						imgName : cartArray[i].imgName;
+						break;
+					}
+					/* else if(configDetailId==cartArray[i].exInt1){
+						index=i;
+						itemFound=1;
+						break;
+					} */
+				}
+				
+				
+				var obj={
+						uniqueId : uniq,
+						orderDetailId : 0,
+						orderId : 0,
+						itemId : prodMaster.productId,
+						hsnCode : prodMaster.hsnCode,
+						qty : qty,
+						mrp : displayRate,
+						rate : calRate,
+						taxableAmt : taxableAmt,
+						cgstPer : prodMaster.cgstPer,
+						sgstPer : prodMaster.sgstPer,
+						igstPer : prodMaster.igstPer,
+						cgstAmt : cgstAmt,
+						sgstAmt : sgstAmt,
+						igstAmt : igstAmt,
+						discAmt : 0,
+						taxAmt : taxAmt,
+						totalAmt : totalAmt,
+						delStatus : 1,
+						remark : '',
+						exInt1 : configDetailId,
+						exInt2 : flvId,
+						exInt3 : isVeg,
+						exInt4 : shapeId,
+						exVar1 : prodMaster.productName,
+						exVar2 : '',
+						exVar3 : '',
+						exVar4 : '',
+						exFloat1 : 1,
+						exFloat2 : 1,
+						exFloat3 : 1,
+						exFloat4 : 1,
+						weight : selectWt,
+						veg : "",
+						rateSettingType : type,
+						flvName : flvName,
+						imgFile : imgFile,
+						imgName : imgName,
+						spInst : "NA",
+						msgonCake : 'NA'
+						
+					}
+				
+				if(itemFound==1){
+					table[index]=obj;
+				}else{
+					table.push(obj);	
+				}
+				
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				appendCartData();
+				
+					openNav();
+				  	setTimeout(function(){ closeNav(); }, 4000);
+				 
+		} 		
+		
+	</script>
 
 
 

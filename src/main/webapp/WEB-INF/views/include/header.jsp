@@ -412,7 +412,7 @@
 								+ ','
 								+ table[i].qty
 								+ ',0)" class="qtyminus"'
-								+ 'field="quantity"/><input type="text" id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
+								+ 'field="quantity"/><input type="text" readonly   id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
 		'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('
 								+ table[i].itemId + ',' + i + ','
 								+ table[i].qty + ',1)" value="+"'
@@ -630,6 +630,8 @@ var maxValue=document.getElementById("maxValue").value;
 
 		var table = [];
 		sessionStorage.setItem("selTags", JSON.stringify(table));
+		sessionStorage.setItem("selTags_SAC", document
+				.getElementById("glbSearch").value);
 
 		window.open('${pageContext.request.contextPath}/products/0', '_self');
 
@@ -693,7 +695,25 @@ var maxValue=document.getElementById("maxValue").value;
 	}
 	
 	//$("input.myClass:checkbox")
+document.addEventListener("DOMContentLoaded", function() {
+			  var lazyBackgrounds = [].slice.call(document.querySelectorAll(".mobile_fit"));
 
+			  if ("IntersectionObserver" in window) {
+				 
+			    let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+			      entries.forEach(function(entry) {
+			        if (entry.isIntersecting) {
+			          entry.target.classList.add("visible");
+			          lazyBackgroundObserver.unobserve(entry.target);
+			        }
+			      });
+			    });
+
+			    lazyBackgrounds.forEach(function(lazyBackground) {
+			      lazyBackgroundObserver.observe(lazyBackground);
+			    });
+			  }
+			});
 </script>
 
 
