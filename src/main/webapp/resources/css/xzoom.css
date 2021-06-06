@@ -88,7 +88,8 @@
   position: absolute;
   bottom: -43px;
   left: 0;
-  background: #000;
+ /*  background: #000; */
+ background:none;
   width: 100%;
   text-align: left;
 }

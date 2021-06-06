@@ -426,6 +426,7 @@ font-family: 'Hind-SemiBold'; margin: /* 15px 0 0 */ 0; -webkit-transition: all 
 
 .circle_tag{position: absolute; right: 10px; top: 10px; width: 36px; height: 36px; border-radius: 50%; padding: 4px; background: #FFF;}
 .purity_icn{position: absolute; left: 10px; top: 10px;}
+.purity_icn img{height: 17px;}
 
 .cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
 .cake_prc i{font-size: 16px; margin: 7px 3px 0 0;}
@@ -439,7 +440,7 @@ font-family: 'Hind-SemiBold'; margin: /* 15px 0 0 */ 0; -webkit-transition: all 
 .circle_tag:hover img:first-child,.circle_tag.active img:first-child{display: none;}
 .circle_tag:hover img:last-child,.circle_tag.active img:last-child{display: inline-block;}
 
-.cake_container{display: block; text-align: left; padding: 10px 0 0 0; position: relative; overflow:initial /* inherit */;}
+.cake_container{display: block; text-align: left; padding: 10px 0 0 0; position: relative; overflow:initial; min-height: 70px; /* inherit */;}
 .cake_nm,.cake_nm a{color: #333; font-size: 15px; margin: 0 0 10px 0; font-family: 'Hind-Medium';text-overflow:ellipsis;vertical-align:middle;white-space:nowrap;overflow:hidden;}
 .cake_one:hover .cake_nm a{color: #ec2c92;}
 
@@ -906,13 +907,13 @@ vertical-align:middle;white-space:nowrap; overflow:hidden;}
 
 /*product page megamenu*/
 .head_marg.with_menu{margin: 164px 0 0 0;}
-.arrow_right{position: absolute; top: 13px; right: 40px; z-index: 2;}
+.arrow_right{position: absolute; top: 38px; right: /* 40px */0; z-index: 2;}
 .arrow_right ul{margin: 0px; padding: 0px;}
-.arrow_right ul li{list-style-type: none; float: left; margin: 0 0 0 10px;}
+.arrow_right ul li{list-style-type: none; float: left; /* margin: 0 0 0 10px; */margin: 0 7px;}
 .arrow_right ul li a{background: #373991; color: #FFF; padding: 3px 8px; border-radius: 5px; font-size: 13px; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .arrow_right ul li a:hover{background: #ec268f; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
-
+.search_class{position: relative;}
 
 .mega_menu_row{display: inline-block; width: 100%; background: #FFF; position: fixed; z-index: 6; top: 108px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); -ms-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);}
 .menuzord-menu>li>a.same_day{color: #373991; font-family: 'Hind-Bold';}
@@ -1099,7 +1100,7 @@ line-height: 28px; margin: 0; width: 25px; height: 28px; text-align: center;}
 .qtyminus.slide{border-radius: 3px 0 0 3px;}
 .qtyplus.slide{border-radius: 0 3px 3px 0;}
 .qtyminus.slide:hover,.qtyplus.slide:hover{background: #ec268f; color: #FFF;}
-.qty.slide{background: #f1f3f6;border-radius: 0;color: #333;font-size: 15px;padding: 4px 10px; width: 50px; 
+.qty.slide{background: #f1f3f6;border-radius: 0;color: #333;font-size: 15px;padding: 4px 10px; width: 40px/* 50px */; 
 height: 28px;line-height: 28px; border:1px solid #f1f3f6; margin: 0 -5px;}
 .plus_minus_one{float: left; width: 70%; margin: 0 10px 0 0; }
 .cake_prc_detail_iclass{/* font-size: 13px; */ }
@@ -1126,7 +1127,7 @@ margin: 0 auto; -webkit-transition: all ease 0.5s; -moz-transition: all ease 0.5
 .festival_offer img {width: 100%; height:167px; object-fit: cover; margin: 5px 0 0 0;}
 .festival_offer a{font-size: 15px; font-family: 'Hind-Medium'; color: #ec268f;
  text-transform: uppercase; letter-spacing: 0.3px; display: block;}
-img.xzoom{width: 100%; height:389px; object-fit:cover;}
+img.xzoom{width: 100%; /* height:389px; */ height:494px; object-fit:cover;}
 .detail_price_tp{color: #ec268f; font-size: 16px; margin:2px 0 0 0; font-family:'Hind-Medium'; vertical-align: middle;}
 .radio_1.gender{display: inline-block; width: 100%;}
 .detail_price_tp span{float: left; margin: 2px 10px 0 0; color: #333;}
@@ -1374,6 +1375,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .actual_prc{font-size: 32px;}
     .actual_prc i {font-size: 24px; margin: 15px 0 0 0;}
 	.cake_pic img{height: 215px;}
+	.purity_icn img{height: 17px;}
 	.circle_tag img{width: 100%; height: 100%;}
 	    .well.small{width: 42%;}
 	
@@ -1662,7 +1664,8 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .cake_prc_detail_pclass{font-size: 18px;}
     .cake_prc i {font-size: 15px; margin: 6px 3px 0 0;}
     
-    .cake_pic img {height: 150px;}
+    .cake_pic img {height: 150px;} 
+    .purity_icn img{height: 17px;}/* 31-5 */
     .circle_tag img{width: 100%; height: 100%;}
     .well.small {width: 90%;}
     
@@ -1798,7 +1801,7 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 @media screen and (max-width:480px){
 	.detail_drop ul li{font-size: 14px;}
 	.cake_prc_detail_iclass.aprice {font-size: 15px; margin: 7px 5px 0 0;}
-	.plus_minus_one{width: 50%;}
+	.plus_minus_one{width: 60%/* 50% */;}
     .lst_tow{float: none; width:100%;}
     .search_one_l{float: none; width: 100%; margin: 0 0 10px 0;}
     .search_one_r{float: none; width: 100%;}
@@ -1840,6 +1843,9 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .small_row_one{margin-bottom: 6px;}
     .small_l{float: none; width: 100%; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px dashed #CCC;}
     .small_r{float: none; width: 100%;}
+    .cake_dropdown_l{float: left; width: 79%;}
+.cake_dropdown_r{float: right; width: 19%;}
+    
     
 }
 
@@ -1867,7 +1873,9 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .cart_button, .buy_button{min-width: 155px;}
     .cart_cont {width: 160px;}
     .cart_cont.width_inc {width: 65%;}
-    
+    .plus_minus_one {
+    width: 63%/* 50% */;
+}
 }
 @media screen and (max-width:320px){
     /*home page css*/
