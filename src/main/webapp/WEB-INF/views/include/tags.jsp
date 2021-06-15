@@ -29,14 +29,21 @@
 		</ul>
 	</div>
 
-	<div class="proceend_bnt">
+	<div class="proceend_bnt" id="pb_div" style="display: none">
 		<a href="javascript:void(0)" onclick="searchByTags()"
-			class="proceed_btn">Proceed</a>
+			class="proceed_btn" >Proceed</a>
 	</div>
 
 </div>
 
 <script type="text/javascript">
+$(window).load(function() {
+	//$("#pb_div").show();
+	//document.getElementById("pb_div").style = "display:none";
+	$('#mongi').popup();
+	document.getElementById("pb_div").style.display = "block";
+
+});
 	$(document)
 			.ready(
 					function() {

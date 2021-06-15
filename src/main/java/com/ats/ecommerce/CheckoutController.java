@@ -207,6 +207,46 @@ public class CheckoutController {
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		try {
+			
+			String payStatus=null;
+			try {
+			payStatus=(String) session.getAttribute("Pay_Page");
+			}catch (Exception e) {
+				payStatus=new String();
+			}
+			System.err.println("payStatus " +payStatus);
+			try {
+			if(payStatus.equalsIgnoreCase("2")) {
+				model.addAttribute("payStatus", payStatus);
+
+				try {
+					session.removeAttribute("orderSaveData");
+					session.removeAttribute("orderId");
+				} catch (Exception e) {
+					session.removeAttribute("orderId");
+				}
+			}else {
+				model.addAttribute("payStatus", "0");
+				int orderId=0;//(int) session.getAttribute("orderId");
+				try {
+					orderId=(int) session.getAttribute("orderId");
+				}catch (Exception e) {
+					orderId=0;
+				}
+				System.err.println("Deleting order Id "+orderId);
+				
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("orderId", session.getAttribute("orderId"));
+				Integer info = Constants.getRestTemplate().postForObject(Constants.url + "deleteOrderSoft", map,
+						Integer.class);
+				
+				System.err.println("Delete Order response orderConfirmation" +info);
+				session.removeAttribute("orderId");
+			}//end of else
+			 session.setAttribute("Pay_Page","0");
+		}catch (Exception e) {
+		}
 			System.err.println("prodIdStr " + prodIdStr);
 			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
@@ -971,7 +1011,7 @@ public class CheckoutController {
 				}
 				orderDetail.setDelStatus(1);
 				orderDetail.setExInt2(itemJsonImportData[i].getExInt1());// ie config detail Id
-				orderDetail.setExVar4(""+itemJsonImportData[i].getRateSettingType());
+				//orderDetail.setExVar4(""+itemJsonImportData[i].getRateSettingType());
 				orderDetail.setHsnCode(itemJsonImportData[i].getHsnCode());
 				System.err.println("orderDetail--- " + orderDetail.toString());
 				orderDetailList.add(orderDetail);
@@ -1096,4 +1136,49 @@ public class CheckoutController {
 	 * 
 	 * configFranchise
 	 */
+//Object cartData;
+String cartData=null;
+List<OrderDetail> orList=new ArrayList<OrderDetail>();
+	@RequestMapping(value = "/sysncCartData", method = RequestMethod.POST)
+	@ResponseBody
+	public Object sysncCartData(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Info info = new Info();
+		System.err.println(" cartData Initial" +cartData);
+		
+		try {
+			
+			String cartDataTemp=request.getParameter("cartValue");
+			System.err.println("cartDataTemp " +cartDataTemp);
+			ObjectMapper objectMapper = new ObjectMapper();
+			  try {
+			if(cartDataTemp == "" || cartDataTemp.length()==0 ||cartDataTemp == null) {
+				System.err.println("A");
+				cartData=cartDataTemp;
+			}else if(cartData==null) {
+				System.err.println("B");
+				cartData=cartDataTemp;
+				//cartData=cartDataTemp;
+			}
+			  }catch (Exception e) {
+				  System.err.println("In Ca");
+			  }
+			  System.err.println("c d before " +cartData);
+			OrderDetail[] itemJsonImportData = objectMapper.readValue(cartData, OrderDetail[].class);
+			  
+			  try {
+					if(itemJsonImportData.length>0) {
+						  orList=new ArrayList<>(Arrays.asList(itemJsonImportData));
+					}
+				}catch (Exception e) {
+				//	e.printStackTrace();
+					return orList;
+				}
+			System.err.println("orList " +orList);
+			
+			//info.setMsg(cartData);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orList;
+		}
 }

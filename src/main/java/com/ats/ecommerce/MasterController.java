@@ -48,7 +48,6 @@ public class MasterController {
 
 			int custId = (int) session.getAttribute("custId");
 			System.err.println("custId " +custId);
-			int compId = (int) session.getAttribute("companyId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 			map.add("custId", custId);
@@ -68,7 +67,14 @@ public class MasterController {
 			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
 
 			model.addAttribute("custAddList", custAddList);
+			int compId = 0;//(int) session.getAttribute("companyId");
 
+			try {
+				compId = (int) session.getAttribute("companyId");
+			}catch (Exception e) {
+				compId =cust.getCompanyId();
+			}
+			 session.setAttribute("companyId",compId);
 			map = new LinkedMultiValueMap<>();
 			map.add("compId", compId);
 
@@ -125,10 +131,10 @@ public class MasterController {
 				session.setAttribute("respMsg", "Email Id already exist");
 				redirect = "redirect:/profile";
 			} */
-			 if (chkMob != null) {
-				session.setAttribute("respMsg", "Mobile No. already exist");
-				redirect = "redirect:/profile";
-			} else {
+			/*
+			 * if (chkMob != null) { session.setAttribute("respMsg",
+			 * "Mobile No. already exist"); redirect = "redirect:/profile"; } else {
+			 */
 				info.setError(true);
 				info.setMsg("Customer Not Found");
 
@@ -205,7 +211,7 @@ public class MasterController {
 					session.setAttribute("respMsg", "Failed to Update Profile");
 				}
 				redirect = "redirect:/profile";
-			}
+			//}
 
 		} catch (Exception e) {
 			System.out.println("Exception in updateCustProfile : " + e.getMessage());
@@ -525,16 +531,19 @@ public class MasterController {
 			map.add("userId", userId);
 			Customer res = Constants.getRestTemplate().postForObject(Constants.url + "getCustByMobNo", map,
 					Customer.class);
-			if (res != null) {
+			info.setError(true);
+			info.setMsg("Customer Not Found with mob");
+			if (res != null&&!res.getCustMobileNo().equalsIgnoreCase(mobNo)) {
 				info.setError(false);
-				info.setMsg("Customer Found");
-			}else if(mobNo.trim().equalsIgnoreCase(res.getCustMobileNo().trim())){
+				info.setMsg("Customer Found a ");
+			}else {
 				info.setError(true);
-				info.setMsg("Customer Not Found");
-			} else {
+				info.setMsg("Customer Not Found c");
+			} if(mobNo.trim().equalsIgnoreCase(res.getCustMobileNo().trim())){
 				info.setError(true);
-				info.setMsg("Customer Not Found");
-			}
+				info.setMsg("Customer Not Found b ");
+			} 
+			System.out.println("Info  " + info.toString());
 		} catch (Exception e) {
 			System.out.println("Execption in /validateCustMob : " + e.getMessage());
 			e.printStackTrace();

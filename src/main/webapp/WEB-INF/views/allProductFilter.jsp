@@ -216,18 +216,18 @@
 
 					<div id="hiddenProductList" style="display: none;"></div>
 <div class="search_class">
-					<div class="find_store">
+					<div class="find_store count_fix">
 						<h2 class="sec_title">
 							<center>
 								<p id="prodCount"></p>
 							</center>
 						</h2>
-					<div class="arrow_right">	<ul>
+					<!-- <div class="arrow_right">	<ul>
 			<li><a href="javascript:void(0)" onclick="priceSort(1)"><i
 					class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
 			<li><a href="javascript:void(0)" onclick="priceSort(0)"><i
 					class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
-		</ul></div>
+		</ul></div> -->
 		</div>
 					</div>
 
@@ -699,6 +699,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			//setFlavourData();
+			$("#sort_arrow").show();
 			loadData();
 		});
 		
@@ -1427,7 +1428,7 @@ if(allItemArr[i].rateSettingType==0){
 						}
 
 					} else {
-						
+						//alert("Tags")
 						//alert("filterArr  = "+filterArr.length);
 						
 							if(filterArr.length>0){
@@ -1481,7 +1482,7 @@ if(allItemArr[i].rateSettingType==0){
 												}
 												
 											}
-											
+											//console.log("SAc 11-06"+hiddenProductListArr)
 										}else{
 											
 											//NOT USED CURRENTLY*************************************************
@@ -2081,11 +2082,11 @@ if(allItemArr[i].rateSettingType==0){
 			document.getElementById("itemListUl").innerHTML = divStr;
 			document.getElementById("hiddenProductList").innerHTML = JSON.stringify(displayListArr);
 			
-			/* sessionStorage.setItem("priceFilterMin", "0");
+			 sessionStorage.setItem("priceFilterMin", "0");
 			sessionStorage.setItem("priceFilterMax", "0");
 			sessionStorage.setItem("menuFilterName", "");
 			sessionStorage.setItem("findCatId", "0");
-			sessionStorage.setItem("filterMenu", "0"); */
+			sessionStorage.setItem("filterMenu", "0"); 
 			
 			
 			var filterName=menuFilter.split(",");
@@ -2097,9 +2098,9 @@ if(allItemArr[i].rateSettingType==0){
 			
 			var prodCountTxt="";
 			if(menuFilter!=""){
-				prodCountTxt=count+' results found for '+'"'+names+'"';
+				prodCountTxt=count+' Results Found For '+'"'+names+'"';
 			}else{
-				prodCountTxt=count+" results found";
+				prodCountTxt=count+" Results Found";
 			}
 			
 			document.getElementById("prodCount").innerHTML = prodCountTxt;

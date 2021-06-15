@@ -1062,7 +1062,7 @@
 						</div> --%>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Billing Name</span> <input type="text"
+								<span class="pop_lab_fld">Recipient Name</span> <input type="text"
 									class="input_place txtOnly" id="txtBillName" name="txtBillName"
 									placeholder="Billing Name" value="${cust.custName}"
 									autocomplete="off" maxlength="25" /> <label class="form-label-hint-error"
@@ -1240,7 +1240,7 @@
 
 						<div class="place_row">
 							<div class="place_row_l">
-								<h3 class="payment_title">Billing Address</h3>
+								<h3 class="payment_title">Recipient Address</h3>
 								<input type="checkbox" id="chkbox" name="chkbox"
 									onchange="setBillingDataByCheckbox()" class="payment_title"
 									value="chkbox"> <label for="chkbox"> Same as
@@ -1431,7 +1431,7 @@
 						<div class="new_pop_l">Message</div>
 						<div class="new_pop_r">
 							<input name="editMsgName" value="" type="text"
-								class="input_place" id="editMsgName" placeholder="Enter Message">
+								class="input_place" id="editMsgName" maxlength="40" placeholder="Enter Message">
 							<input name="editMsgItemUUID" type="hidden" id="editMsgItemUUID">
 							<input name="editMsgItemId" type="hidden" id="editMsgItemId">
 
@@ -1550,6 +1550,16 @@
 									+ table[i].msgonCake + '</a></p>';
 						}
 						var qtyBox = table[i].qty;
+var photoDiv='<div  style="width: 60px;height: 60px; margin: 10px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div>';
+var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
++ table[i].weight
++ ' '
++ allItemArr[j].uomShowName
++ ''
++ table[i].veg
++ ' Cake Flavors - '
++ allItemArr[j].flavorNames
++ ' </div>';
 
 						if (table[i].rateSettingType == 0) {
 							qtyBox = '<button type="button" value="" field="quantity" class="qtyminus cart" id="btnMin'
@@ -1581,6 +1591,10 @@
 									+ ','
 									+ table[i].qty
 									+ ')"> <i class="fa fa-plus" aria-hidden="true"></i> </button>'
+									
+									msgName = '';
+							photoDiv='';
+							wtFlav='';
 						}
 						var tbl_data = '<tr>'
 								+ '<td><div class="cart_pic_row">'
@@ -1601,7 +1615,7 @@
 								+ ')" id="aTagShowDetail'
 								+ table[i].itemId
 								+ '"><i class="fa fa-eye" aria-hidden="true"></i>Show Details</a><div>'
-								+ '<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
+								/* + '<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 								+ table[i].weight
 								+ ' '
 								+ allItemArr[j].uomShowName
@@ -1609,11 +1623,12 @@
 								+ table[i].veg
 								+ ' Cake Flavors - '
 								+ allItemArr[j].flavorNames
-								+ ' </div>'
-								+ '</div>'
+								+ ' </div>' */
+								+wtFlav+'</div>'
 								+ '</div>'
 								+ msgName
-								+ '<div  style="width: 60px;height: 60px; margin: 10px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div> <span class="msg_on_cake">'
+								//+'<div  style="width: 60px;height: 60px; margin: 10px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div> <span class="msg_on_cake">'
+								+''+photoDiv+'<span class="msg_on_cake">'
 								+ '</span>'
 								+ ' </td>'
 								+ '<td>'
@@ -1653,7 +1668,7 @@
 								+ '/'
 								+ allItemArr[j].uomShowName
 								+ '</h3>'
-								+ '<div class="cart_det">'
+								/* + '<div class="cart_det">'
 								+ 'Weight - '
 								+ table[i].weight
 								+ ' '
@@ -1663,8 +1678,8 @@
 								+ '<br>Flavors '
 								+ allItemArr[j].flavorNames
 								+ ''
-								+ '</div>'
-								+ '</div>'
+								+ '</div>' */
+								+wtFlav+'</div>'
 								+ '</div>'
 								+ '</div>'
 								+ '<div class="mob_quan">'
@@ -1702,7 +1717,9 @@
 								+ '<div class="mob_quan_l">Delivery option</div>'
 								+ '<div class="mob_quan_r">'
 								+ '<div class="cart_option">'
-								+ '<div  style="width: 60px;height: 60px; margin: 25px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div><span>'
+							//	+ '<div  style="width: 60px;height: 60px; margin: 25px 0;"><img src="data:image/png;base64,'+table[i].imgFile+'" onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/my-cart-nopic.jpg\'"></div><span>'
+								+''+photoDiv+'<span class="msg_on_cake">'
+
 								+ msgName
 								+ '</span>'
 								+ '</div>'
@@ -2152,6 +2169,18 @@
 				$("#personMobile").val($("#txtMobile").val());
 			}
 
+			if (!$("#personMobile").val().trim()) {
+				mobile = false;
+				$("#errorPersonMobile").show();
+			} else if ($("#personMobile").val().trim().length != 10) {
+				mobile = false;
+				//$("#errorPersonMobile").hide();
+				$("#errorPersonMobile").show();
+			} else {
+				$("#errorPersonMobile").hide();
+			}
+			
+			
 			var selectedDt = $("#delvrDateTime").val();
 			var dtsplit = selectedDt.split("-");
 
@@ -2216,13 +2245,31 @@
 		}
 
 		function setBillingDataByCheckbox() {
-
+			 		//alert("Hi")	    
+			    $("#txtBillingFlat").removeAttr("readonly");
+			    $("#txtBillingArea").removeAttr("readonly");
+			    $("#txtBillingLandmark").removeAttr("readonly");
+			    $("#txtBillingPincode").removeAttr("readonly");
+			    
 			if (document.getElementById("chkbox").checked == true) {
 
 				$("#txtBillingFlat").val($("#txtDelvFlat").val());
-				$("#txtBillingArea").val($("#txtDelvLandmark").val());
+				$("#txtBillingArea").val($("#txtDelvArea").val());
 				$("#txtBillingLandmark").val($("#txtDelvLandmark").val());
 				$("#txtBillingPincode").val($("#txtDelvPincode").val());
+				
+			    $("#txtBillingFlat").attr('readonly','true');
+			    $("#txtBillingArea").attr('readonly','true');
+			    $("#txtBillingLandmark").attr('readonly','true');
+			    $("#txtBillingPincode").attr('readonly','true');
+
+
+			  /*   $("#txtDelvFlat").attr('readonly','true');
+			    $("#txtDelvLandmark").attr('readonly','true');
+			    $("#txtBillingLandmark").attr('readonly','true');
+			    $("#txtBillingPincode").attr('readonly','true'); */
+
+			    
 
 			} else {
 
@@ -2230,10 +2277,31 @@
 				$("#txtBillingArea").val("");
 				$("#txtBillingLandmark").val("");
 				$("#txtBillingPincode").val("");
-
+				
+				 
+				   
 			}
 
-		}
+		}//end of function
+		$("#txtDelvFlat").change(function(){   
+			if (document.getElementById("chkbox").checked == true) {
+				$('input[type=checkbox]').prop('checked',false); 
+				setBillingDataByCheckbox();
+			}
+		});
+		$("#txtDelvArea").change(function(){   
+			if (document.getElementById("chkbox").checked == true) {
+				$('input[type=checkbox]').prop('checked',false); 
+				setBillingDataByCheckbox();
+			}
+		});
+		$("#txtDelvPincode").change(function(){   
+			if (document.getElementById("chkbox").checked == true) {
+				$('input[type=checkbox]').prop('checked',false); 
+				setBillingDataByCheckbox();
+			}
+		});
+
 		var d = new Date();
 		d.setFullYear(d.getFullYear() - 20);
 
@@ -2246,6 +2314,7 @@
 			formatDate : 'Y-m-d',
 			defaultDate : d,
 		});
+		
 		jQuery(document).ready(function() {
 
 			var dt = new Date();
@@ -2389,10 +2458,10 @@
 								//alert(JSON.stringify(resData));
 								var table = [];
 								//un comment it-Sachin
-								sessionStorage.setItem("cartValue", JSON
-										.stringify(table));
-								sessionStorage.setItem("prodImageList", JSON
-										.stringify(table));
+							//	sessionStorage.setItem("cartValue", JSON
+										//.stringify(table));
+							//	sessionStorage.setItem("prodImageList", JSON
+										//.stringify(table));
 								$("#place").hide();
 								if (resData.msg == 'epay') {
 									var url = '${pageContext.request.contextPath}/goToPay';
@@ -2400,7 +2469,10 @@
 								} else {
 									var url = '${pageContext.request.contextPath}/orderConfirmation';
 									//var url = '${pageContext.request.contextPath}/orderConfirmation';
-
+sessionStorage.setItem("cartValue", JSON
+										.stringify(table));
+								sessionStorage.setItem("prodImageList", JSON
+										.stringify(table));
 									window.location = url;
 								}
 
@@ -2441,6 +2513,21 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#new_pop').popup();
+			try{
+				var isPaid=${payStatus}
+				//alert("isPaid " +isPaid);
+				if(parseInt(isPaid)==2){ 
+					var table = [];
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(table));
+				location.reload();
+				}
+			}catch (e) {
+				alert(e)
+			}
+			 
 		});
 	</script>
 

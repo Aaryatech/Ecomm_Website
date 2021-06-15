@@ -7,7 +7,10 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
-
+ <style> body  {opacity:0;}</style>
+<script>
+  window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},500);};
+ </script>
 <body>
 	<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
 
@@ -309,7 +312,7 @@
 														<c:if test="${prodHeader.allowMsgOnCake==1}">
 
 															<div class="a">
-																<input name="" type="text" id="msg_on_cake"
+																<input   type="text" id="msg_on_cake" maxlength="40"
 																	name="msg_on_cake" class="input_txt"
 																	placeholder="Message / Name on the Cake" />
 															</div>
@@ -456,7 +459,7 @@
 								<ul>
 									<li>
 										<div class="detail_price_tp divide">
-											<span>Price :</span> <i++++++
+											<span>Price :</span> <i 
 												class="fa fa-inr cake_prc_detail_iclass aprice"
 												aria-hidden="true"></i>
 

@@ -190,11 +190,13 @@ public class PaymentController {
 			OrderSaveData orderSaveData = (OrderSaveData) session.getAttribute("orderSaveData");
 			
 			try {
+				session.setAttribute("Pay_Page", "1");
+
 				RazorpayClient razorpay = new RazorpayClient("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
 
 				JSONObject orderRequest = new JSONObject();
-				orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt() * 100); // amount in the smallest currency unit
-				//orderRequest.put("amount", 1 * 100); // amount in the smallest currency unit
+				//orderRequest.put("amount", orderSaveData.getOrderHeader().getTotalAmt() * 100); // amount in the smallest currency unit
+				orderRequest.put("amount", 1 * 100); // amount in the smallest currency unit
 
 				orderRequest.put("currency", "INR");
 				orderRequest.put("receipt", "order_rcptid_11");
@@ -356,7 +358,15 @@ public class PaymentController {
 				map.add("payRemark", request.getParameter("razorpay_order_id"));
 				map.add("orderStatus", -100);
 				session.setAttribute("successMsg", "Payment Successful");
-
+				session.setAttribute("Pay_Page", "2");
+				System.err.println("setting pay=2 Pay_Page ");
+				
+				try {
+					session.removeAttribute("orderSaveData");
+					session.removeAttribute("orderId");
+				} catch (Exception e) {
+					session.removeAttribute("orderId");
+				}
 			} else {
 				System.err.println("razorpay_payment_id  null");
 				// OrderSaveData orderSaveData=(OrderSaveData)
@@ -372,6 +382,7 @@ public class PaymentController {
 				map.add("paidStatus", 0);
 				map.add("payRemark", request.getParameter("razorpay_order_id"));
 				map.add("orderStatus", 9);
+				session.setAttribute("Pay_Page", "0");
 			}
 			// updateOrderFrontEnd
 			try {
@@ -381,12 +392,7 @@ public class PaymentController {
 				session.setAttribute("successMsg", "Payment Successful");
 			}
 
-			try {
-				session.removeAttribute("orderSaveData");
-				session.removeAttribute("orderId");
-			} catch (Exception e) {
-				session.removeAttribute("orderId");
-			}
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -473,6 +479,32 @@ public class PaymentController {
 			model.addAttribute("prodUplImgUrl", Constants.PROD_UPLOADED_IMG_VIEW_URL);
 			
 			model.addAttribute("orderSaveData", orderSaveData);
+			String payStatus=(String) session.getAttribute("Pay_Page");
+			System.err.println("payStatus inside orderConfirmation" +payStatus);
+
+			if(payStatus.equalsIgnoreCase("2")) {
+				model.addAttribute("payStatus", payStatus);
+				try {
+					session.removeAttribute("orderSaveData");
+					session.removeAttribute("orderId");
+				} catch (Exception e) {
+					session.removeAttribute("orderId");
+				}
+			}else if(payStatus.equalsIgnoreCase("1")) {
+				//delete order
+				System.err.println("Delete Order inside orderConfirmation");
+				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+				map.add("orderId", session.getAttribute("orderId"));
+				Integer info = Constants.getRestTemplate().postForObject(Constants.url + "deleteOrderSoft", map,
+						Integer.class);
+				
+				System.err.println("Delete Order response orderConfirmation" +info);
+				session.removeAttribute("orderId");
+				session.removeAttribute("orderSaveData");
+
+			}
+			session.setAttribute("Pay_Page","0");
 
 		} catch (Exception e) {
 			e.printStackTrace();

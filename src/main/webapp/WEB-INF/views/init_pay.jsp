@@ -12,14 +12,16 @@
 <script>
 var options = {
     "key": "rzp_live_1xwIfbV7BUaBxt", // Enter the Key ID generated from the Dashboard
-    "amount": "${amount}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+   "amount": "${amount}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+ //"amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+
     "currency": "INR",
     "name": "Pay To Monginis",
     "description": "Order Value from  ${sessionScope.userName}",
     "image": "${pageContext.request.contextPath}/resources/images/logo_monginis-trasPng.png",
     "order_id": "${orderId}",
     "callback_url": "https://pecom.monginis.net/ecom/payResponse",
-   // "callback_url": "http://localhost:8080/ecommerce/payResponse",
+  // "callback_url": "http://localhost:8080/ecommerce/payResponse",
     "prefill": {
         "name": "${sessionScope.userName}",
         "email": "${sessionScope.userEmail}",

@@ -296,14 +296,14 @@
 	</div>
 
 
-	<!-- <div class="arrow_right">
+	<div class="arrow_right" id="sort_arrow" style="display: none;">
 		<ul>
 			<li><a href="javascript:void(0)" onclick="priceSort(1)"><i
 					class="fa fa-arrow-up" aria-hidden="true"></i></a></li>
 			<li><a href="javascript:void(0)" onclick="priceSort(0)"><i
 					class="fa fa-arrow-down" aria-hidden="true"></i></a></li>
 		</ul>
-	</div> -->
+	</div>
 </div>
 <script type="text/javascript">
 function searchMenu(catId) {

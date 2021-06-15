@@ -43,7 +43,24 @@ $(document).ready(function () {
     document.getElementById('auto_popup').click();
 });
 </script>
-    
+    <script type="text/javascript">
+		$(document).ready(function() {
+			try{
+				var isPaid=${payStatus}
+				if(parseInt(isPaid)==2){ 
+					var table = [];
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(table));
+				location.reload();
+				}
+			}catch (e) {
+				alert(e)
+			}
+			 
+		});
+	</script>
 
 
 
