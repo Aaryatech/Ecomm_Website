@@ -6,32 +6,31 @@
 <header>
 	<style>
 </style>
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+	<script
+		src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+	<!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDigzfh2ygt26QhXa7YoJrmNqOdx126oWg",
-    authDomain: "gfplsecurityapp.firebaseapp.com",
-    databaseURL: "https://gfplsecurityapp.firebaseio.com",
-    projectId: "gfplsecurityapp",
-    storageBucket: "gfplsecurityapp.appspot.com",
-    messagingSenderId: "1093488930367",
-    appId: "1:1093488930367:web:674415ee8c528ae737928a"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  
-  var cart_tab = 'table_value';
-	const dbrefObject = firebase.database().ref(cart_tab);
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey : "AIzaSyDigzfh2ygt26QhXa7YoJrmNqOdx126oWg",
+			authDomain : "gfplsecurityapp.firebaseapp.com",
+			databaseURL : "https://gfplsecurityapp.firebaseio.com",
+			projectId : "gfplsecurityapp",
+			storageBucket : "gfplsecurityapp.appspot.com",
+			messagingSenderId : "1093488930367",
+			appId : "1:1093488930367:web:674415ee8c528ae737928a"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
 
-
-</script>
+		var cart_tab = 'cart_value';
+		const dbrefObject = firebase.database().ref(cart_tab);
+	</script>
 	<!-- Akhilesh Loader Jsp -->
 
 	<%-- <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include> --%>
@@ -383,30 +382,44 @@
 </script>
 <script>
 	function appendCartData() {
-		 
-		try{
+
 		try {
-			setLike(0);
-		} catch (e) {
-			console.log("in header jsp appendCartData()")
-		}
-		if (sessionStorage.getItem("allItemList") == null) {
+			try {
+				setLike(0);
+			} catch (e) {
+				console.log("in header jsp appendCartData()")
+			}
+			if (sessionStorage.getItem("allItemList") == null) {
+				var table = [];
+				sessionStorage.setItem("allItemList", JSON.stringify(table));
+			}
+
+			if (sessionStorage.getItem("cartValue") == null) {
+				var table = [];
+				sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}
+
+			var mob = '9885';
+			const dbrefObject = firebase.database().ref("cart_value");
+
+			dbrefObject.on('value', function(snapshot) {
+
+				snapshot.forEach(function(childSnapshot) {
+
+					var childKey = childSnapshot.key;
+					var childData = childSnapshot.val();
+
+					if (childKey == mob) {
+						console.log('Message received. ', childKey);
+						console.log('childData ', childData);
+					}
+				});
+			});
+
+			/*  if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
-			sessionStorage.setItem("allItemList", JSON.stringify(table));
-		}
-	
-		if (sessionStorage.getItem("cartValue") == null) {
-			var table = [];
-			sessionStorage.setItem("cartValue", JSON.stringify(table));
-		}
-		
-		var mob='9885';
-	    const dbrefObject = firebase.database().ref("cart_value/"+mob);
-//alert("Firebase code un comment 406 to 437");
-		 /*  if (sessionStorage.getItem("cartValue") == null) {
-			var table = [];
-		//	sessionStorage.setItem("cartValue", JSON.stringify(table));
-		
+			//	sessionStorage.setItem("cartValue", JSON.stringify(table));
+			
 			 //dbrefObject.on('value', snap => sessionStorage.setItem("cartValue",(JSON.stringify(snap.val()))));
 			 alert("HHHH 406 cart value null");
 			 dbrefObject
@@ -426,7 +439,7 @@
 			 //sessionStorage.setItem("cartValue",x);
 			 alert("KK1")
 
-		}else{
+			}else{
 			alert("before write data"+sessionStorage.getItem("cartValue"));
 			if(sessionStorage.getItem("cartValue")=="undefined"){
 				var table = [];
@@ -434,17 +447,15 @@
 			}else{
 			 writeUserData(mob, sessionStorage.getItem("cartValue"));
 			}			 
-		}   */
+			}   */
 
-		 
-		var allItemList = sessionStorage.getItem("allItemList");
-		var allItemArr = $.parseJSON(allItemList);
-		
-		//new code
-		
-		
-		 /*  var fd = new FormData();
-	fd.append("cartValue",sessionStorage.getItem("cartValue"));
+			var allItemList = sessionStorage.getItem("allItemList");
+			var allItemArr = $.parseJSON(allItemList);
+
+			//new code
+
+			/*  var fd = new FormData();
+			fd.append("cartValue",sessionStorage.getItem("cartValue"));
 			$.ajax({
 				url : '${pageContext.request.contextPath}/sysncCartData',
 				type : 'post',
@@ -462,108 +473,108 @@
 				}
 				},
 			});   */
-		console.log("NC ",sessionStorage.getItem("cartValue"));
-		//nc
-					var cartValue = sessionStorage.getItem("cartValue");
+			console.log("NC ", sessionStorage.getItem("cartValue"));
+			//nc
+			var cartValue = sessionStorage.getItem("cartValue");
 
 			var table = $.parseJSON(cartValue);
 			//setCookie('cart_ck', JSON.stringify(table), 30);
-		$("#item_cart_list").html('');
-		$("#proc_chkout").html('');
-		$("#cart_item_count").html('');
-		var subtotal = 0;
-		var prodIdStr = "";
-		var newCartVal = [];
-		for (var j = 0; j < allItemArr.length; j++) {
-			for (var i = 0; i < table.length; i++) {
-				
-				if (table[i].itemId == allItemArr[j].productId) {
-					prodIdStr = prodIdStr + "," + allItemArr[j].productId;
-					//alert(i);
-					table[i].exVar3=allItemArr[j].prodImagePrimary;
-					table[i].exVar4=allItemArr[j].uomShowName;
-					subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
-							.toFixed(2);
+			$("#item_cart_list").html('');
+			$("#proc_chkout").html('');
+			$("#cart_item_count").html('');
+			var subtotal = 0;
+			var prodIdStr = "";
+			var newCartVal = [];
+			for (var j = 0; j < allItemArr.length; j++) {
+				for (var i = 0; i < table.length; i++) {
 
-					var prodName = "";
-					var qtyBox = "";
+					if (table[i].itemId == allItemArr[j].productId) {
+						prodIdStr = prodIdStr + "," + allItemArr[j].productId;
+						//alert(i);
+						table[i].exVar3 = allItemArr[j].prodImagePrimary;
+						table[i].exVar4 = allItemArr[j].uomShowName;
+						subtotal = (parseFloat(subtotal) + parseFloat(table[i].totalAmt))
+								.toFixed(2);
 
-					if (table[i].rateSettingType == 0) {
-						prodName = table[i].exVar1;
-						qtyBox = '<div class="like_quant">'
-								+ '<span>Qty.</span>'
-								+ '<form id="myform" method="POST" action="#">'
-								+ '<input type="button" value="-" onclick="setQty('
-								+ table[i].itemId
-								+ ','
-								+ i
-								+ ','
-								+ table[i].qty
-								+ ',0)" class="qtyminus"'
-								+ 'field="quantity"/><input type="text" readonly   id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
+						var prodName = "";
+						var qtyBox = "";
+
+						if (table[i].rateSettingType == 0) {
+							prodName = table[i].exVar1;
+							qtyBox = '<div class="like_quant">'
+									+ '<span>Qty.</span>'
+									+ '<form id="myform" method="POST" action="#">'
+									+ '<input type="button" value="-" onclick="setQty('
+									+ table[i].itemId
+									+ ','
+									+ i
+									+ ','
+									+ table[i].qty
+									+ ',0)" class="qtyminus"'
+									+ 'field="quantity"/><input type="text" readonly   id="prod_quantity'+table[i].itemId+'" name="prod_quantity'+table[i].itemId+'"'+
 		'value="'+table[i].qty+'" class="qty" /> <input type="button" onclick="setQty('
-								+ table[i].itemId + ',' + i + ','
-								+ table[i].qty + ',1)" value="+"'
-								+ 'class="qtyplus" field="quantity"/> '
-								+ '</form>  ' + '</div>';
-					} else {
-
-						if (table[i].exInt2 != 0
-								|| table[i].flvName == "undefined"
-								|| table[i].flvName == ""
-								|| table[i].flvName == "NA") {
-							prodName = table[i].exVar1 + " Flavour - "
-									+ table[i].flvName + " Weight - "
-									+ table[i].weight;
-
+									+ table[i].itemId + ',' + i + ','
+									+ table[i].qty + ',1)" value="+"'
+									+ 'class="qtyplus" field="quantity"/> '
+									+ '</form>  ' + '</div>';
 						} else {
-							prodName = table[i].exVar1 + " Weight - "
-									+ table[i].weight;
+
+							if (table[i].exInt2 != 0
+									|| table[i].flvName == "undefined"
+									|| table[i].flvName == ""
+									|| table[i].flvName == "NA") {
+								prodName = table[i].exVar1 + " Flavour - "
+										+ table[i].flvName + " Weight - "
+										+ table[i].weight;
+
+							} else {
+								prodName = table[i].exVar1 + " Weight - "
+										+ table[i].weight;
+
+							}
 
 						}
 
-					}
-
-					$("#item_cart_list")
-							.append(
-									'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('
-											+ table[i].uniqueId
-											+ ')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
-											+ '<div class="like_pic">'
-											+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
+						$("#item_cart_list")
+								.append(
+										'<div class="like_one">  <a href="javascript:void(0)" onclick="deleteItemFromCart('
+												+ table[i].uniqueId
+												+ ')"><i class="fa fa-trash-o" aria-hidden="true"></i></a> '
+												+ '<div class="like_pic">'
+												+ '<img src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'" class="lazy"'+
 				'data-src="${prodImgUrl}'+allItemArr[j].prodImagePrimary+'"'+
 				'alt="">'
-											+ '</div>'
-											+ '<div class="like_cont">'
-											+ '<h4 class="like_cake_nm">'
-											+ prodName
-											+ '</h4>'
-											+ '<p class="like_prc">Rs.'
-											+ table[i].totalAmt
-											+ '</p>'
-											+ qtyBox
-											+ '</div>'
-											+ '<div class="clr"></div>'
-											+ '</div>')
-											newCartVal.push(table[i]);
-				}//IF
-				
-			}//End of For loop 2
-		}//End of loop 1
-		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+												+ '</div>'
+												+ '<div class="like_cont">'
+												+ '<h4 class="like_cake_nm">'
+												+ prodName
+												+ '</h4>'
+												+ '<p class="like_prc">Rs.'
+												+ table[i].totalAmt
+												+ '</p>'
+												+ qtyBox
+												+ '</div>'
+												+ '<div class="clr"></div>'
+												+ '</div>')
+						newCartVal.push(table[i]);
+					}//IF
 
-		document.getElementById("cart_item_count").innerHTML = ""
-				+ table.length;
-		$("#proc_chkout")
-				.append(
-						'<div class="proc_chkout">'
-								+ '<span>Total : Rs.'
-								+ subtotal
-								+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
-								+ ' to Checkout</a>' + '</div>')
+				}//End of For loop 2
+			}//End of loop 1
+			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
+
+			document.getElementById("cart_item_count").innerHTML = ""
+					+ table.length;
+			$("#proc_chkout")
+					.append(
+							'<div class="proc_chkout">'
+									+ '<span>Total : Rs.'
+									+ subtotal
+									+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
+									+ ' to Checkout</a>' + '</div>')
 		} catch (e) {
-	//	alert("Err" +e)
-		} 
+			//	alert("Err" +e)
+		}
 	}
 	function writeUserData(mob, inputJson) {
 		/* alert("A")
@@ -572,27 +583,30 @@
 		    json_input: inputJson,
 		  });
 		 */
-		
+
 		var data_add = {
-				"mob" : mob,
-				"json_input" : inputJson,
-			}
-		
-		var key = firebase.database().ref().child('cart_value/'+mob).add(data_add).key;
-		//alert("B")
+			"mob" : mob,
+			"json_input" : inputJson,
 		}
+
+		var key = firebase.database().ref().child('cart_value/' + mob).add(
+				data_add).key;
+		//alert("B")
+	}
 	function setQty(productId, position, curQty, buttonType) {
 		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
 		//prod_quantity+productId;
-var maxValue=document.getElementById("maxValue").value;
+		var maxValue = document.getElementById("maxValue").value;
 
 		var ischanged = 0;
-		if (parseInt(buttonType) == 0 && parseInt(curQty) > 1&&parseInt(curQty)<=parseInt(maxValue)) {
+		if (parseInt(buttonType) == 0 && parseInt(curQty) > 1
+				&& parseInt(curQty) <= parseInt(maxValue)) {
 			//Its Minus call;
 			//alert("If")
 			curQty = parseInt(curQty) - 1;
 			ischanged = 1;
-		} else if (parseInt(buttonType) == 1 &&parseInt(curQty)<parseInt(maxValue)) {
+		} else if (parseInt(buttonType) == 1
+				&& parseInt(curQty) < parseInt(maxValue)) {
 			//Its Plus;
 			//alert("Else")
 			curQty = parseInt(curQty) + 1;
@@ -655,7 +669,7 @@ var maxValue=document.getElementById("maxValue").value;
 					data : fd,
 					contentType : false,
 					processData : false,
-					async:false,
+					async : false,
 					success : function(response) {
 						//document.getElementById("loaderimg").style.display = "none";
 						//alert(JSON.stringify(response.feProductHeadList))
@@ -710,7 +724,7 @@ var maxValue=document.getElementById("maxValue").value;
 	function onlyUnique(value, index, self) {
 		return self.indexOf(value) === index;
 	}
-	
+
 	function openNav() {
 		appendCartData();
 		document.getElementById("mySidepanel").style.width = "300px";
@@ -800,40 +814,39 @@ var maxValue=document.getElementById("maxValue").value;
 		});
 		$('#like_item_count').html('' + likeCount);
 	}
-	
+
 	//$("input.myClass:checkbox")
-document.addEventListener("DOMContentLoaded", function() {
-			  var lazyBackgrounds = [].slice.call(document.querySelectorAll(".mobile_fit"));
+	document.addEventListener("DOMContentLoaded", function() {
+		var lazyBackgrounds = [].slice.call(document
+				.querySelectorAll(".mobile_fit"));
 
-			  if ("IntersectionObserver" in window) {
-				 
-			    let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
-			      entries.forEach(function(entry) {
-			        if (entry.isIntersecting) {
-			          entry.target.classList.add("visible");
-			          lazyBackgroundObserver.unobserve(entry.target);
-			        }
-			      });
-			    });
+		if ("IntersectionObserver" in window) {
 
-			    lazyBackgrounds.forEach(function(lazyBackground) {
-			      lazyBackgroundObserver.observe(lazyBackground);
-			    });
-			  }
+			let lazyBackgroundObserver = new IntersectionObserver(function(
+					entries, observer) {
+				entries.forEach(function(entry) {
+					if (entry.isIntersecting) {
+						entry.target.classList.add("visible");
+						lazyBackgroundObserver.unobserve(entry.target);
+					}
+				});
 			});
-	
-	
-//Set a Cookie
-function setCookie(cName, cValue, expDays) {
-     let date = new Date();
-     date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
-     const expires = "expires=" + date.toUTCString();
-     document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
-}
 
-//Apply setCookie
-	
- 
+			lazyBackgrounds.forEach(function(lazyBackground) {
+				lazyBackgroundObserver.observe(lazyBackground);
+			});
+		}
+	});
+
+	//Set a Cookie
+	function setCookie(cName, cValue, expDays) {
+		let date = new Date();
+		date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+		const expires = "expires=" + date.toUTCString();
+		document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+	}
+
+	//Apply setCookie
 </script>
 
 
