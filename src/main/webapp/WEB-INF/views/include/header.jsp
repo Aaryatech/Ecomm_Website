@@ -6,7 +6,32 @@
 <header>
 	<style>
 </style>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDigzfh2ygt26QhXa7YoJrmNqOdx126oWg",
+    authDomain: "gfplsecurityapp.firebaseapp.com",
+    databaseURL: "https://gfplsecurityapp.firebaseio.com",
+    projectId: "gfplsecurityapp",
+    storageBucket: "gfplsecurityapp.appspot.com",
+    messagingSenderId: "1093488930367",
+    appId: "1:1093488930367:web:674415ee8c528ae737928a"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  var cart_tab = 'table_value';
+	const dbrefObject = firebase.database().ref(cart_tab);
+
+
+</script>
 	<!-- Akhilesh Loader Jsp -->
 
 	<%-- <jsp:include page="/WEB-INF/views/loader.jsp"></jsp:include> --%>
@@ -358,7 +383,8 @@
 </script>
 <script>
 	function appendCartData() {
-		//alert("Ok")
+		 
+		try{
 		try {
 			setLike(0);
 		} catch (e) {
@@ -368,18 +394,80 @@
 			var table = [];
 			sessionStorage.setItem("allItemList", JSON.stringify(table));
 		}
-
+	
 		if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
 			sessionStorage.setItem("cartValue", JSON.stringify(table));
 		}
+		
+		var mob='9885';
+	    const dbrefObject = firebase.database().ref("cart_value/"+mob);
+//alert("Firebase code un comment 406 to 437");
+		 /*  if (sessionStorage.getItem("cartValue") == null) {
+			var table = [];
+		//	sessionStorage.setItem("cartValue", JSON.stringify(table));
+		
+			 //dbrefObject.on('value', snap => sessionStorage.setItem("cartValue",(JSON.stringify(snap.val()))));
+			 alert("HHHH 406 cart value null");
+			 dbrefObject
+				.on(
+						'value',
+						function(snapshot) {
+							console.log('Message received. ', snapshot.val());
+							//alert(JSON.stringify(snapshot.val().mob));
+							var c=JSON.stringify(snapshot.val().json_input);
+							console.log('Message Data. ', c);
+							 sessionStorage.setItem("cartValue",c);
+							
+						})
+							//console.log('Message received. ', snapshot.val());
+			 
+			// var x="[{\"uniqueId\":1623913756795,\"orderDetailId\":0,\"orderId\":0,\"itemId\":30,\"hsnCode\":\"19059010\",\"qty\":1,\"mrp\":900,\"rate\":900,\"taxableAmt\":900,\"cgstPer\":9,\"sgstPer\":9,\"igstPer\":18,\"cgstAmt\":81,\"sgstAmt\":81,\"igstAmt\":162,\"discAmt\":0,\"taxAmt\":\"324.00\",\"totalAmt\":\"900.00\",\"delStatus\":1,\"remark\":\"\",\"exInt1\":18,\"exInt2\":14,\"exInt3\":79,\"exInt4\":8,\"exVar1\":\"Exotic Blackforest Square Cake\",\"exVar2\":\"\",\"exVar3\":\"1621073696073_6.jpg\",\"exVar4\":\"KGS\",\"exFloat1\":1,\"exFloat2\":1,\"exFloat3\":1,\"exFloat4\":1,\"weight\":\"1\",\"veg\":\"\",\"rateSettingType\":\"1\",\"flvName\":\"BLACK FOREST\",\"imgFile\":\"\",\"imgName\":\"\",\"spInst\":\"NA\",\"msgonCake\":\"NA\"},{\"uniqueId\":1623914157249,\"orderDetailId\":0,\"orderId\":0,\"itemId\":52,\"hsnCode\":\"19059010\",\"qty\":1,\"mrp\":900,\"rate\":900,\"taxableAmt\":900,\"cgstPer\":9,\"sgstPer\":9,\"igstPer\":18,\"cgstAmt\":81,\"sgstAmt\":81,\"igstAmt\":162,\"discAmt\":0,\"taxAmt\":\"324.00\",\"totalAmt\":\"900.00\",\"delStatus\":1,\"remark\":\"\",\"exInt1\":31,\"exInt2\":53,\"exInt3\":79,\"exInt4\":6,\"exVar1\":\"6 Princess With Castle Photo Cake\",\"exVar2\":\"\",\"exVar3\":\"1621515655542_81.jpg\",\"exVar4\":\"KGS\",\"exFloat1\":1,\"exFloat2\":1,\"exFloat3\":1,\"exFloat4\":1,\"weight\":\"1\",\"veg\":\"\",\"rateSettingType\":\"1\",\"flvName\":\"DESIGNER\",\"imgFile\":\"\",\"imgName\":\"\",\"spInst\":\"NA\",\"msgonCake\":\"NA\"},{\"uniqueId\":1623913802276,\"orderDetailId\":0,\"orderId\":0,\"itemId\":91,\"hsnCode\":\"19059010\",\"qty\":1,\"mrp\":900,\"rate\":900,\"taxableAmt\":900,\"cgstPer\":9,\"sgstPer\":9,\"igstPer\":18,\"cgstAmt\":81,\"sgstAmt\":81,\"igstAmt\":162,\"discAmt\":0,\"taxAmt\":\"324.00\",\"totalAmt\":\"900.00\",\"delStatus\":1,\"remark\":\"\",\"exInt1\":61,\"exInt2\":47,\"exInt3\":79,\"exInt4\":6,\"exVar1\":\"Motu Patlu Photo Cake\",\"exVar2\":\"\",\"exVar3\":\"1622539785982_72.jpg\",\"exVar4\":\"KGS\",\"exFloat1\":1,\"exFloat2\":1,\"exFloat3\":1,\"exFloat4\":1,\"weight\":\"1\",\"veg\":\"\",\"rateSettingType\":\"1\",\"flvName\":\"BLUEBERRY\",\"imgFile\":\"\",\"imgName\":\"\",\"spInst\":\"NA\",\"msgonCake\":\"NA\"}]";
+			 //sessionStorage.setItem("cartValue",x);
+			 alert("KK1")
 
+		}else{
+			alert("before write data"+sessionStorage.getItem("cartValue"));
+			if(sessionStorage.getItem("cartValue")=="undefined"){
+				var table = [];
+					sessionStorage.setItem("cartValue", JSON.stringify(table));
+			}else{
+			 writeUserData(mob, sessionStorage.getItem("cartValue"));
+			}			 
+		}   */
+
+		 
 		var allItemList = sessionStorage.getItem("allItemList");
 		var allItemArr = $.parseJSON(allItemList);
+		
+		//new code
+		
+		
+		 /*  var fd = new FormData();
+	fd.append("cartValue",sessionStorage.getItem("cartValue"));
+			$.ajax({
+				url : '${pageContext.request.contextPath}/sysncCartData',
+				type : 'post',
+				dataType : 'json',
+				data : fd,
+				contentType : false,
+				processData : false,
+				async: false,
+				success : function(response) {
+				if(sessionStorage.getItem("cartValue")===null){
+					console.log("In IF",response)
+				}else{
+					console.log("In else",response)
+					//sessionStorage.setItem("cartValue", JSON.stringify(response));
+				}
+				},
+			});   */
+		console.log("NC ",sessionStorage.getItem("cartValue"));
+		//nc
+					var cartValue = sessionStorage.getItem("cartValue");
 
-		var cartValue = sessionStorage.getItem("cartValue");
-		var table = $.parseJSON(cartValue);
-
+			var table = $.parseJSON(cartValue);
+			//setCookie('cart_ck', JSON.stringify(table), 30);
 		$("#item_cart_list").html('');
 		$("#proc_chkout").html('');
 		$("#cart_item_count").html('');
@@ -473,8 +561,26 @@
 								+ subtotal
 								+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
 								+ ' to Checkout</a>' + '</div>')
-
+		} catch (e) {
+	//	alert("Err" +e)
+		} 
 	}
+	function writeUserData(mob, inputJson) {
+		/* alert("A")
+		  firebase.database().ref('table_value/'+mob).set({
+			 mob:mob
+		    json_input: inputJson,
+		  });
+		 */
+		
+		var data_add = {
+				"mob" : mob,
+				"json_input" : inputJson,
+			}
+		
+		var key = firebase.database().ref().child('cart_value/'+mob).add(data_add).key;
+		//alert("B")
+		}
 	function setQty(productId, position, curQty, buttonType) {
 		//setQty('+table[i].itemId+','+i+','+table[i].qty+',0)"
 		//prod_quantity+productId;
@@ -549,6 +655,7 @@ var maxValue=document.getElementById("maxValue").value;
 					data : fd,
 					contentType : false,
 					processData : false,
+					async:false,
 					success : function(response) {
 						//document.getElementById("loaderimg").style.display = "none";
 						//alert(JSON.stringify(response.feProductHeadList))
@@ -646,7 +753,7 @@ var maxValue=document.getElementById("maxValue").value;
 				c = c.substring(1);
 			}
 			if (c.indexOf(name) == 0) {
-				alert(c.substring(name.length, c.length))
+				//alert(c.substring(name.length, c.length))
 				return c.substring(name.length, c.length);
 			}
 		}
@@ -714,6 +821,19 @@ document.addEventListener("DOMContentLoaded", function() {
 			    });
 			  }
 			});
+	
+	
+//Set a Cookie
+function setCookie(cName, cValue, expDays) {
+     let date = new Date();
+     date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+     const expires = "expires=" + date.toUTCString();
+     document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
+
+//Apply setCookie
+	
+ 
 </script>
 
 
