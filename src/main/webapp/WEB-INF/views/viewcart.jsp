@@ -1825,8 +1825,10 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 
 			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
 
-			setCartData();
+			
+			updateFirebase();
 			appendCartData();
+			setCartData();
 				}
 		}
 
@@ -1875,8 +1877,10 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 			}
 
 			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
-			setCartData();
+			updateFirebase();
 			appendCartData();
+			setCartData();
+			
 				}
 		}
 

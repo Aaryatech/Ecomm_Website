@@ -420,6 +420,14 @@
 
 	}
 
+	  var mobile='${sessionScope.mobNo}';
+	var commentsRef = firebase.database().ref('cart_value/' + mobile); 
+	
+	commentsRef.on('child_changed', (data) => {
+		console.log('ala re ala');
+		appendCartData();
+	});  
+	
 	function updateFirebase() {
 		//alert("hieeee");
 		//var mob = '7588519473';
@@ -565,7 +573,7 @@
 			 writeUserData(mob, sessionStorage.getItem("cartValue"));
 			}			 
 			}   */
-
+			setCartData();
 			var allItemList = sessionStorage.getItem("allItemList");
 			var allItemArr = $.parseJSON(allItemList);
 

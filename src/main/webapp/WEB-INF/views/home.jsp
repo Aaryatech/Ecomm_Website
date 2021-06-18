@@ -1292,6 +1292,7 @@ function removeLoader(){
 				table[position].totalAmt = totalAmt;
 				console.log(table);
 				sessionStorage.setItem("cartValue", JSON.stringify(table));
+				updateFirebase();
 				appendCartData();
 			}//end of If ischanged==1
 		}
@@ -2228,8 +2229,9 @@ function removeLoader(){
 				
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
+				updateFirebase();
 				appendCartData();
-				
+				//updateFirebase();
 					openNav();
 				  	setTimeout(function(){ closeNav(); }, 4000);
 				 
