@@ -1903,7 +1903,7 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 			}
 
 			sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
-
+			updateFirebase();
 			setCartData();
 			appendCartData();
 		}

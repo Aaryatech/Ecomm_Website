@@ -573,7 +573,7 @@
 			 writeUserData(mob, sessionStorage.getItem("cartValue"));
 			}			 
 			}   */
-			setCartData();
+			//setCartData();
 			var allItemList = sessionStorage.getItem("allItemList");
 			var allItemArr = $.parseJSON(allItemList);
 
@@ -681,6 +681,7 @@
 		} catch (e) {
 			//	alert("Err" +e)
 		}
+		setCartData();
 		//return "sa";
 	}
 	function writeUserData(mob, inputJson) {
