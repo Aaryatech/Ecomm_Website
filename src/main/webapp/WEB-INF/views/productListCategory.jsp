@@ -1215,6 +1215,7 @@ function setLike(id,isLike) {
 				
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
+				updateFirebase();
 				appendCartData();
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
@@ -1621,6 +1622,7 @@ function setLike(id,isLike) {
 			}catch(e) {
 				//alert(e.message);
 			}	
+			updateFirebase();
 			//alert("Ok End")
 		} 	
 		

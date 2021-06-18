@@ -381,52 +381,54 @@
 	}
 </script>
 <script>
-async function xx(){
-	var mob = '9505';
-	const dbrefObject = firebase.database().ref("cart_value");
+	function xx() {
+		var mob = '9505';
+		const dbrefObject = firebase.database().ref("cart_value");
 
-	dbrefObject.on('value', function(snapshot) {
-var isMobFound=0;
-		snapshot.forEach(function(childSnapshot) {
+		dbrefObject.on('value', function(snapshot) {
+			var isMobFound = 0;
+			snapshot.forEach(function(childSnapshot) {
 
-			var childKey = childSnapshot.key;
-			var childData = childSnapshot.val();
-			
-			if (childKey == mob) {
-				isMobFound=1;
-				if (sessionStorage.getItem("cartValue") == null) {
-					//alert("AKshay")
-					//var x=JSON.parse(childData.cart_value);
-					//var table = [x];
-					//var x= $.parseJSON(childData.cart_value);
-					//alert("x"+childData.json_input)
+				var childKey = childSnapshot.key;
+				var childData = childSnapshot.val();
+
+				if (childKey == mob) {
+					isMobFound = 1;
+					if (sessionStorage.getItem("cartValue") == null) {
+						//alert("AKshay")
+						//var x=JSON.parse(childData.cart_value);
+						//var table = [x];
+						//var x= $.parseJSON(childData.cart_value);
+						//alert("x"+childData.json_input)
 						console.log('x ', childData.json_input);
-					sessionStorage.setItem("cartValue", childData.json_input);
-				}
-				else{
-					//alert("KKK")
-					var db = firebase
-					.database();
-			db
-					.ref(
-							"cart_value"
-									+ "/"
-									+ mob
-									+ "/json_input")
-					.set(
-							sessionStorage.getItem("cartValue"));
-			console.log('childData ', childData.cart_value);
-				}
-				
-				console.log('Message received. ', childKey);
-				//console.log('childData ', childData.cart_value);
-			
-			}
-		});
-	});
+						sessionStorage.setItem("cartValue",
+								childData.json_input);
+					} else {
+						//alert("KKK")
+						var db = firebase.database();
+						db.ref("cart_value" + "/" + mob + "/json_input").set(
+								sessionStorage.getItem("cartValue"));
+						console.log('childData ', childData.cart_value);
+					}
 
-}
- async function appendCartData() {
+					console.log('Message received. ', childKey);
+					//console.log('childData ', childData.cart_value);
+
+				}
+			});
+		});
+
+	}
+
+	function updateFirebase() {
+		//alert("hieeee");
+		//var mob = '7588519473';
+		var mob='${sessionScope.mobNo}';
+		firebase.database().ref(
+				"cart_value/" + mob
+						+ "/cart_value").set(sessionStorage.getItem("cartValue"));
+	}
+	async function appendCartData() {
 
 		try {
 			try {
@@ -442,52 +444,95 @@ var isMobFound=0;
 			/* if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));
-			}
- */
- 			 var mob = '9885';
- //var mob=${sessionScope.mobNo};
-			const dbrefObject = firebase.database().ref("cart_value");
+			} */
 
-			dbrefObject.on('value', function(snapshot) {
+			//var mob = '7588519473';
+			var mob='${sessionScope.mobNo}';
+			const dbrefObject = firebase.database().ref("cart_value");
+ 			var flag=0;
+			await firebase
+					.database()
+					.ref('cart_value')
+					.child(mob)
+					.once('value')
+					.then(
+							function(snap) {
+								if (snap.exists()) {
+									flag=1;
+									const user = snap.val()
+									const userKey = snap.key
+
+									console.log('userKey', userKey);
+									//console.log('childData ', user.json_input);
+
+									/*  if (sessionStorage.getItem("cartValue") == null) {
+
+										sessionStorage.setItem("cartValue",
+												user.cart_value);
+									} else {  
+										 
+										var db = firebase.database();
+										firebase.database().ref(
+												"cart_value/" + mob
+														+ "/cart_value").set(sessionStorage.getItem("cartValue"));
+										
+										 
+										
+									 } */
+									 sessionStorage.setItem("cartValue",
+												user.cart_value);
+								} else {
+									console.log('not Exist');
+								}
+							})
+ 
+							
+
+						if(flag==0){
+							 
+							var table = [];
+							sessionStorage.setItem("cartValue", JSON.stringify(table)); 
+							
+							var data_add = {
+									
+									"cart_value" : JSON.stringify(table),
+									"mob" : mob
+								}
+								var key = firebase.database().ref().child("cart_value"+"/"+mob).update(
+										data_add).key;	
+						}
+			/* dbrefObject.on('value', function(snapshot) {
 
 				snapshot.forEach(function(childSnapshot) {
 
 					var childKey = childSnapshot.key;
 					var childData = childSnapshot.val();
-					
+
 					if (childKey == mob) {
-						
+
 						if (sessionStorage.getItem("cartValue") == null) {
 							//alert("AKshay")
 							//var x=JSON.parse(childData.cart_value);
 							//var table = [x];
 							//var x= $.parseJSON(childData.cart_value);
 							//alert("x"+childData.json_input)
-								console.log('x ', childData.json_input);
-								 sessionStorage.setItem("cartValue", childData.json_input);
-						}
-						else{
+							console.log('x ', childData.json_input);
+							sessionStorage.setItem("cartValue",
+									childData.json_input);
+						} else {
 							//alert("KKK")
-							var db = firebase
-							.database();
-					db
-							.ref(
-									"cart_value"
-											+ "/"
-											+ mob
-											+ "/json_input")
-							.set(
-									sessionStorage.getItem("cartValue"));
-					console.log('Y ', childData.json_input);
-					console.log('childData ', childData.json_input);
+							var db = firebase.database();
+							db.ref("cart_value" + "/" + mob + "/json_input")
+									.set(sessionStorage.getItem("cartValue"));
+
 						}
-						
+
 						console.log('Message received. ', childKey);
 						//console.log('childData ', childData.cart_value);
 					}
 				});
-			});
- 
+			}); */
+
 			/*  if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
 			//	sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -526,7 +571,6 @@ var isMobFound=0;
 
 			//new code
 
-		
 			console.log("NC 22", sessionStorage.getItem("cartValue"));
 			//nc
 			var cartValue = sessionStorage.getItem("cartValue");
@@ -701,6 +745,7 @@ var isMobFound=0;
 			table[position].totalAmt = totalAmt;
 			console.log(table);
 			sessionStorage.setItem("cartValue", JSON.stringify(table));
+			updateFirebase();
 			appendCartData();
 			setCartData();
 		}//end of If ischanged==1
@@ -848,7 +893,7 @@ var isMobFound=0;
 		}
 
 		sessionStorage.setItem("cartValue", JSON.stringify(newCartVal));
-
+		updateFirebase();
 		appendCartData();
 		setCartData();
 	}
