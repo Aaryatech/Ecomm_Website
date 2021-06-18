@@ -7,10 +7,11 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
- <style> body  {opacity:0;}</style>
+ <!-- <style> body  {opacity:0;}</style>
 <script>
   window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},500);};
  </script>
+  -->
 <body>
 	<c:url value="/setLikeOrDislike" var="setLikeOrDislike"></c:url>
 
@@ -1028,11 +1029,17 @@ function moveCursor(){
 	 //bulkImageUpload();
 	};
 	//function x(){
+	
 		if (window.File && window.FileReader && window.FileList && window.Blob) {
+			try{
 			  document.getElementById('img_input_btn').addEventListener('change', handleFileSelect, false);
+			}catch (e) {
+				console.log("Image err",e)
+			}
 			} else {
 			  alert('The File APIs are not fully supported in this browser.');
 			}
+		
 			function handleFileSelect(evt) {
 				 var base64String;
 				var imgName=makeUniqueString(7);
