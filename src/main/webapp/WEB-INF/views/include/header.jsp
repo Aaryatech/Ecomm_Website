@@ -381,7 +381,52 @@
 	}
 </script>
 <script>
-	function appendCartData() {
+async function xx(){
+	var mob = '9505';
+	const dbrefObject = firebase.database().ref("cart_value");
+
+	dbrefObject.on('value', function(snapshot) {
+var isMobFound=0;
+		snapshot.forEach(function(childSnapshot) {
+
+			var childKey = childSnapshot.key;
+			var childData = childSnapshot.val();
+			
+			if (childKey == mob) {
+				isMobFound=1;
+				if (sessionStorage.getItem("cartValue") == null) {
+					//alert("AKshay")
+					//var x=JSON.parse(childData.cart_value);
+					//var table = [x];
+					//var x= $.parseJSON(childData.cart_value);
+					//alert("x"+childData.json_input)
+						console.log('x ', childData.json_input);
+					sessionStorage.setItem("cartValue", childData.json_input);
+				}
+				else{
+					//alert("KKK")
+					var db = firebase
+					.database();
+			db
+					.ref(
+							"cart_value"
+									+ "/"
+									+ mob
+									+ "/json_input")
+					.set(
+							sessionStorage.getItem("cartValue"));
+			console.log('childData ', childData.cart_value);
+				}
+				
+				console.log('Message received. ', childKey);
+				//console.log('childData ', childData.cart_value);
+			
+			}
+		});
+	});
+
+}
+ async function appendCartData() {
 
 		try {
 			try {
@@ -394,12 +439,13 @@
 				sessionStorage.setItem("allItemList", JSON.stringify(table));
 			}
 
-			if (sessionStorage.getItem("cartValue") == null) {
+			/* if (sessionStorage.getItem("cartValue") == null) {
 				var table = [];
 				sessionStorage.setItem("cartValue", JSON.stringify(table));
 			}
-
-			var mob = '9885';
+ */
+ 			 var mob = '9885';
+ //var mob=${sessionScope.mobNo};
 			const dbrefObject = firebase.database().ref("cart_value");
 
 			dbrefObject.on('value', function(snapshot) {
@@ -408,14 +454,40 @@
 
 					var childKey = childSnapshot.key;
 					var childData = childSnapshot.val();
-
+					
 					if (childKey == mob) {
+						
+						if (sessionStorage.getItem("cartValue") == null) {
+							//alert("AKshay")
+							//var x=JSON.parse(childData.cart_value);
+							//var table = [x];
+							//var x= $.parseJSON(childData.cart_value);
+							//alert("x"+childData.json_input)
+								console.log('x ', childData.json_input);
+								 sessionStorage.setItem("cartValue", childData.json_input);
+						}
+						else{
+							//alert("KKK")
+							var db = firebase
+							.database();
+					db
+							.ref(
+									"cart_value"
+											+ "/"
+											+ mob
+											+ "/json_input")
+							.set(
+									sessionStorage.getItem("cartValue"));
+					console.log('Y ', childData.json_input);
+					console.log('childData ', childData.json_input);
+						}
+						
 						console.log('Message received. ', childKey);
-						console.log('childData ', childData);
+						//console.log('childData ', childData.cart_value);
 					}
 				});
 			});
-
+ 
 			/*  if (sessionStorage.getItem("cartValue") == null) {
 			var table = [];
 			//	sessionStorage.setItem("cartValue", JSON.stringify(table));
@@ -454,26 +526,8 @@
 
 			//new code
 
-			/*  var fd = new FormData();
-			fd.append("cartValue",sessionStorage.getItem("cartValue"));
-			$.ajax({
-				url : '${pageContext.request.contextPath}/sysncCartData',
-				type : 'post',
-				dataType : 'json',
-				data : fd,
-				contentType : false,
-				processData : false,
-				async: false,
-				success : function(response) {
-				if(sessionStorage.getItem("cartValue")===null){
-					console.log("In IF",response)
-				}else{
-					console.log("In else",response)
-					//sessionStorage.setItem("cartValue", JSON.stringify(response));
-				}
-				},
-			});   */
-			console.log("NC ", sessionStorage.getItem("cartValue"));
+		
+			console.log("NC 22", sessionStorage.getItem("cartValue"));
 			//nc
 			var cartValue = sessionStorage.getItem("cartValue");
 
@@ -575,6 +629,7 @@
 		} catch (e) {
 			//	alert("Err" +e)
 		}
+		//return "sa";
 	}
 	function writeUserData(mob, inputJson) {
 		/* alert("A")
