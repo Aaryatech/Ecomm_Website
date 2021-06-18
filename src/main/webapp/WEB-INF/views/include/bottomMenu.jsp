@@ -23,7 +23,8 @@
 						<li><a
 							href="${pageContext.request.contextPath}/showAboutUsPage"><i
 								class="fa fa-check" aria-hidden="true"></i> About Us</a></li>
-						<li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
+						
+						<li><a href="${pageContext.request.contextPath}/showPrivacyPolicy"><i class="fa fa-check" aria-hidden="true"></i>
 								Privacy Policy</a></li>
 						<li><a href="${pageContext.request.contextPath}/showT&CPage"><i
 								class="fa fa-check" aria-hidden="true"></i> Terms &amp;

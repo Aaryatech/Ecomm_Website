@@ -956,6 +956,11 @@ public class HomeController {
 	public String showAboutUsPage(Locale locale, Model model) {
 		return "about-us";
 	}
+	
+	@RequestMapping(value = "/showPrivacyPolicy", method = RequestMethod.GET)
+	public String showPrivacyPolicy(Locale locale, Model model) {
+		return "privacyPolicy";
+	}
 
 	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
 	public String showContactUsPage(Locale locale, Model model)

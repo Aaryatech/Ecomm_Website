@@ -5,8 +5,8 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport"
-	content="width=device-width; initial-scale=1.0; maximum-scale=1.0" />
+<!-- <meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0" /> -->
 <meta name="keywords"
 	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market" />
 <meta name="description"
@@ -32,6 +32,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap"
 	rel="stylesheet">
+	
 <!--font-family: 'Hind', sans-serif;-->
 
 <!-- <script type="text/javascript"
@@ -45,6 +46,9 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/jquery.datetimepicker.css" />
+	
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/newpage/new-pages.css" type="text/css"/>    
+ 
 <script
 	src="${pageContext.request.contextPath}/resources/js/jquery.datetimepicker.full.js">
 	$('.qty').on('input', function() {
