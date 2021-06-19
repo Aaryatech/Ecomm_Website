@@ -563,6 +563,10 @@
 				.ready(
 						function() {
 							//$('#landingpop-mobno').hide();
+							document.getElementById("hideLat").value = sessionStorage
+									.getItem("selLat");
+							document.getElementById("hideLong").value = sessionStorage
+									.getItem("selLng");
 							var isAddNewAdd = '${isAddNewAdd}';
 							if (parseInt(isAddNewAdd) == 1) {
 								document.getElementById("addAddDiv").style = "display:none";
@@ -1147,151 +1151,147 @@
 			document.getElementById("txtPlaces").focus();
 		}
 		function calculateDistance(latitude, longitude, type) {
-			try{
-			var frData = '${frData}';
-			sessionStorage.setItem("frList", frData);
-			sessionStorage.setItem("myLat", latitude);
-			sessionStorage.setItem("myLong", longitude);
-			//alert(latitude)
-			//alert(longitude) 
+			try {
+				var frData = '${frData}';
+				sessionStorage.setItem("frList", frData);
+				sessionStorage.setItem("myLat", latitude);
+				sessionStorage.setItem("myLong", longitude);
+				//alert(latitude)
+				//alert(longitude) 
 
-			//alert("Prev ---> "+latitude+"     "+longitude);
+				//alert("Prev ---> "+latitude+"     "+longitude);
 
-			var bounds = new google.maps.LatLngBounds;
+				var bounds = new google.maps.LatLngBounds;
 
-			var origin1 = {
-				lat : parseFloat(latitude),
-				lng : parseFloat(longitude)
-			};
+				var origin1 = {
+					lat : parseFloat(latitude),
+					lng : parseFloat(longitude)
+				};
 
-			var waypts = [];
+				var waypts = [];
 
-			var s = sessionStorage.getItem("frList");
-			
-			s = s.replace(/\\n/g, "\\n")  
-            .replace(/\\'/g, "\\'")
-            .replace(/\\"/g, '\\"')
-            .replace(/\\&/g, "\\&")
-            .replace(/\\r/g, "\\r")
-            .replace(/\\t/g, "\\t")
-            .replace(/\\b/g, "\\b")
-            .replace(/\\f/g, "\\f");
-//remove non-printable and other non-valid JSON chars
-s = s.replace(/[\u0000-\u0019]+/g,""); 
+				var s = sessionStorage.getItem("frList");
 
-			var list = $.parseJSON(s);
+				s = s.replace(/\\n/g, "\\n").replace(/\\'/g, "\\'").replace(
+						/\\"/g, '\\"').replace(/\\&/g, "\\&").replace(/\\r/g,
+						"\\r").replace(/\\t/g, "\\t").replace(/\\b/g, "\\b")
+						.replace(/\\f/g, "\\f");
+				//remove non-printable and other non-valid JSON chars
+				s = s.replace(/[\u0000-\u0019]+/g, "");
 
-			//alert("fr count = "+list.length)
+				var list = $.parseJSON(s);
 
-			for (var i = 0; i < list.length; i++) {
+				//alert("fr count = "+list.length)
 
-				if (!isNaN(parseFloat(list[i].shopsLatitude))) {
-					var data_add = {
-						lat : parseFloat(list[i].shopsLatitude),
-						lng : parseFloat(list[i].shopsLogitude)
+				for (var i = 0; i < list.length; i++) {
+
+					if (!isNaN(parseFloat(list[i].shopsLatitude))) {
+						var data_add = {
+							lat : parseFloat(list[i].shopsLatitude),
+							lng : parseFloat(list[i].shopsLogitude)
+						}
+						waypts.push(data_add);
+
+						//alert(list[i].frName+"       --> "+parseFloat(list[i].shopsLatitude)+"     "+parseFloat(list[i].shopsLogitude))
+
+					} else {
+						var data_add = {
+							lat : parseFloat(0),
+							lng : parseFloat(0)
+						}
+						waypts.push(data_add);
 					}
-					waypts.push(data_add);
 
-					//alert(list[i].frName+"       --> "+parseFloat(list[i].shopsLatitude)+"     "+parseFloat(list[i].shopsLogitude))
-
-				} else {
-					var data_add = {
-						lat : parseFloat(0),
-						lng : parseFloat(0)
-					}
-					waypts.push(data_add);
 				}
 
-			}
+				//alert("fr count = "+waypts.length)
 
-			//alert("fr count = "+waypts.length)
+				//console.log(waypts);
 
-			//console.log(waypts);
+				var geocoder = new google.maps.Geocoder;
+				var service = new google.maps.DistanceMatrixService;
+				service
+						.getDistanceMatrix(
+								{
+									origins : [ origin1 ],
+									destinations : waypts,
+									travelMode : google.maps.TravelMode.DRIVING,
+									unitSystem : google.maps.UnitSystem.METRIC,
+									avoidHighways : false,
+									avoidTolls : false
+								},
+								function(response, status) {
 
-			var geocoder = new google.maps.Geocoder;
-			var service = new google.maps.DistanceMatrixService;
-			service
-					.getDistanceMatrix(
-							{
-								origins : [ origin1 ],
-								destinations : waypts,
-								travelMode : google.maps.TravelMode.DRIVING,
-								unitSystem : google.maps.UnitSystem.METRIC,
-								avoidHighways : false,
-								avoidTolls : false
-							},
-							function(response, status) {
+									//alert(JSON.stringify(response.rows[0].elements))
 
-								//alert(JSON.stringify(response.rows[0].elements))
+									if (status !== 'OK') {
+										//alert('Error was: ' + status);
+									} else {
 
-								if (status !== 'OK') {
-									//alert('Error was: ' + status);
-								} else {
+										var fromGetLocation = sessionStorage
+												.getItem("fromGetLocation");
 
-									var fromGetLocation = sessionStorage
-											.getItem("fromGetLocation");
-
-									//alert(fromGetLocation)
-									if (longitude != 0 && latitude != 0
-											&& fromGetLocation != 0) {
-										$('#showShopDiv').show();
-									}
-
-									$('#selectShop').html('');
-									var html = '<option value="0" selected>Select Shop</option>';
-
-									var originList = response.originAddresses;
-									var destinationList = response.destinationAddresses;
-
-									var results = response.rows[0].elements;
-									var newFrList = [];
-
-									//alert("res count = "+results.length)
-
-									for (var j = 0; j < results.length; j++) {
-
-										try {
-											var km = (parseFloat((results[j].distance.value) / 1000))
-													.toFixed(2);
-
-											//alert(list[j].frName+"    --->    "+km+"        ---> "+list[j].noOfKmAreaCover + "      latlng --> "+parseFloat(list[j].shopsLatitude)+"   "+parseFloat(list[j].shopsLogitude))
-
-											list[j].exInt1 = km;
-											/* if(list[j].frId==13){
-												alert(list[j].exInt1);
-											} */
-											if (km <= parseFloat(list[j].noOfKmAreaCover)) {
-												newFrList.push(list[j]);
-											}
-
-										} catch (err) {
-											//alert("err---")
+										//alert(fromGetLocation)
+										if (longitude != 0 && latitude != 0
+												&& fromGetLocation != 0) {
+											$('#showShopDiv').show();
 										}
 
+										$('#selectShop').html('');
+										var html = '<option value="0" selected>Select Shop</option>';
+
+										var originList = response.originAddresses;
+										var destinationList = response.destinationAddresses;
+
+										var results = response.rows[0].elements;
+										var newFrList = [];
+
+										//alert("res count = "+results.length)
+
+										for (var j = 0; j < results.length; j++) {
+
+											try {
+												var km = (parseFloat((results[j].distance.value) / 1000))
+														.toFixed(2);
+
+												//alert(list[j].frName+"    --->    "+km+"        ---> "+list[j].noOfKmAreaCover + "      latlng --> "+parseFloat(list[j].shopsLatitude)+"   "+parseFloat(list[j].shopsLogitude))
+
+												list[j].exInt1 = km;
+												/* if(list[j].frId==13){
+													alert(list[j].exInt1);
+												} */
+												if (km <= parseFloat(list[j].noOfKmAreaCover)) {
+													newFrList.push(list[j]);
+												}
+
+											} catch (err) {
+												//alert("err---")
+											}
+
+										}
+										//alert(JSON.stringify(newFrList))
+										sortArray(newFrList, "exInt1");
+
+										for (var j = 0; j < newFrList.length; j++) {
+
+											//alert(newFrList[j].exInt1)
+											html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">Monginis Cake Shop - '
+													+ newFrList[j].city
+													+ ' </option>';
+
+										}
+
+										if (type != 2) {
+											sessionStorage.setItem("frList",
+													JSON.stringify(newFrList));
+										}
+										$('#selectShop').html(html);
+
 									}
-									//alert(JSON.stringify(newFrList))
-									sortArray(newFrList, "exInt1");
-								
-									for (var j = 0; j < newFrList.length; j++) {
-
-										//alert(newFrList[j].exInt1)
-										html += '<option data-km="'+newFrList[j].exInt1+'" value="' + newFrList[j].frId + '">Monginis Cake Shop - '
-												+ newFrList[j].city
-												+ ' </option>';
-
-									}
-
-									if (type != 2) {
-										sessionStorage.setItem("frList", JSON
-												.stringify(newFrList));
-									}
-									$('#selectShop').html(html);
-
-								}
-							});
-		}catch (e) {
-			//alert(e)
-		}
+								});
+			} catch (e) {
+				//alert(e)
+			}
 		}//End of function calc dist
 		google.maps.event.addDomListener(window, 'load', function() {
 			var places = new google.maps.places.Autocomplete(document
@@ -1385,14 +1385,17 @@ s = s.replace(/[\u0000-\u0019]+/g,"");
 	<script type="text/javascript">
 		function goToMap(value) {
 
+			var lat = document.getElementById("hideLat").value;
+			var lng = document.getElementById("hideLong").value;
+
 			if (value == 1) {
+				lat = 0;
+				lng = 0;
 				sessionStorage.setItem("divertBtn", "1");
 			} else {
 				sessionStorage.setItem("divertBtn", "0");
 			}
 
-			var lat = document.getElementById("hideLat").value;
-			var lng = document.getElementById("hideLong").value;
 			//alert(lat+"     "+lng)
 
 			//window.open("${pageContext.request.contextPath}/viewmap/"+lng+"/"+lng1,"_self");

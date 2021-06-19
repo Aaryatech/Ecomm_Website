@@ -72,6 +72,7 @@ html, body {
 			var lngVal = ${lng};
 			
 			//alert(latVal+"       "+lngVal)
+			 
 			
 			if(latVal ==0 && lngVal ==0){
 				latVal = position.coords.latitude;
