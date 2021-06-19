@@ -1246,6 +1246,51 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 .detail_drop.four ul li{width: 25%;}
 .detail_price_tp.divide span{display: block; float: none;}
 
+
+
+/*about us page css start here*/
+.abt_bx{display: inline-block; width: 100%;}
+.abt_pic{float: left; width: 38%; background: #FFF; padding: 10px; height: 365px;}
+.abt_cont{float: right; width: 60%;}
+.abt_quality{color: #ec268f; font-size: 28px; font-family: 'Hind-Medium'; margin: 0 0 15px 0;}
+.abt_quality span{display: block; font-size: 18px; color: #333;}
+ul.abt_listing{margin: 15px 0; padding:0;}
+ul.abt_listing li{list-style-type: none; position: relative; padding: 0 0 0 18px; margin: 0 0 6px 0; font-size: 16px;}
+ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-size: 13px;}
+.customer_row{display: inline-block; width: 100%;}
+.customer_row ul{margin: 0px; padding: 0;}
+.customer_row ul li{list-style-type: none; float: left; width: 25%; padding: 0 20px;}
+.customer_one{background: #FFF; padding: 30px; text-align: center; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+.customer_one:hover{box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15); -moz-box-shadow: 0px 0px 25px 0px rgba(0,0,0,0.15); -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
+.customer_one i{display: block; color: #373991; font-size: 50px; margin: 0 0 20px 0;}
+.stastic_head{font-size: 36px; color: #e21586; font-family: 'Hind-Bold'; line-height: 40px}
+.customer_one span{display: block; font-size: 20px; font-family: 'Hind-Medium';}
+
+.quality_row{background: url(../images/abt_bg.jpg) no-repeat center bottom;background-size: cover; padding: 50px 0; color: #FFF; position: relative;}
+.quality_row::after{content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(55, 57, 145, 0.85);}
+.cont_up{position: relative; z-index: 1;}
+.quality_title{text-align: center; margin: 0 0 30px 0; font-size: 30px; line-height: 34px; font-family: 'Hind-Medium';} 
+.quality_title span{display: block; font-size: 16px; line-height: 26px; margin: 6px 0 0 0; font-family: 'Hind-Regular';}
+.quality_bx{display: inline-block; width: 100%;}
+.quality_bx ul{margin: 0px; padding: 0px;}
+.quality_bx ul li{list-style-type: none; float: left; width: 33.333%; text-align: center;}
+.quality_one{text-align: center; padding: 0 30px;}
+.quality_one i{font-size: 42px; margin: 0 0 15px 0;}
+.quality_one h3{font-size: 26px; margin: 0 0 15px 0; font-family: 'Hind-Medium'; letter-spacing: 0.3px;}
+
+
+.testimonial_slide{width: 100%; height: 100%; padding: 20px;}
+.test_cont_top{background: #FFF; padding: 50px; position: relative; text-align: left; line-height: 24px; font-size: 16px;}
+.test_cont_top p{height: 190px; overflow: hidden; font-size: 16px; line-height: 28px;}
+.test_cont_top i{position: absolute; left: -11px; top: -11px; font-size: 40px; color: #373991;} 
+.test_nm_pic{height: 75px; display: table; margin: 15px 0 0 0;}
+.test_pic_l{display: table-cell; vertical-align: middle;}
+.test_pic_l img{width: 75px; height: 75px; border-radius: 50%; border: 5px solid #e7e7e7;}
+.test_nm_r{display: table-cell; vertical-align: middle; padding: 0 0 0 15px; font-size: 18px; font-family: 'Hind-Medium'; color: #ec268f; text-align: left; line-height: 24px;}
+.test_nm_r span{display: block; font-size: 16px; font-family: 'Hind-Regular'; color: #545b77;}
+
+
+
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}
@@ -1262,6 +1307,34 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .stock_prc{font-size: 32px;}
 }
 @media screen and (max-width:1100px){
+    .quality_one h3 {
+    font-size: 24px;
+}
+    .abt_quality {
+    font-size: 24px;
+}
+    .abt_quality span {
+    font-size: 16px;
+}
+    .customer_row ul li {
+    padding: 0 5px;
+}
+    .customer_one {
+    padding: 25px;
+}
+    .find_store, .testimonial_bx, .footer_menu, .product_category, .quality_row {
+    padding: 30px 0;
+}
+    .quality_title {
+    font-size: 28px;
+}
+    .abt_pic {
+    width: 48%;
+}
+    
+    .abt_cont {
+    width: 50%;
+}
 	.cake_prc_detail_pclass{font-size: 18px;}
 	.cake_prc_detail_iclass{font-size: 15px;}
 	.qtyminus.slide, .qtyplus.slide{width: 20px; font-size: 11px; height: 20px; line-height: 20px;}
@@ -1382,6 +1455,17 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
 	
 }
 @media screen and (max-width:900px){
+    .abt_pic {float: none; margin: 0 auto; display: inline-block; text-align: center; width: 100%; background: none;}
+    .abt_cont {float: none; width: 100%;margin: 15px 0 0 0;}
+    .customer_one {padding: 15px;}
+    .customer_one i {font-size: 40px;}
+    .stastic_head {font-size: 30px;}
+    .customer_one span {font-size: 16px;}
+    .quality_one h3 {font-size: 22px; margin: 0 0 10px 0;}
+    .quality_title {font-size: 24px;}
+    .quality_one {padding: 0 15px;}
+    .quality_one i {font-size: 36px; margin: 0 0 10px 0;}
+    .quality_one p, .quality_title span {font-size: 14px;}
 	.user_login {margin: 2px 20px 0 0;}
 	.logo_row{padding:10px 0;}
 	.main_menu{padding:19px 15px 10px 15px;}
@@ -1676,6 +1760,21 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     
 }
 @media screen and (max-width:640px){
+    .abt_bx, .cont_up {padding: 0 10px;}
+    .abt_pic {padding: 0;}
+    .abt_quality, .quality_one h3 {font-size: 20px;}
+    .abt_quality span, .abt_cont p, ul.abt_listing li {font-size: 14px;}
+    .abt_quality span, .abt_cont p, ul.abt_listing li {font-size: 14px;}
+    .customer_row ul li {padding: 5px; width: 50%;}
+    .customer_one {padding: 25px;}
+    .customer_one i {font-size: 36px;}
+    .stastic_head {font-size: 26px; line-height: 32px;}
+    .quality_title {margin: 0;}
+    .quality_bx ul li { float: none; width: 100%;}
+    .quality_one {padding: 20px 0;}
+    .abt_quality, .quality_one h3 { font-size: 20px;}
+    
+    
     /*location page css*/
     .search_wrapper{width: 94%; margin: 0 auto;}
     .current_location {text-align: center; width: 100%; margin: 0px auto 20px auto;}
@@ -1716,6 +1815,12 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     
     .head_marg {margin: 95px 0 0 0;}
     /* .prod_filt ul li {width: 33.333%;} */
+    
+   
+    .abt_bx, .cont_up {padding: 0 10px;}
+    .abt_pic {
+    padding: 0;
+}
     
 }
 @media screen and (max-width:640px){
@@ -1865,6 +1970,11 @@ span.pop_spn{color: #FFF; display: block; margin: 0 0 5px 0; font-size: 14px; fo
     .cart_cont.width_inc{width: 68%;}
     
     .radio_1.promo ul li{width: 100%;}
+    .abt_pic, .abt_pic img {height: auto;}
+    .abt_pic, .abt_pic img {height: auto;}
+    .customer_one {padding: 15px;}
+    .customer_one i {margin: 0 0 10px 0;}
+    .customer_one span {font-size: 14px;}
     
       
 }
