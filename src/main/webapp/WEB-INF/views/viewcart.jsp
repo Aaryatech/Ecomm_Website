@@ -2394,8 +2394,8 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 			    //document.getElementById("close_btn").click();
 				//$("#place").hide();
 								//document.getElementById("loaderimg2").show();
-								document.getElementById("place").style = "display:none";
-								document.getElementById("loaderimg").style.display = "block";
+								//document.getElementById("place").style = "display:none";
+								//document.getElementById("loaderimg").style.display = "block";
 				document.getElementById("place_orderBtn").disabled = true;
 				//$("#place").hide();
 				var fd = new FormData();
@@ -2478,6 +2478,7 @@ sessionStorage.setItem("cartValue", JSON
 								sessionStorage.setItem("prodImageList", JSON
 										.stringify(table));
 									window.location = url;
+									updateFirebase();R
 								}
 
 							},

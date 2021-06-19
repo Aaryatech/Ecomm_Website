@@ -204,6 +204,7 @@ public class PaymentController {
 				Order order = razorpay.Orders.create(orderRequest);
 				model.addAttribute("orderId", order.get("id")); 
 				model.addAttribute("amount",  order.get("amount"));
+				model.addAttribute("payBox",  1);
 			}catch (Exception e) {
 				// TODO: handle exception
 			}

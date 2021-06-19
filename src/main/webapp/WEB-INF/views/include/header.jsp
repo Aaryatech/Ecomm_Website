@@ -43,10 +43,10 @@
 								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
 							href="${pageContext.request.contextPath}/home">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
-						<span><a
+						<%-- <span><a
 							href="${pageContext.request.contextPath}/showVistStorePage">Visit
 								Stores</a></span>
-
+ --%>
 						<ul class="drop_menu">
 							<li><a href="#">Partner with us <i
 									class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -268,7 +268,7 @@
 										<c:when test="${sessionScope.custId>0}">
 											<a href="${pageContext.request.contextPath}/profile"><img
 												width="25" height="25" src="${sessionScope.profileImg}"
-												title="Mohsin"
+												title="${sessionScope.userName} "
 												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/user_pic.png'"
 												alt=""> <!-- <i class="fa fa-angle-down"
 										aria-hidden="true"></i> --></a>
@@ -671,13 +671,21 @@
 
 			document.getElementById("cart_item_count").innerHTML = ""
 					+ table.length;
-			$("#proc_chkout")
+		/* 	$("#proc_chkout")
 					.append(
 							'<div class="proc_chkout">'
 									+ '<span>Total : Rs.'
 									+ subtotal
 									+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
-									+ ' to Checkout</a>' + '</div>')
+									+ ' to Checkout</a>' + '</div>') */
+									prodIdStr=0;
+									$("#proc_chkout")
+									.append(
+											'<div class="proc_chkout">'
+													+ '<span>Total : Rs.'
+													+ subtotal
+													+ '/- </span> <a href="${pageContext.request.contextPath}/checkout/'+prodIdStr+'">Proceed '
+													+ ' to Checkout</a>' + '</div>')
 		} catch (e) {
 			//	alert("Err" +e)
 		}

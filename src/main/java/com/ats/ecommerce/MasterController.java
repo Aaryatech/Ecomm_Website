@@ -86,8 +86,11 @@ public class MasterController {
 			model.addAttribute("cityList", cityList);
 
 		} catch (Exception e) {
-			System.out.println("Exception in /profile : " + e.getMessage());
-			e.printStackTrace();
+			return "redirect:/";
+			/*
+			 * System.out.println("Exception in /profile : " + e.getMessage());
+			 * e.printStackTrace();
+			 */
 		}
 		return "profile";
 	}
@@ -410,7 +413,8 @@ public class MasterController {
 			try {
 			companyId=(int) session.getAttribute("companyId");
 			}catch (Exception e) {
-				companyId =0;
+				//return "redirect:/";
+				companyId =1;
 			}
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -435,8 +439,9 @@ public class MasterController {
 			session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 
 		} catch (Exception e) {
-			System.out.println("Exception in /addresslist : " + e.getMessage());
-			e.printStackTrace();
+			return "redirect:/";
+		//	System.out.println("Exception in /addresslist : " + e.getMessage());
+			//e.printStackTrace();
 		}
 		return "addresslist";
 	}

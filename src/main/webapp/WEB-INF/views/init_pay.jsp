@@ -8,6 +8,10 @@
 </head>
 <body >
 <button id="rzp-button1" style="display:none;">Pay ${sessionScope.userName}</button>
+
+<a href="${pageContext.request.contextPath}/checkout/0">Go Back</a> &nbsp;&nbsp;
+<a href="#" onclick="openPayBox()">Make Payment</a>
+
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 var options = {
@@ -42,6 +46,10 @@ document.getElementById('rzp-button1').onclick = function(e){
     e.preventDefault();
 }
 document.getElementById('rzp-button1').onclick();
+function openPayBox(){
+	document.getElementById('rzp-button1').onclick();
+
+}
 </script>
 </body>
 </html>

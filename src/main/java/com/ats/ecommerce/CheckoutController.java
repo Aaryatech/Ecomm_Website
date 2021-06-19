@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,8 @@ import com.ats.ecommerce.model.order.OrderSaveData;
 import com.ats.ecommerce.model.order.OrderTrail;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
 
 @Controller
 @Scope("session")
@@ -1065,8 +1068,34 @@ public class CheckoutController {
 					// ie paid by elecronic way
 
 					info.setMsg("epay");
-					info.setResponseObject1("");
+					
+					
+					/*session = request.getSession();
+					OrderSaveData orderSaveData2 = (OrderSaveData) session.getAttribute("orderSaveData");
+					
+					try {
+						session.setAttribute("Pay_Page", "1");
 
+						RazorpayClient razorpay = new RazorpayClient("rzp_live_1xwIfbV7BUaBxt", "95FT7Or1sftfjQEweSpB3Gaq");
+
+						JSONObject orderRequest = new JSONObject();
+						//orderRequest.put("amount", orderSaveData2.getOrderHeader().getTotalAmt() * 100); // amount in the smallest currency unit
+						orderRequest.put("amount", 1 * 100); // amount in the smallest currency unit
+
+						orderRequest.put("currency", "INR");
+						orderRequest.put("receipt", "order_rcptid_11");
+
+						Order order2 = razorpay.Orders.create(orderRequest);
+						model.addAttribute("orderId", order2.get("id")); 
+						model.addAttribute("amount",  order2.get("amount"));
+						model.addAttribute("payBox",  1);
+						
+						info.setResponseObject1(""+order2.get("id"));
+						info.setResponseObject2(""+order2.get("amount"));
+					}catch (Exception e) {
+						// TODO: handle exception
+					}
+					 */
 				} else {
 					info.setMsg("cashpay");
 					info.setResponseObject1("");

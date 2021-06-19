@@ -75,7 +75,7 @@ public class ProductDisplayController {
 					}
 				}
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 
 			ObjectMapper Obj = new ObjectMapper();
@@ -83,6 +83,7 @@ public class ProductDisplayController {
 			try {
 				jsonStr = Obj.writeValueAsString(tagList);
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// ALL MENU CATEGORY LIST
@@ -107,6 +108,7 @@ public class ProductDisplayController {
 				data.setCatFilterConfig(catMenuList);
 
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// ALL FILTER LIST
@@ -123,6 +125,7 @@ public class ProductDisplayController {
 				allFilterList = new ArrayList<MFilter>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// ALL FILTER TYPE LIST
@@ -139,6 +142,7 @@ public class ProductDisplayController {
 				allFilterTypeList = new ArrayList<FilterTypes>(Arrays.asList(filterArr));
 
 			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			model.addAttribute("tagsJson", jsonStr);
@@ -149,7 +153,8 @@ public class ProductDisplayController {
 			model.addAttribute("allFilterTypeList", allFilterTypeList);
 
 		} catch (Exception e) {
-			return returnPage;
+			e.printStackTrace();
+			//return returnPage;
 		}
 		return returnPage;
 	}

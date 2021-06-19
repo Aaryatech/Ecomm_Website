@@ -189,6 +189,19 @@ public class HomeController {
 				session.removeAttribute("userAddress");
 				session.removeAttribute("profileImg");
 				// session.removeAttribute("mobNo");
+				
+				Cookie[] cookieArray = request.getCookies();
+				int isCookieFound = 0;
+				if (cookieArray != null)
+					for (int a = 0; a < cookieArray.length; a++) {
+						if (cookieArray[a].getName().equalsIgnoreCase("mobNoCookie")) {
+							System.out.println("mobNoCookie " +cookieArray[a].getName());
+							session.setAttribute("mobNo",
+									(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
+							System.err.println("In From Cookie "+session.getAttribute("mobNo"));
+							break; 
+						}
+					}
 
 			}
 		} catch (Exception e) {
@@ -312,7 +325,7 @@ public class HomeController {
 		float frKm = 0;
 		System.err.println("Here " + request.getParameter("user_type"));
 		int userType = Integer.parseInt(request.getParameter("user_type"));
-
+try {
 		frId = Integer.parseInt(request.getParameter("selectShop"));
 		session.setAttribute("frId", frId);
 
@@ -334,7 +347,9 @@ public class HomeController {
 		frKmCookie = new Cookie("frKmCookie", EncodeDecode.Encrypt("" + frKm));
 		frKmCookie.setMaxAge(60 * 60 * 24 * 15);
 		response.addCookie(frKmCookie);
-
+} catch (Exception e) {
+	e.printStackTrace();
+}
 		if (userType == 3) {
 			try {
 
