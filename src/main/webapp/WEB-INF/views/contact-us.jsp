@@ -81,7 +81,24 @@
                 <span>${cus.subHeading}</span></center> 
             </h2><!-- Get in Touch -->
             <!-- Here's How You Can Reach Us -->
-            <div class="contact_row">
+				<%-- <%
+					if (session.getAttribute("successMsg") != null) {
+				%> --%>
+				<div id="final_msg"
+					style="background-color: #ed558e; color: #fff; text-align: center; margin: 0px ​0px 14px 272px; width: 62%;display: flex;
+  justify-content: center;
+  align-items: center;"
+					class="alert bg-success text-white alert-styled-left alert-dismissible">
+					<span class="font-weight-semibold"> Thank you
+						for getting in touch! <br> We appreciate you contacting us. One of our colleagues will get back in touch with
+						you soon!Have a great day!
+					</span>
+				</div>
+				<%-- <%
+					session.removeAttribute("successMsg");
+					}
+				%> --%>
+				<div class="contact_row">
                 
                 <div class="contact_add">
                     
@@ -116,7 +133,7 @@
                 
                 <!--right form start here-->
                 <div class="contact_frm">
-                    <form action="${pageContext.request.contextPath}/mailVistorInfo" method="post">
+                    <form action="${pageContext.request.contextPath}/mailVistorInfo" method="post" id="submitInsert">
                         <!--<h5 class="touch_title">
                             Get in Touch
                             <span>Please fill out the quick form and we will be in touch with lightening speed.</span>
@@ -124,18 +141,34 @@
                         
                         <div class="frm_bx">
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="firstName" type="text" class="input_two" placeholder="First Name" /></div>
-                                <div class="frm_one_r"><input name="lastName" type="text" class="input_two" placeholder="Last Name" /></div>
+                                <div class="frm_one_l"><input name="firstName" id="firstName" type="text" class="input_two txt-val" placeholder="First Name" />
+                                   <span class="validation-invalid-label text-danger"
+									id="error_firstName" style="display: none; color: red;">This field
+												is required.</span></div>
+									
+                                <div class="frm_one_r"><input name="lastName" id="lastName" type="text" class="input_two txt-val" placeholder="Last Name" />
+                                   <span class="validation-invalid-label text-danger"
+									id="error_lastName" style="display: none; color: red;">This field
+												is required.</span></div>
                                 <div class="clr"></div>                                     
                             </div>
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="contactNo" type="text" class="input_two" placeholder="Phone Number" /></div>
-                                <div class="frm_one_r"><input name="email" type="text" class="input_two" placeholder="Email Address" /></div>
+                                <div class="frm_one_l"><input name="contactNo" id="contactNo" type="text" class="input_two num" placeholder="Phone Number" maxlength="10"/>
+                                <span class="validation-invalid-label text-danger"
+									id="error_contactNo" style="display: none; color: red;">This field
+												is required.</span></div>  
+                               
+                                <div class="frm_one_r"><input name="email" id="email" type="text" class="input_two txt-mail" placeholder="Email Address" />
+                                <span class="validation-invalid-label text-danger"
+									id="error_email" style="display: none; color: red;">Invalid email address.</span></div>
                                 <div class="clr"></div>                                     
                             </div>
                             
                             <div class="frm_one">
-                                <textarea name="message" cols="" rows="5" class="input_two" placeholder="Enter Your Message"></textarea>
+                                <textarea name="message" id="msg" cols="" rows="5" class="input_two" placeholder="Enter Your Message"></textarea>
+                                <span class="validation-invalid-label text-danger"
+									id="error_msg" style="display: none; color: red;">This field
+												is required.</span>
                             </div>
                             <div><input name="" type="submit" class="sub_btn" value="Submit" /></div>
                         </div>
@@ -377,7 +410,101 @@ $('.dropdown').click(function () {
         $(this).parents('.dropdown2').find('input').attr('value', $(this).attr('id'));
     });
 </script>    
+<script type="text/javascript">
+    $(function () {
+        $(".txt-val").keypress(function (e) {
+            var keyCode = e.keyCode || e.which; 
+            
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z]+$/;
+ 
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));           
+ 
+            return isValid;
+        });
+    });
+    
+    $('.num').on('input', function() {
+    	 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+    	});
 
+</script>
+<script type="text/javascript">
+$(document)
+.ready(
+		function($) {
+
+			$("#submitInsert")
+					.submit(
+							function(e) {
+								var isError = false;
+								var errMsg = "";
+								
+								if (!$("#firstName").val()) {
+									isError = true;
+									$("#error_firstName").show()
+								} else {
+									$("#error_firstName").hide()
+								}
+								
+								if (!$("#lastName").val()) {
+									isError = true;
+									$("#error_lastName").show()
+								} else {
+									$("#error_lastName").hide()
+								}
+								
+								if (!$("#contactNo").val()) {
+									isError = true;
+									$("#error_contactNo").show()
+								} else {
+									$("#error_contactNo").hide()
+								}
+								
+								if (!$("#msg").val()) {
+									isError = true;
+									$("#error_msg").show()
+								} else {
+									$("#error_msg").hide()
+								}
+
+						
+								if (!$("#email").val()
+										|| !validateEmail($(
+												"#email").val())) {
+									isError = true;
+									$("#error_email").show()
+								} else {
+									$("#error_email").hide()
+								}
+
+								if (!isError) {
+									var x = true;
+									if (x == true) {
+										document
+												.getElementById("submtbtn").disabled = true;
+										return true;
+									}
+								}
+
+								return false;
+
+							});
+			
+		});
+
+function validateEmail(email) {
+	var eml = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if (eml.test($.trim(email)) == false) {
+		return false;
+	}
+	return true;
+}
+$( document ).ready(function() {
+	setTimeout(function(){$('#final_msg').fadeOut();}, 5000);
+});
+</script>
   
     
 </body>

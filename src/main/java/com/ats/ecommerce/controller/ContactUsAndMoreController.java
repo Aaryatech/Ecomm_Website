@@ -201,6 +201,8 @@ public class ContactUsAndMoreController {
 		Info mailResp = EmailUtility.sendEmailer(senderEmail, senderPassword, recipientEmail, mailsubject, mailMsg);
 		if(!mailResp.isError()) {
 			System.out.println("Mail Send Successfully");
+			
+			session.setAttribute("successMsg", 1);
 			redirect = "redirect:/showContactUsPage";
 		}else {
 			System.out.println("Failed to Send Mail");
@@ -401,6 +403,7 @@ public class ContactUsAndMoreController {
 		Info mailResp = EmailUtility.sendEmailer(senderEmail, senderPassword, recipientEmail, mailsubject, mailMsg);
 		if(!mailResp.isError()) {
 			System.out.println("Mail Send Successfully");
+			session.setAttribute("successMsg", 1);
 			redirect = "redirect:/showBecmVendrFr";
 		}else {
 			System.out.println("Failed to Send Mail");
