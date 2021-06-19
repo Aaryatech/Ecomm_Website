@@ -7,7 +7,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
- <!-- <style> body  {opacity:0;}</style>
+<!-- <style> body  {opacity:0;}</style>
 <script>
   window.onload = function() {setTimeout(function(){document.body.style.opacity="100";},500);};
  </script>
@@ -313,7 +313,7 @@
 														<c:if test="${prodHeader.allowMsgOnCake==1}">
 
 															<div class="a">
-																<input   type="text" id="msg_on_cake" maxlength="40"
+																<input type="text" id="msg_on_cake" maxlength="40"
 																	name="msg_on_cake" class="input_txt"
 																	placeholder="Message / Name on the Cake" />
 															</div>
@@ -436,31 +436,31 @@
 													</c:forEach>
 											</select></li>
 
-										
-												
-											
+
+
+
 
 
 										</c:otherwise>
 
 									</c:choose>
-										<c:if test="${shapeList.size()>0}">
-<li>Shape<select class="select-css" id="shapeSimilar"
-													onchange="reloadProductPage(this.value);">
+									<c:if test="${shapeList.size()>0}">
+										<li>Shape<select class="select-css" id="shapeSimilar"
+											onchange="reloadProductPage(this.value);">
 
-														<option value="">Select Shape</option>
-														<c:forEach items="${shapeList}" var="shapeData">
-															<option value="${shapeData.productId}">${shapeData.flavorName}</option>
-														</c:forEach>
+												<option value="">Select Shape</option>
+												<c:forEach items="${shapeList}" var="shapeData">
+													<option value="${shapeData.productId}">${shapeData.flavorName}</option>
+												</c:forEach>
 
-												</select></li>
-												</c:if>
+										</select></li>
+									</c:if>
 								</ul>
 
 								<ul>
 									<li>
 										<div class="detail_price_tp divide">
-											<span>Price :</span> <i 
+											<span>Price :</span> <i
 												class="fa fa-inr cake_prc_detail_iclass aprice"
 												aria-hidden="true"></i>
 
@@ -1527,7 +1527,7 @@ function moveCursor(){
 	<script type="text/javascript">
 		function addCart(id,type) {
 			
-			//alert("--------------- "+document.getElementById("txtWt").value)
+			// alert("asdfsdfdsf")
 		
 			 try{
 			var selectFlav = 0;
@@ -1557,7 +1557,7 @@ function moveCursor(){
 			
 			//alert(selectWt)
 			// alert(selectFlav)
-				
+				//alert("dsd")
 				var prodMaster;
 				
 				if (sessionStorage.getItem("allItemList") == null) {
@@ -1670,6 +1670,8 @@ function moveCursor(){
 				totalAmt = (parseFloat(taxableAmt)).toFixed(2);
 		
 				if (sessionStorage.getItem("cartValue") == null) {
+					
+				
 					var table = [];
 					sessionStorage.setItem("cartValue", JSON
 							.stringify(table));
@@ -1697,15 +1699,17 @@ function moveCursor(){
 			 }catch (e) {
 					console.log("Sp Inst, msg on cake error",msgonCake);
 				}
-
+			 
 				if (sessionStorage.getItem("cartValue") == null) {
+					 
 					var table = [];
 					sessionStorage.setItem("cartValue", JSON.stringify(table));
 				}
-		
+				
 				var cartValue = sessionStorage.getItem("cartValue");
 				var cartArray = $.parseJSON(cartValue);
 				
+				//alert("before add " + cartArray)
 				
 				  if (sessionStorage.getItem("prodImageList") == null) {
 						var table = [];
@@ -1744,7 +1748,7 @@ function moveCursor(){
 					
 					
 				}
-				
+				 
 				var obj={
 						uniqueId : uniq,
 						orderDetailId : 0,
@@ -1791,17 +1795,17 @@ function moveCursor(){
 				
 				
 				if(itemFound==1){
-					table[index]=obj;
+					cartArray[index]=obj;
 				}else{
-					table.push(obj);	
+					cartArray.push(obj);	
 				}
-				
+				//alert("after add " + cartArray)
 				var tableClear = [];
 				sessionStorage.setItem("prodImageList", JSON
 						.stringify(tableClear));
 				
 				sessionStorage.setItem("cartValue", JSON
-						.stringify(table));
+						.stringify(cartArray));
 				updateFirebase();
 				appendCartData();
 				openNav();
@@ -1928,7 +1932,7 @@ function setLike(id,isLike) {
 }
 </script>
 
-<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 </body>
 
 </html>
