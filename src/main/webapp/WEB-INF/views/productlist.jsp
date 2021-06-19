@@ -2719,6 +2719,7 @@
 				
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
+				updateFirebase();
 				appendCartData();
 				
 					openNav();

@@ -1494,6 +1494,8 @@ function setLike(id,isLike) {
 				
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
+				updateFirebase();
+				
 				appendCartData();
 				openNav();
 			  	setTimeout(function(){ closeNav(); }, 4000);
