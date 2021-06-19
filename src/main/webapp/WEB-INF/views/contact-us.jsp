@@ -81,23 +81,22 @@
                 <span>${cus.subHeading}</span></center> 
             </h2><!-- Get in Touch -->
             <!-- Here's How You Can Reach Us -->
-				<%-- <%
+				 <%
 					if (session.getAttribute("successMsg") != null) {
-				%> --%>
-				<div id="final_msg"
-					style="background-color: #ed558e; color: #fff; text-align: center; margin: 0px ​0px 14px 272px; width: 62%;display: flex;
-  justify-content: center;
-  align-items: center;"
+				%>
+				<div class="contact_row" style="margin-bottom: 30px;" id="final_msg">
+				<div 
+					class="contact_sucs_msg"
 					class="alert bg-success text-white alert-styled-left alert-dismissible">
 					<span class="font-weight-semibold"> Thank you
 						for getting in touch! <br> We appreciate you contacting us. One of our colleagues will get back in touch with
 						you soon!Have a great day!
 					</span>
-				</div>
-				<%-- <%
+				</div></div>
+				 <%
 					session.removeAttribute("successMsg");
 					}
-				%> --%>
+				%> 
 				<div class="contact_row">
                 
                 <div class="contact_add">

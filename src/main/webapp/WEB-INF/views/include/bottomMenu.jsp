@@ -12,7 +12,7 @@
 				<!--left-certificate-->
 				<div class="certificate_one">
 					<h3 class="footer_title">Our Certificate</h3>
-					<img src="#" class="lazy"
+					<img src="${pageContext.request.contextPath}/resources/images/iso_certificate.png"" class="lazy"
 						data-src="${pageContext.request.contextPath}/resources/images/iso_certificate.png"
 						alt="">
 				</div>
@@ -21,12 +21,12 @@
 					<h3 class="footer_title">Main Menu</h3>
 					<ul class="footer_menu_list">
 						<li><a
-							href="${pageContext.request.contextPath}/showAboutUsPage"><i
+							href="${pageContext.request.contextPath}/about-us"><i
 								class="fa fa-check" aria-hidden="true"></i> About Us</a></li>
 						
-						<li><a href="${pageContext.request.contextPath}/showPrivacyPolicy"><i class="fa fa-check" aria-hidden="true"></i>
+						<li><a href="${pageContext.request.contextPath}/privacy-policy-cookie-restriction-mode"><i class="fa fa-check" aria-hidden="true"></i>
 								Privacy Policy</a></li>
-						<li><a href="${pageContext.request.contextPath}/showT&CPage"><i
+						<li><a href="${pageContext.request.contextPath}/terms-and-conditions"><i
 								class="fa fa-check" aria-hidden="true"></i> Terms &amp;
 								Condition</a></li>
 						<!-- <li><a href="#"><i class="fa fa-check" aria-hidden="true"></i>
@@ -47,46 +47,46 @@
 					<div class="footer_social">
 						<ul>
 							<li>Connect with Us :</li>
-							<li><a href="" id="faceLink" target="_blank"><i class="fa fa-facebook"
+							<li><a href="https://www.facebook.com/monginis/" id="faceLink" target="_blank"><i class="fa fa-facebook"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="twitLink" target="_blank"><i class="fa fa-twitter"
+							<li><a href="https://twitter.com/MonginisIndia" id="twitLink" target="_blank"><i class="fa fa-twitter"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="linkedLink" target="_blank"><i class="fa fa-linkedin"
+							<li><a href="https://www.instagram.com/monginiscelebrations/" id="instagram" target="_blank"><i class="fa fa-instagram"
 									aria-hidden="true"></i></a></li>
-							<li><a href="" id="googleLink" target="_blank"><i
-									class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+							<li><a href="https://www.youtube.com/channel/UCL2K9zi9D94YBbmU1GJicAA" id="youtube" target="_blank"><i
+									class="fa fa-youtube" aria-hidden="true"></i></a></li>
 						</ul>
 					</div>
 
 				</div>
 				<!--right-contact-->
-				<div class="contact_address">
+				<!-- <div class="contact_address">
 					<h3 class="footer_title">Contact Us</h3>
 					<div class="cont_add">
 						<i class="fa fa-map-marker" aria-hidden="true"></i>
 						<p id="footeraddress"></p>
-						<!-- Shop 57, Near
+						Shop 57, Near
 						Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Nashik,
-						Maharashtra 422003. -->
+						Maharashtra 422003.
 					</div>
 					<div class="cont_add">
 						<i class="fa fa-phone" aria-hidden="true"></i> <a id="phone1"
 							href="javascript:void(0)"></a> <span>/</span>
-						<!--(+91) 1234567890  -->
+						(+91) 1234567890 
 						<a id="phone2" href="javascript:void(0)"></a>
-						<!-- (+91) 9876 543 210 -->
+						(+91) 9876 543 210
 					</div>
 					<div class="cont_add">
 						<i class="fa fa-envelope" aria-hidden="true"></i> <a id="email1"
 							href=""></a>
-						<!-- customercare@monginis.net -->
+						customercare@monginis.net
 						<span>/</span> <a id="email2" href=""></a>
-						<!-- mailto:info@monginis.net -->
+						mailto:info@monginis.net
 					</div>
 
 
 
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -116,7 +116,7 @@
 		}, 'slow');
 	}
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	getFooteDtl();
 	function getFooteDtl() {
 
@@ -165,4 +165,4 @@
 
 		}); */
 	}
-</script>
+</script> -->

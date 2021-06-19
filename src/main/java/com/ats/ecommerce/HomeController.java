@@ -966,13 +966,13 @@ try {
 		return image;
 
 	}
-
-	@RequestMapping(value = "/showAboutUsPage", method = RequestMethod.GET)
+	 //showAboutUsPage
+	@RequestMapping(value = "/about-us", method = RequestMethod.GET)
 	public String showAboutUsPage(Locale locale, Model model) {
 		return "about-us";
 	}
 	
-	@RequestMapping(value = "/showPrivacyPolicy", method = RequestMethod.GET)
+	@RequestMapping(value = "/privacy-policy-cookie-restriction-mode", method = RequestMethod.GET)
 	public String showPrivacyPolicy(Locale locale, Model model) {
 		return "privacyPolicy";
 	}
@@ -1019,7 +1019,7 @@ try {
 		return "contact-us";
 	}
 
-	@RequestMapping(value = "/showT&CPage", method = RequestMethod.GET)
+	@RequestMapping(value = "/terms-and-conditions", method = RequestMethod.GET)
 	public String showT(Locale locale, Model model) {
 		return "terms-condition";
 	}
