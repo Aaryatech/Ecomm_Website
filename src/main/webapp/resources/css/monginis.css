@@ -873,24 +873,10 @@ table.cart.inner{border: 1px solid #CCC;}
 table.cart.inner tr:nth-child(odd){background-color: #f2f2f2}
 .prc_amt{color: #ec268f; font-family: 'Hind-Medium';}
 .paid {color: #02ab79; font-family: 'Hind-Medium';}
-/* .deliverd{background: #02ab79; color: #FFF; font-size: 12px; border-radius: 15px; padding: 5px 20px; font-family: 'Hind-SemiBold';
+.deliverd{/*background: #02ab79; color: #FFF; font-size: 12px; border-radius: 15px; padding: 5px 20px; font-family: 'Hind-SemiBold';*/
 background: #d6f3e9; color: #02ab79; font-size: 12px; font-family: 'Hind-SemiBold';border-radius: 15px; padding: 5px 20px;}
 .pending_ord{background: #f5d7e7; color: #ec268f; font-size: 12px; font-family: 'Hind-SemiBold';border-radius: 15px; padding: 5px 20px;}
- */
-.deliverd{
-background: #d6f3e9;
-    color: #02ab79;
-    font-size: 12px;
-    font-family: 'Hind-SemiBold';
-    border-radius: 15px;
-    padding: 5px 20px;
-    width: 100px !important;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
-}
+
 .table_title_one{text-align: center; color: #ec268f; font-size: 22px; line-height: 28px; text-align: center; padding: 15px 0; border-top: 1px solid #dfe1e4;}
 .detail_one span.tab_prx{color: #ec268f; font-family: 'Hind-Medium';}
 .detail_one span.tab_kg{color: #373991; font-family: 'Hind-Medium';}
@@ -1304,7 +1290,9 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
 .test_nm_r span{display: block; font-size: 16px; font-family: 'Hind-Regular'; color: #545b77;}
 
 
+.contact_sucs_msg{background-color: #ed558e; color: #fff; text-align: center; padding: 10px 0px; border: 0px;"}
 
+/*-------------------------------------------------------------------------------------------------*/
 @media screen and (max-width:1280px){
     /*home page css*/
     .wrapper{max-width: 1286px; width: 98%; margin: 0 auto;}
