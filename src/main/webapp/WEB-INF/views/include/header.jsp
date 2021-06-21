@@ -174,7 +174,7 @@
 
 
 									<!--1-->
-									<div class="like_one">
+									<%-- <div class="like_one">
 										<div class="like_pic">
 											<img src="#" class="lazy"
 												data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"
@@ -196,9 +196,9 @@
 											</div>
 										</div>
 										<div class="clr"></div>
-									</div>
+									</div> --%>
 									<!--2-->
-									<div class="like_one">
+									<%-- <div class="like_one">
 										<div class="like_pic">
 											<img src="#" class="lazy"
 												data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"
@@ -220,9 +220,9 @@
 											</div>
 										</div>
 										<div class="clr"></div>
-									</div>
+									</div> --%>
 									<!--3-->
-									<div class="like_one">
+									<%-- <div class="like_one">
 										<div class="like_pic">
 											<img src="#" class="lazy"
 												data-src="${pageContext.request.contextPath}/resources/images/like_pic.jpg"
@@ -244,7 +244,7 @@
 											</div>
 										</div>
 										<div class="clr"></div>
-									</div>
+									</div> --%>
 								</div>
 								<div id="proc_chkout">
 									<div class="proc_chkout">

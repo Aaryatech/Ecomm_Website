@@ -31,6 +31,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.model.Franchise;
 import com.ats.ecommerce.model.Info;
@@ -471,6 +472,7 @@ public class PaymentController {
 	@RequestMapping(value = "/orderConfirmation", method = RequestMethod.GET)
 	public String orderConfirmation(Locale locale, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
+		System.err.println("IN inside orderConfirmation " +CommonUtility.getCurrentYMDDateTime());
 
 		try {
 			HttpSession session = request.getSession();
@@ -480,10 +482,12 @@ public class PaymentController {
 			model.addAttribute("prodUplImgUrl", Constants.PROD_UPLOADED_IMG_VIEW_URL);
 			
 			model.addAttribute("orderSaveData", orderSaveData);
-			String payStatus=(String) session.getAttribute("Pay_Page");
+			String payStatus=  (String) session.getAttribute("Pay_Page");
 			System.err.println("payStatus inside orderConfirmation" +payStatus);
 
-			if(payStatus.equalsIgnoreCase("2")) {
+			if(String.valueOf(payStatus).equalsIgnoreCase("2")) {
+				System.err.println("IN IF" +payStatus);
+
 				model.addAttribute("payStatus", payStatus);
 				try {
 					session.removeAttribute("orderSaveData");
@@ -491,7 +495,7 @@ public class PaymentController {
 				} catch (Exception e) {
 					session.removeAttribute("orderId");
 				}
-			}else if(payStatus.equalsIgnoreCase("1")) {
+			}else if(String.valueOf(payStatus).equalsIgnoreCase("1")) {
 				//delete order
 				System.err.println("Delete Order inside orderConfirmation");
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
@@ -503,7 +507,7 @@ public class PaymentController {
 				System.err.println("Delete Order response orderConfirmation" +info);
 				session.removeAttribute("orderId");
 				session.removeAttribute("orderSaveData");
-
+				System.err.println("IN ELSE" +payStatus);
 			}
 			session.setAttribute("Pay_Page","0");
 

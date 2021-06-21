@@ -84,6 +84,7 @@ public class HomeController {
 		} catch (Exception e) {
 			System.err.println("In Home catch");
 		}
+		session.setAttribute("Pay_Page",0);
 
 		ObjectMapper mapper = new ObjectMapper();
 		try {

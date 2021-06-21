@@ -22,9 +22,9 @@
 		<%-- <img
 			src="${pageContext.request.contextPath}/resources/images/loader.svg"
 			alt=""> --%>
-		<img
+		<%-- <img
 			src="${pageContext.request.contextPath}/resources/images/loading_logo.png"
-			alt="" />
+			alt="" /> --%>
 	</div>
 	<c:url var="placeOrder" value="/placeOrder" />
 	<c:url var="getDeliveryChargesByKm" value="/getDeliveryChargesByKm"></c:url>
@@ -512,7 +512,7 @@
 
 									function getDeliveryCharges() {
 										//checkSession();
-										document.getElementById("loaderimg").style.display = "block";
+										//document.getElementById("loaderimg").style.display = "block";
 										var km = '${sessionScope.frKm}'
 										$
 												.getJSON(
@@ -674,8 +674,7 @@
 														.getElementById("discMin").value = 0;
 												//appendTableList();
 											} else {
-												document
-														.getElementById("loaderimg").style.display = "block";
+												//document.getElementById("loaderimg").style.display = "block";
 												$.ajaxSetup({
 													async : false
 												});
@@ -1686,7 +1685,7 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 								+ '<div class="mob_quan_l">Quantity</div>'
 								+ '<div class="mob_quan_r">'
 								+ '<form id="myform" method="POST" action="#">'
-								+ '<button id="btnMin'
+								/* + '<button id="btnMin'
 								+ table[i].uniqueId
 								+ '" name="btnMin'
 								+ table[i].uniqueId
@@ -1708,8 +1707,8 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 								+ table[i].qty
 								+ ')">'
 								+ '<i class="fa fa-plus" aria-hidden="true"></i>'
-								+ '</button>'
-								+ '</form>'
+								+ '</button>' */
+								+qtyBox+'</form>'
 								+ '</div>'
 								+ '<div class="clr"></div>'
 								+ '</div>'
@@ -2394,7 +2393,7 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 			    //document.getElementById("close_btn").click();
 				//$("#place").hide();
 								//document.getElementById("loaderimg2").show();
-								//document.getElementById("place").style = "display:none";
+								document.getElementById("place").style = "display:none";
 								//document.getElementById("loaderimg").style.display = "block";
 				document.getElementById("place_orderBtn").disabled = true;
 				//$("#place").hide();
@@ -2477,8 +2476,9 @@ sessionStorage.setItem("cartValue", JSON
 										.stringify(table));
 								sessionStorage.setItem("prodImageList", JSON
 										.stringify(table));
+								updateFirebase();
 									window.location = url;
-									updateFirebase();R
+									
 								}
 
 							},
@@ -2518,7 +2518,7 @@ sessionStorage.setItem("cartValue", JSON
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#new_pop').popup();
-			try{
+			 /*  try{
 				var isPaid=${payStatus}
 				//alert("isPaid " +isPaid);
 				if(parseInt(isPaid)==2){ 
@@ -2531,8 +2531,27 @@ sessionStorage.setItem("cartValue", JSON
 				}
 			}catch (e) {
 				alert(e)
-			}
+			}   */
 			 
+		});
+	</script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			  try{
+				var isPaid=${payStatus}
+				//alert("isPaid " +isPaid);
+				if(parseInt(isPaid)==2){ 
+					var table = [];
+				sessionStorage.setItem("cartValue", JSON
+						.stringify(table));
+				sessionStorage.setItem("prodImageList", JSON
+						.stringify(table));
+				location.reload();
+				}
+			}catch (e) {
+				alert(e)
+			}  
 		});
 	</script>
 
@@ -2838,7 +2857,9 @@ sessionStorage.setItem("cartValue", JSON
 		});
 	</script>
 	<!--menuzord-->
+
 <jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
+
 </body>
 
 </html>

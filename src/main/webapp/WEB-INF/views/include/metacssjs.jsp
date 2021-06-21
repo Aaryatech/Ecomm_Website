@@ -5,8 +5,9 @@
 <meta charset="utf-8" />
 <title>Monginis</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<!-- <meta name="viewport"
-	content="width=device-width; initial-scale=1.0; maximum-scale=1.0" /> -->
+<meta name="viewport"
+	content="width=device-width; initial-scale=1.0; maximum-scale=1.0" />
+	
 <meta name="keywords"
 	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market" />
 <meta name="description"
@@ -27,7 +28,6 @@
 <!-- jQuery Popup Overlay -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery.popupoverlay.js"></script>
-
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&display=swap"

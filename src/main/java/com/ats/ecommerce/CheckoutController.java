@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.common.DateConvertor;
 import com.ats.ecommerce.common.EncodeDecode;
@@ -209,17 +210,18 @@ public class CheckoutController {
 	public String viewCart(@PathVariable String prodIdStr, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		HttpSession session = request.getSession();
+		System.err.println("IN checkout "+CommonUtility.getCurrentYMDDateTime());
 		try {
 			
-			String payStatus=null;
+			int payStatus=0;
 			try {
-			payStatus=(String) session.getAttribute("Pay_Page");
+			payStatus=(int) session.getAttribute("Pay_Page");
 			}catch (Exception e) {
-				payStatus=new String();
+				payStatus=0;
 			}
 			System.err.println("payStatus " +payStatus);
 			try {
-			if(payStatus.equalsIgnoreCase("2")) {
+			if(String.valueOf(payStatus).equalsIgnoreCase("2")) {
 				model.addAttribute("payStatus", payStatus);
 
 				try {
@@ -237,7 +239,13 @@ public class CheckoutController {
 					orderId=0;
 				}
 				System.err.println("Deleting order Id "+orderId);
+				int payMode=0;
 				
+				payMode=(int) session.getAttribute("epay");
+				if(payMode==2) {
+					System.err.println("Its COD dont delete "+orderId);
+				}else {
+					
 				MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
 
 				map.add("orderId", session.getAttribute("orderId"));
@@ -246,6 +254,7 @@ public class CheckoutController {
 				
 				System.err.println("Delete Order response orderConfirmation" +info);
 				session.removeAttribute("orderId");
+				}
 			}//end of else
 			 session.setAttribute("Pay_Page","0");
 		}catch (Exception e) {
@@ -599,6 +608,8 @@ public class CheckoutController {
 	@ResponseBody
 	public Info placeOrder(HttpServletRequest request, HttpServletResponse response, Model model) {
 		Info info = new Info();
+		System.err.println("IN placeOrder "+CommonUtility.getCurrentYMDDateTime());
+
 		try {
 			HttpSession session = request.getSession();
 			Date ct = new Date();
@@ -784,6 +795,8 @@ public class CheckoutController {
 				delAddIdCookie.setMaxAge(60 * 60 * 24 * 15);
 				response.addCookie(delAddIdCookie);
 				order.setAddressId(saveCustAdd.getCustDetailId());
+			}else {
+				order.setAddressId(delAddId);
 			}
 			// 04-01-2021 end
 			if (res.getCustId() > 0) {
@@ -1068,7 +1081,7 @@ public class CheckoutController {
 					// ie paid by elecronic way
 
 					info.setMsg("epay");
-					
+					session.setAttribute("epay", 1);
 					
 					/*session = request.getSession();
 					OrderSaveData orderSaveData2 = (OrderSaveData) session.getAttribute("orderSaveData");
@@ -1099,6 +1112,7 @@ public class CheckoutController {
 				} else {
 					info.setMsg("cashpay");
 					info.setResponseObject1("");
+					session.setAttribute("epay", 2);
 				}
 			}
 			//System.err.println("Info " + info.toString());

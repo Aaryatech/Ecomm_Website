@@ -141,7 +141,7 @@ $(window).load(function() {
 				list.push($(this).val());
 			}
 		});
-
+console.log("tag list selected" +JSON.stringify(list));
 		sessionStorage.setItem("selTags", JSON.stringify(list));
 		//itemSearchByTagFilter();
 

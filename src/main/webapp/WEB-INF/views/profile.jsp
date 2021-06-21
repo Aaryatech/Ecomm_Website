@@ -629,7 +629,12 @@ $('.txtOnly').bind('keyup blur',function(){
 														.trim()) {
 													isError = true;
 													$("#errorPincode").show();
-												} else {
+												}  else if ($("#txtPincode") .val().trim().length != 6) {
+													isError = true;
+													$("#errorPincode").show();
+												}
+													else {
+												
 													$("#errorPincode").hide();
 												}
 												if (!isError) {

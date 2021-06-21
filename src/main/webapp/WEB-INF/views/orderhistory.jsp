@@ -129,7 +129,8 @@
 								<tr>
 									<th>Sr. No.</th>
 									<th>Order Number</th>
-									<th>Order Date</th>
+										<th>Contact Info</th>
+									<th>Order-Delivery</th>
 										<th>Delivery Charges</th>
 											<th>Order Total</th>
 									<th>Total Amt.</th>
@@ -142,7 +143,8 @@
 									<tr>
 										<td>${count.index+1}</td>
 										<td>${orders.orderNo}</td>
-										<td>${orders.orderDateDisplay}</td>
+										<td>${orders.cityName}-${orders.frName}9011252525</td>
+										<td>${orders.orderDateDisplay}-${orders.deliveryDate}</td>
 											<td class="prc_amt">Rs. ${orders.deliveryCharges}</td>
 												<td class="prc_amt">Rs. ${orders.exFloat1}</td>
 										<td class="prc_amt">Rs. ${orders.totalAmt}</td>
@@ -216,11 +218,15 @@
 															</div>
 															<div class="detail_one">
 																Product Amount <span class="tab_prx">Rs.
-																	${orderDetail.rate}</span>
+																	${orderDetail.mrp}</span>
 															</div>
-															<div class="detail_one">
+															<%-- <div class="detail_one">
 																Product Quantity <span class="tab_kg">
 																	${orderDetail.qty} ${orderDetail.itemUom}</span>
+															</div> --%>
+															<div class="detail_one">
+																Product Quantity <span class="tab_kg">
+																	${orderDetail.exFloat3} ${orderDetail.itemUom}</span>
 															</div>
 															<div class="detail_one">
 																Total <span class="tab_amt">
@@ -324,9 +330,15 @@
 								<div class="mob_quan_r font"><b>${orders.orderNo}</b></div>
 								<div class="clr"></div>
 							</div>
+							
 							<div class="mob_quan">
-								<div class="mob_quan_l history">Order Date</div>
-								<div class="mob_quan_r font">${orders.orderDateDisplay}</div>
+								<div class="mob_quan_l history">Contact Info</div>
+								<div class="mob_quan_r font"> ${orders.cityName}-<br> ${orders.frName} </div>
+								<div class="clr"></div>
+							</div>
+							<div class="mob_quan">
+								<div class="mob_quan_l history">Order-Delivery</div>
+								<div class="mob_quan_r font">${orders.orderDateDisplay}-<br>${orders.deliveryDate}</div>
 								<div class="clr"></div>
 							</div>
 							<div class="mob_quan">

@@ -26,7 +26,25 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/stylesheet.css"
 	type="text/css" />
+<style>
+.pay_btn{    display: block;
+    width: 100%;
 
+    text-align: center;
+    vertical-align: 100vh;
+    padding: 100px 0;}
+.pay_btn a{padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 5px;    
+    height: 20px;
+    vertical-align: middle;
+    height: 20px;
+    display: inline-block; text-decoration: none;}
+.goback_btn{background: #ec268f; color: #FFF; font-size: 16px;}
+.goback_btn:hover{background: #373991; color: #FFF;}
+.makepay_btn{background: #373991; color:#FFF; font-size:16px;}
+.makepay_btn:hover{background: #ec268f; color: #FFF;}
+</style>
 <!--jquery-min-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery-1.10.2.min.js"></script>
@@ -44,11 +62,16 @@ $(document).ready(function () {
     });
     document.getElementById('auto_popup').click();
 });
+function openPayBox(){
+	document.getElementById('auto_popup').click();
+
+}
 </script>
     <script type="text/javascript">
-		$(document).ready(function() {
-			try{
+    $(window).load(function() {			try{
 				var isPaid=${payStatus}
+				console.log('isPaid',isPaid);
+				//alert("isPaid "+isPaid)
 				if(parseInt(isPaid)==2){ 
 					var table = [];
 				sessionStorage.setItem("cartValue", JSON
@@ -56,13 +79,19 @@ $(document).ready(function () {
 				sessionStorage.setItem("prodImageList", JSON
 						.stringify(table));
 				updateFirebase();
-				location.reload();
+				//location.reload();
 				}
 			}catch (e) {
 				alert(e)
 			}
 			 
 		});
+		
+		/* $(window).load(function() {
+			 // executes when complete page is fully loaded, including all frames, objects and images
+			 alert("window is loaded");
+			}); */
+		
 	</script>
 
 
@@ -71,7 +100,47 @@ $(document).ready(function () {
 
 </head>
 <body>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+	<script
+		src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+	<script>
+		// Your web app's Firebase configuration
+		var firebaseConfig = {
+			apiKey : "AIzaSyDigzfh2ygt26QhXa7YoJrmNqOdx126oWg",
+			authDomain : "gfplsecurityapp.firebaseapp.com",
+			databaseURL : "https://gfplsecurityapp.firebaseio.com",
+			projectId : "gfplsecurityapp",
+			storageBucket : "gfplsecurityapp.appspot.com",
+			messagingSenderId : "1093488930367",
+			appId : "1:1093488930367:web:674415ee8c528ae737928a"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+
+		var cart_tab = 'cart_value';
+		const dbrefObject = firebase.database().ref(cart_tab);
+		
+		function updateFirebase() {
+			//alert("hieeee");
+			//var mob = '7588519473';
+			var mob='${sessionScope.mobNo}';
+			firebase.database().ref(
+					"cart_value/" + mob
+							+ "/cart_value").set(sessionStorage.getItem("cartValue"));
+		}
+	</script>
     <div class="initialism fade_open" href="#fade"><a href="#" id="auto_popup" style="display: none;">Order Confirmation</a></div>
+    
+    <div class="pay_btn">
+<a href="${pageContext.request.contextPath}/home" class="goback_btn">Go Back</a>
+<a href="#" onclick="openPayBox()" class="makepay_btn">Make Payment</a>
+</div>
 <div id="fade" class="well">
         <div class="fade_close close_btn" onclick="goHome()"><i class="fa fa-times"   aria-hidden="true"></i></div>
         <div class="back_button">
