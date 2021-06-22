@@ -60,14 +60,14 @@
 
 				</div>
 				<!--right-contact-->
-				<!-- <div class="contact_address">
+				<div class="contact_address">
 					<h3 class="footer_title">Contact Us</h3>
 					<div class="cont_add">
-						<i class="fa fa-map-marker" aria-hidden="true"></i>
-						<p id="footeraddress"></p>
+						<!-- <i class="fa fa-map-marker" aria-hidden="true"></i>
+						<p id="footeraddress"></p> 
 						Shop 57, Near
 						Shri Bhagvati Hotel Puriya Park Road Panchvati Karanje, Nashik,
-						Maharashtra 422003.
+						Maharashtra 422003. -->
 					</div>
 					<div class="cont_add">
 						<i class="fa fa-phone" aria-hidden="true"></i> <a id="phone1"
@@ -83,10 +83,7 @@
 						<span>/</span> <a id="email2" href=""></a>
 						mailto:info@monginis.net
 					</div>
-
-
-
-				</div> -->
+				</div>
 			</div>
 		</div>
 	</div>

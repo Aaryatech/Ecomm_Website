@@ -81,22 +81,23 @@
                 <span>${cus.subHeading}</span></center> 
             </h2><!-- Get in Touch -->
             <!-- Here's How You Can Reach Us -->
-				 <%
+				<%
 					if (session.getAttribute("successMsg") != null) {
-				%>
-				<div class="contact_row" style="margin-bottom: 30px;" id="final_msg">
+				%> 
+				<div class="contact_row" style="margin-bottom: 30px; position: relative;" id="final_msg">
+				<i class="fa fa-times" aria-hidden="true" style="position: absolute; right: 10px; top: 10px; color: #fff; font-size: 13px;" id="cls_btn"></i>
 				<div 
 					class="contact_sucs_msg"
 					class="alert bg-success text-white alert-styled-left alert-dismissible">
 					<span class="font-weight-semibold"> Thank you
 						for getting in touch! <br> We appreciate you contacting us. One of our colleagues will get back in touch with
-						you soon!Have a great day!
+						you soon! Have a great day!
 					</span>
 				</div></div>
 				 <%
 					session.removeAttribute("successMsg");
 					}
-				%> 
+				%>  
 				<div class="contact_row">
                 
                 <div class="contact_add">
@@ -140,24 +141,24 @@
                         
                         <div class="frm_bx">
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="firstName" id="firstName" type="text" class="input_two txt-val" placeholder="First Name" />
+                                <div class="frm_one_l"><input name="firstName" id="firstName" type="text" class="input_two txt-val" placeholder="First Name" autocomplete="off"/>
                                    <span class="validation-invalid-label text-danger"
 									id="error_firstName" style="display: none; color: red;">This field
 												is required.</span></div>
 									
-                                <div class="frm_one_r"><input name="lastName" id="lastName" type="text" class="input_two txt-val" placeholder="Last Name" />
+                                <div class="frm_one_r"><input name="lastName" id="lastName" type="text" class="input_two txt-val" placeholder="Last Name" autocomplete="off"/>
                                    <span class="validation-invalid-label text-danger"
 									id="error_lastName" style="display: none; color: red;">This field
 												is required.</span></div>
                                 <div class="clr"></div>                                     
                             </div>
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="contactNo" id="contactNo" type="text" class="input_two num" placeholder="Phone Number" maxlength="10"/>
+                                <div class="frm_one_l"><input name="contactNo" id="contactNo" type="text" class="input_two num" placeholder="Phone Number" maxlength="10" autocomplete="off"/>
                                 <span class="validation-invalid-label text-danger"
 									id="error_contactNo" style="display: none; color: red;">This field
 												is required.</span></div>  
                                
-                                <div class="frm_one_r"><input name="email" id="email" type="text" class="input_two txt-mail" placeholder="Email Address" />
+                                <div class="frm_one_r"><input name="email" id="email" type="text" class="input_two txt-mail" placeholder="Email Address" autocomplete="off"/>
                                 <span class="validation-invalid-label text-danger"
 									id="error_email" style="display: none; color: red;">Invalid email address.</span></div>
                                 <div class="clr"></div>                                     
@@ -500,9 +501,19 @@ function validateEmail(email) {
 	}
 	return true;
 }
+
+
 $( document ).ready(function() {
-	setTimeout(function(){$('#final_msg').fadeOut();}, 5000);
+	setTimeout(function(){$('#final_msg').fadeOut();}, 60000);
 });
+
+$( "#firstName,#lastName,#email,#contactNo" ).on( "copy cut paste drop", function() {
+    return false;
+});
+
+$( "#cls_btn" ).click(function() {
+	  $("#final_msg").hide();
+	});
 </script>
   
     

@@ -26,13 +26,14 @@
             
             
             <h2 class="sec_title">
-                <center>Become a <i id="typeTitle"></i>
+                <center>Become a <p id="typeTitle" style="display: inline-block;"></p>
                 <span>Looking for a Partner</span></center> 
             </h2>
-            <%
+           		<%--  <%
 					if (session.getAttribute("successMsg") != null) {
-				%>
-				<div class="contact_row" style="margin-bottom: 30px;" id="final_msg">
+				%> --%>
+				<div class="contact_row" style="margin-bottom: 30px; position: relative;" id="final_msg">
+				<i class="fa fa-times" aria-hidden="true" style="position: absolute; right: 10px; top: 10px; color: #fff; font-size: 13px;" id="cls_btn"></i>
 				<div 
 					class="contact_sucs_msg"
 					class="alert bg-success text-white alert-styled-left alert-dismissible">
@@ -41,10 +42,10 @@
 						you soon!Have a great day!
 					</span>
 				</div></div>
-				 <%
+				 <%-- <%
 					session.removeAttribute("successMsg");
 					}
-				%> 
+				%>  --%>
             <div class="contact_row">
                 
                 <div class="contact_add">
@@ -116,22 +117,22 @@
                             
                             
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="firstName" id="firstName" type="text" class="input_two txt-val" placeholder="First Name" />
-                                <span class="validation-invalid-label text-danger" id="error_firstName" style="display: none;">This field is required.</span>
+                                <div class="frm_one_l"><input name="firstName" id="firstName" type="text" class="input_two txt-val" placeholder="First Name" autocomplete="off"/>
+                                <span class="validation-invalid-label text-danger" id="error_firstName" style="display: none; color: red;">This field is required.</span>
                                </div>	
                               
-                                <div class="frm_one_r"><input name="lastName" id="lastName" type="text" class="input_two txt-val" placeholder="Last Name" />
-                                <span class="validation-invalid-label text-danger" id="error_lastName" style="display: none;">This field is required.</span>	
+                                <div class="frm_one_r"><input name="lastName" id="lastName" type="text" class="input_two txt-val" placeholder="Last Name" autocomplete="off"/>
+                                <span class="validation-invalid-label text-danger" id="error_lastName" style="display: none; color: red;">This field is required.</span>	
                              	</div>
                               <div class="clr"></div>                                     
                             </div>
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="contactNo" id="contactNo" type="text" class="input_two num" placeholder="Phone Number" maxlength="10"/>
-                               <span class="validation-invalid-label text-danger" id="error_contactNo" style="display: none;">This field is required.</span>	
+                                <div class="frm_one_l"><input name="contactNo" id="contactNo" type="text" class="input_two num" placeholder="Phone Number" maxlength="10" autocomplete="off"/>
+                               <span class="validation-invalid-label text-danger" id="error_contactNo" style="display: none; color: red;">This field is required.</span>	
                               </div>
                               
                                <div class="frm_one_r"><input name="email" id="email" type="text" class="input_two" placeholder="Email Address" />
-                               <span class="validation-invalid-label text-danger" id="error_email" style="display: none;">This field is required.</span>	
+                               <span class="validation-invalid-label text-danger" id="error_email" style="display: none; color: red;">This field is required.</span>	
                               </div>
                                <div class="clr"></div>                                     
                             </div>
@@ -149,22 +150,22 @@
                                   <li id="Gandhi Nagar">Gandhi Nagar</li>
                                 </ul>                                
                               </div>
-                                 <span class="validation-invalid-label text-danger" id="error_city" style="display: none;">Select city.</span>
+                                 <span class="validation-invalid-label text-danger" id="error_city" style="display: none; color: red;">Select city.</span>
                             </div>
                             
                             <div class="frm_one">
-                                <div class="frm_one_l"><input name="address1" id="address1" type="text" class="input_two" placeholder="Your Address" />
-                              <span class="validation-invalid-label text-danger" id="error_address1" style="display: none;">This field is required.</span>	
+                                <div class="frm_one_l"><input name="address1" id="address1" type="text" class="input_two txt-val-num" placeholder="Your Address" autocomplete="off"/>
+                              <span class="validation-invalid-label text-danger" id="error_address1" style="display: none; color: red;">This field is required.</span>	
                              </div>  
-                                <div class="frm_one_r"><input name="address2" id="address2" type="text" class="input_two" placeholder="Your Address Line 1" />
-                             <span class="validation-invalid-label text-danger" id="error_address2" style="display: none;">This field is required.</span>	
+                                <div class="frm_one_r"><input name="address2" id="address2" type="text" class="input_two txt-val-num" placeholder="Your Address Line 1" autocomplete="off"/>
+                             <span class="validation-invalid-label text-danger" id="error_address2" style="display: none; color: red;">This field is required.</span>	
                                </div>
                                   <div class="clr"></div>                                     
                             </div>
                             
                             <div class="frm_one">
                                 <textarea name="message" id="msg" cols="" rows="5" class="input_two" placeholder="Enter Your Message"></textarea>
-                                <span class="validation-invalid-label text-danger" id="error_msg"  style="display: none;">This field is required.</span>	
+                                <span class="validation-invalid-label text-danger" id="error_msg"  style="display: none; color: red;">This field is required.</span>	
                             </div>
                             <div><input name="" type="submit" class="sub_btn" value="Submit" /></div>
                         </div>
@@ -310,9 +311,7 @@ function chngTitle(val){
 		}
 		return true;
 	}
-	$( document ).ready(function() {
-		setTimeout(function(){$('#final_msg').fadeOut();}, 5000);
-	});
+	
 
 </script>
 <!--cart-sidepanel-->
@@ -527,7 +526,42 @@ $('.dropdown').click(function () {
     	 this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
     	});
     $( document ).ready(function() {
-    	setTimeout(function(){$('#final_msg').fadeOut();}, 5000);
+    	setTimeout(function(){$('#final_msg').fadeOut();}, 60000);
+    });
+    $( "#firstName,#lastName,#email,#contactNo,#address1,#address2" ).on( "copy cut paste drop", function() {
+        return false;
+    });
+
+    $( "#cls_btn" ).click(function() {
+    	  $("#final_msg").hide();
+    	});
+    
+    $(function () {
+        $(".txt-val").keypress(function (e) {
+            var keyCode = e.keyCode || e.which; 
+            
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z]+$/;
+ 
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));           
+ 
+            return isValid;
+        });
+    });
+    
+    $(function () {
+        $(".txt-val-num").keypress(function (e) {
+            var keyCode = e.keyCode || e.which; 
+            
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z0-9]+$/;
+ 
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));           
+ 
+            return isValid;
+        });
     });
 </script>
   
