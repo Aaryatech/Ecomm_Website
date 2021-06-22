@@ -139,7 +139,7 @@ function openPayBox(){
     
     <div class="pay_btn">
 <a href="${pageContext.request.contextPath}/home" class="goback_btn">Go Back</a>
-<a href="#" onclick="openPayBox()" class="makepay_btn">Make Payment</a>
+<a href="#" onclick="openPayBox()" class="makepay_btn">View Order</a>
 </div>
 <div id="fade" class="well">
         <div class="fade_close close_btn" onclick="goHome()"><i class="fa fa-times"   aria-hidden="true"></i></div>

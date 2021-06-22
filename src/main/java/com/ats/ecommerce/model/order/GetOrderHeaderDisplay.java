@@ -78,6 +78,28 @@ public class GetOrderHeaderDisplay {
 	private String orderDateDisplay;
 	private String deliveryTimeDisplay;
 	private String monthName;
+	
+	
+	//SAC 21-07-2021
+		String frContactNo;
+		String city;
+		
+		public String getFrContactNo() {
+			return frContactNo;
+		}
+
+		public void setFrContactNo(String frContactNo) {
+			this.frContactNo = frContactNo;
+		}
+
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+
 
 	List<GetOrderDetailDisplay> orderDetailList;
 	List<GetOrderTrailDisplay> orderTrailList;

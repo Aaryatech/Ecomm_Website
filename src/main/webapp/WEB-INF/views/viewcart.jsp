@@ -2537,17 +2537,19 @@ sessionStorage.setItem("cartValue", JSON
 	</script>
 	
 	<script type="text/javascript">
-		$(document).ready(function() {
+		$(window).load(function() {
 			  try{
 				var isPaid=${payStatus}
-				//alert("isPaid " +isPaid);
+			//alert("isPaid " +isPaid);
 				if(parseInt(isPaid)==2){ 
 					var table = [];
 				sessionStorage.setItem("cartValue", JSON
 						.stringify(table));
 				sessionStorage.setItem("prodImageList", JSON
 						.stringify(table));
-				location.reload();
+				//location.reload();
+				}else{
+					//location.reload();
 				}
 			}catch (e) {
 				alert(e)

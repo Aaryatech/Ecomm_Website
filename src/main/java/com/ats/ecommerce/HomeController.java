@@ -970,20 +970,89 @@ try {
 	 //showAboutUsPage
 	@RequestMapping(value = "/about-us", method = RequestMethod.GET)
 	public String showAboutUsPage(Locale locale, Model model) {
+		
+		
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+
+		model.addAttribute("tagsJson", jsonStr);
+		
 		return "about-us";
+		
+		
+		
+		
 	}
 	
 	@RequestMapping(value = "/privacy-policy-cookie-restriction-mode", method = RequestMethod.GET)
 	public String showPrivacyPolicy(Locale locale, Model model) {
+		
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+
+		model.addAttribute("tagsJson", jsonStr);
+		
 		return "privacyPolicy";
 	}
 
 	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
 	public String showContactUsPage(Locale locale, Model model)
 			throws JsonParseException, JsonMappingException, IOException {
+		if(data!=null) {
 		int compId = data.getFranchiseCatList().get(0).getCompanyId();
 		System.out.println("Compan Id : " + compId);
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
 
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+
+		model.addAttribute("tagsJson", jsonStr);
 		ContactUs cus = new ContactUs();
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -1017,16 +1086,60 @@ try {
 		}
 
 		model.addAttribute("cus", cus);
+		}
 		return "contact-us";
 	}
 
 	@RequestMapping(value = "/terms-and-conditions", method = RequestMethod.GET)
 	public String showT(Locale locale, Model model) {
+		
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+
+		model.addAttribute("tagsJson", jsonStr);
+		
 		return "terms-condition";
 	}
 
 	@RequestMapping(value = "/showVistStorePage", method = RequestMethod.GET)
 	public String showVistStorePage(Locale locale, Model model) {
+		
+		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+		try {
+			for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+				if (tag.getFilterTypeId() == 7) {
+					tagList.add(tag);
+				}
+			}
+		} catch (Exception e) {
+
+		}
+
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		try {
+			jsonStr = Obj.writeValueAsString(tagList);
+		} catch (Exception e) {
+		}
+
+		model.addAttribute("tagsJson", jsonStr);
 		return "visit-stores";
 	}
 
@@ -1039,6 +1152,27 @@ try {
 //			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 
 			// model.addAttribute("cityList", cityList);
+			
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -1087,5 +1221,142 @@ try {
 
 		}
 		return cus;
+	}
+	@RequestMapping(value = "/addresslist", method = RequestMethod.GET)
+	public String addressList(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		try {
+			HttpSession session = request.getSession();
+
+			int custId = (int) session.getAttribute("custId");
+			
+			int companyId =0;
+			try {
+			companyId=(int) session.getAttribute("companyId");
+			}catch (Exception e) {
+				//return "redirect:/";
+				companyId =1;
+			}
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer.class);
+			model.addAttribute("cust", cust);
+
+			map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			map.add("compId", companyId);
+			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
+			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+
+			model.addAttribute("custAddList", custAddList);
+			
+			session.setAttribute("userName", cust.getCustName());
+			session.setAttribute("userEmail", cust.getEmailId());
+			session.setAttribute("userMobile", cust.getCustMobileNo());
+			session.setAttribute("userAddress", cust.getExVar3());
+			session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+
+			
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
+		} catch (Exception e) {
+			return "redirect:/";
+		//	System.out.println("Exception in /addresslist : " + e.getMessage());
+			//e.printStackTrace();
+		}
+		return "addresslist";
+	}
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(HttpServletRequest request, HttpServletResponse response, Model model) {
+		try {
+
+			HttpSession session = request.getSession();
+
+			int custId = (int) session.getAttribute("custId");
+			System.err.println("custId " +custId);
+
+			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+			map.add("custId", custId);
+			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+					Customer.class);
+			model.addAttribute("cust", cust);
+			
+			String[] billAddress = cust.getExVar3().split("~");
+			model.addAttribute("getFlat", billAddress[0]);
+			model.addAttribute("getArea", billAddress[1]);
+			model.addAttribute("getLandmark", billAddress[2]);
+			model.addAttribute("getPin", billAddress[3]);
+			model.addAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+
+			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
+					.postForObject(Constants.url + "getAllCustomerDetailByCustId", map, CustomerAddDetail[].class);
+			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
+
+			model.addAttribute("custAddList", custAddList);
+			int compId = 0;//(int) session.getAttribute("companyId");
+
+			try {
+				compId = (int) session.getAttribute("companyId");
+			}catch (Exception e) {
+				compId =cust.getCompanyId();
+			}
+			 session.setAttribute("companyId",compId);
+			map = new LinkedMultiValueMap<>();
+			map.add("compId", compId);
+
+			ObjectMapper mapper = new ObjectMapper();
+			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+					CityData[].class);
+			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+
+			model.addAttribute("cityList", cityList);
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
+		} catch (Exception e) {
+			return "redirect:/";
+			/*
+			 * System.out.println("Exception in /profile : " + e.getMessage());
+			 * e.printStackTrace();
+			 */
+		}
+		return "profile";
 	}
 }

@@ -11,7 +11,7 @@
   
 
 <!--mongi help-popup-->    
-<div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/images/mongi_help.png" alt=""></a></div> 
+<%-- <div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/images/mongi_help.png" alt=""></a></div> 
     
 <!--apply now pop up-->
     <div id="mongi" class="well">
@@ -63,7 +63,8 @@
     $(document).ready(function () {
       $('#mongi').popup();
     });
-    </script>    
+    </script>     --%>
+    <jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>     
     
     
 <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>     

@@ -9,10 +9,10 @@
  --%> 
  </head>
 <body>
-  
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 <!--mongi help-popup-->    
-<div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/otherresources/images/mongi_help.png" alt=""></a></div> 
+<%-- <div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/otherresources/images/mongi_help.png" alt=""></a></div> 
     
 <!--apply now pop up-->
     <div id="mongi" class="well">
@@ -59,7 +59,7 @@
         
         <div class="proceend_bnt"> <a href="product.html" class="proceed_btn">Proceed</a></div>
         
-    </div>
+    </div> --%>
     <script type="text/javascript">
     $(document).ready(function () {
       $('#mongi').popup();

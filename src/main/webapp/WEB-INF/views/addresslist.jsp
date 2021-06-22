@@ -8,21 +8,21 @@
 <body>
 
 
-	<div class="mongi_help">
+	<%-- <div class="mongi_help">
 		<a href="#mongi" class="initialism mongi_open"><img
 			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
 			alt=""></a>
 	</div>
-
+ --%>
 	<!--apply now pop up-->
-	<div id="mongi" class="well">
+	<!-- <div id="mongi" class="well">
 		<div class="mongi_title">
 			<span><a href="#"> Clear</a></span> Select Our Best Filter
 			<div class="mongi_close close_pop">
 				<i class="fa fa-times" aria-hidden="true"></i>
 			</div>
 		</div>
-		<!-- <div class="mongi_cont">
+		<div class="mongi_cont">
 			<ul class="ks-cboxtags">
 				<li><input type="checkbox" id="checkboxOne"><label
 					for="checkboxOne">Chocolate Cakes</label></li>
@@ -95,18 +95,19 @@
 
 		<div class="proceend_bnt">
 			<a href="product.html" class="proceed_btn">Proceed</a>
-		</div> -->
+		</div>
 
 	</div>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#mongi').popup();
 		});
-	</script>
+	</script> -->
 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 	<div class="head_marg">
 		<!--product listing-->

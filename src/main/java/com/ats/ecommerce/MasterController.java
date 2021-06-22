@@ -33,6 +33,7 @@ import com.ats.ecommerce.model.City;
 import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.Customer;
 import com.ats.ecommerce.model.CustomerAddDetail;
+import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,60 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Scope("session")
 public class MasterController {
 
-	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public String profile(HttpServletRequest request, HttpServletResponse response, Model model) {
-		try {
-
-			HttpSession session = request.getSession();
-
-			int custId = (int) session.getAttribute("custId");
-			System.err.println("custId " +custId);
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("custId", custId);
-			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-					Customer.class);
-			model.addAttribute("cust", cust);
-			
-			String[] billAddress = cust.getExVar3().split("~");
-			model.addAttribute("getFlat", billAddress[0]);
-			model.addAttribute("getArea", billAddress[1]);
-			model.addAttribute("getLandmark", billAddress[2]);
-			model.addAttribute("getPin", billAddress[3]);
-			model.addAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
-
-			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
-					.postForObject(Constants.url + "getAllCustomerDetailByCustId", map, CustomerAddDetail[].class);
-			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
-
-			model.addAttribute("custAddList", custAddList);
-			int compId = 0;//(int) session.getAttribute("companyId");
-
-			try {
-				compId = (int) session.getAttribute("companyId");
-			}catch (Exception e) {
-				compId =cust.getCompanyId();
-			}
-			 session.setAttribute("companyId",compId);
-			map = new LinkedMultiValueMap<>();
-			map.add("compId", compId);
-
-			ObjectMapper mapper = new ObjectMapper();
-			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
-					CityData[].class);
-			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
-
-			model.addAttribute("cityList", cityList);
-
-		} catch (Exception e) {
-			return "redirect:/";
-			/*
-			 * System.out.println("Exception in /profile : " + e.getMessage());
-			 * e.printStackTrace();
-			 */
-		}
-		return "profile";
-	}
+	
 
 	@RequestMapping(value = "/updateCustProfile", method = RequestMethod.POST)
 	public String updateCustProfile(HttpServletRequest request, HttpServletResponse response,
@@ -402,49 +350,6 @@ public class MasterController {
 
 	}
 
-	@RequestMapping(value = "/addresslist", method = RequestMethod.GET)
-	public String addressList(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
-		try {
-			HttpSession session = request.getSession();
-
-			int custId = (int) session.getAttribute("custId");
-			
-			int companyId =0;
-			try {
-			companyId=(int) session.getAttribute("companyId");
-			}catch (Exception e) {
-				//return "redirect:/";
-				companyId =1;
-			}
-
-			MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
-			map.add("custId", custId);
-			Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
-					Customer.class);
-			model.addAttribute("cust", cust);
-
-			map = new LinkedMultiValueMap<>();
-			map.add("custId", custId);
-			map.add("compId", companyId);
-			CustomerAddDetail[] addrsArr = Constants.getRestTemplate()
-					.postForObject(Constants.url + "getAllCustAdresListCustId", map, CustomerAddDetail[].class);
-			List<CustomerAddDetail> custAddList = new ArrayList<CustomerAddDetail>(Arrays.asList(addrsArr));
-
-			model.addAttribute("custAddList", custAddList);
-			
-			session.setAttribute("userName", cust.getCustName());
-			session.setAttribute("userEmail", cust.getEmailId());
-			session.setAttribute("userMobile", cust.getCustMobileNo());
-			session.setAttribute("userAddress", cust.getExVar3());
-			session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
-
-		} catch (Exception e) {
-			return "redirect:/";
-		//	System.out.println("Exception in /addresslist : " + e.getMessage());
-			//e.printStackTrace();
-		}
-		return "addresslist";
-	}
 
 	@RequestMapping(value = "/deleteAddressDetlById", method = RequestMethod.GET)
 	public String deleteAddressDetlById(HttpServletRequest request, HttpServletResponse response, Locale locale,

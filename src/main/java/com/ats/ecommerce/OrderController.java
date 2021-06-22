@@ -1,5 +1,6 @@
 package com.ats.ecommerce;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,7 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
+import com.ats.ecommerce.model.FEDataTraveller;
+import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.order.GetOrderHeaderDisplay;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @Scope("session")
@@ -32,6 +36,8 @@ public class OrderController {
 	@RequestMapping(value = "/orderhistory", method = RequestMethod.GET)
 	public String orderHistory(Locale locale, HttpServletRequest request, HttpServletResponse response, Model model) {
 		List<GetOrderHeaderDisplay> orderList = new ArrayList<>();
+		FEDataTraveller data = new FEDataTraveller();
+
 		try {
 			HttpSession session = request.getSession();
 
@@ -48,6 +54,35 @@ public class OrderController {
 			orderList = new ArrayList<GetOrderHeaderDisplay>(Arrays.asList(orderRepArr));
 			model.addAttribute("orders", orderList);
 			model.addAttribute("imgPath", Constants.PROD_IMG_VIEW_URL);
+			int frId = 0;
+			try {
+				frId = (int) session.getAttribute("frId");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			ObjectMapper mapper = new ObjectMapper();
+
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
 		} catch (Exception e) {
 			return "redirect:/";		}
 

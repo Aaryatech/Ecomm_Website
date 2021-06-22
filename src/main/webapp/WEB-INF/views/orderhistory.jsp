@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
@@ -12,16 +14,17 @@
 	src="${pageContext.request.contextPath}/resources/js/bootstrap-table-expandable.js"></script>
 
 <body>
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 	<!--mongi help-popup-->
-	<div class="mongi_help">
+<%-- 	<div class="mongi_help">
 		<a href="#mongi" class="initialism mongi_open"><img
 			src="${pageContext.request.contextPath}/resources/images/mongi_help.png"
 			alt=""></a>
-	</div>
+	</div> --%>
 
 	<!--apply now pop up-->
-	<div id="mongi" class="well">
+<!-- 	<div id="mongi" class="well">
 		<div class="mongi_title">
 			<span><a href="#"> Clear</a></span> Select Our Best Filter
 			<div class="mongi_close close_pop">
@@ -29,7 +32,7 @@
 			</div>
 		</div>
 		<div class="mongi_cont">
-			<!-- <ul class="ks-cboxtags">
+			<ul class="ks-cboxtags">
 				<li><input type="checkbox" id="checkboxOne"><label
 					for="checkboxOne">Chocolate Cakes</label></li>
 				<li><input type="checkbox" id="checkboxtwo"><label
@@ -93,7 +96,7 @@
 					for="checkboxthirtee">Clover</label></li>
 				<li><input type="checkbox" id="checkboxthirteeone"><label
 					for="checkboxthirteeone">Baby Moondancer</label></li>
-			</ul> -->
+			</ul>
 
 
 
@@ -103,15 +106,16 @@
 			<a href="product.html" class="proceed_btn">Proceed</a>
 		</div>
 
-	</div>
+	</div> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#mongi').popup();
+			//$('#mongi').popup();
 		});
 	</script>
 
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	
 <%
 					request.getSession().removeAttribute("successMsg");
 				%>
@@ -143,8 +147,8 @@
 									<tr>
 										<td>${count.index+1}</td>
 										<td>${orders.orderNo}</td>
-										<td>${orders.cityName}-${orders.frName}9011252525</td>
-										<td>${orders.orderDateDisplay}-${orders.deliveryDate}</td>
+										<td>${orders.frContactNo}</td>
+										<td>${orders.orderDateDisplay} / ${orders.deliveryDateDisplay}</td>
 											<td class="prc_amt">Rs. ${orders.deliveryCharges}</td>
 												<td class="prc_amt">Rs. ${orders.exFloat1}</td>
 										<td class="prc_amt">Rs. ${orders.totalAmt}</td>
@@ -166,35 +170,37 @@
 										<!-- Order Status -->
 										<c:choose>
 											<c:when test="${orders.orderStatus==0}">
-												<td><span class="deliverd">Park Order</span></td>
+												<td><span class="deliverd" title="Park Order">Park Order</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==1}">
-												<td><span class="deliverd">Shop Confirmation
+												<td><span class="deliverd" title="Shop Confirmation
+														Pending">Shop Confirmation
 														Pending</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==2}">
-												<td><span class="deliverd">Accept</span></td>
+												<td><span class="deliverd" title="Accept">Accept</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==3}">
-												<td><span class="deliverd">Processing</span></td>
+												<td><span class="deliverd" title="Processing">Processing</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==4}">
-												<td><span class="deliverd">Delivery Pending</span></td>
+												<td><span class="deliverd" title="Delivery Pending">Delivery Pending</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==5}">
-												<td><span class="deliverd">Delivered</span></td>
+												<td><span class="deliverd" title="Delivered">Delivered</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==6}">
-												<td><span class="deliverd">Rejected by Shop</span></td>
+												<td><span class="deliverd" title="Rejected by Shop">Rejected by Shop</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==7}">
-												<td><span class="deliverd">Return Order</span></td>
+												<td><span class="deliverd" title="Return Order">Return Order</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==8}">
-												<td><span class="deliverd">Cancelled Order</span></td>
+												<td><span class="deliverd" title="Cancelled Order">Cancelled Order</span></td>
 											</c:when>
 											<c:otherwise>
-												<td><span class="deliverd">Online Payment
+												<td><span class="deliverd" title="Online Payment
+														Pending">Online Payment
 														Pending</span></td>
 											</c:otherwise>
 										</c:choose>
@@ -260,38 +266,42 @@
 																	<!-- Order Log Status -->
 																	<c:choose>
 																		<c:when test="${orderTrail.status==0}">
-																			<td><span class="deliverd">Park Order</span></td>
+																			<td><span class="deliverd" title="Park Order">Park Order</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==1}">
-																			<td><span class="deliverd">Shop
+																			<td><span class="deliverd" title="Shop
+																					Confirmation Pending">Shop
 																					Confirmation Pending</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==2}">
-																			<td><span class="deliverd">Accept</span></td>
+																			<td><span class="deliverd" title="Accept">Accept</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==3}">
-																			<td><span class="deliverd">Processing</span></td>
+																			<td><span class="deliverd" title="Processing">Processing</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==4}">
-																			<td><span class="deliverd">Delivery
+																			<td><span class="deliverd" title="Delivery
+																					Pending">Delivery
 																					Pending</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==5}">
-																			<td><span class="deliverd">Delivered</span></td>
+																			<td><span class="deliverd" title="Delivered">Delivered</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==6}">
-																			<td><span class="deliverd">Rejected by
+																			<td><span class="deliverd" title="Rejected by
+																					Shop">Rejected by
 																					Shop</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==7}">
-																			<td><span class="deliverd">Return Order</span></td>
+																			<td><span class="deliverd" title="Return Order">Return Order</span></td>
 																		</c:when>
 																		<c:when test="${orderTrail.status==8}">
-																			<td><span class="deliverd">Cancelled
+																			<td><span class="deliverd" title="Cancelled Order">Cancelled
 																					Order</span></td>
 																		</c:when>
 																		<c:otherwise>
-																			<td><span class="deliverd">Online Payment
+																			<td><span class="deliverd" title="Online Payment
+																					Pending">Online Payment
 																					Pending</span></td>
 																		</c:otherwise>
 																	</c:choose>
@@ -333,12 +343,12 @@
 							
 							<div class="mob_quan">
 								<div class="mob_quan_l history">Contact Info</div>
-								<div class="mob_quan_r font"> ${orders.cityName}-<br> ${orders.frName} </div>
+								<div class="mob_quan_r font">${orders.frContactNo}</div>
 								<div class="clr"></div>
 							</div>
 							<div class="mob_quan">
 								<div class="mob_quan_l history">Order-Delivery</div>
-								<div class="mob_quan_r font">${orders.orderDateDisplay}-<br>${orders.deliveryDate}</div>
+								<div class="mob_quan_r font">${orders.orderDateDisplay}-<br>${orders.deliveryDateDisplay}</div>
 								<div class="clr"></div>
 							</div>
 							<div class="mob_quan">
