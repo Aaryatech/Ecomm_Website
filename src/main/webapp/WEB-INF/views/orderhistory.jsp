@@ -7,7 +7,7 @@
 <html>
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 
-
+ 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap-table-expandable.css">
 <script
