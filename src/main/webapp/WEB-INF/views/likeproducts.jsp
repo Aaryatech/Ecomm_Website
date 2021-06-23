@@ -38,7 +38,7 @@
 									<div class="cake_one">
 												<div class="cake_pic">
 													<a
-														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">
 														<img src="#"
 														data-src="${prodImgUrl}${product.prodImagePrimary}"
 														onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
@@ -163,7 +163,7 @@
 												<div class="cake_container">
 													<h4 class="cake_nm">
 														<a
-															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
@@ -1163,7 +1163,7 @@ function setLike(id,isLike) {
 											function(key, product) {
 						
 						if(product.isLike ==1){
-						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'">'
+						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'/'+product.prodNameDisp+'" target="_blank">'
 							var like='<div class="circle_tag active" onclick="setLike('+product.productId+')">'
 							+ '<img  id="like'+product.productId+'"  src="${pageContext.request.contextPath}/resources/images/heart.svg" alt="">'
 							+ '</div>';
@@ -1183,7 +1183,7 @@ function setLike(id,isLike) {
 							+ ' <input type="hidden" class="tagNameHide" value="'+product.appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'">'
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+product.productId+'/'+product.prodNameDisp+'" target="_blank">'
 							+ product.productName + '</a> </h4>'
 							+ ' </div> </div> </div> </li> ';
 							

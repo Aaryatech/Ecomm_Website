@@ -142,7 +142,17 @@ public class FEProductHeader {
 		private String metaKey;
 		private String imageAlt;
 		
-		
+		//SACHIN 22-06-2021
+				private String prodNameDisp;
+				
+				
+				
+		public String getProdNameDisp() {
+					return prodNameDisp;
+				}
+				public void setProdNameDisp(String prodNameDisp) {
+					this.prodNameDisp = prodNameDisp;
+				}
 		public String getMetaTitle() {
 			return metaTitle;
 		}
@@ -858,7 +868,9 @@ public class FEProductHeader {
 				+ ", defaultVegnonvegId=" + defaultVegnonvegId + ", defaultShapeId=" + defaultShapeId
 				+ ", defaultPrice=" + defaultPrice + ", defaultVegNonvegName=" + defaultVegNonvegName
 				+ ", allFilterNames=" + allFilterNames + ", isLike=" + isLike + ", similarProductIds="
-				+ similarProductIds + ", prodDetailList=" + prodDetailList + "]";
+				+ similarProductIds + ", metaTitle=" + metaTitle + ", metaDesc=" + metaDesc + ", metaKey=" + metaKey
+				+ ", imageAlt=" + imageAlt + ", prodNameDisp=" + prodNameDisp + ", prodDetailList=" + prodDetailList
+				+ "]";
 	}
 
 }

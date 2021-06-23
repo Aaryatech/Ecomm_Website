@@ -603,10 +603,10 @@
 															<div class="cake_one product_padd">
 																<div class="cake_pic">
 																	<a
-																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"><img
+																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank"><img
 																		src="${prodImgUrl}${product.prodImagePrimary}"
 																		onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-																		class="mobile_fit transition"></a>
+																		class="mobile_fit transition" alt="${product.imageAlt}"></a>
 																	<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 																	<div class="cake_prc">
 																		<div>
@@ -674,7 +674,7 @@
 																<div class="cake_container">
 																	<h4 class="cake_nm single_row">
 																		<a
-																			href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+																			href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 																	</h4>
 																				<!-- Cake Container Right -->
 												<div class="cake_dropdown">
@@ -905,10 +905,10 @@
 												<div class="cake_one product_padd">
 													<div class="cake_pic">
 																	<a
-																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"><img
+																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank"><img
 																		src="${prodImgUrl}${product.prodImagePrimary}"
 																		onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-																		class="mobile_fit transition"></a>
+																		class="mobile_fit transition" alt="${product.imageAlt}"></a>
 																	<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 																	<div class="cake_prc">
 																		<div>
@@ -976,7 +976,7 @@
 													<div class="cake_container">
 														<h4 class="cake_nm single_row">
 															<a
-																href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+																href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 														</h4>
 																	<!-- Cake Container Right -->
 												<div class="cake_dropdown">
@@ -1230,10 +1230,10 @@
 											<div class="cake_one product_padd">
 												<div class="cake_pic">
 																	<a
-																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}"><img
+																		href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank"><img
 																		src="${prodImgUrl}${product.prodImagePrimary}"
 																		onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-																		class="mobile_fit transition"></a>
+																		class="mobile_fit transition" alt="${product.imageAlt}"></a>
 																	<!--<div class="circle_tag"><img src="images/heart-1.svg" alt=""> <img src="images/heart.svg" alt=""></div>-->
 																	<div class="cake_prc">
 																		<div>

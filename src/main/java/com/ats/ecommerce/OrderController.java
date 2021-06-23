@@ -37,55 +37,60 @@ public class OrderController {
 	public String orderHistory(Locale locale, HttpServletRequest request, HttpServletResponse response, Model model) {
 		List<GetOrderHeaderDisplay> orderList = new ArrayList<>();
 		FEDataTraveller data = new FEDataTraveller();
-
+		int custId = 0;
 		try {
 			HttpSession session = request.getSession();
 
 			int compId = (int) session.getAttribute("companyId");
-			int custId = (Integer) session.getAttribute("custId");			
+			custId = (Integer) session.getAttribute("custId");
 
 			MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 			map.add("compId", compId);
 			map.add("custId", custId);
+			System.err.println("Map " + map);
+			if (custId > 0) {
+				GetOrderHeaderDisplay[] orderRepArr = Constants.getRestTemplate().postForObject(
+						Constants.url + "/getOrderHistoryListByCustId", map, GetOrderHeaderDisplay[].class);
 
-			GetOrderHeaderDisplay[] orderRepArr = Constants.getRestTemplate()
-					.postForObject(Constants.url + "/getOrderHistoryListByCustId", map, GetOrderHeaderDisplay[].class);
-
-			orderList = new ArrayList<GetOrderHeaderDisplay>(Arrays.asList(orderRepArr));
-			model.addAttribute("orders", orderList);
-			model.addAttribute("imgPath", Constants.PROD_IMG_VIEW_URL);
-			int frId = 0;
-			try {
-				frId = (int) session.getAttribute("frId");
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			ObjectMapper mapper = new ObjectMapper();
-
-			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
-			data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
-
-			try {
-				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
-					if (tag.getFilterTypeId() == 7) {
-						tagList.add(tag);
-					}
+				orderList = new ArrayList<GetOrderHeaderDisplay>(Arrays.asList(orderRepArr));
+				model.addAttribute("orders", orderList);
+				model.addAttribute("imgPath", Constants.PROD_IMG_VIEW_URL);
+				int frId = 0;
+				try {
+					frId = (int) session.getAttribute("frId");
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
+				ObjectMapper mapper = new ObjectMapper();
 
+				List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
+
+				try {
+					for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+						if (tag.getFilterTypeId() == 7) {
+							tagList.add(tag);
+						}
+					}
+				} catch (Exception e) {
+
+				}
+
+				ObjectMapper Obj = new ObjectMapper();
+				String jsonStr = "";
+				try {
+					jsonStr = Obj.writeValueAsString(tagList);
+				} catch (Exception e) {
+				}
+
+				model.addAttribute("tagsJson", jsonStr);
 			}
-
-			ObjectMapper Obj = new ObjectMapper();
-			String jsonStr = "";
-			try {
-				jsonStr = Obj.writeValueAsString(tagList);
-			} catch (Exception e) {
-			}
-
-			model.addAttribute("tagsJson", jsonStr);
 		} catch (Exception e) {
-			return "redirect:/";		}
-
+			return "redirect:/";
+		}
+		if (custId == 0) {
+			return "redirect:/";
+		}
 		return "orderhistory";
 	}
 }

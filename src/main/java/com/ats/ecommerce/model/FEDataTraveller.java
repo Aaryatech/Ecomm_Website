@@ -2,6 +2,7 @@ package com.ats.ecommerce.model;
 
 import java.util.List;
 
+
 public class FEDataTraveller {
 
 	List<FEProductHeader> feProductHeadList; // each header includes list of details inside
@@ -25,6 +26,19 @@ public class FEDataTraveller {
 	List<CateFilterConfig> catFilterConfig;// Filter configured to Category 26-11-2020
 
 	private List<FrSubCatList> frSubCatList;
+	
+	 //SACHIN 23-06-2021
+	 List<HomePageStatusHead> homePageStatusList;
+	 
+	 
+	 
+	public List<HomePageStatusHead> getHomePageStatusList() {
+		return homePageStatusList;
+	}
+
+	public void setHomePageStatusList(List<HomePageStatusHead> homePageStatusList) {
+		this.homePageStatusList = homePageStatusList;
+	}
 
 	public List<CateFilterConfig> getCatFilterConfig() {
 		return catFilterConfig;

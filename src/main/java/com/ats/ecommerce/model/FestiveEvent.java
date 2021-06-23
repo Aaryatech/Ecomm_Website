@@ -10,7 +10,7 @@ public class FestiveEvent {
 	
 	private String eventName;
 
-	private String description;	
+	private String description;//img alt 	
 
 	private String fromDate;
 
@@ -36,11 +36,11 @@ public class FestiveEvent {
 
 	private int exInt3;
 	
-	private String exVar1;
+	private String exVar1;//mt
 
-	private String exVar2;
+	private String exVar2;//desc
 
-	private String exVar3;
+	private String exVar3;//key
 
 	public int getEventId() {
 		return eventId;

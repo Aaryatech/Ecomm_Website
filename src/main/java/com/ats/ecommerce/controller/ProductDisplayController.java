@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.model.CateFilterConfig;
+import com.ats.ecommerce.model.CategoryList;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FEProductHeader;
 import com.ats.ecommerce.model.FilterTypes;
@@ -159,9 +161,9 @@ public class ProductDisplayController {
 		return returnPage;
 	}
 
-	@RequestMapping(value = "/showProductListCategory/{catId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/showProductListCategory/{catId}/{catName}", method = RequestMethod.GET)
 	public String showProductListCategory(Model model, HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int catId) {
+			@PathVariable int catId,@PathVariable String catName) {
 		String returnPage = "productListCategory";
 		try {
 
@@ -175,8 +177,7 @@ public class ProductDisplayController {
 			Gson gson = new Gson();
 			data = gson.fromJson(session.getAttribute("allDataJson").toString(), FEDataTraveller.class);
 			
-			System.err.println("DATA ---------- "+data.getFrSubCatList());
-
+		
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 
 			model.addAttribute("allData", data);
@@ -208,6 +209,23 @@ public class ProductDisplayController {
 			}
 
 			model.addAttribute("tagsJson", jsonStr);
+			//new for seo metadata
+			CategoryList[] catArray = mapper.readValue(
+					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
+			List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+			CategoryList category=new CategoryList();
+			for(int i=0;i<catList.size();i++) {
+				if(catList.get(i).getCatId()==catId) {
+					category=catList.get(i);
+					break;
+				}else {
+				}
+			}//end of loop
+			model.addAttribute("mt", category.getMetaTitle());
+			model.addAttribute("mtdesc", category.getMetaDesc());
+			model.addAttribute("mtkey", category.getMetaKey());
+			model.addAttribute("imgalt", category.getImageAlt());
+			model.addAttribute("canurl", Constants.CAN_BASE_URL+"showProductListCategory/"+catId+"/"+catName);
 
 		} catch (Exception e) {
 			e.printStackTrace();

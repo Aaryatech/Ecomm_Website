@@ -2,18 +2,30 @@
 	pageEncoding="UTF-8"%>
 
 <head>
+
+  <link rel="canonical" href="${canurl}" />
+
 <meta charset="utf-8" />
-<title>Monginis</title>
+<title>${mt}-Monginis Cakes</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport"
 	content="width=device-width; initial-scale=1.0; maximum-scale=1.0" />
 	
-<meta name="keywords"
+	<meta name="title"
+	content="${mt}" />
+	
+	<meta name="description"
+	content="${mtdesc}" />
+	
+	<meta name="keywords"
+	content="${mtkey}" />
+
+<!-- <meta name="keywords"
 	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market" />
 <meta name="description"
 	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market " />
 <meta name="author"
-	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market">
+	content="Monginis only uses the finest ingredients in its products, ensuring the goods that we send out into the market"> -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/monginis.css"
 	type="text/css" />

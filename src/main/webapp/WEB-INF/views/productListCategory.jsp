@@ -175,10 +175,10 @@ html {
 										<div class="cake_one product_padd">
 											<div class="cake_pic">											
 												<a
-													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">
 													<img src="${prodImgUrl}${product.prodImagePrimary}"
 													onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-													alt="" class="mobile_fit transition">
+													 class="mobile_fit transition" alt="${product.imageAlt}">
 												</a>
 												
 												<!--  -->
@@ -305,7 +305,7 @@ html {
 											<div class="cake_container">
 												<h4 class="cake_nm single_row">
 													<a
-														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 
 												</h4>
 												

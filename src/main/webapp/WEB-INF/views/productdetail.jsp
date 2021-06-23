@@ -73,7 +73,7 @@
 								<img class="xzoom" id="xzoom-default"
 									src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 									xoriginal="${prodImgUrl}${prodHeader.prodImagePrimary}"
-									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" />
+									onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" alt="${prodHeader.imageAlt}" />
 
 								<div class="mobile_Scrl">
 									<div class="xzoom-thumbs">
@@ -82,14 +82,14 @@
 											src="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											xpreview="${prodImgUrl}${prodHeader.prodImagePrimary}"
 											title="${prodHeader.productDesc}"
-											onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"></a>
+											onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'" alt="${prodHeader.imageAlt}"></a>
 										<c:forEach items="${prodHeader.productImages}"
 											var="prod_image">
 											<a href="${prodImgUrl}${prod_image}"><img
 												class="xzoom-gallery" width="70" height="70"
 												src="${prodImgUrl}${prod_image}"
 												onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-												title="${prodHeader.productDesc}"></a>
+												title="${prodHeader.productDesc}" alt="${prodHeader.imageAlt}"></a>
 										</c:forEach>
 									</div>
 								</div>
@@ -105,7 +105,7 @@
 								<div class="stock_l">
 									<input type="hidden" id="prodId"
 										value="${prodHeader.productId}" />
-									<h2 class="product_nm">
+									<h1 class="product_nm">
 										<span>In Stock</span>
 
 										<c:choose>
@@ -129,14 +129,15 @@
 											</c:otherwise>
 										</c:choose>
 
-
+						
 										${prodHeader.productName}
-									</h2>
-									<div class="stock_review">
+										
+									</h1>
+									<%-- <div class="stock_review">
 										4.8 <img
 											src="${pageContext.request.contextPath}/resources/images/review_star.png"
 											alt=""> <span>32 Review</span>
-									</div>
+									</div> --%>
 								</div>
 
 								<div class="stock_r">
@@ -689,8 +690,8 @@
 												<i class="fa fa-inr cake_prc_detail_iclass"
 													aria-hidden="true"></i>
 												<p class="cake_prc_detail_pclass" id="cake_prc">${product.defaultPrice}</p>
-												<span class="off_prc" id="off_prc"><i
-													class="fa fa-inr" aria-hidden="true"></i></span> <span
+												<span class="off_prc" id="off_prc"><!-- <i
+													class="fa fa-inr" aria-hidden="true"></i> --></span> <span
 													class="prc_off" id="prc_off"></span>
 											</div>
 
@@ -1002,9 +1003,7 @@ function moveCursor(){
 			var imgFile = $('#img_input_btn')[0].files[0];
 			console.log("imgFile",imgFile.size/1000);
 			var fileSize=imgFile.size/1000;
-			if(parseFloat(fileSize)>600){
-				//alert("Size Exceed")
-			}else{
+			
 				  var imgCanvas = document.getElementById('canvas-element'),
 		       		 imgContext = imgCanvas.getContext("2d");
 			
@@ -1021,7 +1020,7 @@ function moveCursor(){
 			    
 			    // Get canvas contents as a data URL
 			    var imgAsDataURL = imgCanvas.toDataURL("image/png");
-			}
+			
 			//postFilesData();
 	 } catch(err) {
 		 console.log(err);
@@ -1052,10 +1051,12 @@ function moveCursor(){
 				
 				
 				var f = evt.target.files[0]; // FileList object
+				
 			  var reader = new FileReader();
 			  // Closure to capture the file information.
 			  reader.onload = (function(theFile) {
-			    return function(e) {
+if(theFile.size/1000<600)
+				  return function(e) {
 			      var binaryData = e.target.result;
 			      //Converting Binary Data to base 64
 			      base64String = window.btoa(binaryData);

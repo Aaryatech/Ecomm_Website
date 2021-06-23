@@ -108,7 +108,8 @@ public class CategoryList {
 	public String toString() {
 		return "CategoryList [catUuid=" + catUuid + ", catId=" + catId + ", catName=" + catName + ", catPrefix="
 				+ catPrefix + ", catDesc=" + catDesc + ", companyId=" + companyId + ", imageName=" + imageName
-				+ ", sortNo=" + sortNo + "]";
+				+ ", sortNo=" + sortNo + ", metaTitle=" + metaTitle + ", metaDesc=" + metaDesc + ", metaKey=" + metaKey
+				+ ", imageAlt=" + imageAlt + "]";
 	}
 	
 	

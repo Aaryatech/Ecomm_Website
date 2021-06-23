@@ -20,6 +20,16 @@ public class GetFlavorTagStatusList {
 
 	private int isChecked; // Anmol
 
+	
+private String filterNameDisp;//SACHIN 23-06-2021
+	
+	public String getFilterNameDisp() {
+		return filterNameDisp;
+	}
+	public void setFilterNameDisp(String filterNameDisp) {
+		this.filterNameDisp = filterNameDisp;
+	}
+	
 	public int getFilterId() {
 		return filterId;
 	}

@@ -841,7 +841,7 @@ if(allItemArr[i].rateSettingType==0){
 						console.log("A",1)
 							
 							//alert(allItemArr[i]);
-							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 							divStr = divStr
 									+ '<li>'
 									+ ' <div class="item_div"> '
@@ -856,7 +856,7 @@ if(allItemArr[i].rateSettingType==0){
 									+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 									+ ' </div> '
 									+ ' <div class="cake_container"> '
-									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+									+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 									+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 									+ ' </div> </div> </div> </li> '
 									console.log("CC",1)
@@ -868,7 +868,7 @@ if(allItemArr[i].rateSettingType==0){
 
 				} else {
 					console.log("B",1)
-					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 					divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
@@ -883,7 +883,7 @@ if(allItemArr[i].rateSettingType==0){
 							+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 							+ allItemArr[i].productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 							+ ' </div> </div> </div> </li> '
 
@@ -1108,7 +1108,7 @@ if(allItemArr[i].rateSettingType==0){
 						+ '<img id="like'+tempArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 						+ '</div>';
 					}
-					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+					var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'/'+tempArr[i].prodNameDisp+'" target="_blank">'
 						divStr = divStr
 					+ '<li>'
 					+ ' <div class="item_div"> '
@@ -1125,7 +1125,7 @@ if(allItemArr[i].rateSettingType==0){
 					+ ' <input type="hidden" class="tagNameHide" value="'+tempArr[i].appliTagNames+'"> '
 					+ ' </div> '
 					+ ' <div class="cake_container"> '
-					+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'">'
+					+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+tempArr[i].productId+'/'+tempArr[i].prodNameDisp+'" target="_blank">'
 					+ tempArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+tempArr[i].productId+','+tempArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 					+ ' </div> </div> </div> </li> ';
 
@@ -1665,7 +1665,7 @@ if(allItemArr[i].rateSettingType==0){
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '
-						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 						+ ' <img src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+hiddenProductListArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"> </a>'
 						+ like
 						+ isVegType						
@@ -1677,7 +1677,7 @@ if(allItemArr[i].rateSettingType==0){
 						+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
-						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 						+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 						+ ' </div> </div> </div> </li> ';
 
@@ -1733,7 +1733,7 @@ if(allItemArr[i].rateSettingType==0){
 								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
-							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
@@ -1750,7 +1750,7 @@ if(allItemArr[i].rateSettingType==0){
 							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
 							console.log("UK",1)
@@ -1803,7 +1803,7 @@ if(allItemArr[i].rateSettingType==0){
 								+ '<img id="like'+hiddenProductListArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 								+ '</div>';
 							}
-							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 							divStr = divStr
 							+ '<li>'
 							+ ' <div class="item_div"> '
@@ -1820,7 +1820,7 @@ if(allItemArr[i].rateSettingType==0){
 							+ ' <input type="hidden" class="tagNameHide" value="'+hiddenProductListArr[i].appliTagNames+'"> '
 							+ ' </div> '
 							+ ' <div class="cake_container"> '
-							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'">'
+							+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+hiddenProductListArr[i].productId+'/'+hiddenProductListArr[i].prodNameDisp+'" target="_blank">'
 							+ hiddenProductListArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+hiddenProductListArr[i].productId+','+hiddenProductListArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 							+ ' </div> </div> </div> </li> ';
 							console.log("SD",1)
@@ -1879,13 +1879,13 @@ if(allItemArr[i].rateSettingType==0){
 							+ '</div>';
 						}
 						
-						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+						var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 						divStr = divStr
 						+ '<li>'
 						+ ' <div class="item_div"> '
 						+ ' <div class="cake_one product_padd"> '
 						+ ' <div class="cake_pic"> '+detail
-						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+						+ ' <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 						+ ' <img src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" '+noimage+' data-src="${prodImgUrl}'+allItemArr[i].prodImagePrimary+'" alt="" class="mobile_fit transition"></a> '
 						+ isVegType
 						+ like						
@@ -1898,7 +1898,7 @@ if(allItemArr[i].rateSettingType==0){
 						+ ' </a>'
 						+ ' </div> '
 						+ ' <div class="cake_container"> '
-						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+						+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 						+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"><a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 						+ ' </div> </div> </div> </li> ';
 						
@@ -1955,7 +1955,7 @@ if(allItemArr[i].rateSettingType==0){
 									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 									+ '</div>';
 								}
-								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 								divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
@@ -1972,7 +1972,7 @@ if(allItemArr[i].rateSettingType==0){
 								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
-								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
 								console.log("KLL",1)
@@ -2031,7 +2031,7 @@ if(allItemArr[i].rateSettingType==0){
 									+ '<img id="like'+allItemArr[i].productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 									+ '</div>';
 								}
-								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 	 							divStr = divStr
 								+ '<li>'
 								+ ' <div class="item_div"> '
@@ -2048,7 +2048,7 @@ if(allItemArr[i].rateSettingType==0){
 								+ ' <input type="hidden" class="tagNameHide" value="'+allItemArr[i].appliTagNames+'"> '
 								+ ' </div> '
 								+ ' <div class="cake_container"> '
-								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'">'
+								+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+allItemArr[i].productId+'/'+allItemArr[i].prodNameDisp+'" target="_blank">'
 								+ allItemArr[i].productName + '</a> </h4>'+cakeDrpDwn+'<div class="radio_r"> <a href="javascript:void(0)" onclick="addCart('+allItemArr[i].productId+','+allItemArr[i].rateSettingType+')" title="Add To Cart"><i class="fa fa-shopping-cart shop_cart"></i></a> </div>'
 								+ ' </div> </div> </div> </li> ';
 								console.log("LOPP",1)
@@ -2144,7 +2144,7 @@ function setProductData(productObj){
 				+ '<img id="like'+productObj.productId+'" src="${pageContext.request.contextPath}/resources/images/heart-1.svg" alt="">' 
 				+ '</div>';
 			}
-			var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'">'
+			var detail='<a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'/'+productObj.prodNameDisp+'" target="_blank">'
 			
 			 divStr =divStr
 			 +'<li>'
@@ -2162,7 +2162,7 @@ function setProductData(productObj){
 			+ ' <input type="hidden" class="tagNameHide" value="'+productObj.appliTagNames+'"> '
 			+ ' </div> '
 			+ ' <div class="cake_container"> '
-			+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'">'
+			+ ' <h4 class="cake_nm single_row"> <a href="${pageContext.request.contextPath}/showProductDetail/'+productObj.productId+'/'+productObj.prodNameDisp+'" target="_blank">'
 			+ productObj.productName + '</a> </h4><div class="card_cart_btn"> <a href="javascript:void(0)" onclick="addCart('+productObj.productId+','+productObj.rateSettingType+')" class="cart_btn">Add to Cart</a> </div>'
 			+ ' </div> </div> </div> </li> ';
 			//alert("end")

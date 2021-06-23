@@ -199,11 +199,11 @@ function removeLoader(){
 				<div class="prod_cat_1">
 					<div class="cakes_cat_1">
 						<a
-							href="${pageContext.request.contextPath}/showProductListCategory/1">
+							href="${pageContext.request.contextPath}/showProductListCategory/1/Cakes">
 							<div class="img_cap">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
-									alt="">
+									alt="Order cake online">
 								<div class="prod_cat_cap">
 									<span>Cakes</span>
 								</div>
@@ -216,10 +216,10 @@ function removeLoader(){
 						<div class="divide_one_pic left">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/showProductListCategory/2">
+									href="${pageContext.request.contextPath}/showProductListCategory/2/Pastries">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
-									alt="">
+									alt="Order pastries online">
 									<div class="prod_cat_cap1">
 										<span>Pastries</span>
 									</div>
@@ -229,10 +229,10 @@ function removeLoader(){
 						<div class="divide_one_pic right">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/showProductListCategory/3">
+									href="${pageContext.request.contextPath}/showProductListCategory/3/Savories">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
-									alt="">
+									alt="Order Savories online">
 									<div class="prod_cat_cap1">
 										<span>Savories</span>
 									</div>
@@ -245,10 +245,10 @@ function removeLoader(){
 						<div class="divide_one_pic left">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/showProductListCategory/9">
+									href="${pageContext.request.contextPath}/showProductListCategory/9/Packaged-Cakes">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
-									alt="">
+									alt="Order Packaged Cakes online">
 									<div class="prod_cat_cap1">
 										<span>Packaged Cakes</span>
 									</div>
@@ -258,10 +258,10 @@ function removeLoader(){
 						<div class="divide_one_pic right">
 							<div class="single_pic">
 								<a
-									href="${pageContext.request.contextPath}/showProductListCategory/4">
+									href="${pageContext.request.contextPath}/showProductListCategory/4/Chocolates">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
-									alt="">
+									alt="Order Chocolates online">
 									<div class="prod_cat_cap1">
 										<span>Chocolates</span>
 									</div>
@@ -273,10 +273,10 @@ function removeLoader(){
 					<div class="single_prod">
 						<div class="single_pic">
 							<a
-								href="${pageContext.request.contextPath}/showProductListCategory/8">
+								href="${pageContext.request.contextPath}/showProductListCategory/8/Bakersware">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
-								alt="">
+								alt="Order Bakersware online">
 								<div class="prod_cat_cap1">
 									<span>Bakersware</span>
 								</div>
@@ -289,7 +289,7 @@ function removeLoader(){
 					<div class="lst_tow marg_btm divice">
 						<div class="single_pic">
 							<a
-								href="${pageContext.request.contextPath}/showProductListCategory/1">
+								href="#">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
 								alt="">
@@ -302,7 +302,7 @@ function removeLoader(){
 					<div class="lst_tow divice1">
 						<div class="single_pic ">
 							<a
-								href="${pageContext.request.contextPath}/showProductListCategory/1">
+								href="#">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/combo_2.jpg"
 								alt="">
@@ -375,10 +375,12 @@ function removeLoader(){
 					<c:set var="isShow" value="${show}"></c:set>
 					<%-- <c:forEach begin="1" end="10" step="1" varStatus="cn"> --%>
 					<c:if test="${isShow==1}">
+					<c:set var="evName" value="${festEvent.eventName}"/>
+<c:set var="eventNameDisp" value="${fn:replace(evName,' ', '-')}" />
 						<div>
 							<div class="festival_offer">
 								<a
-									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}"
+									href="${pageContext.request.contextPath}/showEventBasedCakes/${count.index}/${eventNameDisp}"
 									title="${festEvent.description}">${festEvent.eventName} <img
 									src="${festEventImgUrl}${festEvent.exVar2}" class="lazy"
 									data-src="${festEventImgUrl}${festEvent.exVar2}"
@@ -419,11 +421,11 @@ function removeLoader(){
 											<div class="cake_one">
 												<div class="cake_pic">
 													<a
-														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
+														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">
 														<img src="#"
 														data-src="${prodImgUrl}${product.prodImagePrimary}"
 														onerror="this.src='${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg'"
-														class="mobile_fit transition lazy">
+														class="mobile_fit transition lazy" alt="${product.imageAlt}">
 													</a>
 
 													<div class="purity_icn">
@@ -437,7 +439,7 @@ function removeLoader(){
 																<img src="#" class="lazy"
 																	id="nonveg${product.productId}"
 																	data-src="${pageContext.request.contextPath}/resources/images/nonveg_icn.jpg"
-																	alt="">
+																	>
 															</c:when>
 															<c:otherwise>
 																<img src="#" class="lazy"
@@ -544,7 +546,7 @@ function removeLoader(){
 												<div class="cake_container">
 													<h4 class="cake_nm">
 														<a
-															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+															href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 													</h4>
 													<div class="cake_dropdown">
 														<div class="cake_dropdown_l">
@@ -815,7 +817,7 @@ function removeLoader(){
 						</section>
 						<div class="more_cakes">
 							<a
-								href="${pageContext.request.contextPath}/moreCakeStatusWise/${statusFilter.filterId}">More
+								href="${pageContext.request.contextPath}/moreCakeStatusWise/${statusFilter.filterId}/${statusFilter.filterNameDisp}">More
 								${statusFilter.filterName}</a>
 						</div>
 					</div>

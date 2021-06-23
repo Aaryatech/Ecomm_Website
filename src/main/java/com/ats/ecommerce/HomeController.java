@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,10 +92,10 @@ public class HomeController {
 		try {
 			// System.out.println("akshayyy");
 			if (frId > 0) {
-				// System.out.println("akshayyy");
+				 System.out.println("frId " +frId);
 				data = mapper.readValue(new File(Constants.JSON_FILES_PATH + frId + "_.json"), FEDataTraveller.class);
 			}
-			// System.err.println("data " + data.getFeProductHeadList());
+			 System.err.println("data cat " + data.getCompanyCatList());
 
 			try {
 
@@ -635,10 +637,12 @@ try {
 		return "productdetail";
 	}
 
-	@RequestMapping(value = "/showProductDetail/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/showProductDetail/{id}/{prodNameDisp}", method = RequestMethod.GET)
 	public String showProductDetail(HttpServletRequest request,
-			HttpServletResponse response, Model model, @PathVariable String id) {
-		System.err.println("In Showdddd Product Detail" +id);
+			HttpServletResponse response, Model model, @PathVariable String id,
+			@PathVariable String prodNameDisp) {
+		System.err.println("In Showdddd Product Detail" +id +"name" +prodNameDisp);
+		String x=new String();
 		try {
 			model.addAttribute("frCatList", data.getFranchiseCatList());
 
@@ -713,6 +717,14 @@ try {
 
 			// FEProductHeader prodHeader = data.getFeProductHeadList().get(index);
 			model.addAttribute("prodHeader", prodHeader);
+			
+			model.addAttribute("mt", prodHeader.getMetaTitle());
+			model.addAttribute("mtdesc", prodHeader.getMetaDesc());
+			model.addAttribute("mtkey", prodHeader.getMetaKey());
+			model.addAttribute("imgalt", prodHeader.getImageAlt());
+			model.addAttribute("canurl", Constants.CAN_BASE_URL+"showProductDetail/"+id+"/"+prodHeader.getProdNameDisp());
+
+			
 			model.addAttribute("shapeList", list);
 			System.out.println("list list " + list);
 			System.out.println("Similar Product " + prodHeader);
@@ -747,12 +759,24 @@ try {
 					.postForObject(Constants.url + "getRelateProductByProductIds", map, Integer[].class);
 			System.err.println("relateItemArray " + relateItemArray.length);
 			model.addAttribute("relateItemArray", relateItemArray);
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return "productdetail";
+		//return x;
 	}
-
+	public String mergePaths(String oldPath, String newPath) {
+	    try {
+	        URI oldUri = new URI(oldPath);
+	        URI resolved = oldUri.resolve(newPath);
+	        return resolved.toString();
+	    } catch (URISyntaxException e) {
+	        return oldPath;
+	    }
+	}
 	@RequestMapping(value = "/getAllFrWiseData", method = RequestMethod.POST)
 	@ResponseBody
 	public FEDataTraveller getAllFrWiseData(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -767,8 +791,9 @@ try {
 
 	// Sachin 25-11-2020
 	// showEventBasedCakes
-	@RequestMapping(value = "/showEventBasedCakes/{index}", method = RequestMethod.GET)
-	public String showEventBasedCakesIndex(@PathVariable int index, Model model, HttpServletRequest request,
+	@RequestMapping(value = "/showEventBasedCakes/{index}/{eventNameDisp}", method = RequestMethod.GET)
+	public String showEventBasedCakesIndex(@PathVariable int index,@PathVariable String eventNameDisp,
+			Model model, HttpServletRequest request,
 			HttpServletResponse response) {
 		String returnPage = "productlist";
 		try {
@@ -783,6 +808,13 @@ try {
 			System.err.println("INDEX - " + index + "    -------> " + data.getFestEventList().get(index));
 
 			// ALL MENU CATEGORY LIST
+			
+			model.addAttribute("mt", data.getFestEventList().get(index).getExVar1());
+			model.addAttribute("mtdesc", data.getFestEventList().get(index).getExVar2());
+			model.addAttribute("mtkey", data.getFestEventList().get(index).getExVar3());
+			model.addAttribute("imgalt", data.getFestEventList().get(index).getDescription());
+			model.addAttribute("canurl", Constants.CAN_BASE_URL+"showEventBasedCakes/"+index+"/"+eventNameDisp);
+
 			try {
 
 				List<CateFilterConfig> catMenuList = new ArrayList<>();

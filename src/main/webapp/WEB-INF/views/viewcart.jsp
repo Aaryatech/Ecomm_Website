@@ -1601,7 +1601,7 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 								+ isVegItem
 								+ '</div>'
 								+ '<div class="cart_cont">'
-								+ '<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'"><h3 class="cart_cake">'
+								+ '<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'/'+allItemArr[j].prodNameDisp+'" target="_blank"><h3 class="cart_cake">'
 								+ table[i].exVar1
 								+ '</h3></a>'
 								+ '<h6 class="cart_det"> &#8377;'
@@ -1659,7 +1659,7 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 					'alt="">'
 								+ '</div>'
 								+ '<div class="cart_cont width_inc">'
-								+ '<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'"><h3 class="cart_cake">'
+								+ '<a href="${pageContext.request.contextPath}/showProductDetail/'+table[i].itemId+'/'+allItemArr[j].prodNameDisp+'" target="_blank"><h3 class="cart_cake">'
 								+ table[i].exVar1
 								+ '</h3></a>'
 								+ '<h3 class="cart_prc">'

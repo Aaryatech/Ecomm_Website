@@ -29,6 +29,7 @@ import com.ats.ecommerce.model.CityData;
 import com.ats.ecommerce.model.CompanyTestomonials;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.FETestimonial;
+import com.ats.ecommerce.model.HomePageStatusHead;
 import com.ats.ecommerce.model.Info;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -246,9 +247,9 @@ try {
 	// moreCakeStatusWise
 
 	// product.html
-	@RequestMapping(value = "/moreCakeStatusWise/{statusId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/moreCakeStatusWise/{statusId}/{filterNameDisp}", method = RequestMethod.GET)
 	public String moreCakeStatusWise(Model model, HttpServletRequest request, HttpServletResponse response,
-			@PathVariable int statusId) {
+			@PathVariable int statusId, @PathVariable String filterNameDisp) {
 		String returnPage = "productlist";
 		try {
 			HttpSession session = request.getSession();
@@ -266,6 +267,35 @@ try {
 			model.addAttribute("isEvent", 0);
 			model.addAttribute("allListFilter", 0);
 			
+			HomePageStatusHead homeStatusHead=new HomePageStatusHead();
+			try {
+				for(int i=0;i<data.getHomePageStatusList().size();i++) {
+					if(data.getHomePageStatusList().get(i).getStatusId()==statusId) {
+						homeStatusHead=data.getHomePageStatusList().get(i);
+						break;
+					}
+				}
+			}catch (Exception e) {
+				 homeStatusHead=new HomePageStatusHead();
+			}
+			
+			  model.addAttribute("mt", homeStatusHead.getExVar1().split("~")[0]);
+			  model.addAttribute("mtdesc", homeStatusHead.getExVar3().split("~")[1]);
+			  model.addAttribute("mtkey", homeStatusHead.getExVar1().split("~")[1]); 
+			  model.addAttribute("imgalt",homeStatusHead.getExVar3().split("~")[0]);
+			 
+			model.addAttribute("canurl", Constants.CAN_BASE_URL+"moreCakeStatusWise/"+statusId+"/"+filterNameDisp);
+
+			
+			/*
+			 * model.addAttribute("mt", data.getFestEventList().get(index).getExVar1());
+			 * model.addAttribute("mtdesc", data.getFestEventList().get(index).getExVar2());
+			 * model.addAttribute("mtkey", data.getFestEventList().get(index).getExVar3());
+			 * model.addAttribute("imgalt",
+			 * data.getFestEventList().get(index).getDescription());
+			 * model.addAttribute("canurl",
+			 * Constants.CAN_BASE_URL+"showEventBasedCakes/"+index);
+			 */
 		} catch (Exception e) {
 			return returnPage;
 		}
