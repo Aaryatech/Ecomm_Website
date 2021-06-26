@@ -6,6 +6,7 @@
 <jsp:include page="/WEB-INF/views/include/metacssjs.jsp"></jsp:include>
 </head>
 <body>
+  <jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
   
 
 <!--mongi help-popup-->    

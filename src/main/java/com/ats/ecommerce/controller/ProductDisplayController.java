@@ -213,6 +213,9 @@ public class ProductDisplayController {
 			CategoryList[] catArray = mapper.readValue(
 					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
 			List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+			catList.clear();
+			catList=data.getCompanyCatList();
+			
 			CategoryList category=new CategoryList();
 			for(int i=0;i<catList.size();i++) {
 				if(catList.get(i).getCatId()==catId) {
@@ -310,6 +313,27 @@ public class ProductDisplayController {
 			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 			model.addAttribute("allData", data);
 
+			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+			try {
+				for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+					if (tag.getFilterTypeId() == 7) {
+						tagList.add(tag);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			ObjectMapper Obj = new ObjectMapper();
+			String jsonStr = "";
+			try {
+				jsonStr = Obj.writeValueAsString(tagList);
+			} catch (Exception e) {
+			}
+
+			model.addAttribute("tagsJson", jsonStr);
+			
 		} catch (Exception e) {
 			return returnPage;
 		}

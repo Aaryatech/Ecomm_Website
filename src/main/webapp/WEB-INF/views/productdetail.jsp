@@ -224,6 +224,11 @@
 												<li><i class="fa fa-circle" aria-hidden="true"></i>
 													Cake Flavour: ${prodHeader.flavorNames}</li>
 											</c:if>
+											
+											<c:if test="${prodHeader.defaultShapeId!=0}">
+									<li><i class="fa fa-circle" aria-hidden="true"></i>
+										Shapes: ${prodHeader.shapeNames}</li>
+								</c:if>
 
 
 
@@ -451,7 +456,7 @@
 
 												<option value="">Select Shape</option>
 												<c:forEach items="${shapeList}" var="shapeData">
-													<option value="${shapeData.productId}">${shapeData.flavorName}</option>
+													<option value="${shapeData.productId}/${shapeData.prodNameDisp}">${shapeData.flavorName}</option>
 												</c:forEach>
 
 										</select></li>
@@ -542,9 +547,10 @@
 
 				<!--product-discription-->
 				<div class="prod_disc" id="prod_disc">
-					<h3 class="prod_title">Product Description:</h3>
+					<h3 class="prod_title">Product Description: ${prodHeader.metaDesc} </h3>
+					
 					<div class="prod_listing">
-						<div class="prod_listing_one">
+						<%-- <div class="prod_listing_one">
 							<h4 class="highlight_title">Highlights :</h4>
 							<ul class="highlist_list">
 
@@ -573,15 +579,12 @@
 										Toppings: ${prodHeader.toppingCreamNames}</li>
 								</c:if>
 
-								<c:if test="${prodHeader.defaultShapeId!=0}">
-									<li><i class="fa fa-circle" aria-hidden="true"></i>
-										Shapes: ${prodHeader.shapeNames}</li>
-								</c:if>
+								
 
 
 
 							</ul>
-						</div>
+						</div> --%>
 
 						<div class="prod_listing_one extra_width">
 							<div class="divide_two">
@@ -611,7 +614,7 @@
 				<div class="product_boxes">
 					<h5 class="sec_title">
 						<center>
-							Related Products <span> </span>
+							Related Products 
 						</center>
 					</h5>
 
@@ -629,8 +632,8 @@
 									<div class="cake_one product_padd">
 										<div class="cake_pic">
 											<a
-												href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">
-												<img src="${prodImgUrl}${product.prodImagePrimary}" alt=""
+												href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}"  target="_blank">
+												<img src="${prodImgUrl}${product.prodImagePrimary}" alt="${product.imageAlt}"
 												class="mobile_fit transition">
 											</a>
 
@@ -700,7 +703,7 @@
 										<div class="cake_container">
 											<h4 class="cake_nm single_row">
 												<a
-													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}">${product.productName}</a>
+													href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">${product.productName}</a>
 												<input type="hidden" id="prodIdText"
 													value="${product.productId}" />
 											</h4>

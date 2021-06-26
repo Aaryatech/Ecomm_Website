@@ -30,6 +30,17 @@ public class CategoryList {
 		private String imageAlt;
 		
 		
+		//SACHIN 25-06-2021
+		private int staticCatId;
+		
+		public int getStaticCatId() {
+			return staticCatId;
+		}
+		public void setStaticCatId(int staticCatId) {
+			this.staticCatId = staticCatId;
+		}
+		
+		
 		public String getMetaTitle() {
 			return metaTitle;
 		}

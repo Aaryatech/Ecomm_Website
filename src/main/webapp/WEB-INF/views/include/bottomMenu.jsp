@@ -5,6 +5,10 @@
 
 <c:url var="getFooterData" value="getFooterData" />
 <!--footer start here-->
+<%{
+					session.removeAttribute("successMsg");
+					}
+				%>  
 <footer>
 	<div class="footer_menu">
 		<div class="wrapper">
@@ -47,13 +51,13 @@
 					<div class="footer_social">
 						<ul>
 							<li>Connect with Us :</li>
-							<li><a href="https://www.facebook.com/monginis/" id="faceLink" target="_blank"><i class="fa fa-facebook"
+							<li><a href="${sessionScope.cus.facebookLink}" id="faceLink" target="_blank"><i class="fa fa-facebook"
 									aria-hidden="true"></i></a></li>
-							<li><a href="https://twitter.com/MonginisIndia" id="twitLink" target="_blank"><i class="fa fa-twitter"
+							<li><a href="${sessionScope.cus.twitterLink}" id="twitLink" target="_blank"><i class="fa fa-twitter"
 									aria-hidden="true"></i></a></li>
-							<li><a href="https://www.instagram.com/monginiscelebrations/" id="instagram" target="_blank"><i class="fa fa-instagram"
+							<li><a href="${sessionScope.cus.youTubeLink}" id="instagram" target="_blank"><i class="fa fa-instagram"
 									aria-hidden="true"></i></a></li>
-							<li><a href="https://www.youtube.com/channel/UCL2K9zi9D94YBbmU1GJicAA" id="youtube" target="_blank"><i
+							<li><a href="${sessionScope.cus.youTubeLink}" id="youtube" target="_blank"><i
 									class="fa fa-youtube" aria-hidden="true"></i></a></li>
 						</ul>
 					</div>
@@ -71,17 +75,18 @@
 					</div>
 					<div class="cont_add">
 						<i class="fa fa-phone" aria-hidden="true"></i> <a id="phone1"
-							href="javascript:void(0)"></a> <span>/</span>
-						(+91) 1234567890 
+							href="javascript:void(0)"></a> 
+						<!-- (+91) 1234567890  -->${sessionScope.cus.footerPhone1}
+						<span>/</span>
 						<a id="phone2" href="javascript:void(0)"></a>
-						(+91) 9876 543 210
+						<!-- (+91) 9876 543 210 -->${sessionScope.cus.footerPhone2}
 					</div>
 					<div class="cont_add">
 						<i class="fa fa-envelope" aria-hidden="true"></i> <a id="email1"
 							href=""></a>
-						customercare@monginis.net
+						${sessionScope.cus.footerEmail1}
 						<span>/</span> <a id="email2" href=""></a>
-						mailto:info@monginis.net
+						${sessionScope.cus.footerEmail2}
 					</div>
 				</div>
 			</div>
@@ -113,7 +118,7 @@
 		}, 'slow');
 	}
 </script>
-<!-- <script type="text/javascript">
+ <!-- <script type="text/javascript">
 	getFooteDtl();
 	function getFooteDtl() {
 
@@ -156,10 +161,10 @@
 					},
 				});
 
-		/* $.getJSON('${getFooterData}', {
+		 $.getJSON('${getFooterData}', {
 			ajax : 'true',
 		}, function(data) {
 
-		}); */
+		}); 
 	}
-</script> -->
+</script>  -->

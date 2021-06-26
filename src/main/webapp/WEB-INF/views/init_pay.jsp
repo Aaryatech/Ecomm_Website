@@ -10,6 +10,10 @@
 	type="images/png" sizes="32x32">
 </head>
 <style>
+#container {
+	background: #F00 !important;
+}
+
 .pay_btn{    display: block;
     width: 100%;
 
@@ -27,6 +31,8 @@
 .goback_btn:hover{background: #373991; color: #FFF;}
 .makepay_btn{background: #373991; color:#FFF; font-size:16px;}
 .makepay_btn:hover{background: #ec268f; color: #FFF;}
+
+
 </style>
 <body >
 <button id="rzp-button1" style="display:none;">Pay ${sessionScope.userName}</button>
@@ -58,8 +64,15 @@ var options = {
         "address": "${sessionScope.landMark}"
     },
     "theme": {
-       "color": "#ec268f"
+       "color": "#ec268f",
+       "backdrop_color":"pink"
     	// "color": "orange"
+    },
+    "modal":{
+    	"backdropclose": 'false',
+    	"escape":'false',
+    	"confirm_close":'true',
+    	"animation":'true'
     }
 };
 

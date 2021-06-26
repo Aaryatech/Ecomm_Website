@@ -2175,10 +2175,12 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 			if (!$("#personMobile").val().trim()) {
 				mobile = false;
 				$("#errorPersonMobile").show();
+				isError=false;
 			} else if ($("#personMobile").val().trim().length != 10) {
 				mobile = false;
 				//$("#errorPersonMobile").hide();
 				$("#errorPersonMobile").show();
+				isError=false
 			} else {
 				$("#errorPersonMobile").hide();
 			}

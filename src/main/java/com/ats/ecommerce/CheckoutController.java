@@ -338,6 +338,20 @@ public class CheckoutController {
 								session.setAttribute("mobNo",
 										(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
 								System.err.println("In From Cookie "+session.getAttribute("mobNo"));
+								
+								
+								map = new LinkedMultiValueMap<>();
+								map.add("mobNo", session.getAttribute("mobNo"));
+								map.add("userId", 0);
+								Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustByMobNo", map,
+										Customer.class);
+								
+								String[] billAddress = cust.getExVar3().split("~");
+								model.addAttribute("getFlat", billAddress[0]);
+								model.addAttribute("getArea", billAddress[1]);
+								model.addAttribute("getLandmark", billAddress[2]);
+								model.addAttribute("getPin", billAddress[3]);
+								model.addAttribute("cust", cust);
 								break; 
 							}
 						}

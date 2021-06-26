@@ -165,6 +165,24 @@ public class ContactUs {
 	public void setFooterImage(String footerImage) {
 		this.footerImage = footerImage;
 	}
+	private String youTubeLink;
+	private String instagramLink;
+	
+	
+	public String getYouTubeLink() {
+		return youTubeLink;
+	}
+	public void setYouTubeLink(String youTubeLink) {
+		this.youTubeLink = youTubeLink;
+	}
+	
+	
+	public String getInstagramLink() {
+		return instagramLink;
+	}
+	public void setInstagramLink(String instagramLink) {
+		this.instagramLink = instagramLink;
+	}
 	@Override
 	public String toString() {
 		return "ContactUs [companyId=" + companyId + ", pageHead=" + pageHead + ", subHeading=" + subHeading

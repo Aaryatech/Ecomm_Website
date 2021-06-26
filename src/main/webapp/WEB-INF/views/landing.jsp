@@ -363,9 +363,12 @@
 										data-cityname="${cityList.cityName}">${cityList.cityName}</option>
 								</c:forEach>
 							</select>
+							
+							<span class="form-label-hint-error-l" id="error_citySel"
+								style="display: none;">This field is required.</span>
 						</div>
 					</div>
-					<div class="search_one" style="display: none;">
+					<!--SAC COMM 26-06-2021 <div class="search_one" style="display: none;">
 						<div class="search_one_l">
 							<input name="" type="text" class="input_search landing"
 								placeholder="Search your Area" /> <i class="fa fa-search"
@@ -375,10 +378,10 @@
 							<a href="get_location.html">Get Location</a>
 						</div>
 						<div class="clr"></div>
-					</div>
+					</div> -->
 
-					<div class="search_one">
-						<div class="search_one_l" id="textareaclass">
+					<div class="search_one"  >
+						<div class="search_one_l" id="textareaclass" style="display: none;">
 							<input name="txtPlaces" value="" type="text" required
 								class="input_search landing" placeholder="Search your Area"
 								id="txtPlaces" /> <i class="fa fa-search" aria-hidden="true"></i>
@@ -391,7 +394,7 @@
 							type="hidden" id="hideLong" />
 
 
-						<div class="search_one_r">
+						<div class="search_one_r" style="display: none;" id="gl_div">
 							<%-- <a href="${pageContext.request.contextPath}/viewmap">Get
 								Location</a> --%>
 
@@ -465,16 +468,32 @@
 					<div class="proceed_btn_1">
 						<input name="" id="addNewAddDiv_btn" type="button"
 							value="Proceed with Address" class="proceed" />
+							
+							<span id="resetBtnDiv1"  > <input
+							name="" id="resetbtn1_SAC" type="button" value="RESET"
+							class="landingpop-mobno_open proceed" title="Reset your address" onclick="resetPage()" />
+						</span>
 					</div>
+					
 				</div>
-
-
+				
+				<style type="text/css">
+					.form-label-hint-error-l.mongi{
+					color: #FFF !important; text-align: left !important; margin: 0 0 10px 0 !important;
+					}
+				</style>
+				
+				<span class="form-label-hint-error-l mongi" id="no_del_avail" 
+				style="display: none;">
+					Service not available at your pointed location. Please Reset
+				</span>
+								
 				<div id="addAddDiv" style="display: none;">
 					<div class="proceed_btn_1">
-						<input name="" id="submtbtn" type="button"
+						<input name="" id="submtbtn" type="button"  style="display: none;"
 							value="Proceed New User" class="landingpop-mobno_open proceed" />
-
-						<span id="resetBtnDiv" style="display: none;"> <input
+<!--display none of reset btn cleared by sachin 26-06  -->
+						<span id="resetBtnDiv" > <input
 							name="" id="resetbtn" type="button" value="RESET"
 							class="landingpop-mobno_open proceed" onclick="resetPage()" />
 						</span>
@@ -667,6 +686,7 @@
 			$("#error_txtPlaces").hide();
 			$("#main_submit").hide();
 			$('#no_user_exist').hide();
+			$("#error_citySel").hide();
 			document.getElementById("mobNo").readOnly = false;
 
 			document.getElementById("otp_div").style = "display:none";
@@ -686,6 +706,15 @@
 			} else {
 				$("#error_txtPlaces").hide()
 			}
+			/* if (!$("#citySel").val()<1) {
+				isError = true;
+				$("#error_citySel").show()
+			} else {
+				$("#error_citySel").hide()
+			} */
+			
+			
+			
 			//alert(isError);
 			if (isError == false) {
 				document.getElementById("mobNo").value = "";
@@ -769,10 +798,13 @@
 													textStatus, jqXHR) {
 												isReload = true;
 												var url = "";
-												if (parseInt(resData) == 1
-														|| parseInt(resData) == 3) {
+												if (parseInt(resData) == 1) {
 													url = '${pageContext.request.contextPath}/home';
-												} else if (parseInt(resData) == 0) {
+												}
+												else if (parseInt(resData) == 3) {
+													url = '${pageContext.request.contextPath}/home';
+												}
+												else if (parseInt(resData) == 0) {
 													//alert("Ok Here 731")
 													$('#landingpop-mobno')
 															.show();
@@ -1141,7 +1173,23 @@
 			document.getElementById("txtPlaces").removeAttribute("readonly");
 			$('#citySel').prop('disabled', false);
 		});
-
+		
+		
+		$("#mobNo").keyup(function(){
+			var mob=document.getElementById("mobNo").value;
+			if(mob.length==10){
+				document.getElementById("sendOtpBtn").focus();
+			}
+			});
+		
+		$("#txtPlaces").change(function(){
+		
+			document.getElementById("gl_div").style="display:block";
+			sessionStorage.setItem("fromGetLocation", "0");
+			
+			});
+		
+		
 		function getCityName(val) {
 			var cityname = $("#city" + val).data("cityname");
 			document.getElementById("txtPlaces").removeAttribute("readonly");
@@ -1149,8 +1197,11 @@
 			$('#txtPlaces').val(cityname + " ");
 
 			document.getElementById("txtPlaces").focus();
+			document.getElementById("textareaclass").style="display:block";
+			
 		}
 		function calculateDistance(latitude, longitude, type) {
+			var isShopFound=0;
 			try {
 				var frData = '${frData}';
 				sessionStorage.setItem("frList", frData);
@@ -1235,6 +1286,7 @@
 										if (longitude != 0 && latitude != 0
 												&& fromGetLocation != 0) {
 											$('#showShopDiv').show();
+											isShopFound=1;
 										}
 
 										$('#selectShop').html('');
@@ -1260,8 +1312,10 @@
 												/* if(list[j].frId==13){
 													alert(list[j].exInt1);
 												} */
+												
 												if (km <= parseFloat(list[j].noOfKmAreaCover)) {
 													newFrList.push(list[j]);
+													isShopFound=2;
 												}
 
 											} catch (err) {
@@ -1270,6 +1324,16 @@
 
 										}
 										//alert(JSON.stringify(newFrList))
+											
+										if(newFrList.length==0 && fromGetLocation == 1 && longitude != 0 && latitude != 0){
+											//alert("NOt found")
+											document.getElementById("no_del_avail").style="display:block";
+											document.getElementById("submtbtn").style="display:none";
+										}else if(fromGetLocation == 1  && longitude != 0 && latitude != 0){
+											//alert("In Else")
+											document.getElementById("submtbtn").style="display:inline-block";
+											sessionStorage.setItem("fromGetLocation", "0");
+										}
 										sortArray(newFrList, "exInt1");
 
 										for (var j = 0; j < newFrList.length; j++) {
@@ -1292,6 +1356,8 @@
 			} catch (e) {
 				//alert(e)
 			}
+			
+			
 		}//End of function calc dist
 		google.maps.event.addDomListener(window, 'load', function() {
 			var places = new google.maps.places.Autocomplete(document
@@ -1310,8 +1376,6 @@
 					var address = place.formatted_address;
 					var latitude = place.geometry.location.lat();
 					var longitude = place.geometry.location.lng();
-					/*  alert(latitude)
-					alert(longitude)  */
 
 					document.getElementById('hideLong').value = longitude;
 					document.getElementById('hideLat').value = latitude;
@@ -1324,7 +1388,7 @@
 				}
 
 			});
-
+ 
 		});
 		function sortArray(array, property, direction) {
 			direction = direction || 1;

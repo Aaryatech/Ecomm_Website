@@ -5,6 +5,14 @@ public class SimilarFalvrNameDetail {
 	private int filterId;
 	private String flavorName;
 	private String productId;
+	private String prodNameDisp;
+	
+	public String getProdNameDisp() {
+		return prodNameDisp;
+	}
+	public void setProdNameDisp(String prodNameDisp) {
+		this.prodNameDisp = prodNameDisp;
+	}
 	public int getFilterId() {
 		return filterId;
 	}

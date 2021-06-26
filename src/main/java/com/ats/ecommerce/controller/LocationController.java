@@ -44,6 +44,8 @@ public class LocationController {
 		
 		try {
 			model.addAttribute("isAddNewAdd", 1);
+			HttpSession session = request.getSession();
+			session.setAttribute("isAddNewAdd",1);
 			System.err.println("In  returnPage = landing ShowAddNewAdd ");
 			ObjectMapper mapper = new ObjectMapper();
 			CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
@@ -61,6 +63,8 @@ public class LocationController {
 			CategoryList[] catArray = mapper.readValue(
 					new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
 			List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+			catList.clear();
+			catList=data.getCompanyCatList();
 			model.addAttribute("catList", catList);
 			model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
 
@@ -86,7 +90,7 @@ public class LocationController {
 			HttpSession session = request.getSession();
 			try {
 				int custId=(int) session.getAttribute("custId");
-				System.err.println("custId In /" +custId);
+				System.err.println("custId In Landing" +custId);
 				if(custId>0) {
 					System.err.println("If");
 					session.setAttribute("isAddressPopup", 0);
@@ -108,7 +112,24 @@ public class LocationController {
 								Integer.parseInt(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
 						int custId=(int) session.getAttribute("custId");
 						System.err.println("custId In cookie found and set /" +custId);
+						
 						returnPage = "redirect:/home";
+						if((int) (request.getSession().getAttribute("isAddNewAdd"))==1) {
+							System.err.println("HERE LANDING ISADDNEWADD 1");
+							returnPage = "landing";
+							model.addAttribute("userType", 3);
+							ObjectMapper mapper = new ObjectMapper();
+							CityData[] city = mapper.readValue(new File(Constants.JSON_FILES_PATH + "AllCityData_.json"),
+									CityData[].class);
+							List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
+							String frData = new Scanner(new File(Constants.JSON_FILES_PATH + "AllFrData_.json")).useDelimiter("\\Z")
+									.next();
+							
+							//System.err.println("FR --------------> "+frData);
+
+							model.addAttribute("cityList", cityList);
+							model.addAttribute("frData", frData);
+						}
 						isCookieFound = 1;
 						break;
 					}
@@ -182,6 +203,8 @@ public class LocationController {
 				CategoryList[] catArray = mapper.readValue(
 						new File(Constants.JSON_FILES_PATH + "MasterCategoryData_.json"), CategoryList[].class);
 				List<CategoryList> catList = new ArrayList<>(Arrays.asList(catArray));
+				catList = new ArrayList<>();
+				catList=data.getCompanyCatList();
 				model.addAttribute("catList", catList);
 				model.addAttribute("catImgUrl", Constants.CAT_IMG_VIEW_URL);
 try {

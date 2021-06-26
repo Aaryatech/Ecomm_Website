@@ -77,6 +77,7 @@ public class HomeController {
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
 		System.err.println("In  home ");
 		HttpSession session = request.getSession();
+		session.setAttribute("isAddNewAdd",0);
 		String strFrId = "0";
 		int frId = 0;
 		try {
@@ -164,6 +165,9 @@ public class HomeController {
 
 				model.addAttribute("testMonialList", data.getTestimonialList());
 				model.addAttribute("TestimonialImgUrl", Constants.TESTMON_IMG_VIEW_URL);
+				
+				model.addAttribute("catList", data.getCompanyCatList());
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,6 +188,8 @@ public class HomeController {
 				session.setAttribute("userAddress", cust.getExVar3());
 				session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
 				session.setAttribute("mobNo", cust.getCustMobileNo());
+				session.setAttribute("companyId",cust.getCompanyId());
+
 			} else {
 				System.err.println("custId <1 " + custId);
 				session.removeAttribute("userName");
@@ -202,14 +208,46 @@ public class HomeController {
 							session.setAttribute("mobNo",
 									(EncodeDecode.DecodeKey(cookieArray[a].getValue())));
 							System.err.println("In From Cookie "+session.getAttribute("mobNo"));
+							
+							MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+							/*
+							 * map.add("custId", custId); Customer cust =
+							 * Constants.getRestTemplate().postForObject(Constants.url + "getCustById", map,
+							 * Customer.class);
+							 */
+							try {
+							map = new LinkedMultiValueMap<>();
+							map.add("mobNo", session.getAttribute("mobNo"));
+							map.add("userId", 0);
+							Customer cust = Constants.getRestTemplate().postForObject(Constants.url + "getCustByMobNo", map,
+									Customer.class);
+							
+							session.setAttribute("userName", cust.getCustName());
+							session.setAttribute("userEmail", cust.getEmailId());
+							session.setAttribute("userMobile", cust.getCustMobileNo());
+							session.setAttribute("userAddress", cust.getExVar3());
+							session.setAttribute("profileImg", Constants.PROFILE_IMG_VIEW_URL + cust.getProfilePic());
+							session.setAttribute("mobNo", cust.getCustMobileNo());
+							session.setAttribute("custId", cust.getCustId());
+							try {
+							int compId = (Integer) session.getAttribute("companyId");
+							}catch (Exception e) {
+								session.setAttribute("companyId",cust.getCompanyId());
+							}
+							
+							}catch (Exception e) {
+								
+							}
 							break; 
 						}
 					}
 
 			}
 		} catch (Exception e) {
-			System.err.println("In Home catch");
-			// e.printStackTrace();
+			System.err.println("In Home catch LLL");
+			e.printStackTrace();
+			//return "redirect:/";
+			return "redirect:/";
 		}
 
 		List<GetFlavorTagStatusList> tagList = new ArrayList<>();
@@ -239,7 +277,53 @@ public class HomeController {
 			session.setAttribute("likeCount", 0);
 		}
 		model.addAttribute("tagsJson", jsonStr);
+//Mahendra Code
+		ContactUs cus = new ContactUs();
 
+		int compId = (Integer) session.getAttribute("companyId");
+
+		mapper = new ObjectMapper();
+		ContactUs[] cusArr = null;
+
+		try {
+			cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH +
+			compId+"_ContactUS_.json"), ContactUs[].class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
+		System.err.println("cont=" + cusList);
+		for (int i = 0; i < cusList.size(); i++) {
+
+		if (cusList.get(i).getCompanyId() == compId) {
+
+		cus.setFacebookLink(cusList.get(i).getFacebookLink());
+		cus.setTwitterLink(cusList.get(i).getTwitterLink());
+		cus.setLinkedInLink(cusList.get(i).getLinkedInLink());
+		cus.setGoogleAcLink(cusList.get(i).getGoogleAcLink());
+		cus.setYouTubeLink(cusList.get(i).getYouTubeLink());
+		cus.setInstagramLink(cusList.get(i).getInstagramLink());
+
+		cus.setOfficeAddress(cusList.get(i).getOfficeAddress());
+		cus.setFooterEmail1(cusList.get(i).getFooterEmail1());
+		cus.setFooterEmail2(cusList.get(i).getFooterEmail2());
+		cus.setFooterPhone1(cusList.get(i).getFooterPhone1());
+		cus.setFooterPhone2(cusList.get(i).getFooterPhone2());
+		cus.setFooterImage(Constants.PROD_IMG_VIEW_URL +
+		cusList.get(i).getFooterImage());
+		}
+		}
+		session.setAttribute("cus", cus);
+		System.out.println("Ses Cus"+session.getAttribute("cus"));
+		//End Mahendra 
 		if (frId > 0) {
 			System.err.println("A");
 			return "home";
@@ -676,6 +760,7 @@ try {
 								SimilarFalvrNameDetail similarFalvrNameDetail = new SimilarFalvrNameDetail();
 								similarFalvrNameDetail.setFilterId(prod.getDefaultShapeId());
 								similarFalvrNameDetail.setProductId(smilarprdts[j]);
+								similarFalvrNameDetail.setProdNameDisp(prod.getProdNameDisp());
 								//similarFalvrNameDetail.setFlavorName("ABC" +prod.getProductCode());
 								list.add(similarFalvrNameDetail);
 								break;
@@ -1024,7 +1109,7 @@ try {
 		}
 
 		model.addAttribute("tagsJson", jsonStr);
-		
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 		return "about-us";
 		
 		
@@ -1055,12 +1140,12 @@ try {
 		}
 
 		model.addAttribute("tagsJson", jsonStr);
-		
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 		return "privacyPolicy";
 	}
 
-	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
-	public String showContactUsPage(Locale locale, Model model)
+	@RequestMapping(value = "/showContactUsPage_OLD", method = RequestMethod.GET)
+	public String showContactUsPage_OLD(Locale locale, Model model)
 			throws JsonParseException, JsonMappingException, IOException {
 		if(data!=null) {
 		int compId = data.getFranchiseCatList().get(0).getCompanyId();
@@ -1116,7 +1201,7 @@ try {
 				cus.setPhone2(cusList.get(i).getPhone2());
 			}
 		}
-
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 		model.addAttribute("cus", cus);
 		}
 		return "contact-us";
@@ -1145,7 +1230,7 @@ try {
 		}
 
 		model.addAttribute("tagsJson", jsonStr);
-		
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 		return "terms-condition";
 	}
 
@@ -1170,7 +1255,7 @@ try {
 			jsonStr = Obj.writeValueAsString(tagList);
 		} catch (Exception e) {
 		}
-
+		model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
 		model.addAttribute("tagsJson", jsonStr);
 		return "visit-stores";
 	}
@@ -1184,7 +1269,8 @@ try {
 //			List<CityData> cityList = new ArrayList<>(Arrays.asList(city));
 
 			// model.addAttribute("cityList", cityList);
-			
+			model.addAttribute("prodImgUrl", Constants.PROD_IMG_VIEW_URL);
+
 			List<GetFlavorTagStatusList> tagList = new ArrayList<>();
 
 			try {
@@ -1312,11 +1398,12 @@ try {
 
 			model.addAttribute("tagsJson", jsonStr);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "redirect:/";
 		//	System.out.println("Exception in /addresslist : " + e.getMessage());
 			//e.printStackTrace();
 		}
-		return "addresslist";
+		return "addresslist"; 
 	}
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profile(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -1391,4 +1478,69 @@ try {
 		}
 		return "profile";
 	}
+	
+	@RequestMapping(value = "/showContactUsPage", method = RequestMethod.GET)
+	public String showContactUsPage(Locale locale, Model model)
+	throws JsonParseException, JsonMappingException, IOException {
+	if(data!=null) {
+	int compId = data.getFranchiseCatList().get(0).getCompanyId();
+	System.out.println("Compan Id : " + compId);
+	List<GetFlavorTagStatusList> tagList = new ArrayList<>();
+
+	try {
+	for (GetFlavorTagStatusList tag : data.getFlavorTagStatusList()) {
+	if (tag.getFilterTypeId() == 7) {
+	tagList.add(tag);
+	}
+	}
+	} catch (Exception e) {
+
+	}
+
+	ObjectMapper Obj = new ObjectMapper();
+	String jsonStr = "";
+	try {
+	jsonStr = Obj.writeValueAsString(tagList);
+	} catch (Exception e) {
+	}
+
+	model.addAttribute("tagsJson", jsonStr);
+	ContactUs cus = new ContactUs();
+
+	ObjectMapper mapper = new ObjectMapper();
+	ContactUs[] cusArr = null;
+
+	cusArr = mapper.readValue(new File(Constants.JSON_FILES_PATH +
+	"1_ContactUS_.json"), ContactUs[].class);
+
+	List<ContactUs> cusList = new ArrayList<ContactUs>(Arrays.asList(cusArr));
+	for (int i = 0; i < cusList.size(); i++) {
+	if (cusList.get(i).getCompanyId() == compId) {
+
+	cus.setCompanyId(compId);
+
+	cus.setEmailText(cusList.get(i).getEmailText());
+	cus.setEmail1(cusList.get(i).getEmail2());
+	cus.setEmail2(cusList.get(i).getEmail1());
+
+	cus.setManufacAddressTxt(cusList.get(i).getManufacAddressTxt());
+	cus.setManufacAddress(cusList.get(i).getManufacAddress());
+
+	cus.setOfficeText(cusList.get(i).getOfficeText());
+	cus.setOfficeAddress(cusList.get(i).getOfficeAddress());
+
+	cus.setPageHead(cusList.get(i).getPageHead());
+	cus.setSubHeading(cusList.get(i).getSubHeading());
+
+	cus.setPhoneText(cusList.get(i).getPhoneText());
+	cus.setPhone1(cusList.get(i).getPhone1());
+	cus.setPhone2(cusList.get(i).getPhone2());
+	}
+	}
+
+	model.addAttribute("cus", cus);
+	}
+	return "contact-us";
+	}
+
 }

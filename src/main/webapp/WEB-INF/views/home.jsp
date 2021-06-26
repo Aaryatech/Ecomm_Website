@@ -5,6 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.ats.ecommerce.model.CategoryList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+
+
 
 
 <!DOCTYPE html>
@@ -175,7 +180,7 @@
 			
 			$(window).on('load', function(){
 				//alert("Ok")
-  setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+  setTimeout(removeLoader, 1000); //wait for page load PLUS two seconds.
 });
 function removeLoader(){
     $( "#loadingDiv").fadeOut(500, function() {
@@ -191,21 +196,56 @@ function removeLoader(){
 	</div>
 
 	<!-- STATIC -->
-
+<%!
+public void getData(int catId,  PageContext pc,HttpServletRequest request){
+	List<String> strList=new ArrayList<String>();
+	List<CategoryList> catList=(List<CategoryList>) request.getAttribute("catList");
+	for(int c=0;c<catList.size();c++){
+		
+		if(catList.get(c).getStaticCatId()==catId){
+			//pageContext.setAttribute("cId", catList.get(c).getCatId());
+			strList.add(""+catList.get(c).getCatId());
+			strList.add(""+catList.get(c).getCatName().replace(' ','-'));
+			strList.add(""+catList.get(c).getCatName().replace(' ','-'));
+			
+			pc.setAttribute("cId", catList.get(c).getCatId());
+			pc.setAttribute("cname", catList.get(c).getCatName().replace(' ','-'));
+			pc.setAttribute("catName", catList.get(c).getCatName());
+			pc.setAttribute("cimgAlt", catList.get(c).getImageAlt());
+			break;
+		}//If close
+		
+	}//Loop close
+/* 	pc.setAttribute("cId", strList.get(0));
+	pc.setAttribute("cname", strList.get(1)); */
+	//return strList;
+}
+%>
 	<!-- multiple product boxes -->
 	<div class="find_store">
 		<div class="wrapper">
 			<div class="prod_cat_bx">
 				<div class="prod_cat_1">
 					<div class="cakes_cat_1">
+					<% 
+					PageContext pc=pageContext;
+					//List<CategoryList> catList=(List<CategoryList>)request.getAttribute("catList");
+					//System.out.print("catList in Home 33" +catList);
+					try{
+					 getData(1, pc,request);
+					 
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
 						<a
-							href="${pageContext.request.contextPath}/showProductListCategory/1/Cakes">
+							href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
 							<div class="img_cap">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/cakes_1.jpg"
-									alt="Order cake online">
+									alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
 								<div class="prod_cat_cap">
-									<span>Cakes</span>
+									<span><% out.print(pageContext.getAttribute("catName"));%></span>
 								</div>
 							</div>
 						</a>
@@ -215,7 +255,24 @@ function removeLoader(){
 					<div class="divid_two">
 						<div class="divide_one_pic left">
 							<div class="single_pic">
+							<% 
+					try{
+					 getData(2, pc,request);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
 								<a
+									href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
+									alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
+									<div class="prod_cat_cap1">
+										<span><% out.print(pageContext.getAttribute("catName"));%></span>
+									</div>
+								</a>
+								
+								<%-- <a
 									href="${pageContext.request.contextPath}/showProductListCategory/2/Pastries">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_1.jpg"
@@ -223,12 +280,29 @@ function removeLoader(){
 									<div class="prod_cat_cap1">
 										<span>Pastries</span>
 									</div>
-								</a>
+								</a> --%>
 							</div>
 						</div>
 						<div class="divide_one_pic right">
 							<div class="single_pic">
-								<a
+							
+							<% 
+					try{
+					 getData(3, pc,request);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
+					<a
+									href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
+									alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
+									<div class="prod_cat_cap1">
+										<span><% out.print(pageContext.getAttribute("catName"));%></span>
+									</div>
+								</a>
+								<%-- <a
 									href="${pageContext.request.contextPath}/showProductListCategory/3/Savories">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_2.jpg"
@@ -236,7 +310,7 @@ function removeLoader(){
 									<div class="prod_cat_cap1">
 										<span>Savories</span>
 									</div>
-								</a>
+								</a> --%>
 							</div>
 						</div>
 						<div class="clr"></div>
@@ -244,7 +318,24 @@ function removeLoader(){
 					<div class="divid_two">
 						<div class="divide_one_pic left">
 							<div class="single_pic">
-								<a
+							
+							<% 
+					try{
+					 getData(9, pc,request);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
+						<a
+									href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
+									alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
+									<div class="prod_cat_cap1">
+										<span><% out.print(pageContext.getAttribute("catName"));%></span>
+									</div>
+								</a>
+							<%-- 	<a
 									href="${pageContext.request.contextPath}/showProductListCategory/9/Packaged-Cakes">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_3.jpg"
@@ -252,12 +343,28 @@ function removeLoader(){
 									<div class="prod_cat_cap1">
 										<span>Packaged Cakes</span>
 									</div>
-								</a>
+								</a> --%>
 							</div>
 						</div>
 						<div class="divide_one_pic right">
 							<div class="single_pic">
-								<a
+								<% 
+					try{
+					 getData(4, pc,request);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
+					<a
+									href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
+									<img
+									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
+									alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
+									<div class="prod_cat_cap1">
+										<span><% out.print(pageContext.getAttribute("catName"));%></span>
+									</div>
+								</a>
+								<%-- <a
 									href="${pageContext.request.contextPath}/showProductListCategory/4/Chocolates">
 									<img
 									src="${pageContext.request.contextPath}/resources/images/offers_prod_4.jpg"
@@ -265,14 +372,31 @@ function removeLoader(){
 									<div class="prod_cat_cap1">
 										<span>Chocolates</span>
 									</div>
-								</a>
+								</a> --%>
 							</div>
 						</div>
 						<div class="clr"></div>
 					</div>
 					<div class="single_prod">
 						<div class="single_pic">
-							<a
+						
+						<% 
+					try{
+					 getData(8, pc,request);
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
+					<a
+								href="${pageContext.request.contextPath}/showProductListCategory/<% out.print(pageContext.getAttribute("cId"));%>/<%out.println(pageContext.getAttribute("cname"));%>">
+								<img
+								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
+								alt="<% out.print(pageContext.getAttribute("cimgAlt"));%>">
+								<div class="prod_cat_cap1">
+									<span><% out.print(pageContext.getAttribute("catName"));%></span>
+								</div>
+							</a>
+							<%-- <a
 								href="${pageContext.request.contextPath}/showProductListCategory/8/Bakersware">
 								<img
 								src="${pageContext.request.contextPath}/resources/images/offers_prod_5.jpg"
@@ -280,7 +404,7 @@ function removeLoader(){
 								<div class="prod_cat_cap1">
 									<span>Bakersware</span>
 								</div>
-							</a>
+							</a> --%>
 
 						</div>
 					</div>
@@ -288,6 +412,7 @@ function removeLoader(){
 				<div class="prod_cat_3">
 					<div class="lst_tow marg_btm divice">
 						<div class="single_pic">
+						
 							<a
 								href="#">
 								<img
@@ -419,7 +544,7 @@ function removeLoader(){
 										<%-- 	<c:when test="${product.prodStatusId==statusFilter.filterId}"> --%>
 										<div>
 											<div class="cake_one">
-												<div class="cake_pic">
+												<div class="cake_pic home">
 													<a
 														href="${pageContext.request.contextPath}/showProductDetail/${product.productId}/${product.prodNameDisp}" target="_blank">
 														<img src="#"
@@ -1595,7 +1720,7 @@ function removeLoader(){
 			rate=rate*wt;
 			
 			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
+			document.getElementById("newPrice"+id).innerHTML=""+rate.toFixed(1);
 
 
 		}

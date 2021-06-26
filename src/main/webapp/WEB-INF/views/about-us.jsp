@@ -590,6 +590,7 @@ $('.dropdown').click(function () {
 </script>    
 
   
+    <jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
     
 </body>
 

@@ -79,7 +79,7 @@ img{border:0px;max-width:100%;vertical-align:top}
 -o-box-sizing:border-box;box-sizing:border-box}
 :before,:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;
 -o-box-sizing:border-box;box-sizing:border-box}
-a{text-decoration:none; color:#bc5627;}
+a{text-decoration:none; color:#ec2c92 /* #bc5627 */;}
 *{text-rendering:optimizeLegibility}
 html.touch *{text-rendering:optimizeSpeed}
 p{margin: 0px;padding: 0px;}
@@ -478,7 +478,7 @@ input[type=radio]:checked ~ .check {border: 1px solid #ec2c92;}
 input[type=radio]:checked ~ .check::before{background: #ec2c92;}
 input[type=radio]:checked ~ label{color: #ec2c92;}
 
-.radio_r{float: right; width: 49%; text-align: right;}
+.radio_r{float: right; width: 49%; text-align: right; margin: 6px 0 0 0;}
 .cart_btn{background: #d90e67; font-size: 11px; text-transform: uppercase; font-family: 'Hind-Medium'; padding: 5px 15px; border-radius: 3px; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 .cart_btn:hover{background: #373991; color: #FFF; -webkit-transition: all ease 0.5s;-moz-transition: all ease 0.5s;-o-transition: all ease 0.5s;-ms-transition: all ease 0.5s;transition: all ease 0.5s;}
 
@@ -874,7 +874,13 @@ table.cart.inner tr:nth-child(odd){background-color: #f2f2f2}
 .prc_amt{color: #ec268f; font-family: 'Hind-Medium';}
 .paid {color: #02ab79; font-family: 'Hind-Medium';}
 .deliverd{/*background: #02ab79; color: #FFF; font-size: 12px; border-radius: 15px; padding: 5px 20px; font-family: 'Hind-SemiBold';*/
-background: #d6f3e9; color: #02ab79; font-size: 12px; font-family: 'Hind-SemiBold';border-radius: 15px; padding: 5px 20px;}
+background: #d6f3e9; color: #02ab79; font-size: 12px; font-family: 'Hind-SemiBold';border-radius: 15px; padding: 5px 20px;
+width: 130px;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;}
 .pending_ord{background: #f5d7e7; color: #ec268f; font-size: 12px; font-family: 'Hind-SemiBold';border-radius: 15px; padding: 5px 20px;}
 
 .table_title_one{text-align: center; color: #ec268f; font-size: 22px; line-height: 28px; text-align: center; padding: 15px 0; border-top: 1px solid #dfe1e4;}
@@ -1158,7 +1164,7 @@ img.xzoom{width: 100%; /* height:389px; */ height:494px; object-fit:cover;}
 .radio_menu .checkmark:after {top: 2px; left: 2px; width: 8px; height: 8px; border-radius: 50%; background: white;}
 
 /*check box css*/
-.check_menu {display: block; position: relative; padding-left: 22px; margin-bottom: 12px; cursor: pointer; font-size: 22px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+.check_menu {/* display: block; */ position: relative; padding-left: 22px; margin-bottom: 12px; cursor: pointer; font-size: 22px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 .check_menu input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
 .checkmark_check {position: absolute; top: 3px; left: 0; height: 14px; width: 14px; background-color: #FFF; border: 1px solid #CCC;} 
 .check_menu:hover input ~ .checkmark_check {background-color: #FFF; border: 1px solid #CCC;}
@@ -1290,7 +1296,11 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
 .test_nm_r span{display: block; font-size: 16px; font-family: 'Hind-Regular'; color: #545b77;}
 
 
-.contact_sucs_msg{background-color: #ed558e; color: #fff; text-align: center; padding: 10px 0px; border: 0px;"}
+.contact_sucs_msg{background-color: #ed558e; color: #fff; text-align: center; padding: 10px 0px; border: 0px;}
+
+/*24 june 2021*/
+.radio_r a i.shop_cart{font-size: 20px;} 
+
 
 /*-------------------------------------------------------------------------------------------------*/
 @media screen and (max-width:1280px){
@@ -1581,8 +1591,9 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
 
         .cart_prc_1,.cart_pic_row, .cart_option{width: auto; display: inline-block; text-align: left;}
         .cart_delete {
-    text-align: left;
+    text-align: right /* left */;
 }
+
         .cart_remove{text-align:center /* left */;}
         .qtyminus.cart, .qtyplus.cart{margin: 0;}
         
@@ -1646,6 +1657,7 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
 
 
 @media screen and (max-width:700px){
+	
 	.qty.slide{width: 50%;}
 	.plus_minus_one{width: 50%;}
 	.prod_kgs{line-height: 24px;}
@@ -1751,14 +1763,20 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .cake_prc_detail_pclass{font-size: 18px;}
     .cake_prc i {font-size: 15px; margin: 6px 3px 0 0;}
     
-    .cake_pic img {height: 150px;} 
-    .purity_icn img{height: 17px;}/* 31-5 */
+    /* .cake_pic img {height: 150px;}  */
+    .purity_icn img{height: 17px !important;}/* 31-5 */
     .circle_tag img{width: 100%; height: 100%;}
     .well.small {width: 90%;}
+    
+    .radio_r {width: 14%;}
+    .detail_drop.four ul li {width: 50%;}
     
     
     .left_side{float: left; width: 100%; margin:  0 0 5px 0;}
     .right_side{float: left; width: 100%; }
+    
+    .user_login {margin: 2px 0 0 0;}
+    .address_txt span.land_mark_css{height:auto;}
     
 }
 @media screen and (max-width:640px){
@@ -1787,7 +1805,7 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .input_search,.dropdown{font-size:14px;}
     .select_location span img{top: 0;}
     .select_location span {font-size: 15px; line-height: 22px; display: inline-block; width: 100%;}
-    .proceed{font-size: 14px; padding: 10px; width: 100%; display: block;}
+    .proceed{font-size: 14px; padding: 10px; width: 100%; display: block; margin: 0 0 10px 0;}
     .search_one_r a{font-size: 13px;}
     
     
@@ -1860,7 +1878,7 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .banner_title {font-size: 18px; line-height: 22px;}
     .banner_title span {font-size: 14px;}
     .banner_txt { font-size: 14px;}
-    .send_now_btn {padding: 5px 20px; font-size: 12px; margin: 6px 0 0 0;}
+    .send_now_btn {padding: 0; font-size: 12px; margin: 6px 0 0 0;}
     .mobile_fit{object-fit: cover; width: 100%;}
     .openbtn.heart{font-size: 16px;}
     .prod_cat_1{float: none; width: 100%; margin: 0 0 10px 0;}
@@ -1883,7 +1901,10 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .strip_payment {padding: 10px 10px 10px 60px;}
     .certificate_one,.menu_list {padding: 0 0 15px 0; float: none; width: 100%; border-right: none; border-bottom: 1px solid #3c3578; min-height: auto; display: inline-block;} 
     .menu_list {padding: 15px 0;}
-    .footer_title{margin: 0 0 15px 0;}
+    
+    .footer_title{margin: 0 0 15px 0; padding:0;}
+    .footer_title:after{display: none;}
+    
     ul.footer_menu_list li{padding: 0 0 0 20px;}
     ul.footer_menu_list li, .cont_add,.copyright{font-size: 13px;}
     .cont_add{margin: 0 0 10px 0;}
@@ -1904,6 +1925,18 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     
     .head_marg {margin: 89px 0 0 0;}
     .prod_fit_txt ul li a{padding: 7px 15px;}
+    
+    .radio_r{margin:4px 0 0 0;}
+    .radio_r a i.shop_cart{font-size: 18px;}
+    /* .radio_r{float: none;} */
+    .cake_pic img {height: 165px;}
+    .cake_pic.home img{height: 300px /* 205px */;}
+    
+    .circle_tag img:first-child{height: 20px;}
+.circle_tag img:last-child{height: 20px;}
+.circle_tag:hover img:first-child,.circle_tag.active img:first-child{height: 20px;}
+.circle_tag:hover img:last-child,.circle_tag.active img:last-child{height: 20px;}
+    
 }
 
 @media screen and (max-width:480px){
@@ -1952,7 +1985,10 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .small_l{float: none; width: 100%; padding-bottom: 6px; margin-bottom: 6px; border-bottom: 1px dashed #CCC;}
     .small_r{float: none; width: 100%;}
     .cake_dropdown_l{float: left; width: 79%;}
-.cake_dropdown_r{float: right; width: 19%;}
+.cake_dropdown_r{/* float: right; width: 19%; */
+    float: right;
+    width: 16%;
+    padding: 0 20px 0 0;}
     
     
 }

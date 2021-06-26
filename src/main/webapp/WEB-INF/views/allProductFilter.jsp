@@ -1146,29 +1146,34 @@ if(allItemArr[i].rateSettingType==0){
 		
 		
 		function loadData() {
-
+try{
 			var noimage='onerror="this.src=\'${pageContext.request.contextPath}/resources/images/no_img_folder/no-product-image.jpg\'"';
 
 			
 			if (sessionStorage.getItem("selTags") == null) {
+				console.log("A",1)
 				var table = [];
 				sessionStorage.setItem("selTags", JSON.stringify(table));
 			}
 
 			if (sessionStorage.getItem("allItemList") == null) {
+				console.log("A",2)
 				var table = [];
 				sessionStorage.setItem("allItemList", JSON.stringify(table));
 			}
 
 			if (sessionStorage.getItem("priceFilterMin") == null) {
+				console.log("A",3)
 				sessionStorage.setItem("priceFilterMin", "0");
 			}
 
 			if (sessionStorage.getItem("priceFilterMax") == null) {
+				console.log("A",4)
 				sessionStorage.setItem("priceFilterMax", "0");
 			}
 
 			if (sessionStorage.getItem("menuFilterName") == null) {
+				console.log("A",5)
 				sessionStorage.setItem("menuFilterName", "");
 			}
 			
@@ -1560,14 +1565,15 @@ if(allItemArr[i].rateSettingType==0){
 			//alert(hiddenProductListArr.length)
 			
 			if(hiddenProductListArr.length > 0){
-				
+				//console.log("hiddenProductListArr",hiddenProductListArr);
+				console.log("catId",catId);
 				//alert("Anmol")
 				var val;
 				for(var i=0; i<hiddenProductListArr.length; i++){
 					 /* if(hiddenProductListArr[i].isLike==1){
 						alert("Ok 1488"+hiddenProductListArr[i].productName)
 					} */
-					if(catId==0){
+					if(catId==0||catId==null||catId==""){
 						//alert("OkAAAA 06-04-2021")
 						displayListArr.push(hiddenProductListArr[i]);
 						//setProductData(hiddenProductListArr[i]);
@@ -2102,10 +2108,13 @@ if(allItemArr[i].rateSettingType==0){
 			}else{
 				prodCountTxt=count+" Results Found";
 			}
-			
+			console.log("SA-",2110)
 			document.getElementById("prodCount").innerHTML = prodCountTxt;
-
+		}catch (e) {
+			console.log("loadData Exception ",e)
+			alert(e)
 		}
+		}//End of function loadData
 //Sachin 27-01-2021	For Setting data after search/filter/applying tag search.
 var divStr='';
 function setProductData(productObj){

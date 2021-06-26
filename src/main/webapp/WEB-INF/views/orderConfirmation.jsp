@@ -39,11 +39,14 @@
     height: 20px;
     vertical-align: middle;
     height: 20px;
-    display: inline-block; text-decoration: none;}
+    display: initial; text-decoration: none;}
 .goback_btn{background: #ec268f; color: #FFF; font-size: 16px;}
 .goback_btn:hover{background: #373991; color: #FFF;}
 .makepay_btn{background: #373991; color:#FFF; font-size:16px;}
 .makepay_btn:hover{background: #ec268f; color: #FFF;}
+
+#fade_background{background-color: #ec268f !important; opacity: 0.8 !important;}
+
 </style>
 <!--jquery-min-->
 <script type="text/javascript"

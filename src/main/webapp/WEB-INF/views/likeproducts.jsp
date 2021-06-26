@@ -13,6 +13,7 @@
 <body>
 
 	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
 
 
 	<div class="head_marg">

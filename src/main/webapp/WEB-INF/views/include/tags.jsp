@@ -104,10 +104,19 @@ $(window).load(function() {
 						} else {
 
 							for (var i = 0; i < allTags.length; i++) {
+								if(i==0){
+									str = str
+									+ '<li><input type="checkbox" checked id="chkTag'+allTags[i].filterId+'" value="'+allTags[i].adminName+'" class="resetTags"><label for="chkTag'+allTags[i].filterId+'">'
+									+ allTags[i].adminName
+									+ '</label></li>';
+								}else{
+									
+								
 								str = str
 										+ '<li><input type="checkbox" id="chkTag'+allTags[i].filterId+'" value="'+allTags[i].adminName+'" class="resetTags"><label for="chkTag'+allTags[i].filterId+'">'
 										+ allTags[i].adminName
 										+ '</label></li>';
+								}
 							}
 
 						}
@@ -144,8 +153,12 @@ $(window).load(function() {
 console.log("tag list selected" +JSON.stringify(list));
 		sessionStorage.setItem("selTags", JSON.stringify(list));
 		//itemSearchByTagFilter();
-
-		window.open('${pageContext.request.contextPath}/products/0', '_self');
+		if(list.length<1){
+			//alert("List null")
+			console.log("IF list.length<1",JSON.stringify(list));
+		}else{
+			window.open('${pageContext.request.contextPath}/products/0', '_self');
+		}
 
 	}
 </script>

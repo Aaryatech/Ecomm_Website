@@ -174,8 +174,7 @@
 											</c:when>
 											<c:when test="${orders.orderStatus==1}">
 												<td><span class="deliverd" title="Shop Confirmation
-														Pending">Shop Confirmation
-														Pending</span></td>
+														Pending">Shop Confirmation Pending</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==2}">
 												<td><span class="deliverd" title="Accept">Accept</span></td>
@@ -209,7 +208,8 @@
 
 
 									<tr>
-										<td colspan="6"><c:forEach
+										<!-- colspan="6" -->
+										<td colspan="10"><c:forEach
 												items="${orders.orderDetailList}" var="orderDetail">
 												<c:if test="${orderDetail.orderId==orders.orderId}">
 													<div class="table_detail">

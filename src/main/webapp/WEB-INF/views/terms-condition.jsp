@@ -7,6 +7,7 @@
 
 </head>
 <body>  
+<jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 
 <!--mongi help-popup-->    
 <%-- <div class="mongi_help"><a href="#mongi" class="initialism mongi_open"><img src="${pageContext.request.contextPath}/resources/images/mongi_help.png" alt=""></a></div> 
