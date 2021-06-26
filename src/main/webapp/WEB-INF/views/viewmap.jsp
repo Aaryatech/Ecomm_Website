@@ -128,17 +128,20 @@ html, body {
 				  marker.setPosition(map.getCenter())
 				}) */
 				
-				google.maps.event.addListener(map, 'center_changed', function() {
+				google.maps.event.addListener(map, 'dragend', function() {
 				    marker.setPosition(map.getCenter()); 
 				    var NewMapCenter = map.getCenter();
 			           var lat = NewMapCenter.lat();
-						var lng = NewMapCenter.lng();
-			             
+						var lng = NewMapCenter.lng(); 
 						$("#latVal").val(lat);
-						$("#lngVal").val(lng);
-						  
+						$("#lngVal").val(lng); 
 						coordinates_to_address(geocoder,lat,lng);
 				} );
+			
+				google.maps.event.addListener(map, 'center_changed', function() {
+				    marker.setPosition(map.getCenter());  
+				} );
+				 
 			 /* map
 				.addListener(
 						'click',
@@ -159,8 +162,7 @@ html, body {
 							
 						}); */
 			 
-			 
-			 
+			  
 
 		}
 		
