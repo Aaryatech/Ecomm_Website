@@ -104,7 +104,12 @@ $(window).load(function() {
 						} else {
 
 							for (var i = 0; i < allTags.length; i++) {
-								if(i==0){
+								
+								str = str
+								+ '<li><input type="checkbox" id="chkTag'+allTags[i].filterId+'" value="'+allTags[i].adminName+'" class="resetTags"><label for="chkTag'+allTags[i].filterId+'">'
+								+ allTags[i].adminName
+								+ '</label></li>';
+								/* if(i==0){
 									str = str
 									+ '<li><input type="checkbox" checked id="chkTag'+allTags[i].filterId+'" value="'+allTags[i].adminName+'" class="resetTags"><label for="chkTag'+allTags[i].filterId+'">'
 									+ allTags[i].adminName
@@ -116,7 +121,7 @@ $(window).load(function() {
 										+ '<li><input type="checkbox" id="chkTag'+allTags[i].filterId+'" value="'+allTags[i].adminName+'" class="resetTags"><label for="chkTag'+allTags[i].filterId+'">'
 										+ allTags[i].adminName
 										+ '</label></li>';
-								}
+								} */
 							}
 
 						}

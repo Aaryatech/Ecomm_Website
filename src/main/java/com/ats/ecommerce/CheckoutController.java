@@ -435,8 +435,12 @@ public class CheckoutController {
 			}
 
 			try {
+				
+				  map = new LinkedMultiValueMap<String, Object>();
+				map = new LinkedMultiValueMap<String, Object>();
+				map.add("compId", 1);
 				DeliverySlots[] delSlotArray = Constants.getRestTemplate()
-						.getForObject(Constants.url + "getAllDeliverySlots", DeliverySlots[].class);
+						.postForObject(Constants.url + "getAllDeliverySlots",map, DeliverySlots[].class);
 				List<DeliverySlots> delSlotList = new ArrayList<DeliverySlots>(Arrays.asList(delSlotArray));
 				model.addAttribute("delSlotList", delSlotList);
 

@@ -792,10 +792,15 @@
 
 			sessionStorage.setItem("selTags", JSON.stringify(list));
 			//itemSearchByTagFilter();
-
-			window.open('${pageContext.request.contextPath}/products/0',
+			if(list.length<1){
+				//alert("List null")
+				console.log("IF list.length<1",JSON.stringify(list));
+			}else{
+				window.open('${pageContext.request.contextPath}/products/0', '_self');
+			}
+			/* window.open('${pageContext.request.contextPath}/products/0',
 					'_self');
-
+ */
 		}
 
 		function itemSearchByTagFilter() {
