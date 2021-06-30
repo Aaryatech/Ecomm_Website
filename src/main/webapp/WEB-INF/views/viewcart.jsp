@@ -1063,10 +1063,10 @@
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Recipient Name</span> <input type="text"
 									class="input_place txtOnly" id="txtBillName" name="txtBillName"
-									placeholder="Billing Name" value="${cust.custName}"
+									placeholder="Recipient Name" value="${cust.custName}"
 									autocomplete="off" maxlength="25" /> <label class="form-label-hint-error"
 									id="errorBillName" style="display: none;">Please enter
-									billing name</label>
+									Recipient name</label>
 							</div>
 							<div class="place_row_r">
 								<span class="pop_lab_fld">Mobile Number</span> <input

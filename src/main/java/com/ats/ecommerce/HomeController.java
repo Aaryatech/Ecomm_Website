@@ -547,6 +547,29 @@ try {
 				System.err.println("Mob No Here " + mobNo);
 				session.setAttribute("mobNo", mobNo);
 				System.err.println("frId Here " + frId);
+				//30.06.2021-SAchin
+				int cityId = 0;
+				try {
+					cityId = Integer.parseInt(request.getParameter("myCityId"));
+					session.setAttribute("myCityId", cityId);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				
+				String myLat = "0";
+				try {
+					myLat =  request.getParameter("myLat");
+					session.setAttribute("myLat", myLat);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+				String myLong = "0";
+				try {
+					myLong =  request.getParameter("myLong");
+					session.setAttribute("myLong", myLong);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.err.println("In Catch here  " + frId);

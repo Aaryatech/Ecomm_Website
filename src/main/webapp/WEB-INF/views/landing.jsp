@@ -784,6 +784,12 @@
 								fd.append('frKm', $("#frKm").val());
 								fd.append('selectShop', $("#selectShop").val());
 								fd.append('user_type', userType);
+								
+								//30.06.2021
+								fd.append('myCityId', sessionStorage.getItem("myCityId"));
+								fd.append('myLat', sessionStorage.getItem("myLat"));
+								fd.append('myLong', sessionStorage.getItem("myLong"));
+								
 
 								$
 										.ajax({
@@ -905,6 +911,11 @@
 								fd.append('mobNo', $("#mobNo").val());
 								fd.append('otp', $("#otp").val());
 								//console.log("fd ",JSON.stringify(fd));
+								//30.06.2021
+								fd.append('myCityId', sessionStorage.getItem("myCityId"));
+								fd.append('myLat', sessionStorage.getItem("myLat"));
+								fd.append('myLong', sessionStorage.getItem("myLong"));
+								
 								$
 										.ajax({
 											url : '${pageContext.request.contextPath}/preHome',

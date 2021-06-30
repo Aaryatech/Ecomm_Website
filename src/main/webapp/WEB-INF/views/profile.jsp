@@ -192,12 +192,12 @@
 								<div class="place_row">
 									<!--input_place-->
 									<div class="place_row_l">
-										<label class="form-label-hint">Billing Name</label> <input
+										<label class="form-label-hint">Recipient Name</label> <input
 											type="text" class="input_two txtOnly" maxlength="180"
 											id="txtBillName" value="${cust.custName}" name="txtBillName"
-											placeholder="Billing Name" /> <label
+											placeholder="Recipient Name" /> <label
 											class="form-label-hint-error" id="errorBillName"
-											style="display: none;">please enter billing name</label>
+											style="display: none;">please enter Recipient name</label>
 									</div>
 									<div class="place_row_r">
 										<label class="form-label-hint">Mobile Number</label> <input
@@ -281,7 +281,7 @@
 
 								<div class="place_row">
 									<div class="place_row_l">
-										<h3 class="payment_title">Billing Address</h3>
+										<h3 class="payment_title">Recipient Address</h3>
 									</div>
 									<div class="place_row_r"></div>
 									<div class="clr"></div>
