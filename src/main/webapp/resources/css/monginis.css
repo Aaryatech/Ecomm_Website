@@ -428,7 +428,7 @@ font-family: 'Hind-SemiBold'; margin: /* 15px 0 0 */ 0; -webkit-transition: all 
 .purity_icn{position: absolute; left: 10px; top: 10px;}
 .purity_icn img{height: 17px;}
 
-.cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left bottom; padding: 40px 10px 8px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: 80px;}
+.cake_prc{position: absolute;  left: 0; bottom: 0; background: url(../images/img_blk_bg.png) repeat-x left top; padding: 5px 10px 3px 10px; width: 100%; text-align: left; color: #FFF; font-size: 20px; min-height: auto;}
 .cake_prc i{font-size: 16px; margin: 7px 3px 0 0;}
 .cake_prc a{color: #FFF; text-decoration: none;}
 .off_prc{font-size: 16px; text-decoration: line-through; margin: 0 0 0 5px; /* display: inline-block; */ display: inline-flex; vertical-align: middle;}
@@ -529,9 +529,9 @@ footer{background: #262261 url(../images/footer_map.png) no-repeat center top; d
 .menu_bx{display: inline-block; width: 100%;}
 
 .certificate_one{float: left; width: 18% /*20%*/; padding: 0 50px 0 0; border-right: 1px solid #3c3578; min-height:210px /*260px*/;}
-.footer_title{position: relative; padding: 0 0 0 40px; color: #FFF; text-transform: uppercase; font-size: 16px; font-family: 'Hind-Medium'; margin: 0 0 30px 0;}
-.footer_title:after{content: ''; position: absolute; left: 0; top: 11px; width: 30px; background: #FFF; height: 1px;}
-
+.footer_title{position: relative; padding: 0 0 0 0; color: #FFF; text-transform: uppercase; font-size: 16px; font-family: 'Hind-Medium'; margin: 0 0 30px 0;}
+/* .footer_title:after{content: ''; position: absolute; left: 0; top: 11px; width: 30px; background: #FFF; height: 1px;}
+ */
 .menu_list{width: 44%; float: left; padding: 0 0 0 70px /*50px*/; border-right: 1px solid #3c3578;  min-height: 210px;}
 ul.footer_menu_list{margin: 0px; padding: 0px;}
 ul.footer_menu_list li{list-style-type: none; float: left; width: 50%; position: relative; padding: 0 0 0 24px; margin: 0 0 10px 0; font-size: 15px; letter-spacing: 0.5px; line-height: 24px;}
@@ -1372,7 +1372,7 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .divide_one_pic, .single_prod {min-height: 149px;}
     .lst_tow {min-height: 230px;}
     .cake_pic{height: auto;}
-    .cake_prc{padding: 40px 10px 0 10px;}
+    .cake_prc{padding:0 10px /* 40px 10px 0 10px */;}
     .festival_offer{margin: 5px;}
     .find_store,.testimonial_bx,.footer_menu,.product_category{padding: 30px 0;}
     .prod_cat_cap,.prod_cat_cap1{font-size: 16px;}
@@ -1505,7 +1505,7 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     .visit_title {font-size: 18px; line-height: 24px;}
     .find_btn {font-size: 14px; padding: 6px 18px;}
     .find_btn i {border: 1px solid #FFF; display: inline-block; margin: 0 0 0 6px; width: 20px; height: 20px; line-height: 16px;}
-    .cake_prc {padding: 48px 10px 0 10px;}
+    .cake_prc {padding: 0 10px /* 48px 10px 0 10px */;}
     .circle_tag{width: 30px; height: 30px;}
     .strip_payment {font-size: 16px; line-height: 20px;}
     .strip_payment{padding: 0 10px 0 62px;}
@@ -2053,8 +2053,9 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
     table.cart1 td:before{font-size: 14px;}
     
     .cake_prc,.off_prc,.prc_off{font-size: 13px;}
-    .cake_prc i,.off_prc i {font-size: 11px;}
-    .cake_prc {padding: 55px 5px 0 5px;}
+    /* .cake_prc i, */.off_prc i {font-size: 11px;}
+    .cake_prc i{font-size:15px;}
+    .cake_prc {padding:0 5px /* 55px 5px 0 5px */;}
     .openbtn.count span{width: 16px; height: 16px; line-height: 18px; right: -3px; top: -2px; font-size: 9px;}
     .product_like span{width: 16px; height: 16px; line-height: 18px; top: -4px; font-size: 9px; right: -10px;}
     
