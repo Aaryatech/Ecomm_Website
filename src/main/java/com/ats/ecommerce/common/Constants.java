@@ -20,15 +20,18 @@ public class Constants {
 	public static final int maxValue=25;
 
 	// Sachin Local Path
-//	 private final static String
+//	 public final static String
 //	  BASEPATH_URL="/home/ubuntu/Documents/apache-tomcat-8.51.38/webapps/"; 
 //	  private final static String IP_URL ="http://107.180.72.86:8080/uploads/ecomAdmin/";
+	  
+	  public final static String
+	  CAN_BASE_URL="https://www.pecom.monginis.net/ecom/";
 	  //private final static String IP_URL ="http://localhost:8080/uploads/ecomAdmin/";
 
 	  //Sever 16GB Live
 	  private final static String IP_URL ="https://pecom.monginis.net/uploads/ecomAdmin/";
 	  private final static String BASEPATH_URL="/opt/cpanel/ea-tomcat85/webapps/uploads/ecomAdmin/";
-//	
+	
 	
 	/*
 	 * private final static String
@@ -53,15 +56,16 @@ public class Constants {
 
 	public static RestTemplate rest = new RestTemplate();
 
-	//public static String url="http://localhost:8094/";
-	public static final String url ="http://107.180.72.86:8080/EcomAPI/";
+	public static String url="http://localhost:8094/";
+	//public static final String url ="http://107.180.72.86:8080/EcomAPI/";
 	public static final Object OFFER_IMG_VIEW_URL = IP_URL+"OFFER_IMG_UP/";
 
 
 	public static String[] imageFileExtensions={"jpg","jpeg","png"};
-	public final static String senderEmail="atsinfosoft@gmail.com";
-	public static final String senderPassword="atsinfosoft#123";
-
+	public final static String senderEmail="noreply.order@monginis.net";
+	public static final String senderPassword="eCom$orD%0507";
+//	public final static String senderEmail="atsinfosoft@gmail.com";
+//	public static final String senderPassword="atsinfosoft#123";
 	public static RestTemplate getRestTemplate() {
 		rest = new RestTemplate();
 		rest.getInterceptors().add(new BasicAuthorizationInterceptor("aaryatech", "Aaryatech@1cr"));
