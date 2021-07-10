@@ -1,5 +1,5 @@
 package com.ats.ecommerce.common;
-
+ 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.DateFormat;
