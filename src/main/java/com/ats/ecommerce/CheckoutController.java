@@ -665,7 +665,11 @@ public class CheckoutController {
 			try {
 				cityId = Integer.parseInt(request.getParameter("myCityId"));
 			} catch (Exception e) {
-				// TODO: handle exception
+				try {
+				cityId=(int) session.getAttribute("myCityId");
+				}catch (Exception e1) {
+					cityId=0;
+				}
 			}
 			
 			String myLat = "0";
@@ -674,12 +678,24 @@ public class CheckoutController {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			System.err.println("myLat" +myLat);
+			if(myLat=="null"||myLat==""||myLat.equalsIgnoreCase("null")) {
+				System.err.println("IN IFF 679" );
+				myLat =  (String) session.getAttribute("myLat");
+			}
+			System.err.println("myLat 22" +myLat);
 			String myLong = "0";
 			try {
 				myLong =  request.getParameter("myLong");
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
+			System.err.println("myLong" +myLong);
+			
+			if(myLong=="null"||myLong==""||myLong.equalsIgnoreCase("null")) {
+				myLong =  (String) session.getAttribute("myLong");
+			}
+			 
 			
 			String delvrInst = request.getParameter("delvrInst");
 			String delvrDateTime = request.getParameter("delvrDateTime");
@@ -867,7 +883,9 @@ public class CheckoutController {
 			/*
 			 * if (delAddId < 1) { txtDelvLandmark=""; }
 			 */
-			order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
+			//order.setAddress(txtDelvFlat + ", " + txtDelvArea + ", " + txtDelvLandmark + ", " + txtDelvPincode);
+			order.setAddress(txtDelvFlat + "~ " + txtDelvArea + "~" + txtDelvLandmark + "~" + txtDelvPincode);
+
 			order.setWhatsappNo(txtMobile);
 			order.setLandmark("-" + session.getAttribute("landMark"));
 			order.setDeliveryDate(delvrDateTime);
@@ -880,8 +898,10 @@ public class CheckoutController {
 			order.setInsertUserId(custId);
 			order.setOrderPlatform(1);
 			order.setBillingName(txtBillName);
+			//order.setBillingAddress(
+				//	txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);
 			order.setBillingAddress(
-					txtBillingFlat + "~" + txtBillingArea + "~ " + txtBillingLandmark + "~ " + txtBillingPincode);
+					txtBillingFlat + "~" + txtBillingArea + "~ "  + txtBillingPincode);
 			order.setDeliveryType(1);
 			order.setDeliveryInstId(1);
 			order.setDeliveryInstText(delvrInst);
@@ -1242,4 +1262,50 @@ List<OrderDetail> orList=new ArrayList<OrderDetail>();
 		}
 		return orList;
 		}
+	
+	
+	@RequestMapping(value = "/setOrderCancel", method = RequestMethod.POST)
+	@ResponseBody
+	public Info setOrderCancel(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		Info info = new Info();
+		try {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		map.add("orderId", request.getParameter("orderId"));
+		map.add("orderStatus", request.getParameter("orderStatus"));
+		map.add("insertDateTime", request.getParameter("insertDateTime"));
+		System.err.println("map at setOrderCancel" +map);
+		 info = Constants.getRestTemplate().postForObject(Constants.url + "orderCancelByCust", map,
+				Info.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.err.println("Info"+info.toString());
+		return info;
+	}
+	
+	@RequestMapping(value = "/checkOrderCancelByCust", method = RequestMethod.POST)
+	@ResponseBody
+	public Info checkOrderCancelByCust(HttpServletRequest request, HttpServletResponse response, Model model) {
+		
+		Info info = new Info();
+		try {
+		MultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+
+		map.add("orderId", request.getParameter("orderId"));
+		map.add("orderStatus", request.getParameter("orderStatus"));
+		map.add("insertDateTime", request.getParameter("insertDateTime"));
+		System.err.println("map at setOrderCancel" +map);
+		 info = Constants.getRestTemplate().postForObject(Constants.url + "checkOrderCancelByCust", map,
+				Info.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.err.println("Info"+info.toString());
+		return info;
+	}
+	
+	
+	
 }

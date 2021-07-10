@@ -68,14 +68,21 @@ import java.util.stream.Stream;
 @Scope("session")
 
 public class HomeController {
-
+static int x=0;
 	FEDataTraveller data = new FEDataTraveller();
 
 	// Modified By -Sachin
 	// Modific Date -03-11-2020
+	
+	@RequestMapping(value = "/test1", method = RequestMethod.GET)
+	public String test(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+		System.err.println("In  test1 "+x);
+		return "test1";
+	}
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
-		System.err.println("In  home ");
+		System.err.println("In  home "+x);
+		x=x+1;
 		HttpSession session = request.getSession();
 		session.setAttribute("isAddNewAdd",0);
 		String strFrId = "0";

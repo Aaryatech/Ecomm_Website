@@ -194,17 +194,22 @@ function openPayBox(){
                             Your order will be sent to:
                             <span>${orderSaveData.address}</span>
                         </div>    
-                        <div class="delivery_one left_side">
+                       
+                            
+                            <div class="delivery_one left_side">
+                                Product Price :
+                                <span>${orderSaveData.exFloat1}</span>
+                            </div>
+                             <div class="delivery_one left_side">
                                 Delivery Charges :
                                 <span>${orderSaveData.deliveryCharges}</span>
                             </div>
-                            
                             <div class="delivery_one left_side">
-                                Order Total :
-                                <span>${orderSaveData.exFloat1}</span>
+                                Discount:
+                                <span>${orderSaveData.discAmt}</span>
                             </div>
                         <div class="delivery_one left_side">
-                                 Total :
+                                 Total Amount :
                                 <span>${orderSaveData.totalAmt}</span>
                             </div>
                     </div>

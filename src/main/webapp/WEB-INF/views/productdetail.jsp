@@ -526,7 +526,7 @@
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
 									To Cart</a> <a
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})"
-									href="${pageContext.request.contextPath}/checkout"
+									href="${pageContext.request.contextPath}/checkout/0"
 									class="buy_button">Buy Now</a>
 								<div class="clr"></div>
 							</div>
@@ -537,7 +537,7 @@
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})">Add
 									To Cart</a> <a
 									onclick="addCart(${prodHeader.productId},${prodHeader.rateSettingType})"
-									href="${pageContext.request.contextPath}/checkout"
+									href="${pageContext.request.contextPath}/checkout/0"
 									class="mobile_buy">Buy Now</a>
 							</div>
 						</div>

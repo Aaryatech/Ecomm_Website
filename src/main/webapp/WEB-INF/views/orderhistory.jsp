@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -136,13 +137,18 @@
 										<th>Contact Info</th>
 									<th>Order-Delivery</th>
 										<th>Delivery Charges</th>
+											
 											<th>Order Total</th>
+											<th>Discount</th>
 									<th>Total Amt.</th>
 									<th>Payment Mode</th>
+										<th>Action</th>
 									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
+							      <c:set var = "statusString" value = "${allowCancelStatusList}"/>
+							
 								<c:forEach items="${orders}" var="orders" varStatus="count">
 									<tr>
 										<td>${count.index+1}</td>
@@ -150,7 +156,10 @@
 										<td>${orders.frContactNo}</td>
 										<td>${orders.orderDateDisplay} / ${orders.deliveryDateDisplay}</td>
 											<td class="prc_amt">Rs. ${orders.deliveryCharges}</td>
+											
 												<td class="prc_amt">Rs. ${orders.exFloat1}</td>
+										<td class="prc_amt">Rs. ${orders.discAmt}</td>
+												
 										<td class="prc_amt">Rs. ${orders.totalAmt}</td>
 
 										<!-- Payment Mode -->
@@ -166,7 +175,17 @@
 											</c:otherwise>
 										</c:choose>
 
+<td> 
+       <c:set var = "ordStatus" value = "${orders.orderStatus}"/>
 
+<%-- <c:if test="${fn:contains('${allowCancelStatusList}', '${orders.orderStatus}')}">
+<i class="fa fa-times" aria-hidden="true" onclick="setOrderCancel('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}');"></i>
+    </c:if> --%>
+    
+    <c:if test="${fn:contains(statusString, ordStatus)}">
+<i class="fa fa-times" title="Cancel Order !!" aria-hidden="true" onclick="setOrderCancel('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}');"></i>
+    </c:if>
+ </td>
 										<!-- Order Status -->
 										<c:choose>
 											<c:when test="${orders.orderStatus==0}">
@@ -223,7 +242,7 @@
 																Product name <span> ${orderDetail.itemName}</span>
 															</div>
 															<div class="detail_one">
-																Product Amount <span class="tab_prx">Rs.
+																Product Price <span class="tab_prx">Rs.
 																	${orderDetail.mrp}</span>
 															</div>
 															<%-- <div class="detail_one">
@@ -235,7 +254,7 @@
 																	${orderDetail.exFloat3} ${orderDetail.itemUom}</span>
 															</div>
 															<div class="detail_one">
-																Total <span class="tab_amt">
+																Total Amount <span class="tab_amt">
 																	Rs.${orderDetail.rate*orderDetail.qty}</span>
 															</div>
 
@@ -458,7 +477,7 @@
 											<div class="clr"></div>
 										</div>
 										<div class="mob_quan">
-											<div class="click_opn_l">Product Amount</div>
+											<div class="click_opn_l">Product Price</div>
 											<div class="click_opn_r">
 												<div class="prc_amt">Rs. ${orderDetail.mrp}</div>
 											</div>
@@ -473,7 +492,7 @@
 											<div class="clr"></div>
 										</div>
 										<div class="mob_quan">
-											<div class="click_opn_l">Total</div>
+											<div class="click_opn_l">Total Amount</div>
 											<div class="click_opn_r">
 												<div class="paid mobile">Rs.${orderDetail.totalAmt}</div>
 											</div>
@@ -598,6 +617,86 @@
 		$('.order_log'+val).toggle("slide");
 	}
 	
+	//Sachin 06-07-2021
+	async	function setOrderCancel(orderId,orderStatus,insertDateTime){
+		var x =confirm("Are you sure to cancel order ? ");
+		if(x){
+		var fd = new FormData();
+		
+		fd.append('orderId',orderId);
+		fd.append('orderStatus',orderStatus);
+		fd.append('insertDateTime',insertDateTime);
+		console.log("fd", insertDateTime);
+		
+		
+		$
+		.ajax({
+			url : '${pageContext.request.contextPath}/checkOrderCancelByCust',
+			type : 'POST',
+			data : fd,
+			dataType : 'json',
+			processData : false,
+			contentType : false,
+			async : false,
+			success : function(
+					resData,
+					textStatus,
+					jqXHR) {
+				//alert(JSON.stringify(resData));
+				if(resData.error==false){
+					//alert("Are you sure "+resData.msg);
+					
+					var x =confirm("Are you sure to cancel order ? " +resData.msg);
+					if(x){
+
+						$
+						.ajax({
+							url : '${pageContext.request.contextPath}/setOrderCancel',
+							type : 'POST',
+							data : fd,
+							dataType : 'json',
+							processData : false,
+							contentType : false,
+							async : false,
+							success : function(
+									resData,
+									textStatus,
+									jqXHR) {
+								//alert(JSON.stringify(resData));
+								if(resData.error==false){
+									alert("Order Cancelled");
+									location.reload();
+								}
+							}
+							})
+						
+					}//end of if x
+				}
+			}
+			})
+			
+		/* $
+				.ajax({
+					url : '${pageContext.request.contextPath}/setOrderCancel',
+					type : 'POST',
+					data : fd,
+					dataType : 'json',
+					processData : false,
+					contentType : false,
+					async : false,
+					success : function(
+							resData,
+							textStatus,
+							jqXHR) {
+						alert(JSON.stringify(resData));
+						if(resData.error==false){
+							alert("Order Cancelled");
+							location.reload();
+						}
+					}
+					}) */
+		}//end of if confirm true
+	}//end of setOrderCancel
 	/* $('#orderHead').click(function() {
 	      $('#order_dtl').toggle("slide");
 	    }); */

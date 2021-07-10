@@ -39,8 +39,8 @@
 			<div class="top_content">
 				<div class="top_links">
 					<div class="top_menu">
-						<span><a href="#"><i class="fa fa-phone"
-								aria-hidden="true"></i> +91 - 1234 567 890</a></span> <span><a
+						<span><a href="#"><!-- <i class="fa fa-phone"
+								aria-hidden="true"></i>  --><!-- +91 - 1234 567 890 --></a></span> <span><a
 							href="${pageContext.request.contextPath}/home">Home</a></span>
 						<!--<span><a href="#">Offers</a></span>-->
 						<%-- <span><a
@@ -422,11 +422,14 @@
 
 	  var mobile='${sessionScope.mobNo}';
 	var commentsRef = firebase.database().ref('cart_value/' + mobile); 
-	
+	try{
 	commentsRef.on('child_changed', (data) => {
 		console.log('ala re ala');
 		appendCartData();
-	});  
+	}); 
+	}catch (e) {
+		alert("Ok"+e);
+	}
 	
 	function updateFirebase() {
 		//alert("hieeee");

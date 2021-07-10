@@ -26,6 +26,7 @@ import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
+import com.ats.ecommerce.model.Info;
 import com.ats.ecommerce.model.order.GetOrderHeaderDisplay;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -84,6 +85,12 @@ public class OrderController {
 				}
 
 				model.addAttribute("tagsJson", jsonStr);
+				
+				
+				Info info = Constants.getRestTemplate().postForObject(Constants.url + "getAllowedCancelStatus", null,
+							Info.class);
+				System.err.println(info.getMsg());
+				model.addAttribute("allowCancelStatusList", info.getMsg());
 			}
 		} catch (Exception e) {
 			return "redirect:/";

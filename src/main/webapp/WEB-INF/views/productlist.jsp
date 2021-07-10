@@ -2375,7 +2375,7 @@
 			rate=rate*wt;
 			
 			//27-04document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
-			document.getElementById("newPrice"+id).innerHTML="<i class='fa fa-inr' aria-hidden='true'></i>"+rate.toFixed(1);
+			document.getElementById("newPrice"+id).innerHTML=rate.toFixed(1);
 
 
 		}

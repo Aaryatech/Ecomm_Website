@@ -289,15 +289,15 @@
 									<div class="applicabl_row last">
 										<div class="applic_l">Applicable Discount Offers</div>
 										<div class="applic_r">
-											<div class="radio_1 promo">
+											<div class="radio_1 promo" style="display: none;">
 												<ul>
-													<li><input type="radio" id="couponWise"
+													<li><input type="radio" id="couponWise" checked
 														name="rdOfferType" class="option-input radio"
-														onchange="setOfferList(1)" checked> <label
+														onchange="setOfferList(1)" > <label
 														for="couponWise">Coupon Wise</label>
 														<div class="check"></div></li>
 													<li><input type="radio" class="option-input radio"
-														onchange="setOfferList(2)" id="custWise"
+														onchange="setOfferList(2)" id="custWise"  
 														name="rdOfferType"> <label for="custWise">Customer
 															Wise</label>
 														<div class="check">
@@ -307,6 +307,15 @@
 											</div>
 										</div>
 									</div>
+									<script>
+									$(window).load(function() {
+										 // executes when complete page is fully loaded, including all frames, objects and images
+									    //$("#custWise").attr('checked', true).trigger('click');
+										 $('.radio').trigger('change');
+										});
+
+									</script>
+									
 
 									<div class="applicabl_row">
 										<div>
@@ -361,7 +370,7 @@
 
 								<div class="title_row_bx">
 									<div class="left_side">
-										<h3 class="payment_title">Payment Method</h3>
+										<h3 class="payment_title">Payment Method <span class="mand_field">*</span></h3>
 										<!-- <form action="" method="get"> -->
 										<div class="payment_one">
 											<div class="divide_marg">
@@ -387,7 +396,7 @@
 
 									</div>
 									<div class="right_side">
-										<h3 class="payment_title">Delivery Information</h3>
+										<h3 class="payment_title">Delivery Information <span class="mand_field">*</span></h3>
 										<div class="divide_marg">
 											<!-- class="payment_two right" -->
 											<div id="filters">
@@ -427,7 +436,7 @@
 
 								<div class="payment_click">
 									By Clicking the button, you agree to the <a target="_blank"
-										href="${pageContext.request.contextPath}/showT&CPage">Terms
+										href="${pageContext.request.contextPath}/terms-and-conditions">Terms
 										and Conditions.</a>
 								</div>
 								<div>
@@ -1059,9 +1068,12 @@
 
 							<div class="clr"></div>
 						</div> --%>
+						<style>
+						.mand_field{color:#F00;}
+						</style>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Recipient Name</span> <input type="text"
+								<span class="pop_lab_fld">Recipient Name</span><span class="mand_field">*</span> <input type="text"
 									class="input_place txtOnly" id="txtBillName" name="txtBillName"
 									placeholder="Recipient Name" value="${cust.custName}"
 									autocomplete="off" maxlength="25" /> <label class="form-label-hint-error"
@@ -1069,7 +1081,7 @@
 									Recipient name</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Mobile Number</span> <input
+								<span class="pop_lab_fld">Mobile Number</span><span class="mand_field">*</span> <input
 									type="text" class="input_place" id="txtMobile"
 									value="${sessionScope.mobNo}" readonly maxlength="10"
 									name="txtMobile" placeholder="Mobile Number" autocomplete="off" />
@@ -1082,7 +1094,7 @@
 						</div>
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Email Address</span> <input
+								<span class="pop_lab_fld">Email Address</span><span class="mand_field">*</span> <input
 									type="text" class="input_place" id="txtEmail"
 									value="${cust.emailId}" name="txtEmail" placeholder="Email ID"
 									autocomplete="off" /> <label class="form-label-hint-error"
@@ -1092,7 +1104,7 @@
 									email id</label>
 							</div>
 							<div class="place_row_r">
-								<div class="gender_l">Gender</div>
+								<div class="gender_l">Gender <span class="mand_field">*</span></div>
 								<div class="gender_r full">
 									<div class="radio_1 gender">
 										<ul>
@@ -1122,7 +1134,7 @@
 
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Date of Birth</span> <input
+								<span class="pop_lab_fld">Date of Birth</span><span class="mand_field">*</span> <input
 									type="text" class="input_place" id="txtDob"
 									value="${cust.dateOfBirth}" name="txtDob"
 									placeholder="Date of Birth" autocomplete="off" /> <label
@@ -1141,7 +1153,7 @@
 						<!-- ------------------------ -->
 						<div class="place_row">
 							<div class="place_row_l">
-								<div class="gender_l">Order Type</div>
+								<div class="gender_l">Order Type<span class="mand_field">*</span></div>
 								<div class="gender_r full">
 									<div class="radio_1 gender">
 										<ul>
@@ -1164,14 +1176,14 @@
 						</div>
 						<div class="place_row" id="giftOrderDiv" style="display: none;">
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Person Name</span> <input type="text"
+								<span class="pop_lab_fld">Person Name</span><span class="mand_field">*</span> <input type="text"
 									class="input_place txtOnly" id="persnName" name="persnName"
 									placeholder="Person Name" autocomplete="off" /> <label
 									class="form-label-hint-error" id="errorPersnName"
 									style="display: none;">Please Person name</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Person Number</span> <input
+								<span class="pop_lab_fld">Person Number</span><span class="mand_field">*</span> <input
 									type="text" class="input_place" id="personMobile"
 									maxlength="10" name="personMobile"
 									placeholder="Person Mobile Number" autocomplete="off" /> <label
@@ -1190,7 +1202,7 @@
 						<div class="place_row">
 							<div class="place_row_l">
 								<span class="pop_lab_fld">Your Address (flat, house no.,
-									building, company, apartment)</span> <input type="text"
+									building, company, apartment)</span><span class="mand_field">*</span><input type="text"
 									class="input_place" autocomplete="off" id="txtDelvFlat"
 									name="txtDelvFlat" value="${getFlatD}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -1200,7 +1212,7 @@
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld"><!-- Next to -->Your Area (From pin point location)</span><br> <input
+								<span class="pop_lab_fld"><!-- Next to -->Your Area (From pin point location)</span><br><input
 									type="hidden" id="txtDelvLandmark" name="txtDelvLandmark"
 									value="${sessionScope.landMark}" /> ${sessionScope.landMark}
 							</div>
@@ -1216,7 +1228,7 @@
 									style="display: none;">Please enter landmark</label>
  --%>
 								<span class="pop_lab_fld"><!-- Your Area (From pin point
-									location) -->Landmark (eg. Next to..., Opposite...)</span> <input type="text" class="input_place"
+									location) -->Landmark (eg. Next to..., Opposite...)</span><span class="mand_field">*</span> <input type="text" class="input_place"
 									autocomplete="off" id="txtDelvArea" name="txtDelvArea"
 									value="${getAreaD}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -1225,7 +1237,7 @@
 									street, sector, village</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld">Pin code</span> <input type="text"
+								<span class="pop_lab_fld">Pin code</span><span class="mand_field">*</span> <input type="text"
 									class="input_place" autocomplete="off" value="${getPinD}"
 									id="txtDelvPincode" name="txtDelvPincode" maxlength="6"
 									placeholder="Shipping Pincode" /> <label
@@ -1254,7 +1266,7 @@
 						</div> -->
 						<div class="place_row">
 							<div class="place_row_l">
-								<span class="pop_lab_fld"><!-- Area -->Address (flat, house no., building, company, apartment)</span> <input type="text"
+								<span class="pop_lab_fld"><!-- Area -->Address (flat, house no., building, company, apartment)</span> <span class="mand_field">*</span><input type="text"
 									class="input_place" autocomplete="off" id="txtBillingFlat"
 									name="txtBillingFlat" value="${getFlat}"
 									placeholder="Flat, House no., Building, Company, Apartment" />
@@ -1264,7 +1276,7 @@
 									building, company, apartment</label>
 							</div>
 							<div class="place_row_r">
-								<span class="pop_lab_fld"><!-- Colony -->Your Area</span> <input type="text"
+								<span class="pop_lab_fld"><!-- Colony -->Your Area</span> <span class="mand_field">*</span><input type="text"
 									class="input_place" autocomplete="off" id="txtBillingArea"
 									name="txtBillingArea" value="${getArea}"
 									placeholder="Area, Colony, Street, Sector, Village" /> <label
@@ -1283,7 +1295,7 @@
 									style="display: none;">Please enter landmark</label>
 							</div>
 							<div class="place_row_l">
-								<span class="pop_lab_fld">Pin code</span> <input type="text" maxlength="6"
+								<span class="pop_lab_fld">Pin code</span><span class="mand_field">*</span> <input type="text" maxlength="6"
 									class="input_place" autocomplete="off" id="txtBillingPincode"
 									name="txtBillingPincode" placeholder="Billing Pincode"
 									value="${getPin}" /> <label class="form-label-hint-error"
@@ -1340,7 +1352,6 @@
 	</div>
 
 	<!-- bottom -->
-	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
 
 	<!--date or time picker-->
@@ -1474,7 +1485,7 @@
 
 		}
 
-		function setCartData() {
+		async function setCartData() {
 
 			document.getElementById("loaderimg").style.display = "block";
 			if (sessionStorage.getItem("allItemList") == null) {
@@ -1758,10 +1769,16 @@ var wtFlav='<div class="cart_det"  id="detail'+table[i].itemId+'">Weight - '
 
 			document.getElementById("cart_item_count").innerHTML = ""
 					+ table.length;
-			setOfferDiscAmt();
-			checkValidOffer();
+			if(parseFloat(finaltotal)>0){
+				setOfferDiscAmt();
+				//checkValidOffer();
+				//applyOffer();
+			}
+			//setOfferDiscAmt();
+			//checkValidOffer();
+			//applyOffer();
+			
 			document.getElementById("loaderimg").style.display = "none";
-			applyOffer();
 		}
 
 		function minusQty(id, curQty) {
@@ -2755,6 +2772,7 @@ sessionStorage.setItem("cartValue", JSON
 									.click(
 											function(e) {
 												// Stop acting like a button
+											
 												e.preventDefault();
 												// Get the field name
 												fieldName = $(this).attr(
@@ -2861,6 +2879,7 @@ sessionStorage.setItem("cartValue", JSON
 		});
 	</script>
 	<!--menuzord-->
+	<jsp:include page="/WEB-INF/views/include/bottomMenu.jsp"></jsp:include>
 
 <jsp:include page="/WEB-INF/views/include/qty_validation.jsp"></jsp:include>
 
