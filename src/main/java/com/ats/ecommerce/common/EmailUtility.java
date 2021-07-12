@@ -504,7 +504,9 @@ public class EmailUtility {
 				// mimeMessage.setText(mailMsg);
 				MimeMultipart multipart = new MimeMultipart("related");
 				BodyPart messageBodyPart = new MimeBodyPart();				
-				messageBodyPart.setContent(mailMsg, "text/html");
+				//messageBodyPart.setContent(mailMsg, "text/html");
+				messageBodyPart.setContent(mailMsg, "text/html; charset=UTF-8");
+
 				multipart.addBodyPart(messageBodyPart);				
 				mimeMessage.setContent(multipart);
 				

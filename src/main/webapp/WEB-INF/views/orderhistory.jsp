@@ -228,7 +228,7 @@
 
 									<tr>
 										<!-- colspan="6" -->
-										<td colspan="10"><c:forEach
+										<td colspan="12"><c:forEach
 												items="${orders.orderDetailList}" var="orderDetail">
 												<c:if test="${orderDetail.orderId==orders.orderId}">
 													<div class="table_detail">
@@ -266,7 +266,7 @@
 												</c:if>
 
 											</c:forEach> <!--table-->
-											<c:forEach items="${orders.orderTrailList}"
+											<%-- <c:forEach items="${orders.orderTrailList}"
 															var="orderTrail">
 															<c:if test="${orderTrail.orderId==orders.orderId}">
 											<div class="cart_able_bx drop_tab">
@@ -333,7 +333,7 @@
 												</div>
 											</div>
 											</c:if>
-														</c:forEach>
+														</c:forEach> --%>
 											<!--  -->
 											</td>
 									</tr>
