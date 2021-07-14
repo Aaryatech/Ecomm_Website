@@ -357,10 +357,14 @@ public class PaymentController {
 				 * orderSaveData.getOrderHeader().setPaymentRemark(request.getParameter(
 				 * "razorpay_order_id")); orderSaveData.getOrderHeader().setPaidStatus(1);
 				 */
-				map.add("uniqNo", request.getParameter("razorpay_payment_id"));
+				
+				OrderHeaderWithDetail orderSaveData = (OrderHeaderWithDetail) session.getAttribute("orderHeaderWithDetail");
+
+				map.add("uniqNo",request.getParameter("razorpay_order_id"));
 				map.add("paidStatus", 1);
-				map.add("payRemark", request.getParameter("razorpay_order_id"));
+				map.add("payRemark",request.getParameter("razorpay_payment_id"));
 				map.add("orderStatus", -100);
+				map.add("paidAmt", orderSaveData.getTotalAmt());
 				session.setAttribute("successMsg", "Payment Successful");
 				session.setAttribute("Pay_Page", "2");
 				System.err.println("setting pay=2 Pay_Page ");
@@ -382,10 +386,11 @@ public class PaymentController {
 				 * orderSaveData.getOrderHeader().setOrderStatus(9);
 				 */
 				session.setAttribute("successMsg", "Payment Failed");
-				map.add("uniqNo", "na");
+				map.add("uniqNo", "pay failed");
 				map.add("paidStatus", 0);
 				map.add("payRemark", request.getParameter("razorpay_order_id"));
 				map.add("orderStatus", 9);
+				map.add("paidAmt", 0);
 				session.setAttribute("Pay_Page", "0");
 			}
 			// updateOrderFrontEnd

@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.ats.ecommerce.common.CommonUtility;
 import com.ats.ecommerce.common.Constants;
@@ -1278,8 +1279,8 @@ List<OrderDetail> orList=new ArrayList<OrderDetail>();
 		System.err.println("map at setOrderCancel" +map);
 		 info = Constants.getRestTemplate().postForObject(Constants.url + "orderCancelByCust", map,
 				Info.class);
-		}catch (Exception e) {
-			e.printStackTrace();
+		}catch (HttpClientErrorException e) {
+			System.err.println("Res " +e.getResponseBodyAsString());
 		}
 		System.err.println("Info"+info.toString());
 		return info;

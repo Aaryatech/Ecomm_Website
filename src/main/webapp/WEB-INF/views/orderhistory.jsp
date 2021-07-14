@@ -11,8 +11,24 @@
  
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/bootstrap-table-expandable.css">
-<script
-	src="${pageContext.request.contextPath}/resources/js/bootstrap-table-expandable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-table-expandable.js"></script>
+
+<style type="text/css">
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+table th{background: #ec268f; color: #FFF;}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+</style>
 
 <body>
 	<jsp:include page="/WEB-INF/views/include/tags.jsp"></jsp:include>
@@ -120,12 +136,63 @@
 <%
 					request.getSession().removeAttribute("successMsg");
 				%>
-
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('#new_pop').popup();
+		});
+	</script>
 	<div class="head_marg">
 		<!--product listing-->
 		<div class="find_store">
 			<div class="wrapper">
+			
+			<input type="hidden" id="ord_id" value="0">
+				<input type="hidden" id="ord_status" value="0">
+					<input type="hidden" id="ord_dttime" value="0">
+					
 				<!-- desktop table -->
+				<!-- Popup -->
+				
+				<div id="new_pop" class="well"><!-- sixty -->
+			<div class="mongi_title">
+				You Will get return on Order Value as Below
+				<div class="new_pop_close close_pop">
+					<i class="fa fa-times" id="main_close" aria-hidden="true"></i>
+				</div>
+			</div>
+			
+			
+
+			<div class="mongi_cont">
+				<div style="overflow-x:auto;">
+  <table>
+    <tr>
+      <th>Sr. No.</th>
+      <th>Order Cancelled within Min.</th>
+      <th>Return %</th>
+    </tr>
+    <c:forEach items="${ordRetPerList}" var="ordRetPer" varStatus="count">
+    <tr>
+      <td>${count.index+1}</td>
+      <td>${ordRetPer.title}</td>
+      <td>${ordRetPer.retPer}</td>
+    </tr>
+    </c:forEach>
+ 
+    
+  </table>
+</div>
+
+	<div class="pop_btn">
+		<a href="#" class="yes_btn" onclick="yesCancelOrder()" >Yes Cancel</a>
+		<a href="#" class="back_btn" onclick="setClose()">Back</a>
+		
+		
+	</div>
+
+			</div>
+		</div>
+				
 				<div class="cart_able_bx drop_tab">
 					<div class="table_bx">
 						<table
@@ -142,7 +209,6 @@
 											<th>Discount</th>
 									<th>Total Amt.</th>
 									<th>Payment Mode</th>
-										<th>Action</th>
 									<th>Status</th>
 								</tr>
 							</thead>
@@ -165,29 +231,33 @@
 										<!-- Payment Mode -->
 										<c:choose>
 											<c:when test="${orders.paymentMethod==1}">
-												<td><span class="paid">Cash</span></td>
+												<td><span class="paid">Cash (${orders.exFloat4})</span></td>
 											</c:when>
 											<c:when test="${orders.paymentMethod==2}">
-												<td><span class="paid">Card</span></td>
+												<td><span class="paid">Card (${orders.exFloat4})</span></td>
 											</c:when>
 											<c:otherwise>
-												<td><span class="paid">E-Pay</span></td>
+												<td><span class="paid">E-Pay (${orders.exFloat4})</span></td>
 											</c:otherwise>
 										</c:choose>
 
 <td> 
-       <c:set var = "ordStatus" value = "${orders.orderStatus}"/>
+       <c:set var = "ordStatus" value = "${orders.intOrderStatus}"/>
 
 <%-- <c:if test="${fn:contains('${allowCancelStatusList}', '${orders.orderStatus}')}">
 <i class="fa fa-times" aria-hidden="true" onclick="setOrderCancel('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}');"></i>
     </c:if> --%>
     
-    <c:if test="${fn:contains(statusString, ordStatus)}">
+    <%-- <c:if test="${fn:contains(statusString, ordStatus)}">
 <i class="fa fa-times" title="Cancel Order !!" aria-hidden="true" onclick="setOrderCancel('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}');"></i>
-    </c:if>
+
+<a href="#new_pop" onclick="setOrderData('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}')"
+										class="initialism new_pop_open"><i class="fa fa-info"
+										aria-hidden="true"></i></a>
+    </c:if> --%>
  </td>
 										<!-- Order Status -->
-										<c:choose>
+										<%-- <c:choose>
 											<c:when test="${orders.orderStatus==0}">
 												<td><span class="deliverd" title="Park Order">Park Order</span></td>
 											</c:when>
@@ -202,7 +272,10 @@
 												<td><span class="deliverd" title="Processing">Processing</span></td>
 											</c:when>
 											<c:when test="${orders.orderStatus==4}">
-												<td><span class="deliverd" title="Delivery Pending">Delivery Pending</span></td>
+												<td><span class="deliverd" title="Delivery Pending">Delivery Pending</span>
+												<p><a href="#new_pop" onclick="setOrderData('${orders.orderId}','${orders.orderStatus}','${orders.insertDateTime}')"
+										class="initialism new_pop_open" style="color: #F00; font-size: 10px; text-decoration: underline;">Cancel Order</a></p>
+												</td>
 											</c:when>
 											<c:when test="${orders.orderStatus==5}">
 												<td><span class="deliverd" title="Delivered">Delivered</span></td>
@@ -221,14 +294,18 @@
 														Pending">Online Payment
 														Pending</span></td>
 											</c:otherwise>
-										</c:choose>
+										</c:choose> --%>
+										
+										<td><span class="deliverd" title="${orders.orderStatus}">${orders.orderStatus}</span>
+										<c:if test="${fn:contains(statusString, ordStatus)}"><p><a href="#new_pop" onclick="setOrderData('${orders.orderId}','${orders.intOrderStatus}','${orders.insertDateTime}')"
+										class="initialism new_pop_open" style="color: #F00; font-size: 10px; text-decoration: underline;">Cancel Order</a></p></c:if></td>
 									</tr>
 
 
 
 									<tr>
 										<!-- colspan="6" -->
-										<td colspan="12"><c:forEach
+										<td colspan="11"><c:forEach
 												items="${orders.orderDetailList}" var="orderDetail">
 												<c:if test="${orderDetail.orderId==orders.orderId}">
 													<div class="table_detail">
@@ -255,7 +332,7 @@
 															</div>
 															<div class="detail_one">
 																Total Amount <span class="tab_amt">
-																	Rs.${orderDetail.rate*orderDetail.qty}</span>
+																	Rs.${orderDetail.mrp*orderDetail.exFloat3}</span>
 															</div>
 
 
@@ -392,7 +469,7 @@
 								</c:choose>
 								<div class="mob_quan_l history">Payment Mode</div>
 								<div class="mob_quan_r font">
-									<div class="paid mobile">${paymentMethod}</div>
+									<div class="paid mobile">${paymentMethod} (${orders.exFloat4})</div>
 								</div>
 								<div class="clr"></div>
 							</div>
@@ -400,7 +477,7 @@
 
 							<div class="mob_quan">
 								<div class="mob_quan_l history">Status</div>
-								<c:choose>
+								<%-- <c:choose>
 									<c:when test="${orders.orderStatus==0}">
 										<div class="mob_quan_r font">
 											<span class="deliverd">Park Order</span>
@@ -451,7 +528,8 @@
 											<span class="deliverd">Online Payment Pending</span>
 										</div>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
+								<span class="deliverd">${orders.orderStatus}</span>
 								<div class="clr"></div>
 							</div>
 							</div>
@@ -486,7 +564,7 @@
 										<div class="mob_quan">
 											<div class="click_opn_l">Product Quantity</div>
 											<div class="click_opn_r">
-												<div class="prc_kg">${orderDetail.qty}
+												<div class="prc_kg">${orderDetail.exFloat3}
 													${orderDetail.itemUom}</div>
 											</div>
 											<div class="clr"></div>
@@ -506,7 +584,7 @@
 
 							<!-- MobView Order Log -->
 							<div style="display: none;" class="order_log${orderHeadId}">
-							<c:forEach items="${orders.orderTrailList}" var="orderTrail" varStatus="count">
+							<%-- <c:forEach items="${orders.orderTrailList}" var="orderTrail" varStatus="count">
 								<c:if test="${orderTrail.orderId==orders.orderId}">
 									<div class="mob_order_log">
 										<h3 class="mobile_order">Order Log ${count.index+1}</h3>
@@ -562,7 +640,7 @@
 
 									</div>
 								</c:if>
-							</c:forEach>
+							</c:forEach> --%>
 							</div>
 						</div>
 					</c:forEach>
@@ -616,6 +694,59 @@
 		$('.order_dtl'+val).toggle("slide");
 		$('.order_log'+val).toggle("slide");
 	}
+	
+	//today 
+	
+		async	function setOrderCancel1(orderId,orderStatus,insertDateTime){
+			$('#new_pop').popup();
+	}
+	
+	//sachin 13-07-2021
+async function	setOrderData(orderId,orderStatus,insertDateTime){
+//set to Hidden fields;
+document.getElementById("ord_id").value=orderId;
+document.getElementById("ord_status").value=orderStatus;
+document.getElementById("ord_dttime").value=insertDateTime;
+}
+	
+async function yesCancelOrder(){
+	//code of cancel
+	var fd = new FormData();
+	
+	fd.append('orderId',document.getElementById("ord_id").value);
+	fd.append('orderStatus',document.getElementById("ord_status").value);
+	fd.append('insertDateTime',document.getElementById("ord_dttime").value);
+	setClose();
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/setOrderCancel',
+		type : 'POST',
+		data : fd,
+		dataType : 'json',
+		processData : false,
+		contentType : false,
+		async : false,
+		success : function(
+				resData,
+				textStatus,
+				jqXHR) {
+			//alert(JSON.stringify(resData));
+			if(resData.error==false){
+				
+				alert("Order Cancelled");
+				location.reload();
+			}
+		}
+		})
+}
+async function setClose(){
+	document.getElementById("ord_id").value=0;
+	document.getElementById("ord_status").value=0;
+	document.getElementById("ord_dttime").value=0;
+	document.getElementById("main_close").click();
+}
+	
+	//end sachin 13-07-2021
 	
 	//Sachin 06-07-2021
 	async	function setOrderCancel(orderId,orderStatus,insertDateTime){

@@ -27,6 +27,7 @@ import com.ats.ecommerce.common.Constants;
 import com.ats.ecommerce.model.FEDataTraveller;
 import com.ats.ecommerce.model.GetFlavorTagStatusList;
 import com.ats.ecommerce.model.Info;
+import com.ats.ecommerce.model.OrderReturnPer;
 import com.ats.ecommerce.model.order.GetOrderHeaderDisplay;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -91,6 +92,12 @@ public class OrderController {
 							Info.class);
 				System.err.println(info.getMsg());
 				model.addAttribute("allowCancelStatusList", info.getMsg());
+				List<OrderReturnPer> ordRetPerList = new ArrayList<>();
+				OrderReturnPer[] ordretPerArr = Constants.getRestTemplate().getForObject(Constants.url + "getOrderRetPerList",
+						OrderReturnPer[].class);
+				ordRetPerList= new ArrayList<OrderReturnPer>(Arrays.asList(ordretPerArr));
+				
+				model.addAttribute("ordRetPerList", ordRetPerList);
 			}
 		} catch (Exception e) {
 			return "redirect:/";

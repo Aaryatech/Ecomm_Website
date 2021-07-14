@@ -1301,6 +1301,16 @@ ul.abt_listing li i{color: #e21586; position: absolute; left: 0; top: 6px; font-
 /*24 june 2021*/
 .radio_r a i.shop_cart{font-size: 20px;} 
 
+/*13-07*/
+.well.sixty{width:60%;}
+.pop_btn{display: inline-block; width:100%; margin: 25px 0 10px 0; text-align: center;}
+.yes_btn{padding:6px 15px; color: #ec268f; border:2px solid #ec268f; font-size: 16px; font-family:'Hind-Medium'; background: #FFF; margin: 0 5px; 
+border-radius:3px;}
+.yes_btn:hover{background: #ec268f; color: #FFF;}
+.back_btn{padding:6px 15px; color: #373991; background: #FFF; border:2px solid #373991; font-size: 16px; 
+font-family:'Hind-Medium'; margin: 0 5px; border-radius:3px;}
+.back_btn:hover{background: #373991; color: #FFF; border: 2px solid #373991;}
+
 
 /*-------------------------------------------------------------------------------------------------*/
 @media screen and (max-width:1280px){

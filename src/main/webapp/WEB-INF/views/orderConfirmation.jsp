@@ -188,6 +188,12 @@ function openPayBox(){
                                 </c:choose>
                              
                             </div>
+                            
+                            <div class="delivery_one left_side">
+                                Paid Amount :
+                                  <span>${orderSaveData.exFloat4}</span>
+                             
+                            </div>
                     </div>
                     <div class="delivery_dt">
                         <div class="delivery_one extra_marg">
